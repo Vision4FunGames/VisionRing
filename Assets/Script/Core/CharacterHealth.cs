@@ -2,8 +2,10 @@ using UnityEngine;
 
 public abstract class CharacterHealth : MonoBehaviour
 {
+    public delegate void DieDelegate();
+    public DieDelegate OnDie;
     protected int health;
-
+    
     public bool IsAlive()
     {
         return health > 0;
@@ -22,6 +24,9 @@ public abstract class CharacterHealth : MonoBehaviour
             Die();
         }
     }
-
-    protected abstract void Die();
+    
+    protected void Die()
+    {
+        OnDie?.Invoke();
+    }
 }
