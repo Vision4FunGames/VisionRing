@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
             UpdateGameState(GameState.Play);
         if (Input.GetKeyDown(KeyCode.W))
             UpdateGameState(GameState.Pause);
+        if (Input.GetKeyDown(KeyCode.E))
+            FindObjectOfType<PlayerHealth>().TakeDamage(10);
     }
 
     public void UpdateGameState(GameState newState)
