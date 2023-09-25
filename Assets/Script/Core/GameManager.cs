@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.Pause);
+        UpdateGameState(GameState.Play);
     }
 
     private void Update()

@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+  
     private PlayerHealth _playerHealth;
     public enum AnimationTriggerType
     {
@@ -27,6 +25,7 @@ public class Player : MonoBehaviour
     #region Movement Variable
     
     public float speed;
+    [HideInInspector] public Animator _playerAnimator;
     [HideInInspector] public Vector3 _playerVelocity;
     [HideInInspector] public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
@@ -51,6 +50,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
         _fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
