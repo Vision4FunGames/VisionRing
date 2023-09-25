@@ -33,6 +33,7 @@ public class PlayerMovementState : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        
     }
 
     public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType)
