@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-  
+    public bool isg;
     private PlayerHealth _playerHealth;
     public enum AnimationTriggerType
     {
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
     {
         StateMachine.CurrentPlayerState.PhysicUpdate();
     }
-   
+
     private void OnEnable()
     {
         GameManager.onGameStateChanged += DisableMovement;
