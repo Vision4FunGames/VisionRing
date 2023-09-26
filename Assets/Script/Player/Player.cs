@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool isg;
     private PlayerHealth _playerHealth;
     public enum AnimationTriggerType
     {
@@ -28,13 +27,13 @@ public class Player : MonoBehaviour
     
     public float speed;
     [HideInInspector] public Animator _playerAnimator;
-    [HideInInspector] public Vector3 _playerVelocity;
+     public Vector3 _playerVelocity;
     [HideInInspector] public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
     
     private void DisableMovement()
     {
-        StateMachine.ChangeState(PlayerIdleState);
+        //StateMachine.ChangeState(PlayerIdleState);
     }
     private void DisableMovement(GameState obj)
     {
@@ -43,7 +42,7 @@ public class Player : MonoBehaviour
             DisableMovement();
         }else if (obj == GameState.Play)
         {
-            StateMachine.ChangeState(PlayerMovementState);
+            //StateMachine.ChangeState(PlayerMovementState);
         }
     }
     #endregion
@@ -52,6 +51,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+       
         _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
         _fixedJoystick = FindObjectOfType<FixedJoystick>();
@@ -68,14 +68,13 @@ public class Player : MonoBehaviour
     }
 
     #endregion
-    
+
   
 
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
         StateMachine.CurrentPlayerState.AnimationTriggerEvent(triggerType);
     }
-
     private void Update()
     {
         StateMachine.CurrentPlayerState.FrameUpdate();

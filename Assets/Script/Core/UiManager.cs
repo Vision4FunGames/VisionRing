@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,5 +8,14 @@ public class UiManager : MonoBehaviour
 {
     [Header("Player Button")] 
     public Button JumpBtn;
-  
+
+    public static UiManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
+    {
+    }
 }
