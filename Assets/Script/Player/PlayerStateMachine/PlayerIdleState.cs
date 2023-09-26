@@ -32,4 +32,9 @@ public class PlayerIdleState : PlayerState
     {
         base.AnimationTriggerEvent(triggerType);
     }
+
+    public override void ChangeAnimationState(string newAnim)
+    {
+        base.ChangeAnimationState(newAnim);
+    }
 }

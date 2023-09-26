@@ -32,4 +32,9 @@ public class PlayerState
     public virtual void AnimationTriggerEvent(Player.AnimationTriggerType triggerType)
     {
     }
+
+    public virtual void ChangeAnimationState(string newAnim)
+    {
+        throw new System.NotImplementedException();
+    }
 }

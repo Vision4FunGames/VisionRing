@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     private PlayerHealth _playerHealth;
     public enum AnimationTriggerType
     {
+        Jump,
+        DJump,
         Movement,
         Idle,
         Attack

@@ -7,7 +7,7 @@ public class PlayerMovementState : PlayerState
     private static readonly int RunSpeed = Animator.StringToHash("RunSpeed");
     private float gravityValue = -9.81f;
     private float jumpHeight = 2;
-
+    private const string playerJumpAnimationString = "Jump";
     public PlayerMovementState(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
     {
     }
@@ -29,19 +29,20 @@ public class PlayerMovementState : PlayerState
         {
             _player._playerVelocity.y = -0.5f;
         }
+
         Movement();
-        
-        if (_player._myController.isGrounded && Input.GetKeyDown(KeyCode.A))
-        {
-            Jump();
-        }
+
         _player._playerVelocity.y += gravityValue * Time.deltaTime;
         _player._myController.Move(_player._playerVelocity * Time.deltaTime);
     }
 
     private void Jump()
     {
-        _player._playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        if (_player._myController.isGrounded)
+        {
+            _player._playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            ChangeAnimationState(playerJumpAnimationString);
+        }
     }
 
     public void Movement()
@@ -58,12 +59,17 @@ public class PlayerMovementState : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
-        
     }
 
     public override void AnimationTriggerEvent(Player.AnimationTriggerType triggerType)
     {
         base.AnimationTriggerEvent(triggerType);
+    }
+
+    public override void ChangeAnimationState(string newAnim)
+    {
+        base.ChangeAnimationState(newAnim);
+        _player._playerAnimator.Play(newAnim);
     }
 
     Vector3 PlayerDirection()
