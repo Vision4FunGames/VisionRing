@@ -1,7 +1,9 @@
+using Script.Player.PlayerStateMachine;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public UiManager uiManager;
     private PlayerHealth _playerHealth;
     public enum AnimationTriggerType
     {
@@ -27,7 +29,6 @@ public class Player : MonoBehaviour
     
     public float speed;
     [HideInInspector] public Animator _playerAnimator;
-     public Vector3 _playerVelocity;
     [HideInInspector] public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
     
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-       
+        uiManager = FindObjectOfType<UiManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
         _fixedJoystick = FindObjectOfType<FixedJoystick>();
