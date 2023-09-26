@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 break;
         }
-
+        
         onGameStateChanged?.Invoke(newState);
     }
 }

@@ -14,7 +14,7 @@ public abstract class CharacterHealth : MonoBehaviour
     public int GetHealth()
     {
         return health;
-    }
+    }vb
 
     public void TakeDamage(int damageAmount)
     {
