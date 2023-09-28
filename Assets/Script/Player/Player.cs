@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
 
     public PlayerStateMachine StateMachine { get; set; }
     public PlayerIdleState PlayerIdleState { get; set; }
-    public PlayerAttackState PlayerAttackState { get; set; }
     public PlayerMovementState PlayerMovementState { get; set; }
     
     
@@ -58,7 +57,6 @@ public class Player : MonoBehaviour
         _fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
-        PlayerAttackState = new PlayerAttackState(this,StateMachine);
         PlayerIdleState = new PlayerIdleState(this,StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
     }

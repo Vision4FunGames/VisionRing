@@ -6,12 +6,15 @@ namespace Script.Player.PlayerStateMachine
     {
         private static readonly int RunSpeed = Animator.StringToHash("RunSpeed");
         private float gravityValue = -9.81f;
-        private float jumpHeight = 2;
+        private float jumpHeight = 1;
         public Vector3 _playerVelocity;
         private const string playerJumpAnimationString = "Jump";
-        public PlayerMovementState(global::Player player, global::PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
+        private const string playerDoubleJumpAnimationString = "DJump";
+        private bool jumpPressed, dJump;
+
+        public PlayerMovementState(global::Player player, global::PlayerStateMachine playerStateMachine) : base(player,
+            playerStateMachine)
         {
-            
         }
 
         public override void EnterState()
@@ -29,13 +32,16 @@ namespace Script.Player.PlayerStateMachine
         {
             if (_player._myController.isGrounded)
             {
+                dJump = false;
                 _playerVelocity.y = -0.5f;
             }
+
             Movement();
-            if (_player._myController.isGrounded && Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 Jump();
             }
+
             _playerVelocity.y += gravityValue * Time.deltaTime;
             _player._myController.Move(_playerVelocity * Time.deltaTime);
         }
@@ -48,6 +54,11 @@ namespace Script.Player.PlayerStateMachine
                 ChangeAnimationState(playerJumpAnimationString);
                 _playerVelocity.y += gravityValue * Time.deltaTime;
                 _player._myController.Move(_playerVelocity * Time.deltaTime);
+            }
+            else if (!_player._myController.isGrounded && !dJump)
+            {
+                dJump = true;
+                ChangeAnimationState(playerDoubleJumpAnimationString);
             }
         }
 
@@ -72,6 +83,7 @@ namespace Script.Player.PlayerStateMachine
             return new Vector3(_player._fixedJoystick.Horizontal, _playerVelocity.y,
                 _player._fixedJoystick.Vertical);
         }
+
         public override void PhysicUpdate()
         {
             base.PhysicUpdate();
