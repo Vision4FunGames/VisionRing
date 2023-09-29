@@ -8,7 +8,8 @@ public class UiManager : MonoBehaviour
 {
     [Header("Player Button")] 
     public Button JumpBtn;
-
+    public Button DashBtn;
+    
     public static UiManager instance;
     private void Awake()
     {
@@ -18,4 +19,7 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
     }
+
+
+   
 }

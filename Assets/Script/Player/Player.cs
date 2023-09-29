@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     public UiManager uiManager;
     private PlayerHealth _playerHealth;
+
     public enum AnimationTriggerType
     {
         Jump,
@@ -19,32 +20,37 @@ public class Player : MonoBehaviour
     public PlayerStateMachine StateMachine { get; set; }
     public PlayerIdleState PlayerIdleState { get; set; }
     public PlayerMovementState PlayerMovementState { get; set; }
-    
-    
+
+    public PlayerSkillState PlayerSkillState { get; set; }
 
     #endregion
 
     #region Movement Variable
-    
+
+    public float animValue = 1;
+    public float animSpeed;
     public float speed;
     [HideInInspector] public Animator _playerAnimator;
     [HideInInspector] public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
-    
+
     private void DisableMovement()
     {
         //StateMachine.ChangeState(PlayerIdleState);
     }
+
     private void DisableMovement(GameState obj)
     {
         if (obj == GameState.Pause)
         {
             DisableMovement();
-        }else if (obj == GameState.Play)
+        }
+        else if (obj == GameState.Play)
         {
             //StateMachine.ChangeState(PlayerMovementState);
         }
     }
+
     #endregion
 
     #region Initiliaze
@@ -57,8 +63,14 @@ public class Player : MonoBehaviour
         _fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
-        PlayerIdleState = new PlayerIdleState(this,StateMachine);
+        PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
+        uiManager.DashBtn.onClick.AddListener((() =>
+        {
+            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
+            StateMachine.ChangeState(PlayerSkillState);
+        }));
+        
     }
 
     private void Start()
@@ -68,12 +80,12 @@ public class Player : MonoBehaviour
 
     #endregion
 
-  
 
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
         StateMachine.CurrentPlayerState.AnimationTriggerEvent(triggerType);
     }
+
     private void Update()
     {
         StateMachine.CurrentPlayerState.FrameUpdate();
@@ -89,10 +101,10 @@ public class Player : MonoBehaviour
         GameManager.onGameStateChanged += DisableMovement;
         _playerHealth.OnDie += DisableMovement;
     }
+
     private void OnDisable()
     {
         GameManager.onGameStateChanged -= DisableMovement;
         _playerHealth.OnDie -= DisableMovement;
     }
-    
 }
