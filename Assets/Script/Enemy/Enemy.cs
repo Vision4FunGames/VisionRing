@@ -1,19 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour,IDamageable
+[RequireComponent(typeof(CharacterStats))]
+public class Enemy : Interactable
 {
     #region Variables
 
     private float health;
-    
-    
+
+    private PlayerManager playerManager;
+    private CharacterStats myStats;
     #endregion
 
-
-    public void Damage(float damageAmount)
+    private void Start()
     {
-        health -= damageAmount;
+        playerManager = PlayerManager.instance;
+        myStats = GetComponent<CharacterStats>();
     }
+
+    public override void Interact()
+    {
+        base.Interact();
+        CharacterCombat playerCombat = playerManager.player.GetComponent<CharacterCombat>();
+        if (playerCombat != null)
+        {
+            playerCombat.Attack(myStats);
+        }
+    }
+
 }

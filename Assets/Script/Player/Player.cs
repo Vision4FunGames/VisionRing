@@ -6,6 +6,10 @@ public class Player : MonoBehaviour
     public UiManager uiManager;
     private PlayerHealth _playerHealth;
 
+    #region Singleton
+
+    public static Player instance;
+    #endregion
     public enum AnimationTriggerType
     {
         Jump,
@@ -57,6 +61,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         uiManager = FindObjectOfType<UiManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
@@ -65,11 +70,11 @@ public class Player : MonoBehaviour
         StateMachine = new PlayerStateMachine();
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
-        uiManager.DashBtn.onClick.AddListener((() =>
-        {
-            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
-            StateMachine.ChangeState(PlayerSkillState);
-        }));
+        // uiManager.DashBtn.onClick.AddListener((() =>
+        // {
+        //     PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
+        //     StateMachine.ChangeState(PlayerSkillState);
+        // }));
         
     }
 
