@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     #region Singleton
 
     public static Player instance;
+
     #endregion
+
     public enum AnimationTriggerType
     {
         Jump,
@@ -70,12 +72,21 @@ public class Player : MonoBehaviour
         StateMachine = new PlayerStateMachine();
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
-        // uiManager.DashBtn.onClick.AddListener((() =>
-        // {
-        //     PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
-        //     StateMachine.ChangeState(PlayerSkillState);
-        // }));
-        
+        DashInıtiliaze();
+    }
+
+    private void DashInıtiliaze()
+    {
+        uiManager.DashBtn.onClick.AddListener((() =>
+        {
+            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
+            StateMachine.ChangeState(PlayerSkillState);
+        }));
+        uiManager.FireBtn.onClick.AddListener((() =>
+        {
+            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.rotateFire);
+            StateMachine.ChangeState(PlayerSkillState);
+        }));
     }
 
     private void Start()
@@ -94,6 +105,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         StateMachine.CurrentPlayerState.FrameUpdate();
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
+            StateMachine.ChangeState(PlayerSkillState);
+        }
     }
 
     private void FixedUpdate()

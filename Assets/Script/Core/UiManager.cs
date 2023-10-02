@@ -9,6 +9,7 @@ public class UiManager : MonoBehaviour
     [Header("Player Button")] 
     public Button JumpBtn;
     public Button DashBtn;
+    public Button FireBtn;
     
     public static UiManager instance;
     private void Awake()
