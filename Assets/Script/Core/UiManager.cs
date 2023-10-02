@@ -8,9 +8,7 @@ public class UiManager : MonoBehaviour
 {
     [Header("Player Button")] 
     public Button JumpBtn;
-    public Button DashBtn;
-    public Button FireBtn;
-    
+    public ButtonType[] ButtonType;
     public static UiManager instance;
     private void Awake()
     {
@@ -20,7 +18,11 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
     }
+}
 
-
-   
+[Serializable]
+public class ButtonType
+{
+    public SkillType mySkillType;
+    public Button skillButton;
 }

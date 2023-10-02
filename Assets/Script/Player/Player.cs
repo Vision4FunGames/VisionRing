@@ -77,16 +77,15 @@ public class Player : MonoBehaviour
 
     private void DashInıtiliaze()
     {
-        uiManager.DashBtn.onClick.AddListener((() =>
+        for (int i = 0; i < uiManager.ButtonType.Length; i++)
         {
-            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
-            StateMachine.ChangeState(PlayerSkillState);
-        }));
-        uiManager.FireBtn.onClick.AddListener((() =>
-        {
-            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.rotateFire);
-            StateMachine.ChangeState(PlayerSkillState);
-        }));
+            int j = i;
+            uiManager.ButtonType[i].skillButton.onClick.AddListener((() =>
+            {
+                PlayerSkillState = new PlayerSkillState(this, StateMachine,   uiManager.ButtonType[j].mySkillType);
+                StateMachine.ChangeState(PlayerSkillState);
+            }));
+        }
     }
 
     private void Start()

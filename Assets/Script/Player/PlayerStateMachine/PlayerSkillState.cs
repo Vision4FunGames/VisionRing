@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using Script.Player.PlayerStateMachine;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public enum SkillType
 {
     dash,
     rotateFire,
+    earthquick,
+    flameT,
 }
 
 public class PlayerSkillState : PlayerState
@@ -31,6 +29,12 @@ public class PlayerSkillState : PlayerState
                 break;
             case SkillType.rotateFire:
                 FireRotate();
+                break;
+            case SkillType.earthquick:
+                EarthQuick();
+                break;
+            case SkillType.flameT:
+                FlameTower();
                 break;
         }
     }
@@ -59,7 +63,25 @@ public class PlayerSkillState : PlayerState
         GameObject.Destroy(currentRotat, 2);
     }
 
+    public void EarthQuick()
+    {
+        GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("EarthShatter") as GameObject);
+        if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
+        currentEarthShatter.transform.localPosition = new Vector3(0, 0, 0);
+        currentEarthShatter.transform.localRotation = _player.transform.GetChild(0).localRotation;
+        _player.StateMachine.ChangeState(_player.PlayerMovementState);
+        GameObject.Destroy(currentEarthShatter, 4);
+    }
 
+    public void FlameTower()
+    {
+        GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("FlameThrower") as GameObject);
+        if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform.GetChild(0));
+        currentEarthShatter.transform.localPosition = new Vector3(0, 2, 0);
+        currentEarthShatter.transform.localRotation = Quaternion.identity;
+        _player.StateMachine.ChangeState(_player.PlayerMovementState);
+        GameObject.Destroy(currentEarthShatter, 10);
+    }
     public override void ExitState()
     {
         base.ExitState();
