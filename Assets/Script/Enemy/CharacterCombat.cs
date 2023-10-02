@@ -16,9 +16,13 @@ public class CharacterCombat : MonoBehaviour
     CharacterStats myStats;
     CharacterStats enemyStats;
 
+    void Start ()
+    {
+        myStats = GetComponent<CharacterStats>();
+    }
     private void Update()
     {
-        attackCooldown -= Time.deltaTime;
+        attackCountdown -= Time.deltaTime;
     }
 
     public void Attack (CharacterStats enemyStats)
@@ -43,7 +47,7 @@ public class CharacterCombat : MonoBehaviour
 
         Debug.Log (transform.name + " swings for " + myStats.damage.GetValue () + " damage");
         enemyStats.TakeDamage (myStats.damage.GetValue ());
-
+        
 
 
 
