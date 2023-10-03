@@ -25,22 +25,43 @@ public class PlayerSkillState : PlayerState
         switch (_skillType)
         {
             case SkillType.dash:
-                DashSkill();
+                if (SkillCoolDown.instance.CanUse(0))
+                    DashSkill();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
                 break;
             case SkillType.rotateFire:
-                FireRotate();
+                if (SkillCoolDown.instance.CanUse(1))
+                    FireRotate();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
                 break;
             case SkillType.earthquick:
-                EarthQuick();
+                if (SkillCoolDown.instance.CanUse(2))
+                    EarthQuick();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
                 break;
             case SkillType.flameT:
-                FlameTower();
+                if (SkillCoolDown.instance.CanUse(3))
+                    FlameTower();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
                 break;
         }
     }
 
     public void DashSkill()
     {
+        SkillCoolDown.instance._SkillsArray[0].coolDownTime = SkillCoolDown.instance._SkillsArray[0].coolDown;
         var position = _player.transform.position;
         Vector3 playerVelocity = new Vector3(_player._fixedJoystick.Horizontal, 0, _player._fixedJoystick.Vertical);
         Vector3 targetPos = new Vector3(position.x, position.y, position.z) +
@@ -56,6 +77,7 @@ public class PlayerSkillState : PlayerState
 
     public void FireRotate()
     {
+        SkillCoolDown.instance._SkillsArray[1].coolDownTime = SkillCoolDown.instance._SkillsArray[1].coolDown;
         GameObject currentRotat = GameObject.Instantiate(Resources.Load("FireEarth") as GameObject);
         if (currentRotat != null) currentRotat.transform.SetParent(_player.transform);
         currentRotat.transform.localPosition = new Vector3(0, 2, 0);
@@ -65,6 +87,7 @@ public class PlayerSkillState : PlayerState
 
     public void EarthQuick()
     {
+        SkillCoolDown.instance._SkillsArray[2].coolDownTime = SkillCoolDown.instance._SkillsArray[2].coolDown;
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("EarthShatter") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
         currentEarthShatter.transform.localPosition = new Vector3(0, 0, 0);
@@ -75,6 +98,7 @@ public class PlayerSkillState : PlayerState
 
     public void FlameTower()
     {
+        SkillCoolDown.instance._SkillsArray[3].coolDownTime = SkillCoolDown.instance._SkillsArray[3].coolDown;
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("FlameThrower") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform.GetChild(0));
         currentEarthShatter.transform.localPosition = new Vector3(0, 2, 0);
@@ -82,6 +106,8 @@ public class PlayerSkillState : PlayerState
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
         GameObject.Destroy(currentEarthShatter, 10);
     }
+
+
     public override void ExitState()
     {
         base.ExitState();

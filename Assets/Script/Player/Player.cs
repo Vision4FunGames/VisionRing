@@ -33,8 +33,8 @@ public class Player : MonoBehaviour
 
     #region Movement Variable
 
-    public float animValue = 1;
-    public float animSpeed;
+    [HideInInspector]public float animValue = 1;
+    [HideInInspector]public float animSpeed;
     public float speed;
     [HideInInspector] public Animator _playerAnimator;
     [HideInInspector] public FixedJoystick _fixedJoystick;
