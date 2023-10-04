@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /* An Item that can be equipped to increase armor/damage. */
@@ -9,6 +10,7 @@ public class Equipment : Item {
     public int armorModifier;
     public int damageModifier;
     public SkinnedMeshRenderer mesh;
+    public GameObject prefab;
         
     // Called when pressed in the inventory
     public override void Use ()

@@ -1,8 +1,6 @@
-
 using System;
 using DamageNumbersPro;
 using UnityEngine;
-
 public class CharacterStats : MonoBehaviour
 {
     public int maxHealth = 100;
@@ -22,7 +20,7 @@ public class CharacterStats : MonoBehaviour
             TakeDamage(10);
         }
     }
-
+    
     public void TakeDamage(int damage)
     {
         damage -= armor.GetValue();

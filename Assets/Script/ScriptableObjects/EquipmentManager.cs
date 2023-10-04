@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -30,7 +31,7 @@ public class EquipmentManager : MonoBehaviour {
 
 	Equipment[] currentEquipment;
 	SkinnedMeshRenderer[] currentMeshes;
-
+	
 	public SkinnedMeshRenderer targetMesh;
 
 	// Callback for when an item is equipped
@@ -38,7 +39,7 @@ public class EquipmentManager : MonoBehaviour {
 	public event OnEquipmentChanged onEquipmentChanged;
 
 	Inventory inventory;
-
+	public GameObject rightHand;
 	void Start ()
 	{
 		inventory = Inventory.instance;
@@ -89,6 +90,14 @@ public class EquipmentManager : MonoBehaviour {
 		if (newItem.mesh) {
 			AttachToMesh (newItem.mesh, slotIndex);
 		}
+		else if (newItem.prefab)
+		{
+			var weapon = Instantiate(newItem.prefab,new Vector3(rightHand.transform.position.x, rightHand.transform.position.y, rightHand.transform.position.z),
+				Quaternion.identity);
+			weapon.transform.parent = rightHand.transform;
+			
+		}
+		
 		//equippedItems [itemIndex] = newMesh.gameObject;
 
 	}
