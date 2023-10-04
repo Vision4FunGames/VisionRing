@@ -27,6 +27,8 @@ public class SkillCoolDown : MonoBehaviour
         for (int i = 0; i < _SkillsArray.Length; i++)
         {
             _SkillsArray[i].coolDownTime -= Time.deltaTime;
+            float fillAmount =   _SkillsArray[i].coolDownTime /  _SkillsArray[i].coolDown;
+            _SkillsArray[i].skillImage.fillAmount = fillAmount;
         }
     }
 

@@ -7,6 +7,7 @@ public enum SkillType
     rotateFire,
     earthquick,
     flameT,
+    tornado,
 }
 
 public class PlayerSkillState : PlayerState
@@ -51,6 +52,14 @@ public class PlayerSkillState : PlayerState
             case SkillType.flameT:
                 if (SkillCoolDown.instance.CanUse(3))
                     FlameTower();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
+                break;
+            case SkillType.tornado:
+                if (SkillCoolDown.instance.CanUse(4))
+                    Tornado();
                 else
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
@@ -105,6 +114,16 @@ public class PlayerSkillState : PlayerState
         currentEarthShatter.transform.localRotation = Quaternion.identity;
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
         GameObject.Destroy(currentEarthShatter, 10);
+    }
+
+    public void Tornado()
+    {
+        SkillCoolDown.instance._SkillsArray[4].coolDownTime = SkillCoolDown.instance._SkillsArray[4].coolDown;
+        GameObject currentTornado = GameObject.Instantiate(Resources.Load("FireTornado") as GameObject);
+        if (currentTornado != null) currentTornado.transform.SetParent(_player.transform.GetChild(0));
+        currentTornado.transform.localPosition = new Vector3(0, 0.1f, 0);
+        _player.StateMachine.ChangeState(_player.PlayerMovementState);
+        GameObject.Destroy(currentTornado, 10);
     }
 
 
