@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myCurrentGunType = CurrentGunType.arrow;
+        myCurrentGunType = CurrentGunType.sword;
         player = FindObjectOfType<Player>();
         playerAnimator = GetComponentInChildren<Animator>();
     }
@@ -78,18 +78,30 @@ public class SwordAttack : MonoBehaviour
 
     public void AttackSword(Player player, Animator _playerAnimator)
     {
+        
         if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) != 0 &&
             comboCounter == 0) // yürürken Attack
         {
             comboCounter++;
-            _playerAnimator.Play("Attack1", 2, 0);
+            _playerAnimator.Play("Attack1", 1, 0);
+            if (player.speed > 2.5)
+            {
+                player.speed /= 2;
+                player.animValue /= 2;
+            }
         }
 
         if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) == 0 &&
             comboCounter == 0) // dururken Attack
         {
             comboCounter++;
-            _playerAnimator.Play("Attack1", 1, 0);
+            _playerAnimator.Play("Attack1", 0, 0);
+            if (player.speed > 2.5)
+            {
+                player.speed /= 2;
+                player.animValue /= 2;
+            }
+        
         }
         _playerAnimator.SetBool("combo",true);
         comboTimer = 0;
@@ -123,6 +135,12 @@ public class SwordAttack : MonoBehaviour
     public void DisableCollider()
     {
         swordCollider.enabled = false;
+        if (playerAnimator.GetComponentInParent<Player>().speed < 5)
+        {
+            playerAnimator.GetComponentInParent<Player>().speed *= 2;
+            playerAnimator.GetComponentInParent<Player>().animValue *= 2;
+        }
+      
     }
 
     public void ComboAttackPlus()
@@ -133,6 +151,11 @@ public class SwordAttack : MonoBehaviour
     public void ComboAttackReset()
     {
         comboCounter = 0;
+        if (playerAnimator.GetComponentInParent<Player>().speed < 5)
+        {
+            playerAnimator.GetComponentInParent<Player>().speed *= 2;
+            playerAnimator.GetComponentInParent<Player>().animValue *= 2;
+        }
     }
 }
 

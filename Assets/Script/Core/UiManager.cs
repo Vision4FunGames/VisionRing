@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    [Header("Player Button")] 
-    public Button JumpBtn;
+    [Header("Player Button")] public Button JumpBtn;
     public ButtonType[] ButtonType;
     public static UiManager instance;
-    
-    public float dashCoolDownLast,rotateFireLast,earthquickLast,flameTLastQuick;
-    
+
+
+    [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
+
     private void Awake()
     {
         instance = this;
@@ -24,7 +24,6 @@ public class UiManager : MonoBehaviour
 
     private void Update()
     {
-        
     }
 }
 
