@@ -6,9 +6,8 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
    // public Button removeButton;
-
-    Item item;	// Current item in the slot
-
+   Item item;	// Current item in the slot
+    public bool isEquipped = false;
     // Add item to the slot
     public void AddItem (Item newItem)
     {
@@ -18,12 +17,11 @@ public class InventorySlot : MonoBehaviour
         icon.enabled = true;
        // removeButton.interactable = true;
     }
-
+    
     // Clear the slot
     public void ClearSlot ()
     {
         item = null;
-
         icon.sprite = null;
         icon.enabled = false;
        // removeButton.interactable = false;

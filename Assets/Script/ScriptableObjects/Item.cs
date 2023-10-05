@@ -20,4 +20,8 @@ public class Item : ScriptableObject
     {
         Inventory.instance.Remove(this);
     }
+    public void RemoveFromEquippedInventory(int slotIndex)
+    {
+        EquipmentManager.instance.currentEquipment[slotIndex] = null;
+    }
 }

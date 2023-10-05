@@ -11,14 +11,30 @@ public class Equipment : Item {
     public int damageModifier;
     public SkinnedMeshRenderer mesh;
     public GameObject prefab;
-        
+
+    //public bool isEquipped = false;
     // Called when pressed in the inventory
+    private void Start ()
+    {
+       
+    }
     public override void Use ()
     {
-        EquipmentManager.instance.Equip(this);	// Equip
-        RemoveFromInventory();	// Remove from inventory
+        if (!showInInventory)
+        {
+            EquipmentManager.instance.Equip(this);
+            this.showInInventory = true;
+            // Equip
+            RemoveFromInventory();	// Remove from inventory
+        }
+        else
+        {
+            EquipmentManager.instance.Unequip((int)equipSlot);
+           RemoveFromEquippedInventory((int)this.equipSlot);
+        }
     }
 
+    
 }
 
 public enum EquipmentSlot { Head,Body, Weapon, Feet}
