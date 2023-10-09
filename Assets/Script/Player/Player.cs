@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     [HideInInspector]public float animSpeed;
     public float speed;
     [HideInInspector] public Animator _playerAnimator;
-    //[HideInInspector] public FixedJoystick _fixedJoystick;
+    public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
 
     private void DisableMovement()
