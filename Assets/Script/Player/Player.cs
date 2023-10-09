@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public UiManager uiManager;
+    [HideInInspector]public UiManager uiManager;
     private PlayerHealth _playerHealth;
 
     #region Singleton

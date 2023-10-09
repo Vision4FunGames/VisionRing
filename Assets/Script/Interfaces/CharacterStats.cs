@@ -11,6 +11,7 @@ public class CharacterStats : MonoBehaviour
     public Stat armor;
     public DamageNumber prefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -27,11 +28,22 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        damage -= armor.GetValue();
-        damage = Mathf.Clamp(damage, 0, int.MaxValue);
-        currentHealth -= damage;
-        DamageVFX(damage);
-        Debug.Log(transform.name + "takes " + damage + "damage.");
+        if (currentHealth > 0)
+        {
+            damage -= armor.GetValue();
+            damage = Mathf.Clamp(damage, 0, int.MaxValue);
+            currentHealth -= damage;
+            DamageVFX(damage);
+            DamageAnimation();
+        }
+        else if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void DamageAnimation()
+    {
         transform.GetChild(0).DOScale(new Vector3(1.5f, 1.5f, 1.5f), .1f).OnComplete(() =>
         {
             transform.GetChild(0).DOScale(new Vector3(1f, 1f, 1f), .1f);
@@ -40,11 +52,8 @@ public class CharacterStats : MonoBehaviour
         {
             int index = i;
             _skinnedMeshRenderers[i].material.DOColor(Color.red, .1f).SetEase(Ease.Linear)
-                .OnComplete((() => _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
-        }
-        if (currentHealth <= 0)
-        {
-            Die();
+                .OnComplete((() =>
+                    _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
         }
     }
 
@@ -58,6 +67,5 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void Die()
     {
-        
     }
 }

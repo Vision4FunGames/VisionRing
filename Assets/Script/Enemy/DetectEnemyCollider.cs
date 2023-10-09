@@ -8,10 +8,12 @@ using Random = UnityEngine.Random;
 public class DetectEnemyCollider : MonoBehaviour
 {
    private EnemyStats _enemyStats;
+   private PlayerAttack _playerAttack;
 
    private void Awake()
    {
       _enemyStats = GetComponent<EnemyStats>();
+      _playerAttack = Player.instance.GetComponent<PlayerAttack>();
    }
 
    private void OnTriggerEnter(Collider other)
@@ -23,7 +25,12 @@ public class DetectEnemyCollider : MonoBehaviour
 
       if (other.CompareTag("RotateFire"))
       {
-         _enemyStats.TakeDamage(10);
+         _enemyStats.TakeDamage(_playerAttack.damage);
+      }
+
+      if (other.CompareTag("SwordCollider"))
+      {
+         _enemyStats.TakeDamage(_playerAttack.damage);
       }
    }
 

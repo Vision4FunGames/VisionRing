@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterStats))]
 public class CharacterCombat : MonoBehaviour
 {
+    private PlayerHealth _player;
     public float attackRate = 1f;
     private float attackCountdown = 0f;
     public float attackDelay = .6f;
@@ -18,6 +19,7 @@ public class CharacterCombat : MonoBehaviour
     
     void Start ()
     {
+        _player = FindObjectOfType<PlayerHealth>();
         myStats = GetComponent<CharacterStats>();
     }
     private void Update()
@@ -30,7 +32,6 @@ public class CharacterCombat : MonoBehaviour
         {
             this.enemyStats = enemyStats;
             attackCountdown = 1f / attackRate;
-            StartCoroutine(DoDamage(enemyStats,attackDelay));
             if (OnAttack != null) {
                 OnAttack ();
             }
