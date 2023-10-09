@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class EquipmentManager : MonoBehaviour {
 		}
 	}
 	static EquipmentManager _instance;
-
+	private GameObject currentWeapon;
 	void Awake ()
 	{
 		_instance = this;
@@ -90,29 +91,22 @@ public class EquipmentManager : MonoBehaviour {
 		if (currentEquipment[slotIndex] != null)
 		{
 			oldItem = currentEquipment [slotIndex];
-			
 			inventory.Add(oldItem);
-			
 		}
-	
 		// An item has been equipped so we trigger the callback
-		
-
-		
 		currentEquipment [slotIndex] = newItem;
 		//equippedInventory.Add(newItem);
 		if (onEquipmentChanged != null)
 			onEquipmentChanged.Invoke(newItem, oldItem);
 		Debug.Log(newItem.name + " equipped!");
-		if (newItem.mesh) {
-			AttachToMesh (newItem.mesh, slotIndex);
+		if (newItem.mesh ) {
+			AttachToMesh (newItem.mesh,slotIndex);
 		}
 		else if (newItem.prefab)
 		{
-			var weapon = Instantiate(newItem.prefab,new Vector3(rightHand.transform.position.x, rightHand.transform.position.y, rightHand.transform.position.z),
+			currentWeapon = Instantiate(newItem.prefab,new Vector3(rightHand.transform.position.x, rightHand.transform.position.y, rightHand.transform.position.z),
 				Quaternion.identity);
-			weapon.transform.parent = rightHand.transform;
-			
+			currentWeapon.transform.parent = rightHand.transform;
 		}
 		
 		
@@ -121,7 +115,6 @@ public class EquipmentManager : MonoBehaviour {
 	}
 
 	
-
 	public void Unequip(int slotIndex) {
 		if (currentEquipment[slotIndex] != null)
 		{
@@ -133,6 +126,11 @@ public class EquipmentManager : MonoBehaviour {
 			if (currentMeshes [slotIndex] != null) {
 				Destroy (currentMeshes [slotIndex].gameObject);
 			}
+			else if (slotIndex == 2 && currentWeapon != null)
+			{
+				Destroy(currentWeapon);
+			}
+			
 			//equippedInventory.Remove(oldItem);
 			InventoryUI.instance.currentItemsParent.transform.GetChild(0).transform.GetChild(slotIndex).GetComponent<InventorySlot>().ClearSlot();
 			// Equipment has been removed so we trigger the callback
@@ -141,10 +139,9 @@ public class EquipmentManager : MonoBehaviour {
 			if (inventory.onItemChangedCallback != null)
 				inventory.onItemChangedCallback.Invoke();
 		}
-
-	
 	}
 
+	
 	void UnequipAll() {
 		for (int i = 0; i < currentEquipment.Length; i++) {
 			Unequip (i);
@@ -157,17 +154,15 @@ public class EquipmentManager : MonoBehaviour {
 			Equip (e);
 		}
 	}
-
+	
 	void AttachToMesh(SkinnedMeshRenderer mesh, int slotIndex) {
 
-		if (currentMeshes [slotIndex] != null) {
+		if (currentMeshes [slotIndex] != null && slotIndex != 2) {
 			Destroy (currentMeshes [slotIndex].gameObject);
 		}
-
 		SkinnedMeshRenderer newMesh = Instantiate(mesh) as SkinnedMeshRenderer;
 		newMesh.bones = targetMesh.bones;
 		newMesh.rootBone = targetMesh.rootBone;
 		currentMeshes [slotIndex] = newMesh;
 	}
-
 }
