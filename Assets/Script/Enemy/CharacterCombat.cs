@@ -26,7 +26,7 @@ public class CharacterCombat : MonoBehaviour
     }
     public void Attack (CharacterStats enemyStats)
     {
-        if (attackCountdown <= 0f)
+        if (attackCountdown <= 0f && myStats.currentHealth > 0)
         {
             this.enemyStats = enemyStats;
             attackCountdown = 1f / attackRate;

@@ -58,5 +58,6 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void Die()
     {
+        
     }
 }

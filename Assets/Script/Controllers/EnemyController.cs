@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
 		float distance = Vector3.Distance(target.position, transform.position);
 
 		// If inside the radius
-		if (distance <= lookRadius)
+		if (distance <= lookRadius && agent != null)
 		{
 			// Move towards the player
 			agent.SetDestination(target.position);

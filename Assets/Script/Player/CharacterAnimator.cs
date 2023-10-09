@@ -8,11 +8,14 @@ public class CharacterAnimator : MonoBehaviour
 
     NavMeshAgent navmeshAgent;
     CharacterCombat combat;
+    private EnemyStats enemyStats;
 
     protected virtual void Start() {
         navmeshAgent = GetComponent<NavMeshAgent> ();
         combat = GetComponent<CharacterCombat> ();
+        enemyStats = GetComponent<EnemyStats>();
         combat.OnAttack += OnAttack;
+        enemyStats.OnDie += DieAnimation;
     }
 
     protected virtual void Update () {
@@ -21,5 +24,11 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void OnAttack() {
         animator.SetTrigger ("Attack");
+    }
+
+    protected virtual void DieAnimation()
+    {
+        animator.SetTrigger("death_");
+        navmeshAgent.speed = 0;
     }
 }
