@@ -6,6 +6,7 @@ Shader "FAE/Foliage"
 	{
 		_Cutoff( "Mask Clip Value", Float ) = 0.5
 		[NoScaleOffset]_MainTex("MainTex", 2D) = "white" {}
+		_Color ("Tint", Color) = (0, 0, 0, 1)
 		[NoScaleOffset][Normal]_BumpMap("BumpMap", 2D) = "bump" {}
 		_WindTint("WindTint", Range( -0.5 , 0.5)) = 0.1
 		_AmbientOcclusion("AmbientOcclusion", Range( 0 , 1)) = 0
@@ -44,6 +45,7 @@ Shader "FAE/Foliage"
 			float4 vertexColor : COLOR;
 		};
 
+		uniform float4 _Color;
 		uniform float _GlobalWindMotion;
 		uniform float _WindSpeed;
 		uniform float4 _WindDirection;
@@ -130,13 +132,14 @@ Shader "FAE/Foliage"
 			float4 lerpResult106 = lerp( Color161 , ( Color161 * 2.0 ) , Subsurface153);
 			float4 FinalColor205 = lerpResult106;
 			float4 lerpResult310 = lerp( FinalColor205 , float4( WindVector577 , 0.0 ) , _WindDebug);
-			o.Albedo = lerpResult310.rgb;
+			o.Albedo = lerpResult310.rgb * _Color;
 			float lerpResult557 = lerp( 1.0 , i.vertexColor.r , _AmbientOcclusion);
 			float AmbientOcclusion207 = lerpResult557;
 			o.Occlusion = AmbientOcclusion207;
 			o.Alpha = 1;
 			float Alpha98 = tex2DNode97.a;
 			float lerpResult313 = lerp( Alpha98 , 1.0 , _WindDebug);
+			lerpResult313 = lerpResult313;
 			clip( lerpResult313 - _Cutoff );
 		}
 

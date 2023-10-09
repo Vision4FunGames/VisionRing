@@ -12,7 +12,8 @@ namespace FAE
     {
 
         MaterialProperty _MaskClipValue;
-
+        MaterialProperty _Tint;
+        
         //Main maps
         MaterialProperty _MainTex;
         MaterialProperty _BumpMap;
@@ -94,9 +95,20 @@ namespace FAE
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel(_MaskClipValue.displayName);
             _MaskClipValue.floatValue = EditorGUILayout.Slider(_MaskClipValue.floatValue, 0f, 1f);
+                
+            
+
+
             EditorGUILayout.EndHorizontal();
             this.m_MaterialEditor.TexturePropertySingleLine(mainTexName, this._MainTex);
             this.m_MaterialEditor.TexturePropertySingleLine(normalMapName, this._BumpMap);
+
+            EditorGUILayout.BeginHorizontal();
+            
+            EditorGUILayout.PrefixLabel(_Tint.displayName);
+            _Tint.colorValue = EditorGUILayout.ColorField("AddColor", _Tint.colorValue);
+            
+            EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space();
         }
@@ -176,6 +188,7 @@ namespace FAE
             //Rendering
 #if UNITY_2017_1_OR_NEWER
             _MaskClipValue = FindProperty("_Cutoff", props);
+            _Tint = FindProperty("_Color", props);
 #else
             _MaskClipValue = FindProperty("_Cutoff", props);
 #endif
