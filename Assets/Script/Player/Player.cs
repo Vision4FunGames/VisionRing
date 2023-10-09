@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     [HideInInspector]public float animSpeed;
     public float speed;
     [HideInInspector] public Animator _playerAnimator;
-    [HideInInspector] public FixedJoystick _fixedJoystick;
+    //[HideInInspector] public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
 
     private void DisableMovement()
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         uiManager = FindObjectOfType<UiManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
-        _fixedJoystick = FindObjectOfType<FixedJoystick>();
+        //_fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
