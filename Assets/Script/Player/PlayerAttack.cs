@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum CurrentGunType
@@ -11,11 +9,15 @@ public enum CurrentGunType
 
 public class PlayerAttack : MonoBehaviour
 {
+    public ParticleSystem[] swordParticle;
+    public int damage;
     private CurrentGunType myCurrentGunType;
     private Player player;
     private Animator playerAnimator;
     private SwordAttack swordAttack;
     private ArrowAttack arrowAttack;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +40,12 @@ public class PlayerAttack : MonoBehaviour
         switch (myCurrentGunType)
         {
             case CurrentGunType.sword:
-                swordAttack ??=playerAnimator.gameObject.AddComponent<SwordAttack>();
+                swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
                 swordAttack.AttackSword(player, playerAnimator);
                 break;
             case CurrentGunType.arrow:
                 arrowAttack ??= playerAnimator.gameObject.AddComponent<ArrowAttack>();
-                arrowAttack.AttackArrow(player,playerAnimator);
+                arrowAttack.AttackArrow(player, playerAnimator);
                 break;
             case CurrentGunType.spear:
                 break;
@@ -59,18 +61,21 @@ public class PlayerAttack : MonoBehaviour
 
 public class SwordAttack : MonoBehaviour
 {
+    private ParticleSystem[] _swordParticle;
     public int comboCounter;
     private float comboTimer;
     [SerializeField] private string comboAttackStringAnimation = "Attack1";
     private Animator playerAnimator;
     private BoxCollider swordCollider;
+
     private void Start()
     {
-        playerAnimator??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
+        playerAnimator ??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
+        _swordParticle = Player.instance.GetComponent<PlayerAttack>().swordParticle;
         GenerateSwordCollider();
     }
 
-   
+
     private void Update()
     {
         ComboCalculate();
@@ -78,7 +83,6 @@ public class SwordAttack : MonoBehaviour
 
     public void AttackSword(Player player, Animator _playerAnimator)
     {
-        
         if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) != 0 &&
             comboCounter == 0) // yürürken Attack
         {
@@ -101,9 +105,9 @@ public class SwordAttack : MonoBehaviour
                 player.speed /= 2;
                 player.animValue /= 2;
             }
-        
         }
-        _playerAnimator.SetBool("combo",true);
+
+        _playerAnimator.SetBool("combo", true);
         comboTimer = 0;
     }
 
@@ -113,10 +117,11 @@ public class SwordAttack : MonoBehaviour
         if (comboTimer > .3f)
         {
             comboCounter = 0;
-            playerAnimator.SetBool("combo",false);
+            playerAnimator.SetBool("combo", false);
             comboTimer = 0;
         }
     }
+
     public void GenerateSwordCollider()
     {
         swordCollider ??= gameObject.AddComponent<BoxCollider>();
@@ -129,7 +134,21 @@ public class SwordAttack : MonoBehaviour
 
     public void EnableSwordCollider()
     {
+        swordCollider.enabled = false;
         swordCollider.enabled = true;
+    }
+
+    public void ParticleSword(int index)
+    {
+        _swordParticle[index].Play();
+        if (index == 2)
+        {
+            PlayerManager.instance.CameraShakePlayer(.1f, .4f);
+        }
+        else
+        {
+            PlayerManager.instance.CameraShakePlayer(.1f, .1f);
+        }
     }
 
     public void DisableCollider()
@@ -140,7 +159,6 @@ public class SwordAttack : MonoBehaviour
             playerAnimator.GetComponentInParent<Player>().speed *= 2;
             playerAnimator.GetComponentInParent<Player>().animValue *= 2;
         }
-      
     }
 
     public void ComboAttackPlus()
@@ -164,29 +182,30 @@ public class ArrowAttack : MonoBehaviour
     private Player player;
     private Animator playerAnimator;
     private bool attack;
+
     private void Start()
     {
         player ??= FindObjectOfType<Player>();
-        playerAnimator??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
+        playerAnimator ??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
     }
 
-    public void AttackArrow(Player player,Animator _playerAnimator)
+    public void AttackArrow(Player player, Animator _playerAnimator)
     {
         if (!attack)
         {
             attack = true;
             player.speed /= 2;
             player.animValue /= 2;
-            if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) != 0 ) // yürürken Attack
+            if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) != 0) // yürürken Attack
             {
                 _playerAnimator.Play("Arrow", 2, 0);
             }
-            if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) == 0 ) // yürürken Attack
+
+            if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) == 0) // yürürken Attack
             {
                 _playerAnimator.Play("Arrow", 1, 0);
             }
         }
-        
     }
 
     public void EndAttack()
