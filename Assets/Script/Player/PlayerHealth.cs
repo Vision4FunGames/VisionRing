@@ -18,15 +18,15 @@ public class PlayerHealth : CharacterHealth
     public void DamageAnimation(int damage)
     {
         TakeDamage(damage);
-        DamageText();
+        DamageText(damage);
         PlayerManager.instance.DamageHitParticle();
     }
 
-    public void DamageText()
+    public void DamageText(int damage)
     {
         DamageNumber newDamageNumber =
             _damageNumbersPro.GetComponent<DamageNumber>().Spawn(
                 new Vector3(transform.position.x, transform.position.y, transform.position.z),
-                10);
+                damage);
     }
 }

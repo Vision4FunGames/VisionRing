@@ -17,4 +17,9 @@ public class DamageManager : MonoBehaviour
     {
         _playerHealth.DamageAnimation(characterStats.damage.GetValue());
     }
+
+    public void PlayerCharge()
+    {
+        //buraya yazacan ne yazacaksan
+    }
 }
