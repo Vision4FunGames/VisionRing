@@ -9,7 +9,7 @@ public class CharacterAnimator : MonoBehaviour
     NavMeshAgent navmeshAgent;
     CharacterCombat combat;
     private EnemyStats enemyStats;
-
+    private int attackCounter = 0;
     protected virtual void Start() {
         navmeshAgent = GetComponent<NavMeshAgent> ();
         combat = GetComponent<CharacterCombat> ();
@@ -23,7 +23,16 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     protected virtual void OnAttack() {
-        animator.SetTrigger ("Attack");
+
+        if (attackCounter % 3 == 0)
+        {
+           animator.SetTrigger("Charge");
+        }
+        else
+        {
+            animator.SetTrigger ("Attack");
+        }
+        attackCounter++;
     }
 
     protected virtual void DieAnimation()

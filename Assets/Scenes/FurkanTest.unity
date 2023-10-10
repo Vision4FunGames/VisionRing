@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -348,6 +348,10 @@ PrefabInstance:
     - target: {fileID: 9083815218306496278, guid: 1f88b1fef4a6e9c4d853d5a4fc6246f5, type: 3}
       propertyPath: m_Name
       value: sword 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083815218306496278, guid: 1f88b1fef4a6e9c4d853d5a4fc6246f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f88b1fef4a6e9c4d853d5a4fc6246f5, type: 3}
@@ -1077,6 +1081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniSkelet
       objectReference: {fileID: 0}
+    - target: {fileID: 1930352219879185654, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3810608986528961657, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1445,6 +1453,10 @@ PrefabInstance:
     - target: {fileID: 4837125561798481288, guid: 88d05ffe336f00341a7d52d3f4343ae5, type: 3}
       propertyPath: m_Name
       value: set 2 sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837125561798481288, guid: 88d05ffe336f00341a7d52d3f4343ae5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6241576145557037875, guid: 88d05ffe336f00341a7d52d3f4343ae5, type: 3}
       propertyPath: m_RootOrder
@@ -1942,6 +1954,10 @@ PrefabInstance:
     - target: {fileID: 8791620877295354256, guid: a1de8ccdbb597e0499a870f5e4356de9, type: 3}
       propertyPath: m_Name
       value: maisn sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791620877295354256, guid: a1de8ccdbb597e0499a870f5e4356de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1de8ccdbb597e0499a870f5e4356de9, type: 3}
@@ -2529,6 +2545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sword 1
       objectReference: {fileID: 0}
+    - target: {fileID: 983056495033772472, guid: 2626715ead5aaf8448f19e2353a471e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4665588536238167652, guid: 2626715ead5aaf8448f19e2353a471e2, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -2585,6 +2605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1519873202}
   - component: {fileID: 1519873201}
+  - component: {fileID: 1519873203}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -2646,6 +2667,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &1519873203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519873200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87bb5ba79c3d6346a02cc8b883c8c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 0.3
+  duration: 0.1
 --- !u!1 &1526197206
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,6 +2975,10 @@ PrefabInstance:
     - target: {fileID: 6377638394272662000, guid: 7444ac9a7b5e4f448b4bd17953d087dc, type: 3}
       propertyPath: m_Name
       value: set 1 sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377638394272662000, guid: 7444ac9a7b5e4f448b4bd17953d087dc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7444ac9a7b5e4f448b4bd17953d087dc, type: 3}
@@ -3357,6 +3396,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sword 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3493134500883167216, guid: f0288b8abf684864a8dfc19616a29878, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0288b8abf684864a8dfc19616a29878, type: 3}
 --- !u!1 &1783543702 stripped
@@ -3376,6 +3419,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b4a2757e9ff1149ac00bcfdb5c165d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!137 &1791557424 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7381636430674938437, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
+  m_PrefabInstance: {fileID: 1864399550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1803977884
 GameObject:
   m_ObjectHideFlags: 0
@@ -3490,7 +3538,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  targetMesh: {fileID: 1974718996}
+  targetMesh: {fileID: 1791557424}
   currentItemInventoryParent: {fileID: 720271948752898586}
   rightHand: {fileID: 2029635855}
 --- !u!1 &1848431705 stripped
@@ -3591,6 +3639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainBow
       objectReference: {fileID: 0}
+    - target: {fileID: 6718265490389011626, guid: bd8e200cae719334abdba00033c04c0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd8e200cae719334abdba00033c04c0d, type: 3}
 --- !u!1001 &1864399550
@@ -3654,11 +3706,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
---- !u!137 &1974718996 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7381636430624309131, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
-  m_PrefabInstance: {fileID: 1864399550}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2029635855 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2581400123099732708, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
@@ -6241,6 +6288,10 @@ PrefabInstance:
     - target: {fileID: 3399877509245605539, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
       propertyPath: m_Name
       value: ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399877509245605539, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
