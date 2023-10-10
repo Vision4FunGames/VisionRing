@@ -12,6 +12,11 @@ public class Interactable : MonoBehaviour
     private Transform player;
     private bool hasInteracted = false;
 
+    private void Awake()
+    {
+        player = Player.instance.transform;
+    }
+
     public virtual void Interact()
     {
        Debug.Log("Interacting with " + transform.name);
