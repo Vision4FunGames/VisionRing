@@ -34,7 +34,6 @@ public class Inventory : MonoBehaviour
                 Debug.Log("Not enough room.");
                 return;
             }
-
             items.Add(item);
             Debug.Log("Item Added to Inventory " + item.name);
             if (onItemChangedCallback != null)

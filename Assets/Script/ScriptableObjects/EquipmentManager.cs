@@ -92,6 +92,10 @@ public class EquipmentManager : MonoBehaviour {
 		{
 			oldItem = currentEquipment [slotIndex];
 			inventory.Add(oldItem);
+			oldItem.showInInventory = false; 
+
+
+
 		}
 		// An item has been equipped so we trigger the callback
 		currentEquipment [slotIndex] = newItem;
