@@ -24,6 +24,7 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void OnAttack() {
 
+        
         if (attackCounter % 3 == 0)
         {
            animator.SetTrigger("Charge");

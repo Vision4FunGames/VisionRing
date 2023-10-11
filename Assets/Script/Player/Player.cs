@@ -63,7 +63,10 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;    
+        }
         uiManager = FindObjectOfType<UiManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
