@@ -3,11 +3,11 @@ using UnityEngine;
 
 public enum SkillType
 {
-    dash,
-    rotateFire,
-    earthquick,
-    flameT,
-    tornado,
+    Dash,
+    FireRotate,
+    EarthQ,
+    FlameT,
+    Tornado,
 }
 
 public class PlayerSkillState : PlayerState
@@ -25,7 +25,7 @@ public class PlayerSkillState : PlayerState
         base.EnterState();
         switch (_skillType)
         {
-            case SkillType.dash:
+            case SkillType.Dash:
                 if (SkillCoolDown.instance.CanUse(0))
                     DashSkill();
                 else
@@ -33,7 +33,7 @@ public class PlayerSkillState : PlayerState
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
                 break;
-            case SkillType.rotateFire:
+            case SkillType.FireRotate:
                 if (SkillCoolDown.instance.CanUse(1))
                     FireRotate();
                 else
@@ -41,7 +41,7 @@ public class PlayerSkillState : PlayerState
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
                 break;
-            case SkillType.earthquick:
+            case SkillType.EarthQ:
                 if (SkillCoolDown.instance.CanUse(2))
                     EarthQuick();
                 else
@@ -49,7 +49,7 @@ public class PlayerSkillState : PlayerState
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
                 break;
-            case SkillType.flameT:
+            case SkillType.FlameT:
                 if (SkillCoolDown.instance.CanUse(3))
                     FlameTower();
                 else
@@ -57,7 +57,7 @@ public class PlayerSkillState : PlayerState
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
                 break;
-            case SkillType.tornado:
+            case SkillType.Tornado:
                 if (SkillCoolDown.instance.CanUse(4))
                     Tornado();
                 else

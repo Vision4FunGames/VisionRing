@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
         StateMachine.CurrentPlayerState.FrameUpdate();
         if (Input.GetKeyDown(KeyCode.C))
         {
-            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.dash);
+            PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.Dash);
             StateMachine.ChangeState(PlayerSkillState);
         }
     }
