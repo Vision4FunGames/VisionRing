@@ -70,7 +70,7 @@ public class PlayerSkillState : PlayerState
 
     public void DashSkill()
     {
-        SkillCoolDown.instance._SkillsArray[0].coolDownTime = SkillCoolDown.instance._SkillsArray[0].coolDown;
+        SkillCoolDown.instance.skillsArray[0].coolDownTime = SkillCoolDown.instance.skillsArray[0].coolDown;
         var position = _player.transform.position;
         Vector3 playerVelocity = new Vector3(_player._fixedJoystick.Horizontal, 0, _player._fixedJoystick.Vertical);
         Vector3 targetPos = new Vector3(position.x, position.y, position.z) +
@@ -86,17 +86,17 @@ public class PlayerSkillState : PlayerState
 
     public void FireRotate()
     {
-        SkillCoolDown.instance._SkillsArray[1].coolDownTime = SkillCoolDown.instance._SkillsArray[1].coolDown;
+        SkillCoolDown.instance.skillsArray[1].coolDownTime = SkillCoolDown.instance.skillsArray[1].coolDown;
         GameObject currentRotat = GameObject.Instantiate(Resources.Load("Skills/FireEarth") as GameObject);
         if (currentRotat != null) currentRotat.transform.SetParent(_player.transform);
         currentRotat.transform.localPosition = new Vector3(0, 2, 0);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-        GameObject.Destroy(currentRotat, SkillCoolDown.instance._SkillsArray[1].coolDown/2);
+        GameObject.Destroy(currentRotat, SkillCoolDown.instance.skillsArray[1].coolDown/2);
     }
 
     public void EarthQuick()
     {
-        SkillCoolDown.instance._SkillsArray[2].coolDownTime = SkillCoolDown.instance._SkillsArray[2].coolDown;
+        SkillCoolDown.instance.skillsArray[2].coolDownTime = SkillCoolDown.instance.skillsArray[2].coolDown;
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/EarthShatter") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
         currentEarthShatter.transform.localPosition = new Vector3(0, 0, 0);
@@ -107,7 +107,7 @@ public class PlayerSkillState : PlayerState
 
     public void FlameTower()
     {
-        SkillCoolDown.instance._SkillsArray[3].coolDownTime = SkillCoolDown.instance._SkillsArray[3].coolDown;
+        SkillCoolDown.instance.skillsArray[3].coolDownTime = SkillCoolDown.instance.skillsArray[3].coolDown;
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/FlameThrower") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
         currentEarthShatter.transform.localPosition = new Vector3(0, 2, 0);
@@ -118,7 +118,7 @@ public class PlayerSkillState : PlayerState
 
     public void Tornado()
     {
-        SkillCoolDown.instance._SkillsArray[4].coolDownTime = SkillCoolDown.instance._SkillsArray[4].coolDown;
+        SkillCoolDown.instance.skillsArray[4].coolDownTime = SkillCoolDown.instance.skillsArray[4].coolDown;
         GameObject currentTornado = GameObject.Instantiate(Resources.Load("Skills/BasicTornado") as GameObject);
         if (currentTornado != null) currentTornado.transform.SetParent(_player.transform);
         currentTornado.transform.localPosition = new Vector3(0, 0.1f, 0);
