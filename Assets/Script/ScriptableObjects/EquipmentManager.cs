@@ -20,7 +20,7 @@ public class EquipmentManager : MonoBehaviour {
 		}
 	}
 	static EquipmentManager _instance;
-	private GameObject currentWeapon;
+	private GameObject currentWeapon,currentInventoryWeapon;
 	void Awake ()
 	{
 		_instance = this;
@@ -35,6 +35,7 @@ public class EquipmentManager : MonoBehaviour {
 	SkinnedMeshRenderer[] currentMeshes;
 	
 	public SkinnedMeshRenderer targetMesh;
+	public SkinnedMeshRenderer targetEnvanterMesh;
 
 	public GameObject currentItemInventoryParent;
 	// Callback for when an item is equipped
@@ -44,6 +45,7 @@ public class EquipmentManager : MonoBehaviour {
 	Inventory inventory;
 	//private EquippedInventory equippedInventory;
 	public GameObject rightHand;
+	public GameObject inventoryHand;
 	void Start ()
 	{
 		ResetObjects();
@@ -112,6 +114,9 @@ public class EquipmentManager : MonoBehaviour {
 			currentWeapon = Instantiate(newItem.prefab,new Vector3(rightHand.transform.position.x, rightHand.transform.position.y, rightHand.transform.position.z),
 				Quaternion.identity);
 			currentWeapon.transform.parent = rightHand.transform;
+			currentInventoryWeapon = Instantiate(newItem.prefab,new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y, inventoryHand.transform.position.z),
+				Quaternion.identity);
+			currentInventoryWeapon.transform.parent = inventoryHand.transform;
 		}
 		
 		
