@@ -24,6 +24,7 @@ public class Inventory : MonoBehaviour
     public List<Item> items = new List<Item>();
 
     public List<Item> currentItems = new List<Item>();
+    
     // Add a new item if enough room
     public void Add (Item item)
     {
@@ -37,7 +38,7 @@ public class Inventory : MonoBehaviour
             items.Add(item);
             Debug.Log("Item Added to Inventory " + item.name);
             if (onItemChangedCallback != null)
-                onItemChangedCallback.Invoke  ();
+                onItemChangedCallback.Invoke();
         }
     }
 

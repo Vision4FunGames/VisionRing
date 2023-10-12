@@ -33,6 +33,7 @@ public class EquipmentManager : MonoBehaviour {
 
 	public Equipment[] currentEquipment;
 	SkinnedMeshRenderer[] currentMeshes;
+	private SkinnedMeshRenderer[] currentInventoryMeshes;
 	
 	public SkinnedMeshRenderer targetMesh;
 	public SkinnedMeshRenderer targetEnvanterMesh;
@@ -55,6 +56,7 @@ public class EquipmentManager : MonoBehaviour {
 		int numSlots = System.Enum.GetNames (typeof(EquipmentSlot)).Length;
 		currentEquipment = new Equipment[numSlots];
 		currentMeshes = new SkinnedMeshRenderer[numSlots];
+		currentInventoryMeshes = new SkinnedMeshRenderer[numSlots];
 
 		EquipAllDefault ();
 	}
@@ -95,10 +97,7 @@ public class EquipmentManager : MonoBehaviour {
 		{
 			oldItem = currentEquipment [slotIndex];
 			inventory.Add(oldItem);
-			oldItem.showInInventory = false; 
-
-
-
+			oldItem.showInInventory = false;
 		}
 		// An item has been equipped so we trigger the callback
 		currentEquipment [slotIndex] = newItem;
@@ -111,17 +110,21 @@ public class EquipmentManager : MonoBehaviour {
 		}
 		else if (newItem.prefab)
 		{
+			if (currentWeapon != null)
+			{
+				Destroy(currentWeapon);
+				Destroy(currentInventoryWeapon);
+			}
 			currentWeapon = Instantiate(newItem.prefab,new Vector3(rightHand.transform.position.x, rightHand.transform.position.y, rightHand.transform.position.z),
 				Quaternion.identity);
 			currentWeapon.transform.parent = rightHand.transform;
+			currentWeapon.transform.rotation = new Quaternion(-24.806f,54.45f,-146.35f,0);
 			currentInventoryWeapon = Instantiate(newItem.prefab,new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y, inventoryHand.transform.position.z),
 				Quaternion.identity);
 			currentInventoryWeapon.transform.parent = inventoryHand.transform;
+			
 		}
-		
-		
 		//equippedItems [itemIndex] = newMesh.gameObject;
-
 	}
 
 	
@@ -135,6 +138,7 @@ public class EquipmentManager : MonoBehaviour {
 			currentEquipment [slotIndex] = null;
 			if (currentMeshes [slotIndex] != null) {
 				Destroy (currentMeshes [slotIndex].gameObject);
+				Destroy(currentInventoryMeshes[slotIndex].gameObject);
 			}
 			else if (slotIndex == 2 && currentWeapon != null)
 			{
@@ -174,5 +178,10 @@ public class EquipmentManager : MonoBehaviour {
 		newMesh.bones = targetMesh.bones;
 		newMesh.rootBone = targetMesh.rootBone;
 		currentMeshes [slotIndex] = newMesh;
+		//Inventory Player
+		SkinnedMeshRenderer newMesh2 = Instantiate(mesh) as SkinnedMeshRenderer;
+		newMesh.bones = targetEnvanterMesh.bones;
+		newMesh.rootBone = targetEnvanterMesh.rootBone;
+		currentInventoryMeshes [slotIndex] = newMesh2;
 	}
 }
