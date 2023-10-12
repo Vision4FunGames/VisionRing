@@ -31,6 +31,10 @@ public class PlayerManager : MonoBehaviour
     public void CameraShakePlayer(float duration , float magnitude)
     {
         StartCoroutine(_cameraShake.ShakeVector(duration, magnitude));
-        StartCoroutine(_cameraShake.Shake(duration, magnitude*5));
+    }
+
+    public void CameraShakeCombo(float duration , float magnitude)
+    {
+        StartCoroutine(_cameraShake.Shake(.1f, magnitude*3));
     }
 }

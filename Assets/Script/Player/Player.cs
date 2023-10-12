@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public PlayerMovementState PlayerMovementState { get; set; }
 
     public PlayerSkillState PlayerSkillState { get; set; }
+    
+    public PlayerBox PlayerBox { get; set; }
 
     #endregion
 
@@ -73,6 +75,7 @@ public class Player : MonoBehaviour
         //_fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
+        PlayerBox = new PlayerBox(this,StateMachine);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
         DashInıtiliaze();
@@ -111,6 +114,11 @@ public class Player : MonoBehaviour
         {
             PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.Dash);
             StateMachine.ChangeState(PlayerSkillState);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            PlayerBox = new PlayerBox(this, StateMachine);
+            StateMachine.ChangeState(PlayerBox);
         }
     }
 

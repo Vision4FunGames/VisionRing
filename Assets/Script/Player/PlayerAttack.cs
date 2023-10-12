@@ -143,11 +143,12 @@ public class SwordAttack : MonoBehaviour
         _swordParticle[index].Play();
         if (index == 2)
         {
-            PlayerManager.instance.CameraShakePlayer(.1f, .4f);
+            PlayerManager.instance.CameraShakePlayer(.3f, 1.5f);
+            PlayerManager.instance.CameraShakeCombo(.5f,.4f);
         }
         else
         {
-            PlayerManager.instance.CameraShakePlayer(.1f, .1f);
+            PlayerManager.instance.CameraShakePlayer(.7f, .5f);
         }
     }
 
