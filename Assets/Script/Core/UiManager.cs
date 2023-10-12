@@ -9,21 +9,30 @@ public class UiManager : MonoBehaviour
     [Header("Player Button")] public Button JumpBtn;
     public ButtonType[] ButtonType;
     public static UiManager instance;
-
-
+    public GameObject gamePlay, inventory;
+    private InventoryUI inventoryUi;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
 
     private void Awake()
     {
         instance = this;
+        
     }
 
     private void Start()
     {
+        inventoryUi = InventoryUI.instance;
+        inventory.SetActive(false);
     }
 
     private void Update()
     {
+        if (Input.GetButtonDown("Inventory"))
+        {
+            inventory.SetActive(!inventory.activeSelf);
+            gamePlay.SetActive(!gamePlay.activeSelf);
+            inventoryUi.UpdateUI();
+        }
     }
 }
 
