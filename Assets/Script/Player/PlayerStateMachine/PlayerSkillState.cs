@@ -126,7 +126,6 @@ public class PlayerSkillState : PlayerState
         GameObject.Destroy(currentTornado, 10);
     }
 
-
     public override void ExitState()
     {
         base.ExitState();

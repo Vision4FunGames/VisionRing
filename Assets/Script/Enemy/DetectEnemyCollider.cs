@@ -40,13 +40,11 @@ public class DetectEnemyCollider : MonoBehaviour
         GetComponent<EnemyController>().enabled = false;
         Vector3 target = transform.position - _tornado.transform.position;
         target = new Vector3(target.x, 10, target.z);
-        transform.DOMove(target * 4, Random.Range(2, 6));
+        //transform.DOMove(target * 4, Random.Range(1, 3));
         GetComponentInChildren<Animator>().SetTrigger("tornado");
-        transform.SetParent(_tornado.transform.GetChild(0));
-        /*
-         transform.DOMoveY(transform.position.y+10,Random.Range(4,10)).OnComplete((() =>
+        transform.SetParent(_tornado.GetComponentInParent<Player>().transform.GetChild(2));
+        transform.DOMoveY(transform.position.y + 10, Random.Range(4, 10)).OnComplete((() =>
         {
-          gameObject.SetActive(false);
-         }));*/
+        }));
     }
 }
