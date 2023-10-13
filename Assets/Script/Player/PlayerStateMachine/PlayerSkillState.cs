@@ -123,7 +123,7 @@ public class PlayerSkillState : PlayerState
         if (currentTornado != null) currentTornado.transform.SetParent(_player.transform);
         currentTornado.transform.localPosition = new Vector3(0, 0.1f, 0);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-        GameObject.Destroy(currentTornado, 10);
+        GameObject.Destroy(currentTornado, 4);
     }
 
     public override void ExitState()

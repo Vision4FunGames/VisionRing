@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -293,6 +293,18 @@ PrefabInstance:
     - target: {fileID: 2622531187056102425, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622531187056102429, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622531187056102429, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622531187056102430, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399877509245605539, guid: c9757dd399a6eca4088a47d4583e63da, type: 3}
       propertyPath: m_Name
@@ -635,7 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89cdb55f7984b6a47bd868ed043b8049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tornadoEnemies: []
+  enemies:
+  - {fileID: 0}
 --- !u!114 &427121607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,6 +798,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2147106698, guid: 0d1fe77127de19b4d816519c1ce0daa6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147106699, guid: 0d1fe77127de19b4d816519c1ce0daa6, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147106699, guid: 0d1fe77127de19b4d816519c1ce0daa6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5653933587837560465, guid: 0d1fe77127de19b4d816519c1ce0daa6, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1198,6 +1223,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniSkelet
       objectReference: {fileID: 0}
+    - target: {fileID: 3411616369370781096, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411616369370781096, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3810608986528961657, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1241,6 +1274,10 @@ PrefabInstance:
     - target: {fileID: 3810608986528961657, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473851112350732133, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8ee7eed38234a744a9faa386fdf0825, type: 3}
@@ -1611,7 +1648,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 17.92, z: -20.24}
+  m_LocalPosition: {x: -0.01504003, y: 17.92, z: -20.33197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2099,6 +2136,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5119321315869258161, guid: 9a827a6020d97914c86139384d657e17, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119321315869258161, guid: 9a827a6020d97914c86139384d657e17, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119321315869258162, guid: 9a827a6020d97914c86139384d657e17, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5119321315869258166, guid: 9a827a6020d97914c86139384d657e17, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2196,7 +2245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 18.18, z: -20.24}
+  m_FollowOffset: {x: -0.01504003, y: 18.18, z: -20.33197}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2308,7 +2357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519873200}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 17.92, z: -20.24}
+  m_LocalPosition: {x: -0.01504003, y: 17.92, z: -20.33197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2345,7 +2394,7 @@ GameObject:
   - component: {fileID: 1526197211}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3020,6 +3069,8 @@ MonoBehaviour:
     skillButton: {fileID: 309517459}
   - mySkillType: 4
     skillButton: {fileID: 1601008905}
+  gamePlay: {fileID: 0}
+  inventory: {fileID: 0}
   dashCoolDownLast: 0
   rotateFireLast: 0
   earthquickLast: 0
@@ -3269,5 +3320,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4f90e99fe95bcce4e9c4902fdcf85df1, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5461400893491958787, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}

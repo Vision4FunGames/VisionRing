@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 199380040608345850}
   - component: {fileID: 114828354333688536}
   - component: {fileID: 6126412923182608419}
+  - component: {fileID: -6838353623043049407}
   m_Layer: 0
   m_Name: BasicTornado
   m_TagString: Tornado
@@ -4954,6 +4955,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.02
   m_Center: {x: 0.24868079, y: -0.09125173, z: 0.9352314}
+--- !u!114 &-6838353623043049407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166697705615292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907c462074a65b244ad53d46c992706f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1442534876973244
 GameObject:
   m_ObjectHideFlags: 0
@@ -24591,7 +24604,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2320603358506521059}
   - component: {fileID: 1652909053106209093}
-  - component: {fileID: 6146223553457355483}
   m_Layer: 0
   m_Name: Rot
   m_TagString: Untagged
@@ -24628,18 +24640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateVector: {x: 0, y: 0, z: 250}
   rotateSpace: 0
---- !u!114 &6146223553457355483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127339281840138884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89cdb55f7984b6a47bd868ed043b8049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &349820141
 PrefabInstance:
   m_ObjectHideFlags: 0
