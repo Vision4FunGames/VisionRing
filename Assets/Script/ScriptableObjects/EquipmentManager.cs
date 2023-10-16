@@ -180,8 +180,8 @@ public class EquipmentManager : MonoBehaviour {
 		currentMeshes [slotIndex] = newMesh;
 		//Inventory Player
 		SkinnedMeshRenderer newMesh2 = Instantiate(mesh) as SkinnedMeshRenderer;
-		newMesh.bones = targetEnvanterMesh.bones;
-		newMesh.rootBone = targetEnvanterMesh.rootBone;
+		newMesh2.bones = targetEnvanterMesh.bones;
+		newMesh2.rootBone = targetEnvanterMesh.rootBone;
 		currentInventoryMeshes [slotIndex] = newMesh2;
 	}
 }

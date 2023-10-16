@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     public GameObject gamePlay, inventory;
     private InventoryUI inventoryUi;
+    public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
 
     private void Awake()
@@ -29,11 +30,18 @@ public class UiManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Inventory"))
         {
-            inventory.SetActive(!inventory.activeSelf);
-            gamePlay.SetActive(!gamePlay.activeSelf);
-            inventoryUi.UpdateUI();
+            ShowInventory();
         }
     }
+
+    public void ShowInventory()
+    {
+        inventory.SetActive(!inventory.activeSelf);
+        inventoryObject.SetActive(!inventoryObject.activeSelf);
+        gamePlay.SetActive(!gamePlay.activeSelf);
+        inventoryUi.UpdateUI();
+    }
+
 }
 
 [Serializable]
@@ -42,3 +50,5 @@ public class ButtonType
     public SkillType mySkillType;
     public Button skillButton;
 }
+
+

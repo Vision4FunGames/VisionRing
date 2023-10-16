@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5038891023898458665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5038891023898458664}
+  - component: {fileID: 5038891023898458667}
+  - component: {fileID: 5038891023898458666}
+  - component: {fileID: 5038891023898458645}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5038891023898458664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5038891023898458667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08278986e08766a469c41790bdfbb53f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: 0
+--- !u!114 &5038891023898458666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b743362643c4548995ebe246c5ab54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpBtn: {fileID: 0}
+  ButtonType: []
+  gamePlay: {fileID: 0}
+  inventory: {fileID: 0}
+  inventoryObject: {fileID: 0}
+  dashCoolDownLast: 0
+  rotateFireLast: 0
+  earthquickLast: 0
+  flameTLastQuick: 0
+--- !u!114 &5038891023898458645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0f8e82e8206ff41a92ac09274d70e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemDatabase:
+  - {fileID: 11400000, guid: 2887cbb116e6f734e9e44fd7d668e2aa, type: 2}
+  - {fileID: 11400000, guid: 55cd26929c78f444dbd18b0f8c0277d4, type: 2}
+  - {fileID: 11400000, guid: ae749a85619dc0f4fb06d96c8477bace, type: 2}
+  - {fileID: 11400000, guid: 7aad0c41236582847b82fb40c29cb627, type: 2}
+  - {fileID: 11400000, guid: 1c7ea09cf7253ed43b00fbde71b318f7, type: 2}
+  - {fileID: 11400000, guid: 027ef060042ccf948a5aa965aa46c17b, type: 2}
+  - {fileID: 11400000, guid: 40556ef576bae3d41a6db5687e6f6812, type: 2}
+  - {fileID: 11400000, guid: 8c9e1c343a87c494fb6096e82da79836, type: 2}
+  - {fileID: 11400000, guid: cf940a9452785e64386dacaaf502e1c2, type: 2}
+  - {fileID: 11400000, guid: 09351d3e9f288eb4292e5daefb9acc0b, type: 2}
+  - {fileID: 11400000, guid: f9dddde3725b6ae4187b4d4b8fbaa373, type: 2}
+  - {fileID: 11400000, guid: e74ec266e53230b4580aee2a74dd6bb0, type: 2}
+  - {fileID: 11400000, guid: 982dc3b1eef339d4dbdf987641d0afc4, type: 2}
+  - {fileID: 11400000, guid: 518b6bc16af96244b8f0fda03f6f572b, type: 2}
+  - {fileID: 11400000, guid: a57ba76ebfc5cc741be79674a13866bd, type: 2}
+  - {fileID: 11400000, guid: ea986feb01a785740bad4fa493ba1297, type: 2}
+  - {fileID: 11400000, guid: ac942f6631ed2794c819574441f66c5c, type: 2}
+  - {fileID: 11400000, guid: 2d1fb663120b50e4bb835409822dbef2, type: 2}
+  - {fileID: 11400000, guid: 8bfadcb4b20b4734daab0941d708cde2, type: 2}
+  - {fileID: 11400000, guid: 97082485f2a7991499ae4dd2fb587ceb, type: 2}
+  - {fileID: 11400000, guid: 7ad67abe39b3cac43afa647a3af6625e, type: 2}
+  - {fileID: 11400000, guid: ccf48870b53e20343925c1ff7869b424, type: 2}
+  - {fileID: 11400000, guid: 90319b1ef5d16c14a92ac5464ddcbf62, type: 2}
+  - {fileID: 11400000, guid: 91660817def1f934c903fab423f22567, type: 2}
+  - {fileID: 11400000, guid: 332f53876aaec2345b1d75d0a78ac944, type: 2}
+  - {fileID: 11400000, guid: 0424359db891b4b4ebd3b5af4106c059, type: 2}
+  - {fileID: 11400000, guid: a055e306cabeccd44ae3284a831a6703, type: 2}
+  - {fileID: 11400000, guid: 675457c6c0e56f240b0e9b12058d51da, type: 2}
+  - {fileID: 11400000, guid: f12dc3c128ac3994fa2abc876b7ebfb4, type: 2}
+  - {fileID: 11400000, guid: 4bd7eda409c492a44acce3eec57373e1, type: 2}
+  defaultWear: []
+  currentEquipment:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  targetMesh: {fileID: 0}
+  targetEnvanterMesh: {fileID: 0}
+  currentItemInventoryParent: {fileID: 0}
+  rightHand: {fileID: 0}
+  inventoryHand: {fileID: 0}

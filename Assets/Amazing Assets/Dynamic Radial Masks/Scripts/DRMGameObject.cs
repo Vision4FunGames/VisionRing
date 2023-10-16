@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace AmazingAssets.DynamicRadialMasks
@@ -14,9 +15,9 @@ namespace AmazingAssets.DynamicRadialMasks
         [HideInInspector] public float frequency = 10;
         [HideInInspector] public float phaseSpeed = 2;
         [HideInInspector] public float currentPhase = 0;
-        [HideInInspector] [Min(0.001f)] public float smooth = 1;               
-        
-
+        [HideInInspector] [Min(0.001f)] public float smooth = 1;
+        public Slider slider;
+    
 #if UNITY_EDITOR
         [HideInInspector] public bool displayAllProperties = true;
         [HideInInspector] public DynamicRadialMasks.Enum.MaskShape maskShape;
@@ -31,6 +32,11 @@ namespace AmazingAssets.DynamicRadialMasks
         void Update()
         {
             currentPhase += Time.deltaTime * phaseSpeed;
+        }
+
+        public void SliderValueChanged()
+        {
+            radius = slider.value * 100f;
         }
     }
 }
