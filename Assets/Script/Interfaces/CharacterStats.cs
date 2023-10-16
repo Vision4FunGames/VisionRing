@@ -2,6 +2,7 @@ using System;
 using DamageNumbersPro;
 using UnityEngine;
 using DG.Tweening;
+using MoreMountains.Tools;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CharacterStats : MonoBehaviour
     public Stat armor;
     public DamageNumber prefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
-
+    public MMProgressBar mmProgressBar;
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -28,6 +29,7 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        
         if (currentHealth > 0)
         {
             damage -= armor.GetValue();
@@ -35,6 +37,7 @@ public class CharacterStats : MonoBehaviour
             currentHealth -= damage;
             DamageVFX(damage);
             DamageAnimation();
+            UpdateHealthBar();
         }
         else if (currentHealth <= 0)
         {
@@ -67,5 +70,10 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void Die()
     {
+    }
+
+    public void UpdateHealthBar()
+    {
+        mmProgressBar.UpdateBar(currentHealth, 0, 100);
     }
 }
