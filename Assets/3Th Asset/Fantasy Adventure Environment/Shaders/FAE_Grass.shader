@@ -26,6 +26,10 @@ Shader "FAE/Grass"
 		[Toggle(_VS_TOUCHBEND_ON)] _VS_TOUCHBEND("VS_TOUCHBEND", Float) = 0
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
+		
+		[HDR]_EdgeEmission("Edge Emission", Color) = (1,1,1,1)
+		_DissolveNoise("Dissolve Noise", 2D) = "white" {}
+		[Toggle]_InvertDissolve("Invert Dissolve", Float) = 0
 	}
 
 	SubShader
@@ -38,6 +42,8 @@ Shader "FAE/Grass"
 		#include "UnityCG.cginc"
 		#include "UnityStandardUtils.cginc"
 		#include "Lighting.cginc"
+		#include "Assets/Amazing Assets/Dynamic Radial Masks/Shaders/CGINC/HeightField/DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global.cginc"
+
 		#pragma target 3.0
 		#pragma multi_compile_instancing
 		#pragma shader_feature _VS_TOUCHBEND_ON
@@ -59,6 +65,9 @@ Shader "FAE/Grass"
 			float3 worldNormal;
 			INTERNAL_DATA
 			float4 vertexColor : COLOR;
+
+			float2 uv2_texcoord2;
+			float2 uv_DissolveNoise;
 		};
 
 		struct SurfaceOutputCustomLightingCustom
@@ -268,10 +277,22 @@ Shader "FAE/Grass"
 			s.GIData = data;
 		}
 
+		fixed4 _EdgeEmission;
+		sampler2D _DissolveNoise;
+		float _InvertDissolve;
+		
 		void surf( Input i , inout SurfaceOutputCustomLightingCustom o )
 		{
 			o.SurfInput = i;
 			o.Normal = float3(0,0,1);
+
+			    float noise = tex2D(_DissolveNoise, i.uv_DissolveNoise).r;
+    float mask = DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global(i.worldPos, noise);
+    mask = _InvertDissolve ? mask : 1 - mask;
+	
+    clip(mask > 0.5 ? -1 : 1);
+
+    o.Emission = _EdgeEmission * mask;
 		}
 
 		ENDCG

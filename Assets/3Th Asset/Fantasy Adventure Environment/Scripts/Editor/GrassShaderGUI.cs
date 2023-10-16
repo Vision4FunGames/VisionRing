@@ -17,6 +17,7 @@ namespace FAE
         //Main maps
         MaterialProperty _MainTex;
         MaterialProperty _BumpMap;
+        MaterialProperty _Noise;
 
         //Color
         MaterialProperty _ColorTop;
@@ -31,7 +32,11 @@ namespace FAE
         MaterialProperty _WindSwinging;
         MaterialProperty _WindAmplitudeMultiplier;
         MaterialProperty _BendingInfluence;
+        
+        MaterialProperty _EdgeEmission;
+        MaterialProperty _InvertDissolve;
 
+        bool inverseFlag;
         //VS Touch Bend
 #if TOUCH_REACT
         MaterialProperty _VS_TOUCHBEND;
@@ -64,6 +69,8 @@ namespace FAE
 
         GUIContent mainTexName = new GUIContent("Diffuse", "Diffuse (RGB) and Transparency (A)");
         GUIContent normalMapName = new GUIContent("Normal Map");
+        GUIContent disolveName = new GUIContent("Disolve", "Disolve");
+
         private bool visualizeVectors;
 
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
@@ -129,6 +136,26 @@ namespace FAE
             this.m_MaterialEditor.TexturePropertySingleLine(normalMapName, this._BumpMap);
 
             EditorGUILayout.Space();
+            
+            EditorGUILayout.BeginHorizontal();
+
+
+            this.m_MaterialEditor.TexturePropertySingleLine(disolveName, this._Noise, this._EdgeEmission);
+
+            EditorGUILayout.EndHorizontal();
+
+
+            EditorGUILayout.BeginHorizontal();
+            inverseFlag = EditorGUILayout.Toggle("Inverse", inverseFlag);
+            if (inverseFlag)
+            {
+                _InvertDissolve.floatValue = 0.0F;
+            }
+            else
+            {
+                _InvertDissolve.floatValue = 1.0F;
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
         void DoColorArea()
@@ -329,6 +356,10 @@ namespace FAE
             _WindSwinging = FindProperty("_WindSwinging", props);
             _WindAmplitudeMultiplier = FindProperty("_WindAmplitudeMultiplier", props);
             _BendingInfluence = FindProperty("_BendingInfluence", props);
+            
+            _Noise = FindProperty("_DissolveNoise", props);
+            _EdgeEmission = FindProperty("_EdgeEmission", props);
+            _InvertDissolve = FindProperty("_InvertDissolve", props);
 
 #if TOUCH_REACT
             //TouchBend
