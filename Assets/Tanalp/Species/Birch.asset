@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aad7dd2aeef8c848b29c8429ff2ce3d, type: 3}
+  m_Name: Birch
+  m_EditorClassIdentifier: 
+  Archetypes:
+  - Prefab: {fileID: 1000010151976528, guid: ca0f87d8635ce0940b7441781fb4354d, type: 3}
+    PlacementMethod: 0
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 1000013451787930, guid: 06b059ea2b033674198473f8573ffd67, type: 3}
+    PlacementMethod: 0
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 1000013552779140, guid: e70352c946d2d3249b00e9e0a8b5a18f, type: 3}
+    PlacementMethod: 0
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  ConformToMeshSurface: 1
+  InitialSeedDensity: 0.0003
+  MaxSeedTravelDistance: 10
+  MinChildren: 1
+  MaxChildren: 3
+  CollisionRange: 1
+  CollisionRangeSq: 1
+  ShadeRange: 5
+  ShadeRangeSq: 25
+  CanGrowInShade: 0
+  MinScaleMultiplier: 0.7
+  MaxScaleMultiplier: 1
+  MinSlopeAngle: 0
+  MaxSlopeAngle: 30
+  MinAltitude: -1000
+  MaxAltitude: 1000
+  Generations: []
+  LayerMode: 2
+  LayerDensityCombineMode: 0
+  DefaultLayerDensity: 0
+  LayerDensityRules: []
+  fileVersion: 2
+  PlacementTextureMask: []
+  PlacementTextureIndexMask: 

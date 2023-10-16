@@ -1,0 +1,88 @@
+1.4.2
+FEATURES
+- Added an option to the species archetype settings for GameObject foliage to be static (previously, GameObject foliage was always static with no way to change it)
+- Added an optional 'Root' GameObject to the Foliage Area settings that foliage GameObjects will be parented to. If left blank a new object will be created, mimicking the old behaviour
+
+1.4.1
+BUGFIXES
+- Fixed an issue causing a species asset to sometimes not save changes to its archetype settings
+
+1.4.0
+FEATURES
+- Terrain texture masks section has been replaced with terrain layer density rules
+	> Can now be set up by terrain layer (in Unity 2018.3+) in addition to texture or index 
+	> Now use a density multiplier for each layer to give more control over where (and how much) a species can spawn based on the terrain layers
+	> A default density can be provided for layers which don't appear in the list
+
+- [Experimental] Procedural grass placement component (Component > Landscaper > Experimental > Grass Placement)
+	> Procedurally spawns GameObject instances on to a terrain in an area around the component
+	> Supports multiple grass types and various constraints
+
+ENHANCEMENTS
+- Added tooltips for all species properties
+
+
+
+1.3.4
+- Masks can now be specified using a splatmap index instead of referencing a texture directly
+- GameObject trees are now placed as prefab instances in the editor
+
+
+1.3.1
+FEATURES
+- Foliage archetypes now have their own weight value to adjust the likelihood that each archetype appears when planting a new foliage instance 
+
+BUGFIXES
+- [IMPORTANT] The "Layer" property of the FoliageArea was previously being incorrectly saved as a LayerMask. Your layer value may have changed after the update, be sure to check to make sure foliage is still set to spawn on the same layer
+- Creating a new FoliageArea from the menu bar and changing properties on a FoliageArea should now correctly mark the scene as dirty, prompting you to save the scene when it is closed
+
+CHANGES
+- All properties of the FoliageArea component now support undo/redo and all have tooltips 
+
+
+1.3.0
+FEATURES
+- FoliageArea now has an option to exclude specific layers. Excluded layers will block raycasts, preventing foliage from growing on or under objects in any of these layers
+- Added options for handling Unity's cap of 65,535 correctly-LODed terrain trees per-terrain
+- Added a slider to control global density scale from the FoliageArea component
+
+BUGFIXES
+- Fixed an issue causing shade distance to sometimes not be taken into account 
+- Runtime-placed terrain trees should now properly have their colliders applied
+- Children of GameObjects placed by Landscaper should now have their layer set properly 
+
+CHANGES
+- Change Added a progress bar for generation inside the editor (NOTE: Editor simulation currently can't run in the background any more) 
+
+
+1.2.0
+- There is now an option to place a Foliage Area from the menu, under "GameObject > Landscaper > Foliage Area"
+- Prefabs have been replaced with "Archetypes", which group certain options with the prefab itself
+- Placement mode can now be chosen on a per-archetype basis, rather than for an entire species
+- Archetypes have a scale range which is used to adjust the scale of foliage instances based on their generation. It's no longer necessary to specify generation overrides in order to control scale
+- Added a colour variation option to archetypes, allowing for foliage instances to be randomly darkened to add variation
+- Generation overrides now also use archetypes for increased control
+- Generation overrides can be individually disabled. For example: if you wanted to override generation 1, but not generation 0, you can do that now
+- Greatly improved usability when editing foliage species
+- Each species can now consist of multiple prefabs which will be selected from at random
+
+
+1.1.0
+- Tree creator trees no longer appear black when placed as Terrain Trees
+- Generation times are greatly reduced for larger terrains; FoliageAreas have a "MaxTileSize" which splits the area into multiple generation chunks for further improved performance.
+- The FoliageArea inspector now has options for auto-fitting to the scene: All Geometry, Terrain, and Selection
+- Foliage instances placed using the GameObject method are no longer hidden in the hierarchy and are instead parented to a new empty GameObject named "Landscaper Foliage"
+- Placed foliage is no longer automatically cleared when the FoliageArea component is removed
+- FoliageArea now has an optional layer mask to filter which surfaces instances can be planted on
+- Species now have a list of terrain textures that they are allowed to grow on. If the list is empty, instances can grow anywhere. Has no effect when planting on non-terrain GameObjects
+- Landscaper is now compatible with Unity 4.6.x, and possibly older versions as well
+
+
+1.0.2
+- Added instance count & generation time information to the FoliageArea inspector as well as an estimate for the maximum number of foliage instances that will be generated with the given settings
+- Foliage placed using the GameObject placement mode can now optionally not conform to the normal of the surface they are planted on 
+
+
+1.0.1
+- Foliage simulates ~50% faster. Very large areas will still take a while to generate foliage for
+- Each species now has a PlacementMethod that can be switched between "GameObject" and "Terrain Tree". Terrain trees slightly outperform GameObjects & consume less memory; GameObjects can have scripts (to allow for interactable foliage, for example). Terrain trees also cannot conform to the normal of the surface they are on, unfortunately. 

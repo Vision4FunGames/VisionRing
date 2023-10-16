@@ -14,6 +14,10 @@ namespace FAE
         //Main maps
         MaterialProperty _MainTex;
         MaterialProperty _BumpMap;
+        MaterialProperty _Noise;
+
+        [ColorUsage(true, true)]
+        MaterialProperty _EdgeEmission;
 
         MaterialProperty _UseSpeedTreeWind;
 
@@ -21,14 +25,17 @@ namespace FAE
         MaterialProperty _AmbientOcclusion;
         MaterialProperty _GradientBrightness;
         MaterialProperty _Smoothness;
+        MaterialProperty _InvertDissolve;
 
         MaterialEditor m_MaterialEditor;
 
         //Meta
         bool showHelp;
+        bool inverseFlag;
 
         GUIContent mainTexName = new GUIContent("Diffuse", "Diffuse (RGB) and Transparency (A)");
         GUIContent normalMapName = new GUIContent("Normal Map");
+        GUIContent disolveName = new GUIContent("Disolve", "Disolve");
 
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
         {
@@ -83,6 +90,26 @@ namespace FAE
             this.m_MaterialEditor.TexturePropertySingleLine(normalMapName, this._BumpMap);
 
             EditorGUILayout.Space();
+
+            EditorGUILayout.BeginHorizontal();
+
+
+            this.m_MaterialEditor.TexturePropertySingleLine(disolveName, this._Noise, this._EdgeEmission);
+
+            EditorGUILayout.EndHorizontal();
+
+
+            EditorGUILayout.BeginHorizontal();
+            inverseFlag = EditorGUILayout.Toggle("Inverse", inverseFlag);
+            if (inverseFlag)
+            {
+                _InvertDissolve.floatValue = 0.0F;
+            }
+            else
+            {
+                _InvertDissolve.floatValue = 1.0F;
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
         void DoColorArea()
@@ -105,6 +132,9 @@ namespace FAE
             //Main maps
             _MainTex = FindProperty("_MainTex", props);
             _BumpMap = FindProperty("_BumpMap", props);
+            _Noise = FindProperty("_DissolveNoise", props);
+            _EdgeEmission = FindProperty("_EdgeEmission", props);
+            _InvertDissolve = FindProperty("_InvertDissolve", props);
 
             //Color
             _AmbientOcclusion = FindProperty("_AmbientOcclusion", props);

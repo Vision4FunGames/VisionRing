@@ -22,6 +22,10 @@ Shader "FAE/Tree Branch"
 		[HideInInspector] _texcoord2( "", 2D ) = "white" {}
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
+
+		[HDR]_EdgeEmission("Edge Emission", Color) = (1,1,1,1)
+		_DissolveNoise("Dissolve Noise", 2D) = "white" {}
+		[Toggle]_InvertDissolve("Invert Dissolve", Float) = 0
 	}
 
 	SubShader
@@ -29,8 +33,11 @@ Shader "FAE/Tree Branch"
 		Tags{ "RenderType" = "TransparentCutout"  "Queue" = "AlphaTest+0" "IsEmissive" = "true"  }
 		Cull Off
 		CGPROGRAM
+
+		#include "Assets/Amazing Assets/Dynamic Radial Masks/Shaders/CGINC/HeightField/DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global.cginc"
 		#include "UnityShaderVariables.cginc"
 		#include "UnityCG.cginc"
+
 		#pragma target 3.0
 		#pragma multi_compile_instancing
 		#include "VS_InstancedIndirect.cginc"
@@ -45,6 +52,7 @@ Shader "FAE/Tree Branch"
 			float4 vertexColor : COLOR;
 			float2 uv2_texcoord2;
 			float4 vertexToFrag332;
+			float2 uv_DissolveNoise;
 		};
 
 		uniform sampler2D _WindVectors;
@@ -70,7 +78,9 @@ Shader "FAE/Tree Branch"
 		uniform float _AmbientOcclusion;
 		uniform float _Cutoff = 0.5;
 		uniform float _Fade = 1;
-
+		fixed4 _EdgeEmission;
+		sampler2D _DissolveNoise;
+		float _InvertDissolve;
 
 		void vertexDataFunc( inout appdata_full v, out Input o )
 		{
@@ -124,7 +134,9 @@ Shader "FAE/Tree Branch"
 			float4 lerpResult97 = lerp( Color56 , float4( WindVectors99 , 0.0 ) , _WindDebug);
 			o.Albedo = lerpResult97.rgb;
 			float4 SSS45 = i.vertexToFrag332;
-			o.Emission = SSS45.rgb;
+			//o.Emission = SSS45.rgb;
+	
+	
 			o.Smoothness = _Smoothness;
 			float lerpResult53 = lerp( 1.0 , 0.0 , ( _AmbientOcclusion * ( 1.0 - i.vertexColor.r ) ));
 			float AmbientOcclusion218 = lerpResult53;
@@ -133,6 +145,16 @@ Shader "FAE/Tree Branch"
 			float Alpha31 = tex2DNode19.a;
 			float lerpResult101 = lerp( Alpha31 , 1.0 , _WindDebug);
 			clip(lerpResult101 - _Cutoff * _Fade);
+	
+			float noise = tex2D(_DissolveNoise, i.uv_DissolveNoise).r;
+			float mask = DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global(i.worldPos, noise);
+			mask = _InvertDissolve ? mask : 1 - mask;
+	
+			clip(mask > 0.5 ? -1 : 1);
+
+			o.Emission = _EdgeEmission * mask;
+
+			
 }
 
 		ENDCG

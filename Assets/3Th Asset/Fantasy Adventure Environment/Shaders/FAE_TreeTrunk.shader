@@ -13,13 +13,19 @@ Shader "FAE/Tree Trunk"
 		[HideInInspector] _texcoord2( "", 2D ) = "white" {}
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
+
+		[HDR]_EdgeEmission("Edge Emission", Color) = (1,1,1,1)
+		_DissolveNoise("Dissolve Noise", 2D) = "white" {}
+		[Toggle]_InvertDissolve("Invert Dissolve", Float) = 0
 	}
 
 	SubShader
 	{
-		Tags{ "RenderType" = "Opaque"  "Queue" = "Geometry+0" }
+		Tags{ "RenderType" = "TransparentCutout"   "Queue" = "AlphaTest+0" "IsEmissive" = "true"}
 		Cull Back
 		CGPROGRAM
+
+		#include "Assets/Amazing Assets/Dynamic Radial Masks/Shaders/CGINC/HeightField/DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global.cginc"
 		#include "UnityShaderVariables.cginc"
 		#pragma target 3.0
 		#pragma multi_compile_instancing
@@ -33,6 +39,9 @@ Shader "FAE/Tree Trunk"
 			float2 uv_texcoord;
 			float4 vertexColor : COLOR;
 			float2 uv2_texcoord2;
+			float3 worldPos;
+			float2 uv_DissolveNoise;
+	
 		};
 
 		uniform float _WindSpeed;
@@ -48,6 +57,10 @@ Shader "FAE/Tree Trunk"
 		uniform float4 _MainTex_ST;
 		uniform float _Smoothness;
 		uniform float _AmbientOcclusion;
+
+		fixed4 _EdgeEmission;
+		sampler2D _DissolveNoise;
+		float _InvertDissolve;
 
 		void vertexDataFunc( inout appdata_full v, out Input o )
 		{
@@ -77,7 +90,15 @@ Shader "FAE/Tree Trunk"
 			float lerpResult120 = lerp( 1.0 , i.vertexColor.r , _AmbientOcclusion);
 			o.Occlusion = lerpResult120;
 			o.Alpha = 1;
-		}
+	
+    float noise = tex2D(_DissolveNoise, i.uv_DissolveNoise).r;
+    float mask = DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global(i.worldPos, noise);
+    mask = _InvertDissolve ? mask : 1 - mask;
+	
+    clip(mask > 0.5 ? -1 : 1);
+
+    o.Emission = _EdgeEmission * mask;
+}
 
 		ENDCG
 	}

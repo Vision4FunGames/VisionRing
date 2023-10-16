@@ -5,6 +5,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using UnityEngine.UIElements;
 
 namespace FAE
 {
@@ -13,7 +14,11 @@ namespace FAE
 
         MaterialProperty _MaskClipValue;
         MaterialProperty _FadeValue;
+        MaterialProperty _Noise;
+        MaterialProperty _InvertDissolve;
 
+        [ColorUsage(true, true)]
+        MaterialProperty _EdgeEmission;
 
         MaterialProperty _UseSpeedTreeWind;
 
@@ -40,13 +45,17 @@ namespace FAE
         bool showHelp;
         bool showHelpColor;
         bool showHelpAnimation;
+        bool inverseFlag;
 
         bool hasWindController;
         WindController windController;
 
         GUIContent mainTexName = new GUIContent("Diffuse", "Diffuse (RGB) and Transparency (A)");
+        GUIContent disolveName = new GUIContent("Disolve", "Disolve");
+
         GUIContent normalMapName = new GUIContent("Normal Map");
         private bool visualizeVectors;
+
 
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
         {
@@ -112,6 +121,29 @@ namespace FAE
             this.m_MaterialEditor.TexturePropertySingleLine(normalMapName, this._BumpMap);
 
             EditorGUILayout.Space();
+
+            EditorGUILayout.BeginHorizontal();
+
+
+            this.m_MaterialEditor.TexturePropertySingleLine(disolveName, this._Noise, this._EdgeEmission);
+
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            inverseFlag = EditorGUILayout.Toggle("Inverse", inverseFlag);
+            if (inverseFlag)
+            {
+                _InvertDissolve.floatValue = 0.0F;
+            }
+            else
+            {
+                _InvertDissolve.floatValue = 1.0F;
+            }
+            EditorGUILayout.EndHorizontal();
+
+
+
+
         }
 
         void DoColorArea()
@@ -198,6 +230,9 @@ namespace FAE
             _Color = FindProperty("_Color", props);
             _MainTex = FindProperty("_MainTex", props);
             _BumpMap = FindProperty("_BumpMap", props);
+            _Noise = FindProperty("_DissolveNoise", props);
+            _EdgeEmission = FindProperty("_EdgeEmission", props);
+            _InvertDissolve = FindProperty("_InvertDissolve", props);
 
             //Color
             _HueVariation = FindProperty("_HueVariation", props);
