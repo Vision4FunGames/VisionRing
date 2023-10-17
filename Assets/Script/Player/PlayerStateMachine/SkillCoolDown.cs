@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SkillCoolDown : MonoBehaviour
 {
-    public List<Image> _skillImages;
-    [HideInInspector]public List<Skills> _currentSkills;
+    [HideInInspector] public List<Image> _skillImages;
+    [HideInInspector] public List<Skills> _currentSkills;
     public Skills[] skillsArray;
     public static SkillCoolDown instance;
 
@@ -54,7 +54,7 @@ public class SkillCoolDown : MonoBehaviour
         for (int i = 0; i < _currentSkills.Count; i++)
         {
             _currentSkills[i].coolDownTime -= Time.deltaTime;
-            float fillAmount = 1-(_currentSkills[i].coolDownTime / _currentSkills[i].coolDown);
+            float fillAmount = 1 - (_currentSkills[i].coolDownTime / _currentSkills[i].coolDown);
             _skillImages[i].fillAmount = fillAmount;
         }
     }

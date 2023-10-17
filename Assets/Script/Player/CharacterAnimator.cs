@@ -38,9 +38,14 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void DieAnimation()
     {
+        enemyStats.die = true;
         animator.SetTrigger("death_");
         navmeshAgent.speed = 0;
         enemyStats.mmProgressBar.gameObject.SetActive(false);   
         Destroy(gameObject,3);
+        if (GetComponentInParent<TornadoExit>())
+        {
+            GetComponent<DetectEnemyCollider>().TornadoFinish();
+        }
     }
 }

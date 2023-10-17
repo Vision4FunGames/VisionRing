@@ -15,7 +15,7 @@ public class DetectEnemyCollider : MonoBehaviour
     private PlayerAttack _playerAttack;
     private Collider collider;
     private Rigidbody rb;
-    
+
     private void Awake()
     {
         na = GetComponent<NavMeshAgent>();
@@ -53,25 +53,33 @@ public class DetectEnemyCollider : MonoBehaviour
 
     public void TornadoStart(GameObject _tornado)
     {
-        na.enabled = false;
-        collider.enabled = false;
-        enemyController.enabled = false;
-        FindObjectOfType<TornadoExit>().enemies.Add(gameObject);
-        animator.SetTrigger("tornado");
-        transform.SetParent(_tornado.GetComponentInParent<Player>().transform.GetChild(2));
-        rb.isKinematic = true;
-        transform.DOMoveY(transform.position.y + 5, Random.Range(4, 10));
+        if (!_enemyStats.die)
+        {
+            na.enabled = false;
+            collider.enabled = false;
+            enemyController.enabled = false;
+            FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
+            animator.SetTrigger("tornado");
+            transform.SetParent(_tornado.GetComponentInParent<Player>().transform.GetChild(2));
+            rb.isKinematic = true;
+            transform.DOMoveY(transform.position.y + 5, Random.Range(4, 10));
+        }
     }
 
     public void TornadoFinish()
     {
         transform.DOKill();
         enemyController.enabled = true;
-        FindObjectOfType<TornadoExit>().enemies.Remove(gameObject);
+        FindObjectOfType<TornadoExit>().EnemyRemove(gameObject);
+        AddForce();
+    }
+
+    public void AddForce()
+    {
         transform.SetParent(null);
         rb.isKinematic = false;
         collider.enabled = true;
         Vector3 direction = transform.position - _playerAttack.transform.position;
-        rb.AddForce(direction*50);
+        rb.AddForce(direction * 50);
     }
 }

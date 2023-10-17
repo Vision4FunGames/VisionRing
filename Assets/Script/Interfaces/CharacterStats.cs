@@ -6,6 +6,7 @@ using MoreMountains.Tools;
 
 public class CharacterStats : MonoBehaviour
 {
+    public bool die;
     public int maxHealth = 100;
     public int currentHealth { get; private set; }
     public Stat damage;
@@ -13,6 +14,7 @@ public class CharacterStats : MonoBehaviour
     public DamageNumber prefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
+    
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -29,7 +31,6 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        
         if (currentHealth > 0)
         {
             damage -= armor.GetValue();
