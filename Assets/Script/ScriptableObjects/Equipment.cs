@@ -16,7 +16,7 @@ public class Equipment : Item {
     // Called when pressed in the inventory
     private void Start ()
     {
-       
+        
     }
     public override void Use ()
     {

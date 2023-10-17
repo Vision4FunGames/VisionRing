@@ -32,6 +32,8 @@ public class EquipmentManager : MonoBehaviour {
 	public Equipment[] defaultWear;
 
 	public Equipment[] currentEquipment;
+
+	private Equipment[] saveEquipment;
 	SkinnedMeshRenderer[] currentMeshes;
 	private SkinnedMeshRenderer[] currentInventoryMeshes;
 	
@@ -52,12 +54,14 @@ public class EquipmentManager : MonoBehaviour {
 		ResetObjects();
 		inventory = Inventory.instance;
 		//equippedInventory = EquippedInventory.instance;
-		
 		int numSlots = System.Enum.GetNames (typeof(EquipmentSlot)).Length;
 		currentEquipment = new Equipment[numSlots];
 		currentMeshes = new SkinnedMeshRenderer[numSlots];
 		currentInventoryMeshes = new SkinnedMeshRenderer[numSlots];
-
+		saveEquipment = new Equipment[numSlots];
+		saveEquipment = ES3.Load("currentItems", currentEquipment);
+		inventory.items.Clear();
+		inventory.items = ES3.Load("inventory", inventory.items);
 		EquipAllDefault ();
 	}
 
@@ -72,7 +76,7 @@ public class EquipmentManager : MonoBehaviour {
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.U)) {
 			UnequipAll ();
-			
+
 		}
 	}
 
@@ -95,6 +99,7 @@ public class EquipmentManager : MonoBehaviour {
 		// make sure to put it back in the inventory
 		if (currentEquipment[slotIndex] != null)
 		{
+			Debug.Log("Item var olan ile degisti");
 			oldItem = currentEquipment [slotIndex];
 			inventory.Add(oldItem);
 			oldItem.showInInventory = false;
@@ -105,9 +110,10 @@ public class EquipmentManager : MonoBehaviour {
 		if (onEquipmentChanged != null)
 			onEquipmentChanged.Invoke(newItem, oldItem);
 		Debug.Log(newItem.name + " equipped!");
+		newItem.showInInventory = true;
 		if (newItem.mesh ) {
 			AttachToMesh (newItem.mesh,slotIndex);
-		}
+		} 
 		else if (newItem.prefab)
 		{
 			if (currentWeapon != null)
@@ -125,6 +131,8 @@ public class EquipmentManager : MonoBehaviour {
 			
 		}
 		//equippedItems [itemIndex] = newMesh.gameObject;
+		
+		
 	}
 
 	
@@ -153,6 +161,9 @@ public class EquipmentManager : MonoBehaviour {
 			if (inventory.onItemChangedCallback != null)
 				inventory.onItemChangedCallback.Invoke();
 		}
+		ES3.Save("currentItems",currentEquipment);
+		ES3.Save("inventory",inventory.items);
+		Debug.Log("Saved");
 	}
 
 	
@@ -164,15 +175,21 @@ public class EquipmentManager : MonoBehaviour {
 	}
 
 	void EquipAllDefault() {
-		foreach (Equipment e in defaultWear) {
-			Equip (e);
+		foreach (Equipment e in saveEquipment) {
+			if (e != null)
+			{
+				Equip (e);
+			}
+			
 		}
+		
 	}
 	
 	void AttachToMesh(SkinnedMeshRenderer mesh, int slotIndex) {
 
 		if (currentMeshes [slotIndex] != null && slotIndex != 2) {
 			Destroy (currentMeshes [slotIndex].gameObject);
+			Destroy(currentInventoryMeshes[slotIndex].gameObject);
 		}
 		SkinnedMeshRenderer newMesh = Instantiate(mesh) as SkinnedMeshRenderer;
 		newMesh.bones = targetMesh.bones;

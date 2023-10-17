@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class UiManager : MonoBehaviour
     private InventoryUI inventoryUi;
     public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
+    public MMProgressBar playerProgressBar;
 
     private void Awake()
     {
@@ -41,6 +43,12 @@ public class UiManager : MonoBehaviour
         gamePlay.SetActive(!gamePlay.activeSelf);
         inventoryUi.UpdateUI();
     }
+
+    // public void UpdatePlayerHealthBar(float health)
+    // {
+    //     playerProgressBar.UpdateBar(health, 0, 100);
+    // }
+
 
 }
 
