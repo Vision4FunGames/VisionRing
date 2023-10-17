@@ -30,7 +30,8 @@ Shader "FAE/Tree Branch"
 
 	SubShader
 	{
-		Tags{ "RenderType" = "TransparentCutout"  "Queue" = "AlphaTest+0" "IsEmissive" = "true"  }
+		//"Queue" = "AlphaTest+0"
+		Tags{ "RenderType" = "TransparentCutout"   "IsEmissive" = "true"  }
 		Cull Off
 		CGPROGRAM
 

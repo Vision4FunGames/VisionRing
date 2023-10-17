@@ -28,7 +28,7 @@ MonoBehaviour:
     ColourVariation: 0.4
     Weight: 1
   ConformToMeshSurface: 1
-  InitialSeedDensity: 0.0003
+  InitialSeedDensity: 0.0001
   MaxSeedTravelDistance: 10
   MinChildren: 1
   MaxChildren: 3
@@ -47,7 +47,11 @@ MonoBehaviour:
   LayerMode: 2
   LayerDensityCombineMode: 0
   DefaultLayerDensity: 0
-  LayerDensityRules: []
+  LayerDensityRules:
+  - TerrainLayer: {fileID: 8574412962073106934, guid: d4c2688d0b8083e4ba58b6d7cdec7b83, type: 2}
+    Texture: {fileID: 0}
+    TextureIndex: 0
+    DensityMultiplier: 1
   fileVersion: 2
   PlacementTextureMask: []
   PlacementTextureIndexMask: 

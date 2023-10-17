@@ -21,7 +21,7 @@ Shader "FAE/Tree Trunk"
 
 	SubShader
 	{
-		Tags{ "RenderType" = "TransparentCutout"   "Queue" = "AlphaTest+0" "IsEmissive" = "true"}
+		Tags{ "RenderType" = "TransparentCutout" /*"Queue" = "AlphaTest+0"*/ "IsEmissive" = "true"}
 		Cull Back
 		CGPROGRAM
 
@@ -33,7 +33,9 @@ Shader "FAE/Tree Trunk"
 		#pragma instancing_options assumeuniformscaling lodfade maxcount:50 procedural:setup
 		#pragma multi_compile GPU_FRUSTUM_ON __
 		#pragma exclude_renderers xbox360 psp2 n3ds wiiu 
-		#pragma surface surf Standard keepalpha addshadow fullforwardshadows dithercrossfade vertex:vertexDataFunc 
+		#pragma surface surf Standard keepalpha addshadow fullforwardshadows dithercrossfade vertex:vertexDataFunc
+		#pragma surface surf Standard fullforwardshadows
+
 		struct Input
 		{
 			float2 uv_texcoord;
