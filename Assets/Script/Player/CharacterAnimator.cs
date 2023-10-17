@@ -40,5 +40,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         animator.SetTrigger("death_");
         navmeshAgent.speed = 0;
+        enemyStats.mmProgressBar.gameObject.SetActive(false);   
+        Destroy(gameObject,3);
     }
 }
