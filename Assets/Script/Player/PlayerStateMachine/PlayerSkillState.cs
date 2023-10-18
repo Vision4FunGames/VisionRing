@@ -109,7 +109,7 @@ public class PlayerSkillState : PlayerState
     {
         SkillCoolDown.instance.skillsArray[3].coolDownTime = SkillCoolDown.instance.skillsArray[3].coolDown;
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/FlameThrower") as GameObject);
-        if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
+        if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform.GetChild(0));
         currentEarthShatter.transform.localPosition = new Vector3(0, 2, 0);
         currentEarthShatter.transform.localRotation = Quaternion.identity;
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
@@ -123,7 +123,7 @@ public class PlayerSkillState : PlayerState
         if (currentTornado != null) currentTornado.transform.SetParent(_player.transform);
         currentTornado.transform.localPosition = new Vector3(0, 0.1f, 0);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-        GameObject.Destroy(currentTornado, 10);
+        GameObject.Destroy(currentTornado, 4);
     }
 
     public override void ExitState()

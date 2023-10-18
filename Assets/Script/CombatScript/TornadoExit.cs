@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TornadoExit : MonoBehaviour
 {
-    public float rateOfFired;
+    private PlayerAttack playerAttack;
     private float currentTime;
     public List<GameObject> enemies;
     private void Awake()
     {
+        playerAttack = GetComponentInParent<PlayerAttack>();
         enemies = new List<GameObject>();
     }
     public void TornadoExitFunc()
@@ -39,7 +40,7 @@ public class TornadoExit : MonoBehaviour
     
     public bool CanDamage()
     {
-        return currentTime > rateOfFired;
+        return currentTime > playerAttack.tornadoDamageRate;
     }
 
     public void TornadoDamage()
@@ -47,7 +48,7 @@ public class TornadoExit : MonoBehaviour
         currentTime = 0;
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GetComponentInChildren<EnemyStats>().TakeDamage(80);
+            enemies[i].GetComponentInChildren<EnemyStats>().TakeDamage(playerAttack.tornadoDamage);
         }
     }
 }

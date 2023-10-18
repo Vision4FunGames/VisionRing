@@ -66,11 +66,12 @@ public class CharacterStats : MonoBehaviour
         DamageNumber newDamageNumber =
             prefab.Spawn(new Vector3(transform.position.x, transform.position.y, transform.position.z),
                 damage);
-        prefab.followedTarget = transform;
+        newDamageNumber.followedTarget = transform;
     }
 
     public virtual void Die()
     {
+        
     }
 
     public void UpdateHealthBar()

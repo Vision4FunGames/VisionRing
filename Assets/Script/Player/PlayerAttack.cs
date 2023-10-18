@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum CurrentGunType
 {
@@ -17,6 +18,11 @@ public class PlayerAttack : MonoBehaviour
     private SwordAttack swordAttack;
     private ArrowAttack arrowAttack;
 
+    [Header("Skills")] 
+    public float tornadoDamageRate;
+    public int tornadoDamage;
+    public float flameDamage;
+    public float flameDamageRateOfFire;
 
     // Start is called before the first frame update
     void Start()
@@ -144,7 +150,7 @@ public class SwordAttack : MonoBehaviour
         if (index == 2)
         {
             PlayerManager.instance.CameraShakePlayer(.3f, 1.5f);
-            PlayerManager.instance.CameraShakeCombo(.5f,.4f);
+            PlayerManager.instance.CameraShakeCombo(.5f, .4f);
         }
         else
         {

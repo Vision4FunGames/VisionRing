@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageManager : MonoBehaviour
@@ -22,5 +19,10 @@ public class DamageManager : MonoBehaviour
     public void PlayerCharge()
     {
         _playerHealth.DamageAnimation(characterStats.damage.GetValue() * 14 / 10);
+    }
+    
+    public void DeathEnemy()
+    {
+        Destroy(transform.parent.gameObject,3);
     }
 }

@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 1244007399908466920}
   - component: {fileID: 1244007399908466921}
   - component: {fileID: 1244007399908466900}
+  - component: {fileID: 2168672734020771598}
   m_Layer: 0
   m_Name: Skelet
   m_TagString: Untagged
@@ -658,7 +659,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244007399908466913}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1.16
   m_Height: 4.55
@@ -689,6 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c17d9275c37c9945a6f61cb98840cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  die: 0
   maxHealth: 100
   damage:
     baseValue: 5
@@ -724,6 +726,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1244007400501947585}
+--- !u!114 &2168672734020771598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244007399908466913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c22da51e7b54444b2d87f54851076f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1288659648459612703
 GameObject:
   m_ObjectHideFlags: 0
@@ -4157,7 +4171,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1244007400501947585
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4174,8 +4188,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1244007400501947599
 MonoBehaviour:
   m_ObjectHideFlags: 0

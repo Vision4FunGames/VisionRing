@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.AI;
@@ -15,7 +13,7 @@ public class DetectEnemyCollider : MonoBehaviour
     private PlayerAttack _playerAttack;
     private Collider collider;
     private Rigidbody rb;
-
+    private float currentFlameTimer;
     private void Awake()
     {
         na = GetComponent<NavMeshAgent>();
@@ -50,6 +48,23 @@ public class DetectEnemyCollider : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Flame"))
+        {
+            if (currentFlameTimer > _playerAttack.flameDamageRateOfFire)
+            {
+                currentFlameTimer = 0;
+                AddDomoveBack();
+                _enemyStats.TakeDamage(_playerAttack.tornadoDamage);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        currentFlameTimer += Time.deltaTime;
+    }
 
     public void TornadoStart(GameObject _tornado)
     {
@@ -59,7 +74,7 @@ public class DetectEnemyCollider : MonoBehaviour
             collider.enabled = false;
             enemyController.enabled = false;
             FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
-            animator.SetTrigger("tornado");
+            animator.SetBool("tornado",true);
             transform.SetParent(_tornado.GetComponentInParent<Player>().transform.GetChild(2));
             rb.isKinematic = true;
             transform.DOMoveY(transform.position.y + 5, Random.Range(4, 10));
@@ -81,5 +96,15 @@ public class DetectEnemyCollider : MonoBehaviour
         collider.enabled = true;
         Vector3 direction = transform.position - _playerAttack.transform.position;
         rb.AddForce(direction * 50);
+        animator.SetBool("tornado",false);
+    }
+
+    public void AddDomoveBack()
+    {
+        transform.DOKill();
+        na.enabled = false;
+        Vector3 direction = transform.position - _playerAttack.transform.position;
+        direction = new Vector3(direction.x, 0, direction.z);
+        transform.DOMove(direction*2,1 ).OnComplete(() => na.enabled=true);
     }
 }

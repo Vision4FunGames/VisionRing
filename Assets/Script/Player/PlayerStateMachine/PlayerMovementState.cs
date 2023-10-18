@@ -65,13 +65,13 @@ namespace Script.Player.PlayerStateMachine
 
         public void Movement()
         {
-            _player.animSpeed = (Mathf.Abs(_player._fixedJoystick.Horizontal) +
-                                 Mathf.Abs(_player._fixedJoystick.Vertical)) * _player.animValue;
-            _player._myController.Move(PlayerDirection() * (Time.deltaTime * _player.speed));
-            _player._playerAnimator.SetFloat(RunSpeed, _player.animSpeed);
+            //_player.animSpeed = (Mathf.Abs(_player._fixedJoystick.Horizontal) +
+            //                     Mathf.Abs(_player._fixedJoystick.Vertical)) * _player.animValue;
+            //_player._myController.Move(PlayerDirection() * (Time.deltaTime * _player.speed));
+            //_player._playerAnimator.SetFloat(RunSpeed, _player.animSpeed);
             _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
-                                                 new Vector3(_player._fixedJoystick.Horizontal, 0f,
-                                                     _player._fixedJoystick.Vertical) *
+                                                 new Vector3(-_player._fixedJoystick.Horizontal, 0f,
+                                                     -_player._fixedJoystick.Vertical) *
                                                  (_player.speed * Time.deltaTime));
             if (Input.GetKey(KeyCode.A))
             {
