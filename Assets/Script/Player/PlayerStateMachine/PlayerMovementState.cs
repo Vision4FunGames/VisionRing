@@ -7,6 +7,7 @@ namespace Script.Player.PlayerStateMachine
         private static readonly int RunSpeed = Animator.StringToHash("RunSpeed");
         private float gravityValue = -9.81f;
         private float jumpHeight = 1;
+        private float _rotSpeed = 5;
         public Vector3 _playerVelocity;
         private const string playerJumpAnimationString = "Jump";
         private const string playerDoubleJumpAnimationString = "DJump";
@@ -72,7 +73,7 @@ namespace Script.Player.PlayerStateMachine
             _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
                                                  new Vector3(_player._fixedJoystick.Horizontal, 0f,
                                                      _player._fixedJoystick.Vertical) *
-                                                 (_player.speed * Time.deltaTime));
+                                                 (_rotSpeed * Time.deltaTime));
             if (Input.GetKey(KeyCode.A))
             {
                 _player._myController.Move(new Vector3(-1, 0, 0) * (Time.deltaTime * _player.speed));

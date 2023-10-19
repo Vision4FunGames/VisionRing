@@ -46,6 +46,19 @@ public class DetectEnemyCollider : MonoBehaviour
         {
             rb.isKinematic = true;
         }
+
+        if (other.CompareTag("Earth"))
+        {
+            print("AAAAAAAAAAAAAAA");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Earth"))
+        {
+            print("AAAAAAAAAAAAAAAA");
+        }
     }
 
     private void OnTriggerStay(Collider other)

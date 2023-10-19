@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     [HideInInspector]public float animValue = 1;
     [HideInInspector]public float animSpeed;
     public float speed;
+    [HideInInspector]public float baseSpeed;
     [HideInInspector] public Animator _playerAnimator;
     public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        baseSpeed = speed;
         if (instance == null)
         {
             instance = this;    
@@ -78,7 +80,9 @@ public class Player : MonoBehaviour
         PlayerBox = new PlayerBox(this,StateMachine);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
+        
         DashInıtiliaze();
+     
     }
 
     private void DashInıtiliaze()
