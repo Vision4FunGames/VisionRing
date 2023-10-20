@@ -16,7 +16,7 @@ public class TornadoExit : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GetComponentInChildren<DetectEnemyCollider>().TornadoFinish();
+            enemies[i].GetComponent<Enemy>().TornadoFinish();
         }
     }
 
@@ -27,7 +27,7 @@ public class TornadoExit : MonoBehaviour
     public void EnemyRemove(GameObject enemy)
     {
         enemies.Remove(enemy);
-        enemy.GetComponent<DetectEnemyCollider>().AddForce();
+        enemy.GetComponent<Enemy>().AddForce();
     }
 
    
@@ -48,7 +48,7 @@ public class TornadoExit : MonoBehaviour
         currentTime = 0;
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GetComponentInChildren<EnemyStats>().TakeDamage(playerAttack.tornadoDamage);
+            enemies[i].GetComponent<EnemyStats>().TakeDamage(playerAttack.tornadoDamage);
         }
     }
 }

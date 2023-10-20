@@ -44,7 +44,7 @@ public class CharacterAnimator : MonoBehaviour
         enemyStats.mmProgressBar.gameObject.SetActive(false);   
         if (GetComponentInParent<TornadoExit>())
         {
-            GetComponent<DetectEnemyCollider>().TornadoFinish();
+            GetComponent<Enemy>().TornadoFinish();
         }
     }
 }
