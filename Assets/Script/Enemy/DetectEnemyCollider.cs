@@ -47,19 +47,9 @@ public class DetectEnemyCollider : MonoBehaviour
             rb.isKinematic = true;
         }
 
-        if (other.CompareTag("Earth"))
-        {
-            print("AAAAAAAAAAAAAAA");
-        }
+      
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Earth"))
-        {
-            print("AAAAAAAAAAAAAAAA");
-        }
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -69,7 +59,7 @@ public class DetectEnemyCollider : MonoBehaviour
             {
                 currentFlameTimer = 0;
                 AddDomoveBack();
-                _enemyStats.TakeDamage(_playerAttack.tornadoDamage);
+                _enemyStats.TakeDamage(_playerAttack.flameDamage);
             }
         }
     }
@@ -78,7 +68,7 @@ public class DetectEnemyCollider : MonoBehaviour
     {
         currentFlameTimer += Time.deltaTime;
     }
-
+    
     public void TornadoStart(GameObject _tornado)
     {
         if (!_enemyStats.die)

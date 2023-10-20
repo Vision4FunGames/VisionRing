@@ -21,8 +21,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("Skills")] 
     public float tornadoDamageRate;
     public int tornadoDamage;
-    public float flameDamage;
+    public int flameDamage;
     public float flameDamageRateOfFire;
+    public int earthSkillDamage;
 
     // Start is called before the first frame update
     void Start()

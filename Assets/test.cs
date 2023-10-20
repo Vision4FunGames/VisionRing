@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-  private void OnParticleCollision(GameObject other)
-  {
-    if (other.CompareTag("Enemy"))
+    private PlayerAttack playerAttack;
+
+    private void Start()
     {
-      print("pppppppppppppppppp");
+        playerAttack = FindObjectOfType<PlayerAttack>();
     }
-  }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            other.GetComponent<Collider>().enabled =false;
+            other.GetComponentInParent<Enemy>().DoJumpBack(gameObject,playerAttack.earthSkillDamage);
+        }
+    }
 }
