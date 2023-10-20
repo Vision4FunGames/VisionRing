@@ -5,6 +5,15 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     // Start is called before the first frame update
+    
+    #region Singleton
+    public static Shop instance;
+    private string type = "All";
+    void Awake ()
+    {
+        instance = this;
+    }
+    #endregion
     public delegate void OnItemChanged();
 
     public OnItemChanged onItemChangedCallback;
@@ -14,10 +23,12 @@ public class Shop : MonoBehaviour
     public GameObject shopItem;
 
     private ShopUI shopUI;
+    int i;
     void Start()
     {
         shopUI = ShopUI.instance;
-        for (int i = 0; i < 3; i++)
+        
+        for ( i=0; i < 3; i++)
         {
             AddItem();
         }
@@ -34,6 +45,9 @@ public class Shop : MonoBehaviour
         var currentItem = Instantiate(shopItem);
         currentItem.transform.parent = shopUI.itemsParent.transform;
         currentItem.transform.localScale = new Vector3(1, 1, 1);
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
+
     }
 
 }

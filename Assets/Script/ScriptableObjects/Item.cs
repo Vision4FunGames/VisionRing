@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,12 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public string name = "New ScriptableObject";
-    public Sprite icon = null;
+    [ES3NonSerializable] public Sprite icon;
     public bool showInInventory;
-    
+    public int itemLevel;
+
+  
+
     public virtual void Use (InventoryType type)
     {
         // Use the item

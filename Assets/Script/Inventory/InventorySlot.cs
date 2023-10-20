@@ -6,16 +6,18 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
    // public Button removeButton;
-   Item item;	// Current item in the slot
+     Item item;	// Current item in the slot
     public bool isEquipped = false;
     public InventoryType _inventoryType;
 
+    public Image backGImage;
     // Add item to the slot
     
     public void AddItem (Item newItem)
     {
         item = newItem;
-
+        backGImage.sprite = UiManager.instance.itemlevelSprites[newItem.itemLevel];
+       
         icon.sprite = item.icon;
         icon.enabled = true;
        // removeButton.interactable = true;
@@ -26,6 +28,11 @@ public class InventorySlot : MonoBehaviour
     {
         item = null;
         icon.sprite = null;
+        if (UiManager.instance.emptySprite != null)
+        {
+            backGImage.sprite = UiManager.instance.emptySprite;
+        }
+       
         icon.enabled = false;
        // removeButton.interactable = false;
     }

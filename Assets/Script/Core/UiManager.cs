@@ -16,6 +16,10 @@ public class UiManager : MonoBehaviour
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
     public MMProgressBar playerProgressBar;
 
+    public Sprite[] itemlevelSprites;
+    public Sprite[] itemDescriptionSprites;
+    public Sprite emptySprite = null;
+    
     private void Awake()
     {
         instance = this;
@@ -25,7 +29,8 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         inventoryUi = InventoryUI.instance;
-        //inventory.SetActive(false);
+        inventory.SetActive(false);
+        gamePlay.SetActive(true);
     }
 
     private void Update()
@@ -38,6 +43,7 @@ public class UiManager : MonoBehaviour
 
     public void ShowInventory()
     {
+        
         inventory.SetActive(!inventory.activeSelf);
         inventoryObject.SetActive(!inventoryObject.activeSelf);
         gamePlay.SetActive(!gamePlay.activeSelf);

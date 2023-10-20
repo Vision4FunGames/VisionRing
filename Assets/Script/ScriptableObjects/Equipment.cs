@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 /* An Item that can be equipped to increase armor/damage. */
@@ -10,30 +11,44 @@ public class Equipment : Item {
     public int armorModifier;
     public int damageModifier;
     public SkinnedMeshRenderer mesh;
-    public GameObject prefab;
+    [ES3NonSerializable]public GameObject prefab;
 
+    public int price = 0;
+
+   
     //public bool isEquipped = false;
-    // Called when pressed in the inventory
-    private void Start ()
+
+    [ContextMenu("Save")]
+    public void Save()
     {
-        
+        AssetDatabase.SaveAssets();
     }
+  
+    
     public override void Use (InventoryType type)
     {
+        // Called when pressed in the inventory
         if (type == InventoryType.Equip)
-        {
+        { 
             if (!showInInventory)
-                   {
+                {
                        EquipmentManager.instance.Equip(this);
                        this.showInInventory = true;
                        // Equip
                        RemoveFromInventory();	// Remove from inventory
-                   }
-                   else
-                   {
+                }
+            else
+                {
                        EquipmentManager.instance.Unequip((int)equipSlot);
                       RemoveFromEquippedInventory((int)this.equipSlot);
-                   } 
+                 } 
+        }
+
+        if (type == InventoryType.Buy)
+        {
+            Inventory.instance.items.Add(this);
+            Inventory.instance.onItemChangedCallback.Invoke();
+
         }
        
     }

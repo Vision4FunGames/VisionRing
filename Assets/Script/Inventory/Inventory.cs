@@ -38,8 +38,8 @@ public class Inventory : MonoBehaviour
     public void Add (Item item)
     {
         Debug.Log("Add e Girildi");
-        if (item.showInInventory)
-        {
+         if (item.showInInventory)
+         {
             if (items.Count >= space)
             {
                 Debug.Log("Not enough room.");
