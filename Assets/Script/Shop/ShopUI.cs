@@ -44,6 +44,9 @@ public class ShopUI : MonoBehaviour
         switch (type)
         { 
             case "All":
+                ClearAllSlots();
+                counter = 0;
+                Debug.Log("ALL");
                 for (int i = 0; i < slots.Length; i++)
                 {
                     if (i < shop.shopItems.Count)
@@ -111,7 +114,11 @@ public class ShopUI : MonoBehaviour
 
     private void ClearAllSlots()
     {
-        throw new System.NotImplementedException();
+        InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].ClearSlot();
+        }
     }
     
     public void ConvertToEquipmentList()
@@ -121,5 +128,12 @@ public class ShopUI : MonoBehaviour
         {
             listEq.Add((Equipment)shop.shopItems[i]);
         }
+    }
+    public void ShowSelected(string selected)
+    {
+        type = selected;
+        UpdateShop();
+        type = "All";
+        
     }
 }
