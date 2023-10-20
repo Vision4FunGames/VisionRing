@@ -25,7 +25,7 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         inventoryUi = InventoryUI.instance;
-        inventory.SetActive(false);
+        //inventory.SetActive(false);
     }
 
     private void Update()

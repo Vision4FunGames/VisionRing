@@ -9,7 +9,7 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool showInInventory;
     
-    public virtual void Use ()
+    public virtual void Use (InventoryType type)
     {
         // Use the item
         // Something may happen

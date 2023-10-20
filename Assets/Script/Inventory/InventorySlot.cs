@@ -8,7 +8,10 @@ public class InventorySlot : MonoBehaviour
    // public Button removeButton;
    Item item;	// Current item in the slot
     public bool isEquipped = false;
+    public InventoryType _inventoryType;
+
     // Add item to the slot
+    
     public void AddItem (Item newItem)
     {
         item = newItem;
@@ -36,7 +39,14 @@ public class InventorySlot : MonoBehaviour
     // Use the item
     public void UseItem ()
     {
-        item?.Use();
+        item?.Use(_inventoryType);
     }
 
+}
+public enum InventoryType
+{
+    Equip,
+    Buy,
+    Sell,
+    Upgrade
 }

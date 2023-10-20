@@ -18,20 +18,24 @@ public class Equipment : Item {
     {
         
     }
-    public override void Use ()
+    public override void Use (InventoryType type)
     {
-        if (!showInInventory)
+        if (type == InventoryType.Equip)
         {
-            EquipmentManager.instance.Equip(this);
-            this.showInInventory = true;
-            // Equip
-            RemoveFromInventory();	// Remove from inventory
+            if (!showInInventory)
+                   {
+                       EquipmentManager.instance.Equip(this);
+                       this.showInInventory = true;
+                       // Equip
+                       RemoveFromInventory();	// Remove from inventory
+                   }
+                   else
+                   {
+                       EquipmentManager.instance.Unequip((int)equipSlot);
+                      RemoveFromEquippedInventory((int)this.equipSlot);
+                   } 
         }
-        else
-        {
-            EquipmentManager.instance.Unequip((int)equipSlot);
-           RemoveFromEquippedInventory((int)this.equipSlot);
-        }
+       
     }
 
     
