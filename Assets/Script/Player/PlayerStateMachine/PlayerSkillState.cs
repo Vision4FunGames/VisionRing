@@ -70,6 +70,11 @@ public class PlayerSkillState : PlayerState
 
     public void DashSkill()
     {
+        _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
+                                             new Vector3(_player.uiManager.attackJoystick.Horizontal, 0f,
+                                                 _player.uiManager.attackJoystick.Vertical) *
+                                             (10 * Time.deltaTime));
+        _player._playerAnimator.Play("Dash");
         SkillCoolDown.instance.skillsArray[0].coolDownTime = SkillCoolDown.instance.skillsArray[0].coolDown;
         var position = _player.transform.position;
         Vector3 playerVelocity = new Vector3(_player.uiManager.attackJoystick.Horizontal, 0, _player.uiManager.attackJoystick.Vertical);
