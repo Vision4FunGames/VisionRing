@@ -21,12 +21,12 @@ MonoBehaviour:
     ColourVariation: 0.4
     Weight: 1
   ConformToMeshSurface: 1
-  InitialSeedDensity: 0.001
-  MaxSeedTravelDistance: 10
+  InitialSeedDensity: 0.005
+  MaxSeedTravelDistance: 100
   MinChildren: 8
   MaxChildren: 10
-  CollisionRange: 1
-  CollisionRangeSq: 1
+  CollisionRange: 0.5
+  CollisionRangeSq: 0.25
   ShadeRange: 5
   ShadeRangeSq: 25
   CanGrowInShade: 1
@@ -45,6 +45,14 @@ MonoBehaviour:
     Texture: {fileID: 0}
     TextureIndex: 0
     DensityMultiplier: 1
+  - TerrainLayer: {fileID: 8574412962073106934, guid: 460a246db77adff45aaccfca50c93c4c, type: 2}
+    Texture: {fileID: 0}
+    TextureIndex: 0
+    DensityMultiplier: 0
+  - TerrainLayer: {fileID: 8574412962073106934, guid: 25b6385971c16dd49bcb8bd66e89ca04, type: 2}
+    Texture: {fileID: 0}
+    TextureIndex: 0
+    DensityMultiplier: 0
   fileVersion: 2
   PlacementTextureMask: []
   PlacementTextureIndexMask: 

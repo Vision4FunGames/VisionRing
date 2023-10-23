@@ -9,11 +9,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: FAE_VegetationAtlas
   m_Shader: {fileID: 4800000, guid: e27c26c0ecebef247ba69245490f2562, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ALPHATEST_ON
+  - _INVERTDISSOLVE_ON
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -21,7 +20,6 @@ Material:
   stringTagMap:
     RenderType: TransparentCutout
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -41,6 +39,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DissolveNoise:
+        m_Texture: {fileID: 2800000, guid: a8baae6b79794a4448fcf5cddc9df7e8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -50,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c117a77557b34c5439cfe023a3e9fc6e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 47904388512f50c40b25b2f6a6b898a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -118,6 +120,7 @@ Material:
     - _GlossyReflections: 1
     - _Height: 0
     - _HeightmapInfluence: 0
+    - _InvertDissolve: 1
     - _Keyword0: 0
     - _LeafFlutter: 0.026
     - _MaskClipValue: 0.5
@@ -160,9 +163,10 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 0.19684935, g: 0, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorBottom: {r: 1, g: 1, b: 1, a: 1}
     - _ColorTop: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeEmission: {r: 0, g: 0.694036, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ObstaclePosition: {r: -118.41, g: 0.365, b: -132.43, a: 0}
     - _SSSColor: {r: 0.9368154, g: 1, b: 0.3455882, a: 1}

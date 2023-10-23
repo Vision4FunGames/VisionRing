@@ -21,13 +21,19 @@ Shader "FAE/Foliage"
 		_LeafFlutter("LeafFlutter", Range( 0 , 1)) = 0.495
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
+
+		[HDR]_EdgeEmission("Edge Emission", Color) = (1,1,1,1)
+		_DissolveNoise("Dissolve Noise", 2D) = "white" {}
+		[Toggle]_InvertDissolve("Invert Dissolve", Float) = 0
 	}
 
 	SubShader
 	{
-		Tags{ "RenderType" = "Opaque"  "Queue" = "AlphaTest+0" }
+		Tags{ "RenderType" = "TransparentCutout"  "Queue" = "AlphaTest+0"   }
 		Cull Off
 		CGPROGRAM
+
+		#include "Assets/Amazing Assets/Dynamic Radial Masks/Shaders/CGINC/HeightField/DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global.cginc"
 		#include "UnityShaderVariables.cginc"
 		#include "UnityStandardUtils.cginc"
 		#include "UnityCG.cginc"
@@ -43,6 +49,10 @@ Shader "FAE/Foliage"
 			float3 worldPos;
 			float2 uv_texcoord;
 			float4 vertexColor : COLOR;
+	
+			float2 uv2_texcoord2;
+			float2 uv_DissolveNoise;
+	
 		};
 
 		uniform float4 _Color;
@@ -69,6 +79,10 @@ Shader "FAE/Foliage"
 		uniform float _WindDebug;
 		uniform float _AmbientOcclusion;
 		uniform float _Cutoff = 0.5;
+
+		fixed4 _EdgeEmission;
+		sampler2D _DissolveNoise;
+		float _InvertDissolve;
 
 		void vertexDataFunc( inout appdata_full v, out Input o )
 		{
@@ -141,7 +155,15 @@ Shader "FAE/Foliage"
 			float lerpResult313 = lerp( Alpha98 , 1.0 , _WindDebug);
 			lerpResult313 = lerpResult313;
 			clip( lerpResult313 - _Cutoff );
-		}
+	
+    float noise = tex2D(_DissolveNoise, i.uv_DissolveNoise).r;
+    float mask = DynamicRadialMasks_HeightField_1_Advanced_Normalized_ID1_Global(i.worldPos, noise);
+    mask = _InvertDissolve ? mask : 1 - mask;
+	
+    clip(mask > 0.5 ? -1 : 1);
+
+    o.Emission = _EdgeEmission * mask;
+}
 
 		ENDCG
 	}

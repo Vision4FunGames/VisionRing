@@ -61,8 +61,8 @@
 			o.Smoothness = _Glossiness;
 			o.Alpha = 1;
 
-			o.Emission = _EdgeEmission * mask;
-		}
+			o.Emission = _EdgeEmission * 2 * clamp(mask - 0.3, 0, 1);
+}
 		ENDCG
 	}
 	FallBack "Diffuse"

@@ -13,7 +13,13 @@ namespace FAE
 
         MaterialProperty _MaskClipValue;
         MaterialProperty _Tint;
-        
+
+        MaterialProperty _Noise;
+        MaterialProperty _InvertDissolve;
+
+        [ColorUsage(true, true)]
+        MaterialProperty _EdgeEmission;
+
         //Main maps
         MaterialProperty _MainTex;
         MaterialProperty _BumpMap;
@@ -42,8 +48,12 @@ namespace FAE
         bool hasWindController;
         WindController windController;
 
+        bool inverseFlag;
+
         GUIContent mainTexName = new GUIContent("Diffuse", "Diffuse (RGB) and Transparency (A)");
         GUIContent normalMapName = new GUIContent("Normal Map");
+        GUIContent disolveName = new GUIContent("Disolve", "Disolve");
+
         private bool visualizeVectors;
 
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
@@ -111,6 +121,15 @@ namespace FAE
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space();
+
+            EditorGUILayout.BeginHorizontal();
+
+
+            this.m_MaterialEditor.TexturePropertySingleLine(disolveName, this._Noise, this._EdgeEmission);
+
+            EditorGUILayout.EndHorizontal();
+
+
         }
 
         void DoColorArea()
@@ -202,6 +221,10 @@ namespace FAE
             _AmbientOcclusion = FindProperty("_AmbientOcclusion", props);
             _TransmissionSize = FindProperty("_TransmissionSize", props);
             _TransmissionAmount = FindProperty("_TransmissionAmount", props);
+
+            _Noise = FindProperty("_DissolveNoise", props);
+            _EdgeEmission = FindProperty("_EdgeEmission", props);
+            _InvertDissolve = FindProperty("_InvertDissolve", props);
 
             //Animation
             _MaxWindStrength = FindProperty("_MaxWindStrength", props);
