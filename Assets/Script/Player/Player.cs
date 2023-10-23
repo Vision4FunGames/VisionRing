@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [HideInInspector]public UiManager uiManager;
+    [HideInInspector] public UiManager uiManager;
     private PlayerHealth _playerHealth;
 
     #region Singleton
@@ -28,17 +28,17 @@ public class Player : MonoBehaviour
     public PlayerMovementState PlayerMovementState { get; set; }
 
     public PlayerSkillState PlayerSkillState { get; set; }
-    
+
     public PlayerBox PlayerBox { get; set; }
 
     #endregion
 
     #region Movement Variable
 
-    [HideInInspector]public float animValue = 1;
-    [HideInInspector]public float animSpeed;
+    [HideInInspector] public float animValue = 1;
+    [HideInInspector] public float animSpeed;
     public float speed;
-    [HideInInspector]public float baseSpeed;
+    [HideInInspector] public float baseSpeed;
     [HideInInspector] public Animator _playerAnimator;
     public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
@@ -69,20 +69,20 @@ public class Player : MonoBehaviour
         baseSpeed = speed;
         if (instance == null)
         {
-            instance = this;    
+            instance = this;
         }
+
         uiManager = FindObjectOfType<UiManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
         //_fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
-        PlayerBox = new PlayerBox(this,StateMachine);
+        PlayerBox = new PlayerBox(this, StateMachine);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
-        
+        _skillCoolDown = FindObjectOfType<SkillCoolDown>();
         DashInıtiliaze();
-     
     }
 
     private void DashInıtiliaze()
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
             int j = i;
             uiManager.ButtonType[i].skillButton.onClick.AddListener((() =>
             {
-                PlayerSkillState = new PlayerSkillState(this, StateMachine,   uiManager.ButtonType[j].mySkillType);
+                PlayerSkillState = new PlayerSkillState(this, StateMachine, uiManager.ButtonType[j].mySkillType);
                 StateMachine.ChangeState(PlayerSkillState);
             }));
         }
@@ -105,6 +105,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    private SkillCoolDown _skillCoolDown;
 
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
@@ -114,11 +115,13 @@ public class Player : MonoBehaviour
     private void Update()
     {
         StateMachine.CurrentPlayerState.FrameUpdate();
-        if (Input.GetKeyDown(KeyCode.C))
+        if (uiManager.attackJoystick.input.magnitude > 0.98f && _skillCoolDown.CanUse(0))
         {
+            print("a1");
             PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.Dash);
             StateMachine.ChangeState(PlayerSkillState);
         }
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             PlayerBox = new PlayerBox(this, StateMachine);

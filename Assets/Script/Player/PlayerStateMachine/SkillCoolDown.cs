@@ -51,6 +51,7 @@ public class SkillCoolDown : MonoBehaviour
 
     public void CoolDownImage()
     {
+        skillsArray[0].coolDownTime -= Time.deltaTime;
         for (int i = 0; i < _currentSkills.Count; i++)
         {
             _currentSkills[i].coolDownTime -= Time.deltaTime;

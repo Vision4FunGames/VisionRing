@@ -59,7 +59,7 @@ public class JoystickSetterExample : MonoBehaviour
         variableJoystick.SnapY = value;
     }
 
-    private void Update()
+   private void Update()
     {
         valueText.text = "Current Value: " + variableJoystick.Direction;
     }

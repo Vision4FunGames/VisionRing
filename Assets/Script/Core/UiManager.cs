@@ -17,7 +17,7 @@ public class UiManager : MonoBehaviour
     public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
     public MMProgressBar playerProgressBar;
-
+    public FixedJoystick attackJoystick;
     public Sprite[] itemlevelSprites;
     public Sprite[] itemDescriptionSprites;
     public Sprite emptySprite = null;

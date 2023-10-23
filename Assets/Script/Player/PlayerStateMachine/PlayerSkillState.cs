@@ -72,7 +72,7 @@ public class PlayerSkillState : PlayerState
     {
         SkillCoolDown.instance.skillsArray[0].coolDownTime = SkillCoolDown.instance.skillsArray[0].coolDown;
         var position = _player.transform.position;
-        Vector3 playerVelocity = new Vector3(_player._fixedJoystick.Horizontal, 0, _player._fixedJoystick.Vertical);
+        Vector3 playerVelocity = new Vector3(_player.uiManager.attackJoystick.Horizontal, 0, _player.uiManager.attackJoystick.Vertical);
         Vector3 targetPos = new Vector3(position.x, position.y, position.z) +
                             playerVelocity * 10;
         targetPos = new Vector3(targetPos.x, position.y, targetPos.z);
