@@ -46,6 +46,7 @@ public class Inventory : MonoBehaviour
                 return;
             }
             items.Add(item);
+            item.showInInventory = false;
             Debug.Log("Item Added to Inventory " + item.name);
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
@@ -67,4 +68,13 @@ public class Inventory : MonoBehaviour
         Debug.Log("Saved");
     }
 
+    public void InventoryTypeChange(InventoryType type)
+    {
+        InventorySlot[] slots;
+        slots = InventoryUI.instance.itemsParent.GetComponentsInChildren<InventorySlot>();
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i]._inventoryType = type;
+        }
+    }
 }

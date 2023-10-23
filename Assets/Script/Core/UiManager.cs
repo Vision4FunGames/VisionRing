@@ -10,7 +10,9 @@ public class UiManager : MonoBehaviour
     [Header("Player Button")] public Button JumpBtn;
     public ButtonType[] ButtonType;
     public static UiManager instance;
-    public GameObject gamePlay, inventory;
+    [Header("UI Objects")]
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel;
+
     private InventoryUI inventoryUi;
     public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
@@ -19,7 +21,8 @@ public class UiManager : MonoBehaviour
     public Sprite[] itemlevelSprites;
     public Sprite[] itemDescriptionSprites;
     public Sprite emptySprite = null;
-    
+
+    public List<GameObject> UiPanels = new List<GameObject>();
     private void Awake()
     {
         instance = this;
@@ -47,9 +50,30 @@ public class UiManager : MonoBehaviour
         inventory.SetActive(!inventory.activeSelf);
         inventoryObject.SetActive(!inventoryObject.activeSelf);
         gamePlay.SetActive(!gamePlay.activeSelf);
+        Inventory.instance.InventoryTypeChange(InventoryType.Equip);
         inventoryUi.UpdateUI();
     }
 
+    public void BlackSmithUI()
+    {
+        CloseAllUI();
+        
+        inventory.gameObject.SetActive(true);
+        blacksmithPanel.gameObject.SetActive(true);
+        equipmentPanel.gameObject.SetActive(true);
+        inventoryObject.gameObject.SetActive(true);
+        Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
+        inventoryUi.UpdateUI();
+        
+    }
+
+    public void CloseAllUI()
+    {
+        for (int i = 0; i < UiPanels.Count; i++)
+        {
+            UiPanels[i].gameObject.SetActive(false);
+        }
+    }
     // public void UpdatePlayerHealthBar(float health)
     // {
     //     playerProgressBar.UpdateBar(health, 0, 100);

@@ -50,7 +50,19 @@ public class Equipment : Item {
             Inventory.instance.onItemChangedCallback.Invoke();
 
         }
-       
+
+        if (type == InventoryType.Upgrade)
+        {
+            EquipmentManager.instance.UpgradeEquip(this);
+            //RemoveFromInventory();
+        }
+
+        if (type == InventoryType.UnEquip)
+        {
+            Inventory.instance.items.Add(this);
+            Inventory.instance.onItemChangedCallback.Invoke();
+            
+        }
     }
 
     

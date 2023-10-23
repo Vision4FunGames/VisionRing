@@ -12,7 +12,7 @@ public class InventorySlot : MonoBehaviour
 
     public Image backGImage;
     // Add item to the slot
-    
+    public int slotIndex;
     public void AddItem (Item newItem)
     {
         item = newItem;
@@ -47,6 +47,21 @@ public class InventorySlot : MonoBehaviour
     public void UseItem ()
     {
         item?.Use(_inventoryType);
+        if (_inventoryType == InventoryType.UnEquip)
+        {
+            if (slotIndex != null)
+            {
+               
+                EquipmentManager.instance.upgradeEquipment[slotIndex] = null;
+                EquipmentManager.instance.onItemAddedCallback.Invoke();
+            }
+            
+           
+        }
+    }
+    public void SetSlotIndex(int index)
+    {
+        slotIndex = index;
     }
 
 }
@@ -55,5 +70,7 @@ public enum InventoryType
     Equip,
     Buy,
     Sell,
-    Upgrade
+    Upgrade,
+    UnEquip
 }
+

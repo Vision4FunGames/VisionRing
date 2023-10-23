@@ -21,6 +21,9 @@ public class EquipmentManager : MonoBehaviour {
 	}
 	static EquipmentManager _instance;
 	private GameObject currentWeapon,currentInventoryWeapon;
+	
+	public delegate void OnItemAdded();
+	public OnItemAdded onItemAddedCallback;
 	void Awake ()
 	{
 		_instance = this;
@@ -49,6 +52,8 @@ public class EquipmentManager : MonoBehaviour {
 	//private EquippedInventory equippedInventory;
 	public GameObject rightHand;
 	public GameObject inventoryHand;
+	public Equipment[] upgradeEquipment;
+	public InventorySlot[] upgradeSlots;
 	void Start ()
 	{
 		ResetObjects();
@@ -63,7 +68,10 @@ public class EquipmentManager : MonoBehaviour {
 		inventory.items.Clear();
 		inventory.items = ES3.Load("inventory", inventory.items);
 		EquipAllDefault ();
+		onItemAddedCallback += UpdateUpgradeSlots;
 	}
+
+	
 
 	public void ResetObjects()
 	{
@@ -165,6 +173,81 @@ public class EquipmentManager : MonoBehaviour {
 		Debug.Log("Saved");
 	}
 
+	#region Upgrade
+	public void UpgradeEquip(Equipment newItem)
+	{
+		for (int i = 0; i < upgradeEquipment.Length; i++)
+		{
+			if (upgradeEquipment[i] == null)
+			{
+				upgradeEquipment[i] = newItem;
+				newItem.RemoveFromInventory();
+				if (onItemAddedCallback!= null)
+				{
+					onItemAddedCallback.Invoke();
+				}
+				
+				return;
+			}
+			
+		}
+	}
+	private void UpdateUpgradeSlots()
+	{
+		for (int i = 0; i < upgradeSlots.Length; i++)
+		{
+			if (upgradeEquipment[i]!=null)
+			{
+				upgradeSlots[i].AddItem(upgradeEquipment[i]);
+			}
+			else
+			{
+				upgradeSlots[i].ClearSlot();
+			}
+		}
+	}
+
+	public void UpgradeItem()
+	{
+		for (int i = 0; i < upgradeEquipment.Length; i++)
+		{
+			if (upgradeEquipment[i] == null)
+			{
+				return;
+			}
+		}
+		if (upgradeEquipment[0].name == upgradeEquipment[1].name && upgradeEquipment[0].name == upgradeEquipment[2].name) 
+		{
+			if (upgradeEquipment[0].itemLevel == upgradeEquipment[1].itemLevel && upgradeEquipment[0].itemLevel == upgradeEquipment[2].itemLevel)
+			{
+				upgradeEquipment[0].itemLevel++;
+				upgradeEquipment[0].showInInventory = true;
+				inventory.Add(upgradeEquipment[0]);
+				
+				if (inventory.onItemChangedCallback!=null)
+				{
+					inventory.onItemChangedCallback.Invoke();
+				}
+
+				ClearUpgradeSlots();
+			}
+		}
+	}
+
+	private void ClearUpgradeSlots()
+	{
+		for (int i = 0; i < upgradeEquipment.Length; i++)
+		{
+			upgradeEquipment[i] = null;
+		}
+		if (onItemAddedCallback != null)
+		{
+			onItemAddedCallback.Invoke();
+		}
+		
+	}
+
+	#endregion
 	
 	void UnequipAll() {
 		for (int i = 0; i < currentEquipment.Length; i++) {

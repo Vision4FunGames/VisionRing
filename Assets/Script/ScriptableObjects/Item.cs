@@ -8,7 +8,7 @@ public class Item : ScriptableObject
 {
     public string name = "New ScriptableObject";
     [ES3NonSerializable] public Sprite icon;
-    public bool showInInventory;
+   [ES3NonSerializable] public bool showInInventory;
     public int itemLevel;
 
   
