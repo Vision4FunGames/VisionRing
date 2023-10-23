@@ -10,24 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6aad7dd2aeef8c848b29c8429ff2ce3d, type: 3}
-  m_Name: Graves
+  m_Name: Corpses
   m_EditorClassIdentifier: 
   Archetypes:
-  - Prefab: {fileID: 4137519250124826900, guid: 080f2d481a6925242bb9a9a9dc8b502a, type: 3}
+  - Prefab: {fileID: 107488355198530791, guid: cb1674dd09a7e4e488fd23b28e4d20a0, type: 3}
     PlacementMethod: 1
     GameObjectStatic: 0
     MaximumScale: 1
     MinimumScale: 0.8
     ColourVariation: 0.4
     Weight: 1
-  - Prefab: {fileID: 1375519379117565108, guid: 6287c2d66fa5d0c45b726e74095540b0, type: 3}
-    PlacementMethod: 1
-    GameObjectStatic: 0
-    MaximumScale: 1
-    MinimumScale: 0.8
-    ColourVariation: 0.4
-    Weight: 1
-  - Prefab: {fileID: 6342323878239681099, guid: 76d418cb069ba254889181399adc8b75, type: 3}
+  - Prefab: {fileID: 1724866038478097338, guid: 88600e787e77a0645acc9b75814d6ddc, type: 3}
     PlacementMethod: 1
     GameObjectStatic: 0
     MaximumScale: 1
@@ -37,8 +30,8 @@ MonoBehaviour:
   ConformToMeshSurface: 1
   InitialSeedDensity: 0.0003
   MaxSeedTravelDistance: 10
-  MinChildren: 0
-  MaxChildren: 0
+  MinChildren: 4
+  MaxChildren: 6
   CollisionRange: 1
   CollisionRangeSq: 1
   ShadeRange: 5
