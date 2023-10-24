@@ -1,5 +1,6 @@
 using Script.Player.PlayerStateMachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -82,6 +83,8 @@ public class Player : MonoBehaviour
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine);
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
+        dashSprite =     Resources.Load<Sprite>("SkillSprite/Dash");
+        attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         DashInıtiliaze();
     }
 
@@ -106,7 +109,7 @@ public class Player : MonoBehaviour
     #endregion
 
     private SkillCoolDown _skillCoolDown;
-
+    private Sprite dashSprite, attackSprite;
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
         StateMachine.CurrentPlayerState.AnimationTriggerEvent(triggerType);
@@ -117,9 +120,17 @@ public class Player : MonoBehaviour
         StateMachine.CurrentPlayerState.FrameUpdate();
         if (uiManager.attackJoystick.input.magnitude > 0.98f && _skillCoolDown.CanUse(0))
         {
-            print("a1");
             PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.Dash);
             StateMachine.ChangeState(PlayerSkillState);
+        }
+
+        if (uiManager.attackJoystick.input.magnitude > 0.98f)
+        {
+            uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = dashSprite;
+        }
+        else
+        {
+            uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = attackSprite;
         }
 
         if (Input.GetKeyDown(KeyCode.B))
