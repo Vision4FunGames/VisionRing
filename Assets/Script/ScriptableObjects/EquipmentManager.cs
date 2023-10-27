@@ -137,6 +137,8 @@ public class EquipmentManager : MonoBehaviour {
 			currentInventoryWeapon = Instantiate(newItem.prefab,new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y, inventoryHand.transform.position.z),
 				Quaternion.identity);
 			currentInventoryWeapon.transform.parent = inventoryHand.transform;
+			currentInventoryWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);
+			currentInventoryWeapon.transform.localEulerAngles = new Vector3(-31.375f,-43.925f,-97.642f);
 			
 		}
 		//equippedItems [itemIndex] = newMesh.gameObject;
@@ -159,6 +161,7 @@ public class EquipmentManager : MonoBehaviour {
 			else if (slotIndex == 2 && currentWeapon != null)
 			{
 				Destroy(currentWeapon);
+				Destroy(currentInventoryWeapon);
 			}
 			
 			//equippedInventory.Remove(oldItem);

@@ -4,6 +4,7 @@ public class DamageManager : MonoBehaviour
 {
     private PlayerHealth _playerHealth;
     public EnemyStats characterStats;
+
     private void Start()
     {
         characterStats = GetComponentInParent<EnemyStats>();
@@ -20,9 +21,16 @@ public class DamageManager : MonoBehaviour
     {
         _playerHealth.DamageAnimation(characterStats.damage.GetValue() * 14 / 10);
     }
-    
+
     public void DeathEnemy()
     {
-        Destroy(transform.parent.gameObject,3);
+        Destroy(transform.parent.gameObject, 3);
     }
+
+    //Coffin for Boss
+    public void SkeletSpawn()
+    {
+        
+    }
+
 }

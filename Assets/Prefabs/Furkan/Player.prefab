@@ -1382,7 +1382,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631297510898300615}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10}
@@ -1563,6 +1563,7 @@ MonoBehaviour:
   animValue: 1
   animSpeed: 0
   speed: 5
+  baseSpeed: 0
   _playerAnimator: {fileID: 0}
   _fixedJoystick: {fileID: 0}
   _myController: {fileID: 0}
@@ -1578,6 +1579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a00977d7e441f4db21e72ab1f91452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mmProgressBar: {fileID: 0}
   _damageNumbersPro: {fileID: 0}
 --- !u!114 &2631297512559623451
 MonoBehaviour:
@@ -1596,6 +1598,11 @@ MonoBehaviour:
   - {fileID: 2631297511090115849}
   - {fileID: 2631297511090115849}
   damage: 15
+  tornadoDamageRate: 0
+  tornadoDamage: 0
+  flameDamage: 0
+  flameDamageRateOfFire: 0
+  earthSkillDamage: 0
 --- !u!114 &8020616301625844294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1635,12 +1642,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b621595a8bed3384692ec91e0d1b5f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  die: 0
   maxHealth: 100
   damage:
     baseValue: 0
   armor:
     baseValue: 0
   prefab: {fileID: 0}
+  mmProgressBar: {fileID: 0}
+  enemyType: 0
 --- !u!1 &2833150564508463037
 GameObject:
   m_ObjectHideFlags: 0
