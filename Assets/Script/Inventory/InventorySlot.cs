@@ -12,7 +12,7 @@ public class InventorySlot : MonoBehaviour
 
     public Image backGImage;
     // Add item to the slot
-    public int slotIndex;
+    public int slotIndex; //For Upgrade Items to Unequip
     public void AddItem (Item newItem)
     {
         item = newItem;

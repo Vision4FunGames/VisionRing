@@ -14,7 +14,6 @@ public class CharacterStats : MonoBehaviour
     public DamageNumber prefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
-    public EnemyType enemyType;
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -31,10 +30,6 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (enemyType == EnemyType.Boss)
-        {
-            CheckBossHealth();
-        }
         if (currentHealth > 0)
         {
             damage -= armor.GetValue();

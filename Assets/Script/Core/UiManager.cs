@@ -79,7 +79,12 @@ public class UiManager : MonoBehaviour
     //     playerProgressBar.UpdateBar(health, 0, 100);
     // }
 
-
+    public void GamePlayUI()
+    {
+        EquipmentManager.instance.SaveUpgradeItems();
+        CloseAllUI();
+        gamePlay.gameObject.SetActive(true);
+    }
 }
 
 [Serializable]

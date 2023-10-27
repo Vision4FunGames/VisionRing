@@ -236,6 +236,7 @@ public class EquipmentManager : MonoBehaviour {
 				ClearUpgradeSlots();
 			}
 		}
+		inventory.SaveAllItems();
 	}
 
 	private void ClearUpgradeSlots()
@@ -251,6 +252,18 @@ public class EquipmentManager : MonoBehaviour {
 		
 	}
 
+	public void SaveUpgradeItems()
+	{
+		for (int i = 0; i < upgradeEquipment.Length; i++)
+		{
+			if (upgradeEquipment[i] != null)
+			{
+				inventory.items.Add(upgradeEquipment[i]);
+			}
+		}
+		ClearUpgradeSlots();
+		inventory.SaveAllItems();
+	}
 	#endregion
 	
 	void UnequipAll() {

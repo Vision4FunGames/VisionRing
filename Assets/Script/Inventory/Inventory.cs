@@ -50,9 +50,7 @@ public class Inventory : MonoBehaviour
             Debug.Log("Item Added to Inventory " + item.name);
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
-            ES3.Save("currentItems",equipmentManager.currentEquipment);
-            ES3.Save("inventory",items);
-            Debug.Log("Saved");
+            SaveAllItems();
         }
         
     }
@@ -76,5 +74,12 @@ public class Inventory : MonoBehaviour
         {
             slots[i]._inventoryType = type;
         }
+    }
+
+    public void SaveAllItems()
+    {
+        ES3.Save("currentItems",equipmentManager.currentEquipment);
+        ES3.Save("inventory",items);
+        Debug.Log("Saved");
     }
 }

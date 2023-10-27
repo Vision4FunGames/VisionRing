@@ -61,7 +61,6 @@ public class Equipment : Item {
         {
             Inventory.instance.items.Add(this);
             Inventory.instance.onItemChangedCallback.Invoke();
-            
         }
     }
 
