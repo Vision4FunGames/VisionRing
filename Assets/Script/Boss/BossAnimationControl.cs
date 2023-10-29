@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossAnimationControl : MonoBehaviour
@@ -26,6 +23,7 @@ public class BossAnimationControl : MonoBehaviour
 
     public void EndAttack()
     {
+        PlayerManager.instance.CameraShakeCombo(1f, .8f);
         bossMovement.attackBoss = false;
         bossMovement.currentTime = 0;
         bossMovement.navMeshAgent.speed = 2;

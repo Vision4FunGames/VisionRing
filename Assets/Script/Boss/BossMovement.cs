@@ -4,15 +4,17 @@ using UnityEngine.AI;
 public class BossMovement : MonoBehaviour
 {
     private float rateOfFire = 3;
-    [HideInInspector]public float currentTime;
-    [HideInInspector]public bool attackBoss = false;
-    [HideInInspector]public NavMeshAgent navMeshAgent;
+    [HideInInspector] public float currentTime;
+    [HideInInspector] public bool attackBoss = false;
+    [HideInInspector] public NavMeshAgent navMeshAgent;
+    [HideInInspector] public bool isStun;
     private BossCombat bossCombat;
     private Animator animator;
     private Player player;
     public float detectPlayerRange;
     private float currentAnimSpeed;
     private float distance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,17 +28,15 @@ public class BossMovement : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        distance = Vector3.Distance(player.transform.position,transform.position);
-        if (distance < detectPlayerRange && !attackBoss)
+        distance = Vector3.Distance(player.transform.position, transform.position);
+        if (distance < detectPlayerRange && !attackBoss && !isStun)
         {
             MovementTarget();
         }
 
-        if (distance < 10 && !attackBoss && currentTime > rateOfFire)
+        if (distance < 10 && !attackBoss && currentTime > rateOfFire && !isStun)
         {
-            attackBoss = true;
-            navMeshAgent.speed = 0;
-            bossCombat.AttackBoss();
+            Attack();
         }
     }
 
@@ -46,7 +46,15 @@ public class BossMovement : MonoBehaviour
         navMeshAgent.SetDestination(player.transform.position);
         animator.SetFloat("Blend", currentAnimSpeed);
     }
-    void OnDrawGizmosSelected ()
+
+    public void Attack()
+    {
+        attackBoss = true;
+        navMeshAgent.speed = 0;
+        bossCombat.AttackBoss();
+    }
+
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectPlayerRange);
