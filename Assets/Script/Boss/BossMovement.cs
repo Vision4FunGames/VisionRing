@@ -6,9 +6,9 @@ public class BossMovement : MonoBehaviour
     private BossManager bossManager;
     private float rateOfFire = 3;
     [HideInInspector] public float currentTime;
-    [HideInInspector] public bool attackBoss = false;
-    [HideInInspector] public NavMeshAgent navMeshAgent;
-    [HideInInspector] public bool isStun;
+    public bool attackBoss = false;
+    public NavMeshAgent navMeshAgent;
+    public bool isStun;
     private BossCombat bossCombat;
     private Animator animator;
     private Player player;
@@ -31,7 +31,7 @@ public class BossMovement : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         distance = Vector3.Distance(player.transform.position, transform.position);
-        if (distance < detectPlayerRange && !attackBoss && !isStun)
+        if (distance < detectPlayerRange && !attackBoss && !isStun && navMeshAgent)
         {
             MovementTarget();
         }
@@ -60,10 +60,10 @@ public class BossMovement : MonoBehaviour
     {
         bossManager.stunParticle.Play();
         isStun = true;
-        animator.SetBool("stun",true);
+        animator.SetBool("stun", true);
         animator.Play("Stun");
         CancelInvoke("StunDisable");
-        Invoke("StunDisable",7);
+        Invoke("StunDisable", 7);
     }
 
     public void StunDisable()
@@ -72,9 +72,9 @@ public class BossMovement : MonoBehaviour
         bossManager.stunParticle.Stop();
         isStun = false;
         attackBoss = false;
-        animator.SetBool("stun",false);
-        
+        animator.SetBool("stun", false);
     }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
