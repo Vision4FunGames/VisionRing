@@ -21,7 +21,7 @@ public class UiManager : MonoBehaviour
     public Sprite[] itemlevelSprites;
     public Sprite[] itemDescriptionSprites;
     public Sprite emptySprite = null;
-
+    
     public List<GameObject> UiPanels = new List<GameObject>();
     private void Awake()
     {
@@ -44,12 +44,21 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void ShopUI()
+    {
+        CloseAllUI();
+        shopPanel.gameObject.SetActive(true);
+        equipmentPanel.gameObject.SetActive(true);
+        inventory.gameObject.SetActive(true);
+        inventoryObject.SetActive(true);
+    }
     public void ShowInventory()
     {
-        
-        inventory.SetActive(!inventory.activeSelf);
-        inventoryObject.SetActive(!inventoryObject.activeSelf);
-        gamePlay.SetActive(!gamePlay.activeSelf);
+        CloseAllUI();
+        inventory.SetActive(true);
+        inventoryObject.SetActive(true);
+        equipmentPanel.gameObject.SetActive(true);
+        currentItems.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Equip);
         inventoryUi.UpdateUI();
     }
