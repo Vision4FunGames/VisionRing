@@ -36,7 +36,7 @@ public class BossTrap : MonoBehaviour
     IEnumerator ExplosionFinish()
     {
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(15f);
         // for (int i = 0; i < obj.Length; i++)
         // {
         //     Destroy(obj[i]);

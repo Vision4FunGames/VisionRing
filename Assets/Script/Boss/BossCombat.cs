@@ -7,6 +7,7 @@ public class BossCombat : MonoBehaviour
     private BossMovement bossMovement;
     public GameObject circleParentObj;
     public GameObject chargeParentObj;
+    public Collider circleCollider , swordCollider;
     // Start is called before the first frame update
     void Start()
     {

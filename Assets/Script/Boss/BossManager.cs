@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    public ParticleSystem stunParticle;
     private bool isStunned;
     public float bossHealth;
     [HideInInspector] public GameObject _damageNumbersPro;
@@ -18,12 +19,14 @@ public class BossManager : MonoBehaviour
         if (isStunned)
         {
             bossHealth -= damage;
+            ShowDamageText(damage*100);
         }
         else
         {
             bossHealth -= (damage / 10);
+            ShowDamageText(damage*10);
         }
-        ShowDamageText(damage);
+      
     }
 
     public void ShowDamageText(int damage)

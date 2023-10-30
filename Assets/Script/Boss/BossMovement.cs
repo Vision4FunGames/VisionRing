@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class BossMovement : MonoBehaviour
 {
+    private BossManager bossManager;
     private float rateOfFire = 3;
     [HideInInspector] public float currentTime;
     [HideInInspector] public bool attackBoss = false;
@@ -18,6 +19,7 @@ public class BossMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bossManager = GetComponent<BossManager>();
         bossCombat = GetComponent<BossCombat>();
         animator = GetComponentInChildren<Animator>();
         player = FindObjectOfType<Player>();
@@ -54,6 +56,25 @@ public class BossMovement : MonoBehaviour
         bossCombat.AttackBoss();
     }
 
+    public void StunEnable()
+    {
+        bossManager.stunParticle.Play();
+        isStun = true;
+        animator.SetBool("stun",true);
+        animator.Play("Stun");
+        CancelInvoke("StunDisable");
+        Invoke("StunDisable",7);
+    }
+
+    public void StunDisable()
+    {
+        navMeshAgent.speed = 2;
+        bossManager.stunParticle.Stop();
+        isStun = false;
+        attackBoss = false;
+        animator.SetBool("stun",false);
+        
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
