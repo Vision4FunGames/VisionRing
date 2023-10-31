@@ -13,7 +13,7 @@ public class BossMovement : MonoBehaviour
     private Animator animator;
     private Player player;
     public float detectPlayerRange;
-    private float currentAnimSpeed;
+    public float currentAnimSpeed;
     private float distance;
 
     // Start is called before the first frame update
@@ -31,12 +31,14 @@ public class BossMovement : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         distance = Vector3.Distance(player.transform.position, transform.position);
-        if (distance < detectPlayerRange && !attackBoss && !isStun && navMeshAgent)
+        currentAnimSpeed = navMeshAgent.velocity.magnitude;
+        animator.SetFloat("Blend", currentAnimSpeed);
+        if (distance < detectPlayerRange && !attackBoss && !isStun && navMeshAgent && !bossManager.isSkeletsLive)
         {
             MovementTarget();
         }
 
-        if (distance < 10 && !attackBoss && currentTime > rateOfFire && !isStun)
+        if (distance < 10 && !attackBoss && currentTime > rateOfFire && !isStun && !bossManager.isSkeletsLive)
         {
             Attack();
         }
@@ -44,9 +46,7 @@ public class BossMovement : MonoBehaviour
 
     public void MovementTarget()
     {
-        currentAnimSpeed = navMeshAgent.velocity.magnitude / (navMeshAgent.speed);
         navMeshAgent.SetDestination(player.transform.position);
-        animator.SetFloat("Blend", currentAnimSpeed);
     }
 
     public void Attack()
@@ -68,11 +68,14 @@ public class BossMovement : MonoBehaviour
 
     public void StunDisable()
     {
-        navMeshAgent.speed = 2;
-        bossManager.stunParticle.Stop();
-        isStun = false;
-        attackBoss = false;
-        animator.SetBool("stun", false);
+        if (!bossManager.isSkeletsLive)
+        {
+            navMeshAgent.speed = 2;
+            bossManager.stunParticle.Stop();
+            isStun = false;
+            attackBoss = false;
+            animator.SetBool("stun", false);
+        }
     }
 
     void OnDrawGizmosSelected()

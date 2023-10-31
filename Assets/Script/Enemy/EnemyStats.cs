@@ -10,7 +10,7 @@ public class EnemyStats : CharacterStats
    {
       if (enemyType == EnemyType.skelet)
       {
-         mmProgressBar ??= Instantiate(Resources.Load<Canvas>("EnemyHealthBar"),new Vector3(transform.localPosition.x,transform.localPosition.y,transform.localPosition.z), Quaternion.identity,transform).GetComponentInChildren<MMProgressBar>();
+         mmProgressBar ??= Instantiate(Resources.Load<Canvas>("EnemyHealthBar"),new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity,transform).GetComponentInChildren<MMProgressBar>();
       }
       
    }

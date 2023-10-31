@@ -5,9 +5,10 @@ public class BossAnimationControl : MonoBehaviour
     private BossMovement bossMovement;
     private Animator animator;
     private BossCombat bossCombat;
-
+    private BossManager _bossManager;
     private void Start()
     {
+        _bossManager = GetComponentInParent<BossManager>();
         bossCombat = GetComponentInParent<BossCombat>();
         animator = GetComponent<Animator>();
         bossMovement = GetComponentInParent<BossMovement>();
@@ -44,5 +45,10 @@ public class BossAnimationControl : MonoBehaviour
     {
         bossCombat.circleCollider.gameObject.SetActive(false);
         bossCombat.swordCollider.gameObject.SetActive(false);
+    }
+
+    public void SkeletSpawn()
+    {
+        _bossManager.SpawnSkelet();
     }
 }

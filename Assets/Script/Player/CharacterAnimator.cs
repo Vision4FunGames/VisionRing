@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class CharacterAnimator : MonoBehaviour
 {
     public Animator animator;
-
+    [HideInInspector] public bool isTabut;
     NavMeshAgent navmeshAgent;
     CharacterCombat combat;
     private EnemyStats enemyStats;
@@ -38,6 +38,13 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void DieAnimation()
     {
+        print("aaa");
+        if (isTabut)
+        {
+            FindObjectOfType<TabutManager>().DeadEnemy();
+        }
+
+        GetComponent<Collider>().enabled = false;
         enemyStats.die = true;
         animator.SetTrigger("death_");
         navmeshAgent.speed = 0;

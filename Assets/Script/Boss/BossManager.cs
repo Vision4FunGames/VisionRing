@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    [HideInInspector] public bool isSkeletsLive;
+    [HideInInspector] public bool bossSpecialSkelet;
+    [HideInInspector] public GameObject _damageNumbersPro;
+
+
+    public ParticleSystem footParticle;
+    public GameObject tabuts;
     private float bossBaseHealth;
-    private bool bossSpecialSkelet;
     private Canvas mainCanvas;
     private BossMovement bossMovement;
     private bool sleep;
@@ -14,10 +20,11 @@ public class BossManager : MonoBehaviour
     public ParticleSystem stunParticle;
     private bool isStunned;
     public float bossHealth;
-    [HideInInspector] public GameObject _damageNumbersPro;
     public MMProgressBar mmProgressBar;
+    public ParticleSystem _shieldParticle;
     private void Awake()
     {
+        bossBaseHealth = bossHealth;
         player = FindObjectOfType<Player>();
         bossMovement = GetComponent<BossMovement>();
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
@@ -38,32 +45,53 @@ public class BossManager : MonoBehaviour
         bossMovement.navMeshAgent.enabled = true;
         mmProgressBar.gameObject.SetActive(true);
     }
+
     public void BossTakeSwordDamage(int damage)
     {
-        if (bossHealth > 0)
+        if (bossHealth > 0 && !isSkeletsLive)
         {
             if (isStunned)
             {
                 bossHealth -= damage;
-                ShowDamageText(damage*100);
-                mmProgressBar.UpdateBar(bossHealth,0,100);
+                ShowDamageText(damage * 100);
+                mmProgressBar.UpdateBar(bossHealth, 0, 100);
             }
             else
             {
                 bossHealth -= (damage / 10);
-                ShowDamageText(damage*10);
-                mmProgressBar.UpdateBar(bossHealth,0,100);
+                ShowDamageText(damage * 10);
+                mmProgressBar.UpdateBar(bossHealth, 0, 100);
             }
+
+            CheckBossHealth();
         }
-        
     }
 
     public void CheckBossHealth()
     {
         if (bossHealth < bossBaseHealth / 2 && !bossSpecialSkelet)
         {
-            
+            GetComponentInChildren<Animator>().Play("SkeletSpawn");
         }
+    }
+
+    public void SpawnSkelet()
+    {
+        _shieldParticle.Play();
+        isSkeletsLive = true;
+        bossSpecialSkelet = true;
+        tabuts.SetActive(true);
+        bossMovement.navMeshAgent.speed = 0;
+    }
+
+    public void DisablesSpawnSkeletSkill()
+    {
+        isSkeletsLive = false;
+        tabuts.SetActive(false);
+        bossMovement.navMeshAgent.speed = 2;
+        bossMovement.StunDisable();
+        _shieldParticle.Stop();
+
     }
 
     public void ShowDamageText(int damage)
