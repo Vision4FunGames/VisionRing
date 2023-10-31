@@ -4,9 +4,10 @@ public class DamageManager : MonoBehaviour
 {
     private PlayerHealth _playerHealth;
     public EnemyStats characterStats;
-
+    private DropChest dropChest;
     private void Start()
     {
+        dropChest = GetComponentInParent<DropChest>();
         characterStats = GetComponentInParent<EnemyStats>();
         _playerHealth = Player.instance.GetComponent<PlayerHealth>();
     }
@@ -22,6 +23,10 @@ public class DamageManager : MonoBehaviour
         _playerHealth.DamageAnimation(characterStats.damage.GetValue() * 14 / 10);
     }
 
+    public void ChestDrop()
+    {
+        dropChest.ChestDrop(transform.position);
+    }
     public void DeathEnemy()
     {
         Destroy(transform.parent.gameObject, 3);

@@ -21,7 +21,8 @@ public class UiManager : MonoBehaviour
     public Sprite[] itemlevelSprites;
     public Sprite[] itemDescriptionSprites;
     public Sprite emptySprite = null;
-    
+
+    public GameObject selectedPouch;
     public List<GameObject> UiPanels = new List<GameObject>();
     private void Awake()
     {

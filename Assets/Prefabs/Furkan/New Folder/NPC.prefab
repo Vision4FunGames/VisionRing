@@ -2179,6 +2179,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 992509203938550589, guid: 377b724af03829c4f8460bd15f1019b4, type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 6523070075029883866}
+    - target: {fileID: 992509203938550589, guid: 377b724af03829c4f8460bd15f1019b4, type: 3}
+      propertyPath: waypointDistance
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 992509203938550589, guid: 377b724af03829c4f8460bd15f1019b4, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -2200,6 +2208,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 377b724af03829c4f8460bd15f1019b4, type: 3}
+--- !u!195 &6523070075029883866 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 992509203938550588, guid: 377b724af03829c4f8460bd15f1019b4, type: 3}
+  m_PrefabInstance: {fileID: 6287166302128908518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6523070075029883871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 992509203938550585, guid: 377b724af03829c4f8460bd15f1019b4, type: 3}

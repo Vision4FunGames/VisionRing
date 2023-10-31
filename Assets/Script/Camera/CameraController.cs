@@ -25,6 +25,12 @@ public class CameraController : MonoBehaviour
                 {
                   UiManager.instance.BlackSmithUI();
                 }
+
+                if (hit.transform.gameObject.name == "pouch")
+                {
+                    hit.transform.gameObject.GetComponent<PouchManager>().OpenPouchPanel();
+                    UiManager.instance.selectedPouch = hit.transform.gameObject;
+                }
                 
                 
               

@@ -54,6 +54,7 @@ public class EquipmentManager : MonoBehaviour {
 	public GameObject inventoryHand;
 	public Equipment[] upgradeEquipment;
 	public InventorySlot[] upgradeSlots;
+	public Equipment[] chestItems;
 	void Start ()
 	{
 		ResetObjects();

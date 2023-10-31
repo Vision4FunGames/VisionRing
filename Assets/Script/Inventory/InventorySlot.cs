@@ -55,8 +55,12 @@ public class InventorySlot : MonoBehaviour
                 EquipmentManager.instance.upgradeEquipment[slotIndex] = null;
                 EquipmentManager.instance.onItemAddedCallback.Invoke();
             }
-            
-           
+        }
+
+        else if (_inventoryType == InventoryType.Collect)
+        {
+            Destroy(transform.parent.gameObject);
+            UiManager.instance.selectedPouch.GetComponent<PouchManager>().PouchInsideControl();
         }
     }
     public void SetSlotIndex(int index)
@@ -71,6 +75,7 @@ public enum InventoryType
     Buy,
     Sell,
     Upgrade,
-    UnEquip
+    UnEquip,
+    Collect
 }
 
