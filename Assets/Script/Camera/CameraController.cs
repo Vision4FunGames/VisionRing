@@ -31,6 +31,11 @@ public class CameraController : MonoBehaviour
                     hit.transform.gameObject.GetComponent<PouchManager>().OpenPouchPanel();
                     UiManager.instance.selectedPouch = hit.transform.gameObject;
                 }
+                if (hit.transform.gameObject.name == "Chest")
+                {
+                    UiManager.instance.ChestPanelUI();
+                    UiManager.instance.caseScroll.GetComponent<CaseScroll>().Scroll();
+                }
                 
                 
               

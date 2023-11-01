@@ -12,7 +12,7 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     [Header("UI Objects")]
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel;
-
+    
     private InventoryUI inventoryUi;
     public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
@@ -22,8 +22,12 @@ public class UiManager : MonoBehaviour
     public Sprite[] itemDescriptionSprites;
     public Sprite emptySprite = null;
 
+    //Chest Scroll
+    public GameObject caseScroll;
+    public GameObject chestPanel;
     public GameObject selectedPouch;
     public List<GameObject> UiPanels = new List<GameObject>();
+    
     private void Awake()
     {
         instance = this;
@@ -94,6 +98,13 @@ public class UiManager : MonoBehaviour
         EquipmentManager.instance.SaveUpgradeItems();
         CloseAllUI();
         gamePlay.gameObject.SetActive(true);
+    }
+
+    public void ChestPanelUI()
+    {
+        CloseAllUI();
+        inventory.gameObject.SetActive(true);
+        chestPanel.gameObject.SetActive(true);
     }
 }
 
