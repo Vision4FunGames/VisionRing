@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class BossSword : MonoBehaviour
 {
-    private BossMovement bossMovement;
+    private BossCombat bossCombat;
 
     private void Awake()
     {
-        bossMovement = GetComponentInParent<BossMovement>();
+        bossCombat = GetComponentInParent<BossCombat>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -15,7 +15,7 @@ public class BossSword : MonoBehaviour
         if (other.CompareTag("BossTrap"))
         {
             other.GetComponent<BossTrap>().Explosion();
-            bossMovement.StunEnable();
+            bossCombat.StunEnable();
         }
     }
 }

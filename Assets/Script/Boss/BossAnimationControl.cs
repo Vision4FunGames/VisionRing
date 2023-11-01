@@ -27,9 +27,9 @@ public class BossAnimationControl : MonoBehaviour
     public void EndAttack()
     {
         PlayerManager.instance.CameraShakeCombo(1f, .8f);
-        bossMovement.attackBoss = false;
+        bossCombat.attackBos = false;
         bossMovement.currentTime = 0;
-        bossMovement.navMeshAgent.speed = 2;
+        _bossManager.navMeshAgent.speed = 2;
     }
 
     public void CircleColliderEnable()

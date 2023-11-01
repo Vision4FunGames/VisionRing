@@ -2,6 +2,7 @@ using System;
 using DamageNumbersPro;
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossManager : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class BossManager : MonoBehaviour
     [HideInInspector] public GameObject _damageNumbersPro;
 
 
+    private BossMovement bossMovement;
+    private BossCombat bossCombat;
     public ParticleSystem footParticle;
     public GameObject tabuts;
     private float bossBaseHealth;
     private Canvas mainCanvas;
-    private BossMovement bossMovement;
+    public NavMeshAgent navMeshAgent;
     private bool sleep;
     private Player player;
     public ParticleSystem stunParticle;
@@ -24,6 +27,8 @@ public class BossManager : MonoBehaviour
     public ParticleSystem _shieldParticle;
     private void Awake()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        bossCombat = GetComponent<BossCombat>();
         bossBaseHealth = bossHealth;
         player = FindObjectOfType<Player>();
         bossMovement = GetComponent<BossMovement>();
@@ -42,7 +47,7 @@ public class BossManager : MonoBehaviour
     public void WakeUp()
     {
         sleep = true;
-        bossMovement.navMeshAgent.enabled = true;
+        navMeshAgent.enabled = true;
         mmProgressBar.gameObject.SetActive(true);
     }
 
@@ -73,23 +78,35 @@ public class BossManager : MonoBehaviour
         {
             GetComponentInChildren<Animator>().Play("SkeletSpawn");
         }
+
+        if (bossHealth <= 0)
+        {
+            DeadBoss();
+        }
     }
 
+    public void DeadBoss()
+    {
+        navMeshAgent.speed = 0;
+        bossMovement.enabled = false;
+        GetComponent<Collider>().enabled = false;
+        GetComponentInChildren<Animator>().Play("Dead");
+    }
     public void SpawnSkelet()
     {
         _shieldParticle.Play();
         isSkeletsLive = true;
         bossSpecialSkelet = true;
         tabuts.SetActive(true);
-        bossMovement.navMeshAgent.speed = 0;
+        navMeshAgent.speed = 0;
     }
 
     public void DisablesSpawnSkeletSkill()
     {
         isSkeletsLive = false;
         tabuts.SetActive(false);
-        bossMovement.navMeshAgent.speed = 2;
-        bossMovement.StunDisable();
+        navMeshAgent.speed = 2;
+        bossCombat.StunDisable();
         _shieldParticle.Stop();
 
     }
@@ -98,7 +115,7 @@ public class BossManager : MonoBehaviour
     {
         DamageNumber newDamageNumber =
             _damageNumbersPro.GetComponent<DamageNumber>().Spawn(
-                new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                new Vector3(transform.position.x, transform.position.y+6, transform.position.z),
                 damage);
     }
 }

@@ -5,6 +5,7 @@ public class DamageManager : MonoBehaviour
     private PlayerHealth _playerHealth;
     public EnemyStats characterStats;
     private DropChest dropChest;
+
     private void Start()
     {
         dropChest = GetComponentInParent<DropChest>();
@@ -25,8 +26,10 @@ public class DamageManager : MonoBehaviour
 
     public void ChestDrop()
     {
-        dropChest.ChestDrop(transform.position);
+        if (dropChest != null)
+            dropChest.ChestDrop(transform.position);
     }
+
     public void DeathEnemy()
     {
         Destroy(transform.parent.gameObject, 3);
@@ -35,7 +38,5 @@ public class DamageManager : MonoBehaviour
     //Coffin for Boss
     public void SkeletSpawn()
     {
-        
     }
-
 }
