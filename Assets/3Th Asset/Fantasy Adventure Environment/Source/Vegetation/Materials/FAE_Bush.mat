@@ -37,6 +37,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DissolveNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -84,6 +88,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HeightmapInfluence: 0
+    - _InvertDissolve: 0
     - _LeafFlutter: 0.173
     - _MaskClipValue: 0.5
     - _MaxHeight: 0
@@ -114,6 +119,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorBottom: {r: 0.65693426, g: 1, b: 0, a: 1}
     - _ColorTop: {r: 0.65693426, g: 1, b: 0, a: 1}
+    - _EdgeEmission: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Vector0: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
