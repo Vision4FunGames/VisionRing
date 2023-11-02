@@ -52,7 +52,7 @@ public class CaseScroll : MonoBehaviour
         {
            _speed = 0; 
            _isScrolling = false;
-           //UiManager.instance.CollectButtonOpen();
+           UiManager.instance.CollectButtonOpen();
         }
     }
 }

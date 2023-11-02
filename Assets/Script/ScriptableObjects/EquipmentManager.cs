@@ -55,6 +55,8 @@ public class EquipmentManager : MonoBehaviour {
 	public Equipment[] upgradeEquipment;
 	public InventorySlot[] upgradeSlots;
 	public Equipment[] chestItems;
+
+	public Equipment selectedChestItem;
 	void Start ()
 	{
 		ResetObjects();

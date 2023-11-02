@@ -22,7 +22,9 @@ public class CaseCell : MonoBehaviour
     var index = Randomize();
     int rnd = Random.Range(0, _equipments[index]._EquipmentItems.Count);
     _Equipment = _equipments[index]._EquipmentItems[rnd];
-   transform.parent.GetComponent<Image>().sprite = _equipments[index]._EquipmentItems[rnd].icon;
+
+    transform.parent.GetComponent<Image>().sprite =
+      UiManager.instance.itemlevelSprites[_equipments[index]._EquipmentItems[rnd].itemLevel];
     GetComponent<Image>().sprite = _equipments[index]._EquipmentItems[rnd].icon;
 
   }

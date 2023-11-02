@@ -33,8 +33,9 @@ public class CameraController : MonoBehaviour
                 }
                 if (hit.transform.gameObject.name == "Chest")
                 {
-                    UiManager.instance.ChestPanelUI();
-                    UiManager.instance.caseScroll.GetComponent<CaseScroll>().Scroll();
+                    hit.transform.gameObject.GetComponent<ChestManager>().GoToCamera();
+                    hit.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
+
                 }
                 
                 

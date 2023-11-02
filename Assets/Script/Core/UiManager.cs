@@ -27,7 +27,7 @@ public class UiManager : MonoBehaviour
     public GameObject chestPanel;
     public GameObject selectedPouch;
     public List<GameObject> UiPanels = new List<GameObject>();
-    
+    public GameObject collectBtn;
     private void Awake()
     {
         instance = this;
@@ -105,6 +105,11 @@ public class UiManager : MonoBehaviour
         CloseAllUI();
         inventory.gameObject.SetActive(true);
         chestPanel.gameObject.SetActive(true);
+    }
+
+    public void CollectButtonOpen()
+    {
+        collectBtn.gameObject.SetActive(true);
     }
 }
 

@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 
 public enum GameState
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameState gameState;
     public static event Action<GameState> onGameStateChanged;
-
+    public CinemachineVirtualCamera playerVCam;
     private void Awake()
     {
         instance = this;
