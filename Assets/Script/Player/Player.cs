@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
     #region Movement Variable
 
+     public bool isWalk;
     [HideInInspector] public float animValue = 1;
     [HideInInspector] public float animSpeed;
     public float speed;

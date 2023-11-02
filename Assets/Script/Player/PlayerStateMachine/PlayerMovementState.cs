@@ -74,24 +74,11 @@ namespace Script.Player.PlayerStateMachine
                                                  new Vector3(_player._fixedJoystick.Horizontal, 0f,
                                                      _player._fixedJoystick.Vertical) *
                                                  (_rotSpeed * Time.deltaTime));
-            if (Input.GetKey(KeyCode.A))
+            if (PlayerDirection().magnitude > 0.5)
+                _player.isWalk = true;
+            else
             {
-                _player._myController.Move(new Vector3(-1, 0, 0) * (Time.deltaTime * _player.speed));
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                _player._myController.Move(new Vector3(+1, 0, 0) * (Time.deltaTime * _player.speed));
-            }
-
-            if (Input.GetKey(KeyCode.W))
-            {
-                _player._myController.Move(new Vector3(0, 0, 1) * (Time.deltaTime * _player.speed));
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                _player._myController.Move(new Vector3(0, 0, -1) * (Time.deltaTime * _player.speed));
+                _player.isWalk = false;
             }
         }
 
