@@ -28,6 +28,9 @@ public class UiManager : MonoBehaviour
     public GameObject selectedPouch;
     public List<GameObject> UiPanels = new List<GameObject>();
     public GameObject collectBtn;
+    public GameObject upgradeWheel;
+
+    public GameObject inventoryBtnPanel,shopBtnPanel;
     private void Awake()
     {
         instance = this;

@@ -26,16 +26,22 @@ public class CameraController : MonoBehaviour
                   UiManager.instance.BlackSmithUI();
                 }
 
-                if (hit.transform.gameObject.name == "pouch")
+                else if (hit.transform.gameObject.name == "pouch")
                 {
                     hit.transform.gameObject.GetComponent<PouchManager>().OpenPouchPanel();
                     UiManager.instance.selectedPouch = hit.transform.gameObject;
                 }
-                if (hit.transform.gameObject.name == "Chest")
+                else if (hit.transform.gameObject.name == "Chest")
                 {
                     hit.transform.gameObject.GetComponent<ChestManager>().GoToCamera();
                     hit.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
 
+                }
+
+                else if (hit.transform.gameObject.name == "Merchant")
+                {
+                    UiManager.instance.CloseAllUI();
+                    UiManager.instance.ShopUI();
                 }
                 
                 

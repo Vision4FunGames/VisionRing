@@ -562,6 +562,7 @@ GameObject:
   - component: {fileID: 1244007399908466921}
   - component: {fileID: 1244007399908466900}
   - component: {fileID: 2168672734020771598}
+  - component: {fileID: 1956348263}
   m_Layer: 0
   m_Name: Skelet
   m_TagString: Untagged
@@ -698,6 +699,7 @@ MonoBehaviour:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
   mmProgressBar: {fileID: 0}
+  enemyType: 0
 --- !u!114 &1244007399908466921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,6 +728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1244007400501947585}
+  isTabut: 0
 --- !u!114 &2168672734020771598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,6 +741,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c22da51e7b54444b2d87f54851076f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1956348263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244007399908466913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7be6af967ed2b438b42a56ab1df5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkeletType: 0
+  chestPrefab: {fileID: 8064687337860177436, guid: cedf4b7c74572594f8a0ff9255faaa2e, type: 3}
+  boss: {fileID: 1244007399908466913}
+  rnd: 11
 --- !u!1 &1288659648459612703
 GameObject:
   m_ObjectHideFlags: 0
@@ -4144,7 +4163,6 @@ GameObject:
   - component: {fileID: 6945042688117989852}
   - component: {fileID: 1244007400501947585}
   - component: {fileID: 1244007400501947599}
-  - component: {fileID: 7722106745270713191}
   m_Layer: 0
   m_Name: Skeleton_Final (1)
   m_TagString: Untagged
@@ -4171,7 +4189,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1244007400501947585
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4188,7 +4206,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1244007400501947599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4202,18 +4221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 0}
---- !u!114 &7722106745270713191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7722106745270713190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49b4a2757e9ff1149ac00bcfdb5c165d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7791297530607626457
 GameObject:
   m_ObjectHideFlags: 0

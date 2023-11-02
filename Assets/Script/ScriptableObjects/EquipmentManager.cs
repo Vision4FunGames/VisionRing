@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -227,16 +228,20 @@ public class EquipmentManager : MonoBehaviour {
 		{
 			if (upgradeEquipment[0].itemLevel == upgradeEquipment[1].itemLevel && upgradeEquipment[0].itemLevel == upgradeEquipment[2].itemLevel)
 			{
-				upgradeEquipment[0].itemLevel++;
-				upgradeEquipment[0].showInInventory = true;
-				inventory.Add(upgradeEquipment[0]);
-				
-				if (inventory.onItemChangedCallback!=null)
+				UiManager.instance.upgradeWheel.transform.DORotate(new Vector3(0, 0, 180f), 2f).OnComplete(() =>
 				{
-					inventory.onItemChangedCallback.Invoke();
-				}
-
-				ClearUpgradeSlots();
+					upgradeEquipment[0].itemLevel++;
+					upgradeEquipment[0].showInInventory = true;
+					inventory.Add(upgradeEquipment[0]);
+				
+					if (inventory.onItemChangedCallback!=null)
+					{
+						inventory.onItemChangedCallback.Invoke();
+					}
+				
+					ClearUpgradeSlots();
+				});
+				
 			}
 		}
 		inventory.SaveAllItems();

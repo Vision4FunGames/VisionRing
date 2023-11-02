@@ -141,7 +141,7 @@ public class PouchManager : MonoBehaviour
         if (current.transform.GetChild(0).childCount == 0)
         {
             Destroy(current.gameObject);
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 
@@ -155,7 +155,7 @@ public class PouchManager : MonoBehaviour
         Debug.Log("SlotCount : " + slotCount);
         if (slotCount<=1)
         {
-            Destroy(transform.gameObject);
+            Destroy(transform.parent.gameObject);
             Destroy(current.gameObject);
         }
     }

@@ -28,7 +28,7 @@ public class Shop : MonoBehaviour
     {
         shopUI = ShopUI.instance;
         
-        for ( i=0; i < 3; i++)
+        for ( i=0; i < shopItems.Count; i++)
         {
             AddItem();
         }
@@ -37,9 +37,9 @@ public class Shop : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
-
+        
     }
-
+    
     public void AddItem() 
     {
         var currentItem = Instantiate(shopItem);
@@ -48,6 +48,11 @@ public class Shop : MonoBehaviour
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
 
+    }
+
+    public void ClearShop()
+    {
+        
     }
 
 }

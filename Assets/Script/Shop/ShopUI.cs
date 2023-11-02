@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class ShopUI : MonoBehaviour
                         shopSlots[i].AddItem(listEq[i]);
                     } else
                     {
+                        
                         slots[i].ClearSlot();
                     }
                 }
@@ -131,9 +133,21 @@ public class ShopUI : MonoBehaviour
     }
     public void ShowSelected(string selected)
     {
+        
+        var btnBG = UiManager.instance.shopBtnPanel.GetComponentsInChildren<Button>();
+        for (int i = 0; i < btnBG.Length; i++)
+        {
+            var image = btnBG[i].GetComponent<Image>().color;
+            btnBG[i].GetComponent<Image>().color = new Color(image.r, image.g, image.b, 0f);
+        }
         type = selected;
         UpdateShop();
         type = "All";
         
+    }
+    public void SelectedButton(GameObject btn)
+    {
+        var color = btn.GetComponent<Image>().color;
+        btn.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 255f);
     }
 }

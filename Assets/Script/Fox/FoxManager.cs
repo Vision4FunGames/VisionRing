@@ -18,6 +18,7 @@ public class FoxManager : MonoBehaviour
 
     void Start()
     {
+        player = Player.instance.transform;
         foxAnim = GetComponent<Animator>();
         foxBaseTransform = transform.position;
             // _movementPlayer = player.gameObject.GetComponent<PlayerMovement>();
@@ -33,7 +34,7 @@ public class FoxManager : MonoBehaviour
 
     public void NavMeshStart()
     {
-        if ( !stop)
+        if ( Player.instance.isWalk && !stop)
         {
             var position = player.position;
             distance = Vector3.Distance(transform.position, position);

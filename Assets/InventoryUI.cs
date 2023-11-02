@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,7 @@ public class InventoryUI : MonoBehaviour {
         switch (type)
         { 
             case "All":
+                
                 for (int i = 0; i < slots.Length; i++)
                 {
                     if (i < inventory.items.Count)
@@ -116,10 +118,6 @@ public class InventoryUI : MonoBehaviour {
                 break;
         }
         
-        if (type == "All")
-        {
-            
-        }
         for (int i = 0; i < equipmentManager.currentEquipment.Length; i++)
         {
             if (equipmentManager.currentEquipment[i] != null)
@@ -160,12 +158,24 @@ public class InventoryUI : MonoBehaviour {
 
     public void ShowSelected(string selected)
     {
+        var btnBG = UiManager.instance.inventoryBtnPanel.GetComponentsInChildren<Button>();
+        for (int i = 0; i < btnBG.Length; i++)
+        {
+            var image = btnBG[i].GetComponent<Image>().color;
+            btnBG[i].GetComponent<Image>().color = new Color(image.r, image.g, image.b, 0f);
+        }
+        
         type = selected;
         UpdateUI();
         type = "All";
         
     }
 
+    public void SelectedButton(GameObject btn)
+    {
+        var color = btn.GetComponent<Image>().color;
+        btn.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 255f);
+    }
     public void ConvertToEquipmentList()
     {
         listEq.Clear();

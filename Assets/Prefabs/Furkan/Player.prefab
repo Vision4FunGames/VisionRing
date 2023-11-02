@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2631297512559623445}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &731524870
 MonoBehaviour:
@@ -59,7 +59,7 @@ MonoBehaviour:
   shaderData_RingCount:
   - 0
   shaderData_Phase:
-  - 12.344927
+  - 621.24695
   shaderData_Frequency:
   - 14.85
   shaderData_Smooth:
@@ -91,8 +91,8 @@ MonoBehaviour:
   edgeSize: 2.77
   ringCount: 0
   frequency: 14.85
-  phaseSpeed: 4
-  currentPhase: 12.424777
+  phaseSpeed: 20
+  currentPhase: 621.24695
   smooth: 0.46
   slider: {fileID: 0}
   displayAllProperties: 1
@@ -1600,8 +1600,6 @@ GameObject:
   - component: {fileID: 2631297512559623449}
   - component: {fileID: 2631297512559623451}
   - component: {fileID: 8020616301625844294}
-  - component: {fileID: 8020616302981549102}
-  - component: {fileID: 8020616302981549103}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1622,8 +1620,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2631297510898300616}
-  - {fileID: 8020616302477939808}
   - {fileID: 731524871}
+  - {fileID: 8020616302477939808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1674,9 +1672,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  isWalk: 0
   animValue: 1
   animSpeed: 0
-  speed: 5
+  speed: 12
   baseSpeed: 0
   _playerAnimator: {fileID: 0}
   _fixedJoystick: {fileID: 0}
@@ -1729,41 +1728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18676c7bc53a3304f916e3e0a35408bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8020616302981549102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631297512559623440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97518330f7662a743b13ce7b26cbfc62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRate: 1
-  attackDelay: 0.6
-  attackSpeed: 1
---- !u!114 &8020616302981549103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631297512559623440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b621595a8bed3384692ec91e0d1b5f36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  die: 0
-  maxHealth: 100
-  damage:
-    baseValue: 0
-  armor:
-    baseValue: 0
-  prefab: {fileID: 0}
-  mmProgressBar: {fileID: 0}
 --- !u!1 &2833150564508463037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4799,7 +4763,7 @@ Transform:
   m_Children:
   - {fileID: 2631297511759419769}
   m_Father: {fileID: 2631297512559623445}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8020616303074407133
 GameObject:
