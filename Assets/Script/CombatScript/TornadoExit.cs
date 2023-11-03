@@ -14,9 +14,10 @@ public class TornadoExit : MonoBehaviour
     }
     public void TornadoExitFunc()
     {
-        for (int i = 0; i < enemies.Count; i++)
+        int enemieC = enemies.Count;
+        for (int i = 0; i < enemieC; i++)
         {
-            enemies[i].GetComponent<Enemy>().TornadoFinish();
+            enemies[0].GetComponent<Enemy>().TornadoFinish();
         }
     }
 

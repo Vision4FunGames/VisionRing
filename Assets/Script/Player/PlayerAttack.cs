@@ -18,8 +18,7 @@ public class PlayerAttack : MonoBehaviour
     private SwordAttack swordAttack;
     private ArrowAttack arrowAttack;
 
-    [Header("Skills")] 
-    public float tornadoDamageRate;
+    [Header("Skills")] public float tornadoDamageRate;
     public int tornadoDamage;
     public int flameDamage;
     public float flameDamageRateOfFire;
@@ -162,11 +161,8 @@ public class SwordAttack : MonoBehaviour
     public void DisableCollider()
     {
         swordCollider.enabled = false;
-        if (playerAnimator.GetComponentInParent<Player>().speed <= 5)
-        {
-            playerAnimator.GetComponentInParent<Player>().speed = playerAnimator.GetComponentInParent<Player>().baseSpeed;
-            playerAnimator.GetComponentInParent<Player>().animValue *= 2;
-        }
+        playerAnimator.GetComponentInParent<Player>().speed = playerAnimator.GetComponentInParent<Player>().baseSpeed;
+        playerAnimator.GetComponentInParent<Player>().animValue = 1;
     }
 
     public void ComboAttackPlus()

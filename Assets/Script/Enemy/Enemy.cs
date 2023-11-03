@@ -66,7 +66,7 @@ public class Enemy : Interactable
             enemyController.enabled = false;
             FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
             animator.SetBool("tornado", true);
-            transform.SetParent(_tornado.GetComponentInParent<Player>().transform.GetChild(2));
+            transform.SetParent(_tornado.GetComponentInParent<Player>().transform.GetComponentInChildren<TornadoExit>().transform);
             rb.isKinematic = true;
             transform.DOMoveY(transform.position.y + 5, Random.Range(4, 10));
         }
