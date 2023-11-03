@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     private GameObject currentRope;
     private CameraShake _cameraShake;
     private ParticleSystem _damageParticle;
-    public GameObject sessizImage;
+    [HideInInspector] public GameObject sessizImage;
     #region Singleton
 
     public static PlayerManager instance;

@@ -162,9 +162,9 @@ public class SwordAttack : MonoBehaviour
     public void DisableCollider()
     {
         swordCollider.enabled = false;
-        if (playerAnimator.GetComponentInParent<Player>().speed < 5)
+        if (playerAnimator.GetComponentInParent<Player>().speed <= 5)
         {
-            playerAnimator.GetComponentInParent<Player>().speed *= 2;
+            playerAnimator.GetComponentInParent<Player>().speed = playerAnimator.GetComponentInParent<Player>().baseSpeed;
             playerAnimator.GetComponentInParent<Player>().animValue *= 2;
         }
     }
