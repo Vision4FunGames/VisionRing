@@ -11,6 +11,7 @@ public class Equipment : Item {
     public int armorModifier;
     public int damageModifier;
     public SkinnedMeshRenderer mesh;
+   
     [ES3NonSerializable]public GameObject prefab;
 
     public int price = 0;
@@ -37,7 +38,7 @@ public class Equipment : Item {
                        // Equip
                        RemoveFromInventory();	// Remove from inventory
                 }
-            else
+            else if(!isDefault)
                 {
                        EquipmentManager.instance.Unequip((int)equipSlot);
                       RemoveFromEquippedInventory((int)this.equipSlot);
@@ -57,7 +58,7 @@ public class Equipment : Item {
             //RemoveFromInventory();
         }
 
-        if (type == InventoryType.UnEquip)
+        if (type == InventoryType.UnEquip )
         {
             Inventory.instance.items.Add(this);
             Inventory.instance.onItemChangedCallback.Invoke();

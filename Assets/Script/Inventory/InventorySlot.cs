@@ -49,7 +49,7 @@ public class InventorySlot : MonoBehaviour
         item?.Use(_inventoryType);
         if (_inventoryType == InventoryType.UnEquip)
         {
-            if (slotIndex != null)
+            if (slotIndex != null && !item.isDefault)
             {
                
                 EquipmentManager.instance.upgradeEquipment[slotIndex] = null;

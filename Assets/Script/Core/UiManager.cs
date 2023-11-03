@@ -42,6 +42,7 @@ public class UiManager : MonoBehaviour
         inventoryUi = InventoryUI.instance;
         inventory.SetActive(false);
         gamePlay.SetActive(true);
+       
     }
 
     private void Update()

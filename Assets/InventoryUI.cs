@@ -28,7 +28,7 @@ public class InventoryUI : MonoBehaviour {
         equipmentManager = EquipmentManager.instance;
         inventory = Inventory.instance;
         inventory.onItemChangedCallback += UpdateUI;
-        UpdateUI();
+        
         inventory.gameObject.SetActive(false);
         int counter = 0;
     }
@@ -51,6 +51,7 @@ public class InventoryUI : MonoBehaviour {
         ConvertToEquipmentList();
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         InventorySlot[] currentSlots = currentItemsParent.GetComponentsInChildren<InventorySlot>();
+        DefaultWearBringTop();
         switch (type)
         { 
             case "All":
@@ -126,6 +127,13 @@ public class InventoryUI : MonoBehaviour {
                 currentSlots[index].AddItem(equipmentManager.currentEquipment[i]);
                 currentSlots[index].isEquipped = true;
             }
+            else
+            {
+                int index = (int)equipmentManager.defaultWear[i].equipSlot;
+                currentSlots[i].AddItem(equipmentManager.defaultWear[i]);
+                currentSlots[index].isEquipped = true;
+                equipmentManager.Equip(equipmentManager.defaultWear[i]);
+            }
         }
         
         for (int i = 0; i <currentSlots.Length; i++)
@@ -133,6 +141,7 @@ public class InventoryUI : MonoBehaviour {
             if (currentSlots[i].isEquipped ==false || currentSlots[i].name == null)
             {
                 currentSlots[i].ClearSlot();
+               
             }
         }
         // for (int i = 0; i < currentSlots.Length; i++)
@@ -155,7 +164,8 @@ public class InventoryUI : MonoBehaviour {
             slots[i].ClearSlot();
         }
     }
-
+    
+    //Button filter
     public void ShowSelected(string selected)
     {
         var btnBG = UiManager.instance.inventoryBtnPanel.GetComponentsInChildren<Button>();
@@ -171,6 +181,7 @@ public class InventoryUI : MonoBehaviour {
         
     }
 
+    //selected button background change
     public void SelectedButton(GameObject btn)
     {
         var color = btn.GetComponent<Image>().color;
@@ -185,4 +196,18 @@ public class InventoryUI : MonoBehaviour {
         }
     }
 
+    public void DefaultWearBringTop()
+    {
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            if (inventory.items[i].isDefault)
+            {
+                int index = (int)listEq[i].equipSlot;
+                var temp = inventory.items[index];
+                inventory.items[index] = inventory.items[i];
+                inventory.items[i] = temp;
+            }
+        }
+    }
+   
 }

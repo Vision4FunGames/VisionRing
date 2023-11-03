@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Collections.ObjectModel;
+
 public class Inventory : MonoBehaviour
 {
     #region Singleton
@@ -38,7 +40,7 @@ public class Inventory : MonoBehaviour
     public void Add (Item item)
     {
         Debug.Log("Add e Girildi");
-         if (item.showInInventory)
+         if (item.showInInventory && !item.isDefault)
          {
             if (items.Count >= space)
             {
@@ -82,4 +84,6 @@ public class Inventory : MonoBehaviour
         ES3.Save("inventory",items);
         Debug.Log("Saved");
     }
+
+    
 }

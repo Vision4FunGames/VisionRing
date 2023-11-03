@@ -88,7 +88,6 @@ public class EquipmentManager : MonoBehaviour {
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.U)) {
 			UnequipAll ();
-
 		}
 	}
 
@@ -282,12 +281,23 @@ public class EquipmentManager : MonoBehaviour {
 	}
 
 	void EquipAllDefault() {
-		foreach (Equipment e in saveEquipment) {
-			if (e != null)
+		// foreach (Equipment e in saveEquipment) {
+		// 	if (e != null)
+		// 	{
+		// 		Equip (e);
+		// 	}
+		// }
+
+		for (int i = 0; i < saveEquipment.Length; i++)
+		{
+			if (saveEquipment[i] != null)
 			{
-				Equip (e);
+				Equip(saveEquipment[i]);
 			}
-			
+			else
+			{
+				Equip(defaultWear[i]);
+			}
 		}
 		
 	}
