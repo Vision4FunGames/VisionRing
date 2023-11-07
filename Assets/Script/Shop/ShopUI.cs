@@ -46,6 +46,7 @@ public class ShopUI : MonoBehaviour
         { 
             case "All":
                 ClearAllSlots();
+                AllSlotsShow();
                 counter = 0;
                 Debug.Log("ALL");
                 for (int i = 0; i < slots.Length; i++)
@@ -54,15 +55,16 @@ public class ShopUI : MonoBehaviour
                     {
                         slots[i].AddItem(shop.shopItems[i]);
                         shopSlots[i].AddItem(listEq[i]);
-                    } else
+                    } 
+                    else
                     {
-                        
-                        slots[i].ClearSlot();
+                        shopSlots[i].gameObject.SetActive(false);
                     }
                 }
                 break;
             case "Armor":
                 ClearAllSlots();
+                AllSlotsShow();
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -71,10 +73,15 @@ public class ShopUI : MonoBehaviour
                             slots[counter].AddItem(shop.shopItems[i]);
                             counter++;
                     } 
+                    else
+                    {
+                        shopSlots[i].gameObject.SetActive(false);
+                    }
                 }
                 break;
             case "Sword":
                 ClearAllSlots();
+                AllSlotsShow();
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -82,11 +89,16 @@ public class ShopUI : MonoBehaviour
                     {
                         slots[counter].AddItem(shop.shopItems[i]);
                         counter++;
-                    } 
+                    }
+                    else
+                    {
+                        shopSlots[i].gameObject.SetActive(false);
+                    }
                 }
                 break;
             case "Shoes":
                 ClearAllSlots();
+                AllSlotsShow();
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -95,10 +107,15 @@ public class ShopUI : MonoBehaviour
                         slots[counter].AddItem(shop.shopItems[i]);
                         counter++;
                     } 
+                    else
+                    {
+                        shopSlots[i].gameObject.SetActive(false);
+                    }
                 }
                 break;
             case "Head":
                 ClearAllSlots();
+                AllSlotsShow();
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -107,10 +124,22 @@ public class ShopUI : MonoBehaviour
                         slots[counter].AddItem(shop.shopItems[i]);
                         counter++;
                     } 
+                    else
+                    {
+                        shopSlots[i].gameObject.SetActive(false);
+                    }
                 }
                 break;
             case "Potion":
                 break;
+        }
+    }
+
+    private void AllSlotsShow()
+    {
+        for (int i = 0; i < itemsParent.childCount; i++)
+        {
+            itemsParent.GetChild(i).gameObject.SetActive(true);
         }
     }
 

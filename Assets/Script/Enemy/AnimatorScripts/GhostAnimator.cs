@@ -7,20 +7,20 @@ using UnityEngine;
 public class GhostAnimator : MonoBehaviour
 {
     public GameObject rightHand;
-    public GhostBall ballPrefab;
+    public PoolingObject ballPrefab;
     private Player player;
 
-    private GhostBallSpawner ghostBallSpawner;
+    private PoolingObjectSpawner poolingObjectSpawner;
     private void Start()
     {
         player = Player.instance;
-        ghostBallSpawner = GetComponent<GhostBallSpawner>();
+        poolingObjectSpawner = GetComponent<PoolingObjectSpawner>();
     }
 
-    public void ThrowBall()
+    public void Throw()
     {
        // var currentBall = Instantiate(ballPrefab, rightHand.transform.position, Quaternion.identity);
-       ghostBallSpawner._pool.Get();
+       poolingObjectSpawner._pool.Get();
        // currentBall.transform.DOMove(new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),.2f).OnComplete(()=>Destroy(currentBall.gameObject));
     }
     public void DeathEnemy()
