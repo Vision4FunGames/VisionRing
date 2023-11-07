@@ -1,11 +1,13 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
 public class Golem2 : MonoBehaviour
 {
+    private Collider collider;
     private float _currentTime, _rateOfFire = 5;
     private CameraShake _cameraShake;
-    public ParticleSystem golemParticle;
+    public ParticleSystem golemParticle , stunStar;
     private Animator _animator;
     private Player _player;
     [HideInInspector] public bool attack;
@@ -13,9 +15,12 @@ public class Golem2 : MonoBehaviour
     private Vector3 _targetPos;
     private float animSpeed;
     
+    public bool stun , checkPlayer;
     // Start is called before the first frame update
     void Start()
     {
+        collider = GetComponent<Collider>();
+        collider.enabled = false;
         circleParentObj = Instantiate(Resources.Load<GameObject>("GolemCircle"),transform);
         _cameraShake = FindObjectOfType<CameraShake>();
         _animator = GetComponentInChildren<Animator>();
@@ -25,10 +30,10 @@ public class Golem2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!attack)
+        if (!attack && !stun)
             LookAtPlayer();
 
-        if (_currentTime > _rateOfFire)
+        if (_currentTime > _rateOfFire && !stun)
         {
             _currentTime = 0;
             Attack();
@@ -65,8 +70,49 @@ public class Golem2 : MonoBehaviour
     }
     public void FinishAttack()
     {
+        CancelInvoke("CheckPlayerCollider");
+        Invoke("CheckPlayerCollider",.5f);
+        collider.enabled = true;
         StartCoroutine(_cameraShake.Shake(.5f, 1));
         golemParticle.Play();
         attack = false;
+    }
+
+    public void StunBoss()
+    {
+        collider.enabled = false;
+        checkPlayer = false;
+        stun = true;
+        stunStar.Play();
+        _animator.Play("Stun");
+        Invoke("DisableStun",5f);
+    }
+
+    public void DisableStun()
+    {
+        stunStar.Stop();
+        stun = false;
+        _animator.Play("Idle");
+
+    }
+    public void CheckPlayerCollider()
+    {
+        if (checkPlayer)
+        {
+            collider.enabled = false;
+            checkPlayer = false;
+        }
+        else
+        {
+            StunBoss();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            checkPlayer = true;    
+            other.GetComponent<PlayerHealth>().TakeDamage(40);
+        }
     }
 }

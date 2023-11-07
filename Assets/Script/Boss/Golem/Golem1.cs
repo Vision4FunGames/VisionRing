@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -8,27 +9,29 @@ public class Golem1 : MonoBehaviour
     private float rateOfFire = 2;
     private float currentTime;
     private CameraShake _cameraShake;
-    public ParticleSystem golemParticle;
-    public float golemMovementAttackRange;
+    public ParticleSystem golemParticle, stunParticle;
     public float detectRadius;
     private Animator _animator;
     private Player _player;
     private float _distance;
     private bool _sleep = true;
     [HideInInspector] public bool _attack;
+    private IEnumerator cameraShake;
     private bool move;
     private float currentMovementTime;
+    public bool checkPlayer, stun;
 
     private void Awake()
     {
         _cameraShake = FindObjectOfType<CameraShake>();
+        cameraShake = _cameraShake.Shake(3, 1);
         _animator = GetComponentInChildren<Animator>();
         _player = FindObjectOfType<Player>();
     }
 
     private void Update()
     {
-        if (!_attack)
+        if (!_attack && !stun)
         {
             LookAtPlayer();
         }
@@ -39,13 +42,13 @@ public class Golem1 : MonoBehaviour
             _sleep = true;
         }
 
-        if (_sleep && !_attack && currentTime > rateOfFire)
+        if (_sleep && !_attack && currentTime > rateOfFire && !stun)
         {
             currentTime = 0;
             Attack();
         }
 
-        if (move)
+        if (move && !stun)
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
             currentMovementTime += Time.deltaTime;
@@ -74,17 +77,38 @@ public class Golem1 : MonoBehaviour
     public void StopAttack()
     {
         _animator.Play("AttackBitis");
+        StopCoroutine(cameraShake);
         golemParticle.Stop();
         currentMovementTime = 0;
         _attack = false;
         move = false;
         currentTime = 0;
+        if (!checkPlayer)
+        {
+            stunParticle.Play();
+            _animator.Play("Stun");
+            stun = true;
+            checkPlayer = false;
+            Invoke("DisableStun",5);
+        }
+        else
+        {
+            checkPlayer = false;
+        }
     }
 
+    public void DisableStun()
+    {
+        stunParticle.Stop();
+        _animator.Play("idle");
+        stun = false;
+        checkPlayer = false;
+    }
     public void MovementAttack()
     {
         golemParticle.Play();
-        StartCoroutine(_cameraShake.Shake(3, 1));
+        cameraShake = _cameraShake.Shake(3, 1);
+        StartCoroutine(cameraShake);
         move = true;
     }
 
@@ -96,6 +120,13 @@ public class Golem1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StopAttack();
+        if (other.CompareTag("Player"))
+        {
+            checkPlayer = true;
+        }
+        if (other.CompareTag("BossTrap"))
+        {
+            StopAttack();
+        }
     }
 }
