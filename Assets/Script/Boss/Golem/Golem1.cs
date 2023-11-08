@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using DamageNumbersPro;
 using DG.Tweening;
+using MoreMountains.Tools;
 using UnityEngine;
 
-public class Golem1 : MonoBehaviour
+public class Golem1 : MonoBehaviour, GolemCombat
 {
     public float speed;
     private float rateOfFire = 2;
@@ -20,13 +22,19 @@ public class Golem1 : MonoBehaviour
     private bool move;
     private float currentMovementTime;
     public bool checkPlayer, stun;
+    public MMProgressBar healthBar;
+    public int health;
+    private int baseHealth;
+    public GameObject _damageNumbersPro;
 
     private void Awake()
     {
+        baseHealth = health;
         _cameraShake = FindObjectOfType<CameraShake>();
         cameraShake = _cameraShake.Shake(3, 1);
         _animator = GetComponentInChildren<Animator>();
         _player = FindObjectOfType<Player>();
+        _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
     }
 
     private void Update()
@@ -68,11 +76,45 @@ public class Golem1 : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10);
     }
 
-    public void Attack()
+
+    void OnDrawGizmosSelected()
     {
-        _attack = true;
-        _animator.Play("AttackHazirlik");
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            checkPlayer = true;
+        }
+
+        if (other.CompareTag("BossTrap"))
+        {
+            StopAttack();
+        }
+
+        if (other.CompareTag("SwordCollider"))
+        {
+            TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+        }
+    }
+
+    #region Stun
+
+    public void DisableStun()
+    {
+        stunParticle.Stop();
+        _animator.Play("idle");
+        stun = false;
+        checkPlayer = false;
+    }
+
+    #endregion
+
+    #region Attack
 
     public void StopAttack()
     {
@@ -89,7 +131,7 @@ public class Golem1 : MonoBehaviour
             _animator.Play("Stun");
             stun = true;
             checkPlayer = false;
-            Invoke("DisableStun",5);
+            Invoke("DisableStun", 5);
         }
         else
         {
@@ -97,13 +139,12 @@ public class Golem1 : MonoBehaviour
         }
     }
 
-    public void DisableStun()
+    public void Attack()
     {
-        stunParticle.Stop();
-        _animator.Play("idle");
-        stun = false;
-        checkPlayer = false;
+        _attack = true;
+        _animator.Play("AttackHazirlik");
     }
+
     public void MovementAttack()
     {
         golemParticle.Play();
@@ -112,21 +153,25 @@ public class Golem1 : MonoBehaviour
         move = true;
     }
 
-    void OnDrawGizmosSelected()
+    #endregion
+
+    #region GolemTakeDamage
+
+    public void ShowText(int damage)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectRadius);
+        DamageNumber newDamageNumber =
+            _damageNumbersPro.GetComponent<DamageNumber>().Spawn(
+                new Vector3(transform.position.x, transform.position.y + 6, transform.position.z),
+                damage);
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    public void TakeDamage(int damage)
     {
-        if (other.CompareTag("Player"))
-        {
-            checkPlayer = true;
-        }
-        if (other.CompareTag("BossTrap"))
-        {
-            StopAttack();
-        }
+        ShowText(damage);
+        health -= damage;
+        healthBar.UpdateBar(health, 0, baseHealth);
     }
+
+    #endregion
 }

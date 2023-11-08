@@ -7,10 +7,12 @@ public class GolemAnimator : MonoBehaviour
 {
     private Golem1 _golem1;
     private Golem2 _golem2;
+    private BirlesikGolem birlesikGolem;
     private void Awake()
     {
         _golem1 = GetComponentInParent<Golem1>();
         _golem2 = GetComponentInParent<Golem2>();
+        birlesikGolem = GetComponentInParent<BirlesikGolem>();
     }
 
     public void MovementAttack()
@@ -21,5 +23,20 @@ public class GolemAnimator : MonoBehaviour
     public void FinishAttack()
     {
         _golem2.Jump();
+    }
+
+    public void EarthQuakeAndShake()
+    {
+        birlesikGolem.EarthQuakeAndShake();
+    }
+
+    public void AttackTwoBasla()
+    {
+        birlesikGolem.MovementAttack();
+    }
+
+    public void BirlesikGolemAttackFinish()
+    {
+        birlesikGolem.StopAttack();
     }
 }
