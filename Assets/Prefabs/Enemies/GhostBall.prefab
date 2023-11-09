@@ -111,10 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c6ccf3802959e4cbdfaca2874fe716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatDestroysBall:
-    serializedVersion: 2
-    m_Bits: 0
-  destroyTime: 0
+  destroyTime: 5
+  ballOwner: {fileID: 0}
 --- !u!54 &-6922277844952484135
 Rigidbody:
   m_ObjectHideFlags: 0

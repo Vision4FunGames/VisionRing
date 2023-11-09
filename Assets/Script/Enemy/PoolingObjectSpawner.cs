@@ -21,8 +21,10 @@ public class PoolingObjectSpawner : MonoBehaviour
 
     private PoolingObject CreateGhostBall()
     {
+        
         PoolingObject _poolingObject = Instantiate(ghostAnimator.ballPrefab, ghostAnimator.rightHand.transform.position,
-            ghostAnimator.rightHand.transform.rotation);
+         new Quaternion(0,0,0,0));
+        
         _poolingObject.SetPool(_pool);
         _poolingObject.ballOwner = GetComponent<DamageManager>();
         

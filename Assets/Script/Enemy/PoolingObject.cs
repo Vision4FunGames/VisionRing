@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,30 +27,48 @@ public class PoolingObject : MonoBehaviour
     {
        
         rb = GetComponent<Rigidbody>();
-        player = Player.instance;
+        
       
        ThrowArrow();
+       
     }
 
     private void OnEnable()
     {
+        player = Player.instance;
         deactivateBulletAfterTimeCoroutine = StartCoroutine(DeactivateBulletAfterTime());
     }
 
     public void ThrowArrow()
     {
+        rb.isKinematic = true;
+        if (GetComponent<BoxCollider>() != null)
+        {
+            GetComponent<BoxCollider>().isTrigger = true;
+        }
+
+        if (GetComponent<SphereCollider>() != null)
+        {
+            GetComponent<SphereCollider>().isTrigger = true;
+        }
+        transform.LookAt(player.transform.forward);
+        rb.AddForce(Vector3.forward,ForceMode.Force);
         transform.DOMove(
                 new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z), .5f)
             .OnComplete(() =>
             {
-                if (ballOwner != null)
-                {
-                    ballOwner.PlayerDamage();
-                }
-                else
-                {
-                    Debug.Log("Null");
-                }
+                // if (ballOwner != null)
+                // {
+                //     ballOwner.PlayerDamage();
+                // }
+                // else
+                // {
+                //     Debug.Log("Null");
+                // }
+                //
+                rb.isKinematic = false;
+               
+                
             });
     }
     // Update is called once per frame
@@ -58,6 +77,24 @@ public class PoolingObject : MonoBehaviour
        // transform.DOMove(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), .3f);
         
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            ballOwner?.PlayerDamage();
+            rb.isKinematic = false;
+            if (GetComponent<BoxCollider>() != null)
+            {
+                GetComponent<BoxCollider>().isTrigger = false;
+            }
+
+            if (GetComponent<SphereCollider>() != null)
+            {
+                GetComponent<SphereCollider>().isTrigger = false;
+            }
+        }
     }
 
     public void SetPool(ObjectPool<PoolingObject> pool)
