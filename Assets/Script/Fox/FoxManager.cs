@@ -34,21 +34,22 @@ public class FoxManager : MonoBehaviour
 
     public void NavMeshStart()
     {
+        var position = player.position;
+        distance = Vector3.Distance(transform.position, position);
+        distance = (int)distance;
         if ( Player.instance.isWalk && !stop)
         {
-            var position = player.position;
-            distance = Vector3.Distance(transform.position, position);
-            agent.SetDestination(position);
             if (distance > agent.stoppingDistance)
             {
+                agent.SetDestination(position);
                 foxAnim.SetBool("standupBool",true);
                 foxAnim.SetBool("sitBool",false);
             }
-            else if(distance < agent.stoppingDistance)
-            {
-                foxAnim.SetBool("standupBool",false);
-                foxAnim.SetBool("sitBool",true);
-            }
+        }
+        if(distance <= agent.stoppingDistance)
+        {
+            foxAnim.SetBool("standupBool",false);
+            foxAnim.SetBool("sitBool",true);
         }
     }
     void OnDrawGizmosSelected()
