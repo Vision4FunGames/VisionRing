@@ -150,7 +150,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.49591106
+        functionName: WalkVibration
+        data: 
+        objectReferenceParameter: {fileID: 9012201514013658592, guid: 4ddb2d634e40cb34cbfd2041898a113d, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9037931
+        functionName: WalkVibration
+        data: 
+        objectReferenceParameter: {fileID: 9012201514013658592, guid: 4ddb2d634e40cb34cbfd2041898a113d, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -179,7 +193,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.29181576
+        functionName: EarthQuakeAndShake
+        data: 
+        objectReferenceParameter: {fileID: 9012201514013658592, guid: 4ddb2d634e40cb34cbfd2041898a113d, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -305,6 +326,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.83878833
         functionName: BirlesikGolemAttackFinish
+        data: 
+        objectReferenceParameter: {fileID: 9012201514013658592, guid: 4ddb2d634e40cb34cbfd2041898a113d, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5430171
+        functionName: EarthQuakeAndShake
         data: 
         objectReferenceParameter: {fileID: 9012201514013658592, guid: 4ddb2d634e40cb34cbfd2041898a113d, type: 3}
         floatParameter: 0

@@ -10,14 +10,14 @@ public class BirlesikGolem : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator animator;
     private float distance;
-    public bool attack;
-    public float currentAttackTime, rateOfFire;
+    private bool attack;
+    private float currentAttackTime, rateOfFire;
     public ParticleSystem earthQuake;
     public ParticleSystem explosion;
     private CameraShake _cameraShake;
     private IEnumerator cameraShake;
-    public bool move;
-    public float currentMovementTime;
+    private bool move;
+    private float currentMovementTime;
     public float AttackTwoSpeed = 20;
     
     private void Start()

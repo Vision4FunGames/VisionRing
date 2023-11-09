@@ -8,11 +8,13 @@ public class GolemAnimator : MonoBehaviour
     private Golem1 _golem1;
     private Golem2 _golem2;
     private BirlesikGolem birlesikGolem;
+    private CameraShake cameraShake;
     private void Awake()
     {
         _golem1 = GetComponentInParent<Golem1>();
         _golem2 = GetComponentInParent<Golem2>();
         birlesikGolem = GetComponentInParent<BirlesikGolem>();
+        cameraShake = FindObjectOfType<CameraShake>();
     }
 
     public void MovementAttack()
@@ -38,5 +40,10 @@ public class GolemAnimator : MonoBehaviour
     public void BirlesikGolemAttackFinish()
     {
         birlesikGolem.StopAttack();
+    }
+
+    public void WalkVibration()
+    {
+        StartCoroutine(cameraShake.Shake(.3f,3f));
     }
 }
