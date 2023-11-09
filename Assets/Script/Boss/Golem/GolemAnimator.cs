@@ -44,6 +44,6 @@ public class GolemAnimator : MonoBehaviour
 
     public void WalkVibration()
     {
-        StartCoroutine(cameraShake.Shake(.3f,3f));
+        StartCoroutine(cameraShake.Shake(.3f,.4f));
     }
 }

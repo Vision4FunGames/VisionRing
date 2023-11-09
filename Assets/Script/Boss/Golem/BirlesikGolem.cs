@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
+using DamageNumbersPro;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class BirlesikGolem : MonoBehaviour
 {
+    private bool dead;
+    public int health, baseHealth;
     public bool sleep = true;
     private Player player;
     private NavMeshAgent navMeshAgent;
@@ -19,20 +24,26 @@ public class BirlesikGolem : MonoBehaviour
     private bool move;
     private float currentMovementTime;
     public float AttackTwoSpeed = 20;
-    
+    public MMProgressBar healthBar;
+    public GameObject _damageNumbersPro;
+    public Transform ust, alt;
+
     private void Start()
     {
+        baseHealth = health;
         _cameraShake = FindObjectOfType<CameraShake>();
         animator = GetComponentInChildren<Animator>();
         rateOfFire = 5;
         player = FindObjectOfType<Player>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
     }
 
     private void Update()
     {
         distance = Vector3.Distance(player.transform.position, transform.position);
-        CheckBoss();
+        if (!dead)
+            CheckBoss();
     }
 
     public void CheckBoss()
@@ -71,10 +82,41 @@ public class BirlesikGolem : MonoBehaviour
 
     public void Movement()
     {
-        animator.SetFloat ("runspeed", navMeshAgent.velocity.magnitude/navMeshAgent.speed,.1f,Time.deltaTime);
+        animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed, .1f, Time.deltaTime);
         navMeshAgent.SetDestination(player.transform.position);
     }
 
+    public void ShowText(int damage)
+    {
+        DamageNumber newDamageNumber =
+            _damageNumbersPro.GetComponent<DamageNumber>().Spawn(
+                new Vector3(transform.position.x, transform.position.y + 6, transform.position.z),
+                damage);
+        newDamageNumber.transform.localScale = new Vector3(4, 4, 4);
+    }
+
+
+    public void TakeDamage(int damage)
+    {
+        ShowText(damage);
+        health -= damage;
+        healthBar.UpdateBar(health, 0, baseHealth);
+        if (baseHealth > health)
+        {
+            GetComponent<Collider>().enabled = false;
+            navMeshAgent.enabled = false;
+            animator.Play("Ayrilma");
+            dead = true;
+            
+            Invoke("SpawnGolems",2);
+        }
+    }
+
+    public void SpawnGolems()
+    {
+        GameObject golem1 = Instantiate(Resources.Load("Golem") , ust.transform.position  , Quaternion.identity,null)  as GameObject;
+        GameObject golem2 = Instantiate(Resources.Load("Golem - 2") , alt.transform.position  , Quaternion.identity,null)  as GameObject;
+    }
     #region Attack
 
     public void EarthQuakeAndShake()
@@ -140,4 +182,12 @@ public class BirlesikGolem : MonoBehaviour
     }
 
     #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("SwordCollider"))
+        {
+            TakeDamage(player.GetComponent<PlayerAttack>().damage);
+        }
+    }
 }
