@@ -23,32 +23,33 @@ namespace AmazingAssets.DynamicRadialMasks
         [HideInInspector] public DynamicRadialMasks.Enum.MaskShape maskShape;
 #endif
 
-        private bool increase,decrease;
+        public bool increase,decrease;
         void Start()
         {
             currentPhase = 0;
         }
         void Update()
-        {
-            currentPhase += Time.deltaTime * phaseSpeed;
-            if (increase)
-            {
-                radius += Time.deltaTime * phaseSpeed;
-                if (radius >=100)
-                {
-                    radius = 100;
-                    increase = false;
-                }
-            }
-            if (decrease)
-            {
-                radius -= Time.deltaTime * phaseSpeed;
-                if ( radius <= 0)
-                {
-                    radius = 0;
-                    decrease = false;
-                }
-            }
+         {
+             currentPhase += Time.deltaTime * phaseSpeed;
+        //     
+        //     if (increase)
+        //     {
+        //         radius += Time.deltaTime * phaseSpeed;
+        //         if (radius >=100)
+        //         {
+        //             radius = 100;
+        //             increase = false;
+        //         }
+        //     }
+        //     if (decrease)
+        //     {
+        //         radius -= Time.deltaTime * phaseSpeed;
+        //         if ( radius <= 0)
+        //         {
+        //             radius = 0;
+        //             decrease = false;
+        //         }
+        //     }
         }
 
         public void SliderValueChanged()
