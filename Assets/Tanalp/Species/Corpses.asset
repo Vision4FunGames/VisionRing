@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aad7dd2aeef8c848b29c8429ff2ce3d, type: 3}
+  m_Name: Corpses
+  m_EditorClassIdentifier: 
+  Archetypes:
+  - Prefab: {fileID: 107488355198530791, guid: cb1674dd09a7e4e488fd23b28e4d20a0, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 1724866038478097338, guid: 88600e787e77a0645acc9b75814d6ddc, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 4599190147295829896, guid: eec0137d9005fb847a5acea51d5ac0c2, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 2502064192773321684, guid: a7fb0fa66e1d67c4c8226ca0c43871cb, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 2649075918257752815, guid: fb9d0ef134fbea94dbcfdfe4adef6ba5, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 4305427468470322419, guid: 2d5074a3ca35d8f45bbb672ab4cbf44e, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 6998626016434312628, guid: 43a8f1fa7fa2b0a4a9ccd3a00fd4b0e5, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 4202083312174302821, guid: aec26698aefa27c45b4b6c963e1392d8, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 2112498247463864513, guid: b084e48bbd51fc44982981f1e777ac11, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 9121561911872296497, guid: 553b85bff2c8e3d4f87296b5ca69ae0d, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  - Prefab: {fileID: 6461572982034277173, guid: 62b2dd63f3fa4d04e955918de72143ed, type: 3}
+    PlacementMethod: 1
+    GameObjectStatic: 1
+    MaximumScale: 1
+    MinimumScale: 0.8
+    ColourVariation: 0.4
+    Weight: 1
+  ConformToMeshSurface: 1
+  InitialSeedDensity: 0.0003
+  MaxSeedTravelDistance: 10
+  MinChildren: 3
+  MaxChildren: 5
+  CollisionRange: 1
+  CollisionRangeSq: 1
+  ShadeRange: 5
+  ShadeRangeSq: 25
+  CanGrowInShade: 0
+  MinScaleMultiplier: 0.7
+  MaxScaleMultiplier: 1
+  MinSlopeAngle: 0
+  MaxSlopeAngle: 30
+  MinAltitude: -1000
+  MaxAltitude: 1000
+  Generations: []
+  LayerMode: 2
+  LayerDensityCombineMode: 0
+  DefaultLayerDensity: 0
+  LayerDensityRules:
+  - TerrainLayer: {fileID: 8574412962073106934, guid: d4c2688d0b8083e4ba58b6d7cdec7b83, type: 2}
+    Texture: {fileID: 0}
+    TextureIndex: 0
+    DensityMultiplier: 1
+  fileVersion: 2
+  PlacementTextureMask: []
+  PlacementTextureIndexMask: 
