@@ -45,8 +45,9 @@ public class Shop : MonoBehaviour
         var currentItem = Instantiate(shopItem);
         currentItem.transform.parent = shopUI.itemsParent.transform;
         currentItem.transform.localScale = new Vector3(1, 1, 1);
-        if (onItemChangedCallback != null)
-            onItemChangedCallback.Invoke();
+        currentItem.GetComponent<ShopSlot>().index = i;
+        // if (onItemChangedCallback != null)
+        //     onItemChangedCallback.Invoke();
 
     }
 

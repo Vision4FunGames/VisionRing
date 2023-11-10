@@ -11,7 +11,7 @@ public class ShopSlot : MonoBehaviour
     public TextMeshProUGUI priceText;
     public Text firstText, secondText, thirdText;
     public int price;
-
+    public int index;
     private Item currentItem;
 
     public Image bgImage;
@@ -39,6 +39,8 @@ public class ShopSlot : MonoBehaviour
         //money condition
         //currentItem?.Use(InventoryType.Buy);
         //Inventory.instance.Add(currentItem);
+        Shop.instance.shopItems.RemoveAt(index);
         Destroy(gameObject);
+        Shop.instance.onItemChangedCallback.Invoke();
     }
 }

@@ -10,7 +10,7 @@ public class GhostAnimator : MonoBehaviour
     public PoolingObject ballPrefab;
     private Player player;
 
-    private PoolingObjectSpawner poolingObjectSpawner;
+    public PoolingObjectSpawner poolingObjectSpawner;
     private void Start()
     {
         player = Player.instance;

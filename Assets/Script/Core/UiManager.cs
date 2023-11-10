@@ -60,6 +60,7 @@ public class UiManager : MonoBehaviour
         equipmentPanel.gameObject.SetActive(true);
         inventory.gameObject.SetActive(true);
         inventoryObject.SetActive(true);
+        inventoryUi.UpdateUI();
     }
     public void ShowInventory()
     {

@@ -26,15 +26,14 @@ public class PoolingObject : MonoBehaviour
     void Start()
     {
        
-        rb = GetComponent<Rigidbody>();
-        
-      
-       ThrowArrow();
+       
+        ThrowArrow();
        
     }
 
     private void OnEnable()
     {
+        rb = GetComponent<Rigidbody>();
         player = Player.instance;
         deactivateBulletAfterTimeCoroutine = StartCoroutine(DeactivateBulletAfterTime());
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,8 @@ public class ShopUI : MonoBehaviour
     #region Singleton
     public static ShopUI instance;
     private string type = "All";
-    
+    private InventorySlot[] slots;
+    private ShopSlot[] shopSlots;
     void Awake ()
     {
         instance = this;
@@ -39,14 +41,14 @@ public class ShopUI : MonoBehaviour
     public void UpdateShop()
     {
         int counter = 0;
+        ClearAllSlots();
         ConvertToEquipmentList();
-        InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-        ShopSlot[] shopSlots = itemsParent.GetComponentsInChildren<ShopSlot>();
+        AllSlotsShow();
+        slots = itemsParent.GetComponentsInChildren<InventorySlot>(); 
+        shopSlots = itemsParent.GetComponentsInChildren<ShopSlot>();
         switch (type)
         { 
             case "All":
-                ClearAllSlots();
-                AllSlotsShow();
                 counter = 0;
                 Debug.Log("ALL");
                 for (int i = 0; i < slots.Length; i++)
@@ -55,6 +57,7 @@ public class ShopUI : MonoBehaviour
                     {
                         slots[i].AddItem(shop.shopItems[i]);
                         shopSlots[i].AddItem(listEq[i]);
+                        shopSlots[i].index = i;
                     } 
                     else
                     {
@@ -70,9 +73,11 @@ public class ShopUI : MonoBehaviour
                 {
                     if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Body))
                     {
-                            slots[counter].AddItem(shop.shopItems[i]);
-                            counter++;
-                    } 
+                        shopSlots[i].AddItem(listEq[i]);
+                        shopSlots[i].index = i;
+                        slots[i].AddItem(shop.shopItems[i]);
+                        counter++;
+                    }
                     else
                     {
                         shopSlots[i].gameObject.SetActive(false);
@@ -87,7 +92,9 @@ public class ShopUI : MonoBehaviour
                 {
                     if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Weapon))
                     {
-                        slots[counter].AddItem(shop.shopItems[i]);
+                        shopSlots[i].AddItem(listEq[i]);
+                        shopSlots[i].index = i;
+                        slots[i].AddItem(shop.shopItems[i]);
                         counter++;
                     }
                     else
@@ -102,11 +109,13 @@ public class ShopUI : MonoBehaviour
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if ((i <shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Feet))
+                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Feet))
                     {
-                        slots[counter].AddItem(shop.shopItems[i]);
+                        shopSlots[i].AddItem(listEq[i]);
+                        shopSlots[i].index = i;
+                        slots[i].AddItem(shop.shopItems[i]);
                         counter++;
-                    } 
+                    }
                     else
                     {
                         shopSlots[i].gameObject.SetActive(false);
@@ -121,9 +130,11 @@ public class ShopUI : MonoBehaviour
                 {
                     if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Head))
                     {
-                        slots[counter].AddItem(shop.shopItems[i]);
+                        shopSlots[i].AddItem(listEq[i]);
+                        shopSlots[i].index = i;
+                        slots[i].AddItem(shop.shopItems[i]);
                         counter++;
-                    } 
+                    }
                     else
                     {
                         shopSlots[i].gameObject.SetActive(false);
@@ -171,7 +182,7 @@ public class ShopUI : MonoBehaviour
         }
         type = selected;
         UpdateShop();
-        type = "All";
+        //type = "All";
         
     }
     public void SelectedButton(GameObject btn)
