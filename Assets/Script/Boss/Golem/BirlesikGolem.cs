@@ -11,18 +11,18 @@ public class BirlesikGolem : MonoBehaviour
     private bool dead;
     public int health, baseHealth;
     public bool sleep = true;
-    private Player player;
-    private NavMeshAgent navMeshAgent;
+    public Player player;
+    public NavMeshAgent navMeshAgent;
     private Animator animator;
-    private float distance;
-    private bool attack;
-    private float currentAttackTime, rateOfFire;
+    public float distance;
+    public bool attack;
+    public float currentAttackTime, rateOfFire;
     public ParticleSystem earthQuake;
     public ParticleSystem explosion;
     private CameraShake _cameraShake;
     private IEnumerator cameraShake;
-    private bool move;
-    private float currentMovementTime;
+    public bool move;
+    public float currentMovementTime;
     public float AttackTwoSpeed = 20;
     public MMProgressBar healthBar;
     public GameObject _damageNumbersPro;
@@ -57,7 +57,7 @@ public class BirlesikGolem : MonoBehaviour
         }
         else
         {
-            if (!attack)
+            if (!attack && !move)
             {
                 Movement();
                 currentAttackTime += Time.deltaTime;
@@ -83,7 +83,8 @@ public class BirlesikGolem : MonoBehaviour
     public void Movement()
     {
         animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed, .1f, Time.deltaTime);
-        navMeshAgent.SetDestination(player.transform.position);
+        if (player && navMeshAgent.enabled)
+            navMeshAgent.SetDestination(player.transform.position);
     }
 
     public void ShowText(int damage)
@@ -107,16 +108,22 @@ public class BirlesikGolem : MonoBehaviour
             navMeshAgent.enabled = false;
             animator.Play("Ayrilma");
             dead = true;
-            
-            Invoke("SpawnGolems",2);
+
+            Invoke("SpawnGolems", 2);
         }
     }
 
     public void SpawnGolems()
     {
-        GameObject golem1 = Instantiate(Resources.Load("Golem") , ust.transform.position  , Quaternion.identity,null)  as GameObject;
-        GameObject golem2 = Instantiate(Resources.Load("Golem - 2") , alt.transform.position  , Quaternion.identity,null)  as GameObject;
+        earthQuake.transform.localPosition = new Vector3(0, 0, -16);
+        earthQuake.Play();
+        ust.gameObject.SetActive(true);
+        alt.gameObject.SetActive(true);
+        ust.SetParent(null);
+        alt.SetParent(null);
+        Destroy(gameObject);
     }
+
     #region Attack
 
     public void EarthQuakeAndShake()
@@ -142,18 +149,23 @@ public class BirlesikGolem : MonoBehaviour
                 AttackTwo();
             }
         }
+        else
+        {
+            AttackTwo();
+        }
     }
 
     public void StopAttack()
     {
-        currentMovementTime = 0;
-        currentAttackTime = 0;
-        navMeshAgent.enabled = true;
-        attack = false;
-        move = false;
-        animator.Play("Blend Tree");
         var main = earthQuake.main;
         main.loop = false;
+        currentMovementTime = 0;
+        currentAttackTime = 0;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        navMeshAgent.enabled = true;
+        move = false;
+        attack = false;
+        animator.Play("Blend Tree");
         StopCoroutine(cameraShake);
         earthQuake.Stop();
     }
@@ -166,7 +178,6 @@ public class BirlesikGolem : MonoBehaviour
 
     public void AttackTwo()
     {
-        navMeshAgent.enabled = false;
         animator.Play("AttackTwoHazirlik");
     }
 

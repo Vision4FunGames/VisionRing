@@ -107,6 +107,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
     public void Jump()
     {
         circleParentObj.SetActive(false);
+        _targetPos = new Vector3(_targetPos.x, 0, _targetPos.z);
         transform.DOJump(_targetPos, 8, 0, 1).SetEase(Ease.Linear).OnComplete((() =>
         {
             FinishAttack();
