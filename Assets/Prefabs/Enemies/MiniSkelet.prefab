@@ -813,6 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8460587173801852325}
+  isTabut: 0
 --- !u!54 &3411616369370781096
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -867,6 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c17d9275c37c9945a6f61cb98840cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  die: 0
   maxHealth: 100
   damage:
     baseValue: 0
@@ -874,6 +876,7 @@ MonoBehaviour:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
   mmProgressBar: {fileID: 0}
+  enemyType: 0
 --- !u!1 &1944234839625677977
 GameObject:
   m_ObjectHideFlags: 0
@@ -5581,6 +5584,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bce4950f1be43504580bf146923efde7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bce4950f1be43504580bf146923efde7, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bce4950f1be43504580bf146923efde7, type: 3}
       propertyPath: m_Name

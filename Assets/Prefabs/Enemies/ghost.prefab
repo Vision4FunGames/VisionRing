@@ -2171,6 +2171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c17d9275c37c9945a6f61cb98840cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  die: 0
   maxHealth: 100
   damage:
     baseValue: 7
@@ -2178,6 +2179,7 @@ MonoBehaviour:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
   mmProgressBar: {fileID: 0}
+  enemyType: 0
 --- !u!114 &2622531187056102403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2206,6 +2208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4162873894117454467}
+  isTabut: 0
 --- !u!54 &2622531187056102429
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3603,7 +3606,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5923176309011199076}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
