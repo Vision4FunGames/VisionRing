@@ -17,7 +17,6 @@ public class Shop : MonoBehaviour
     public delegate void OnItemChanged();
 
     public OnItemChanged onItemChangedCallback;
-    public int space = 10;
 
     public List<Item> shopItems = new List<Item>();
     public GameObject shopItem;
@@ -46,8 +45,8 @@ public class Shop : MonoBehaviour
         currentItem.transform.parent = shopUI.itemsParent.transform;
         currentItem.transform.localScale = new Vector3(1, 1, 1);
         currentItem.GetComponent<ShopSlot>().index = i;
-        // if (onItemChangedCallback != null)
-        //     onItemChangedCallback.Invoke();
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
 
     }
 
