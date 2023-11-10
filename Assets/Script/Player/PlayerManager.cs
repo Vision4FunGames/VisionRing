@@ -4,18 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    private PlayerHealth _playerHealth;
     private Player player;
     private bool Isrope;
     private GameObject currentRope;
     private CameraShake _cameraShake;
     private ParticleSystem _damageParticle;
     [HideInInspector] public GameObject sessizImage;
+    private float currentTime, delayTime = 2;
+    
     #region Singleton
 
     public static PlayerManager instance;
 
     private void Awake()
     {
+        _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
         instance = this;
         _damageParticle = Instantiate(Resources.Load("ShadowExplosion", typeof(ParticleSystem)) as ParticleSystem,
@@ -59,6 +63,19 @@ public class PlayerManager : MonoBehaviour
             player.speed = player.baseSpeed / 2;
             player._playerAnimator.SetBool("yurumeBool", true);
             sessizImage = Instantiate(Resources.Load("SessizImage"),GameObject.FindWithTag("mainCanvas").transform)as GameObject;
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Fire"))
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > delayTime)
+            {
+                currentTime = 0;
+                _playerHealth.DamageAnimation(2);
+            }
         }
     }
 
