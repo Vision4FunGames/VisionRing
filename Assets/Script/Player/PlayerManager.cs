@@ -1,4 +1,6 @@
 using System;
+using DG.Tweening;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     private ParticleSystem _damageParticle;
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
-    
+
     #region Singleton
 
     public static PlayerManager instance;
@@ -62,7 +64,9 @@ public class PlayerManager : MonoBehaviour
         {
             player.speed = player.baseSpeed / 2;
             player._playerAnimator.SetBool("yurumeBool", true);
-            sessizImage = Instantiate(Resources.Load("SessizImage"),GameObject.FindWithTag("mainCanvas").transform)as GameObject;
+            sessizImage =
+                Instantiate(Resources.Load("SessizImage"),
+                    GameObject.FindWithTag("mainCanvas").transform) as GameObject;
         }
     }
 
@@ -116,5 +120,27 @@ public class PlayerManager : MonoBehaviour
         transform.GetComponent<CharacterController>().enabled = true;
         currentRope.GetComponent<RopeManager>().fakePlayer.transform.GetChild(0).localScale = new Vector3(0, 0, 0);
         currentRope.GetComponent<Collider>().enabled = true;
+    }
+
+    [Button("Stun")]
+    public void Stun(GameObject enemy)
+    {
+        player.isMovement = false;
+        player.speed = 0;
+        player.rotSpeed = 0;
+        Vector3 target = transform.position - enemy.transform.position;
+        target = new Vector3(target.x, 0, target.z);
+        print(target);
+        transform.DOMove(player.transform.position + (target * 5), 2f);
+        CancelInvoke("DisableStun");
+        Invoke("DisableStun", 2);
+        player._playerAnimator.Play("Dusme");
+    }
+
+    public void DisableStun()
+    {
+        player.isMovement = true;
+        player.speed = player.baseSpeed;
+        player.rotSpeed = 5;
     }
 }

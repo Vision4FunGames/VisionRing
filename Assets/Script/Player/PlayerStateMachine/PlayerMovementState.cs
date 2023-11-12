@@ -31,20 +31,27 @@ namespace Script.Player.PlayerStateMachine
 
         public override void FrameUpdate()
         {
-            if (_player._myController.isGrounded)
+            if (_player.isMovement)
             {
-                dJump = false;
-                _playerVelocity.y = -0.5f;
-            }
+                if (_player._myController.isGrounded)
+                {
+                    dJump = false;
+                    _playerVelocity.y = -0.5f;
+                }
 
-            Movement();
-            if (Input.GetKeyDown(KeyCode.Space))
+                Movement();
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Jump();
+                }
+
+                _playerVelocity.y += gravityValue * Time.deltaTime;
+                _player._myController.Move(_playerVelocity * Time.deltaTime);
+            }
+            else
             {
-                Jump();
+                _player._playerAnimator.SetFloat(RunSpeed, 0);
             }
-
-            _playerVelocity.y += gravityValue * Time.deltaTime;
-            _player._myController.Move(_playerVelocity * Time.deltaTime);
         }
 
         public void Jump()
@@ -73,7 +80,7 @@ namespace Script.Player.PlayerStateMachine
             _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
                                                  new Vector3(_player._fixedJoystick.Horizontal, 0f,
                                                      _player._fixedJoystick.Vertical) *
-                                                 (_rotSpeed * Time.deltaTime));
+                                                 (_player.rotSpeed * Time.deltaTime));
             if (PlayerDirection().magnitude > 0.5)
                 _player.isWalk = true;
             else

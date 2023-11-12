@@ -36,10 +36,12 @@ public class Player : MonoBehaviour
 
     #region Movement Variable
 
+    public bool isMovement = true;
      public bool isWalk;
     [HideInInspector] public float animValue = 1;
     [HideInInspector] public float animSpeed;
     public float speed;
+    public float rotSpeed = 5;
     [HideInInspector] public float baseSpeed;
     [HideInInspector] public Animator _playerAnimator;
     public FixedJoystick _fixedJoystick;
@@ -105,6 +107,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         StateMachine.Initialize(PlayerMovementState);
+        
+        
     }
 
     #endregion

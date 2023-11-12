@@ -37,6 +37,20 @@ public class Golem1 : MonoBehaviour, GolemCombat
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
     }
 
+    private void OnEnable()
+    {
+        MMProgressBar prefab = Resources.Load<MMProgressBar>("Golem1 Bar");
+        if (prefab != null)
+        {
+            healthBar = Instantiate(prefab, FindObjectOfType<ShopUI>().transform, false);
+            healthBar.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("BirlesikGolem prefab'ı bulunamadı veya yüklenemedi!");
+        }
+    }
+
     private void Update()
     {
         if (!_attack && !stun)
@@ -73,6 +87,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
         var lookPos = _player.transform.position - transform.position;
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
+        _animator.SetFloat("Blend",-(transform.rotation.eulerAngles.magnitude-rotation.eulerAngles.magnitude));
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10);
     }
 

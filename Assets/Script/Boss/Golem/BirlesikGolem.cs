@@ -9,27 +9,29 @@ using Random = UnityEngine.Random;
 public class BirlesikGolem : MonoBehaviour
 {
     private bool dead;
-    public int health, baseHealth;
+    public int health;
+    private int  baseHealth;
     public bool sleep = true;
-    public Player player;
-    public NavMeshAgent navMeshAgent;
+    private Player player;
+    private NavMeshAgent navMeshAgent;
     private Animator animator;
-    public float distance;
-    public bool attack;
+    private float distance;
+    private bool attack;
     public float currentAttackTime, rateOfFire;
     public ParticleSystem earthQuake;
     public ParticleSystem explosion;
     private CameraShake _cameraShake;
     private IEnumerator cameraShake;
-    public bool move;
-    public float currentMovementTime;
-    public float AttackTwoSpeed = 20;
-    public MMProgressBar healthBar;
-    public GameObject _damageNumbersPro;
+    private bool move;
+    private float currentMovementTime;
+    private float AttackTwoSpeed = 20;
+    private MMProgressBar healthBar;
+    private GameObject _damageNumbersPro;
     public Transform ust, alt;
-
+    
     private void Start()
     {
+      
         baseHealth = health;
         _cameraShake = FindObjectOfType<CameraShake>();
         animator = GetComponentInChildren<Animator>();
@@ -37,6 +39,17 @@ public class BirlesikGolem : MonoBehaviour
         player = FindObjectOfType<Player>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
+        MMProgressBar prefab = Resources.Load<MMProgressBar>("BirlesikGolem");
+        if (prefab != null)
+        {
+            healthBar = Instantiate(prefab, FindObjectOfType<ShopUI>().transform, false);
+            healthBar.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("BirlesikGolem prefab'ı bulunamadı veya yüklenemedi!");
+        }
+
     }
 
     private void Update()
@@ -70,9 +83,9 @@ public class BirlesikGolem : MonoBehaviour
 
             if (attack && move)
             {
-                transform.Translate(Vector3.forward * AttackTwoSpeed * Time.deltaTime);
+                Movement();
                 currentMovementTime += Time.deltaTime;
-                if (currentMovementTime > 2)
+                if (currentMovementTime > 3)
                 {
                     StopAttack();
                 }
@@ -124,6 +137,11 @@ public class BirlesikGolem : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        healthBar.gameObject.SetActive(false);
+    }
+
     #region Attack
 
     public void EarthQuakeAndShake()
@@ -137,7 +155,7 @@ public class BirlesikGolem : MonoBehaviour
     {
         attack = true;
 
-        if (distance < 20)
+        if (distance < 40)
         {
             int rand = Random.Range(0, 20);
             if (rand < 10)
@@ -162,7 +180,7 @@ public class BirlesikGolem : MonoBehaviour
         currentMovementTime = 0;
         currentAttackTime = 0;
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        navMeshAgent.enabled = true;
+        navMeshAgent.speed = 5;
         move = false;
         attack = false;
         animator.Play("Blend Tree");
@@ -172,7 +190,7 @@ public class BirlesikGolem : MonoBehaviour
 
     public void AttackOne()
     {
-        navMeshAgent.enabled = false;
+        navMeshAgent.speed = 0;
         animator.Play("Attack1");
     }
 
@@ -183,8 +201,8 @@ public class BirlesikGolem : MonoBehaviour
 
     public void MovementAttack()
     {
-        navMeshAgent.enabled = false;
-        cameraShake = _cameraShake.Shake(3, 1);
+        navMeshAgent.speed = 35;
+        cameraShake = _cameraShake.Shake(2, 1);
         StartCoroutine(cameraShake);
         var main = earthQuake.main;
         main.loop = true;
@@ -199,6 +217,13 @@ public class BirlesikGolem : MonoBehaviour
         if (other.CompareTag("SwordCollider"))
         {
             TakeDamage(player.GetComponent<PlayerAttack>().damage);
+        }
+
+        if (other.CompareTag("Player") && attack)
+        {
+            player.GetComponent<PlayerManager>().Stun(gameObject);
+            player.GetComponent<PlayerHealth>().TakeDamage(10);
+            StopAttack();
         }
     }
 }
