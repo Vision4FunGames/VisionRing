@@ -22,9 +22,12 @@ public class Golem2 : MonoBehaviour , GolemCombat
     public bool stun , checkPlayer;
     public GameObject _damageNumbersPro;
     public ParticleSystem golemParticle , stunStar;
+    private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+
     // Start is called before the first frame update
     void Start()
     {
+        _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         baseHealth = health;
         collider = GetComponent<Collider>();
         collider.enabled = false;
@@ -154,9 +157,21 @@ public class Golem2 : MonoBehaviour , GolemCombat
 
     public void TakeDamage(int damage)
     {
+        DamageMaterial();
+        
         ShowText(damage);
         health -= damage;
         healthBar.UpdateBar(health,0,baseHealth);
+    }
+    public void DamageMaterial()
+    {
+        for (int i = 0; i < _skinnedMeshRenderers.Length; i++)
+        {
+            int index = i;
+            _skinnedMeshRenderers[i].material.DOColor(Color.red, .1f).SetEase(Ease.Linear)
+                .OnComplete((() =>
+                    _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
+        }
     }
 
     public void ShowText(int damage)

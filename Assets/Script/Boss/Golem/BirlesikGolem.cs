@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DamageNumbersPro;
+using DG.Tweening;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,9 +9,10 @@ using Random = UnityEngine.Random;
 
 public class BirlesikGolem : MonoBehaviour
 {
+    private Collider _collider;
     private bool dead;
     public int health;
-    private int  baseHealth;
+    private int baseHealth;
     public bool sleep = true;
     private Player player;
     private NavMeshAgent navMeshAgent;
@@ -28,10 +30,13 @@ public class BirlesikGolem : MonoBehaviour
     private MMProgressBar healthBar;
     private GameObject _damageNumbersPro;
     public Transform ust, alt;
-    
+    private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+    private bool damageAttack;
+
     private void Start()
     {
-      
+        _collider = GetComponentInChildren<Collider>();
+        _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         baseHealth = health;
         _cameraShake = FindObjectOfType<CameraShake>();
         animator = GetComponentInChildren<Animator>();
@@ -49,7 +54,6 @@ public class BirlesikGolem : MonoBehaviour
         {
             Debug.LogError("BirlesikGolem prefab'ı bulunamadı veya yüklenemedi!");
         }
-
     }
 
     private void Update()
@@ -112,10 +116,12 @@ public class BirlesikGolem : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        GetComponentInChildren<Collider>().enabled = false;
+        DamageMaterial();
         ShowText(damage);
         health -= damage;
         healthBar.UpdateBar(health, 0, baseHealth);
-        if (baseHealth > health)
+        if (health < baseHealth / 2)
         {
             GetComponent<Collider>().enabled = false;
             navMeshAgent.enabled = false;
@@ -123,6 +129,17 @@ public class BirlesikGolem : MonoBehaviour
             dead = true;
 
             Invoke("SpawnGolems", 2);
+        }
+    }
+
+    public void DamageMaterial()
+    {
+        for (int i = 0; i < _skinnedMeshRenderers.Length; i++)
+        {
+            int index = i;
+            _skinnedMeshRenderers[i].material.DOColor(Color.red, .1f).SetEase(Ease.Linear)
+                .OnComplete((() =>
+                    _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
         }
     }
 
@@ -139,16 +156,27 @@ public class BirlesikGolem : MonoBehaviour
 
     private void OnDestroy()
     {
-        healthBar.gameObject.SetActive(false);
+        if (healthBar)
+            healthBar.gameObject.SetActive(false);
     }
 
     #region Attack
 
     public void EarthQuakeAndShake()
     {
+        _collider.enabled = false;
+        _collider.enabled = true;
+        damageAttack = true;
+        CancelInvoke("DisableDamageAttack");
+        Invoke("DisableDamageAttack", 1);
         earthQuake.Play();
         cameraShake = _cameraShake.Shake(.6f, 1);
         StartCoroutine(cameraShake);
+    }
+
+    public void DisableDamageAttack()
+    {
+        damageAttack = false;
     }
 
     public void Attack()
@@ -175,6 +203,7 @@ public class BirlesikGolem : MonoBehaviour
 
     public void StopAttack()
     {
+        damageAttack = false;
         var main = earthQuake.main;
         main.loop = false;
         currentMovementTime = 0;
@@ -201,6 +230,9 @@ public class BirlesikGolem : MonoBehaviour
 
     public void MovementAttack()
     {
+        _collider.enabled = false;
+        _collider.enabled = true;
+        damageAttack = true;
         navMeshAgent.speed = 35;
         cameraShake = _cameraShake.Shake(2, 1);
         StartCoroutine(cameraShake);
@@ -219,11 +251,12 @@ public class BirlesikGolem : MonoBehaviour
             TakeDamage(player.GetComponent<PlayerAttack>().damage);
         }
 
-        if (other.CompareTag("Player") && attack)
+        if (other.CompareTag("Player") && damageAttack)
         {
             player.GetComponent<PlayerManager>().Stun(gameObject);
             player.GetComponent<PlayerHealth>().TakeDamage(10);
-            StopAttack();
+            if (move)
+                StopAttack();
         }
     }
 }

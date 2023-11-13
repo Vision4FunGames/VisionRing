@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    private PlayerAttack _playerAttack;
     private PlayerHealth _playerHealth;
     private Player player;
     private bool Isrope;
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
         instance = this;
@@ -125,13 +127,14 @@ public class PlayerManager : MonoBehaviour
     [Button("Stun")]
     public void Stun(GameObject enemy)
     {
+        _playerAttack.isStun = true;
         player.isMovement = false;
         player.speed = 0;
         player.rotSpeed = 0;
         Vector3 target = transform.position - enemy.transform.position;
         target = new Vector3(target.x, 0, target.z);
         print(target);
-        transform.DOMove(player.transform.position + (target * 5), 2f);
+        transform.DOMove(player.transform.position + (target * 2), 1f);
         CancelInvoke("DisableStun");
         Invoke("DisableStun", 2);
         player._playerAnimator.Play("Dusme");
@@ -139,6 +142,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DisableStun()
     {
+        _playerAttack.isStun =false;
         player.isMovement = true;
         player.speed = player.baseSpeed;
         player.rotSpeed = 5;

@@ -10,6 +10,7 @@ public enum CurrentGunType
 
 public class PlayerAttack : MonoBehaviour
 {
+    [HideInInspector] public bool isDead, isStun;
     public ParticleSystem[] swordParticle;
     public int damage;
     private CurrentGunType myCurrentGunType;
@@ -35,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) )
         {
             Attack();
         }
@@ -43,19 +44,23 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        switch (myCurrentGunType)
+        if(!isDead && !isStun)
         {
-            case CurrentGunType.sword:
-                swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
-                swordAttack.AttackSword(player, playerAnimator);
-                break;
-            case CurrentGunType.arrow:
-                arrowAttack ??= playerAnimator.gameObject.AddComponent<ArrowAttack>();
-                arrowAttack.AttackArrow(player, playerAnimator);
-                break;
-            case CurrentGunType.spear:
-                break;
+            switch (myCurrentGunType)
+            {
+                case CurrentGunType.sword:
+                    swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
+                    swordAttack.AttackSword(player, playerAnimator);
+                    break;
+                case CurrentGunType.arrow:
+                    arrowAttack ??= playerAnimator.gameObject.AddComponent<ArrowAttack>();
+                    arrowAttack.AttackArrow(player, playerAnimator);
+                    break;
+                case CurrentGunType.spear:
+                    break;
+            }
         }
+       
     }
 
     public void ChangeGunType(CurrentGunType currentGunType)
