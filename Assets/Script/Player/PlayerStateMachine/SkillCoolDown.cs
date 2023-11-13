@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SkillCoolDown : MonoBehaviour
 {
-    [HideInInspector] public List<Image> _skillImages;
-    [HideInInspector] public List<Skills> _currentSkills;
+     public List<Image> _skillImages;
+     public List<Skills> _currentSkills;
     public Skills[] skillsArray;
     public static SkillCoolDown instance;
 
@@ -68,4 +68,5 @@ public class Skills
     public float coolDown;
     public float coolDownTime;
     public Sprite skillImage;
+    public int skillLevel;
 }

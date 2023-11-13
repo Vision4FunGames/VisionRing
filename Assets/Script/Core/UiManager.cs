@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MoreMountains.Tools;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,8 +30,12 @@ public class UiManager : MonoBehaviour
     public List<GameObject> UiPanels = new List<GameObject>();
     public GameObject collectBtn;
     public GameObject upgradeWheel;
-
+    
     public GameObject inventoryBtnPanel,shopBtnPanel;
+    
+    //Economy
+    public TextMeshProUGUI contentText;
+    
     private void Awake()
     {
         instance = this;
@@ -61,6 +66,7 @@ public class UiManager : MonoBehaviour
         inventory.gameObject.SetActive(true);
         inventoryObject.SetActive(true);
         inventoryUi.UpdateUI();
+        contentText.text = "SHOP";
     }
     public void ShowInventory()
     {
@@ -83,7 +89,8 @@ public class UiManager : MonoBehaviour
         inventoryObject.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
         inventoryUi.UpdateUI();
-        
+        contentText.text = "BLACKSMITH";
+
     }
 
     public void MagicianUI()
@@ -91,7 +98,8 @@ public class UiManager : MonoBehaviour
         CloseAllUI();
         inventory.gameObject.SetActive(true);
         magicianPanel.gameObject.SetActive(true);
-        
+        contentText.text = "MAGICIAN";
+
     }
 
     public void CloseAllUI()
