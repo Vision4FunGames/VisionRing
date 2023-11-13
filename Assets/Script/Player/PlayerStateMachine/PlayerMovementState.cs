@@ -66,16 +66,18 @@ namespace Script.Player.PlayerStateMachine
         {
             if (_player._myController.isGrounded)
             {
-                _playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
+                _playerVelocity.y = 3;
                 ChangeAnimationState(playerJumpAnimationString);
-                _playerVelocity.y += gravityValue * Time.deltaTime;
+                //_playerVelocity.y += gravityValue * Time.deltaTime;
                 _player._myController.Move(_playerVelocity * Time.deltaTime);
             }
             else if (!_player._myController.isGrounded && !dJump)
             {
                 dJump = true;
+                _playerVelocity.y = 4;
                 ChangeAnimationState(playerDoubleJumpAnimationString);
-                _playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
             }
         }
 
