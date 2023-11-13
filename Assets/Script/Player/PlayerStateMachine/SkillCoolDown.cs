@@ -69,4 +69,12 @@ public class Skills
     public float coolDownTime;
     public Sprite skillImage;
     public int skillLevel;
+    public String[] necessariesName;
+    public int[] itemCount;
+}
+
+public class SkillNecessary
+{
+    public List<String> ItemList;
+    public List<int> itemCount;
 }

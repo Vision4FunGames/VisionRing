@@ -48,14 +48,14 @@ public class EquipmentManager : MonoBehaviour {
 	// Callback for when an item is equipped
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 	public event OnEquipmentChanged onEquipmentChanged;
-
+	
 	Inventory inventory;
 	//private EquippedInventory equippedInventory;
 	public GameObject rightHand;
 	public GameObject inventoryHand;
 	public Equipment[] upgradeEquipment;
 	public InventorySlot[] upgradeSlots;
-	public Equipment[] chestItems;
+	public Equipment[] chestItems,upgradeItems;
 
 	public Equipment selectedChestItem;
 	void Start ()
