@@ -11,7 +11,7 @@ public class UiManager : MonoBehaviour
     public ButtonType[] ButtonType;
     public static UiManager instance;
     [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel;
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel;
     
     private InventoryUI inventoryUi;
     public GameObject inventoryObject;
@@ -83,6 +83,14 @@ public class UiManager : MonoBehaviour
         inventoryObject.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
         inventoryUi.UpdateUI();
+        
+    }
+
+    public void MagicianUI()
+    {
+        CloseAllUI();
+        inventory.gameObject.SetActive(true);
+        magicianPanel.gameObject.SetActive(true);
         
     }
 
