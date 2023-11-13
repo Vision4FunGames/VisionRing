@@ -3,6 +3,7 @@ using DamageNumbersPro;
 using UnityEngine;
 using DG.Tweening;
 using MoreMountains.Tools;
+using PixelCrushers.QuestMachine;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class CharacterStats : MonoBehaviour
     public DamageNumber prefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
+    public string message;
+
 
     private void Awake()
     {
@@ -72,7 +75,7 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void Die()
     {
-        
+        QuestMachineMessages.SendCompositeMessage(this, message);
     }
 
     public void UpdateHealthBar()

@@ -1,4 +1,5 @@
 
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -74,8 +75,37 @@ public class PouchManager : MonoBehaviour
     //     // current.gameObject.SetActive(false);
     // }
 
+    public bool Scripted = false;
+    public int ScriptedItemId = 0;
+    public string message = "";
+
+    public void CreateScriptedItem()
+    {
+        var pouchPanel = Instantiate(this.pouchPanel, current.transform.GetChild(0));
+        pouchPanel.transform.SetAsFirstSibling();
+        var item1 = Instantiate(inventorySlot, current.transform.GetChild(0).transform.GetChild(0).transform);
+        var rectTransform = item1.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(150, 150);
+        rectTransform.anchorMin = new Vector2(0, .5f);
+        rectTransform.anchorMax = new Vector2(0, .5f);
+        rectTransform.pivot = new Vector2(0, .5f);
+        item1.transform.localPosition = new Vector3(0, 0, 0);
+        int chest = ScriptedItemId;
+        item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[chest]);
+        item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
+        current.gameObject.SetActive(false);
+    }
+
     public void CreateItem(int count)
     {
+        if (Scripted)
+        {
+            CreateScriptedItem();
+            return;
+        }
+        
+
+
         for (int i = 0; i < count; i++)
         {
             var pouchPanel = Instantiate(this.pouchPanel, current.transform.GetChild(0));
@@ -146,6 +176,7 @@ public class PouchManager : MonoBehaviour
         Debug.Log("SlotCount : " + slotCount);
         if (slotCount<=1)
         {
+            QuestMachineMessages.SendCompositeMessage(this, message);
             Destroy(transform.parent.gameObject);
             Destroy(current.gameObject);
         }

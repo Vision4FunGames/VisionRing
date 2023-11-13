@@ -14,6 +14,14 @@ namespace Script.Player.PlayerStateMachine
         private bool jumpPressed, dJump;
 
 
+
+        public void CinematicOverride(string overrideState)
+        {
+            ChangeAnimationState(overrideState);
+
+        }
+
+
         public PlayerMovementState(global::Player player, global::PlayerStateMachine playerStateMachine) : base(player,
             playerStateMachine)
         {
