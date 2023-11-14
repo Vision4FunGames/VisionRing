@@ -28,7 +28,7 @@ public class DropChest : MonoBehaviour
     public void ChestDrop(Vector3 bossTransform)
     {
          rnd = Random.Range(1, 100);
-         if (rnd <= 15)
+         if (rnd <= 85)
         {
             if (SkeletType == SkeletType.Skelet)
             {

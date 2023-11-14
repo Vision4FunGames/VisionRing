@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
 
     // Our current list of items in the inventory
     public List<Item> items = new List<Item>();
-
+    public List<Item> upgradeItems = new List<Item>();
     public List<Item> currentItems = new List<Item>();
     
     // Add a new item if enough room
@@ -47,7 +47,14 @@ public class Inventory : MonoBehaviour
                 Debug.Log("Not enough room.");
                 return;
             }
-            items.Add(item);
+            if (item.isUpgrade)
+            {
+                upgradeItems.Add(item);
+            }
+            else
+            {
+                items.Add(item);
+            }
             item.showInInventory = false;
             Debug.Log("Item Added to Inventory " + item.name);
             if (onItemChangedCallback != null)
@@ -82,6 +89,7 @@ public class Inventory : MonoBehaviour
     {
         ES3.Save("currentItems",equipmentManager.currentEquipment);
         ES3.Save("inventory",items);
+        ES3.Save("upgradeItems",upgradeItems);
         Debug.Log("Saved");
     }
 

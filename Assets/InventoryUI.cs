@@ -84,7 +84,7 @@ public class InventoryUI : MonoBehaviour {
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if ((i < inventory.items.Count) && (listEq[i].equipSlot == EquipmentSlot.Weapon))
+                    if ((i < inventory.items.Count) && (listEq[i]?.equipSlot == EquipmentSlot.Weapon))
                     {
                         slots[counter].AddItem(inventory.items[i]);
                         counter++;
@@ -116,6 +116,16 @@ public class InventoryUI : MonoBehaviour {
                 }
                 break;
             case "Potion":
+                ClearAllSlots();
+                counter = 0;
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if (i<inventory.upgradeItems.Count)
+                    {
+                        slots[counter].AddItem(inventory.upgradeItems[i]);
+                        counter++;
+                    }
+                }
                 break;
         }
         
@@ -156,6 +166,20 @@ public class InventoryUI : MonoBehaviour {
         // }
     }
 
+    private void CountUpgradeItems()
+    {
+        var item = inventory.upgradeItems[0];
+        int count = 0;
+        for (int i = 0; i < inventory.upgradeItems.Count; i++)
+        {
+            if (inventory.upgradeItems[i] == item)
+            {
+                count++;
+                inventory.upgradeItems.RemoveAt(i);
+                i--;
+            }
+        }
+    }
     private void ClearAllSlots()
     {
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
@@ -192,7 +216,13 @@ public class InventoryUI : MonoBehaviour {
         listEq.Clear();
         for (int i = 0; i < inventory.items.Count; i++)
         {
-            listEq.Add((Equipment)inventory.items[i]);
+            if (inventory.items[i].GetType() == typeof(Item))
+            {
+                listEq.Add((Equipment)inventory.items[i]); 
+            }
+            
+
+            
         }
     }
 

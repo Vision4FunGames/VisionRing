@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,12 +70,15 @@ public class Skills
     public float coolDownTime;
     public Sprite skillImage;
     public int skillLevel;
-    public String[] necessariesName;
-    public int[] itemCount;
+    public SkillNecessary[] necessariesName;
 }
 
-public class SkillNecessary
-{
-    public List<String> ItemList;
-    public List<int> itemCount;
-}
+
+// public partial class SkillNecessary : ScriptableObject
+// {
+//     public List<Equipment> ItemList;
+//     public List<int> itemCount;
+//     
+//   
+//    
+// }

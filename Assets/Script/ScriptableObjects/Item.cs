@@ -10,9 +10,10 @@ public class Item : ScriptableObject
     [ES3NonSerializable] public Sprite icon;
    [ES3NonSerializable] public bool showInInventory;
     [ES3NonSerializable] public bool isDefault;
+    [ES3NonSerializable] public bool isUpgrade;
     public int itemLevel;
-
-  
+    
+    
 
     public virtual void Use (InventoryType type)
     {

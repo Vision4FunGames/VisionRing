@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class SkillUpgrade : MonoBehaviour
 {
     private SkillCoolDown _skillCoolDown;
     public GameObject shopParent,shopSlot;
+    public GameObject itemSlot;
+    public GameObject necessaryParent;
     private void Start()
     {
         _skillCoolDown = SkillCoolDown.instance;
@@ -30,25 +33,20 @@ public class SkillUpgrade : MonoBehaviour
                 skillBuySlot.skillSlot1.GetComponent<InventorySlot>().backGImage.sprite =
                     UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel];
                 //Upgrade Skill
-                skillBuySlot.skillSlot1.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
-                skillBuySlot.skillSlot1.GetComponent<InventorySlot>().backGImage.sprite =
+                skillBuySlot.skillSlot2.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
+                skillBuySlot.skillSlot2.GetComponent<InventorySlot>().backGImage.sprite =
                     UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel+1];
 
-                for (int j = 0; j < _skillCoolDown._currentSkills[i].itemCount.Length; j++)
+                int currentSkillLevel = currentSkills[i].skillLevel;
+                var itemList = currentSkills[i].necessariesName[currentSkillLevel].ItemList;
+                var itemCount = currentSkills[i].necessariesName[currentSkillLevel].itemCount;
+                for (int j = 0; j < itemList.Count; j++)
                 {
-                    var necessarySlot = Instantiate(skillBuySlot.itemSlot, skillBuySlot.necessaryParent.transform);
-                    Equipment necessaryItem = new Equipment();
-                    for (int k = 0; k < EquipmentManager.instance.upgradeItems.Length; k++)
-                    {
-                        if (EquipmentManager.instance.upgradeItems[k].name == currentSkills[i].necessariesName[i])
-                        {
-                            necessaryItem = EquipmentManager.instance.upgradeItems[k];
-                        }
-                    }
-
-                    necessarySlot.GetComponent<InventorySlot>().icon.sprite = necessaryItem.icon;
-                    
+                    var necessaryItem = Instantiate(skillBuySlot.itemSlot, skillBuySlot.necessaryParent.transform);
+                    necessaryItem.GetComponent<InventorySlot>().AddItem(itemList[j]);
+                    necessaryItem.GetComponentInChildren<TextMeshProUGUI>().text = "X/ " + itemCount[j];
                 }
+               
                     
             }
         }

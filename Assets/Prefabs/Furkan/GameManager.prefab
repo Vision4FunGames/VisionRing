@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5038891023898458667}
   - component: {fileID: 5038891023898458666}
   - component: {fileID: 5038891023898458645}
+  - component: {fileID: 1111943512}
+  - component: {fileID: 1111943513}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  playerVCam: {fileID: 0}
 --- !u!114 &5038891023898458666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,13 +63,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpBtn: {fileID: 0}
-  ButtonType: []
+  ButtonType:
+  - mySkillType: 4
+    skillButton: {fileID: 0}
+  - mySkillType: 1
+    skillButton: {fileID: 0}
+  - mySkillType: 3
+    skillButton: {fileID: 0}
   gamePlay: {fileID: 0}
   inventory: {fileID: 0}
   currentItems: {fileID: 0}
   blacksmithPanel: {fileID: 0}
   shopPanel: {fileID: 0}
   equipmentPanel: {fileID: 0}
+  magicianPanel: {fileID: 0}
   inventoryObject: {fileID: 0}
   dashCoolDownLast: 0
   rotateFireLast: 0
@@ -87,6 +97,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f0b7f01a3d8035b4a98776002fc1ac9c, type: 3}
   - {fileID: 21300000, guid: d1fcca06bb2fc804e93ec070f14281b7, type: 3}
   emptySprite: {fileID: 21300000, guid: b5bf0bd18228fb64494c8b9b390ac347, type: 3}
+  caseScroll: {fileID: 0}
+  chestPanel: {fileID: 0}
   selectedPouch: {fileID: 0}
   UiPanels:
   - {fileID: 0}
@@ -96,6 +108,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  collectBtn: {fileID: 0}
+  upgradeWheel: {fileID: 0}
+  inventoryBtnPanel: {fileID: 0}
+  shopBtnPanel: {fileID: 0}
+  contentText: {fileID: 0}
 --- !u!114 &5038891023898458645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +160,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 675457c6c0e56f240b0e9b12058d51da, type: 2}
   - {fileID: 11400000, guid: f12dc3c128ac3994fa2abc876b7ebfb4, type: 2}
   - {fileID: 11400000, guid: 4bd7eda409c492a44acce3eec57373e1, type: 2}
-  defaultWear: []
+  defaultWear:
+  - {fileID: 11400000, guid: 4bd7eda409c492a44acce3eec57373e1, type: 2}
+  - {fileID: 11400000, guid: 518b6bc16af96244b8f0fda03f6f572b, type: 2}
+  - {fileID: 11400000, guid: 7ad67abe39b3cac43afa647a3af6625e, type: 2}
+  - {fileID: 11400000, guid: 2887cbb116e6f734e9e44fd7d668e2aa, type: 2}
   currentEquipment:
   - {fileID: 0}
   - {fileID: 0}
@@ -159,10 +184,81 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   chestItems:
-  - {fileID: 11400000, guid: 8c9e1c343a87c494fb6096e82da79836, type: 2}
-  - {fileID: 11400000, guid: cf940a9452785e64386dacaaf502e1c2, type: 2}
-  - {fileID: 11400000, guid: 09351d3e9f288eb4292e5daefb9acc0b, type: 2}
-  - {fileID: 11400000, guid: f9dddde3725b6ae4187b4d4b8fbaa373, type: 2}
-  - {fileID: 11400000, guid: e74ec266e53230b4580aee2a74dd6bb0, type: 2}
-  - {fileID: 11400000, guid: 982dc3b1eef339d4dbdf987641d0afc4, type: 2}
-  - {fileID: 11400000, guid: 518b6bc16af96244b8f0fda03f6f572b, type: 2}
+  - {fileID: 11400000, guid: 2e7887a5c9f04764b9c5b1d5b5fa5da3, type: 2}
+  - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
+  upgradeItems: []
+  selectedChestItem: {fileID: 0}
+--- !u!114 &1111943512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e4f17eb78abf644970b8c6044c7b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillImages: []
+  _currentSkills: []
+  skillsArray:
+  - skillName: Dash
+    coolDown: 2
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName: []
+  - skillName: FireRotate
+    coolDown: 5
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+  - skillName: EarthQ
+    coolDown: 5
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+  - skillName: FlameT
+    coolDown: 1
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+  - skillName: Tornado
+    coolDown: 5
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+--- !u!114 &1111943513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4d8c519e582a346aab49e5de7c5cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDashParticle: {fileID: 0}

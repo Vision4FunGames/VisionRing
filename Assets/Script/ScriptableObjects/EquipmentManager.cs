@@ -55,7 +55,7 @@ public class EquipmentManager : MonoBehaviour {
 	public GameObject inventoryHand;
 	public Equipment[] upgradeEquipment;
 	public InventorySlot[] upgradeSlots;
-	public Equipment[] chestItems,upgradeItems;
+	public Item[] chestItems,upgradeItems;
 
 	public Equipment selectedChestItem;
 	void Start ()
