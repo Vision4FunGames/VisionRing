@@ -17,6 +17,8 @@ public class PoolingObjectSpawner : MonoBehaviour
         ghostAnimator = GetComponent<GhostAnimator>();
         _pool = new ObjectPool<PoolingObject>(CreateGhostBall, OnTakeBallFromPool, OnReturnBallToPool, OnDestroyBall, true,
             10, 50);
+
+
     }
 
     private PoolingObject CreateGhostBall()

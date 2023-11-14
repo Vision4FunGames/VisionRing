@@ -30,7 +30,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         if (attackCounter % 3 == 0)
         {
-            animator.SetTrigger("Charge");
+            animator.SetTrigger("Attack");
         }
         else
         {

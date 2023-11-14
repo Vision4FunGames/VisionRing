@@ -66,8 +66,8 @@ public class PoolingObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ballOwner?.PlayerDamage();
-            StopCoroutine(deactivateBulletAfterTimeCoroutine);
-            _pool.Release(this);
+            //StopCoroutine(deactivateBulletAfterTimeCoroutine);
+            //_pool.Release(this);
             
         }
     }
