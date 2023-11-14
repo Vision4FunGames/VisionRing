@@ -25,10 +25,7 @@ public class PoolingObject : MonoBehaviour
     float elapsedTime = 0f;
     void Start()
     {
-       
-       
         ThrowArrow();
-       
     }
 
     private void OnEnable()
@@ -50,25 +47,11 @@ public class PoolingObject : MonoBehaviour
         {
             GetComponent<SphereCollider>().isTrigger = true;
         }
-        transform.LookAt(player.transform.forward);
-        rb.AddForce(Vector3.forward,ForceMode.Force);
+        //transform.LookAt(player.transform.forward);
+        //rb.AddForce(Vector3.forward,ForceMode.Force);
         transform.DOMove(
-                new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z), .5f)
-            .OnComplete(() =>
-            {
-                // if (ballOwner != null)
-                // {
-                //     ballOwner.PlayerDamage();
-                // }
-                // else
-                // {
-                //     Debug.Log("Null");
-                // }
-                //
-                rb.isKinematic = false;
-               
-                
-            });
+            new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
+            .2f).SetEase(Ease.Linear);
     }
     // Update is called once per frame
     void Update()
@@ -83,16 +66,9 @@ public class PoolingObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ballOwner?.PlayerDamage();
-            rb.isKinematic = false;
-            if (GetComponent<BoxCollider>() != null)
-            {
-                GetComponent<BoxCollider>().isTrigger = false;
-            }
-
-            if (GetComponent<SphereCollider>() != null)
-            {
-                GetComponent<SphereCollider>().isTrigger = false;
-            }
+            StopCoroutine(deactivateBulletAfterTimeCoroutine);
+            _pool.Release(this);
+            
         }
     }
 

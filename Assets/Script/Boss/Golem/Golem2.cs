@@ -93,6 +93,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
         {
             checkPlayer = true;    
             other.GetComponent<PlayerHealth>().TakeDamage(40);
+            other.GetComponent<PlayerManager>().Stun(gameObject);
         }
 
         if (other.CompareTag("SwordCollider"))

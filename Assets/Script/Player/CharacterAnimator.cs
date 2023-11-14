@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
 public class CharacterAnimator : MonoBehaviour
 {
     public Animator animator;
@@ -10,29 +11,38 @@ public class CharacterAnimator : MonoBehaviour
     CharacterCombat combat;
     private EnemyStats enemyStats;
     private int attackCounter = 0;
-    protected virtual void Start() {
-        navmeshAgent = GetComponent<NavMeshAgent> ();
-        combat = GetComponent<CharacterCombat> ();
+
+    protected virtual void Start()
+    {
+        navmeshAgent = GetComponent<NavMeshAgent>();
+        combat = GetComponent<CharacterCombat>();
         enemyStats = GetComponent<EnemyStats>();
         combat.OnAttack += OnAttack;
         enemyStats.OnDie += DieAnimation;
     }
 
-    protected virtual void Update () {
-        animator.SetFloat ("runspeed", navmeshAgent.velocity.magnitude/navmeshAgent.speed,.1f,Time.deltaTime);
+    protected virtual void Update()
+    {
+        animator.SetFloat("runspeed", navmeshAgent.velocity.magnitude / navmeshAgent.speed, .1f, Time.deltaTime);
     }
 
-    protected virtual void OnAttack() {
-
-        
+    protected virtual void OnAttack()
+    {
         if (attackCounter % 3 == 0)
         {
-           animator.SetTrigger("Charge");
+            animator.SetTrigger("Charge");
         }
         else
         {
-            animator.SetTrigger ("Attack");
+            int rand = Random.Range(0, 30);
+            if (rand < 10 && rand >= 0)
+                animator.SetTrigger("Attack");
+            else if(rand>=10 && rand<20)
+                animator.SetTrigger("Attack2");
+            else if(rand>=20 && rand<30)
+                animator.SetTrigger("Attack3");
         }
+
         attackCounter++;
     }
 
@@ -48,7 +58,7 @@ public class CharacterAnimator : MonoBehaviour
         enemyStats.die = true;
         animator.SetTrigger("death_");
         navmeshAgent.speed = 0;
-        enemyStats.mmProgressBar.gameObject.SetActive(false);   
+        enemyStats.mmProgressBar.gameObject.SetActive(false);
         if (GetComponentInParent<TornadoExit>())
         {
             GetComponent<Enemy>().TornadoFinish();

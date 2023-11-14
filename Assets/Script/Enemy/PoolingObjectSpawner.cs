@@ -40,7 +40,7 @@ public class PoolingObjectSpawner : MonoBehaviour
         //set the transform and rotation
         Debug.Log(poolingObject.transform.position + "1st position");
       //  Vector3 pos = new Vector3(ghostAnimator.rightHand.transform.position.x,ghostAnimator.rightHand.transform.position.y,go)
-        poolingObject.transform.localRotation = ghostAnimator.rightHand.transform.rotation;
+        poolingObject.transform.LookAt(player.transform);
         poolingObject.transform.localPosition = ghostAnimator.rightHand.transform.position;
         Debug.Log(poolingObject.transform.position + "2nd position");
         //activate
