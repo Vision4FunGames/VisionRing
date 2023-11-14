@@ -20,10 +20,10 @@ public class Equipment : Item {
     //public bool isEquipped = false;
 
     [ContextMenu("Save")]
-    // public void Save()
-    // {
-    //     AssetDatabase.SaveAssets();
-    // }
+    public void Save()
+    {
+        AssetDatabase.SaveAssets();
+    }
   
     
     public override void Use (InventoryType type)
@@ -74,4 +74,4 @@ public class Equipment : Item {
     
 }
 
-public enum EquipmentSlot { Head,Body, Weapon, Feet,Upgrade}
+public enum EquipmentSlot { Head,Body, Weapon, Feet}

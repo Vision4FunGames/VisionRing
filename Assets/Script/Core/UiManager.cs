@@ -82,7 +82,6 @@ public class UiManager : MonoBehaviour
     public void BlackSmithUI()
     {
         CloseAllUI();
-        
         inventory.gameObject.SetActive(true);
         blacksmithPanel.gameObject.SetActive(true);
         equipmentPanel.gameObject.SetActive(true);
@@ -99,6 +98,7 @@ public class UiManager : MonoBehaviour
         inventory.gameObject.SetActive(true);
         magicianPanel.gameObject.SetActive(true);
         contentText.text = "MAGICIAN";
+        magicianPanel.GetComponentInChildren<SkillUpgrade>().BringSkills();
 
     }
 
