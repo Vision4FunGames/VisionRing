@@ -23,6 +23,7 @@ public class UiManager : MonoBehaviour
     public Sprite[] itemDescriptionSprites;
     public Sprite emptySprite = null;
 
+    [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
     //Chest Scroll
     public GameObject caseScroll;
     public GameObject chestPanel;
@@ -36,6 +37,8 @@ public class UiManager : MonoBehaviour
     //Economy
     public TextMeshProUGUI contentText;
     
+    public delegate void OnEconomyChanged();
+    public OnEconomyChanged onEconomyChangedCallBack;
     private void Awake()
     {
         instance = this;
@@ -47,6 +50,8 @@ public class UiManager : MonoBehaviour
         inventoryUi = InventoryUI.instance;
         inventory.SetActive(false);
         gamePlay.SetActive(true);
+        
+        onEconomyChangedCallBack += EconomyUI;
        
     }
 
@@ -77,6 +82,7 @@ public class UiManager : MonoBehaviour
         currentItems.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Equip);
         inventoryUi.UpdateUI();
+        onEconomyChangedCallBack.Invoke();
     }
 
     public void BlackSmithUI()
@@ -131,6 +137,13 @@ public class UiManager : MonoBehaviour
     public void CollectButtonOpen()
     {
         collectBtn.gameObject.SetActive(true);
+    }
+
+    public void EconomyUI()
+    {
+        goldText.text = EconomyManager.instance.GetGold().ToString();
+        diamondText.text = EconomyManager.instance.GetDiamond().ToString();
+        gemText.text = EconomyManager.instance.GetGem().ToString();
     }
 }
 

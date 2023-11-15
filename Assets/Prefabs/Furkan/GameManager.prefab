@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 5038891023898458645}
   - component: {fileID: 1111943512}
   - component: {fileID: 1111943513}
+  - component: {fileID: 4138459671566022656}
+  - component: {fileID: 2668921968425631565}
+  - component: {fileID: 1111943518}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -97,6 +100,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f0b7f01a3d8035b4a98776002fc1ac9c, type: 3}
   - {fileID: 21300000, guid: d1fcca06bb2fc804e93ec070f14281b7, type: 3}
   emptySprite: {fileID: 21300000, guid: b5bf0bd18228fb64494c8b9b390ac347, type: 3}
+  diamondText: {fileID: 0}
+  gemText: {fileID: 0}
+  goldText: {fileID: 0}
   caseScroll: {fileID: 0}
   chestPanel: {fileID: 0}
   selectedPouch: {fileID: 0}
@@ -262,3 +268,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDashParticle: {fileID: 0}
+--- !u!114 &4138459671566022656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e4f17eb78abf644970b8c6044c7b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillImages: []
+  _currentSkills: []
+  skillsArray:
+  - skillName: Dash
+    coolDown: 2
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName: []
+  - skillName: FireRotate
+    coolDown: 5
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName: []
+  - skillName: EarthQ
+    coolDown: 5
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName: []
+  - skillName: FlameT
+    coolDown: 1
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName: []
+  - skillName: Tornado
+    coolDown: 5
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName: []
+--- !u!114 &2668921968425631565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4d8c519e582a346aab49e5de7c5cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDashParticle: {fileID: 0}
+--- !u!114 &1111943518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757da9977e3dedf4db5fc7d98a7de2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemList:
+  - {fileID: 11400000, guid: 2e7887a5c9f04764b9c5b1d5b5fa5da3, type: 2}
+  - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
+  itemCount: 0000000000000000

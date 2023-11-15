@@ -98,6 +98,9 @@ public class EquipmentManager : MonoBehaviour {
 	}
 
 	// Equip a new item
+
+	#region Equip
+	
 	public void Equip (Equipment newItem)
 	{
 		Equipment oldItem = null;
@@ -179,6 +182,52 @@ public class EquipmentManager : MonoBehaviour {
 		ES3.Save("inventory",inventory.items);
 		Debug.Log("Saved");
 	}
+	void UnequipAll() {
+		for (int i = 0; i < currentEquipment.Length; i++) {
+			Unequip (i);
+		}
+		EquipAllDefault ();
+	}
+
+	void EquipAllDefault() {
+		// foreach (Equipment e in saveEquipment) {
+		// 	if (e != null)
+		// 	{
+		// 		Equip (e);
+		// 	}
+		// }
+
+		for (int i = 0; i < saveEquipment.Length; i++)
+		{
+			if (saveEquipment[i] != null)
+			{
+				Equip(saveEquipment[i]);
+			}
+			else
+			{
+				Equip(defaultWear[i]);
+			}
+		}
+		
+	}
+	
+	void AttachToMesh(SkinnedMeshRenderer mesh, int slotIndex) {
+
+		if (currentMeshes [slotIndex] != null && slotIndex != 2) {
+			Destroy (currentMeshes [slotIndex].gameObject);
+			Destroy(currentInventoryMeshes[slotIndex].gameObject);
+		}
+		SkinnedMeshRenderer newMesh = Instantiate(mesh) as SkinnedMeshRenderer;
+		newMesh.bones = targetMesh.bones;
+		newMesh.rootBone = targetMesh.rootBone;
+		currentMeshes [slotIndex] = newMesh;
+		//Inventory Player
+		SkinnedMeshRenderer newMesh2 = Instantiate(mesh) as SkinnedMeshRenderer;
+		newMesh2.bones = targetEnvanterMesh.bones;
+		newMesh2.rootBone = targetEnvanterMesh.rootBone;
+		currentInventoryMeshes [slotIndex] = newMesh2;
+	}
+	#endregion
 
 	#region Upgrade
 	public void UpgradeEquip(Equipment newItem)
@@ -273,49 +322,7 @@ public class EquipmentManager : MonoBehaviour {
 	}
 	#endregion
 	
-	void UnequipAll() {
-		for (int i = 0; i < currentEquipment.Length; i++) {
-			Unequip (i);
-		}
-		EquipAllDefault ();
-	}
-
-	void EquipAllDefault() {
-		// foreach (Equipment e in saveEquipment) {
-		// 	if (e != null)
-		// 	{
-		// 		Equip (e);
-		// 	}
-		// }
-
-		for (int i = 0; i < saveEquipment.Length; i++)
-		{
-			if (saveEquipment[i] != null)
-			{
-				Equip(saveEquipment[i]);
-			}
-			else
-			{
-				Equip(defaultWear[i]);
-			}
-		}
-		
-	}
 	
-	void AttachToMesh(SkinnedMeshRenderer mesh, int slotIndex) {
-
-		if (currentMeshes [slotIndex] != null && slotIndex != 2) {
-			Destroy (currentMeshes [slotIndex].gameObject);
-			Destroy(currentInventoryMeshes[slotIndex].gameObject);
-		}
-		SkinnedMeshRenderer newMesh = Instantiate(mesh) as SkinnedMeshRenderer;
-		newMesh.bones = targetMesh.bones;
-		newMesh.rootBone = targetMesh.rootBone;
-		currentMeshes [slotIndex] = newMesh;
-		//Inventory Player
-		SkinnedMeshRenderer newMesh2 = Instantiate(mesh) as SkinnedMeshRenderer;
-		newMesh2.bones = targetEnvanterMesh.bones;
-		newMesh2.rootBone = targetEnvanterMesh.rootBone;
-		currentInventoryMeshes [slotIndex] = newMesh2;
-	}
+	
+	
 }
