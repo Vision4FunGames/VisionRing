@@ -9,6 +9,7 @@ public enum SkillType
     EarthQ,
     FlameT,
     Tornado,
+    Sword
 }
 
 public class PlayerSkillState : PlayerState
@@ -66,9 +67,21 @@ public class PlayerSkillState : PlayerState
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
                 break;
+            case SkillType.Sword:
+                if (SkillCoolDown.instance.CanUse(5))
+                    SwordSkill();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
+                break;
         }
     }
 
+    public void SwordSkill()
+    {
+        
+    }
     public void DashSkill()
     {
         _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
