@@ -52,6 +52,10 @@ public class InventoryUI : MonoBehaviour {
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         InventorySlot[] currentSlots = currentItemsParent.GetComponentsInChildren<InventorySlot>();
         DefaultWearBringTop();
+        if (type == "")
+        {
+            type = "All";
+        }
         switch (type)
         { 
             case "All":
@@ -117,13 +121,18 @@ public class InventoryUI : MonoBehaviour {
                 break;
             case "Potion":
                 ClearAllSlots();
+                CountItem();
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if (i<inventory.upgradeItems.Count)
+                    if (i<EconomyManager.instance.itemList.Count)
                     {
-                        slots[counter].AddItem(inventory.upgradeItems[i]);
-                        counter++;
+                        if (EconomyManager.instance.itemCount[i] > 0)
+                        {
+                            slots[i].AddItem(EconomyManager.instance.itemList[i]);
+                            slots[i].countText.text = EconomyManager.instance.itemCount[i].ToString();
+                        }
+                       
                     }
                 }
                 break;
@@ -166,20 +175,7 @@ public class InventoryUI : MonoBehaviour {
         // }
     }
 
-    private void CountUpgradeItems()
-    {
-        var item = inventory.upgradeItems[0];
-        int count = 0;
-        for (int i = 0; i < inventory.upgradeItems.Count; i++)
-        {
-            if (inventory.upgradeItems[i] == item)
-            {
-                count++;
-                inventory.upgradeItems.RemoveAt(i);
-                i--;
-            }
-        }
-    }
+  
     private void ClearAllSlots()
     {
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
@@ -239,5 +235,29 @@ public class InventoryUI : MonoBehaviour {
             }
         }
     }
+    
+    private void CountItem()
+    {
+        for (int i = 0; i < EconomyManager.instance.itemList.Count; i++)
+        {
+            EconomyManager.instance.itemCount[i] = GetItemCount(EconomyManager.instance.itemList[i].name);
+        }
+        
+    }
+
+    public int GetItemCount(String itemName)
+    {
+        int count = 0;
+
+        foreach (var item in Inventory.instance.upgradeItems)
+        {
+            if (item.name == itemName)
+            {
+                count++;
+            }
+        }
+        return count;
+    } 
+
    
 }

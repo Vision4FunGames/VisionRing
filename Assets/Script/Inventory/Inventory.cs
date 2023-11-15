@@ -92,6 +92,6 @@ public class Inventory : MonoBehaviour
         ES3.Save("upgradeItems",upgradeItems);
         Debug.Log("Saved");
     }
-
+    
     
 }

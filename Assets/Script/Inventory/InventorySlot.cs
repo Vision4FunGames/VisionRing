@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -12,7 +13,10 @@ public class InventorySlot : MonoBehaviour
 
     public Image backGImage;
     // Add item to the slot
-    public int slotIndex; //For Upgrade Items to Unequip
+    public int slotIndex;
+
+    public TextMeshProUGUI countText;
+    //For Upgrade Items to Unequip
     public void AddItem (Item newItem)
     {
         item = newItem;
@@ -32,9 +36,13 @@ public class InventorySlot : MonoBehaviour
         {
             backGImage.sprite = UiManager.instance.emptySprite;
         }
-       
         icon.enabled = false;
-       // removeButton.interactable = false;
+        if (countText != null)
+        {
+            countText.text = "";
+        }
+       
+        // removeButton.interactable = false;
     }
 
     // If the remove button is pressed, this function will be called.

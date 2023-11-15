@@ -68,13 +68,19 @@ public class EquipmentManager : MonoBehaviour {
 		currentMeshes = new SkinnedMeshRenderer[numSlots];
 		currentInventoryMeshes = new SkinnedMeshRenderer[numSlots];
 		saveEquipment = new Equipment[numSlots];
-		saveEquipment = ES3.Load("currentItems", currentEquipment);
-		inventory.items.Clear();
-		inventory.items = ES3.Load("inventory", inventory.items);
+		LoadEquipment();
 		EquipAllDefault ();
 		onItemAddedCallback += UpdateUpgradeSlots;
 	}
 
+	public void LoadEquipment()
+	{
+		saveEquipment = ES3.Load("currentItems", currentEquipment);
+		inventory.items.Clear();
+		inventory.items = ES3.Load("inventory", inventory.items);
+		inventory.upgradeItems = ES3.Load("upgradeItems", inventory.upgradeItems);
+		
+	}
 	
 
 	public void ResetObjects()

@@ -84,16 +84,10 @@ public class EconomyManager : MonoBehaviour
         {
             coin = PlayerPrefs.GetInt("coin");
         }
-    }
-
-    private void LoadItem()
-    {
-        for (int i = 0; i < Inventory.instance.upgradeItems.Count; i++)
-        {
-            
-        }
         
     }
+
+    
     // Update is called once per frame
     void Update()
     {

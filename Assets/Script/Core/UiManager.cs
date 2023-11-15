@@ -81,8 +81,9 @@ public class UiManager : MonoBehaviour
         equipmentPanel.gameObject.SetActive(true);
         currentItems.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Equip);
-        inventoryUi.UpdateUI();
+        //inventoryUi.UpdateUI();
         onEconomyChangedCallBack.Invoke();
+        inventoryUi.ShowSelected("Potion");
     }
 
     public void BlackSmithUI()
