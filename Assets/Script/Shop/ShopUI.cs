@@ -31,13 +31,7 @@ public class ShopUI : MonoBehaviour
         UpdateShop();
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void UpdateShop()
     {
         int counter = 0;
@@ -58,6 +52,7 @@ public class ShopUI : MonoBehaviour
                         slots[i].AddItem(shop.shopItems[i]);
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
+                        shopSlots[i].onSpendMoneyChanged.Invoke();
                     } 
                     else
                     {
@@ -76,6 +71,7 @@ public class ShopUI : MonoBehaviour
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
                         slots[i].AddItem(shop.shopItems[i]);
+                        shopSlots[i].onSpendMoneyChanged.Invoke();
                         counter++;
                     }
                     else
@@ -95,6 +91,7 @@ public class ShopUI : MonoBehaviour
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
                         slots[i].AddItem(shop.shopItems[i]);
+                        shopSlots[i].onSpendMoneyChanged.Invoke();
                         counter++;
                     }
                     else
@@ -114,6 +111,7 @@ public class ShopUI : MonoBehaviour
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
                         slots[i].AddItem(shop.shopItems[i]);
+                        shopSlots[i].onSpendMoneyChanged.Invoke();
                         counter++;
                     }
                     else
@@ -133,6 +131,7 @@ public class ShopUI : MonoBehaviour
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
                         slots[i].AddItem(shop.shopItems[i]);
+                        shopSlots[i].onSpendMoneyChanged.Invoke();
                         counter++;
                     }
                     else

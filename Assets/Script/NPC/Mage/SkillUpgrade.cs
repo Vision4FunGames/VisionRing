@@ -22,16 +22,12 @@ public class SkillUpgrade : MonoBehaviour
         for (int i = 0; i < _skillCoolDown._currentSkills.Count; i++)
         {
             var currentSlot = Instantiate(shopSlot, shopParent.transform);
-
-
             var skillBuySlot = currentSlot.GetComponent<SkillBuySlot>();
-            
             if (_skillCoolDown._currentSkills[i].skillLevel< UiManager.instance.itemlevelSprites.Length)
             {
                 //Our Current Skill
                 skillBuySlot.skillSlot1.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
-                skillBuySlot.skillSlot1.GetComponent<InventorySlot>().backGImage.sprite =
-                    UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel];
+                skillBuySlot.skillSlot1.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel];
                 //Upgrade Skill
                 skillBuySlot.skillSlot2.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
                 skillBuySlot.skillSlot2.GetComponent<InventorySlot>().backGImage.sprite =
@@ -44,13 +40,28 @@ public class SkillUpgrade : MonoBehaviour
                 {
                     var necessaryItem = Instantiate(skillBuySlot.itemSlot, skillBuySlot.necessaryParent.transform);
                     necessaryItem.GetComponent<InventorySlot>().AddItem(itemList[j]);
-                    necessaryItem.GetComponentInChildren<TextMeshProUGUI>().text = "X/ " + itemCount[j];
+                    string itemName = itemList[j].name;
+                    int count;
+                    for (int k = 0; k < EconomyManager.instance.itemList.Count; k++)
+                    {
+                        if (EconomyManager.instance.itemList[k].name == itemName)
+                        {
+                            count = EconomyManager.instance.itemCount[k];
+                            var tmp = necessaryItem.GetComponentInChildren<TextMeshProUGUI>();
+                            tmp.text = count +" / " + itemCount[j];
+                            if (count < itemCount[j])
+                            {
+                               tmp.color = Color.red;
+                            }
+                            else
+                            {
+                                tmp.color = Color.white;
+                            }
+                            break;
+                        }
+                    }
                 }
-               
-                    
             }
         }
-            
-           
     }
 }

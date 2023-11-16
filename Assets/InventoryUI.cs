@@ -88,11 +88,11 @@ public class InventoryUI : MonoBehaviour {
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if ((i < inventory.items.Count) && (listEq[i]?.equipSlot == EquipmentSlot.Weapon))
-                    {
-                        slots[counter].AddItem(inventory.items[i]);
-                        counter++;
-                    } 
+                        if ((i < inventory.items.Count)  && (listEq[i].equipSlot == EquipmentSlot.Weapon))
+                        {
+                            slots[counter].AddItem(inventory.items[i]);
+                            counter++;
+                        }    
                 }
                 break;
             case "Shoes":
@@ -212,13 +212,7 @@ public class InventoryUI : MonoBehaviour {
         listEq.Clear();
         for (int i = 0; i < inventory.items.Count; i++)
         {
-            if (inventory.items[i].GetType() == typeof(Item))
-            {
-                listEq.Add((Equipment)inventory.items[i]); 
-            }
-            
-
-            
+            listEq.Add((Equipment)inventory.items[i]);
         }
     }
 

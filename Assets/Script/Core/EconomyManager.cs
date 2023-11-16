@@ -7,10 +7,11 @@ using UnityEngine;
 public class EconomyManager : MonoBehaviour
 {
     public static EconomyManager instance;
-
+    private ShopSlot[] shopSlot;
     private void Awake()
     {
         instance = this;
+        shopSlot = GetComponents<ShopSlot>();
     }
     
 
@@ -47,6 +48,7 @@ public class EconomyManager : MonoBehaviour
     {
         gold += count;
         UiManager.instance.onEconomyChangedCallBack.Invoke();
+        Shop.instance.onItemChangedCallback.Invoke();
         PlayerPrefs.SetInt("gold",gold);
     }
     public void SetCoin(int count)

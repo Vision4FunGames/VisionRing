@@ -15,6 +15,7 @@ public class UiManager : MonoBehaviour
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel;
     
     private InventoryUI inventoryUi;
+    private ShopUI shopUI;
     public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
     public MMProgressBar playerProgressBar;
@@ -36,7 +37,7 @@ public class UiManager : MonoBehaviour
     
     //Economy
     public TextMeshProUGUI contentText;
-    
+    private ShopSlot[] shopSlots;
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
     private void Awake()
@@ -48,9 +49,10 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         inventoryUi = InventoryUI.instance;
+        shopUI = global::ShopUI.instance;
         inventory.SetActive(false);
         gamePlay.SetActive(true);
-        
+        shopSlots = GetComponents<ShopSlot>();
         onEconomyChangedCallBack += EconomyUI;
        
     }
@@ -74,7 +76,7 @@ public class UiManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Inventory"))
         {
-            ShowInventory();
+            EconomyManager.instance.SetGold(5000);
         }
     }
 
@@ -86,8 +88,11 @@ public class UiManager : MonoBehaviour
         inventory.gameObject.SetActive(true);
         inventoryObject.SetActive(true);
         inventoryUi.UpdateUI();
+        shopUI.UpdateShop();
+        onEconomyChangedCallBack.Invoke();
         contentText.text = "SHOP";
     }
+    
     public void ShowInventory()
     {
         CloseAllUI();
