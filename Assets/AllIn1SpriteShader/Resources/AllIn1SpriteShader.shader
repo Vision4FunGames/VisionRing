@@ -636,8 +636,8 @@
 
 
 				o.uvOutTex.xy -=0.5;
-                float s = sin ( 20 * _Time );
-                float c = cos ( 20 * _Time );
+                float s = sin ( 50 * _Time );
+                float c = cos ( 50 * _Time );
                 float2x2 rotationMatrix = float2x2( c, -s, s, c);
                 rotationMatrix *=0.5;
                 rotationMatrix +=0.5;
