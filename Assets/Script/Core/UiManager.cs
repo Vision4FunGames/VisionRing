@@ -55,6 +55,21 @@ public class UiManager : MonoBehaviour
        
     }
 
+    public void DisableButton()
+    {
+        for (int i = 0; i < ButtonType.Length; i++)
+        {
+            ButtonType[i].skillButton.enabled = false;
+        }
+    }
+
+    public void EnableButton()
+    {
+        for (int i = 0; i < ButtonType.Length; i++)
+        {
+            ButtonType[i].skillButton.enabled = true;
+        }
+    }
     private void Update()
     {
         if (Input.GetButtonDown("Inventory"))

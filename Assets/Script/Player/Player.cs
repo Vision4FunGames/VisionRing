@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator _playerAnimator;
     public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
-
+    [HideInInspector] public GameObject skillSword;
     private void DisableMovement()
     {
         //StateMachine.ChangeState(PlayerIdleState);
@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
         dashSprite =     Resources.Load<Sprite>("SkillSprite/Dash");
         attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        skillSword = GetComponentInChildren<SwordSkill>().gameObject;
         DashInıtiliaze();
     }
 
@@ -145,6 +146,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void DisableSkill(float skilltime)
+    {
+        Invoke("DisableSkillTime",skilltime);
+    }
+
+    public void DisableSkillTime()
+    {
+        UiManager.instance.EnableButton();
+        _playerAnimator.SetFloat("AttackSpeed",1);
+    }
     private void FixedUpdate()
     {
         StateMachine.CurrentPlayerState.PhysicUpdate();

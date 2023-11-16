@@ -15,7 +15,6 @@ public class DamageManager : MonoBehaviour
 
     public void PlayerDamage()
     {
-        Debug.Log("Start Function");
         _playerHealth.DamageAnimation(characterStats.damage.GetValue());
     }
 

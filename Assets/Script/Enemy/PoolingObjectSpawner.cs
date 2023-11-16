@@ -33,18 +33,15 @@ public class PoolingObjectSpawner : MonoBehaviour
        // Destroy(poolingObject,poolingObject.destroyTime);
         //assign the ghostball`s pool
 
-        Debug.Log("Spawn");
         return _poolingObject;
     }
 
     private void OnTakeBallFromPool(PoolingObject poolingObject)
     {
         //set the transform and rotation
-        Debug.Log(poolingObject.transform.position + "1st position");
       //  Vector3 pos = new Vector3(ghostAnimator.rightHand.transform.position.x,ghostAnimator.rightHand.transform.position.y,go)
         poolingObject.transform.LookAt(player.transform);
         poolingObject.transform.localPosition = ghostAnimator.rightHand.transform.position;
-        Debug.Log(poolingObject.transform.position + "2nd position");
         //activate
         poolingObject.gameObject.SetActive(true);
         poolingObject.ThrowArrow();

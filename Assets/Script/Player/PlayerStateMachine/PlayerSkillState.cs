@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum SkillType
 {
@@ -15,6 +17,7 @@ public enum SkillType
 public class PlayerSkillState : PlayerState
 {
     private SkillType _skillType;
+    private GameObject sword;
 
     public PlayerSkillState(Player player, PlayerStateMachine playerStateMachine, SkillType mySkillType) : base(player,
         playerStateMachine)
@@ -34,6 +37,7 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
             case SkillType.FireRotate:
                 if (SkillCoolDown.instance.CanUse(1))
@@ -42,6 +46,7 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
             case SkillType.EarthQ:
                 if (SkillCoolDown.instance.CanUse(2))
@@ -50,6 +55,7 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
             case SkillType.FlameT:
                 if (SkillCoolDown.instance.CanUse(3))
@@ -58,6 +64,7 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
             case SkillType.Tornado:
                 if (SkillCoolDown.instance.CanUse(4))
@@ -66,6 +73,7 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
             case SkillType.Sword:
                 if (SkillCoolDown.instance.CanUse(5))
@@ -74,14 +82,29 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
         }
     }
 
     public void SwordSkill()
     {
-        
+        SkillCoolDown.instance.skillsArray[5].coolDownTime = SkillCoolDown.instance.skillsArray[5].coolDown;
+        UiManager.instance.DisableButton();
+        sword = GameObject.Instantiate(Resources.Load("Skills/Skill Sword") as GameObject);
+        if (sword != null)
+        {
+            sword.transform.SetParent(_player.skillSword.transform);
+            sword.transform.localRotation = Quaternion.identity;
+            sword.transform.localPosition = Vector3.zero;
+            sword.transform.localScale = new Vector3(1, 1, 1);
+        }
+        _player._playerAnimator.SetFloat("AttackSpeed", 0.5f);
+        _player.StateMachine.ChangeState(_player.PlayerMovementState);
+        Destroy(sword,10);
+        _player.DisableSkill(10);
     }
+   
     public void DashSkill()
     {
         _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
@@ -91,7 +114,8 @@ public class PlayerSkillState : PlayerState
         _player._playerAnimator.Play("Dash");
         SkillCoolDown.instance.skillsArray[0].coolDownTime = SkillCoolDown.instance.skillsArray[0].coolDown;
         var position = _player.transform.position;
-        Vector3 playerVelocity = new Vector3(_player.uiManager.attackJoystick.Horizontal, 0, _player.uiManager.attackJoystick.Vertical);
+        Vector3 playerVelocity = new Vector3(_player.uiManager.attackJoystick.Horizontal, 0,
+            _player.uiManager.attackJoystick.Vertical);
         Vector3 targetPos = new Vector3(position.x, position.y, position.z) +
                             playerVelocity * 10;
         targetPos = new Vector3(targetPos.x, position.y, targetPos.z);
@@ -105,16 +129,20 @@ public class PlayerSkillState : PlayerState
 
     public void FireRotate()
     {
+        UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[1].coolDownTime = SkillCoolDown.instance.skillsArray[1].coolDown;
         GameObject currentRotat = GameObject.Instantiate(Resources.Load("Skills/FireEarth") as GameObject);
         if (currentRotat != null) currentRotat.transform.SetParent(_player.transform);
         currentRotat.transform.localPosition = new Vector3(0, 2, 0);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-        GameObject.Destroy(currentRotat, SkillCoolDown.instance.skillsArray[1].coolDown/2);
+        GameObject.Destroy(currentRotat, SkillCoolDown.instance.skillsArray[1].coolDown / 2);
+        _player.DisableSkill(SkillCoolDown.instance.skillsArray[1].coolDown / 2);
+
     }
 
     public void EarthQuick()
     {
+        UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[2].coolDownTime = SkillCoolDown.instance.skillsArray[2].coolDown;
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/EarthShatter") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
@@ -122,29 +150,34 @@ public class PlayerSkillState : PlayerState
         currentEarthShatter.transform.localRotation = _player.transform.GetChild(0).localRotation;
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
         GameObject.Destroy(currentEarthShatter, 4);
+        _player.DisableSkill(4);
     }
 
     public void FlameTower()
     {
+        UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[3].coolDownTime = SkillCoolDown.instance.skillsArray[3].coolDown;
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/FlameThrower") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform.GetChild(0));
-        _player._playerAnimator.SetBool("Flame",true);
+        _player._playerAnimator.SetBool("Flame", true);
         currentEarthShatter.transform.localPosition = new Vector3(0, 2, 2);
         currentEarthShatter.transform.localRotation = Quaternion.identity;
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
         _player.speed = 0;
         GameObject.Destroy(currentEarthShatter, 8);
+        _player.DisableSkill(8);
     }
 
     public void Tornado()
     {
+        UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[4].coolDownTime = SkillCoolDown.instance.skillsArray[4].coolDown;
         GameObject currentTornado = GameObject.Instantiate(Resources.Load("Skills/BasicTornado") as GameObject);
         if (currentTornado != null) currentTornado.transform.SetParent(_player.transform);
         currentTornado.transform.localPosition = new Vector3(0, 0.1f, 0);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
         GameObject.Destroy(currentTornado, 4);
+        _player.DisableSkill(4);
     }
 
     public override void ExitState()
