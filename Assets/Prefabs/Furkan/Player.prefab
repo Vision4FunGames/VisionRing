@@ -59,7 +59,7 @@ MonoBehaviour:
   shaderData_RingCount:
   - 0
   shaderData_Phase:
-  - 26.863092
+  - 682.55334
   shaderData_Frequency:
   - 14.85
   shaderData_Smooth:
@@ -92,7 +92,7 @@ MonoBehaviour:
   ringCount: 0
   frequency: 14.85
   phaseSpeed: 20
-  currentPhase: 33.52976
+  currentPhase: 689.22003
   smooth: 0.46
   slider: {fileID: 0}
   displayAllProperties: 1
@@ -1779,11 +1779,11 @@ MonoBehaviour:
   - {fileID: 2631297511090115849}
   - {fileID: 2631297511090115849}
   damage: 15
-  tornadoDamageRate: 0
-  tornadoDamage: 0
-  flameDamage: 0
-  flameDamageRateOfFire: 0
-  earthSkillDamage: 0
+  tornadoDamageRate: 1
+  tornadoDamage: 10
+  flameDamage: 10
+  flameDamageRateOfFire: 1
+  earthSkillDamage: 10
 --- !u!114 &8020616301625844294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3600,6 +3600,7 @@ Transform:
   - {fileID: 4659725051896259468}
   - {fileID: 496040048013668937}
   - {fileID: 8020616301836641221}
+  - {fileID: 5537620725708028260}
   m_Father: {fileID: 2339064698441041016}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3955,6 +3956,102 @@ Transform:
   m_Father: {fileID: 4720213149910539399}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6450085011066686080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5537620725708028260}
+  - component: {fileID: 6559857567715225818}
+  - component: {fileID: 4376542542791309417}
+  - component: {fileID: 6559857567715225819}
+  m_Layer: 0
+  m_Name: Skill Sword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5537620725708028260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450085011066686080}
+  m_LocalRotation: {x: -0.482976, y: -0.0534809, z: -0.80284023, w: 0.34542945}
+  m_LocalPosition: {x: 0.016168967, y: 0.011787417, z: 0.011238352}
+  m_LocalScale: {x: 2.9326, y: 3.0336187, z: 3.0224247}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 6106027540949277426}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6559857567715225818
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450085011066686080}
+  m_Mesh: {fileID: -7389041871959824590, guid: 252f69d1de46d444281f9d07b3967a25, type: 3}
+--- !u!23 &4376542542791309417
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450085011066686080}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 005674afd0f78a94e88b6663207cdb4b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6559857567715225819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450085011066686080}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be25aa86c6eba524484eef24d8e0f716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6572386049315793923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4734,7 +4831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8020616301836641221
 Transform:
   m_ObjectHideFlags: 0
