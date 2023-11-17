@@ -5,12 +5,18 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+public enum EnemyVariation
+{
+    Variation1,
+    Variation2
+}
 
 [RequireComponent(typeof(CharacterStats))]
 public class Enemy : Interactable
 {
     #region Variables
 
+    public EnemyVariation myVariation;
     private EnemyController enemyController;
     private Animator animator;
     private Rigidbody rb;

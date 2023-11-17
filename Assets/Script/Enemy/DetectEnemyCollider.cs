@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DetectEnemyCollider : MonoBehaviour
@@ -7,6 +8,7 @@ public class DetectEnemyCollider : MonoBehaviour
     private PlayerAttack _playerAttack;
     private Rigidbody rb;
     private float currentFlameTimer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,9 +38,8 @@ public class DetectEnemyCollider : MonoBehaviour
         {
             rb.isKinematic = true;
         }
-
-      
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Flame"))
@@ -49,6 +50,19 @@ public class DetectEnemyCollider : MonoBehaviour
                 enemy.AddDomoveBack();
                 _enemyStats.TakeDamage(_playerAttack.flameDamage);
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print(collision.gameObject.name);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.name == "ArrowSkill")
+        {   
+            _enemyStats.TakeDamage(10);
         }
     }
 

@@ -125,7 +125,7 @@ public class SwordAttack : MonoBehaviour
     private void ComboCalculate()
     {
         comboTimer += Time.deltaTime;
-        if (comboTimer > .5f)
+        if (comboTimer > .3f)
         {
             comboCounter = 0;
             playerAnimator.SetBool("combo", false);

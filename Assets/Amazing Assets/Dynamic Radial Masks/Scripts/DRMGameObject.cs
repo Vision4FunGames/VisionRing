@@ -7,6 +7,8 @@ namespace AmazingAssets.DynamicRadialMasks
     [ExecuteAlways]
     public class DRMGameObject : MonoBehaviour
     {
+        private DrmEnemyChange _drmEnemyChange;
+         public bool increaseEnes;
         [HideInInspector] public float radius = 5;
         [HideInInspector] public float intensity = 1;
         [HideInInspector] public float noiseStrength = 0;
@@ -22,10 +24,12 @@ namespace AmazingAssets.DynamicRadialMasks
         [HideInInspector] public bool displayAllProperties = true;
         [HideInInspector] public DynamicRadialMasks.Enum.MaskShape maskShape;
 #endif
-
+    
         public bool increase,decrease;
+        
         void Start()
         {
+            _drmEnemyChange = GetComponent<DrmEnemyChange>();
             currentPhase = 0;
         }
         void Update()
@@ -57,11 +61,13 @@ namespace AmazingAssets.DynamicRadialMasks
             if (radius == 100)
             {
                 decrease = true;
+                increaseEnes = false;
             }
 
-            if (radius!=100)
+            if (radius==0)
             {
                 increase = true;
+                increaseEnes = true;
             }
         }
     }
