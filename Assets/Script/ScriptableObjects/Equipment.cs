@@ -71,7 +71,20 @@ public class Equipment : Item {
         }
     }
 
-    
+    public void Fill(Equipment item)
+    {
+        this.equipSlot = item.equipSlot;
+        armorModifier = item.armorModifier;
+        damageModifier = item.damageModifier;
+        mesh = item.mesh;
+        price = item.price;
+        name = item.name;
+        icon = item.icon; 
+        isDefault = item.isDefault;
+        isUpgrade = item.isUpgrade;
+        prefab = item.prefab;
+        Save();
+    }
 }
 
 public enum EquipmentSlot { Head,Body, Weapon, Feet}

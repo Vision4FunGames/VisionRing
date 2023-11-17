@@ -7,7 +7,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public string name = "New ScriptableObject";
-    [ES3NonSerializable] public Sprite icon;
+    public Sprite icon;
     [ES3NonSerializable] public bool showInInventory;
     [ES3NonSerializable] public bool isDefault;
     [ES3NonSerializable] public bool isUpgrade;

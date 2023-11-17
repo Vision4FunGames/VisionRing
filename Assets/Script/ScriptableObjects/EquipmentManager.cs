@@ -284,18 +284,18 @@ public class EquipmentManager : MonoBehaviour {
 			{
 				UiManager.instance.upgradeWheel.transform.DORotate(new Vector3(0, 0, 180f), 2f).OnComplete(() =>
 				{
-					upgradeEquipment[0].itemLevel++;
-					upgradeEquipment[0].showInInventory = true;
-					inventory.Add(upgradeEquipment[0]);
-				
+					Equipment eq = new Equipment();
+					eq.Fill(upgradeEquipment[0]);
+					eq.itemLevel = upgradeEquipment[0].itemLevel + 1;
+					eq.name = upgradeEquipment[0].name;
+					eq.showInInventory = true;
+					inventory.Add(eq);
 					if (inventory.onItemChangedCallback!=null)
 					{
 						inventory.onItemChangedCallback.Invoke();
 					}
-				
 					ClearUpgradeSlots();
 				});
-				
 			}
 		}
 		inventory.SaveAllItems();
