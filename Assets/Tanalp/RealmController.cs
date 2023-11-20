@@ -82,7 +82,7 @@ public class RealmController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("The particle system does not have a material with '_AlbedoHDR'.");
+                    //Debug.LogWarning("The particle system does not have a material with '_AlbedoHDR'.");
                 }
         
                 if (waterObject != null)

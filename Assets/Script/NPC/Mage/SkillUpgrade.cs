@@ -11,13 +11,43 @@ public class SkillUpgrade : MonoBehaviour
     public GameObject shopParent,shopSlot;
     public GameObject itemSlot;
     public GameObject necessaryParent;
+
+    public delegate void onSkillShopChange();
+
+    public onSkillShopChange onSkillShopChangeCallBack; 
     private void Start()
     {
         _skillCoolDown = SkillCoolDown.instance;
+        onSkillShopChangeCallBack += UpdateSkillShop;
+        ShopAddSlot();
     }
 
-    public void BringSkills()
+    public void ShopAddSlot()
     {
+        for (int i = 0; i < _skillCoolDown.skillsArray.Length; i++)
+        {
+            Instantiate(shopSlot, shopParent.transform);
+        }
+        onSkillShopChangeCallBack.Invoke();
+        
+    }
+    public void UpdateSkillShop()
+    {
+        SkillBuySlot[] slots = shopParent.GetComponentsInChildren<SkillBuySlot>();
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].Fill(_skillCoolDown.skillsArray[i]);
+            slots[i].slotIndex = i;
+        }
+        
+    }
+    public void BringCurrentSkills()
+    {
+        if (_skillCoolDown == null)
+        {
+         _skillCoolDown = SkillCoolDown.instance;
+        }
         var currentSkills = _skillCoolDown._currentSkills;
         for (int i = 0; i < _skillCoolDown._currentSkills.Count; i++)
         {
@@ -26,12 +56,9 @@ public class SkillUpgrade : MonoBehaviour
             if (_skillCoolDown._currentSkills[i].skillLevel< UiManager.instance.itemlevelSprites.Length)
             {
                 //Our Current Skill
-                skillBuySlot.skillSlot1.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
-                skillBuySlot.skillSlot1.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel];
-                //Upgrade Skill
-                skillBuySlot.skillSlot2.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
-                skillBuySlot.skillSlot2.GetComponent<InventorySlot>().backGImage.sprite =
-                    UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel+1];
+                skillBuySlot.skillSlot.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
+                skillBuySlot.skillSlot.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel];
+               
 
                 int currentSkillLevel = currentSkills[i].skillLevel;
                 var itemList = currentSkills[i].necessariesName[currentSkillLevel].ItemList;
@@ -64,4 +91,52 @@ public class SkillUpgrade : MonoBehaviour
             }
         }
     }
+    
+    public void BringBuyableSkill()
+    {
+        
+    }
+
+    public void BuySkill(SkillBuySlot slot)
+    {
+        int readyCounter = 0;
+        var list = slot.GetItemList();
+        var countList = slot.GetItemCount();
+        for (int i = 0; i < list.Count; i++)
+        {
+            int index = EconomyManager.instance.itemList.FindIndex(r => r.name.Contains(list[i].name));
+            if (EconomyManager.instance.itemCount[index] >= countList[i])
+            {
+                readyCounter++;
+                Debug.Log("Alindi");
+            }
+            else
+            {
+                Debug.LogWarning("Yetersiz");
+            }
+        }
+
+        if (readyCounter == list.Count)
+        {
+            if (_skillCoolDown.skillsArray[slot.slotIndex].skillLevel == 0)
+            {
+                if (!_skillCoolDown._currentSkills.Contains(_skillCoolDown.skillsArray[slot.slotIndex]))
+                {
+                    _skillCoolDown._currentSkills.Add(_skillCoolDown.skillsArray[slot.slotIndex]);
+                    _skillCoolDown.skillsArray[slot.slotIndex].skillLevel++;
+                }
+               
+            }
+            else
+            {
+                _skillCoolDown.skillsArray[slot.slotIndex].skillLevel++;
+            }
+
+            _skillCoolDown.onSkillChangeCallBack?.Invoke();
+            onSkillShopChangeCallBack.Invoke();
+        }
+      
+        
+    }
+    
 }

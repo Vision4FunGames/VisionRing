@@ -13,7 +13,8 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     [Header("UI Objects")]
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel;
-    
+
+    [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
     private ShopUI shopUI;
     public GameObject inventoryObject;
@@ -34,7 +35,8 @@ public class UiManager : MonoBehaviour
     public GameObject upgradeWheel;
     
     public GameObject inventoryBtnPanel,shopBtnPanel;
-    
+
+    [SerializeField]private SkillUpgrade skillUpgrade;
     //Economy
     public TextMeshProUGUI contentText;
     private ShopSlot[] shopSlots;
@@ -125,7 +127,10 @@ public class UiManager : MonoBehaviour
         inventory.gameObject.SetActive(true);
         magicianPanel.gameObject.SetActive(true);
         contentText.text = "MAGICIAN";
-        magicianPanel.GetComponentInChildren<SkillUpgrade>().BringSkills();
+        Inventory.instance.onItemChangedCallback?.Invoke();
+        skillUpgrade.onSkillShopChangeCallBack?.Invoke();
+        
+        //skillUpgrade.BringCurrentSkills();
 
     }
 
@@ -173,6 +178,7 @@ public class ButtonType
 {
     public SkillType mySkillType;
     public Button skillButton;
+    
 }
 
 

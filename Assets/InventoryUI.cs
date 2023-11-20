@@ -52,6 +52,7 @@ public class InventoryUI : MonoBehaviour {
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         InventorySlot[] currentSlots = currentItemsParent.GetComponentsInChildren<InventorySlot>();
         DefaultWearBringTop();
+        CountItem();
         if (type == "")
         {
             type = "All";

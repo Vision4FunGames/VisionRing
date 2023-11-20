@@ -11,6 +11,9 @@ public class SkillCoolDown : MonoBehaviour
     public Skills[] skillsArray;
     public static SkillCoolDown instance;
 
+    public delegate void onSkillChange();
+    
+    public onSkillChange onSkillChangeCallBack;
     private void Awake()
     {
         instance = this;
@@ -18,26 +21,28 @@ public class SkillCoolDown : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < skillsArray.Length; i++)
-        {
-            skillsArray[i].coolDownTime = skillsArray[i].coolDown;
-
-            for (int j = 0; j < UiManager.instance.ButtonType.Length; j++)
-            {
-                if (UiManager.instance.ButtonType[j].mySkillType.ToString() == skillsArray[i].skillName)
-                {
-                    skillsArray[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + skillsArray[i].skillName);
-                    UiManager.instance.ButtonType[j].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()
-                            .sprite =
-                        skillsArray[i].skillImage;
-                    UiManager.instance.ButtonType[j].skillButton.transform.GetChild(1).GetComponent<Image>().sprite =
-                        skillsArray[i].skillImage;
-                    _skillImages.Add(UiManager.instance.ButtonType[j].skillButton.transform.GetChild(0)
-                        .GetComponent<Image>());
-                    _currentSkills.Add(skillsArray[i]);
-                }
-            }
-        }
+        
+        onSkillChangeCallBack += UpdateSkillButton;
+        // for (int i = 0; i < skillsArray.Length; i++)
+        // {
+        //     skillsArray[i].coolDownTime = skillsArray[i].coolDown;
+        //
+        //     for (int j = 0; j < UiManager.instance.ButtonType.Length; j++)
+        //     {
+        //         if (UiManager.instance.ButtonType[j].mySkillType.ToString() == skillsArray[i].skillName)
+        //         {
+        //             skillsArray[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + skillsArray[i].skillName);
+        //             UiManager.instance.ButtonType[j].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()
+        //                     .sprite =
+        //                 skillsArray[i].skillImage;
+        //             UiManager.instance.ButtonType[j].skillButton.transform.GetChild(1).GetComponent<Image>().sprite =
+        //                 skillsArray[i].skillImage;
+        //             _skillImages.Add(UiManager.instance.ButtonType[j].skillButton.transform.GetChild(0)
+        //                 .GetComponent<Image>());
+        //             _currentSkills.Add(skillsArray[i]);
+        //         }
+        //     }
+        // }
     }
 
     private void Update()
@@ -62,7 +67,45 @@ public class SkillCoolDown : MonoBehaviour
                 float fillAmount = 1 - (_currentSkills[i].coolDownTime / _currentSkills[i].coolDown);
                 _skillImages[i].fillAmount = fillAmount;
             }
+        }
         
+    }
+
+    public void UpdateSkillButton()
+    {
+        
+        for (int i = 0; i < _currentSkills.Count; i++)
+        {
+            UiManager.instance.ButtonType[i].skillButton.gameObject.SetActive(true);
+            switch (_currentSkills[i].skillName)
+            {
+                case "FireRotate":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.FireRotate;
+                    break;
+                case "EarthQ":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.EarthQ;
+                    break;
+                case "FlameT":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.FlameT;
+                    break;
+                case "Tornado":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.Tornado;
+                    break;
+                case "Sword":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.Sword;
+                    break;
+            }
+            UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()
+                    .sprite =
+                _currentSkills[i].skillImage;
+            UiManager.instance.ButtonType[i].skillButton.transform.GetChild(1).GetComponent<Image>().sprite =
+                _currentSkills[i].skillImage;
+            _skillImages.Add(UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0)
+                .GetComponent<Image>());
+            if (_currentSkills.Count > 3)
+            {
+                return;
+            }
         }
     }
 }

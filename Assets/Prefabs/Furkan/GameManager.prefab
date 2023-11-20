@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 5038891023898458667}
   - component: {fileID: 5038891023898458666}
   - component: {fileID: 5038891023898458645}
-  - component: {fileID: 1111943512}
-  - component: {fileID: 1111943513}
   - component: {fileID: 4138459671566022656}
   - component: {fileID: 2668921968425631565}
   - component: {fileID: 1111943518}
@@ -69,7 +67,7 @@ MonoBehaviour:
   ButtonType:
   - mySkillType: 4
     skillButton: {fileID: 0}
-  - mySkillType: 1
+  - mySkillType: 5
     skillButton: {fileID: 0}
   - mySkillType: 3
     skillButton: {fileID: 0}
@@ -122,6 +120,7 @@ MonoBehaviour:
   upgradeWheel: {fileID: 0}
   inventoryBtnPanel: {fileID: 0}
   shopBtnPanel: {fileID: 0}
+  skillUpgrade: {fileID: 0}
   contentText: {fileID: 0}
 --- !u!114 &5038891023898458645
 MonoBehaviour:
@@ -194,80 +193,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
   upgradeItems: []
   selectedChestItem: {fileID: 0}
---- !u!114 &1111943512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5038891023898458665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2e4f17eb78abf644970b8c6044c7b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _skillImages: []
-  _currentSkills: []
-  skillsArray:
-  - skillName: Dash
-    coolDown: 2
-    coolDownTime: 0
-    skillImage: {fileID: 0}
-    skillLevel: 0
-    necessariesName: []
-  - skillName: FireRotate
-    coolDown: 5
-    coolDownTime: 0
-    skillImage: {fileID: 0}
-    skillLevel: 0
-    necessariesName:
-    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
-    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
-    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
-    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
-  - skillName: EarthQ
-    coolDown: 5
-    coolDownTime: 0
-    skillImage: {fileID: 0}
-    skillLevel: 0
-    necessariesName:
-    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
-    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
-    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
-    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
-  - skillName: FlameT
-    coolDown: 1
-    coolDownTime: 0
-    skillImage: {fileID: 0}
-    skillLevel: 0
-    necessariesName:
-    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
-    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
-    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
-    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
-  - skillName: Tornado
-    coolDown: 5
-    coolDownTime: 0
-    skillImage: {fileID: 0}
-    skillLevel: 0
-    necessariesName:
-    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
-    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
-    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
-    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
---- !u!114 &1111943513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5038891023898458665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce4d8c519e582a346aab49e5de7c5cce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerDashParticle: {fileID: 0}
 --- !u!114 &4138459671566022656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,27 +217,53 @@ MonoBehaviour:
   - skillName: FireRotate
     coolDown: 5
     coolDownTime: 0
-    skillImage: {fileID: 0}
+    skillImage: {fileID: 21300000, guid: 39c589d8231659a47955c13b0e04d231, type: 3}
     skillLevel: 0
-    necessariesName: []
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: EarthQ
     coolDown: 5
     coolDownTime: 0
-    skillImage: {fileID: 0}
+    skillImage: {fileID: 21300000, guid: d7a192199c42cc044931d84cd1c069b8, type: 3}
     skillLevel: 0
-    necessariesName: []
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: FlameT
     coolDown: 1
     coolDownTime: 0
     skillImage: {fileID: 0}
     skillLevel: 0
-    necessariesName: []
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: Tornado
     coolDown: 5
     coolDownTime: 0
     skillImage: {fileID: 0}
     skillLevel: 0
-    necessariesName: []
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+  - skillName: Sword
+    coolDown: 5
+    coolDownTime: 0
+    skillImage: {fileID: 0}
+    skillLevel: 0
+    necessariesName:
+    - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
+    - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
+    - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
 --- !u!114 &2668921968425631565
 MonoBehaviour:
   m_ObjectHideFlags: 0

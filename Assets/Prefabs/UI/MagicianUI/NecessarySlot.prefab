@@ -132,6 +132,7 @@ MonoBehaviour:
   _inventoryType: 0
   backGImage: {fileID: 5309676187303731465}
   slotIndex: 0
+  countText: {fileID: 0}
 --- !u!1 &5309676187303731467
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,10 +300,10 @@ RectTransform:
   m_Father: {fileID: 6538021625686087414}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -1, y: -24}
-  m_SizeDelta: {x: 99.9333, y: 56.2542}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: -27.7}
+  m_SizeDelta: {x: 0, y: 56.2542}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &6518544913428008367
 CanvasRenderer:
@@ -332,7 +333,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10/20
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 163a9bffa97a27c4c97fb370fb42f9d2, type: 2}
   m_sharedMaterial: {fileID: -2735640341234319819, guid: 163a9bffa97a27c4c97fb370fb42f9d2, type: 2}
