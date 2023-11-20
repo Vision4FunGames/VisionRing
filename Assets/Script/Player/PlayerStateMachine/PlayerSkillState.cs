@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public enum SkillType
@@ -11,7 +8,9 @@ public enum SkillType
     EarthQ,
     FlameT,
     Tornado,
-    Sword
+    Sword,
+    ArrowRain,
+    Shield
 }
 
 public class PlayerSkillState : PlayerState
@@ -84,9 +83,51 @@ public class PlayerSkillState : PlayerState
                 }
 
                 break;
+            case SkillType.ArrowRain:
+                if (SkillCoolDown.instance.CanUse(6))
+                    ArrowRain();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
+
+                break;
+            case SkillType.Shield:
+                if (SkillCoolDown.instance.CanUse(7))
+                    ShieldSkill();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
+
+                break;
         }
     }
 
+    public void ShieldSkill()
+    {
+        SkillCoolDown.instance.skillsArray[7].coolDownTime = SkillCoolDown.instance.skillsArray[7].coolDown;
+        UiManager.instance.DisableButton();
+        Vector3 shieldPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 2f, _player.transform.position.z);
+        GameObject shield =  GameObject.Instantiate(Resources.Load("Skills/Shield") as GameObject ,shieldPos,Quaternion.identity);
+        _player._playerHealth.useShield = true;
+        shield.GetComponent<ParticleSystem>().Play();
+        shield.transform.SetParent(_player.transform);
+        _player.StateMachine.ChangeState(_player.PlayerMovementState);
+        Destroy(shield,20);
+        _player.DisableSkill(20);
+    }
+    public void ArrowRain()
+    {
+        SkillCoolDown.instance.skillsArray[6].coolDownTime = SkillCoolDown.instance.skillsArray[6].coolDown;
+        UiManager.instance.DisableButton();
+        Vector3 arrowPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 40f, _player.transform.position.z);
+        GameObject arrowSkil =  GameObject.Instantiate(Resources.Load("Skills/ArrowRain") as GameObject ,arrowPos,Quaternion.Euler(-90,0,0));
+        arrowSkil.GetComponent<ParticleSystem>().Play();
+        _player.StateMachine.ChangeState(_player.PlayerMovementState);
+        Destroy(arrowSkil,10);
+        _player.DisableSkill(10);
+    }
     public void SwordSkill()
     {
         SkillCoolDown.instance.skillsArray[5].coolDownTime = SkillCoolDown.instance.skillsArray[5].coolDown;

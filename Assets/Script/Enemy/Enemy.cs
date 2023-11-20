@@ -102,6 +102,7 @@ public class Enemy : Interactable
         navMeshAgent.enabled = false;
         Vector3 direction = transform.position - playerAttack.transform.position;
         direction = new Vector3(direction.x, 0, direction.z);
-        transform.DOMove(transform.position+(direction * 2), 1).OnComplete(() => navMeshAgent.enabled = true);
+        direction = Vector3.ClampMagnitude(direction, 2);
+        transform.DOMove(transform.position+(direction), 1).OnComplete(() => navMeshAgent.enabled = true);
     }
 }

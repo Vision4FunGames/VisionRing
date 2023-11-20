@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 6759728030344244776}
   - component: {fileID: 6759728030344244775}
   - component: {fileID: 6759728030344244774}
+  - component: {fileID: 1601766727}
   m_Layer: 0
   m_Name: GoblinSword
   m_TagString: Enemy
@@ -136,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4cb7ad07a63ae4788f4fb101396866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5.14
+  radius: 0
   interactionTransform: {fileID: 543450651842388428}
   myVariation: 1
 --- !u!195 &6759728030344244781
@@ -188,8 +189,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3323059, y: 3.6400003, z: 1}
-  m_Center: {x: 0.036697388, y: 1.71, z: 0}
+  m_Size: {x: 2.69, y: 1.67, z: 3.22}
+  m_Center: {x: 0.039535522, y: 5.23, z: 0}
 --- !u!114 &6759728030344244778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77aa5ecd6ab30d4192daec55ed326a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 35.92
+  lookRadius: 0
 --- !u!114 &6759728030344244777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c22da51e7b54444b2d87f54851076f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &1601766727
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759728030344244772}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.74
+  m_Height: 3.68
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.53, z: 0}
 --- !u!1001 &1857570343
 PrefabInstance:
   m_ObjectHideFlags: 0

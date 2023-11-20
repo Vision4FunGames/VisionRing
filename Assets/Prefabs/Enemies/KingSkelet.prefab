@@ -3144,9 +3144,10 @@ GameObject:
   - component: {fileID: 2147106698}
   - component: {fileID: 2147106697}
   - component: {fileID: 2147106700}
+  - component: {fileID: 1293535107}
   m_Layer: 0
   m_Name: KingSkelet
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3203,6 +3204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   interactionTransform: {fileID: 0}
+  myVariation: 0
 --- !u!114 &5653933587837560477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3236,6 +3238,7 @@ MonoBehaviour:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
   mmProgressBar: {fileID: 0}
+  message: 
   enemyType: 0
 --- !u!114 &5653933587837560479
 MonoBehaviour:
@@ -3250,8 +3253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 1
-  attackDelay: 0.6
-  attackSpeed: 1
 --- !u!114 &5653933587837560472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3322,6 +3323,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   interactionTransform: {fileID: 3156630742449499681}
+--- !u!65 &1293535107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653933587837560473}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.69, y: 1.67, z: 3.22}
+  m_Center: {x: 0.039535522, y: 5.23, z: 0}
 --- !u!1 &5694092897726564979
 GameObject:
   m_ObjectHideFlags: 0

@@ -60,12 +60,12 @@ public class DetectEnemyCollider : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.name == "ArrowSkill")
+        if (other.name == "ArrowRain")
         {   
             _enemyStats.TakeDamage(10);
         }
     }
-
+    
     private void Update()
     {
         currentFlameTimer += Time.deltaTime;

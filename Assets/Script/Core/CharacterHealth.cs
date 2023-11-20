@@ -7,6 +7,7 @@ public abstract class CharacterHealth : MonoBehaviour
     public DieDelegate OnDie;
     protected int health;
     public MMProgressBar mmProgressBar;
+    [HideInInspector]public bool useShield;
     public bool IsAlive()
     {
         return health > 0;
@@ -19,11 +20,14 @@ public abstract class CharacterHealth : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        health -= damageAmount;
-        UpdateHealthBar();
-        if (health <= 0)
+        if (!useShield)
         {
-            Die();
+            health -= damageAmount;
+            UpdateHealthBar();
+            if (health <= 0)
+            {
+                Die();
+            }
         }
     }
     public void UpdateHealthBar()

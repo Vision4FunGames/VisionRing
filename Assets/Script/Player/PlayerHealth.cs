@@ -1,13 +1,10 @@
 using UnityEngine;
-using DG.Tweening;
 using DamageNumbersPro;
-using NaughtyAttributes;
 
 public class PlayerHealth : CharacterHealth
 {
     Material _playerMaterial;
     [HideInInspector] public GameObject _damageNumbersPro;
-
     private void Awake()
     {
         health = 100;
@@ -17,9 +14,12 @@ public class PlayerHealth : CharacterHealth
 
     public void DamageAnimation(int damage)
     {
-        TakeDamage(damage);
-        DamageText(damage);
-        PlayerManager.instance.DamageHitParticle();
+        if (!useShield)
+        {
+            TakeDamage(damage);
+            DamageText(damage);
+            PlayerManager.instance.DamageHitParticle();
+        }
     }
 
     public void DamageText(int damage)

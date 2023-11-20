@@ -64,7 +64,7 @@ namespace AmazingAssets.DynamicRadialMasks
                 increaseEnes = false;
             }
 
-            if (radius==0)
+            if (radius!=100)
             {
                 increase = true;
                 increaseEnes = true;

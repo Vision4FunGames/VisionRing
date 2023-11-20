@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [HideInInspector] public UiManager uiManager;
-    private PlayerHealth _playerHealth;
+    [HideInInspector] public PlayerHealth _playerHealth;
 
     #region Singleton
 
@@ -155,6 +155,7 @@ public class Player : MonoBehaviour
     {
         UiManager.instance.EnableButton();
         _playerAnimator.SetFloat("AttackSpeed",1);
+        _playerHealth.useShield = false;
     }
     private void FixedUpdate()
     {
