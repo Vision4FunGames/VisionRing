@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 10f;
     private EnemyStats _enemyStats;
-    Transform target;
+    [HideInInspector] public Transform target;
     NavMeshAgent agent;
     CharacterCombat combatManager;
 
@@ -28,8 +28,13 @@ public class EnemyController : MonoBehaviour
         // If inside the radius
         if (distance <= lookRadius && agent != null && !_enemyStats.die)
         {
-            // Move towards the player
-            agent.SetDestination(target.position);
+            if (target)
+                agent.SetDestination(target.position);
+            else
+            {
+                target = Player.instance.transform;
+                agent.SetDestination(target.position);
+            }
             if (distance <= agent.stoppingDistance)
             {
                 // Attack

@@ -24,7 +24,6 @@ public class EnemyStats : CharacterStats
       }
       base.Die();
    }
-   
 }
 
 public enum EnemyType { skelet, Boss }

@@ -4,10 +4,12 @@ using UnityEngine;
 public abstract class CharacterHealth : MonoBehaviour
 {
     public delegate void DieDelegate();
+
     public DieDelegate OnDie;
     protected int health;
     public MMProgressBar mmProgressBar;
-    [HideInInspector]public bool useShield;
+    [HideInInspector] public bool useShield;
+
     public bool IsAlive()
     {
         return health > 0;
@@ -30,11 +32,13 @@ public abstract class CharacterHealth : MonoBehaviour
             }
         }
     }
+
     public void UpdateHealthBar()
     {
-        mmProgressBar.UpdateBar(health, 0, 100);
+        if (mmProgressBar)
+            mmProgressBar.UpdateBar(health, 0, 100);
     }
-    
+
     protected void Die()
     {
         OnDie?.Invoke();

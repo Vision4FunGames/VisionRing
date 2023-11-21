@@ -48,7 +48,6 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void DieAnimation()
     {
-        print("aaa");
         if (isTabut)
         {
             FindObjectOfType<TabutManager>().DeadEnemy();

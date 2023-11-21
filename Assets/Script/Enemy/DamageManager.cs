@@ -2,25 +2,24 @@ using UnityEngine;
 
 public class DamageManager : MonoBehaviour
 {
-    private PlayerHealth _playerHealth;
     public EnemyStats characterStats;
     private DropChest dropChest;
-
+    private EnemyController enemyController;
     private void Start()
     {
+        enemyController = GetComponentInParent<EnemyController>();
         dropChest = GetComponentInParent<DropChest>();
         characterStats = GetComponentInParent<EnemyStats>();
-        _playerHealth = Player.instance.GetComponent<PlayerHealth>();
     }
 
     public void PlayerDamage()
     {
-        _playerHealth.DamageAnimation(characterStats.damage.GetValue());
+        enemyController.target.GetComponent<PlayerHealth>().DamageAnimation(characterStats.damage.GetValue());
     }
 
     public void PlayerCharge()
     {
-        _playerHealth.DamageAnimation(characterStats.damage.GetValue() * 14 / 10);
+        enemyController.target.GetComponent<PlayerHealth>().DamageAnimation(characterStats.damage.GetValue() * 14 / 10);
     }
 
     public void ChestDrop()
