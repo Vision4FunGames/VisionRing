@@ -22,6 +22,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        Vector3 startPlayerPos = ES3.Load("CheckPoint", transform.position) + new Vector3(0,0,-4);
+        transform.position = startPlayerPos;
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
@@ -69,6 +71,11 @@ public class PlayerManager : MonoBehaviour
             sessizImage =
                 Instantiate(Resources.Load("SessizImage"),
                     GameObject.FindWithTag("mainCanvas").transform) as GameObject;
+        }
+
+        if (other.CompareTag("CheckPoint"))
+        {
+            ES3.Save("CheckPoint", other.transform.position);
         }
     }
 

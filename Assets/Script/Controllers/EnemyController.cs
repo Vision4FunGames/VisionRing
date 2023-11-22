@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public Transform target;
     NavMeshAgent agent;
     CharacterCombat combatManager;
-
+    private float distance;
     void Start()
     {
         _enemyStats = GetComponent<EnemyStats>();
@@ -23,7 +23,11 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         // Get the distance to the player
-        float distance = Vector3.Distance(target.position, transform.position);
+        if (target)
+        {
+            distance = Vector3.Distance(target.position, transform.position);
+        }
+          
 
         // If inside the radius
         if (distance <= lookRadius && agent != null && !_enemyStats.die)

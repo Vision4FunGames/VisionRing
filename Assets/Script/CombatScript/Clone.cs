@@ -16,11 +16,12 @@ public class Clone : MonoBehaviour
     private float timer;
     private float clearTimer = .5f;
 
-    private void Awake()
+    private void Start()
     {
+        _player = FindObjectOfType<Player>();
         _animator = GetComponentInChildren<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _player = FindObjectOfType<Player>();
+        _navMeshAgent.enabled = true;
         cloneAttack ??= _animator.gameObject.AddComponent<CloneAttack>();
     }
 

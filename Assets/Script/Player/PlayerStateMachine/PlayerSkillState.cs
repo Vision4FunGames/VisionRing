@@ -123,6 +123,8 @@ public class PlayerSkillState : PlayerState
         for (int i = 0; i < 3; i++)
         {
             clones.Add(Instantiate(Resources.Load("Skills/Clone") as GameObject));
+            clones[i].transform.position = _player.transform.position;
+            clones[i].SetActive(true);
             Destroy(clones[i].gameObject,20);
         }
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
