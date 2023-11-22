@@ -23,26 +23,10 @@ public class SkillCoolDown : MonoBehaviour
     {
         
         onSkillChangeCallBack += UpdateSkillButton;
-        // for (int i = 0; i < skillsArray.Length; i++)
-        // {
-        //     skillsArray[i].coolDownTime = skillsArray[i].coolDown;
-        //
-        //     for (int j = 0; j < UiManager.instance.ButtonType.Length; j++)
-        //     {
-        //         if (UiManager.instance.ButtonType[j].mySkillType.ToString() == skillsArray[i].skillName)
-        //         {
-        //             skillsArray[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + skillsArray[i].skillName);
-        //             UiManager.instance.ButtonType[j].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()
-        //                     .sprite =
-        //                 skillsArray[i].skillImage;
-        //             UiManager.instance.ButtonType[j].skillButton.transform.GetChild(1).GetComponent<Image>().sprite =
-        //                 skillsArray[i].skillImage;
-        //             _skillImages.Add(UiManager.instance.ButtonType[j].skillButton.transform.GetChild(0)
-        //                 .GetComponent<Image>());
-        //             _currentSkills.Add(skillsArray[i]);
-        //         }
-        //     }
-        // }
+        for (int i = 0; i < skillsArray.Length; i++)
+        {
+            skillsArray[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + skillsArray[i].skillName);
+        }
     }
 
     private void Update()
@@ -95,6 +79,7 @@ public class SkillCoolDown : MonoBehaviour
                     UiManager.instance.ButtonType[i].mySkillType = SkillType.Sword;
                     break;
             }
+         
             UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()
                     .sprite =
                 _currentSkills[i].skillImage;
@@ -116,7 +101,7 @@ public class Skills
     public string skillName;
     public float coolDown;
     public float coolDownTime;
-    public Sprite skillImage;
+    [HideInInspector] public Sprite skillImage;
     public int skillLevel;
     public SkillNecessary[] necessariesName;
 }

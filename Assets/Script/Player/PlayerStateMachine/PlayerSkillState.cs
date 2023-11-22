@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -10,7 +11,8 @@ public enum SkillType
     Tornado,
     Sword,
     ArrowRain,
-    Shield
+    Shield,
+    Clone
 }
 
 public class PlayerSkillState : PlayerState
@@ -101,9 +103,32 @@ public class PlayerSkillState : PlayerState
                 }
 
                 break;
+            case SkillType.Clone:
+                if (SkillCoolDown.instance.CanUse(8))
+                    CloneSkill();
+                else
+                {
+                    _player.StateMachine.ChangeState(_player.PlayerMovementState);
+                }
+
+                break;
         }
     }
 
+    public void CloneSkill()
+    {
+        SkillCoolDown.instance.skillsArray[8].coolDownTime = SkillCoolDown.instance.skillsArray[8].coolDown;
+        UiManager.instance.DisableButton();
+        List<GameObject> clones = new List<GameObject>();
+        for (int i = 0; i < 3; i++)
+        {
+            clones.Add(Instantiate(Resources.Load("Skills/Clone") as GameObject));
+            Destroy(clones[i].gameObject,20);
+        }
+        _player.StateMachine.ChangeState(_player.PlayerMovementState);
+       
+        _player.DisableSkill(20);
+    }
     public void ShieldSkill()
     {
         SkillCoolDown.instance.skillsArray[7].coolDownTime = SkillCoolDown.instance.skillsArray[7].coolDown;
