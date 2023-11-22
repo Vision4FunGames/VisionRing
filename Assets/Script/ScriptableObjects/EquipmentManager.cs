@@ -79,7 +79,8 @@ public class EquipmentManager : MonoBehaviour {
 		inventory.items.Clear();
 		inventory.items = ES3.Load("inventory", inventory.items);
 		inventory.upgradeItems = ES3.Load("upgradeItems", inventory.upgradeItems);
-		
+		EconomyManager.instance.itemCount = ES3.Load("itemCount", EconomyManager.instance.itemCount);
+
 	}
 	
 

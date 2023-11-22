@@ -52,7 +52,7 @@ public class InventoryUI : MonoBehaviour {
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         InventorySlot[] currentSlots = currentItemsParent.GetComponentsInChildren<InventorySlot>();
         DefaultWearBringTop();
-        CountItem();
+        //CountItem();
         if (type == "")
         {
             type = "All";
@@ -122,7 +122,7 @@ public class InventoryUI : MonoBehaviour {
                 break;
             case "Potion":
                 ClearAllSlots();
-                CountItem();
+               // CountItem();
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -231,28 +231,28 @@ public class InventoryUI : MonoBehaviour {
         }
     }
     
-    private void CountItem()
-    {
-        for (int i = 0; i < EconomyManager.instance.itemList.Count; i++)
-        {
-            EconomyManager.instance.itemCount[i] = GetItemCount(EconomyManager.instance.itemList[i].name);
-        }
-        
-    }
+    // private void CountItem()
+    // {
+    //     for (int i = 0; i < EconomyManager.instance.itemList.Count; i++)
+    //     {
+    //         EconomyManager.instance.itemCount[i] = GetItemCount(EconomyManager.instance.itemList[i].name);
+    //     }
+    //     
+    // }
 
-    public int GetItemCount(String itemName)
-    {
-        int count = 0;
-
-        foreach (var item in Inventory.instance.upgradeItems)
-        {
-            if (item.name == itemName)
-            {
-                count++;
-            }
-        }
-        return count;
-    } 
+    // public int GetItemCount(String itemName)
+    // {
+    //     int count = 0;
+    //
+    //     foreach (var item in Inventory.instance.upgradeItems)
+    //     {
+    //         if (item.name == itemName)
+    //         {
+    //             count++;
+    //         }
+    //     }
+    //     return count;
+    // } 
 
    
 }

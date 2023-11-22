@@ -36,6 +36,7 @@ public class SkillCoolDown : MonoBehaviour
 
     public bool CanUse(int skillindex)
     {
+        Debug.Log(skillindex + " Index");
         return skillsArray[skillindex].coolDownTime <= 0;
     }
 
@@ -78,6 +79,16 @@ public class SkillCoolDown : MonoBehaviour
                 case "Sword":
                     UiManager.instance.ButtonType[i].mySkillType = SkillType.Sword;
                     break;
+                case "ArrowRain":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.ArrowRain;
+                    break;
+                case "Shield":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.Shield;
+                    break;
+                case "Clone":
+                    UiManager.instance.ButtonType[i].mySkillType = SkillType.Clone;
+                    break;
+
             }
          
             UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()

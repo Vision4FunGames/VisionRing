@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class SkillUpgrade : MonoBehaviour
 {
@@ -11,9 +13,7 @@ public class SkillUpgrade : MonoBehaviour
     public GameObject shopParent,shopSlot;
     public GameObject itemSlot;
     public GameObject necessaryParent;
-
     public delegate void onSkillShopChange();
-
     public onSkillShopChange onSkillShopChangeCallBack; 
     private void Start()
     {
@@ -21,7 +21,6 @@ public class SkillUpgrade : MonoBehaviour
         onSkillShopChangeCallBack += UpdateSkillShop;
         ShopAddSlot();
     }
-
     public void ShopAddSlot()
     {
         for (int i = 0; i < _skillCoolDown.skillsArray.Length; i++)
@@ -29,18 +28,15 @@ public class SkillUpgrade : MonoBehaviour
             Instantiate(shopSlot, shopParent.transform);
         }
         onSkillShopChangeCallBack.Invoke();
-        
     }
     public void UpdateSkillShop()
     {
         SkillBuySlot[] slots = shopParent.GetComponentsInChildren<SkillBuySlot>();
-
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].Fill(_skillCoolDown.skillsArray[i]);
             slots[i].slotIndex = i;
         }
-        
     }
     public void BringCurrentSkills()
     {
@@ -91,12 +87,6 @@ public class SkillUpgrade : MonoBehaviour
             }
         }
     }
-    
-    public void BringBuyableSkill()
-    {
-        
-    }
-
     public void BuySkill(SkillBuySlot slot)
     {
         int readyCounter = 0;
@@ -115,9 +105,10 @@ public class SkillUpgrade : MonoBehaviour
                 Debug.LogWarning("Yetersiz");
             }
         }
-
-        if (readyCounter == list.Count)
+        if (readyCounter == list.Count)   // Control if enough items 
         {
+            // Spend Items here
+            EconomyManager.instance.SpendItems(list,countList);
             if (_skillCoolDown.skillsArray[slot.slotIndex].skillLevel == 0)
             {
                 if (!_skillCoolDown._currentSkills.Contains(_skillCoolDown.skillsArray[slot.slotIndex]))
@@ -125,18 +116,16 @@ public class SkillUpgrade : MonoBehaviour
                     _skillCoolDown._currentSkills.Add(_skillCoolDown.skillsArray[slot.slotIndex]);
                     _skillCoolDown.skillsArray[slot.slotIndex].skillLevel++;
                 }
-               
             }
             else
             {
                 _skillCoolDown.skillsArray[slot.slotIndex].skillLevel++;
             }
-
             _skillCoolDown.onSkillChangeCallBack?.Invoke();
+            slot.skillSlot.transform.DOScale(new Vector3(0, 0, 0), .5f)
+                .OnComplete(() => slot.skillSlot.transform.DOScale(new Vector3(1, 1, 1), .5f));
+            slot.skillSlot.GetComponent<InventorySlot>().backGImage.material = UiManager.instance.skillMaterial;
             onSkillShopChangeCallBack.Invoke();
         }
-      
-        
     }
-    
 }

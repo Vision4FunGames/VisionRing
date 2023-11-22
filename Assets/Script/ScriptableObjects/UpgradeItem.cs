@@ -9,7 +9,14 @@ public class UpgradeItem : Item
     {
         if (type == InventoryType.Collect)
         {
-            Inventory.instance.upgradeItems.Add(this);
+           // Inventory.instance.upgradeItems.Add(this);
+            for (int i = 0; i < EconomyManager.instance.itemList.Count; i++)
+            {
+                if (EconomyManager.instance.itemList[i] == this)
+                {
+                    EconomyManager.instance.itemCount[i]++;
+                }
+            }
             Inventory.instance.onItemChangedCallback.Invoke();
         }
     }

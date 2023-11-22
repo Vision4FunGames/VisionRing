@@ -89,7 +89,21 @@ public class EconomyManager : MonoBehaviour
         
     }
 
-    
+    public void SpendItems(List<UpgradeItem> itemList,List<int> itemCount)
+    {
+       
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            for (int j = 0; j < this.itemList.Count; j++)
+            {
+                if (this.itemList[j] == itemList[i])
+                {
+                    this.itemCount[j] -= itemCount[i];
+                    break;
+                }
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {

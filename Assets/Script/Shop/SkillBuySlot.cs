@@ -17,7 +17,7 @@ public class SkillBuySlot : MonoBehaviour
     private List<int> itemCount = new List<int>();
     public int slotIndex;
     private SkillUpgrade skillUpgrade;
-    private TextMeshProUGUI buyText;
+    public TextMeshProUGUI buyText;
     
     private void Start()
     {
@@ -29,7 +29,14 @@ public class SkillBuySlot : MonoBehaviour
         
         skillSlot.GetComponent<InventorySlot>().icon.sprite = skill.skillImage;
         skillSlot.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites[skill.skillLevel];
-        
+        if (skill.skillLevel == 0)
+        {
+            buyText.text = "BUY";
+        }
+        else
+        {
+            buyText.text = "UPGRADE";
+        }
 
         var necessary = skill.necessariesName[skill.skillLevel];
         itemlist = necessary.ItemList;

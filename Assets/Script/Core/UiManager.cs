@@ -24,6 +24,7 @@ public class UiManager : MonoBehaviour
     public Sprite[] itemlevelSprites;
     public Sprite[] itemDescriptionSprites;
     public Sprite emptySprite = null;
+    public Material skillMaterial;
 
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
     //Chest Scroll

@@ -49,7 +49,15 @@ public class Inventory : MonoBehaviour
             }
             if (item.isUpgrade)
             {
-                upgradeItems.Add(item);
+                //upgradeItems.Add(item);
+                // 
+                for (int i = 0; i < EconomyManager.instance.itemList.Count; i++)
+                {
+                    if (EconomyManager.instance.itemList[i] == item)
+                    {
+                        EconomyManager.instance.itemCount[i]++;
+                    }
+                }
             }
             else
             {
@@ -90,7 +98,9 @@ public class Inventory : MonoBehaviour
         ES3.Save("currentItems",equipmentManager.currentEquipment);
         ES3.Save("inventory",items);
         ES3.Save("upgradeItems",upgradeItems);
+        ES3.Save("itemCount",EconomyManager.instance.itemCount);
         Debug.Log("Saved");
+        
     }
     
     
