@@ -12,7 +12,7 @@ public class Equipment : Item {
     public int damageModifier;
     public SkinnedMeshRenderer mesh;
    
-    [ES3NonSerializable]public GameObject prefab;
+   [ES3NonSerializable] public GameObject prefab;
 
     public int price = 0;
 
@@ -47,7 +47,17 @@ public class Equipment : Item {
 
         if (type == InventoryType.Buy)
         {
-            Inventory.instance.items.Add(this);
+            if (Inventory.instance.items.Contains(this))
+            {
+                int index = Inventory.instance.items.FindIndex(r => r.name.Contains(this.name));
+                Inventory.instance.itemsCount[index]++;
+            }
+            else
+            {
+                Inventory.instance.items.Add(this);
+                Inventory.instance.itemsCount.Add(1);
+            }
+            //Inventory.instance.items.Add(this);
             Inventory.instance.onItemChangedCallback.Invoke();
 
         }
@@ -60,7 +70,17 @@ public class Equipment : Item {
 
         if (type == InventoryType.UnEquip )
         {
-            Inventory.instance.items.Add(this);
+            if (Inventory.instance.items.Contains(this))
+            {
+                int index = Inventory.instance.items.FindIndex(r => r.name.Contains(this.name));
+                Inventory.instance.itemsCount[index]++;
+            }
+            else
+            {
+                Inventory.instance.items.Add(this);
+                Inventory.instance.itemsCount.Add(1);
+            }
+            
             Inventory.instance.onItemChangedCallback.Invoke();
         }
 
@@ -73,7 +93,7 @@ public class Equipment : Item {
 
     public void Fill(Equipment item)
     {
-        this.equipSlot = item.equipSlot;
+        equipSlot = item.equipSlot;
         armorModifier = item.armorModifier;
         damageModifier = item.damageModifier;
         mesh = item.mesh;
@@ -83,7 +103,7 @@ public class Equipment : Item {
         isDefault = item.isDefault;
         isUpgrade = item.isUpgrade;
         prefab = item.prefab;
-        Save();
+        
     }
 }
 

@@ -17,14 +17,30 @@ public class InventorySlot : MonoBehaviour
 
     public TextMeshProUGUI countText;
     //For Upgrade Items to Unequip
-    public void AddItem (Item newItem)
+    public void AddItem (Item newItem,int count)
     {
         item = newItem;
         backGImage.sprite = UiManager.instance.itemlevelSprites[newItem.itemLevel];
-       
+        if (count>1)
+        {
+            countText.text = count.ToString(); 
+        }
+        else
+        {
+            countText.text = "";
+        }
         icon.sprite = item.icon;
         icon.enabled = true;
        // removeButton.interactable = true;
+    }
+
+    public void AddItem(Item newItem)
+    {
+        item = newItem;
+        backGImage.sprite = UiManager.instance.itemlevelSprites[newItem.itemLevel];
+
+        icon.sprite = item.icon;
+        icon.enabled = true;
     }
     
     // Clear the slot

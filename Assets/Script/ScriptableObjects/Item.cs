@@ -9,7 +9,7 @@ public class Item : ScriptableObject
     public string name = "New ScriptableObject";
     public Sprite icon;
     [ES3NonSerializable] public bool showInInventory;
-    [ES3NonSerializable] public bool isDefault;
+     public bool isDefault;
     [ES3NonSerializable] public bool isUpgrade;
     public int itemLevel;
     

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Collections.ObjectModel;
+using Unity.VisualScripting;
 
 public class Inventory : MonoBehaviour
 {
@@ -28,13 +29,25 @@ public class Inventory : MonoBehaviour
 
     // Our current list of items in the inventory
     public List<Item> items = new List<Item>();
+    public List<int> itemsCount = new List<int>();
     public List<Item> upgradeItems = new List<Item>();
     public List<Item> currentItems = new List<Item>();
     
     // Add a new item if enough room
     private void Start()
     {
-        
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        for (int i = 0; i <items.Count; i++)
+        {
+            if ((items[i].icon == null))
+            {
+                items[i].icon = Resources.Load<Sprite>("ItemSprite/" + items[i].name);
+            }
+        }
     }
 
     public void Add (Item item)
@@ -61,7 +74,18 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                items.Add(item);
+                if (items.Contains(item))
+                {
+                   int index =  items.FindIndex(r => r.name.Contains(item.name));
+                   itemsCount[index]++;
+                }
+                else
+                {
+                    items.Add(item);
+                    itemsCount.Add(1);
+                }
+               
+                
             }
             item.showInInventory = false;
             Debug.Log("Item Added to Inventory " + item.name);
@@ -75,7 +99,16 @@ public class Inventory : MonoBehaviour
     // Remove an item
     public void Remove (Item item)
     {
-        items.Remove(item);
+        int index = items.FindIndex(r => r.name.Contains(item.name));
+        if (itemsCount[index] > 1)
+        {
+            itemsCount[index]--;
+        }
+        else
+        {
+            items.RemoveAt(index);
+            itemsCount.RemoveAt(index);
+        }
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
         ES3.Save("currentItems",equipmentManager.currentEquipment);
@@ -99,6 +132,7 @@ public class Inventory : MonoBehaviour
         ES3.Save("inventory",items);
         ES3.Save("upgradeItems",upgradeItems);
         ES3.Save("itemCount",EconomyManager.instance.itemCount);
+        ES3.Save("InvItemCount",itemsCount);
         Debug.Log("Saved");
         
     }

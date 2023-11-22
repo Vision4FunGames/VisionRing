@@ -78,6 +78,8 @@ public class EquipmentManager : MonoBehaviour {
 		saveEquipment = ES3.Load("currentItems", currentEquipment);
 		inventory.items.Clear();
 		inventory.items = ES3.Load("inventory", inventory.items);
+		inventory.itemsCount.Clear();
+		inventory.itemsCount = ES3.Load("InvItemCount", inventory.itemsCount);
 		inventory.upgradeItems = ES3.Load("upgradeItems", inventory.upgradeItems);
 		EconomyManager.instance.itemCount = ES3.Load("itemCount", EconomyManager.instance.itemCount);
 
@@ -321,7 +323,17 @@ public class EquipmentManager : MonoBehaviour {
 		{
 			if (upgradeEquipment[i] != null)
 			{
-				inventory.items.Add(upgradeEquipment[i]);
+				if (inventory.items.Contains(upgradeEquipment[i]))
+				{
+					int index = inventory.items.FindIndex(r => r.name.Contains(upgradeEquipment[i].name));
+					inventory.itemsCount[index]++;
+				}
+				else
+				{
+					inventory.items.Add(upgradeEquipment[i]);
+					inventory.itemsCount.Add(1);
+				}
+				//inventory.items.Add(upgradeEquipment[i]);
 			}
 		}
 		ClearUpgradeSlots();
