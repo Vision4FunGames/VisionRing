@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     private ParticleSystem _damageParticle;
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
-
+    public bool edit;
     #region Singleton
 
     public static PlayerManager instance;
@@ -23,7 +23,8 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         Vector3 startPlayerPos = ES3.Load("CheckPoint", transform.position) + new Vector3(0,0,-4);
-        transform.position = startPlayerPos;
+        if(!edit)
+            transform.position = startPlayerPos;
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();

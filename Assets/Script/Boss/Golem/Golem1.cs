@@ -27,7 +27,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
     private int baseHealth;
     public GameObject _damageNumbersPro;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
-
+    private bool dead;
     private void Awake()
     {
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -55,7 +55,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
 
     private void Update()
     {
-        if (!_attack && !stun)
+        if (!_attack && !stun && !dead)
         {
             LookAtPlayer();
         }
@@ -66,13 +66,13 @@ public class Golem1 : MonoBehaviour, GolemCombat
             _sleep = true;
         }
 
-        if (_sleep && !_attack && currentTime > rateOfFire && !stun)
+        if (_sleep && !_attack && currentTime > rateOfFire && !stun && !dead)
         {
             currentTime = 0;
             Attack();
         }
 
-        if (move && !stun)
+        if (move && !stun && !dead)
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
             currentMovementTime += Time.deltaTime;
@@ -117,7 +117,8 @@ public class Golem1 : MonoBehaviour, GolemCombat
 
         if (other.CompareTag("SwordCollider"))
         {
-            TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+            if(!dead)
+                TakeDamage(_player.GetComponent<PlayerAttack>().damage);
         }
     }
 
@@ -197,10 +198,21 @@ public class Golem1 : MonoBehaviour, GolemCombat
 
     public void TakeDamage(int damage)
     {
-        DamageMaterial();
-        ShowText(damage);
-        health -= damage;
-        healthBar.UpdateBar(health, 0, baseHealth);
+        if (health > 0)
+        {
+            DamageMaterial();
+            ShowText(damage);
+            health -= damage;
+            healthBar.UpdateBar(health, 0, baseHealth);
+        }
+        else if(health<=0 && !dead)
+        {
+            GetComponent<Collider>().enabled = false;
+            _animator.Play("Death");
+            dead = true;
+            Destroy(gameObject, 10);
+        }
+      
     }
 
     #endregion

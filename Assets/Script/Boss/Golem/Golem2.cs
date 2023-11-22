@@ -19,7 +19,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
     public GameObject circleParentObj;
     public MMProgressBar healthBar;
     public int health;
-    public bool stun , checkPlayer;
+    public bool stun , checkPlayer,dead;
     public GameObject _damageNumbersPro;
     public ParticleSystem golemParticle , stunStar;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
@@ -55,10 +55,10 @@ public class Golem2 : MonoBehaviour , GolemCombat
     // Update is called once per frame
     void Update()
     {
-        if (!attack && !stun)
+        if (!attack && !stun && !dead)
             LookAtPlayer();
 
-        if (_currentTime > _rateOfFire && !stun)
+        if (_currentTime > _rateOfFire && !stun && !dead)
         {
             _currentTime = 0;
             Attack();
@@ -98,7 +98,8 @@ public class Golem2 : MonoBehaviour , GolemCombat
 
         if (other.CompareTag("SwordCollider"))
         {
-            TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+            if(!dead)
+                TakeDamage(_player.GetComponent<PlayerAttack>().damage);
         }
     }
 
@@ -158,11 +159,23 @@ public class Golem2 : MonoBehaviour , GolemCombat
 
     public void TakeDamage(int damage)
     {
-        DamageMaterial();
+        if (health > 0 && !dead)
+        {
+            DamageMaterial();
         
-        ShowText(damage);
-        health -= damage;
-        healthBar.UpdateBar(health,0,baseHealth);
+            ShowText(damage);
+            health -= damage;
+            healthBar.UpdateBar(health,0,baseHealth);
+        }
+        else if(health<=0 && !dead)
+        {
+            
+            GetComponent<Collider>().enabled = false;
+            dead = true;
+            _animator.Play("Death");
+            Destroy(gameObject, 10);
+        }
+       
     }
     public void DamageMaterial()
     {
