@@ -61,6 +61,7 @@ public class InventoryUI : MonoBehaviour {
         switch (type)
         { 
             case "All":
+                UiManager.instance.InventoryFilter("");
                 int ecoCounter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -82,6 +83,7 @@ public class InventoryUI : MonoBehaviour {
                 break;
             case "Armor":
                 ClearAllSlots();
+                UiManager.instance.InventoryFilter("Armor");
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -94,6 +96,7 @@ public class InventoryUI : MonoBehaviour {
                 break;
             case "Sword":
                 ClearAllSlots();
+                UiManager.instance.InventoryFilter("Gun");
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
@@ -134,6 +137,7 @@ public class InventoryUI : MonoBehaviour {
                 break;
             
             case "Potion":
+                UiManager.instance.InventoryFilter("");
                 ClearAllSlots();
                // CountItem();
                 counter = 0;
@@ -215,6 +219,32 @@ public class InventoryUI : MonoBehaviour {
         
     }
 
+    public void ShowSelectedMini(string selected)
+    {
+        Button[] btnBG = { };
+        if (UiManager.instance.armorFilter.activeSelf)
+        {
+            btnBG = UiManager.instance.armorFilter.GetComponentsInChildren<Button>();
+        } 
+        if (UiManager.instance.gunFilter.activeSelf)
+        {
+             btnBG = UiManager.instance.gunFilter.GetComponentsInChildren<Button>();
+        }
+
+        if (btnBG.Length>0)
+        {
+            for (int i = 0; i < btnBG.Length; i++)
+            {
+                var image = btnBG[i].GetComponent<Image>().color;
+                btnBG[i].GetComponent<Image>().color = new Color(image.r, image.g, image.b, 0f);
+            }
+        
+            type = selected;
+            UpdateUI();
+            type = "All";
+        }
+       
+    }
     //selected button background change
     public void SelectedButton(GameObject btn)
     {

@@ -31,20 +31,16 @@ public class EquipmentManager : MonoBehaviour {
 	}
 
 	#endregion
-
 	public List<Equipment> ItemDatabase;
 	public Equipment[] defaultWear;
-
 	public Equipment[] currentEquipment;
-
 	private Equipment[] saveEquipment;
 	SkinnedMeshRenderer[] currentMeshes;
 	private SkinnedMeshRenderer[] currentInventoryMeshes;
-	
 	public SkinnedMeshRenderer targetMesh;
 	public SkinnedMeshRenderer targetEnvanterMesh;
-
 	public GameObject currentItemInventoryParent;
+	
 	// Callback for when an item is equipped
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 	public event OnEquipmentChanged onEquipmentChanged;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
@@ -12,13 +13,14 @@ public class UiManager : MonoBehaviour
     public ButtonType[] ButtonType;
     public static UiManager instance;
     [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel;
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter;
 
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
     private ShopUI shopUI;
     public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
+    
     public MMProgressBar playerProgressBar;
     public FixedJoystick attackJoystick;
     public Sprite[] itemlevelSprites;
@@ -41,6 +43,7 @@ public class UiManager : MonoBehaviour
     //Economy
     public TextMeshProUGUI contentText;
     private ShopSlot[] shopSlots;
+    
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
     private void Awake()
@@ -104,9 +107,10 @@ public class UiManager : MonoBehaviour
         equipmentPanel.gameObject.SetActive(true);
         currentItems.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Equip);
-        //inventoryUi.UpdateUI();
+        inventoryUi.ShowSelected("All");
+        inventoryUi.UpdateUI();
         onEconomyChangedCallBack.Invoke();
-        inventoryUi.ShowSelected("Potion");
+        
     }
 
     public void BlackSmithUI()
@@ -171,6 +175,25 @@ public class UiManager : MonoBehaviour
         goldText.text = EconomyManager.instance.GetGold().ToString();
         diamondText.text = EconomyManager.instance.GetDiamond().ToString();
         gemText.text = EconomyManager.instance.GetGem().ToString();
+    }
+
+    public void InventoryFilter(String type)
+    {
+        if (type == "Gun")
+        {
+            armorFilter.gameObject.SetActive(false);
+            gunFilter.gameObject.SetActive(true);
+        }
+        else if (type == "Armor")
+        {
+            armorFilter.gameObject.SetActive(true);
+            gunFilter.gameObject.SetActive(false);
+        }
+        else
+        {
+            armorFilter.gameObject.SetActive(false);
+            gunFilter.gameObject.SetActive(false);
+        }
     }
 }
 
