@@ -11,30 +11,29 @@ namespace Script.Player.PlayerStateMachine
         public Vector3 _playerVelocity;
         private const string playerJumpAnimationString = "Jump";
         private const string playerDoubleJumpAnimationString = "DJump";
-        private bool jumpPressed, dJump;
-
-
+        public bool jumpPressed, dJump;
 
         public void CinematicOverride(string overrideState)
         {
             ChangeAnimationState(overrideState);
-
         }
 
 
-        public PlayerMovementState(global::Player player, global::PlayerStateMachine playerStateMachine) : base(player,
-            playerStateMachine)
+        public PlayerMovementState(global::Player player, global::PlayerStateMachine playerStateMachine, bool jump) :
+            base(player,
+                playerStateMachine)
         {
+            
         }
 
         public override void EnterState()
         {
-            _player.uiManager.JumpBtn.onClick.AddListener(Jump);
+            if (jumpPressed)
+                Jump();
         }
 
         public override void ExitState()
         {
-            _player.uiManager.JumpBtn.onClick.RemoveListener(Jump);
         }
 
         public override void FrameUpdate()
@@ -43,6 +42,7 @@ namespace Script.Player.PlayerStateMachine
             {
                 if (_player._myController.isGrounded)
                 {
+                    jumpPressed = false;
                     dJump = false;
                     _playerVelocity.y = -0.5f;
                 }

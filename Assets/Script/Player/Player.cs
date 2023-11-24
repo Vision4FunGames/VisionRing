@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     #region Movement Variable
 
     public bool isMovement = true;
-     public bool isWalk;
+    public bool isWalk;
     [HideInInspector] public float animValue = 1;
     [HideInInspector] public float animSpeed;
     public float speed;
@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     public FixedJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
     [HideInInspector] public GameObject skillSword;
+
     private void DisableMovement()
     {
         //StateMachine.ChangeState(PlayerIdleState);
@@ -84,9 +85,10 @@ public class Player : MonoBehaviour
         StateMachine = new PlayerStateMachine();
         PlayerBox = new PlayerBox(this, StateMachine);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
-        PlayerMovementState = new PlayerMovementState(this, StateMachine);
+        PlayerMovementState = new PlayerMovementState(this, StateMachine, false);
+
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
-        dashSprite =     Resources.Load<Sprite>("SkillSprite/Dash");
+        dashSprite = Resources.Load<Sprite>("SkillSprite/Dash");
         attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         skillSword = GetComponentInChildren<SwordSkill>().gameObject;
         DashInıtiliaze();
@@ -103,19 +105,25 @@ public class Player : MonoBehaviour
                 StateMachine.ChangeState(PlayerSkillState);
             }));
         }
+
+        uiManager.JumpBtn.onClick.AddListener(() =>
+            {
+                PlayerMovementState.jumpPressed = true;
+                StateMachine.ChangeState(PlayerMovementState);
+            }
+        );
     }
 
     private void Start()
     {
         StateMachine.Initialize(PlayerMovementState);
-        
-        
     }
 
     #endregion
 
     private SkillCoolDown _skillCoolDown;
     private Sprite dashSprite, attackSprite;
+
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
         StateMachine.CurrentPlayerState.AnimationTriggerEvent(triggerType);
@@ -148,15 +156,16 @@ public class Player : MonoBehaviour
 
     public void DisableSkill(float skilltime)
     {
-        Invoke("DisableSkillTime",skilltime);
+        Invoke("DisableSkillTime", skilltime);
     }
 
     public void DisableSkillTime()
     {
         UiManager.instance.EnableButton();
-        _playerAnimator.SetFloat("AttackSpeed",1);
+        _playerAnimator.SetFloat("AttackSpeed", 1);
         _playerHealth.useShield = false;
     }
+
     private void FixedUpdate()
     {
         StateMachine.CurrentPlayerState.PhysicUpdate();
