@@ -101,7 +101,6 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
-
                 break;
             case SkillType.Clone:
                 if (SkillCoolDown.instance.CanUse(8))
@@ -110,7 +109,6 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
-
                 break;
         }
     }
