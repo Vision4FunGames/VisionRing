@@ -23,7 +23,7 @@ public class SkillUpgrade : MonoBehaviour
     }
     public void ShopAddSlot()
     {
-        for (int i = 0; i < _skillCoolDown.skillsArray.Length; i++)
+        for (int i = 0; i < _skillCoolDown.skillsArray.Length-1; i++)
         {
             Instantiate(shopSlot, shopParent.transform);
         }
@@ -32,10 +32,10 @@ public class SkillUpgrade : MonoBehaviour
     public void UpdateSkillShop()
     {
         SkillBuySlot[] slots = shopParent.GetComponentsInChildren<SkillBuySlot>();
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length  ; i++)
         {
-            slots[i].Fill(_skillCoolDown.skillsArray[i]);
-            slots[i].slotIndex = i;
+            slots[i].Fill(_skillCoolDown.skillsArray[i+1]);
+            slots[i].slotIndex = i+1;
         }
     }
     public void BringCurrentSkills()

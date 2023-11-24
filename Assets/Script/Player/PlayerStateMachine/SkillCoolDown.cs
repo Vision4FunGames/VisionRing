@@ -58,7 +58,7 @@ public class SkillCoolDown : MonoBehaviour
 
     public void UpdateSkillButton()
     {
-        
+        _skillImages.Clear();
         for (int i = 0; i < _currentSkills.Count; i++)
         {
             UiManager.instance.ButtonType[i].skillButton.gameObject.SetActive(true);
