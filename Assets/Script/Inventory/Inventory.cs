@@ -43,11 +43,11 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i <items.Count; i++)
         {
-            if ((items[i].icon == null))
-            {
-                items[i].icon = Resources.Load<Sprite>("ItemSprite/" + items[i].name);
-            }
+            items[i].icon ??= Resources.Load<Sprite>("ItemSprite/" + items[i].name);
+            
         }
+
+        
     }
 
     public void Add (Item item)

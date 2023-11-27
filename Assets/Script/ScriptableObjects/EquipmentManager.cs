@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -72,15 +73,33 @@ public class EquipmentManager : MonoBehaviour {
 	public void LoadEquipment()
 	{
 		saveEquipment = ES3.Load("currentItems", currentEquipment);
+		
 		inventory.items.Clear();
 		inventory.items = ES3.Load("inventory", inventory.items);
 		inventory.itemsCount.Clear();
 		inventory.itemsCount = ES3.Load("InvItemCount", inventory.itemsCount);
 		inventory.upgradeItems = ES3.Load("upgradeItems", inventory.upgradeItems);
 		EconomyManager.instance.itemCount = ES3.Load("itemCount", EconomyManager.instance.itemCount);
+		EquipmentInitialize();
 
 	}
-	
+
+	public void EquipmentInitialize()
+	{
+		for (int i = 0; i < saveEquipment.Length; i++)
+		{
+			if (saveEquipment[i] !=null)
+			{
+				var s = saveEquipment[i].equipSlot.ToString();
+				saveEquipment[i].prefab=Resources.Load<GameObject>(s +"/" + saveEquipment[i].name);
+			}
+			
+		}
+		for (int i = 0; i <inventory.items.Count; i++)
+		{
+			inventory.items[i].icon ??= Resources.Load<Sprite>("ItemSprite/" + inventory.items[i].name);
+		}
+	}
 
 	public void ResetObjects()
 	{
