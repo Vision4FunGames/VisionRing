@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunType : MonoBehaviour
 {
-    public GunType myGunType;
+    public CurrentGunType myGunType;
     // Start is called before the first frame update
     void Start()
     {

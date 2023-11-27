@@ -132,7 +132,6 @@ public class PlayerManager : MonoBehaviour
         currentRope.GetComponent<Collider>().enabled = true;
     }
 
-    [Button("Stun")]
     public void Stun(GameObject enemy)
     {
         _playerAttack.isStun = true;

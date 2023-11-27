@@ -86,7 +86,6 @@ public class Player : MonoBehaviour
         PlayerBox = new PlayerBox(this, StateMachine);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine, false);
-
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
         dashSprite = Resources.Load<Sprite>("SkillSprite/Dash");
         attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;

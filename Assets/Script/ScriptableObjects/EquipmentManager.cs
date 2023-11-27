@@ -41,7 +41,8 @@ public class EquipmentManager : MonoBehaviour {
 	public SkinnedMeshRenderer targetMesh;
 	public SkinnedMeshRenderer targetEnvanterMesh;
 	public GameObject currentItemInventoryParent;
-	
+
+	private PlayerAttack _playerAttack;
 	// Callback for when an item is equipped
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 	public event OnEquipmentChanged onEquipmentChanged;
@@ -57,6 +58,7 @@ public class EquipmentManager : MonoBehaviour {
 	public Equipment selectedChestItem;
 	void Start ()
 	{
+		_playerAttack = FindObjectOfType<PlayerAttack>();
 		ResetObjects();
 		inventory = Inventory.instance;
 		//equippedInventory = EquippedInventory.instance;
@@ -171,6 +173,8 @@ public class EquipmentManager : MonoBehaviour {
 			currentWeapon.transform.parent = rightHand.transform;
 			currentWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);
 			currentWeapon.transform.localEulerAngles = new Vector3(-31.375f,-43.925f,-97.642f);
+			print("AAAA");
+			_playerAttack.ChangeGunType(currentWeapon.GetComponentInChildren<GunType>().myGunType);
 			currentInventoryWeapon = Instantiate(newItem.prefab,new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y, inventoryHand.transform.position.z),
 				Quaternion.identity);
 			currentInventoryWeapon.transform.parent = inventoryHand.transform;

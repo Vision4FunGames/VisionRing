@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public bool isDead, isStun;
     public ParticleSystem[] swordParticle;
     public int damage;
-    private CurrentGunType myCurrentGunType;
+    public CurrentGunType myCurrentGunType;
     private Player player;
     private Animator playerAnimator;
     private SwordAttack swordAttack;
@@ -28,7 +28,6 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myCurrentGunType = CurrentGunType.sword;
         player = FindObjectOfType<Player>();
         playerAnimator = GetComponentInChildren<Animator>();
     }
@@ -41,7 +40,6 @@ public class PlayerAttack : MonoBehaviour
             Attack();
         }
     }
-
     public void Attack()
     {
         if(!isDead && !isStun)
@@ -207,12 +205,12 @@ public class ArrowAttack : MonoBehaviour
             player.animValue /= 2;
             if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) != 0) // yürürken Attack
             {
-                _playerAnimator.Play("Arrow", 2, 0);
+                _playerAnimator.Play("Arrow", 1, 0);
             }
 
             if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) == 0) // yürürken Attack
             {
-                _playerAnimator.Play("Arrow", 1, 0);
+                _playerAnimator.Play("Arrow", 0, 0);
             }
         }
     }
@@ -220,7 +218,7 @@ public class ArrowAttack : MonoBehaviour
     public void EndAttack()
     {
         attack = false;
-        player.speed *= 2;
-        player.animValue *= 2;
+        playerAnimator.GetComponentInParent<Player>().speed = playerAnimator.GetComponentInParent<Player>().baseSpeed;
+        playerAnimator.GetComponentInParent<Player>().animValue = 1;
     }
 }
