@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     public float rotSpeed = 5;
     [HideInInspector] public float baseSpeed;
     [HideInInspector] public Animator _playerAnimator;
-    public FixedJoystick _fixedJoystick;
+    public DynamicJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
     [HideInInspector] public GameObject skillSword;
 
