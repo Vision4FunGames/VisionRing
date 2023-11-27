@@ -91,7 +91,14 @@ public class EquipmentManager : MonoBehaviour {
 			if (saveEquipment[i] !=null)
 			{
 				var s = saveEquipment[i].equipSlot.ToString();
-				saveEquipment[i].prefab=Resources.Load<GameObject>(s +"/" + saveEquipment[i].name);
+				if (saveEquipment[i].equipSlot == EquipmentSlot.Weapon)
+				{
+					saveEquipment[i].prefab=Resources.Load<GameObject>(s +"/" + saveEquipment[i].name);
+				}
+				else
+				{
+					saveEquipment[i].mesh = Resources.Load<SkinnedMeshRenderer>(s +"/" + saveEquipment[i].name);
+				}
 			}
 			
 		}
