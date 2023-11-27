@@ -181,7 +181,7 @@ public class ShopUI : MonoBehaviour
         }
         type = selected;
         UpdateShop();
-        //type = "All";
+        type = "All";
         
     }
     public void SelectedButton(GameObject btn)

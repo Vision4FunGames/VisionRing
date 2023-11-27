@@ -42,8 +42,16 @@ public class ShopSlot : MonoBehaviour
         {
             inveSlot.UseItem();
             Shop.instance.shopItems.RemoveAt(index);
-            Destroy(gameObject);
-            Shop.instance.onItemChangedCallback.Invoke(); 
+           // Destroy(gameObject);
+            if (Shop.instance.onItemChangedCallback!= null)
+            {
+                Shop.instance.onItemChangedCallback.Invoke(); 
+                Debug.Log("Invoked");
+            }
+            else
+            {
+                ShopUI.instance.UpdateShop();
+            }
         }
       
     }
