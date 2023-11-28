@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Collections.ObjectModel;
+using System.Linq;
 using Unity.VisualScripting;
 
 public class Inventory : MonoBehaviour
@@ -32,6 +33,7 @@ public class Inventory : MonoBehaviour
     public List<int> itemsCount = new List<int>();
     public List<Item> upgradeItems = new List<Item>();
     public List<Item> currentItems = new List<Item>();
+    List<Equipment> listEq = new List<Item>().Cast<Equipment>().ToList();
     
     // Add a new item if enough room
     private void Start()
@@ -41,13 +43,26 @@ public class Inventory : MonoBehaviour
 
     public void Initialize()
     {
+        listEq.Clear();
         for (int i = 0; i <items.Count; i++)
         {
             items[i].icon ??= Resources.Load<Sprite>("ItemSprite/" + items[i].name);
             
+            if (items[i].GetType() == typeof(Equipment))
+            {
+                listEq.Add((Equipment)items[i]);  
+                var s =  listEq[i].equipSlot.ToString();
+                if (listEq[i].equipSlot == EquipmentSlot.Weapon)
+                {
+                    listEq[i].prefab = Resources.Load<GameObject>("Weapon/" + items[i].name);
+                }
+                else
+                {
+                    listEq[i].mesh = Resources.Load<SkinnedMeshRenderer>(s+"/" + items[i].name);
+                }
+            }
+            
         }
-
-        
     }
 
     public void Add (Item item)
