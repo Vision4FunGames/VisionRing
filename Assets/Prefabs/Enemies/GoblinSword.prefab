@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 6759728030344244775}
   - component: {fileID: 6759728030344244774}
   - component: {fileID: 1601766727}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GoblinSword
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 0
+  target: {fileID: 0}
 --- !u!114 &6759728030344244777
 MonoBehaviour:
   m_ObjectHideFlags: 0

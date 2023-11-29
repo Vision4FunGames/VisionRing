@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Script.CombatScript;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator playerAnimator;
     private SwordAttack swordAttack;
     private ArrowAttack arrowAttack;
-
+    public List<GameObject> arrow;
     [Header("Skills")] public float tornadoDamageRate;
     public int tornadoDamage;
     public int flameDamage;
@@ -30,19 +32,25 @@ public class PlayerAttack : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         playerAnimator = GetComponentInChildren<Animator>();
+        for (int i = 0; i < 30; i++)
+        {
+            arrow.Add(Instantiate(Resources.Load("Arrow") as GameObject));
+            arrow[i].SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) )
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Attack();
         }
     }
+
     public void Attack()
     {
-        if(!isDead && !isStun)
+        if (!isDead && !isStun)
         {
             switch (myCurrentGunType)
             {
@@ -58,7 +66,6 @@ public class PlayerAttack : MonoBehaviour
                     break;
             }
         }
-       
     }
 
     public void ChangeGunType(CurrentGunType currentGunType)
@@ -186,14 +193,52 @@ public class SwordAttack : MonoBehaviour
 
 public class ArrowAttack : MonoBehaviour
 {
+    public Collider[] hitColliders;
+    private PlayerAttack playerAttack;
     private Player player;
     private Animator playerAnimator;
     private bool attack;
-
+    public LayerMask layer; 
+    GameObject closestEnemy;
     private void Start()
     {
+        layer = LayerMask.GetMask("Enemy");
+        playerAttack ??= FindObjectOfType<PlayerAttack>();
         player ??= FindObjectOfType<Player>();
         playerAnimator ??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
+    }
+
+    public void CheckEnemyNear()
+    {
+        hitColliders = Physics.OverlapSphere(transform.position, 40, layer);
+        float min = 100;
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+           float currentDistance = Vector3.Distance(transform.position, hitColliders[i].transform.position);
+           if (currentDistance < min)
+           {
+               closestEnemy = hitColliders[i].gameObject;
+               min = currentDistance;
+           }
+        }
+    }
+
+    public void ArrowSpawn()
+    {
+        CheckEnemyNear();
+        if (closestEnemy)
+        {
+            GameObject currentArrow = playerAttack.arrow[0];
+            currentArrow.transform.position = transform.position + new Vector3(0,2,0);
+            currentArrow.SetActive(true);
+            currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy);
+            ArrowRemove();
+        }
+    }
+
+    public void ArrowRemove()
+    {
+        playerAttack.arrow.RemoveAt(0);
     }
 
     public void AttackArrow(Player player, Animator _playerAnimator)
@@ -217,6 +262,7 @@ public class ArrowAttack : MonoBehaviour
 
     public void EndAttack()
     {
+        ArrowSpawn();
         attack = false;
         playerAnimator.GetComponentInParent<Player>().speed = playerAnimator.GetComponentInParent<Player>().baseSpeed;
         playerAnimator.GetComponentInParent<Player>().animValue = 1;

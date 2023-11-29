@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 1581168890}
   - component: {fileID: 1581168891}
   - component: {fileID: 635666913}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MiniSkelet
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
+  target: {fileID: 0}
 --- !u!114 &6512186244140242534
 MonoBehaviour:
   m_ObjectHideFlags: 0

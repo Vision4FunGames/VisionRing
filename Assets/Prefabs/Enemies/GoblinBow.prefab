@@ -2069,7 +2069,7 @@ GameObject:
   - component: {fileID: 2923813580176414460}
   - component: {fileID: 2923813580176414404}
   - component: {fileID: 1751839462}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GoblinBow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -2232,6 +2232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 0
+  target: {fileID: 0}
 --- !u!136 &1751839462
 CapsuleCollider:
   m_ObjectHideFlags: 0
