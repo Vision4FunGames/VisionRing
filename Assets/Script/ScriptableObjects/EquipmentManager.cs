@@ -173,7 +173,6 @@ public class EquipmentManager : MonoBehaviour {
 			currentWeapon.transform.parent = rightHand.transform;
 			currentWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);
 			currentWeapon.transform.localEulerAngles = new Vector3(-31.375f,-43.925f,-97.642f);
-			print("AAAA");
 			_playerAttack.ChangeGunType(currentWeapon.GetComponentInChildren<GunType>().myGunType);
 			currentInventoryWeapon = Instantiate(newItem.prefab,new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y, inventoryHand.transform.position.z),
 				Quaternion.identity);

@@ -198,8 +198,11 @@ public class ArrowAttack : MonoBehaviour
     private Player player;
     private Animator playerAnimator;
     private bool attack;
-    public LayerMask layer; 
+    public LayerMask layer;
+    public CurrentArrowType mycurrentArrowType;
     GameObject closestEnemy;
+
+
     private void Start()
     {
         layer = LayerMask.GetMask("Enemy");
@@ -214,25 +217,40 @@ public class ArrowAttack : MonoBehaviour
         float min = 100;
         for (int i = 0; i < hitColliders.Length; i++)
         {
-           float currentDistance = Vector3.Distance(transform.position, hitColliders[i].transform.position);
-           if (currentDistance < min)
-           {
-               closestEnemy = hitColliders[i].gameObject;
-               min = currentDistance;
-           }
+            float currentDistance = Vector3.Distance(transform.position, hitColliders[i].transform.position);
+            if (currentDistance < min)
+            {
+                closestEnemy = hitColliders[i].gameObject;
+                min = currentDistance;
+            }
         }
     }
 
     public void ArrowSpawn()
     {
-        CheckEnemyNear();
         if (closestEnemy)
         {
-            GameObject currentArrow = playerAttack.arrow[0];
-            currentArrow.transform.position = transform.position + new Vector3(0,2,0);
-            currentArrow.SetActive(true);
-            currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy);
-            ArrowRemove();
+            switch (mycurrentArrowType)
+            {
+                case CurrentArrowType.single:
+                    GameObject currentArrow = playerAttack.arrow[0];
+                    currentArrow.transform.position = transform.position + new Vector3(0, 2, 0);
+                    currentArrow.SetActive(true);
+                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy);
+                    ArrowRemove();
+                    break;
+                case CurrentArrowType.three:
+
+                    break;
+                case CurrentArrowType.split:
+
+                    break;
+                case CurrentArrowType.bounce:
+
+                    break;
+            }
+
+           
         }
     }
 
@@ -245,17 +263,23 @@ public class ArrowAttack : MonoBehaviour
     {
         if (!attack)
         {
-            attack = true;
-            player.speed /= 2;
-            player.animValue /= 2;
-            if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) != 0) // yürürken Attack
+            CheckEnemyNear();
+            if (closestEnemy)
             {
-                _playerAnimator.Play("Arrow", 1, 0);
-            }
+                attack = true;
+                player.speed /= 2;
+                player.animValue /= 2;
+                if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) !=
+                    0) // yürürken Attack
+                {
+                    _playerAnimator.Play("Arrow", 1, 0);
+                }
 
-            if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) == 0) // yürürken Attack
-            {
-                _playerAnimator.Play("Arrow", 0, 0);
+                if (Mathf.Abs(player._fixedJoystick.Horizontal + player._fixedJoystick.Vertical) ==
+                    0) // yürürken Attack
+                {
+                    _playerAnimator.Play("Arrow", 0, 0);
+                }
             }
         }
     }
