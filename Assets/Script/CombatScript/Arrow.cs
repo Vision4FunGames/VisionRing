@@ -11,14 +11,35 @@ namespace Script.CombatScript
         private GameObject targetEnemy;
         private bool arrowMove;
         private bool _split;
+        private bool _three;
 
-        public void ArrowStart(GameObject target, bool split)
+        public void ArrowStart(GameObject target, bool split , bool three)
         {
             splitBoolMove = false;
+            _three = three;
             _split = split;
             playerAttack = FindObjectOfType<PlayerAttack>();
             targetEnemy = target;
             arrowMove = true;
+            transform.LookAt(targetEnemy.transform.position+new Vector3(0,2,0));
+            if (_three)
+            {
+                GameObject currentArrowObj = playerAttack.arrow[0].gameObject;
+                playerAttack.arrow.RemoveAt(0);
+                currentArrowObj.SetActive(true);
+                currentArrowObj.transform.position = transform.position;
+                currentArrowObj.transform.eulerAngles = new Vector3(transform.eulerAngles.x,
+                    transform.eulerAngles.y+15, transform.eulerAngles.z);
+                currentArrowObj.GetComponent<Arrow>().SetSplitTarget();
+                
+                GameObject currentArrowObj1 = playerAttack.arrow[0].gameObject;
+                playerAttack.arrow.RemoveAt(0);
+                currentArrowObj1.SetActive(true);
+                currentArrowObj1.transform.position = transform.position;
+                currentArrowObj1.transform.eulerAngles = new Vector3(transform.eulerAngles.x,
+                    transform.eulerAngles.y-15, transform.eulerAngles.z);
+                currentArrowObj1.GetComponent<Arrow>().SetSplitTarget();
+            }
             Invoke("CloseArrow", 5);
         }
 
@@ -32,7 +53,7 @@ namespace Script.CombatScript
             }
 
             if (splitBoolMove)
-            {
+            {   
                 transform.position = Vector3.MoveTowards(transform.position, splitTarget + new Vector3(0, 2, 0), 5);
             }
         }
@@ -47,6 +68,7 @@ namespace Script.CombatScript
         {
             playerAttack = FindObjectOfType<PlayerAttack>();
             _split = false;
+            _three = false;
             splitTarget = transform.position + (transform.forward * 50);
             splitBoolMove = true;
             Invoke("CloseArrow", 5);

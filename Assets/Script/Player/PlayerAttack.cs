@@ -237,17 +237,21 @@ public class ArrowAttack : MonoBehaviour
                     GameObject currentArrow = playerAttack.arrow[0];
                     currentArrow.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow.SetActive(true);
-                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy,false);
+                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy,false,false);
                     ArrowRemove();
                     break;
                 case CurrentArrowType.three:
-                   
+                    GameObject currentArrow2 = playerAttack.arrow[0];
+                    currentArrow2.transform.position = transform.position + new Vector3(0, 2, 0);
+                    currentArrow2.SetActive(true);
+                    ArrowRemove();
+                    currentArrow2.GetComponent<Arrow>().ArrowStart(closestEnemy,false,true);
                     break;
                 case CurrentArrowType.split:
                     GameObject currentArrow1 = playerAttack.arrow[0];
                     currentArrow1.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow1.SetActive(true);
-                    currentArrow1.GetComponent<Arrow>().ArrowStart(closestEnemy,true);
+                    currentArrow1.GetComponent<Arrow>().ArrowStart(closestEnemy,true,false);
                     ArrowRemove();
                     break;
                 case CurrentArrowType.bounce:
