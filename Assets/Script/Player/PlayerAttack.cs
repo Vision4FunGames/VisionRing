@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public bool isDead, isStun;
     public ParticleSystem[] swordParticle;
     public int damage;
+    public CurrentArrowType myCurrentArrowType;
     public CurrentGunType myCurrentGunType;
     private Player player;
     private Animator playerAnimator;
@@ -60,7 +61,7 @@ public class PlayerAttack : MonoBehaviour
                     break;
                 case CurrentGunType.arrow:
                     arrowAttack ??= playerAnimator.gameObject.AddComponent<ArrowAttack>();
-                    arrowAttack.AttackArrow(player, playerAnimator);
+                    arrowAttack.AttackArrow(player, playerAnimator,myCurrentArrowType);
                     break;
                 case CurrentGunType.spear:
                     break;
@@ -236,14 +237,18 @@ public class ArrowAttack : MonoBehaviour
                     GameObject currentArrow = playerAttack.arrow[0];
                     currentArrow.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow.SetActive(true);
-                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy);
+                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy,false);
                     ArrowRemove();
                     break;
                 case CurrentArrowType.three:
-
+                   
                     break;
                 case CurrentArrowType.split:
-
+                    GameObject currentArrow1 = playerAttack.arrow[0];
+                    currentArrow1.transform.position = transform.position + new Vector3(0, 2, 0);
+                    currentArrow1.SetActive(true);
+                    currentArrow1.GetComponent<Arrow>().ArrowStart(closestEnemy,true);
+                    ArrowRemove();
                     break;
                 case CurrentArrowType.bounce:
 
@@ -259,8 +264,9 @@ public class ArrowAttack : MonoBehaviour
         playerAttack.arrow.RemoveAt(0);
     }
 
-    public void AttackArrow(Player player, Animator _playerAnimator)
+    public void AttackArrow(Player player, Animator _playerAnimator , CurrentArrowType _arrowType)
     {
+        mycurrentArrowType = _arrowType;
         if (!attack)
         {
             CheckEnemyNear();
