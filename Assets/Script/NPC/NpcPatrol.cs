@@ -18,6 +18,15 @@ public class NpcPatrol : MonoBehaviour
 
     }
 
+    public void PatrolStop()
+    {
+        navMeshAgent.speed = 0;
+    }
+    
+    public void PatrolResume()
+    {
+        navMeshAgent.speed = 5;
+    }
     
     void Update()
     {
