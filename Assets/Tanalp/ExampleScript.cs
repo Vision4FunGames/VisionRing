@@ -96,7 +96,7 @@ public class ExampleScript : MonoBehaviour
         flag = true;
     }
 }
-
+/*
 [UnityEditor.CustomEditor(typeof(ExampleScript))]
 public class ExampleScriptEditor : UnityEditor.Editor
 {
@@ -115,3 +115,4 @@ public class ExampleScriptEditor : UnityEditor.Editor
         }
     }
 }
+*/

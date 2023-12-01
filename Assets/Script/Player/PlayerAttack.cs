@@ -219,7 +219,7 @@ public class ArrowAttack : MonoBehaviour
         for (int i = 0; i < hitColliders.Length; i++)
         {
             float currentDistance = Vector3.Distance(transform.position, hitColliders[i].transform.position);
-            if (currentDistance < min)
+            if (currentDistance < min && !hitColliders[i].GetComponent<EnemyStats>().die)
             {
                 closestEnemy = hitColliders[i].gameObject;
                 min = currentDistance;
@@ -237,7 +237,7 @@ public class ArrowAttack : MonoBehaviour
                     GameObject currentArrow = playerAttack.arrow[0];
                     currentArrow.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow.SetActive(true);
-                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy,false,false);
+                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy,false,false,false);
                     ArrowRemove();
                     break;
                 case CurrentArrowType.three:
@@ -245,17 +245,21 @@ public class ArrowAttack : MonoBehaviour
                     currentArrow2.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow2.SetActive(true);
                     ArrowRemove();
-                    currentArrow2.GetComponent<Arrow>().ArrowStart(closestEnemy,false,true);
+                    currentArrow2.GetComponent<Arrow>().ArrowStart(closestEnemy,false,true,false);
                     break;
                 case CurrentArrowType.split:
                     GameObject currentArrow1 = playerAttack.arrow[0];
                     currentArrow1.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow1.SetActive(true);
-                    currentArrow1.GetComponent<Arrow>().ArrowStart(closestEnemy,true,false);
+                    currentArrow1.GetComponent<Arrow>().ArrowStart(closestEnemy,true,false,false);
                     ArrowRemove();
                     break;
                 case CurrentArrowType.bounce:
-
+                    GameObject currentArrow3 = playerAttack.arrow[0];
+                    currentArrow3.transform.position = transform.position + new Vector3(0, 2, 0);
+                    currentArrow3.SetActive(true);
+                    currentArrow3.GetComponent<Arrow>().ArrowStart(closestEnemy,false,false,true);
+                    ArrowRemove();
                     break;
             }
 

@@ -22,7 +22,7 @@ public class Equipment : Item {
     [ContextMenu("Save")]
     public void Save()
     {
-        AssetDatabase.SaveAssets();
+        //ssetDatabase.SaveAssets();
     }
   
     
