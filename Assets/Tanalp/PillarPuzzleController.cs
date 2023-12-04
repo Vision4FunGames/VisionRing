@@ -4,9 +4,11 @@ public class PillarPuzzleController : MonoBehaviour
 {
     public GameObject[] pillars;
     public AudioClip grindSound;  // Assign the grind sound in the Inspector
-    private int[] correctRotations = { 120, 240, 0 };
+    private int[] correctRotations = { 180, 0, 180 };
     private int[] currentRotations;
     private bool isRotating = false;
+    public GameObject forcefield;
+    private bool solved = false;
 
     void Start()
     {
@@ -24,12 +26,13 @@ public class PillarPuzzleController : MonoBehaviour
             pillars[i].GetComponent<BoxCollider>().isTrigger = true;
             pillars[i].GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
             pillars[i].AddComponent<PillarClickHandler>().Init(this, index, audioSource);
+            currentRotations[i] = (int)pillars[index].transform.rotation.eulerAngles.y;
         }
     }
 
     public void OnPillarClicked(int index)
     {
-        if (!isRotating)
+        if (!isRotating && !solved)
         {
             StartCoroutine(RotatePillarSmoothly(index, 1f));
         }
@@ -41,7 +44,7 @@ public class PillarPuzzleController : MonoBehaviour
 
         float elapsed = 0f;
         float startRotation = pillars[index].transform.rotation.eulerAngles.y;
-        float targetRotation = (currentRotations[index] + 120) % 360;
+        float targetRotation = (startRotation + 120) % 360;
 
         // Play the grind sound
         pillars[index].GetComponent<AudioSource>().PlayOneShot(grindSound);
@@ -65,7 +68,9 @@ public class PillarPuzzleController : MonoBehaviour
 
         if (CheckCorrectRotations())
         {
-            Debug.Log("Correct sequence found!");
+            solved = true;
+            forcefield.SetActive(false);
+
         }
     }
 
