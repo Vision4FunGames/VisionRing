@@ -53,5 +53,6 @@ public abstract class CharacterHealth : MonoBehaviour
         _player._playerAnimator.Play("Death");
         _player.StateMachine.ChangeState(new PlayerIdleState(_player,_player.StateMachine));
         OnDie?.Invoke();
+        UiManager.instance.DeadUI();
     }
 }

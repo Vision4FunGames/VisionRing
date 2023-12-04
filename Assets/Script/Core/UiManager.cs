@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DG.Tweening;
 using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
@@ -13,7 +15,7 @@ public class UiManager : MonoBehaviour
     public ButtonType[] ButtonType;
     public static UiManager instance;
     [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter;
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel;
 
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
@@ -194,6 +196,12 @@ public class UiManager : MonoBehaviour
             armorFilter.gameObject.SetActive(false);
             gunFilter.gameObject.SetActive(false);
         }
+    }
+
+    public void DeadUI()
+    {
+        deadPanel.gameObject.SetActive(true);
+        deadPanel.GetComponent<Image>().DOFade(1f, 4f);
     }
 }
 

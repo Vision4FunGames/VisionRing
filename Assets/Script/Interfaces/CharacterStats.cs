@@ -72,7 +72,7 @@ public class CharacterStats : MonoBehaviour
                 damage);
         newDamageNumber.followedTarget = transform;
     }
-
+    
     public virtual void Die()
     {
         QuestMachineMessages.SendCompositeMessage(this, message);
