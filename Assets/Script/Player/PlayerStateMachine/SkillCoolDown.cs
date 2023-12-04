@@ -27,6 +27,14 @@ public class SkillCoolDown : MonoBehaviour
         {
             skillsArray[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + skillsArray[i].skillName);
         }
+
+        LoadSkill();
+    }
+
+    public void LoadSkill()
+    {
+        ES3.Load("currentSkills", _currentSkills);
+        onSkillChangeCallBack.Invoke();
     }
 
     private void Update()
@@ -61,6 +69,10 @@ public class SkillCoolDown : MonoBehaviour
         _skillImages.Clear();
         for (int i = 0; i < _currentSkills.Count; i++)
         {
+            if (i >= 3)
+            {
+                return;
+            }
             UiManager.instance.ButtonType[i].skillButton.gameObject.SetActive(true);
             switch (_currentSkills[i].skillName)
             {
@@ -88,9 +100,7 @@ public class SkillCoolDown : MonoBehaviour
                 case "Clone":
                     UiManager.instance.ButtonType[i].mySkillType = SkillType.Clone;
                     break;
-
             }
-         
             UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()
                     .sprite =
                 _currentSkills[i].skillImage;
@@ -98,10 +108,6 @@ public class SkillCoolDown : MonoBehaviour
                 _currentSkills[i].skillImage;
             _skillImages.Add(UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0)
                 .GetComponent<Image>());
-            if (_currentSkills.Count > 3)
-            {
-                return;
-            }
         }
     }
 }

@@ -127,5 +127,7 @@ public class SkillUpgrade : MonoBehaviour
             slot.skillSlot.GetComponent<InventorySlot>().backGImage.material = UiManager.instance.skillMaterial;
             onSkillShopChangeCallBack.Invoke();
         }
+
+        ES3.Save("currentSkills", _skillCoolDown._currentSkills);
     }
 }

@@ -42,6 +42,13 @@ public class InventorySlot : MonoBehaviour
         icon.sprite = item.icon;
         icon.enabled = true;
     }
+
+    public void AddSkill(Skills skill)
+    {
+        backGImage.sprite = UiManager.instance.itemlevelSprites[skill.skillLevel];
+        icon.sprite = skill.skillImage;
+        icon.enabled = true;
+    }
     
     // Clear the slot
     public void ClearSlot ()
