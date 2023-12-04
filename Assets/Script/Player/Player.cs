@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 
     #region StateMachine Variable
 
+    public PlayerAttack _playerAttack;
     public PlayerStateMachine StateMachine { get; set; }
     public PlayerIdleState PlayerIdleState { get; set; }
     public PlayerMovementState PlayerMovementState { get; set; }
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
 
     #region Movement Variable
 
+    public CurrentArrowType _baseCurrentArrowType;
+    public CurrentGunType _baseCurrentGunType;
     public bool isMovement = true;
     public bool isWalk;
     [HideInInspector] public float animValue = 1;
@@ -47,7 +50,7 @@ public class Player : MonoBehaviour
     public DynamicJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
     [HideInInspector] public GameObject skillSword;
-
+    
     private void DisableMovement()
     {
         //StateMachine.ChangeState(PlayerIdleState);
@@ -77,6 +80,7 @@ public class Player : MonoBehaviour
             instance = this;
         }
 
+        _playerAttack = GetComponent<PlayerAttack>();
         uiManager = FindObjectOfType<UiManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
@@ -163,6 +167,8 @@ public class Player : MonoBehaviour
         UiManager.instance.EnableButton();
         _playerAnimator.SetFloat("AttackSpeed", 1);
         _playerHealth.useShield = false;
+        _playerAttack.myCurrentGunType = _baseCurrentGunType;
+        _playerAttack.myCurrentArrowType = _baseCurrentArrowType;
     }
 
     private void FixedUpdate()

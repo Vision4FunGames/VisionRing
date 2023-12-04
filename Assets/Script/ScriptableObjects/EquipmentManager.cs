@@ -43,7 +43,7 @@ public class EquipmentManager : MonoBehaviour
     public SkinnedMeshRenderer targetMesh;
     public SkinnedMeshRenderer targetEnvanterMesh;
     public GameObject currentItemInventoryParent;
-
+    private Player _player;
     private PlayerAttack _playerAttack;
 
     // Callback for when an item is equipped
@@ -64,6 +64,7 @@ public class EquipmentManager : MonoBehaviour
 
     void Start()
     {
+        _player = FindObjectOfType<Player>();
         _playerAttack = FindObjectOfType<PlayerAttack>();
         ResetObjects();
         inventory = Inventory.instance;
@@ -189,7 +190,7 @@ public class EquipmentManager : MonoBehaviour
                 currentWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);
                 currentWeapon.transform.localEulerAngles = new Vector3(-31.375f, -43.925f, -97.642f);
                 _playerAttack.ChangeGunType(currentWeapon.GetComponentInChildren<GunType>().myGunType);
-
+                
                 currentInventoryWeapon = Instantiate(newItem.prefab,
                     new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y,
                         inventoryHand.transform.position.z),
@@ -205,6 +206,7 @@ public class EquipmentManager : MonoBehaviour
                 currentWeapon.transform.localEulerAngles = new Vector3(-31.375f, -43.925f, -97.642f);
                 _playerAttack.ChangeGunType(currentWeapon.GetComponentInChildren<GunType>().myGunType);
                 _playerAttack.myCurrentArrowType = currentWeapon.GetComponentInChildren<GunType>().MyArrowType;
+                _player._baseCurrentArrowType = currentWeapon.GetComponentInChildren<GunType>().MyArrowType;
                 currentInventoryWeapon = Instantiate(newItem.prefab,
                     new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y,
                         inventoryHand.transform.position.z),

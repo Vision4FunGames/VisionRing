@@ -19,7 +19,6 @@ public class PlayerSkillState : PlayerState
 {
     private SkillType _skillType;
     private GameObject sword;
-
     public PlayerSkillState(Player player, PlayerStateMachine playerStateMachine, SkillType mySkillType) : base(player,
         playerStateMachine)
     {
@@ -158,6 +157,7 @@ public class PlayerSkillState : PlayerState
         SkillCoolDown.instance.skillsArray[5].coolDownTime = SkillCoolDown.instance.skillsArray[5].coolDown;
         UiManager.instance.DisableButton();
         sword = GameObject.Instantiate(Resources.Load("Skills/Skill Sword") as GameObject);
+        _player._playerAttack.myCurrentGunType = CurrentGunType.sword;
         if (sword != null)
         {
             sword.transform.SetParent(_player.skillSword.transform);
@@ -170,6 +170,8 @@ public class PlayerSkillState : PlayerState
         Destroy(sword,10);
         _player.DisableSkill(10);
     }
+
+   
    
     public void DashSkill()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Script.CombatScript;
 using UnityEngine;
@@ -28,10 +29,15 @@ public class PlayerAttack : MonoBehaviour
     public float flameDamageRateOfFire;
     public int earthSkillDamage;
 
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<Player>();
+      
         playerAnimator = GetComponentInChildren<Animator>();
         for (int i = 0; i < 30; i++)
         {
@@ -72,6 +78,7 @@ public class PlayerAttack : MonoBehaviour
     public void ChangeGunType(CurrentGunType currentGunType)
     {
         myCurrentGunType = currentGunType;
+        player._baseCurrentGunType = currentGunType;
     }
 }
 
