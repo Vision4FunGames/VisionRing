@@ -89,6 +89,11 @@ public class Equipment : Item {
             Inventory.instance.items.Add(this);
             Inventory.instance.onItemChangedCallback.Invoke();
         }
+
+        if (type == InventoryType.Skill)
+        {
+            
+        }
     }
 
     public void Fill(Equipment item)

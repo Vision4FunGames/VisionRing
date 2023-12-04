@@ -100,6 +100,7 @@ public enum InventoryType
     Sell,
     Upgrade,
     UnEquip,
-    Collect
+    Collect,
+    Skill
 }
 
