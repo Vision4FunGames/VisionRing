@@ -1,3 +1,4 @@
+using System;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -5,11 +6,12 @@ public abstract class CharacterHealth : MonoBehaviour
 {
     public delegate void DieDelegate();
 
+    private Player _player;
     public DieDelegate OnDie;
     protected int health;
     public MMProgressBar mmProgressBar;
     [HideInInspector] public bool useShield;
-
+    private GameManager _gameManager;
     public bool IsAlive()
     {
         return health > 0;
@@ -18,6 +20,12 @@ public abstract class CharacterHealth : MonoBehaviour
     public int GetHealth()
     {
         return health;
+    }
+
+    private void Start()
+    {
+        _player = FindObjectOfType<Player>();
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     public void TakeDamage(int damageAmount)
@@ -41,6 +49,9 @@ public abstract class CharacterHealth : MonoBehaviour
 
     protected void Die()
     {
+        _gameManager.UpdateGameState(GameState.GameOver);
+        _player._playerAnimator.Play("Death");
+        _player.StateMachine.ChangeState(new PlayerIdleState(_player,_player.StateMachine));
         OnDie?.Invoke();
     }
 }

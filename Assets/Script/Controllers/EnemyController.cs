@@ -12,8 +12,10 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent agent;
     CharacterCombat combatManager;
     private float distance;
+    private GameManager _gameManager;
     void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         _enemyStats = GetComponent<EnemyStats>();
         target = Player.instance.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -30,7 +32,7 @@ public class EnemyController : MonoBehaviour
           
 
         // If inside the radius
-        if (distance <= lookRadius && agent != null && !_enemyStats.die)
+        if (distance <= lookRadius && agent != null && !_enemyStats.die &&_gameManager.gameState != GameState.GameOver )
         {
             if (target)
                 agent.SetDestination(target.position);
