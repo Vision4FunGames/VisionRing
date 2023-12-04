@@ -52,7 +52,7 @@ public class FadeObstructionsManager : MonoBehaviour
 
     // Camera viewing the object this script is on
     public Camera Camera;
-    //public PlayerRender PlayerRender;
+    public PlayerRender PlayerRender;
 
     // Seconds it takes to fade
     public float FadeOutSeconds = 1f;
@@ -188,9 +188,9 @@ public class FadeObstructionsManager : MonoBehaviour
 
                         if (x.Options != null && x.Options.isNotTransParent)
                         {
-                           // Camera.GetComponent<PlayerRender>().currentRenderer =
-                                //x.GameObject.GetComponentInChildren<Renderer>().gameObject;
-                            //Camera.GetComponent<PlayerRender>().MaterialTransparent();
+                            Camera.GetComponent<PlayerRender>().currentRenderer =
+                                x.GameObject.GetComponentInChildren<Renderer>().gameObject;
+                            Camera.GetComponent<PlayerRender>().MaterialTransparent();
                             foreach (Material m in x.GameObject.GetComponent<Renderer>().materials)
                             {
                                 m.color = new Color(m.color.r, m.color.g, m.color.b, x.TransparencyLevel);

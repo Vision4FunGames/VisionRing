@@ -12,7 +12,7 @@ public class FadeObstructingObjectsInspector : Editor
         FadeObstructionsManager fade = target as FadeObstructionsManager;
 
         fade.Camera = (Camera)EditorGUILayout.ObjectField(new GUIContent("Camera", "Fading is camera dependant, we fade the objects between something and the camera"), fade.Camera, typeof(Camera), true);
-        //fade.PlayerRender = (PlayerRender)EditorGUILayout.ObjectField(new GUIContent("Camera", "Fading is camera dependant, we fade the objects between something and the camera"), fade.PlayerRender, typeof(PlayerRender), true);
+        fade.PlayerRender = (PlayerRender)EditorGUILayout.ObjectField(new GUIContent("Camera", "Fading is camera dependant, we fade the objects between something and the camera"), fade.PlayerRender, typeof(PlayerRender), true);
         fade.FinalAlpha = EditorGUILayout.Slider(new GUIContent("Final Alpha", "The final alpha of the objects that get faded. If you would like to override this on a specific object you can place a FadeObjectOptions script on that object."), fade.FinalAlpha, 0.0f, 1.0f);
         if (fade.FinalAlpha < 0)
             fade.FinalAlpha = 0;
