@@ -50,7 +50,7 @@ namespace Script.CombatScript
 
         private void FixedUpdate()
         {
-            if (arrowMove)
+            if (arrowMove && targetEnemy)
             {
                 transform.position = Vector3.MoveTowards(transform.position,
                     targetEnemy.transform.position + new Vector3(0, 2, 0), 5);
