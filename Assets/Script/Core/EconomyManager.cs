@@ -13,7 +13,7 @@ public class EconomyManager : MonoBehaviour
         instance = this;
         shopSlot = GetComponents<ShopSlot>();
     }
-    
+
 
     [Header("Items")] public List<Item> itemList = new List<Item>();
     public List<int> itemCount = new List<int>();
@@ -67,7 +67,9 @@ public class EconomyManager : MonoBehaviour
     void Start()
     {
         LoadEconomy();
-       
+        gold = 10000;
+        diamond = 10000;
+        coin = 10000;
     }
 
     private void LoadEconomy()
