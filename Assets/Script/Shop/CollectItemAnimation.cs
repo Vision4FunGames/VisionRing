@@ -1,0 +1,44 @@
+using UnityEngine;
+using DG.Tweening;
+using NaughtyAttributes;
+
+public class CollectItemAnimation : MonoBehaviour
+{
+    Canvas canvasMain;
+
+    private void Start()
+    {
+        canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
+      
+    }
+
+    [ButtonAttribute("CollectItem")]
+    public void CollectItem()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            int rand = Random.Range(0, 20);
+            if (rand < 10)
+            {
+                GameObject current = Instantiate(Resources.Load<GameObject>("GoldImage"), canvasMain.transform);
+                Vector3 goldpos = Camera.main.WorldToScreenPoint(this.transform.position);
+                current.transform.position = goldpos+new Vector3(Random.Range(10f,100f),Random.Range(10f,100f),Random.Range(10f,100f));
+                current.transform.DOLocalMove(canvasMain.transform.GetChild(0).GetChild(8).transform.localPosition, 1f).SetDelay(Random.Range(0f,1f)).OnComplete(() =>
+                {
+                    Destroy(current);
+                });
+            }
+            else
+            {
+                GameObject current = Instantiate(Resources.Load<GameObject>("GoldImage 1"), canvasMain.transform);
+                Vector3 goldpos = Camera.main.WorldToScreenPoint(this.transform.position);
+                current.transform.position = goldpos+new Vector3(Random.Range(0f,10f),Random.Range(0f,10f),Random.Range(0f,10f));
+                current.transform.DOLocalMove(canvasMain.transform.GetChild(0).GetChild(8).transform.localPosition, 1f).SetDelay(Random.Range(0f,1f)).OnComplete(() =>
+                {
+                    Destroy(current);
+                });
+            }
+          
+        }
+    }
+}
