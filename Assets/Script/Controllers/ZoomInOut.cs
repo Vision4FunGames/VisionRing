@@ -6,8 +6,9 @@ public class ZoomInOut : MonoBehaviour
     private DynamicJoystick dynamicJoystick;
     private FixedJoystick _fixedJoystick;
     private CinemachineVirtualCamera cm;
+    private CinemachineTransposer cmF;
     private float touchesPrevPosDif, touchesCurPosDif;
-    public float zoomModifier;
+    [Range(10, 30)] public float zoomModifier;
     private Vector2 firstTouchPrevPos, secondTouchPrevPos;
     [SerializeField] private float zoomModifierSpeed = .1f;
 
@@ -16,6 +17,7 @@ public class ZoomInOut : MonoBehaviour
     {
         dynamicJoystick = FindObjectOfType<DynamicJoystick>();
         cm = GetComponent<CinemachineVirtualCamera>();
+        cmF = cm.GetCinemachineComponent<CinemachineTransposer>();
     }
 
     // Update is called once per frame
@@ -33,13 +35,12 @@ public class ZoomInOut : MonoBehaviour
             touchesCurPosDif = (firstTouch.position - seconTouch.position).magnitude;
 
             zoomModifier = (firstTouch.deltaPosition - seconTouch.deltaPosition).magnitude * zoomModifierSpeed;
-           
+
             if (touchesPrevPosDif > touchesCurPosDif)
                 cm.m_Lens.FieldOfView += zoomModifier;
             if (touchesPrevPosDif < touchesCurPosDif)
                 cm.m_Lens.FieldOfView -= zoomModifier;
         }
-
-        cm.m_Lens.FieldOfView = Mathf.Clamp(cm.m_Lens.FieldOfView, 11, 80);
+        cmF.m_FollowOffset = new Vector3(0, zoomModifier, -zoomModifier);
     }
 }
