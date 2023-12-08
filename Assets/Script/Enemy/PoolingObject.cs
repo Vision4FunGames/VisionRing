@@ -87,7 +87,6 @@ public class PoolingObject : MonoBehaviour
         }
         //after the timer is over
         _pool.Release(this);
-        
     }
     
 }
