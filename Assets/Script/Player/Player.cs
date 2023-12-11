@@ -165,6 +165,7 @@ public class Player : MonoBehaviour
     public void DisableSkillTime()
     {
         UiManager.instance.EnableButton();
+        _playerAttack.flameTFloor.Stop();
         _playerAnimator.SetFloat("AttackSpeed", 1);
         _playerHealth.useShield = false;
         _playerAttack.myCurrentGunType = _baseCurrentGunType;

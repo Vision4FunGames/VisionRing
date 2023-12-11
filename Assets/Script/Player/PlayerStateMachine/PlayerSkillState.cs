@@ -230,6 +230,7 @@ public class PlayerSkillState : PlayerState
         _player._playerAnimator.SetBool("Flame", true);
         currentEarthShatter.transform.localPosition = new Vector3(0, 2, 2);
         currentEarthShatter.transform.localRotation = Quaternion.identity;
+        _player._playerAttack.flameTFloor.Play();
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
         _player.speed = 0;
         GameObject.Destroy(currentEarthShatter, 8);

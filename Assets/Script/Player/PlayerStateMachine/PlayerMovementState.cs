@@ -23,7 +23,6 @@ namespace Script.Player.PlayerStateMachine
             base(player,
                 playerStateMachine)
         {
-            
         }
 
         public override void EnterState()
