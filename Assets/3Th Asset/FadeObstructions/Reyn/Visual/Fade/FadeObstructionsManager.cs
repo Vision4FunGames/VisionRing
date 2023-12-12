@@ -131,7 +131,7 @@ public class FadeObstructionsManager : MonoBehaviour
             }
         }
 
-        //        FadeObstructions(objectsInWay);
+               FadeObstructions(objectsInWay);
     }
 
     private void FadeObstructions(List<GameObject> objectsInWay)
