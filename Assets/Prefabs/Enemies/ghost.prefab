@@ -7059,6 +7059,7 @@ MonoBehaviour:
   armor:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
+  critDamageText: {fileID: 8130553911094169867, guid: a589e7a1f484ef74284d07a946b2e201, type: 3}
   mmProgressBar: {fileID: 0}
   message: 
   enemyType: 0
@@ -7430,6 +7431,8 @@ GameObject:
   - component: {fileID: 2147220776}
   - component: {fileID: 2111803966}
   - component: {fileID: 2111803967}
+  - component: {fileID: 9181269317204364566}
+  - component: {fileID: 744142809298087547}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -7501,6 +7504,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2111803967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162873894117454492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f200b3a3eb3e246419108a27fd4e1ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHand: {fileID: 8474472977159035978}
+  ballPrefab: {fileID: 8880955666799231680, guid: 48c6e38383596084887e70c241e94c34, type: 3}
+  poolingObjectSpawner: {fileID: 0}
+--- !u!114 &9181269317204364566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162873894117454492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27f1419ce2e98f46ba94d2477cd6a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &744142809298087547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

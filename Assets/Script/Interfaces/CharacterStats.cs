@@ -13,6 +13,7 @@ public class CharacterStats : MonoBehaviour
     public Stat damage;
     public Stat armor;
     public DamageNumber prefab;
+    public DamageNumber critDamageText;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
     public string message;
@@ -50,6 +51,31 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage, bool crit)
+    {
+        if (currentHealth > 0 && !die)
+        {
+            damage -= armor.GetValue();
+            damage = Mathf.Clamp(damage, 0, int.MaxValue);
+            currentHealth -= damage;
+            if (crit)
+            {
+                DamageCritVFX(damage);
+            }
+            else
+            {
+                DamageVFX(damage);    
+            }
+            DamageAnimation();
+            UpdateHealthBar();
+        }
+        else if (currentHealth <= 0)
+        {
+            Die();
+            die = true;
+        } 
+    }
+
     public void DamageAnimation()
     {
         transform.GetChild(0).DOScale(new Vector3(1.5f, 1.5f, 1.5f), .1f).OnComplete(() =>
@@ -70,6 +96,13 @@ public class CharacterStats : MonoBehaviour
         DamageNumber newDamageNumber =
             prefab.Spawn(new Vector3(transform.position.x, transform.position.y, transform.position.z),
                 damage);
+        newDamageNumber.followedTarget = transform;
+    }
+
+    public void DamageCritVFX(int damage)
+    {
+        DamageNumber newDamageNumber = critDamageText.Spawn(new Vector3(transform.position.x, transform.position.y, transform.position.z),
+            damage);
         newDamageNumber.followedTarget = transform;
     }
     
