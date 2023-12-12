@@ -159,17 +159,16 @@ public class EquipmentManager : MonoBehaviour
             inventory.Add(oldItem);
             oldItem.showInInventory = false;
         }
-
+    
         // An item has been equipped so we trigger the callback
         currentEquipment[slotIndex] = newItem;
         //equippedInventory.Add(newItem);
         if (onEquipmentChanged != null)
             onEquipmentChanged.Invoke(newItem, oldItem);
-        Debug.Log(newItem.name + " equipped!");
         newItem.showInInventory = true;
         if (newItem.mesh)
         {
-            AttachToMesh(newItem.mesh, slotIndex);
+            AttachToMesh(newItem,newItem.mesh, slotIndex);
         }
         else if (newItem.prefab)
         {
@@ -178,11 +177,20 @@ public class EquipmentManager : MonoBehaviour
                 Destroy(currentWeapon);
                 Destroy(currentInventoryWeapon);
             }
-
+            
             currentWeapon = Instantiate(newItem.prefab,
                 new Vector3(rightHand.transform.position.x, rightHand.transform.position.y,
                     rightHand.transform.position.z),
                 Quaternion.identity);
+            if (newItem.itemLevel == 4)
+            {
+                GameObject particleGlow = Instantiate(Resources.Load("SparkleAreaPurple") as GameObject ,Vector3.zero,Quaternion.identity,currentWeapon.transform);
+                particleGlow.transform.localPosition = new Vector3(0, 1.25f, 0);
+            }else if (newItem.itemLevel == 5)
+            {
+                GameObject particleGlow = Instantiate(Resources.Load("SparkleAreaYellow") as GameObject ,Vector3.zero,Quaternion.identity,currentWeapon.transform);
+                particleGlow.transform.localPosition = new Vector3(0, 1.25f, 0);
+            }
             if (currentWeapon.GetComponentInChildren<GunType>().myGunType == CurrentGunType.sword ||
                 currentWeapon.GetComponentInChildren<GunType>().myGunType == CurrentGunType.spear)
             {
@@ -286,18 +294,28 @@ public class EquipmentManager : MonoBehaviour
         }
     }
 
-    void AttachToMesh(SkinnedMeshRenderer mesh, int slotIndex)
+    void AttachToMesh(Equipment newItem,SkinnedMeshRenderer mesh, int slotIndex)
     {
         if (currentMeshes[slotIndex] != null && slotIndex != 2)
         {
             Destroy(currentMeshes[slotIndex].gameObject);
             Destroy(currentInventoryMeshes[slotIndex].gameObject);
         }
-
+    
         SkinnedMeshRenderer newMesh = Instantiate(mesh) as SkinnedMeshRenderer;
         newMesh.bones = targetMesh.bones;
         newMesh.rootBone = targetMesh.rootBone;
         currentMeshes[slotIndex] = newMesh;
+        print(newItem.itemLevel);
+        if (newItem.itemLevel == 4)
+        {
+            GameObject particleGlow = Instantiate(Resources.Load("SparkleAreaPurple") as GameObject);
+            particleGlow.transform.localPosition = new Vector3(0, 1.25f, 0);
+        }else if (newItem.itemLevel == 5)
+        {
+            GameObject particleGlow = Instantiate(Resources.Load("SparkleAreaYellow") as GameObject );
+            particleGlow.transform.localPosition = new Vector3(0, 1.25f, 0);
+        }
         //Inventory Player
         SkinnedMeshRenderer newMesh2 = Instantiate(mesh) as SkinnedMeshRenderer;
         newMesh2.bones = targetEnvanterMesh.bones;
