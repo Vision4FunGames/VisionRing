@@ -310,11 +310,13 @@ public class EquipmentManager : MonoBehaviour
         if (newItem.itemLevel == 4)
         {
             GameObject particleGlow = Instantiate(Resources.Load("SparkleAreaPurple") as GameObject);
-            particleGlow.transform.localPosition = new Vector3(0, 1.25f, 0);
+            particleGlow.transform.SetParent(newMesh.bones[0]);
+            particleGlow.transform.localPosition = new Vector3(0, 0f, 0);
         }else if (newItem.itemLevel == 5)
         {
             GameObject particleGlow = Instantiate(Resources.Load("SparkleAreaYellow") as GameObject );
-            particleGlow.transform.localPosition = new Vector3(0, 1.25f, 0);
+            particleGlow.transform.SetParent(newMesh.bones[0]);
+            particleGlow.transform.localPosition = new Vector3(0, 0f, 0);
         }
         //Inventory Player
         SkinnedMeshRenderer newMesh2 = Instantiate(mesh) as SkinnedMeshRenderer;
