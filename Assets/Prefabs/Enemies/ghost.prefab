@@ -7001,7 +7001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4cb7ad07a63ae4788f4fb101396866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 13.02
   interactionTransform: {fileID: 0}
   myVariation: 0
 --- !u!195 &2622531187056102407
@@ -7038,7 +7038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77aa5ecd6ab30d4192daec55ed326a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 10
+  lookRadius: 15.97
   target: {fileID: 0}
 --- !u!114 &2622531187056102402
 MonoBehaviour:
@@ -7428,6 +7428,8 @@ GameObject:
   - component: {fileID: 4162873894117454465}
   - component: {fileID: 4162873894117454467}
   - component: {fileID: 2147220776}
+  - component: {fileID: 2111803966}
+  - component: {fileID: 2111803967}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -7486,6 +7488,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 0}
+--- !u!114 &2111803966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162873894117454492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27f1419ce2e98f46ba94d2477cd6a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2111803967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162873894117454492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f200b3a3eb3e246419108a27fd4e1ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHand: {fileID: 8474472977159035978}
+  ballPrefab: {fileID: 8880955666799231680, guid: 48c6e38383596084887e70c241e94c34, type: 3}
+  poolingObjectSpawner: {fileID: 0}
 --- !u!1 &4250678690016983298
 GameObject:
   m_ObjectHideFlags: 0
