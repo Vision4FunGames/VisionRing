@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     private bool Isrope;
     private GameObject currentRope;
     private CameraShake _cameraShake;
-    private ParticleSystem _damageParticle;
+    [SerializeField] private ParticleSystem _damageParticle;
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
     public bool edit;

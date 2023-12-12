@@ -192,8 +192,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190224
+  m_fontColor: {r: 0.5660378, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
@@ -468,10 +468,10 @@ MonoBehaviour:
   enableLerp: 1
   lerpSettings:
     speed: 5
-    minX: -0.4
-    maxX: 0.4
-    minY: 2.55
-    maxY: 4.81
+    minX: -0.7
+    maxX: 0.7
+    minY: -6
+    maxY: -4
     randomFlip: 0
   enableVelocity: 0
   velocitySettings:
@@ -709,12 +709,12 @@ MonoBehaviour:
   collisionSettings:
     radius: 0.5
     pushFactor: 1.5
-    desiredDirection: {x: 0, y: 2, z: 0}
+    desiredDirection: {x: 0, y: 0, z: 0}
   enablePush: 0
   pushSettings:
     radius: 3
     pushOffset: 1
-  updateDelay: 0.01667
+  updateDelay: 0.0125
   enablePooling: 1
   poolSize: 50
   position: {x: 0, y: 0, z: 0}
