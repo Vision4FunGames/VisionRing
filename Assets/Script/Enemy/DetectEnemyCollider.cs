@@ -31,16 +31,7 @@ public class DetectEnemyCollider : MonoBehaviour
 
         if (other.CompareTag("SwordCollider"))
         {
-            if (_playerAttack.CalculateCrit())
-            {
-             
-                _enemyStats.TakeDamage(_playerAttack.damage,true);   
-            }
-            else
-            {
-                
-                _enemyStats.TakeDamage(_playerAttack.damage);
-            }
+            _enemyStats.TakeDamage(_playerAttack.damage);
         }
 
         if (other.CompareTag("Floor"))

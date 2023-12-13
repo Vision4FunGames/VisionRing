@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Script.CombatScript;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Random = System.Random;
 
 public enum CurrentGunType
 {
@@ -17,7 +16,6 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public bool isDead, isStun;
     public ParticleSystem[] swordParticle;
     public int damage;
-    public float critRate;
     public CurrentArrowType myCurrentArrowType;
     public CurrentGunType myCurrentGunType;
     private Player player;
@@ -81,15 +79,6 @@ public class PlayerAttack : MonoBehaviour
     {
         myCurrentGunType = currentGunType;
         player._baseCurrentGunType = currentGunType;
-    }
-    public bool CalculateCrit()
-    {
-        int random = UnityEngine.Random.Range(0, 10);
-        if (random < critRate * 10 )
-        {
-            return true;
-        }
-        return false;
     }
 }
 
@@ -167,7 +156,6 @@ public class SwordAttack : MonoBehaviour
         swordCollider.isTrigger = true;
     }
 
-    
     public void EnableSwordCollider()
     {
         swordCollider.enabled = false;

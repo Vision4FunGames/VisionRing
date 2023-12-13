@@ -95,7 +95,7 @@ public class RealmController : MonoBehaviour
                         // Update the _WaterColor property
                         float normalizedRadius = drmScript.radius / 100f; // Normalize the radius value to the range [0, 1]
                         Color startColor = new Color(0.2117f, 0.6745f, 1.0f); // Initial color
-                        Color endColor = new Color(0.1373f, 1.0f, 0.0f); // Target color
+                        Color endColor = new Color(0.1373f, 1.0f, 0.4f); // Target color
         
                         Color waterColor = Color.Lerp(startColor, endColor, normalizedRadius);
                         waterMaterial.SetColor("_WaterColor", waterColor);
