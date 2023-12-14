@@ -31,6 +31,7 @@ public class PlayerManager : MonoBehaviour
         instance = this;
         _damageParticle = Instantiate(Resources.Load("ShadowExplosion", typeof(ParticleSystem)) as ParticleSystem,
             new Vector3(0, 2, 0), Quaternion.identity, transform);
+        _damageParticle.transform.localPosition = new Vector3(0, 2, 0);
         _cameraShake = FindObjectOfType<CameraShake>();
     }
 

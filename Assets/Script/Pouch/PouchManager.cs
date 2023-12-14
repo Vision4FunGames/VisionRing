@@ -10,7 +10,7 @@ public class PouchManager : MonoBehaviour
     public GameObject pouchCanvas;
     private Player player;
     Canvas canvasMain;
-    private GameObject current;
+    public GameObject current;
     public float buttonRange;
     public Vector3 offsett;
     public GameObject itemSlot;

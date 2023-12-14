@@ -1,6 +1,9 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 using NaughtyAttributes;
+using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 
 public class CollectItemAnimation : MonoBehaviour
 {
@@ -10,6 +13,21 @@ public class CollectItemAnimation : MonoBehaviour
     {
         canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
       
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pouch"))
+        {
+            UiManager.instance.selectedPouch = other.gameObject.transform.gameObject;
+            var panel = other.gameObject.GetComponent<PouchManager>().current.transform.GetChild(0).transform;
+            var items = panel.GetComponentsInChildren<InventorySlot>();
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i].UseItem();
+                Debug.Log("Toplandi :" + i);
+            }
+        }
     }
 
     [ButtonAttribute("CollectItem")]
