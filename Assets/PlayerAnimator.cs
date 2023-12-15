@@ -8,6 +8,7 @@ public class PlayerAnimator : MonoBehaviour
     private Animator animator;
     // Start is called before the first frame update
     public GameObject DRM;
+    public GameObject fog;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -17,19 +18,24 @@ public class PlayerAnimator : MonoBehaviour
     public void RingBtn()
     {
         animator.SetTrigger("Ring");
+        
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
     }
     public void RingAction()
     {
         DRM.GetComponent<DRMGameObject>().SliderValueChanged();
-       
+        
     }
 
     public void RingActionEnd()
     {
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
     }
-    
+
+    public void FogAction()
+    {
+        fog.GetComponent<FogScale>().StartScale();
+    }
     // Update is called once per frame
     void Update()
     {

@@ -19,6 +19,6 @@ public class FogScale : MonoBehaviour
         gameObject.SetActive(true);
         transform.localScale = startScale;
         gameObject.GetComponent<ParticleSystem>().Play();
-        transform.DOScale(targetScale, 5f).OnComplete(() => { gameObject.SetActive(false); });
+        transform.DOScale(targetScale, 12f).SetEase(Ease.Linear).OnComplete(() => { gameObject.SetActive(false); });
     }
 }
