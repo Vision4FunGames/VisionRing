@@ -9,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     // Start is called before the first frame update
     public GameObject DRM;
     public GameObject fog;
+    public ParticleSystem ringParticle;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,7 +19,7 @@ public class PlayerAnimator : MonoBehaviour
     public void RingBtn()
     {
         animator.SetTrigger("Ring");
-        
+        ringParticle.Play();
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
     }
     public void RingAction()
@@ -30,6 +31,7 @@ public class PlayerAnimator : MonoBehaviour
     public void RingActionEnd()
     {
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
+        ringParticle.Stop();
     }
 
     public void FogAction()
