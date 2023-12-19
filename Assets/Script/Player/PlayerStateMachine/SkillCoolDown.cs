@@ -33,7 +33,8 @@ public class SkillCoolDown : MonoBehaviour
 
     public void LoadSkill()
     {
-        ES3.Load("currentSkills", _currentSkills);
+        _currentSkills = ES3.Load("currentSkills", _currentSkills);
+        Debug.Log("Loaded SKills");
         onSkillChangeCallBack.Invoke();
     }
 
@@ -101,13 +102,18 @@ public class SkillCoolDown : MonoBehaviour
                     UiManager.instance.ButtonType[i].mySkillType = SkillType.Clone;
                     break;
             }
+            //GamePlay Buttons
             UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0).GetChild(0).GetComponent<Image>()
                     .sprite =
                 _currentSkills[i].skillImage;
+            
             UiManager.instance.ButtonType[i].skillButton.transform.GetChild(1).GetComponent<Image>().sprite =
                 _currentSkills[i].skillImage;
             _skillImages.Add(UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0)
                 .GetComponent<Image>());
+            //SkillPanel Buttons
+            
+            UiManager.instance.skillPanel.transform.GetChild(i).GetComponent<InventorySlot>().AddSkill(_currentSkills[i]);
         }
     }
 }

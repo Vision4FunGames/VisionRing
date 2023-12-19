@@ -129,5 +129,6 @@ public class SkillUpgrade : MonoBehaviour
         }
 
         ES3.Save("currentSkills", _skillCoolDown._currentSkills);
+        Debug.Log("Skill Saved");
     }
 }

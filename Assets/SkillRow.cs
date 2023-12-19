@@ -5,6 +5,8 @@ using UnityEngine;
 public class SkillRow : MonoBehaviour
 {
     // Start is called before the first frame update
+    public int index;
+    public InventorySlot slot;
     void Start()
     {
         

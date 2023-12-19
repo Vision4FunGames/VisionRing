@@ -27,6 +27,7 @@ public class UiManager : MonoBehaviour
     public FixedJoystick attackJoystick;
     public Sprite[] itemlevelSprites;
     public Sprite[] itemDescriptionSprites;
+    public Sprite[] skillBGSprites;
     public Sprite emptySprite = null;
     public Material skillMaterial;
 

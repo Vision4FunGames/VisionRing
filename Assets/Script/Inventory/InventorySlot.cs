@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -45,7 +46,36 @@ public class InventorySlot : MonoBehaviour
 
     public void AddSkill(Skills skill)
     {
-        backGImage.sprite = UiManager.instance.itemlevelSprites[skill.skillLevel];
+
+        switch (skill.skillName)
+        {
+            case "FireRotate":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot red");
+                break;
+            case "FlameT":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot red");
+                break;
+            case "EarthQ":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot red");
+                break;
+            case "Tornado":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot orange");
+                break;
+            case "Sword":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot gray");
+                break;
+            case "ArrowRain":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot gray");
+                break;
+            case "Clone":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot green");
+                break;
+            case "Shield":
+                backGImage.sprite = Resources.Load<Sprite>("SkillSprite/slot green");
+                break;
+                
+        }
+      //  backGImage.sprite = UiManager.instance.itemlevelSprites[skill.skillLevel];
         icon.sprite = skill.skillImage;
         icon.enabled = true;
     }
@@ -97,6 +127,13 @@ public class InventorySlot : MonoBehaviour
         else if (_inventoryType == InventoryType.Skill)
         {
             // Skill Secme
+            SkillPanel.instance.selectedSlot = this;
+            SkillPanel.instance.onSelectedSkillChange.Invoke();
+        }
+        else if (_inventoryType == InventoryType.CurrentSkill)
+        {
+            SkillPanel.instance.currentSlot = this;
+            SkillPanel.instance.ChangeSkill();
             
         }
     }
@@ -114,6 +151,7 @@ public enum InventoryType
     Upgrade,
     UnEquip,
     Collect,
-    Skill
+    Skill,
+    CurrentSkill
 }
 
