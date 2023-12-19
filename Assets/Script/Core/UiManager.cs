@@ -15,7 +15,7 @@ public class UiManager : MonoBehaviour
     public ButtonType[] ButtonType;
     public static UiManager instance;
     [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel;
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel;
 
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
@@ -139,6 +139,16 @@ public class UiManager : MonoBehaviour
         
         //skillUpgrade.BringCurrentSkills();
 
+    }
+
+    public void SkillUI()
+    {
+        CloseAllUI();
+        inventory.gameObject.SetActive(true);
+        skillPanel.gameObject.SetActive(true);
+        contentText.text = "SKILLS";
+        SkillPanel.instance.onSkillUseChangeCallBack.Invoke();
+       
     }
 
     public void CloseAllUI()

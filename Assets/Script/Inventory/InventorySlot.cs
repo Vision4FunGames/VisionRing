@@ -94,6 +94,11 @@ public class InventorySlot : MonoBehaviour
             Player.instance.GetComponent<CollectItemAnimation>().CollectItem(icon.sprite);
             UiManager.instance.selectedPouch.GetComponent<PouchManager>().PouchInsideControl();
         }
+        else if (_inventoryType == InventoryType.Skill)
+        {
+            // Skill Secme
+            
+        }
     }
     public void SetSlotIndex(int index)
     {
