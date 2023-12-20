@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 205000013662551996}
   - component: {fileID: 64000013571711988}
   - component: {fileID: 65000013294652238}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cliff_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4000012239912756
 Transform:
@@ -26,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010017310506}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.3276904, y: 4.289726, z: 3.6488125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4000011333500372}
@@ -73,7 +73,7 @@ MeshCollider:
   m_GameObject: {fileID: 1000010017310506}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -87,7 +87,7 @@ BoxCollider:
   m_GameObject: {fileID: 1000010017310506}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 15.65, y: 10.2, z: 15.67}
   m_Center: {x: 0, y: 0, z: -0.93}
@@ -102,12 +102,12 @@ GameObject:
   - component: {fileID: 4000014132793472}
   - component: {fileID: 33000012100584626}
   - component: {fileID: 23000010582669138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cliff_A_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4000014132793472
 Transform:
@@ -152,7 +152,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 883bbd715dd7e2e428aa32e0c388722a, type: 2}
+  - {fileID: 2100000, guid: 66bfe49c9c44a5246a549a83e6c8c139, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,12 +185,12 @@ GameObject:
   - component: {fileID: 4000011333500372}
   - component: {fileID: 33000010974649698}
   - component: {fileID: 23000010402929834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cliff_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4000011333500372
 Transform:
@@ -235,7 +235,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 883bbd715dd7e2e428aa32e0c388722a, type: 2}
+  - {fileID: 2100000, guid: 66bfe49c9c44a5246a549a83e6c8c139, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -268,12 +268,12 @@ GameObject:
   - component: {fileID: 4000011086050516}
   - component: {fileID: 33000012056544436}
   - component: {fileID: 23000012606156224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cliff_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 123
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4000011086050516
 Transform:
@@ -318,7 +318,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 883bbd715dd7e2e428aa32e0c388722a, type: 2}
+  - {fileID: 2100000, guid: 66bfe49c9c44a5246a549a83e6c8c139, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
