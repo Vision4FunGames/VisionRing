@@ -29,7 +29,7 @@ public class Equipment : Item {
     public override void Use (InventoryType type)
     {
         // Called when pressed in the inventory
-        if (type == InventoryType.Equip)
+        if (type == InventoryType.Equip || type == InventoryType.Inventory)
         { 
             if (!showInInventory)
                 {
@@ -42,7 +42,7 @@ public class Equipment : Item {
                 {
                        EquipmentManager.instance.Unequip((int)equipSlot);
                       RemoveFromEquippedInventory((int)this.equipSlot);
-                 } 
+                } 
         }
 
         if (type == InventoryType.Buy)

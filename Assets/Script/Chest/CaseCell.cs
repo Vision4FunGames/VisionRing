@@ -24,7 +24,7 @@ public class CaseCell : MonoBehaviour
     _Equipment = _equipments[index]._EquipmentItems[rnd];
 
     transform.parent.GetComponent<Image>().sprite =
-      UiManager.instance.itemlevelSprites[_equipments[index]._EquipmentItems[rnd].itemLevel];
+      UiManager.instance.itemlevelSprites45[_equipments[index]._EquipmentItems[rnd].itemLevel];
     GetComponent<Image>().sprite = _equipments[index]._EquipmentItems[rnd].icon;
 
   }

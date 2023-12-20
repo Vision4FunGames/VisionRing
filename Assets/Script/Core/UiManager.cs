@@ -8,6 +8,7 @@ using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
@@ -27,7 +28,8 @@ public class UiManager : MonoBehaviour
     
     public MMProgressBar playerProgressBar;
     public FixedJoystick attackJoystick;
-    public Sprite[] itemlevelSprites;
+    public Sprite[] itemlevelSprites45;
+    public Sprite[] itemLevelSprites;
     public Sprite[] itemDescriptionSprites;
     public Sprite[] skillBGSprites;
     public Sprite emptySprite = null;
@@ -116,13 +118,15 @@ public class UiManager : MonoBehaviour
     public void ShowInventory()
     {
         CloseAllUI();
+        contentText.text = "INVENTORY";
+        EconomyManager.instance.SetGold(5000); //Build deneme
         inventory.SetActive(true);
         inventoryObject.SetActive(true);
         equipmentPanel.gameObject.SetActive(true);
         currentItems.gameObject.SetActive(true);
         goldPanel.gameObject.SetActive(true);
         contentPanel.gameObject.SetActive(true);
-        Inventory.instance.InventoryTypeChange(InventoryType.Equip);
+        Inventory.instance.InventoryTypeChange(InventoryType.Inventory);
         inventoryUi.ShowSelected("All");
         inventoryUi.UpdateUI();
         onEconomyChangedCallBack.Invoke();

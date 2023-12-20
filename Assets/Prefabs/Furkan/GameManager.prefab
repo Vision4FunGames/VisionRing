@@ -82,6 +82,10 @@ MonoBehaviour:
   armorFilter: {fileID: 0}
   gunFilter: {fileID: 0}
   deadPanel: {fileID: 0}
+  skillPanel: {fileID: 0}
+  goldPanel: {fileID: 0}
+  contentPanel: {fileID: 0}
+  menuUi: {fileID: 0}
   skillButtons: []
   inventoryObject: {fileID: 0}
   dashCoolDownLast: 0
@@ -91,18 +95,26 @@ MonoBehaviour:
   playerProgressBar: {fileID: 0}
   attackJoystick: {fileID: 0}
   itemlevelSprites:
-  - {fileID: 21300000, guid: b91f5f40bff9be741a739be1e98f9b6e, type: 3}
-  - {fileID: 21300000, guid: fa09866f8e41b7a499c88a578487c3a8, type: 3}
-  - {fileID: 21300000, guid: 50c2eba695d692e4b9a1debb742ac2f0, type: 3}
-  - {fileID: 21300000, guid: 6065a493c93ca3149a0bf3a155f5b805, type: 3}
-  - {fileID: 21300000, guid: 3d5a3abb5fd1ffd46a7cf5de9832646a, type: 3}
+  - {fileID: 21300000, guid: d790103b80968f64daa62eea4dc03ab0, type: 3}
+  - {fileID: 21300000, guid: a4644b19ca2ca454e833f1f9914c8ab4, type: 3}
+  - {fileID: 21300000, guid: 1e06c46471842734db882c6b1f66470b, type: 3}
+  - {fileID: 21300000, guid: 62faf7bb8f395c3478b3c5c57daea02a, type: 3}
+  - {fileID: 21300000, guid: bf12a8cd4d715204bbfe38e14b4cd8f7, type: 3}
   itemDescriptionSprites:
   - {fileID: 21300000, guid: b8f85fac00c26c24db2ba964b1c8ba38, type: 3}
   - {fileID: 21300000, guid: 97f7f109994ee454b827a696be428b7b, type: 3}
   - {fileID: 21300000, guid: 1ad549a24002e0a46a9f18aaf930f70b, type: 3}
   - {fileID: 21300000, guid: f0b7f01a3d8035b4a98776002fc1ac9c, type: 3}
   - {fileID: 21300000, guid: d1fcca06bb2fc804e93ec070f14281b7, type: 3}
-  emptySprite: {fileID: 21300000, guid: b5bf0bd18228fb64494c8b9b390ac347, type: 3}
+  skillBGSprites:
+  - {fileID: 21300000, guid: 838a0bef4360e8643944c943cc5d59c2, type: 3}
+  - {fileID: 21300000, guid: 99b38000e5b6e4f4592d115473dfd64e, type: 3}
+  - {fileID: 21300000, guid: 6e186ac9aaf78d94e93dcfd2c9974085, type: 3}
+  - {fileID: 21300000, guid: 9b54c6156a0b4214ab64bc906e76a200, type: 3}
+  - {fileID: 21300000, guid: 8fd540d544f679147a2b1047dcb0434a, type: 3}
+  - {fileID: 21300000, guid: 08fcabf8575912e45877e2d8d9c7437d, type: 3}
+  - {fileID: 21300000, guid: 9aef5fb80a7a29948b90854e66790b2f, type: 3}
+  emptySprite: {fileID: 21300000, guid: d71b6f93f8b55d84485f3b02601f077f, type: 3}
   skillMaterial: {fileID: 2100000, guid: a3f7a2356cdb2604c8f48b7f17ec27fb, type: 2}
   diamondText: {fileID: 0}
   gemText: {fileID: 0}
@@ -111,6 +123,9 @@ MonoBehaviour:
   chestPanel: {fileID: 0}
   selectedPouch: {fileID: 0}
   UiPanels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -236,6 +251,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: EarthQ
     coolDown: 5
     coolDownTime: 0
@@ -245,6 +262,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: FlameT
     coolDown: 1
@@ -256,6 +275,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: Tornado
     coolDown: 5
     coolDownTime: 0
@@ -265,6 +286,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: Sword
     coolDown: 5
@@ -276,6 +299,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: ArrowRain
     coolDown: 5
     coolDownTime: 0
@@ -285,6 +310,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: Shield
     coolDown: 5
@@ -296,6 +323,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
   - skillName: Clone
     coolDown: 5
     coolDownTime: 0
@@ -305,6 +334,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 662e9248db5a0f44e978361eca87d3d2, type: 2}
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
 --- !u!114 &2668921968425631565
 MonoBehaviour:
@@ -335,7 +366,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e7887a5c9f04764b9c5b1d5b5fa5da3, type: 2}
   - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
   - {fileID: 11400000, guid: b399d225e4d2e3e4598df7dbea7a80a4, type: 2}
-  itemCount: 000000000000000000000000
+  itemCount: f4010000f4010000f4010000
 --- !u!114 &1897537093
 MonoBehaviour:
   m_ObjectHideFlags: 0

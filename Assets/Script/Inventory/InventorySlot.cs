@@ -21,7 +21,14 @@ public class InventorySlot : MonoBehaviour
     public void AddItem (Item newItem,int count)
     {
         item = newItem;
-        backGImage.sprite = UiManager.instance.itemlevelSprites[newItem.itemLevel];
+        if (_inventoryType == InventoryType.Inventory)
+        {
+            backGImage.sprite = UiManager.instance.itemLevelSprites[newItem.itemLevel];
+        }
+        else
+        {
+            backGImage.sprite = UiManager.instance.itemlevelSprites45[newItem.itemLevel];
+        }
         if (count>1)
         {
             countText.text = count.ToString(); 
@@ -38,7 +45,15 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(Item newItem)
     {
         item = newItem;
-        backGImage.sprite = UiManager.instance.itemlevelSprites[newItem.itemLevel];
+        if (_inventoryType == InventoryType.Inventory)
+        {
+            backGImage.sprite = UiManager.instance.itemLevelSprites[newItem.itemLevel];
+        }
+        else
+        {
+            backGImage.sprite = UiManager.instance.itemlevelSprites45[newItem.itemLevel];
+        }
+      
 
         icon.sprite = item.icon;
         icon.enabled = true;
@@ -145,6 +160,7 @@ public class InventorySlot : MonoBehaviour
 }
 public enum InventoryType
 {
+    
     Equip,
     Buy,
     Sell,
@@ -152,6 +168,7 @@ public enum InventoryType
     UnEquip,
     Collect,
     Skill,
-    CurrentSkill
+    CurrentSkill,
+    Inventory
 }
 

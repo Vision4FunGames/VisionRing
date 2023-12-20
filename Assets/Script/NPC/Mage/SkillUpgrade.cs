@@ -49,11 +49,11 @@ public class SkillUpgrade : MonoBehaviour
         {
             var currentSlot = Instantiate(shopSlot, shopParent.transform);
             var skillBuySlot = currentSlot.GetComponent<SkillBuySlot>();
-            if (_skillCoolDown._currentSkills[i].skillLevel< UiManager.instance.itemlevelSprites.Length)
+            if (_skillCoolDown._currentSkills[i].skillLevel< UiManager.instance.itemlevelSprites45.Length)
             {
                 //Our Current Skill
                 skillBuySlot.skillSlot.GetComponent<InventorySlot>().icon.sprite = _skillCoolDown._currentSkills[i].skillImage;
-                skillBuySlot.skillSlot.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites[_skillCoolDown._currentSkills[i].skillLevel];
+                skillBuySlot.skillSlot.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites45[_skillCoolDown._currentSkills[i].skillLevel];
                
 
                 int currentSkillLevel = currentSkills[i].skillLevel;

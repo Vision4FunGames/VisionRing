@@ -26,18 +26,30 @@ public class SkillBuySlot : MonoBehaviour
 
     public void Fill(Skills skill)
     {
-        
+        if (skill.skillLevel >5)
+        {
+            skill.skillLevel = 5;
+        }
         skillSlot.GetComponent<InventorySlot>().icon.sprite = skill.skillImage;
-        skillSlot.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites[skill.skillLevel];
+        if (skill.skillLevel<= UiManager.instance.itemlevelSprites45.Length)
+        {
+            skillSlot.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites45[skill.skillLevel];
+        }
+       
         if (skill.skillLevel == 0)
         {
             buyText.text = "BUY";
+        }
+        else if (skill.skillLevel == 5)
+        {
+            buyText.text = "MAX";
+            buyText.transform.parent.gameObject.GetComponent<Button>().enabled = false;
         }
         else
         {
             buyText.text = "UPGRADE";
         }
-
+        
         var necessary = skill.necessariesName[skill.skillLevel];
         itemlist = necessary.ItemList;
          itemCount = necessary.itemCount;
