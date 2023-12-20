@@ -24,7 +24,7 @@ namespace AmazingAssets.DynamicRadialMasks
         [HideInInspector] public bool displayAllProperties = true;
         [HideInInspector] public DynamicRadialMasks.Enum.MaskShape maskShape;
 #endif
-    
+        public TerrainCollider ter1, ter2;
         public bool increase,decrease;
         
         void Start()
@@ -62,12 +62,16 @@ namespace AmazingAssets.DynamicRadialMasks
             {
                 decrease = true;
                 increaseEnes = false;
+                ter1.enabled = true;
+                ter2.enabled = false;
             }
 
             if (radius!=100)
             {
                 increase = true;
                 increaseEnes = true;
+                ter1.enabled = false;
+                ter2.enabled = true;
             }
         }
     }
