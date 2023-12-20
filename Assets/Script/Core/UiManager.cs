@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using DG.Tweening;
 using MoreMountains.Tools;
 using TMPro;
@@ -15,8 +16,9 @@ public class UiManager : MonoBehaviour
     public ButtonType[] ButtonType;
     public static UiManager instance;
     [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel;
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel;
 
+    public GameObject menuUi;
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
     private ShopUI shopUI;
@@ -89,6 +91,13 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void MenuUI()
+    {
+        CloseAllUI();
+        
+        inventory.gameObject.SetActive(true);
+        menuUi.gameObject.SetActive(true);
+    }
     public void ShopUI()
     {
         CloseAllUI();
@@ -96,6 +105,8 @@ public class UiManager : MonoBehaviour
         equipmentPanel.gameObject.SetActive(true);
         inventory.gameObject.SetActive(true);
         inventoryObject.SetActive(true);
+        goldPanel.gameObject.SetActive(true);
+        contentPanel.gameObject.SetActive(true);
         inventoryUi.UpdateUI();
         shopUI.UpdateShop();
         onEconomyChangedCallBack.Invoke();
@@ -109,6 +120,8 @@ public class UiManager : MonoBehaviour
         inventoryObject.SetActive(true);
         equipmentPanel.gameObject.SetActive(true);
         currentItems.gameObject.SetActive(true);
+        goldPanel.gameObject.SetActive(true);
+        contentPanel.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Equip);
         inventoryUi.ShowSelected("All");
         inventoryUi.UpdateUI();
@@ -123,6 +136,8 @@ public class UiManager : MonoBehaviour
         blacksmithPanel.gameObject.SetActive(true);
         equipmentPanel.gameObject.SetActive(true);
         inventoryObject.gameObject.SetActive(true);
+        contentPanel.gameObject.SetActive(true);
+        goldPanel.gameObject.SetActive(true);
         Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
         inventoryUi.UpdateUI();
         contentText.text = "BLACKSMITH";
@@ -134,6 +149,8 @@ public class UiManager : MonoBehaviour
         CloseAllUI();
         inventory.gameObject.SetActive(true);
         magicianPanel.gameObject.SetActive(true);
+        contentPanel.gameObject.SetActive(true);
+        goldPanel.gameObject.SetActive(true);
         contentText.text = "MAGICIAN";
         Inventory.instance.onItemChangedCallback?.Invoke();
         skillUpgrade.onSkillShopChangeCallBack?.Invoke();
@@ -147,6 +164,9 @@ public class UiManager : MonoBehaviour
         CloseAllUI();
         inventory.gameObject.SetActive(true);
         skillPanel.gameObject.SetActive(true);
+        contentPanel.gameObject.SetActive(true);
+        goldPanel.gameObject.SetActive(true);
+        
         contentText.text = "SKILLS";
         SkillPanel.instance.onSkillUseChangeCallBack.Invoke();
        
