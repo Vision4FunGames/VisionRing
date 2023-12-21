@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -46,6 +47,7 @@ public class EquipmentManager : MonoBehaviour
     private Player _player;
     private PlayerAttack _playerAttack;
 
+    public Animator inventoryPlayerAnim;
     // Callback for when an item is equipped
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 
@@ -77,6 +79,7 @@ public class EquipmentManager : MonoBehaviour
         LoadEquipment();
         EquipAllDefault();
         onItemAddedCallback += UpdateUpgradeSlots;
+        
     }
 
     public void LoadEquipment()
@@ -148,8 +151,10 @@ public class EquipmentManager : MonoBehaviour
         ParticleManager.instance.playerEnvanterParticleSystem.Play();
         // Find out what slot the item fits in
         // and put it there.
+        
         int slotIndex = (int)newItem.equipSlot;
 
+        
         // If there was already an item in the slot
         // make sure to put it back in the inventory
         if (currentEquipment[slotIndex] != null)
@@ -170,6 +175,10 @@ public class EquipmentManager : MonoBehaviour
         if (newItem.mesh)
         {
             AttachToMesh(newItem.mesh, slotIndex);
+            if (newItem.equipSlot == EquipmentSlot.Body)
+            {
+                inventoryPlayerAnim.SetTrigger("Armor");
+            }
         }
         else if (newItem.prefab)
         {
@@ -198,7 +207,16 @@ public class EquipmentManager : MonoBehaviour
                 currentInventoryWeapon.transform.parent = inventoryHand.transform;
                 currentInventoryWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);
                 currentInventoryWeapon.transform.localEulerAngles = new Vector3(-31.375f, -43.925f, -97.642f);
+                if (currentWeapon.GetComponentInChildren<GunType>().myGunType == CurrentGunType.sword)
+                {
+                    inventoryPlayerAnim.SetTrigger("Sword");
+                }
+                else
+                {
+                    inventoryPlayerAnim.SetTrigger("Spear");
+                }
             }
+            
             else if (currentWeapon.GetComponentInChildren<GunType>().myGunType == CurrentGunType.arrow)
             {
                 currentWeapon.transform.parent = leftHand.transform;
@@ -214,6 +232,7 @@ public class EquipmentManager : MonoBehaviour
                 currentInventoryWeapon.transform.parent = inventoryLeftHand.transform;
                 currentInventoryWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);
                 currentInventoryWeapon.transform.localEulerAngles = new Vector3(-31.375f, -43.925f, -97.642f);
+                inventoryPlayerAnim.SetTrigger("Bow");
             }
         }
         //equippedItems [itemIndex] = newMesh.gameObject;
