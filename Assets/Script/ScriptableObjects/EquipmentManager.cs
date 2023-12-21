@@ -145,7 +145,7 @@ public class EquipmentManager : MonoBehaviour
     public void Equip(Equipment newItem)
     {
         Equipment oldItem = null;
-
+        ParticleManager.instance.playerEnvanterParticleSystem.Play();
         // Find out what slot the item fits in
         // and put it there.
         int slotIndex = (int)newItem.equipSlot;
