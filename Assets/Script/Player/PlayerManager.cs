@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
         instance = this;
-        _damageParticle = Instantiate(Resources.Load("ShadowExplosion", typeof(ParticleSystem)) as ParticleSystem,
+        _damageParticle = Instantiate(Resources.Load("ShadowExplosion2", typeof(ParticleSystem)) as ParticleSystem,
             new Vector3(0, 2, 0), Quaternion.identity, transform);
         _damageParticle.transform.localPosition = new Vector3(0, 2, 0);
         _cameraShake = FindObjectOfType<CameraShake>();
