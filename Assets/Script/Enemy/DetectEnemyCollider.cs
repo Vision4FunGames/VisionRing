@@ -31,7 +31,7 @@ public class DetectEnemyCollider : MonoBehaviour
 
         if (other.CompareTag("SwordCollider"))
         {
-            _enemyStats.TakeDamage(_playerAttack.damage,_playerAttack.critChance);
+            _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
         }
 
         if (other.CompareTag("Floor"))
@@ -61,15 +61,16 @@ public class DetectEnemyCollider : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         if (other.name == "ArrowRain")
-        {   
+        {
+            print("aa");
             _enemyStats.TakeDamage(10);
         }
     }
-    
+
     private void Update()
     {
         currentFlameTimer += Time.deltaTime;
-        
+
         Vector3 enemyPosition = transform.position;
         Vector3 playerPosition = _playerAttack.transform.position;
 

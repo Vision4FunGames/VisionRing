@@ -13,18 +13,25 @@ public class ArrowSkill : MonoBehaviour
     {
         _particleSystem = GetComponent<ParticleSystem>();
         _collisionEvents = new List<ParticleCollisionEvent>();
+        ArrowSkilStart();
     }
-    
+
     [Button("Arrow Start")]
     public void ArrowSkilStart()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
 
+        GameObject[] boss = GameObject.FindGameObjectsWithTag("Boss");
         for (int i = 0; i < gameObjects.Length; i++)
         {
-            _particleSystem.trigger.AddCollider(gameObjects[i].GetComponent<Collider>());
+            if (gameObjects[i].GetComponent<BoxCollider>())
+                _particleSystem.trigger.AddCollider(gameObjects[i].GetComponent<BoxCollider>());
         }
-      
+
+        for (int i = 0; i < boss.Length; i++)
+        {
+            if (boss[i].GetComponent<BoxCollider>())
+                _particleSystem.trigger.AddCollider(boss[i].GetComponent<BoxCollider>());
+        }
     }
-    
 }
