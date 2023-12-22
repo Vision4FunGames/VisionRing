@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
+using Random = System.Random;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class CharacterStats : MonoBehaviour
     public int currentHealth { get; private set; }
     public Stat damage;
     public Stat armor;
-    public DamageNumber prefab;
+    public DamageNumber prefab,critPrefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
     public string message;
@@ -22,6 +23,7 @@ public class CharacterStats : MonoBehaviour
     {
         currentHealth = maxHealth;
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        critPrefab = Resources.Load<DamageNumber>("CritSpreadUp");
     }
 
     private void Update()
@@ -39,7 +41,7 @@ public class CharacterStats : MonoBehaviour
             damage -= armor.GetValue();
             damage = Mathf.Clamp(damage, 0, int.MaxValue);
             currentHealth -= damage;
-            DamageVFX(damage);
+            DamageVFX(damage,false);
             DamageAnimation();
             UpdateHealthBar();
         }
@@ -48,6 +50,45 @@ public class CharacterStats : MonoBehaviour
             Die();
             die = true;
         }
+    }
+
+    public void TakeDamage(int damage, float critChance)
+    {
+        bool crit = false;
+        int rnd = UnityEngine.Random.Range(0, 10);
+        if (rnd <= critChance * 100)
+        {
+            crit = true;
+        }
+        
+        if (currentHealth > 0 && !die)
+        {
+            damage -= armor.GetValue();
+            if (crit)
+            {
+                damage *= 2;
+                DamageVFX(damage,true);
+            }
+            else
+            {
+                DamageVFX(damage,false);
+            }
+            //damage = Mathf.Clamp(damage, 0, int.MaxValue);
+            currentHealth -= damage;
+            
+            DamageAnimation();
+            UpdateHealthBar();
+        }
+        else if (currentHealth <= 0)
+        {
+            Die();
+            die = true;
+        }
+    }
+
+    public void CalculateCriticalChance()
+    {
+        
     }
 
     public void DamageAnimation()
@@ -65,13 +106,26 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void DamageVFX(int damage)
+    public void DamageVFX(int damage,bool crit)
     {
-        DamageNumber newDamageNumber =
-            prefab.Spawn(new Vector3(transform.position.x, transform.position.y, transform.position.z),
-                damage);
-        newDamageNumber.followedTarget = transform;
+        if (!crit)
+        {
+            DamageNumber newDamageNumber =
+                prefab.Spawn(new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                    damage);
+            newDamageNumber.followedTarget = transform;
+        }
+        else
+        {
+            DamageNumber newDamageNumber =
+                critPrefab.Spawn(new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                    damage);
+            newDamageNumber.followedTarget = transform;
+        }
+       
     }
+    
+    
     
     public virtual void Die()
     {

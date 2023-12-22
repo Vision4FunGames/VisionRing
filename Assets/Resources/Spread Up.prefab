@@ -453,18 +453,18 @@ MonoBehaviour:
   enableCrossScaleFadeIn: 1
   crossScaleFadeIn: {x: 1, y: 1.5}
   enableShakeFadeIn: 1
-  shakeOffsetFadeIn: {x: 0, y: -1}
+  shakeOffsetFadeIn: {x: 0, y: 1}
   shakeFrequencyFadeIn: 4
-  durationFadeOut: 0.3
-  enableOffsetFadeOut: 1
-  offsetFadeOut: {x: 0, y: -0.2}
+  durationFadeOut: 0.2
+  enableOffsetFadeOut: 0
+  offsetFadeOut: {x: 0.5, y: 0}
   enableScaleFadeOut: 1
-  scaleFadeOut: {x: 0.8, y: 1.2}
-  enableCrossScaleFadeOut: 1
+  scaleFadeOut: {x: 0.6, y: 1.4}
+  enableCrossScaleFadeOut: 0
   crossScaleFadeOut: {x: 1, y: 1.5}
   enableShakeFadeOut: 1
-  shakeOffsetFadeOut: {x: 0, y: 1}
-  shakeFrequencyFadeOut: 3
+  shakeOffsetFadeOut: {x: 0, y: -1}
+  shakeFrequencyFadeOut: 2
   enableLerp: 1
   lerpSettings:
     speed: 5
@@ -473,7 +473,7 @@ MonoBehaviour:
     minY: -6
     maxY: -4
     randomFlip: 0
-  enableVelocity: 0
+  enableVelocity: 1
   velocitySettings:
     minX: -1
     maxX: 1
@@ -542,7 +542,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  enableScaleByNumber: 1
+  enableScaleByNumber: 0
   scaleByNumberSettings:
     fromNumber: 0
     toNumber: 1000
@@ -705,7 +705,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  enableCollision: 1
+  enableCollision: 0
   collisionSettings:
     radius: 0.5
     pushFactor: 1.5

@@ -26,7 +26,8 @@ public class PlayerHealth : CharacterHealth
     {
         DamageNumber newDamageNumber =
             _damageNumbersPro.GetComponent<DamageNumber>().Spawn(
-                new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                new Vector3(transform.localPosition.x, transform.localPosition.y + 2f, transform.localPosition.z),
                 damage);
+        newDamageNumber.followedTarget = transform;
     }
 }

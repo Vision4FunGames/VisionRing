@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Script.CombatScript;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public bool isDead, isStun;
     public ParticleSystem[] swordParticle;
     public int damage;
+    public float critChance;
     public CurrentArrowType myCurrentArrowType;
     public CurrentGunType myCurrentGunType;
     private Player player;
@@ -37,7 +39,6 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
         playerAnimator = GetComponentInChildren<Animator>();
         for (int i = 0; i < 30; i++)
         {
@@ -54,7 +55,7 @@ public class PlayerAttack : MonoBehaviour
             Attack();
         }
     }
-
+    
     public void Attack()
     {
         if (!isDead && !isStun)
