@@ -59,6 +59,7 @@ public class BirlesikGolem : MonoBehaviour
     private void Update()
     {
         distance = Vector3.Distance(player.transform.position, transform.position);
+        print(distance);
         if (!dead)
             CheckBoss();
     }
@@ -256,6 +257,14 @@ public class BirlesikGolem : MonoBehaviour
             player.GetComponent<PlayerHealth>().TakeDamage(10);
             if (move)
                 StopAttack();
+        }
+    }
+    
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.name == "ArrowRain")
+        {   
+            TakeDamage(10);
         }
     }
 }
