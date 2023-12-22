@@ -69,5 +69,17 @@ public class DetectEnemyCollider : MonoBehaviour
     private void Update()
     {
         currentFlameTimer += Time.deltaTime;
+        
+        Vector3 enemyPosition = transform.position;
+        Vector3 playerPosition = _playerAttack.transform.position;
+
+        Vector3 directionToPlayer = enemyPosition - playerPosition;
+
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+
+        if (angle < 90f && _enemyStats.enemyType == EnemyType.kingSkelet)
+        {
+            print("Take Damage");
+        }
     }
 }

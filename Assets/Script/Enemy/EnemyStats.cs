@@ -8,7 +8,7 @@ public class EnemyStats : CharacterStats
    public event System.Action OnDie;
    private void Start()
    {
-      if (enemyType == EnemyType.skelet)
+      if (enemyType == EnemyType.skelet && enemyType == EnemyType.kingSkelet)
       {
          mmProgressBar ??= Instantiate(Resources.Load<Canvas>("EnemyHealthBar"),new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity,transform).GetComponentInChildren<MMProgressBar>();
       }
@@ -26,4 +26,4 @@ public class EnemyStats : CharacterStats
    }
 }
 
-public enum EnemyType { skelet, Boss }
+public enum EnemyType { skelet, Boss , kingSkelet }
