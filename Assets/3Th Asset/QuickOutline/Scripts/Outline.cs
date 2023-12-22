@@ -87,6 +87,7 @@ public class Outline : MonoBehaviour
     public Material CurrentoutlineFillMaterial;
     public bool isTake;
     private bool needsUpdate;
+    public bool fade;
 
     void Awake()
     {
@@ -102,7 +103,8 @@ public class Outline : MonoBehaviour
         CurrentoutlineFillMaterial = outlineFillMaterial;
         // Retrieve or generate smooth normals
         LoadSmoothNormals();
-
+        if (fade)
+            ChangeColor();
         // Apply material properties immediately
         needsUpdate = true;
     }
@@ -119,11 +121,9 @@ public class Outline : MonoBehaviour
 
             renderer.materials = materials.ToArray();
         }
-
-        ChangeColor();
     }
 
-    float alpha;
+    float alpha =1;
 
     public void ChangeColor()
     {
@@ -172,8 +172,9 @@ public class Outline : MonoBehaviour
 
             UpdateMaterialProperties();
         }
-        CurrentoutlineFillMaterial.SetColor("_OutlineColor", new Color(outlineColor.r,outlineColor.g,outlineColor.b,alpha));
-     
+
+        CurrentoutlineFillMaterial.SetColor("_OutlineColor",
+            new Color(outlineColor.r, outlineColor.g, outlineColor.b, alpha));
     }
 
     void OnDisable()

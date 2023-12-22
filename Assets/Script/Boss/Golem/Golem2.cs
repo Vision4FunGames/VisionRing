@@ -110,7 +110,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
         attack = true;
         circleParentObj.SetActive(true);
         _targetPos = _player.transform.position;
-        circleParentObj.transform.position = new Vector3(_targetPos.x, 0.5f, _targetPos.z);
+        circleParentObj.transform.position = new Vector3(_targetPos.x,_targetPos.y, _targetPos.z);
         circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);
         circleParentObj.transform.GetChild(1).transform.DOScale(new Vector3(1, 1, 1), 1.5f)
             .OnComplete((() => circleParentObj.SetActive(false)));
@@ -127,7 +127,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
     public void Jump()
     {
         circleParentObj.SetActive(false);
-        _targetPos = new Vector3(_targetPos.x, 0, _targetPos.z);
+        _targetPos = new Vector3(_targetPos.x, _targetPos.y, _targetPos.z);
         transform.DOJump(_targetPos, 8, 0, 1).SetEase(Ease.Linear).OnComplete((() =>
         {
             FinishAttack();

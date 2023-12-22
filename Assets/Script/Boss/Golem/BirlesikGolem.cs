@@ -116,7 +116,6 @@ public class BirlesikGolem : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        GetComponentInChildren<Collider>().enabled = false;
         DamageMaterial();
         ShowText(damage);
         health -= damage;

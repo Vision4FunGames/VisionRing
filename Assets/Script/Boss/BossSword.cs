@@ -17,5 +17,11 @@ public class BossSword : MonoBehaviour
             other.GetComponent<BossTrap>().Explosion();
             bossCombat.StunEnable();
         }
+
+        if (other.CompareTag("Player"))
+        {
+            print("Bosss");
+            other.GetComponent<PlayerHealth>().TakeDamage(10);
+        }
     }
 }
