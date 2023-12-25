@@ -22,6 +22,10 @@ public class BossDetect : MonoBehaviour
         {
             FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
         }
+        if (other.CompareTag("RotateFire"))
+        {
+            bossManager.BossTakeSwordDamage(playerAttack.damage);
+        }
     }
 
     public void OnTriggerExit(Collider other)

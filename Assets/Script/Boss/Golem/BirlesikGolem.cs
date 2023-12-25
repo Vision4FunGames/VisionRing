@@ -261,6 +261,10 @@ public class BirlesikGolem : MonoBehaviour
         {
             FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
         }
+        if (other.CompareTag("RotateFire"))
+        {
+            TakeDamage(player.GetComponent<PlayerAttack>().damage);
+        }
     }
 
     public void OnTriggerExit(Collider other)

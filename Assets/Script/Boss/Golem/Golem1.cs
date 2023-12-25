@@ -28,6 +28,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
     public GameObject _damageNumbersPro;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     private bool dead;
+
     private void Awake()
     {
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -89,7 +90,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
         var lookPos = _player.transform.position - transform.position;
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
-        _animator.SetFloat("Blend",-(transform.rotation.eulerAngles.magnitude-rotation.eulerAngles.magnitude));
+        _animator.SetFloat("Blend", -(transform.rotation.eulerAngles.magnitude - rotation.eulerAngles.magnitude));
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10);
     }
 
@@ -117,12 +118,18 @@ public class Golem1 : MonoBehaviour, GolemCombat
 
         if (other.CompareTag("SwordCollider"))
         {
-            if(!dead)
+            if (!dead)
                 TakeDamage(_player.GetComponent<PlayerAttack>().damage);
         }
+
         if (other.CompareTag("Tornado"))
         {
             FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
+        }
+
+        if (other.CompareTag("RotateFire"))
+        {
+            TakeDamage(_player.GetComponent<PlayerAttack>().damage);
         }
     }
 
@@ -217,14 +224,13 @@ public class Golem1 : MonoBehaviour, GolemCombat
             health -= damage;
             healthBar.UpdateBar(health, 0, baseHealth);
         }
-        else if(health<=0 && !dead)
+        else if (health <= 0 && !dead)
         {
             GetComponent<Collider>().enabled = false;
             _animator.Play("Death");
             dead = true;
             Destroy(gameObject, 10);
         }
-      
     }
 
     #endregion

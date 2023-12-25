@@ -105,6 +105,10 @@ public class Golem2 : MonoBehaviour , GolemCombat
         {
             FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
         }
+        if (other.CompareTag("RotateFire"))
+        {
+            TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+        }
     }
 
     public void OnTriggerExit(Collider other)
