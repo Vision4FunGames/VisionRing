@@ -257,6 +257,18 @@ public class BirlesikGolem : MonoBehaviour
             if (move)
                 StopAttack();
         }
+        if (other.CompareTag("Tornado"))
+        {
+            FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Tornado"))
+        {
+            FindObjectOfType<TornadoExit>().EnemyRemove(gameObject);
+        }
     }
     
     private void OnParticleCollision(GameObject other)

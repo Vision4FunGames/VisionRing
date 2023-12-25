@@ -101,6 +101,18 @@ public class Golem2 : MonoBehaviour , GolemCombat
             if(!dead)
                 TakeDamage(_player.GetComponent<PlayerAttack>().damage);
         }
+        if (other.CompareTag("Tornado"))
+        {
+            FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Tornado"))
+        {
+            FindObjectOfType<TornadoExit>().EnemyRemove(gameObject);
+        }
     }
 
     #region Attack

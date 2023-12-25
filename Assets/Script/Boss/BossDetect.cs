@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BossDetect : MonoBehaviour
@@ -15,6 +16,19 @@ public class BossDetect : MonoBehaviour
         if (other.CompareTag("SwordCollider"))
         {
             bossManager.BossTakeSwordDamage(playerAttack.damage*10);
+        }
+
+        if (other.CompareTag("Tornado"))
+        {
+            FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Tornado"))
+        {
+            FindObjectOfType<TornadoExit>().EnemyRemove(gameObject);
         }
     }
 }

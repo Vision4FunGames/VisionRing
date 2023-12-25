@@ -21,7 +21,7 @@ public class BossSword : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             print("Bosss");
-            other.GetComponent<PlayerHealth>().TakeDamage(10);
+            other.GetComponent<PlayerHealth>().DamageAnimation(10);
         }
     }
 }
