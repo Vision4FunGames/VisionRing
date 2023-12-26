@@ -292,7 +292,6 @@ public class BirlesikGolem : MonoBehaviour
     {
         if (other.name == "ArrowRain")
         {   
-            print("aAAAAaaAAaAaa");
             TakeDamage(10);
         }
     }

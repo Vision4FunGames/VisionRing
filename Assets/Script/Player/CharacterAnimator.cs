@@ -11,6 +11,7 @@ public class CharacterAnimator : MonoBehaviour
     CharacterCombat combat;
     private EnemyStats enemyStats;
     private int attackCounter = 0;
+    private bool shied;
 
     protected virtual void Start()
     {
@@ -28,22 +29,61 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void OnAttack()
     {
-        if (attackCounter % 3 == 0)
+        if (enemyStats.enemyType != EnemyType.kingSkelet)
         {
-            animator.SetTrigger("Attack");
+            if (attackCounter % 3 == 0)
+            {
+                animator.SetTrigger("Attack");
+            }
+            else
+            {
+                int rand = Random.Range(0, 30);
+                if (rand < 10 && rand >= 0)
+                    animator.SetTrigger("Attack");
+                else if (rand >= 10 && rand < 20)
+                    animator.SetTrigger("Attack2");
+                else if (rand >= 20 && rand < 30)
+                    animator.SetTrigger("Attack3");
+            }
+
+            attackCounter++;
         }
         else
         {
-            int rand = Random.Range(0, 30);
-            if (rand < 10 && rand >= 0)
-                animator.SetTrigger("Attack");
-            else if(rand>=10 && rand<20)
-                animator.SetTrigger("Attack2");
-            else if(rand>=20 && rand<30)
-                animator.SetTrigger("Attack3");
-        }
+            if (!shied)
+            {
+                shied = true;
+                if (attackCounter % 3 == 0)
+                {
+                    GetComponent<NavMeshAgent>().speed = 0;
+                    animator.SetBool("shield", false);
 
-        attackCounter++;
+                    animator.SetTrigger("Attack");
+
+                    CancelInvoke("ShieldClose");
+                    Invoke("ShieldClose", 20);
+                }
+                else
+                {
+                    int rand = Random.Range(0, 30);
+                    if (rand < 10 && rand >= 0)
+                        animator.SetTrigger("Attack2");
+                    else if (rand >= 10 && rand < 20)
+                        animator.SetTrigger("Attack2");
+                    else if (rand >= 20 && rand < 30)
+                        animator.SetTrigger("Attack3");
+                }
+
+                attackCounter++;
+            }
+        }
+    }
+
+    public void ShieldClose()
+    {
+        GetComponent<NavMeshAgent>().speed = 6;
+        shied = false;
+        animator.SetBool("shield", true);
     }
 
     protected virtual void DieAnimation()
