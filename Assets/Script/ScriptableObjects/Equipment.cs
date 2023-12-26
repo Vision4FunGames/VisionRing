@@ -11,6 +11,7 @@ public class Equipment : Item {
     public int armorModifier;
     public int damageModifier;
     public float critChance;
+    public int itemSet;
    [ES3NonSerializable] public SkinnedMeshRenderer mesh;
    
    [ES3NonSerializable] public GameObject prefab;
@@ -110,6 +111,7 @@ public class Equipment : Item {
         isUpgrade = item.isUpgrade;
         prefab = item.prefab;
         critChance = item.critChance;
+        itemSet = item.itemSet;
 
     }
 }

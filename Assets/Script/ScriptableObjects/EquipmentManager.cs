@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class EquipmentManager : MonoBehaviour
@@ -105,6 +106,7 @@ public class EquipmentManager : MonoBehaviour
                 if (saveEquipment[i].equipSlot == EquipmentSlot.Weapon)
                 {
                     saveEquipment[i].prefab = Resources.Load<GameObject>(s + "/" + saveEquipment[i].name);
+                    saveEquipment[i].icon = Resources.Load<Sprite>("ItemSprite/" + saveEquipment[i].name);
                 }
                 else
                 {
@@ -235,6 +237,7 @@ public class EquipmentManager : MonoBehaviour
                 inventoryPlayerAnim.SetTrigger("Bow");
             }
         }
+        CheckItemSet();
         //equippedItems [itemIndex] = newMesh.gameObject;
     }
 
@@ -267,7 +270,7 @@ public class EquipmentManager : MonoBehaviour
             if (inventory.onItemChangedCallback != null)
                 inventory.onItemChangedCallback.Invoke();
         }
-
+        CheckItemSet();
         ES3.Save("currentItems", currentEquipment);
         ES3.Save("inventory", inventory.items);
         Debug.Log("Saved");
@@ -324,6 +327,35 @@ public class EquipmentManager : MonoBehaviour
         currentInventoryMeshes[slotIndex] = newMesh2;
     }
 
+    void CheckItemSet()
+    {
+        for (int i = 0; i < currentEquipment.Length; i++)
+        {
+            if (currentEquipment[i]==null)
+            {
+                return;
+            }
+        }
+          InventorySlot[] currentSlots = InventoryUI.instance.currentItemsParent.GetComponentsInChildren<InventorySlot>();
+        if (currentEquipment[0].itemSet == currentEquipment[1].itemSet && currentEquipment[0].itemSet== currentEquipment[3].itemSet && currentEquipment[0].itemSet !=0)
+        {
+            for (int i = 0; i < currentSlots.Length; i++)
+            {
+                if (i==2)
+                {
+                    i++;
+                }
+                currentSlots[i].backGImage.material = UiManager.instance.skillMaterial;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < currentSlots.Length; i++)
+            {
+                currentSlots[i].backGImage.material = null;
+            }
+        }
+    }
     #endregion
 
     #region Upgrade
