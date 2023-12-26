@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7330025280185203795}
   - component: {fileID: 6931454157712110943}
+  - component: {fileID: 1343973802107855094}
   m_Layer: 0
   m_Name: Shoes 6
   m_TagString: Untagged
@@ -52,7 +53,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fcaf9b3abf34a1a418bf5c3efd55dcae, type: 2}
+  - {fileID: 2100000, guid: 8d4211397e670f242a378893be17ba36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,3 +158,25 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0019194107, y: -0.002357515, z: 0.0040030507}
     m_Extent: {x: 0.010056077, y: 0.012900611, z: 0.0072831055}
   m_DirtyAABB: 0
+--- !u!114 &1343973802107855094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595319693456133183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorFadeTime: 0
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  CurrentoutlineFillMaterial: {fileID: 0}
+  isTake: 0
+  fade: 0

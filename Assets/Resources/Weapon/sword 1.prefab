@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9132085001021602449}
   - component: {fileID: 1288118565136427573}
   - component: {fileID: 6365846882370873190}
+  - component: {fileID: 6126198756885154860}
   m_Layer: 0
   m_Name: sword 1
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3096619310516992474, guid: 545c458e5070cdd448b22d8c86fc346f, type: 3}
+  - {fileID: 2100000, guid: 8d4211397e670f242a378893be17ba36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,3 +99,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myGunType: 0
   MyArrowType: 0
+--- !u!114 &6126198756885154860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983056495033772472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorFadeTime: 0
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  CurrentoutlineFillMaterial: {fileID: 0}
+  isTake: 0
+  fade: 0
