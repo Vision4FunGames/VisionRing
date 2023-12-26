@@ -26,4 +26,4 @@ public class EnemyStats : CharacterStats
    }
 }
 
-public enum EnemyType { skelet, Boss , kingSkelet }
+public enum EnemyType { skelet, Boss , kingSkelet,Ghost}

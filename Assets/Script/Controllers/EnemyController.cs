@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     CharacterCombat combatManager;
     private float distance;
     private GameManager _gameManager;
+    private float retrieveDistance = 3f;
+    private bool attack;
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -34,19 +36,49 @@ public class EnemyController : MonoBehaviour
         // If inside the radius
         if (distance <= lookRadius && agent != null && !_enemyStats.die &&_gameManager.gameState != GameState.GameOver )
         {
-            if (target)
-                agent.SetDestination(target.position);
+            if (_enemyStats.enemyType == EnemyType.Ghost)
+            {
+                if (target)
+                {
+                  
+                        agent.isStopped = true; // Agent'ı durdur
+                        agent.velocity = Vector3.zero; // Hareketi sıfırla
+                        attack = true; // Ateş etmeye başla
+
+                        // Geri çekilme mesafesi kadar geriye doğru git
+                        Vector3 geriCekilmeYonu = transform.position - Player.instance.transform.position;
+                        geriCekilmeYonu = geriCekilmeYonu.normalized * retrieveDistance;
+                        Vector3 yeniHedef = transform.position + geriCekilmeYonu;
+                        agent.SetDestination(yeniHedef);
+                        combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                        FaceTarget();
+
+                        if (attack && agent.remainingDistance <= agent.stoppingDistance)
+                        {
+                            agent.isStopped = true;
+                        }
+
+                       
+                    
+                }
+            }
             else
             {
-                target = Player.instance.transform;
-                agent.SetDestination(target.position);
+                if (target)
+                    agent.SetDestination(target.position);
+                else
+                {
+                    target = Player.instance.transform;
+                    agent.SetDestination(target.position);
+                }
+                if (distance <= agent.stoppingDistance)
+                {
+                    // Attack
+                    combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                    FaceTarget();
+                }
             }
-            if (distance <= agent.stoppingDistance)
-            {
-                // Attack
-                combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
-                FaceTarget();
-            }
+           
         }
     }
 
