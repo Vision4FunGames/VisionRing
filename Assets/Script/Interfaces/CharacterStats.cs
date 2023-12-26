@@ -13,7 +13,7 @@ public class CharacterStats : MonoBehaviour
     public int currentHealth { get; private set; }
     public Stat damage;
     public Stat armor;
-    public DamageNumber prefab,critPrefab;
+    public DamageNumber prefab, critPrefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
     public string message;
@@ -41,7 +41,7 @@ public class CharacterStats : MonoBehaviour
             damage -= armor.GetValue();
             damage = Mathf.Clamp(damage, 0, int.MaxValue);
             currentHealth -= damage;
-            DamageVFX(damage,false);
+            DamageVFX(damage, false);
             DamageAnimation();
             UpdateHealthBar();
         }
@@ -60,22 +60,23 @@ public class CharacterStats : MonoBehaviour
         {
             crit = true;
         }
-        
+
         if (currentHealth > 0 && !die)
         {
             damage -= armor.GetValue();
             if (crit)
             {
                 damage *= 2;
-                DamageVFX(damage,true);
+                DamageVFX(damage, true);
             }
             else
             {
-                DamageVFX(damage,false);
+                DamageVFX(damage, false);
             }
+
             //damage = Mathf.Clamp(damage, 0, int.MaxValue);
             currentHealth -= damage;
-            
+
             DamageAnimation();
             UpdateHealthBar();
         }
@@ -88,7 +89,6 @@ public class CharacterStats : MonoBehaviour
 
     public void CalculateCriticalChance()
     {
-        
     }
 
     public void DamageAnimation()
@@ -106,7 +106,7 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void DamageVFX(int damage,bool crit)
+    public void DamageVFX(int damage, bool crit)
     {
         if (!crit)
         {
@@ -122,11 +122,9 @@ public class CharacterStats : MonoBehaviour
                     damage);
             newDamageNumber.followedTarget = transform;
         }
-       
     }
-    
-    
-    
+
+
     public virtual void Die()
     {
         QuestMachineMessages.SendCompositeMessage(this, message);
@@ -134,6 +132,7 @@ public class CharacterStats : MonoBehaviour
 
     public void UpdateHealthBar()
     {
-        mmProgressBar.UpdateBar(currentHealth, 0, 100);
+        if (mmProgressBar)
+            mmProgressBar.UpdateBar(currentHealth, 0, 100);
     }
 }

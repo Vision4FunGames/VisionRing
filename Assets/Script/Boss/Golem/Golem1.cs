@@ -28,6 +28,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
     public GameObject _damageNumbersPro;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     private bool dead;
+    private float currentFlameTimer;
 
     private void Awake()
     {
@@ -56,6 +57,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
 
     private void Update()
     {
+        currentFlameTimer += Time.deltaTime;
         if (!_attack && !stun && !dead)
         {
             LookAtPlayer();
@@ -132,7 +134,17 @@ public class Golem1 : MonoBehaviour, GolemCombat
             TakeDamage(_player.GetComponent<PlayerAttack>().damage);
         }
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Flame"))
+        {
+            if (currentFlameTimer > _player.GetComponent<PlayerAttack>().flameDamageRateOfFire)
+            {
+                currentFlameTimer = 0;
+                TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+            }
+        }
+    }
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Tornado"))

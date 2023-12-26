@@ -23,6 +23,8 @@ public class Golem2 : MonoBehaviour , GolemCombat
     public GameObject _damageNumbersPro;
     public ParticleSystem golemParticle , stunStar;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
+    private float currentFlameTimer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
     // Update is called once per frame
     void Update()
     {
+        currentFlameTimer += Time.deltaTime;
         if (!attack && !stun && !dead)
             LookAtPlayer();
 
@@ -108,6 +111,17 @@ public class Golem2 : MonoBehaviour , GolemCombat
         if (other.CompareTag("RotateFire"))
         {
             TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Flame"))
+        {
+            if (currentFlameTimer > _player.GetComponent<PlayerAttack>().flameDamageRateOfFire)
+            {
+                currentFlameTimer = 0;
+                TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+            }
         }
     }
 

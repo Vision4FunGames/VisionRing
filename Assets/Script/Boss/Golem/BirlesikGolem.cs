@@ -32,6 +32,8 @@ public class BirlesikGolem : MonoBehaviour
     public Transform ust, alt;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     private bool damageAttack;
+    private float currentFlameTimer;
+
 
     private void Start()
     {
@@ -58,6 +60,7 @@ public class BirlesikGolem : MonoBehaviour
 
     private void Update()
     {
+        currentFlameTimer += Time.deltaTime;
         distance = Vector3.Distance(player.transform.position, transform.position);
         if (!dead)
             CheckBoss();
@@ -266,7 +269,17 @@ public class BirlesikGolem : MonoBehaviour
             TakeDamage(player.GetComponent<PlayerAttack>().damage);
         }
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Flame"))
+        {
+            if (currentFlameTimer > player.GetComponent<PlayerAttack>().flameDamageRateOfFire)
+            {
+                currentFlameTimer = 0;
+                TakeDamage(player.GetComponent<PlayerAttack>().damage);
+            }
+        }
+    }
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Tornado"))

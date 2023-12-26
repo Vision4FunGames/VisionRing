@@ -58,9 +58,10 @@ public class Enemy : Interactable
         myStats.TakeDamage(damage);
         Vector3 direction = transform.position - dir.transform.position;
         direction = new Vector3(direction.x, 0, direction.z);
+        direction = Vector3.ClampMagnitude(direction, 2f);
         transform.DOKill();
-        transform.DOJump(direction * 2, 6, 1, 1)
-            .OnComplete((() => transform.GetChild(0).GetComponent<Collider>().enabled = true));
+        transform.DOJump(direction+transform.position, 6, 1, 1)
+            .OnComplete((() => transform.GetChild(0).GetComponent<BoxCollider>().enabled = true));
     }
 
     public void TornadoStart(GameObject _tornado)
