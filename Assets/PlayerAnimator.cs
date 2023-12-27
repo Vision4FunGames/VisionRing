@@ -19,7 +19,7 @@ public class PlayerAnimator : MonoBehaviour
     public void RingBtn()
     {
         animator.SetTrigger("Ring");
-        ringParticle.Play();
+        //ringParticle.Play();
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
     }
     public void RingAction()
@@ -31,7 +31,7 @@ public class PlayerAnimator : MonoBehaviour
     public void RingActionEnd()
     {
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
-        ringParticle.Stop();
+        //ringParticle.Stop();
     }
 
     public void FogAction()

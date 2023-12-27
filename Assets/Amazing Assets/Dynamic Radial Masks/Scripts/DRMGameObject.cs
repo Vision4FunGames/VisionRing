@@ -60,6 +60,7 @@ namespace AmazingAssets.DynamicRadialMasks
         {
             if (radius == 100)
             {
+
                 transform.GetChild(0).GetComponent<FogScale>().StartScale();
                 decrease = true;
                 increaseEnes = false;
