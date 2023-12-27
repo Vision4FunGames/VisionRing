@@ -44,20 +44,24 @@ public class RealmController : MonoBehaviour
                 
                 if (drmScript.increase)
                 {
+                    drmScript.ter2.gameObject.SetActive(true);
                     drmScript.radius += Time.deltaTime * drmScript.phaseSpeed;
                     if (drmScript.radius >=100)
                     {
                         drmScript.radius = 100;
                         drmScript.increase = false;
+                        drmScript.ter1.gameObject.SetActive(false);
                     }
                 }
                 else if (drmScript.decrease)
                 {
+                    drmScript.ter1.gameObject.SetActive(true);
                     drmScript.radius -= Time.deltaTime * drmScript.phaseSpeed;
                     if ( drmScript.radius <= 0)
                     {
                         drmScript.radius = 0;
                         drmScript.decrease = false;
+                        drmScript.ter2.gameObject.SetActive(false);
                     }
                 }
                 // Update the radius value based on the speed control
