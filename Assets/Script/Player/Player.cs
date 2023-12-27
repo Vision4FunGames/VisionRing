@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Script.Player.PlayerStateMachine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -155,6 +156,15 @@ public class Player : MonoBehaviour
             PlayerBox = new PlayerBox(this, StateMachine);
             StateMachine.ChangeState(PlayerBox);
         }
+    }
+
+    public void BackDoMove(GameObject enemy)
+    {
+        Vector3 dir = transform.position - enemy.transform.position;
+        dir = Vector3.ClampMagnitude(dir, 2);
+        isMovement = false;
+        _playerAttack.missAttackParticle.Play();
+        transform.DOMove(transform.position + (dir*2), 1f).OnComplete(()=> isMovement = true);
     }
 
     public void DisableSkill(float skilltime)

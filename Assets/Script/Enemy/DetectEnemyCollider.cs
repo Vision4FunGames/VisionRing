@@ -6,6 +6,7 @@ public class DetectEnemyCollider : MonoBehaviour
     private Enemy enemy;
     private EnemyStats _enemyStats;
     private PlayerAttack _playerAttack;
+    private Player player;
     private Rigidbody rb;
     private float currentFlameTimer;
 
@@ -15,6 +16,7 @@ public class DetectEnemyCollider : MonoBehaviour
         enemy = GetComponent<Enemy>();
         _enemyStats = GetComponent<EnemyStats>();
         _playerAttack = Player.instance.GetComponent<PlayerAttack>();
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,6 +44,10 @@ public class DetectEnemyCollider : MonoBehaviour
             {
                 if (angle < 90)
                     _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
+                else
+                {
+                    Player.instance.BackDoMove(gameObject);
+                }
             }
             else
                 _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);

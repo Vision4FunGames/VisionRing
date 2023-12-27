@@ -31,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
     public float flameDamageRateOfFire;
     public int earthSkillDamage;
     public ParticleSystem flameTFloor;
+    public ParticleSystem missAttackParticle;
     private void Awake()
     {
         player = FindObjectOfType<Player>();
