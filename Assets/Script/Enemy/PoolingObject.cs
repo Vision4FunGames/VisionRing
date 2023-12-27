@@ -6,10 +6,16 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
+public enum ThrowType
+{
+    arrow,
+    bomb
+}
 public class PoolingObject : MonoBehaviour
 {
-
+     public ThrowType mythrThrowType;
    
     [SerializeField] public float destroyTime;
 
@@ -30,6 +36,7 @@ public class PoolingObject : MonoBehaviour
 
     private void OnEnable()
     {
+        GetComponent<Collider>().enabled = false;
         rb = GetComponent<Rigidbody>();
         player = Player.instance;
         deactivateBulletAfterTimeCoroutine = StartCoroutine(DeactivateBulletAfterTime());
@@ -49,9 +56,23 @@ public class PoolingObject : MonoBehaviour
         }
         //transform.LookAt(player.transform.forward);
         //rb.AddForce(Vector3.forward,ForceMode.Force);
-        transform.DOMove(
-            new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
-            .2f).SetEase(Ease.Linear);
+        if (mythrThrowType == ThrowType.arrow)
+        {
+            transform.DOMove(
+                new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
+                .2f).SetEase(Ease.Linear);
+        }else if (mythrThrowType == ThrowType.bomb)
+        {
+            transform.DOJump(
+                new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
+                6f,1,1).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                GetComponent<Collider>().enabled = true;
+                ParticleSystem bomb= Instantiate(ParticleManager.instance.bombparticle, transform.position, Quaternion.identity, null);
+                Destroy(bomb.gameObject,2f);
+            });
+        }
+    
     }
     // Update is called once per frame
     void Update()

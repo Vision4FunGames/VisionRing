@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class ParticleManager : MonoBehaviour
 {
+    public ParticleSystem bombparticle;
     public ParticleSystem playerDashParticle;
      public ParticleSystem playerEnvanterParticleSystem;
     public static ParticleManager instance;
