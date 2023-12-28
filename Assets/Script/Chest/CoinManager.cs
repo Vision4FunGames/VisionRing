@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
@@ -17,10 +18,12 @@ public class CoinManager : MonoBehaviour
   private float distance;
   public GameObject coin;
   Canvas canvasMain;
+  public int numberOfObjects;
+  public float spawnRadius;
   private void Start()
   {
     canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
-      
+    SpawnCoin();
   }
   private void Update()
   {
@@ -44,5 +47,17 @@ public class CoinManager : MonoBehaviour
       });
     }
     
+  }
+
+  void SpawnCoin()
+  {
+    for (int i = 0; i < numberOfObjects; i++)
+    {
+      Vector3 randomPos = Random.insideUnitSphere * spawnRadius; // Rastgele bir nokta oluştur
+      randomPos.y = 0; // Y ekseni sabit olduğunda objeler yeryüzüne yerleştirilir
+
+      Instantiate(coin, new Vector3(transform.position.x,transform.position.y+2f,transform.position.z) + randomPos, new Quaternion(90,180,0,0));
+      // Belirtilen objeyi rastgele noktada oluştur
+    }
   }
 }
