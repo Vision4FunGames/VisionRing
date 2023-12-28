@@ -22,6 +22,7 @@ public class CoinManager : MonoBehaviour
   public float spawnRadius;
   private void Start()
   {
+    numberOfObjects = Random.Range(2, 7);
     canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
     SpawnCoin();
   }
@@ -57,6 +58,8 @@ public class CoinManager : MonoBehaviour
       randomPos.y = 0; // Y ekseni sabit olduğunda objeler yeryüzüne yerleştirilir
 
       Instantiate(coin, new Vector3(transform.position.x,transform.position.y+2f,transform.position.z) + randomPos, new Quaternion(90,180,0,0));
+      coin.GetComponent<Rigidbody>().isKinematic = false;
+      
       // Belirtilen objeyi rastgele noktada oluştur
     }
   }
