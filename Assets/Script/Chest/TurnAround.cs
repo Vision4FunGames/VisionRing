@@ -14,8 +14,11 @@ public class TurnAround : MonoBehaviour
     private float currentAngle = 0f; // Dolaşılacak açı
     private bool isMovingToPlayer = false; // Player'a doğru hareket etme durumu
     private bool isInside;
+    private Canvas canvasMain;
+    private bool done;
     void Start()
     {
+        canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
         player = Player.instance.transform;
         centerPosition = transform.position; // Dairenin merkez pozisyonunu Coin'in pozisyonu olarak belirle
     }
@@ -39,11 +42,11 @@ public class TurnAround : MonoBehaviour
 
                 Vector3 targetPosition = new Vector3(x, transform.position.y, z);
 
-                // Coin'i hedef pozisyona doğru hareket ettir
+                // // Coin'i hedef pozisyona doğru hareket ettir
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
                 // Açıyı güncelle, böylece Coin sürekli olarak yarım daireyi dolaşır
-                currentAngle += Time.deltaTime * moveSpeed / circleRadius;
+                currentAngle += Time.deltaTime * moveSpeed *3f / circleRadius;
 
                 // Eğer açı 180 dereceden büyükse, Player'a doğru hareketi başlat
                 if (currentAngle > 30f)
@@ -55,17 +58,37 @@ public class TurnAround : MonoBehaviour
             else
             {
                 // Player'a doğru hareket et
-                transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x,player.position.y+2f,player.position.z), moveSpeed *2* Time.deltaTime);
 
                 // Eğer Player'a ulaşıldıysa Coin'i yok et
-                if (Vector3.Distance(transform.position, player.position) < 0.1f)
+                if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)
                 {
-                    Destroy(gameObject);
+                  CollectAnimation();
                 }
             } 
         }
         
+        
        
+    }
+    private void CollectAnimation()
+    {
+        if (!done)
+        {
+            done = true;
+            var target = canvasMain.transform.GetChild(0).GetChild(8).transform;
+            GameObject current = Instantiate(Resources.Load<GameObject>("coin"), canvasMain.transform);
+            Vector3 goldpos = Camera.main.WorldToScreenPoint(this.transform.position);
+            current.transform.position = goldpos+new Vector3(Random.Range(10f,100f),Random.Range(10f,100f),Random.Range(10f,100f));
+            current.transform.DOLocalMove(new Vector3(target.localPosition.x-2f,target.localPosition.y-2f,target.localPosition.z), 1f).SetDelay(Random.Range(0f,1f)).OnComplete(() =>
+            {
+                Destroy(current);
+                Destroy(gameObject);
+            });
+        }
+            
+         
+
     }
     
 }
