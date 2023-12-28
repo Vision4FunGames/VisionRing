@@ -43,8 +43,8 @@ public class PoolingObjectSpawner : MonoBehaviour
         poolingObject.transform.LookAt(player.transform);
         poolingObject.transform.localPosition = ghostAnimator.rightHand.transform.position;
         //activate
-        poolingObject.gameObject.SetActive(true);
-        poolingObject.ThrowArrow();
+        //poolingObject.gameObject.SetActive(true);
+        //poolingObject.ThrowArrow();
     }
 
     private void OnReturnBallToPool(PoolingObject poolingObject)

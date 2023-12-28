@@ -1,12 +1,15 @@
+using AmazingAssets.DynamicRadialMasks;
 using UnityEngine;
 using DamageNumbersPro;
 
 public class PlayerHealth : CharacterHealth
 {
+    private DRMGameObject drmGameObject;
     Material _playerMaterial;
     [HideInInspector] public GameObject _damageNumbersPro;
     private void Awake()
     {
+        drmGameObject = GetComponentInChildren<DRMGameObject>();
         health = 100;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
@@ -16,6 +19,7 @@ public class PlayerHealth : CharacterHealth
     {
         if (!useShield)
         {
+            drmGameObject.timer = 0;
             TakeDamage(damage);
             DamageText(damage);
             PlayerManager.instance.DamageHitParticle();

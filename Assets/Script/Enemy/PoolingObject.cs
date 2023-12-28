@@ -13,22 +13,24 @@ public enum ThrowType
     arrow,
     bomb
 }
+
 public class PoolingObject : MonoBehaviour
 {
-     public ThrowType mythrThrowType;
-   
+    public ThrowType mythrThrowType;
+    public GameObject circleParentObj;
     [SerializeField] public float destroyTime;
 
     public DamageManager ballOwner;
     private ObjectPool<PoolingObject> _pool;
 
     private Coroutine deactivateBulletAfterTimeCoroutine;
-    
+
     private Rigidbody rb;
-    
+
     // Start is called before the first frame update
     private Player player;
     float elapsedTime = 0f;
+
     void Start()
     {
         ThrowArrow();
@@ -54,6 +56,7 @@ public class PoolingObject : MonoBehaviour
         {
             GetComponent<SphereCollider>().isTrigger = true;
         }
+
         //transform.LookAt(player.transform.forward);
         //rb.AddForce(Vector3.forward,ForceMode.Force);
         if (mythrThrowType == ThrowType.arrow)
@@ -61,25 +64,34 @@ public class PoolingObject : MonoBehaviour
             transform.DOMove(
                 new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
                 .2f).SetEase(Ease.Linear);
-        }else if (mythrThrowType == ThrowType.bomb)
+        }
+        else if (mythrThrowType == ThrowType.bomb)
         {
+            print("bomb");
+            circleParentObj = Instantiate(Resources.Load<GameObject>("GolemCircle"));
+            circleParentObj.SetActive(true);
+            circleParentObj.transform.localScale = new Vector3(4, 1.5f, 4);
+            Vector3 _targetPos = player.transform.position;
+            circleParentObj.transform.position = new Vector3(_targetPos.x, _targetPos.y+0.5f, _targetPos.z);
+            circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);
+            circleParentObj.transform.GetChild(1).transform.DOScale(new Vector3(1, 1, 1), 1f)
+                .OnComplete((() =>Destroy(circleParentObj.gameObject)));
             transform.DOJump(
                 new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
-                6f,1,1).SetEase(Ease.Linear).OnComplete(() =>
+                6f, 1, 1).SetEase(Ease.Linear).OnComplete(() =>
             {
                 GetComponent<Collider>().enabled = true;
-                ParticleSystem bomb= Instantiate(ParticleManager.instance.bombparticle, transform.position, Quaternion.identity, null);
-                Destroy(bomb.gameObject,2f);
+                ParticleSystem bomb = Instantiate(ParticleManager.instance.bombparticle, transform.position,
+                    Quaternion.identity, null);
+                Destroy(bomb.gameObject, 2f);
             });
         }
-    
     }
+
     // Update is called once per frame
     void Update()
     {
-       // transform.DOMove(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), .3f);
-        
-
+        // transform.DOMove(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), .3f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -89,7 +101,6 @@ public class PoolingObject : MonoBehaviour
             ballOwner?.PlayerDamage();
             //StopCoroutine(deactivateBulletAfterTimeCoroutine);
             //_pool.Release(this);
-            
         }
     }
 
@@ -106,8 +117,8 @@ public class PoolingObject : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
         //after the timer is over
         _pool.Release(this);
     }
-    
 }

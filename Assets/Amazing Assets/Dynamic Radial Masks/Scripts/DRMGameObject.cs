@@ -7,6 +7,8 @@ namespace AmazingAssets.DynamicRadialMasks
     [ExecuteAlways]
     public class DRMGameObject : MonoBehaviour
     {
+        public float waitTime;
+        public float timer;
         private DrmEnemyChange _drmEnemyChange;
          public bool increaseEnes;
         [HideInInspector] public float radius = 5;
@@ -31,50 +33,55 @@ namespace AmazingAssets.DynamicRadialMasks
         {
             _drmEnemyChange = GetComponent<DrmEnemyChange>();
             currentPhase = 0;
+            timer = waitTime;
         }
         void Update()
          {
              currentPhase += Time.deltaTime * phaseSpeed;
-        //     
-        //     if (increase)
-        //     {
-        //         radius += Time.deltaTime * phaseSpeed;
-        //         if (radius >=100)
-        //         {
-        //             radius = 100;
-        //             increase = false;
-        //         }
-        //     }
-        //     if (decrease)
-        //     {
-        //         radius -= Time.deltaTime * phaseSpeed;
-        //         if ( radius <= 0)
-        //         {
-        //             radius = 0;
-        //             decrease = false;
-        //         }
-        //     }
-        }
+             timer += Time.deltaTime;
+             //     
+             //     if (increase)
+             //     {
+             //         radius += Time.deltaTime * phaseSpeed;
+             //         if (radius >=100)
+             //         {
+             //             radius = 100;
+             //             increase = false;
+             //         }
+             //     }
+             //     if (decrease)
+             //     {
+             //         radius -= Time.deltaTime * phaseSpeed;
+             //         if ( radius <= 0)
+             //         {
+             //             radius = 0;
+             //             decrease = false;
+             //         }
+             //     }
+         }
 
         public void SliderValueChanged()
         {
-            if (radius == 100)
+            if (timer > waitTime)
             {
+                if (radius == 100)
+                {
 
-                transform.GetChild(0).GetComponent<FogScale>().StartScale();
-                decrease = true;
-                increaseEnes = false;
-                ter1.enabled = true;
-                ter2.enabled = false;
-            }
+                    transform.GetChild(0).GetComponent<FogScale>().StartScale();
+                    decrease = true;
+                    increaseEnes = false;
+                    ter1.enabled = true;
+                    ter2.enabled = false;
+                }
 
-            if (radius!=100)
-            {
-                transform.GetChild(0).GetComponent<FogScale>().StartScale();
-                increase = true;
-                increaseEnes = true;
-                ter1.enabled = false;
-                ter2.enabled = true;
+                if (radius!=100)
+                {
+                    transform.GetChild(0).GetComponent<FogScale>().StartScale();
+                    increase = true;
+                    increaseEnes = true;
+                    ter1.enabled = false;
+                    ter2.enabled = true;
+                }
             }
         }
     }
