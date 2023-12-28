@@ -15,6 +15,7 @@ public class CoinManager : MonoBehaviour
   private bool done = false;
   public float lookRadius;
   private float distance;
+  public GameObject coin;
   Canvas canvasMain;
   private void Start()
   {
@@ -23,11 +24,11 @@ public class CoinManager : MonoBehaviour
   }
   private void Update()
   {
-    distance = Vector3.Distance(Player.instance.transform.position, transform.position);
-    if (distance <= lookRadius)
-    {
-      GoToPlayer();
-    }
+    // distance = Vector3.Distance(Player.instance.transform.position, transform.position);
+    // if (distance <= lookRadius)
+    // {
+    //   GoToPlayer();
+    // }
   }
 
   private void GoToPlayer()
