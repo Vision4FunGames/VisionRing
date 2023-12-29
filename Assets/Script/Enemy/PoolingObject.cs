@@ -70,7 +70,7 @@ public class PoolingObject : MonoBehaviour
             print("bomb");
             circleParentObj = Instantiate(Resources.Load<GameObject>("GolemCircle"));
             circleParentObj.SetActive(true);
-            circleParentObj.transform.localScale = new Vector3(4, 1.5f, 4);
+            circleParentObj.transform.localScale = new Vector3(2, 1.5f, 2);
             Vector3 _targetPos = player.transform.position;
             circleParentObj.transform.position = new Vector3(_targetPos.x, _targetPos.y+0.5f, _targetPos.z);
             circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);

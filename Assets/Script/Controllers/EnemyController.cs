@@ -15,6 +15,9 @@ public class EnemyController : MonoBehaviour
     private GameManager _gameManager;
     private float retrieveDistance = 3f;
     private bool attack;
+    [HideInInspector] public bool bombActiveted;
+    [HideInInspector] public bool bombexp;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -31,35 +34,31 @@ public class EnemyController : MonoBehaviour
         {
             distance = Vector3.Distance(target.position, transform.position);
         }
-          
+
 
         // If inside the radius
-        if (distance <= lookRadius && agent != null && !_enemyStats.die &&_gameManager.gameState != GameState.GameOver )
+        if (distance <= lookRadius && agent != null && !_enemyStats.die && _gameManager.gameState != GameState.GameOver)
         {
             if (_enemyStats.enemyType == EnemyType.Ghost)
             {
                 if (target)
                 {
-                  
-                        agent.isStopped = true; // Agent'ı durdur
-                        agent.velocity = Vector3.zero; // Hareketi sıfırla
-                        attack = true; // Ateş etmeye başla
+                    agent.isStopped = true; // Agent'ı durdur
+                    agent.velocity = Vector3.zero; // Hareketi sıfırla
+                    attack = true; // Ateş etmeye başla
 
-                        // Geri çekilme mesafesi kadar geriye doğru git
-                        Vector3 geriCekilmeYonu = transform.position - Player.instance.transform.position;
-                        geriCekilmeYonu = geriCekilmeYonu.normalized * retrieveDistance;
-                        Vector3 yeniHedef = transform.position + geriCekilmeYonu;
-                        agent.SetDestination(yeniHedef);
-                        combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
-                        FaceTarget();
+                    // Geri çekilme mesafesi kadar geriye doğru git
+                    Vector3 geriCekilmeYonu = transform.position - Player.instance.transform.position;
+                    geriCekilmeYonu = geriCekilmeYonu.normalized * retrieveDistance;
+                    Vector3 yeniHedef = transform.position + geriCekilmeYonu;
+                    agent.SetDestination(yeniHedef);
+                    combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                    FaceTarget();
 
-                        if (attack && agent.remainingDistance <= agent.stoppingDistance)
-                        {
-                            agent.isStopped = true;
-                        }
-
-                       
-                    
+                    if (attack && agent.remainingDistance <= agent.stoppingDistance)
+                    {
+                        agent.isStopped = true;
+                    }
                 }
             }
             else
@@ -71,6 +70,7 @@ public class EnemyController : MonoBehaviour
                     target = Player.instance.transform;
                     agent.SetDestination(target.position);
                 }
+
                 if (distance <= agent.stoppingDistance)
                 {
                     // Attack
@@ -78,10 +78,8 @@ public class EnemyController : MonoBehaviour
                     FaceTarget();
                 }
             }
-           
         }
     }
-
     // Point towards the player
     void FaceTarget()
     {
