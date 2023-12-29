@@ -21,63 +21,65 @@ public class TurnAround : MonoBehaviour
         canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
         player = Player.instance.transform;
         centerPosition = transform.position; // Dairenin merkez pozisyonunu Coin'in pozisyonu olarak belirle
+       
+        transform.DOLocalJump(Random.insideUnitSphere * 2f, 5f, 1, .5f);
     }
 
     void Update()
     {
         transform.Rotate (Vector3.up * 50 * Time.deltaTime, Space.World);
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer< minDistanceToPlayer)
-        {
-            isInside = true;
-        }
-
-        if (isInside)
-        {
-            // Player'a doğru hareket et
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x,player.position.y+2f,player.position.z), moveSpeed *2* Time.deltaTime);
-            GetComponent<Collider>().isTrigger = true;
-            // Eğer Player'a ulaşıldıysa Coin'i yok et
-            if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)
-            {
-                CollectAnimation();
-            }
-            // if (!isMovingToPlayer)
-            // {
-            //     // // Daire üzerinde yarım daire hareketi
-            //     // float x = centerPosition.x + Mathf.Cos(currentAngle) * circleRadius;
-            //     // float z = centerPosition.z + Mathf.Sin(currentAngle) * circleRadius;
-            //     //
-            //     // Vector3 targetPosition = new Vector3(x, transform.position.y, z);
-            //     //
-            //     // // // Coin'i hedef pozisyona doğru hareket ettir
-            //     // transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            //     //
-            //     // // Açıyı güncelle, böylece Coin sürekli olarak yarım daireyi dolaşır
-            //     // currentAngle += Time.deltaTime * moveSpeed *3f / circleRadius;
-            //     // isMovingToPlayer = true;
-            //     // Eğer açı 180 dereceden büyükse, Player'a doğru hareketi başlat
-            //     // if (currentAngle > 30f)
-            //     // {
-            //     //     currentAngle = 30f;
-            //     //     //isMovingToPlayer = true;
-            //     //     
-            //     // }
-            //     
-            // }
-            // else
-            // {
-            //     // Player'a doğru hareket et
-            //     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x,player.position.y+2f,player.position.z), moveSpeed *2* Time.deltaTime);
-            //     GetComponent<Collider>().isTrigger = true;
-            //     // Eğer Player'a ulaşıldıysa Coin'i yok et
-            //     if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)
-            //     {
-            //       CollectAnimation();
-            //     }
-            // } 
-        }
-        
+    //     float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+    //     if (distanceToPlayer< minDistanceToPlayer)
+    //     {
+    //         isInside = true;
+    //     }
+    //
+    //     if (isInside)
+    //     {
+    //         // Player'a doğru hareket et
+    //         transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x,player.position.y+2f,player.position.z), moveSpeed *2* Time.deltaTime);
+    //         GetComponent<Collider>().isTrigger = true;
+    //         // Eğer Player'a ulaşıldıysa Coin'i yok et
+    //         if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)
+    //         {
+    //             CollectAnimation();
+    //         }
+    //         // if (!isMovingToPlayer)
+    //         // {
+    //         //     // // Daire üzerinde yarım daire hareketi
+    //         //     // float x = centerPosition.x + Mathf.Cos(currentAngle) * circleRadius;
+    //         //     // float z = centerPosition.z + Mathf.Sin(currentAngle) * circleRadius;
+    //         //     //
+    //         //     // Vector3 targetPosition = new Vector3(x, transform.position.y, z);
+    //         //     //
+    //         //     // // // Coin'i hedef pozisyona doğru hareket ettir
+    //         //     // transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+    //         //     //
+    //         //     // // Açıyı güncelle, böylece Coin sürekli olarak yarım daireyi dolaşır
+    //         //     // currentAngle += Time.deltaTime * moveSpeed *3f / circleRadius;
+    //         //     // isMovingToPlayer = true;
+    //         //     // Eğer açı 180 dereceden büyükse, Player'a doğru hareketi başlat
+    //         //     // if (currentAngle > 30f)
+    //         //     // {
+    //         //     //     currentAngle = 30f;
+    //         //     //     //isMovingToPlayer = true;
+    //         //     //     
+    //         //     // }
+    //         //     
+    //         // }
+    //         // else
+    //         // {
+    //         //     // Player'a doğru hareket et
+    //         //     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x,player.position.y+2f,player.position.z), moveSpeed *2* Time.deltaTime);
+    //         //     GetComponent<Collider>().isTrigger = true;
+    //         //     // Eğer Player'a ulaşıldıysa Coin'i yok et
+    //         //     if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)
+    //         //     {
+    //         //       CollectAnimation();
+    //         //     }
+    //         // } 
+    //     }
+    //     
         
        
     }
