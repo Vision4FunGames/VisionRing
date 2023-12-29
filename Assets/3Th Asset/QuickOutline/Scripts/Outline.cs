@@ -17,7 +17,6 @@ using UnityEngine;
 public class Outline : MonoBehaviour
 {
     private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
-
     public enum Mode
     {
         OutlineAll,
@@ -111,6 +110,7 @@ public class Outline : MonoBehaviour
 
     void OnEnable()
     {
+        outlineManager.outlineChaner += FadeOutline;
         foreach (var renderer in renderers)
         {
             // Append outline shaders
@@ -122,7 +122,7 @@ public class Outline : MonoBehaviour
             renderer.materials = materials.ToArray();
         }
     }
-
+    
     float alpha =1;
 
     public void ChangeColor()
@@ -179,6 +179,7 @@ public class Outline : MonoBehaviour
 
     void OnDisable()
     {
+        outlineManager.outlineChaner -= FadeOutline;
         foreach (var renderer in renderers)
         {
             // Remove outline shaders
@@ -191,6 +192,10 @@ public class Outline : MonoBehaviour
         }
     }
 
+    public void FadeOutline(float faded)
+    {
+        alpha = faded;
+    }
     void OnDestroy()
     {
         // Destroy material instances
