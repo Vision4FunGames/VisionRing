@@ -6951,6 +6951,7 @@ GameObject:
   - component: {fileID: 2622531187056102429}
   - component: {fileID: 2622531187056102430}
   - component: {fileID: 2622531187056102431}
+  - component: {fileID: 2782680113967816743}
   m_Layer: 10
   m_Name: ghost
   m_TagString: Enemy
@@ -7059,6 +7060,7 @@ MonoBehaviour:
   armor:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
+  critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
   message: 
   enemyType: 0
@@ -7089,6 +7091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4162873894117454467}
   isTabut: 0
+  dieParticle: {fileID: 0}
 --- !u!54 &2622531187056102429
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7131,6 +7134,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c22da51e7b54444b2d87f54851076f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2782680113967816743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399877509245605539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7be6af967ed2b438b42a56ab1df5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkeletType: 4
+  chestPrefab: {fileID: 8064687337860177436, guid: cedf4b7c74572594f8a0ff9255faaa2e, type: 3}
+  boss: {fileID: 0}
+  rnd: 0
+  coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
 --- !u!1 &3428962898474633404
 GameObject:
   m_ObjectHideFlags: 0

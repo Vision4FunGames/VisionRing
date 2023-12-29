@@ -102,7 +102,7 @@ MonoBehaviour:
   player: {fileID: 0}
   circleRadius: 1
   moveSpeed: 8
-  minDistanceToPlayer: 2
+  minDistanceToPlayer: 10
 --- !u!54 &5199262667671018003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 64
   m_CollisionDetection: 0
 --- !u!65 &5747525605765505507
 BoxCollider:

@@ -11,7 +11,9 @@ public enum SkeletType
     Skelet,
     MiniSkelet,
     KingSkelet,
-    Boss
+    Boss,
+    Ghost,
+    Goblin
 }
 public class DropChest : MonoBehaviour
 {
@@ -40,19 +42,31 @@ public class DropChest : MonoBehaviour
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y, bossTransform.z), 2f);
                 }
-                if (SkeletType == SkeletType.Boss)
+                else if (SkeletType == SkeletType.Boss)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
                     drop.transform.DOScale(new Vector3(3f, 3f, 3f), .1f).SetEase(Ease.OutBounce).SetDelay(4f);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y, bossTransform.z), 2f).SetDelay(4f);;
                 }
-                if (SkeletType== SkeletType.MiniSkelet)
+                else if (SkeletType== SkeletType.MiniSkelet)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y + 2.65f, bossTransform.z), 2f);
                 }
-                if (SkeletType== SkeletType.KingSkelet)
+                else if (SkeletType== SkeletType.KingSkelet)
+                {
+                    var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
+                    drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
+                    drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y + 2.70f, bossTransform.z), 2f);
+                }
+                else if (SkeletType== SkeletType.Ghost)
+                {
+                    var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
+                    drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
+                    drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y + 2.70f, bossTransform.z), 2f);
+                }
+                else if (SkeletType== SkeletType.Goblin)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);

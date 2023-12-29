@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 6759728030344244775}
   - component: {fileID: 6759728030344244774}
   - component: {fileID: 1601766727}
+  - component: {fileID: 1834905463}
   m_Layer: 10
   m_Name: GoblinSword
   m_TagString: Enemy
@@ -224,6 +225,7 @@ MonoBehaviour:
   armor:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
+  critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
   message: Killed:Goblin
   enemyType: 0
@@ -280,6 +282,23 @@ CapsuleCollider:
   m_Height: 3.68
   m_Direction: 1
   m_Center: {x: 0, y: 1.53, z: 0}
+--- !u!114 &1834905463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759728030344244772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7be6af967ed2b438b42a56ab1df5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkeletType: 5
+  chestPrefab: {fileID: 8064687337860177436, guid: cedf4b7c74572594f8a0ff9255faaa2e, type: 3}
+  boss: {fileID: 0}
+  rnd: 0
+  coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
 --- !u!1001 &1857570343
 PrefabInstance:
   m_ObjectHideFlags: 0

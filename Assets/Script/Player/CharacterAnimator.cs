@@ -92,9 +92,9 @@ public class CharacterAnimator : MonoBehaviour
         {
             FindObjectOfType<TabutManager>().DeadEnemy();
         }
-
         GetComponent<Collider>().enabled = false;
         enemyStats.die = true;
+        
         animator.SetTrigger("death_");
         navmeshAgent.speed = 0;
         enemyStats.mmProgressBar.gameObject.SetActive(false);
