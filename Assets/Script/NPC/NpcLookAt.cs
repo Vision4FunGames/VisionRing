@@ -14,6 +14,6 @@ public class NpcLookAt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Player.instance.transform);
+        transform.LookAt(new Vector3(Player.instance.transform.position.x,transform.position.y,Player.instance.transform.position.z));
     }
 }
