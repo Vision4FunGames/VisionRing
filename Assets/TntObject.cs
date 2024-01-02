@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using DG.Tweening;
 
@@ -8,7 +10,8 @@ public class TntObject : MonoBehaviour
     public ParticleSystem explosionParticle;
     public GameObject circleParentObj;
     private bool hit;
-
+    public List<GameObject> varilList;
+    public CameraShake camShake;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,7 +33,19 @@ public class TntObject : MonoBehaviour
                 .OnComplete(() =>
                 {
                     explosionParticle.Play();
-                    Destroy(gameObject,.2f);
+                    GetComponent<MeshRenderer>().enabled = false;
+                    circleParentObj.gameObject.SetActive(false);
+                    camShake.ShakeCam(.1f,5f);
+                    if (varilList!=null)
+                    {
+                        
+                        for (int i = 0; i < varilList.Count; i++)
+                        {
+                            varilList[i].GetComponent<MeshRenderer>().enabled = false;
+                            varilList[i].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                        }
+                    }
+                    Destroy(gameObject,2f);
                 });
         }
         else

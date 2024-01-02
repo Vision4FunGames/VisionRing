@@ -21,6 +21,12 @@ public class CameraShake : MonoBehaviour
         _basePosition = _cinemachineTransposer.m_FollowOffset;
     }
 
+    
+    public void ShakeCam(float t,float f)
+    {
+        StartCoroutine(ShakeVector(t, f));
+    }
+    
     [Button("sss")]
     public void ShakeCam()
     {
