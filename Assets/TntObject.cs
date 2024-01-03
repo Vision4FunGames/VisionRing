@@ -45,13 +45,8 @@ public class TntObject : MonoBehaviour
                             varilList[i].gameObject.transform.GetChild(0).gameObject.SetActive(true);
                         }
                     }
-                    Destroy(gameObject,2f);
                 });
-        }
-        else
-        {
-            explosionParticle.Play();
-            Destroy(gameObject);
+            Destroy(gameObject,6f);
         }
     }
 

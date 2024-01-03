@@ -120,7 +120,7 @@ public class CloneAttack : MonoBehaviour
     public void GenerateSwordCollider()
     {
         swordCollider ??= gameObject.AddComponent<BoxCollider>();
-        swordCollider.size = new Vector3(10, 2, 10);
+        swordCollider.size = new Vector3(5, 2, 5);
         swordCollider.center = new Vector3(0, 0, 5);
         swordCollider.enabled = false;
         swordCollider.tag = "SwordCollider";

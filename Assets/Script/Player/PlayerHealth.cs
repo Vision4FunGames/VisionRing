@@ -1,18 +1,54 @@
+using System;
+using System.Collections;
 using AmazingAssets.DynamicRadialMasks;
 using UnityEngine;
 using DamageNumbersPro;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class PlayerHealth : CharacterHealth
 {
     private DRMGameObject drmGameObject;
     Material _playerMaterial;
     [HideInInspector] public GameObject _damageNumbersPro;
+    private bool isCooldown;
+    
+    [Header("Heal Buff")] public float healRate;
+    public GameObject healBuffParticle;
+    public float healTime;
+    public bool firstHeal;
+    public float healCooldown;
+    private bool isHealBuff;
+
     private void Awake()
     {
         drmGameObject = GetComponentInChildren<DRMGameObject>();
         health = 100;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
+    }
+
+    private void Update()
+    {
+        if (isHealBuff)
+        {
+            healTime -= Time.deltaTime;
+            if (healTime <= 0)
+            {
+                isHealBuff = false;
+                healBuffParticle.gameObject.SetActive(false);
+            }
+        }
+
+        if (isCooldown)
+        {
+            healCooldown -= Time.deltaTime;
+            if (healCooldown <= 0)
+            {
+                healCooldown = 0;
+                isCooldown = false;
+            }
+        }
     }
 
     public void DamageAnimation(int damage)
@@ -34,4 +70,68 @@ public class PlayerHealth : CharacterHealth
                 damage);
         newDamageNumber.followedTarget = transform;
     }
+    
+    #region HealBuff
+
+    public void EnableHealBuff()
+    {
+        if ( health<100f && !isCooldown)
+        {
+            healCooldown = 8f;
+            isCooldown = true;
+            healRate = .3f;
+            HealBuff(true);
+        }
+    }
+    
+    
+    public void HealBuff(bool isFirst)
+    {
+        firstHeal = isFirst;
+      
+        if (firstHeal)
+        {
+            isHealBuff = true;
+            healTime = 3f;
+            healBuffParticle.gameObject.SetActive(true);
+        }
+        else
+        {
+            
+            health += (int)(20f*healRate);
+            Debug.Log("Health: " + health + " Islem: " + 20 * healRate);
+           mmProgressBar.UpdateBar(health, 0, 100);
+            if (health >= 100)
+            {
+                health = 100;
+                mmProgressBar.UpdateBar(health, 0, 100);
+                DisableHealBuff();
+                StopCoroutine(HealCor());
+            }
+        }
+        StartCoroutine(HealCor());
+    }
+    
+    IEnumerator HealCor()
+    {
+        yield return new WaitForSeconds(.5f);
+        if (isHealBuff)
+        {
+            Debug.Log("HealBuff COr");
+            HealBuff(false);
+        }
+    }
+    public void DisableHealBuff()
+    {
+        healBuffParticle.gameObject.SetActive(false);
+        isHealBuff = false;
+    }
+
+    public void HealBtnCoolDown(GameObject btn)
+    {
+        var btnImage = btn.GetComponent<Image>();
+        btnImage.fillAmount = 0f;
+        btnImage.DOFillAmount(360f, 8f).SetEase(Ease.Linear);
+    }
+    #endregion    
 }
