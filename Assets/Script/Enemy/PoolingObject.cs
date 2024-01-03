@@ -38,7 +38,7 @@ public class PoolingObject : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponent<Collider>().enabled = false;
+        //GetComponent<Collider>().enabled = false;
         rb = GetComponent<Rigidbody>();
         player = Player.instance;
         deactivateBulletAfterTimeCoroutine = StartCoroutine(DeactivateBulletAfterTime());
