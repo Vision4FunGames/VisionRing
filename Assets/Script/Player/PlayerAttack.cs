@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Script.CombatScript;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum CurrentGunType
 {
