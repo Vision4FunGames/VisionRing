@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 485616}
   - component: {fileID: 3322706}
   - component: {fileID: 2309360}
+  - component: {fileID: 8203085824889824461}
   m_Layer: 0
   m_Name: FAE_Birch_A_Billboard
   m_TagString: Untagged
@@ -29,9 +30,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4000012807369804}
+  - {fileID: 4000011336150474}
+  - {fileID: 4000010231781144}
   m_Father: {fileID: 4000012308464578}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3322706
 MeshFilter:
@@ -83,6 +87,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8203085824889824461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b94cc3ac8b86a541acdae519b4aa9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverrideFadeOutSeconds: 0
+  OverrideFadeInSeconds: 0
+  FadeOutSeconds: 0
+  FadeInSeconds: 0
+  OverrideFinalAlpha: 0
+  FinalAlpha: 0
+  isNotTransParent: 1
+  orgMaterial: []
 --- !u!1 &1000010151976528
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +119,7 @@ GameObject:
   - component: {fileID: 205000010921650282}
   - component: {fileID: 136000013745559892}
   - component: {fileID: 208355713006402262}
+  - component: {fileID: 4258198339668772030}
   m_Layer: 0
   m_Name: FAE_Birch_A
   m_TagString: Untagged
@@ -114,9 +139,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4000012807369804}
-  - {fileID: 4000011336150474}
-  - {fileID: 4000010231781144}
   - {fileID: 485616}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -182,6 +204,26 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 11, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &4258198339668772030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010151976528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b94cc3ac8b86a541acdae519b4aa9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverrideFadeOutSeconds: 0
+  OverrideFadeInSeconds: 0
+  FadeOutSeconds: 0
+  FadeInSeconds: 0
+  OverrideFinalAlpha: 0
+  FinalAlpha: 0
+  isNotTransParent: 1
+  orgMaterial: []
 --- !u!1 &1000010600017118
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +235,7 @@ GameObject:
   - component: {fileID: 4000012807369804}
   - component: {fileID: 33000011066172412}
   - component: {fileID: 23000010309640570}
+  - component: {fileID: 6112826820128533706}
   m_Layer: 0
   m_Name: FAE_Birch_A_LOD0
   m_TagString: Untagged
@@ -212,7 +255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4000012308464578}
+  m_Father: {fileID: 485616}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33000011066172412
@@ -266,6 +309,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6112826820128533706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010600017118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b94cc3ac8b86a541acdae519b4aa9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverrideFadeOutSeconds: 0
+  OverrideFadeInSeconds: 0
+  FadeOutSeconds: 0
+  FadeInSeconds: 0
+  OverrideFinalAlpha: 0
+  FinalAlpha: 0
+  isNotTransParent: 1
+  orgMaterial: []
 --- !u!1 &1000011945300424
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +340,7 @@ GameObject:
   - component: {fileID: 4000011336150474}
   - component: {fileID: 33000010325053190}
   - component: {fileID: 23000010813710006}
+  - component: {fileID: 1478412402559497411}
   m_Layer: 0
   m_Name: FAE_Birch_A_LOD1
   m_TagString: Untagged
@@ -296,7 +360,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4000012308464578}
+  m_Father: {fileID: 485616}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33000010325053190
@@ -350,6 +414,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1478412402559497411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011945300424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b94cc3ac8b86a541acdae519b4aa9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverrideFadeOutSeconds: 0
+  OverrideFadeInSeconds: 0
+  FadeOutSeconds: 0
+  FadeInSeconds: 0
+  OverrideFinalAlpha: 0
+  FinalAlpha: 0
+  isNotTransParent: 1
+  orgMaterial: []
 --- !u!1 &1000013546317300
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +445,7 @@ GameObject:
   - component: {fileID: 4000010231781144}
   - component: {fileID: 33000010587194330}
   - component: {fileID: 23000013391541918}
+  - component: {fileID: 4198149102873424483}
   m_Layer: 0
   m_Name: FAE_Birch_A_LOD2
   m_TagString: Untagged
@@ -380,7 +465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4000012308464578}
+  m_Father: {fileID: 485616}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33000010587194330
@@ -434,3 +519,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4198149102873424483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013546317300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b94cc3ac8b86a541acdae519b4aa9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverrideFadeOutSeconds: 0
+  OverrideFadeInSeconds: 0
+  FadeOutSeconds: 0
+  FadeInSeconds: 0
+  OverrideFinalAlpha: 0
+  FinalAlpha: 0
+  isNotTransParent: 1
+  orgMaterial: []

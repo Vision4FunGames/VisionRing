@@ -4,6 +4,7 @@ using AmazingAssets.DynamicRadialMasks;
 using UnityEngine;
 using DamageNumbersPro;
 using DG.Tweening;
+using MoreMountains.Tools;
 using UnityEngine.UI;
 
 public class PlayerHealth : CharacterHealth
@@ -26,6 +27,7 @@ public class PlayerHealth : CharacterHealth
         health = 100;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
+        mmProgressBar = FindObjectOfType<bl_MiniMap>().GetComponentInChildren<MMProgressBar>();
     }
 
     private void Update()

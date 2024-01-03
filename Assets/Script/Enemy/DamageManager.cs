@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class DamageManager : MonoBehaviour
 {
+    public GameObject bomb;
     public EnemyStats characterStats;
     private DropChest dropChest;
     private EnemyController enemyController;
@@ -59,13 +60,20 @@ public class DamageManager : MonoBehaviour
 
     public void BombExp()
     {
+        
         GetComponent<SphereCollider>().enabled = true;
         ParticleSystem bombParticle = Instantiate(ParticleManager.instance.bombparticle);
         bombParticle.transform.localScale = new Vector3(6, 6, 6);
         bombParticle.gameObject.transform.position = transform.position;
+        Invoke("closeTrigger",.1f);
+        bomb.SetActive(false);
         Destroy(gameObject, 5);
     }
 
+    public void closeTrigger()
+    {
+        GetComponent<SphereCollider>().enabled = false;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

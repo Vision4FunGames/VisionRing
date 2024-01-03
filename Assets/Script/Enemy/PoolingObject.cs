@@ -81,13 +81,17 @@ public class PoolingObject : MonoBehaviour
                 6f, 1, 1).SetEase(Ease.Linear).OnComplete(() =>
             {
                 GetComponent<Collider>().enabled = true;
+                Invoke("closeTrigger",.1f);
                 ParticleSystem bomb = Instantiate(ParticleManager.instance.bombparticle, transform.position,
                     Quaternion.identity, null);
                 Destroy(bomb.gameObject, 2f);
             });
         }
     }
-
+    public void closeTrigger()
+    {
+        GetComponent<Collider>().enabled = false;
+    }
     // Update is called once per frame
     void Update()
     {
