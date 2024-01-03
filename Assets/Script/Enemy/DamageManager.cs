@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class DamageManager : MonoBehaviour
 {
@@ -38,6 +39,11 @@ public class DamageManager : MonoBehaviour
         GetComponentInParent<EnemyStats>().die = true;
         enemyController.GetComponent<NavMeshAgent>().speed = 0;
         enemyController.GetComponentInChildren<Animator>().speed = 0;
+        GameObject circleParentObj = transform.root.GetChild(1).gameObject;
+        circleParentObj.SetActive(true);
+        circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);
+        circleParentObj.transform.GetChild(1).transform.DOScale(new Vector3(1, 1, 1), 2f)
+            .OnComplete((() =>Destroy(circleParentObj.gameObject)));
         Invoke("StartAnim", 2);
     }
 
