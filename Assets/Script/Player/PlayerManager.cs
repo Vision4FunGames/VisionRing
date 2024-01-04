@@ -77,6 +77,9 @@ public class PlayerManager : MonoBehaviour
 
         if (other.CompareTag("CheckPoint"))
         {
+            other.GetComponent<CheckPoint>().healParticle.Play();
+            other.GetComponent<CheckPoint>().campFireParticle.Play();
+            other.GetComponent<CheckPoint>().shineParticle.Stop();
             ES3.Save("CheckPoint", other.transform.position);
         }
     }
@@ -101,6 +104,13 @@ public class PlayerManager : MonoBehaviour
             player.speed = player.baseSpeed;
             player._playerAnimator.SetBool("yurumeBool", false);
             Destroy(sessizImage.gameObject);
+        }
+        if (other.CompareTag("CheckPoint"))
+        {
+            other.GetComponent<CheckPoint>().healParticle.Stop();
+            other.GetComponent<CheckPoint>().campFireParticle.Stop();
+            other.GetComponent<CheckPoint>().shineParticle.Play();
+       
         }
     }
 
