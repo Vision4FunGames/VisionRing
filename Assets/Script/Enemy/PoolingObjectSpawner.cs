@@ -18,7 +18,7 @@ public class PoolingObjectSpawner : MonoBehaviour
         _pool = new ObjectPool<PoolingObject>(CreateGhostBall, OnTakeBallFromPool, OnReturnBallToPool, OnDestroyBall, true,
             10, 50);
 
-
+      
     }
 
     private PoolingObject CreateGhostBall()

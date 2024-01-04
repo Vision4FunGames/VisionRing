@@ -46,7 +46,8 @@ public class DamageManager : MonoBehaviour
     public void WaitBall()
     {
         ballParticleSystem.Play();
-        ballParticleSystem.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 2f).OnComplete((() => StartAnim()));
+        ballParticleSystem.transform.DOKill();
+        ballParticleSystem.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1f).OnComplete((() => StartAnim()));
         enemyController.GetComponent<NavMeshAgent>().speed = 0;
         enemyController.GetComponentInChildren<Animator>().speed = 0;
         

@@ -8,7 +8,7 @@ public class CharacterCombat : MonoBehaviour
 {
     private PlayerHealth _player;
     public float attackRate = 1f;
-    private float attackCountdown = 0f;
+    public float attackCountdown = 0f;
     private float attackCooldown = 1f;
     public event System.Action OnAttack;
     
@@ -28,8 +28,8 @@ public class CharacterCombat : MonoBehaviour
     {
         if (attackCountdown <= 0f && myStats.currentHealth > 0)
         {
-            this.enemyStats = enemyStats;
             attackCountdown = attackRate;
+            this.enemyStats = enemyStats;
             if (OnAttack != null) {
                 OnAttack ();
             }

@@ -5,7 +5,7 @@ public class GhostAnimator : MonoBehaviour
     public GameObject rightHand;
     public PoolingObject ballPrefab;
     private Player player;
-
+    public GameObject curr;
     public PoolingObjectSpawner poolingObjectSpawner;
     private void Start()
     {
@@ -15,6 +15,7 @@ public class GhostAnimator : MonoBehaviour
 
     public void Throw()
     {
+        print("thrıw");
        // var currentBall = Instantiate(ballPrefab, rightHand.transform.position, Quaternion.identity);
        poolingObjectSpawner._pool.Get();
        GetComponent<DamageManager>().closeBallPart();
