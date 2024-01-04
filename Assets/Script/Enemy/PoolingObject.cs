@@ -32,31 +32,31 @@ public class PoolingObject : MonoBehaviour
     private Player player;
     float elapsedTime = 0f;
 
+    private void Awake()
+    {
+       
+       
+    }
+
     void Start()
     {
         ThrowArrow();
+        
     }
 
     private void OnEnable()
     {
         //GetComponent<Collider>().enabled = false;
-        rb = GetComponent<Rigidbody>();
+        // rb = GetComponent<Rigidbody>();
         player = Player.instance;
         deactivateBulletAfterTimeCoroutine = StartCoroutine(DeactivateBulletAfterTime());
     }
 
     public void ThrowArrow()
     {
-        rb.isKinematic = true;
-        if (GetComponent<BoxCollider>() != null)
-        {
-            GetComponent<BoxCollider>().isTrigger = true;
-        }
-
-        if (GetComponent<SphereCollider>() != null)
-        {
-            GetComponent<SphereCollider>().isTrigger = true;
-        }
+        
+        //rb.isKinematic = true;
+        GetComponent<Collider>().enabled = true;
 
         //transform.LookAt(player.transform.forward);
         //rb.AddForce(Vector3.forward,ForceMode.Force);
@@ -115,8 +115,8 @@ public class PoolingObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ballOwner?.PlayerDamage();
-            //StopCoroutine(deactivateBulletAfterTimeCoroutine);
-            //_pool.Release(this);
+            StopCoroutine(deactivateBulletAfterTimeCoroutine);
+            _pool.Release(this);
         }
     }
 
@@ -135,6 +135,7 @@ public class PoolingObject : MonoBehaviour
         }
 
         //after the timer is over
+        Debug.Log("Released");
         _pool.Release(this);
     }
 }

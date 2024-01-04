@@ -15,8 +15,8 @@ public class PoolingObjectSpawner : MonoBehaviour
     {
         player = Player.instance;
         ghostAnimator = GetComponent<GhostAnimator>();
-        _pool = new ObjectPool<PoolingObject>(CreateGhostBall, OnTakeBallFromPool, OnReturnBallToPool, OnDestroyBall, true,
-            10, 50);
+        _pool = new ObjectPool<PoolingObject>(CreateGhostBall, OnTakeBallFromPool, OnReturnBallToPool, OnDestroyBall, false,
+            5, 10);
 
       
     }
@@ -43,8 +43,8 @@ public class PoolingObjectSpawner : MonoBehaviour
         poolingObject.transform.LookAt(player.transform);
         poolingObject.transform.localPosition = ghostAnimator.rightHand.transform.position;
         //activate
-        //poolingObject.gameObject.SetActive(true);
-        //poolingObject.ThrowArrow();
+        poolingObject.gameObject.SetActive(true);
+        poolingObject.ThrowArrow();
     }
 
     private void OnReturnBallToPool(PoolingObject poolingObject)
