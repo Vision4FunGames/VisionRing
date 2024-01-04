@@ -17,9 +17,10 @@ public class EnemyController : MonoBehaviour
     private bool attack;
     [HideInInspector] public bool bombActiveted;
     [HideInInspector] public bool bombexp;
-
+    private Enemy enemy;
     void Start()
     {
+        enemy = GetComponent<Enemy>();
         _gameManager = FindObjectOfType<GameManager>();
         _enemyStats = GetComponent<EnemyStats>();
         target = Player.instance.transform;
@@ -43,17 +44,26 @@ public class EnemyController : MonoBehaviour
             {
                 if (target)
                 {
-                    agent.isStopped = true; // Agent'ı durdur
-                    agent.velocity = Vector3.zero; // Hareketi sıfırla
-                    attack = true; // Ateş etmeye başla
-
-                    // Geri çekilme mesafesi kadar geriye doğru git
-                    Vector3 geriCekilmeYonu = transform.position - Player.instance.transform.position;
-                    geriCekilmeYonu = geriCekilmeYonu.normalized * retrieveDistance;
-                    Vector3 yeniHedef = transform.position + geriCekilmeYonu;
-                    agent.SetDestination(yeniHedef);
-                    combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
-                    FaceTarget();
+                    if (distance < enemy.radius)
+                    {
+                        agent.isStopped = false;
+                        attack = false;
+                        Vector3 geriCekilmeYonu = transform.position - Player.instance.transform.position;
+                        geriCekilmeYonu = geriCekilmeYonu.normalized * retrieveDistance;
+                        Vector3 yeniHedef = transform.position + geriCekilmeYonu;
+                        agent.SetDestination(yeniHedef);
+                    }
+                    else
+                    {
+                        agent.isStopped = true; // Agent'ı durdur
+                        agent.velocity = Vector3.zero; // Hareketi sıfırla
+                        attack = true; // Ateş etmeye başla
+                        // Geri çekilme mesafesi kadar geriye doğru git
+                    
+                        combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                        FaceTarget();
+                    }
+                  
 
                     if (attack && agent.remainingDistance <= agent.stoppingDistance)
                     {

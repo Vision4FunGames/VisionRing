@@ -41,6 +41,7 @@ public class Enemy : Interactable
         _enemyStats = GetComponent<EnemyStats>();
         playerManager = PlayerManager.instance;
         myStats = GetComponent<CharacterStats>();
+      
     }
 
     public override void Interact()
