@@ -2148,6 +2148,7 @@ MonoBehaviour:
   armor:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
+  critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
   message: 
   enemyType: 0
@@ -2233,6 +2234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 15
   target: {fileID: 0}
+  bombActiveted: 0
+  bombexp: 0
 --- !u!136 &1751839462
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2735,6 +2738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3998161474a8745b4572b47b381b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bomb: {fileID: 0}
   characterStats: {fileID: 0}
 --- !u!114 &4387720023800492049
 MonoBehaviour:
@@ -3036,7 +3040,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1695841675134466970, guid: 70aeaf57d2e923f4986b9d2e00f20d1a, type: 3}
+  - {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4147,7 +4151,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e4f592230598db84dbd31ad47b475817, type: 2}
+  - {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

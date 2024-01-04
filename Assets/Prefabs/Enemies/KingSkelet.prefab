@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 5653933587837560473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0796, y: 1.0796, z: 1.0796}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543450652804141593}
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 10
   target: {fileID: 0}
+  bombActiveted: 0
+  bombexp: 0
 --- !u!114 &5653933587837560478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,10 +266,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4667070052937259404, guid: ea203f549afe4244c936be838acd8090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
+    - target: {fileID: 571668117468244195, guid: ea203f549afe4244c936be838acd8090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
     - target: {fileID: 919132149155446097, guid: ea203f549afe4244c936be838acd8090, type: 3}
       propertyPath: m_Name
       value: skeleton-king
       objectReference: {fileID: 0}
+    - target: {fileID: 1435251460299991995, guid: ea203f549afe4244c936be838acd8090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 92799f53cd07aa7439d80f7931de14df, type: 2}
+    - target: {fileID: 1957473412355672075, guid: ea203f549afe4244c936be838acd8090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
+    - target: {fileID: 4225706409183468453, guid: ea203f549afe4244c936be838acd8090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
+    - target: {fileID: 8094965386857021538, guid: ea203f549afe4244c936be838acd8090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea203f549afe4244c936be838acd8090, type: 3}
 --- !u!4 &543450652804141593 stripped
@@ -313,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3998161474a8745b4572b47b381b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bomb: {fileID: 0}
   characterStats: {fileID: 0}
 --- !u!4 &6902298233085889153 stripped
 Transform:
@@ -382,6 +409,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 207.4
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c8dda9bd6f7876f4694c5e64ab0ad86b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
     - target: {fileID: 919132149155446097, guid: c8dda9bd6f7876f4694c5e64ab0ad86b, type: 3}
       propertyPath: m_Name
       value: shield

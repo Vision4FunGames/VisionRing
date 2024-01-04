@@ -184,6 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 15
   target: {fileID: 0}
+  bombActiveted: 0
+  bombexp: 0
 --- !u!136 &5741898620138795140
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -261,6 +263,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 141.028
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f4780f54616a5f54cb60998daa20dac2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
     - target: {fileID: 919132149155446097, guid: f4780f54616a5f54cb60998daa20dac2, type: 3}
       propertyPath: m_Name
       value: bomb
@@ -322,6 +328,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bomb-goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 2489448698390836655, guid: 36c52a1f2cb20884580bf082addead3b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb7f8830410363438fc9528b40d340d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36c52a1f2cb20884580bf082addead3b, type: 3}
 --- !u!4 &2662076697672213155 stripped
@@ -379,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3998161474a8745b4572b47b381b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bomb: {fileID: 0}
   characterStats: {fileID: 0}
 --- !u!114 &5741898620876665471
 MonoBehaviour:
