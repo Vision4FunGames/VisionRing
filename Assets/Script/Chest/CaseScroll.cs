@@ -21,7 +21,7 @@ public class CaseScroll : MonoBehaviour
             return;
 
         GetComponent<RectTransform>().localPosition = new Vector3(10800, 0);
-        _speed = Random.Range(7, 8);
+        _speed = Random.Range(5, 6);
         _isScrolling = true;
 
         if (celss.Count == 0)

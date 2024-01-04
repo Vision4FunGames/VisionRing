@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PuzzleController : MonoBehaviour
 {
@@ -16,12 +17,12 @@ public class PuzzleController : MonoBehaviour
     public GameObject rockButton;
     public int enemyCount;
     public int killedEnemy;
-    public IEnumerator StoneStart()
+    public IEnumerator StoneStart(GameObject stone)
     {
-        children = new Transform[StoneArray.transform.childCount]; // Çocuk nesnelerin referanslarını al
-        for (int i = 0; i < StoneArray.transform.childCount; i++)
+        children = new Transform[stone.transform.childCount]; // Çocuk nesnelerin referanslarını al
+        for (int i = 0; i < stone.transform.childCount; i++)
         {
-            children[i] = StoneArray.transform.GetChild(i);
+            children[i] = stone.transform.GetChild(i);
         }
 
         yield return StartCoroutine(MoveChildren());
@@ -50,8 +51,13 @@ public class PuzzleController : MonoBehaviour
         missionStoneCounter++; 
         if (missionStoneCounter ==mission)
         {
-            StartCoroutine(StoneStart());
+            StartCoroutine(StoneStart(StoneArray));
         }
+    }
+
+    public void DoneEnemyMission()
+    {
+        StartCoroutine(StoneStart(StoneArray1));
     }
 
     public void EnemyDead()
@@ -60,6 +66,7 @@ public class PuzzleController : MonoBehaviour
         if (killedEnemy == enemyCount)
         {
             rockButton.transform.GetChild(0).gameObject.SetActive(false);
+            rockButton.GetComponent<Collider>().isTrigger = true;
         }
     }
     

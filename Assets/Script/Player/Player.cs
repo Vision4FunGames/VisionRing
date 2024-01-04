@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using MoreMountains.Tools;
 using Script.Player.PlayerStateMachine;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -179,7 +180,7 @@ public class Player : MonoBehaviour
                     currentİndex = i;
                 }
             }
-            transform.DOMove(boxObject.GetComponent<BoxItem>().playerDragPos[currentİndex].transform.position, .2f)
+            transform.DOMove(boxObject.GetComponent<BoxItem>().playerDragPos[currentİndex].transform.position, .1f)
                 .OnComplete((() =>
                 {
                      transform.GetChild(0).LookAt(new Vector3(boxObject.transform.position.x,transform.position.y,boxObject.transform.position.z));
@@ -188,9 +189,12 @@ public class Player : MonoBehaviour
                     boxObject.transform.parent = dragT;
                     boxObject.transform.localPosition = new Vector3(0, 0, 0);
                 }));
-            
-            
-           
+        }
+
+        if (other.CompareTag("RockPuzzle"))
+        {
+            other.gameObject.GetComponentInParent<PuzzleController>().DoneEnemyMission();
+            other.isTrigger = false;
         }
     }
 
