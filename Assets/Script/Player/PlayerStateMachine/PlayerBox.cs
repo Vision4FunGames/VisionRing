@@ -7,9 +7,11 @@ public class PlayerBox : PlayerState
     private static readonly int Box = Animator.StringToHash("box");
     private static readonly int RunSpeed = Animator.StringToHash("RunSpeed");
     public Vector3 _playerVelocity;
-    
-    public PlayerBox(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
+    public GameObject box;
+    public Transform DragT;
+    public PlayerBox(Player player, PlayerStateMachine playerStateMachine,GameObject box) : base(player, playerStateMachine)
     {
+        this.box = box;
     }
 
     public override void EnterState()
@@ -39,6 +41,7 @@ public class PlayerBox : PlayerState
                                              new Vector3(_player._fixedJoystick.Horizontal, 0f,
                                                  _player._fixedJoystick.Vertical) *
                                              (_player.speed * Time.deltaTime));
+        
     }
     Vector3 PlayerDirection()   
     {

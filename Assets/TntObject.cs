@@ -26,6 +26,7 @@ public class TntObject : MonoBehaviour
         if (!hit)
         {
             startParticle.Play();
+            DamageAnimation();
             hit = true;
             circleParentObj.SetActive(true);
             circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);
@@ -48,6 +49,15 @@ public class TntObject : MonoBehaviour
                 });
             Destroy(gameObject,6f);
         }
+    }
+
+    private void DamageAnimation()
+    {
+        var mesh = GetComponent<MeshRenderer>();
+        transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 4f).OnComplete(() =>
+        {
+                transform.DOScale(new Vector3(1f, 1f, 1f), .3f); 
+        });
     }
 
     IEnumerator Counter()

@@ -1,7 +1,9 @@
+using System;
 using DG.Tweening;
 using Script.Player.PlayerStateMachine;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class Player : MonoBehaviour
 {
@@ -51,6 +53,7 @@ public class Player : MonoBehaviour
     public DynamicJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
     [HideInInspector] public GameObject skillSword;
+    public Transform dragT;
     
     private void DisableMovement()
     {
@@ -88,7 +91,7 @@ public class Player : MonoBehaviour
         //_fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
-        PlayerBox = new PlayerBox(this, StateMachine);
+        PlayerBox = new PlayerBox(this, StateMachine,gameObject);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine, false);
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
@@ -151,10 +154,43 @@ public class Player : MonoBehaviour
             uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = attackSprite;
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        // if (Input.GetKeyDown(KeyCode.B))
+        // {
+        //     PlayerBox = new PlayerBox(this, StateMachine);
+        //     StateMachine.ChangeState(PlayerBox);
+        // }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Box"))
         {
-            PlayerBox = new PlayerBox(this, StateMachine);
-            StateMachine.ChangeState(PlayerBox);
+            var boxObject = other.gameObject;
+            float minDis = Vector3.Distance(transform.position,
+                boxObject.GetComponent<BoxItem>().playerDragPos[0].transform.position);
+            int currentİndex = 0;
+            for (int i = 0; i < boxObject.GetComponent<BoxItem>().playerDragPos.Length; i++)
+            {
+                if (Vector3.Distance(transform.position,
+                        boxObject.GetComponent<BoxItem>().playerDragPos[i].transform.position) < minDis)
+                {
+                    minDis = Vector3.Distance(transform.position,
+                        boxObject.GetComponent<BoxItem>().playerDragPos[i].transform.position);
+                    currentİndex = i;
+                }
+            }
+            transform.DOMove(boxObject.GetComponent<BoxItem>().playerDragPos[currentİndex].transform.position, .2f)
+                .OnComplete((() =>
+                {
+                     transform.GetChild(0).LookAt(new Vector3(boxObject.transform.position.x,transform.position.y,boxObject.transform.position.z));
+                    PlayerBox = new PlayerBox(this, StateMachine,other.gameObject); 
+                    StateMachine.ChangeState(PlayerBox);
+                    boxObject.transform.parent = dragT;
+                    boxObject.transform.localPosition = new Vector3(0, 0, 0);
+                }));
+            
+            
+           
         }
     }
 
