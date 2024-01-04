@@ -11,7 +11,8 @@ using UnityEngine.Serialization;
 public enum ThrowType
 {
     arrow,
-    bomb
+    bomb,
+    ghostball
 }
 
 public class PoolingObject : MonoBehaviour
@@ -59,6 +60,17 @@ public class PoolingObject : MonoBehaviour
 
         //transform.LookAt(player.transform.forward);
         //rb.AddForce(Vector3.forward,ForceMode.Force);
+        if (mythrThrowType == ThrowType.ghostball)
+        {
+            Vector3 dir = transform.position - player.transform.position;
+         
+            dir = new Vector3(dir.x, 0, dir.z);
+            dir = Vector3.ClampMagnitude(dir, 2);
+            transform.DOMove(
+                transform.position+
+                dir*-20f, 
+                2f).SetEase(Ease.Linear);
+        }
         if (mythrThrowType == ThrowType.arrow)
         {
             transform.DOMove(

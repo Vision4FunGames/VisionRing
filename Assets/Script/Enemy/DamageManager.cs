@@ -9,6 +9,8 @@ public class DamageManager : MonoBehaviour
     public EnemyStats characterStats;
     private DropChest dropChest;
     private EnemyController enemyController;
+    private GhostAnimator ghostAnimator;
+    private ParticleSystem ballParticleSystem;
 
     private void Start()
     {
@@ -17,6 +19,12 @@ public class DamageManager : MonoBehaviour
         enemyController = GetComponentInParent<EnemyController>();
         dropChest = GetComponentInParent<DropChest>();
         characterStats = GetComponentInParent<EnemyStats>();
+        if (GetComponent<GhostAnimator>())
+        {
+            ghostAnimator = GetComponent<GhostAnimator>();
+            ballParticleSystem = ghostAnimator.transform.GetComponentInChildren<ParticleSystem>();
+        }
+     
     }
 
     public void PlayerDamage()
@@ -35,6 +43,14 @@ public class DamageManager : MonoBehaviour
             dropChest.ChestDrop(transform.position);
     }
 
+    public void WaitBall()
+    {
+        ballParticleSystem.Play();
+        ballParticleSystem.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 2f).OnComplete((() => StartAnim()));
+        enemyController.GetComponent<NavMeshAgent>().speed = 0;
+        enemyController.GetComponentInChildren<Animator>().speed = 0;
+        
+    }
     public void StopAnim()
     {
         GetComponentInParent<EnemyStats>().die = true;
@@ -51,6 +67,17 @@ public class DamageManager : MonoBehaviour
     public void StartAnim()
     {
         enemyController.GetComponentInChildren<Animator>().speed = 1;
+       
+    }
+
+    public void closeBallPart()
+    {
+        if (ballParticleSystem)
+        {
+            ballParticleSystem.transform.localScale=Vector3.zero;
+            ballParticleSystem.Stop();
+            enemyController.GetComponent<NavMeshAgent>().speed = 6;
+        }
     }
 
     public void DeathEnemy()

@@ -14,10 +14,11 @@ public class EnemyController : MonoBehaviour
     private float distance;
     private GameManager _gameManager;
     private float retrieveDistance = 3f;
-    private bool attack;
+    public bool attack;
     [HideInInspector] public bool bombActiveted;
     [HideInInspector] public bool bombexp;
     private Enemy enemy;
+
     void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -59,15 +60,9 @@ public class EnemyController : MonoBehaviour
                         agent.velocity = Vector3.zero; // Hareketi sıfırla
                         attack = true; // Ateş etmeye başla
                         // Geri çekilme mesafesi kadar geriye doğru git
-                    
+
                         combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
                         FaceTarget();
-                    }
-                  
-
-                    if (attack && agent.remainingDistance <= agent.stoppingDistance)
-                    {
-                        agent.isStopped = true;
                     }
                 }
             }
@@ -90,6 +85,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
     // Point towards the player
     void FaceTarget()
     {

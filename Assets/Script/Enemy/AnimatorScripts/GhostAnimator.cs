@@ -17,6 +17,7 @@ public class GhostAnimator : MonoBehaviour
     {
        // var currentBall = Instantiate(ballPrefab, rightHand.transform.position, Quaternion.identity);
        poolingObjectSpawner._pool.Get();
+       GetComponent<DamageManager>().closeBallPart();
        // currentBall.transform.DOMove(new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),.2f).OnComplete(()=>Destroy(currentBall.gameObject));
     }
     public void DeathEnemy()
