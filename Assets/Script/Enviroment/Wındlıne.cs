@@ -14,7 +14,7 @@ public class Wındlıne : MonoBehaviour
         if (timer <= 0)
         {
             ChangePosition();
-            timer = 10f;
+            timer = 5f;
         }
 
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 using DamageNumbersPro;
 using DG.Tweening;
 using MoreMountains.Tools;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 
 public class PlayerHealth : CharacterHealth
@@ -20,7 +21,7 @@ public class PlayerHealth : CharacterHealth
     public bool firstHeal;
     public float healCooldown;
     private bool isHealBuff;
-
+    private int healLimit = 3;
     private void Awake()
     {
         drmGameObject = GetComponentInChildren<DRMGameObject>();
@@ -28,8 +29,14 @@ public class PlayerHealth : CharacterHealth
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
         mmProgressBar = FindObjectOfType<bl_MiniMap>().GetComponentInChildren<MMProgressBar>();
+        
     }
 
+    private void Start()
+    {
+        UiManager.instance.healText.text = healLimit.ToString();
+    }
+    
     private void Update()
     {
         if (isHealBuff)
@@ -75,14 +82,17 @@ public class PlayerHealth : CharacterHealth
     
     #region HealBuff
 
-    public void EnableHealBuff()
+    public void EnableHealBuff(GameObject btn)
     {
-        if ( health<100f && !isCooldown)
+        if ( health<100f && !isCooldown && healLimit > 0)
         {
+            healLimit--;
+            UiManager.instance.healText.text = healLimit.ToString();
             healCooldown = 8f;
             isCooldown = true;
             healRate = .3f;
             HealBuff(true);
+            HealBtnCoolDown(btn);
         }
     }
     
@@ -93,6 +103,7 @@ public class PlayerHealth : CharacterHealth
       
         if (firstHeal)
         {
+           
             isHealBuff = true;
             healTime = 3f;
             healBuffParticle.gameObject.SetActive(true);

@@ -18,7 +18,8 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     [Header("UI Objects")]
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas;
-    
+
+    public TextMeshProUGUI healText;
     public GameObject menuUi;
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
