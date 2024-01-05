@@ -31,6 +31,13 @@ public class EconomyManager : MonoBehaviour
 
     public int GetDiamond()
     {
+        int index = 0;
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            index = itemList.FindIndex(r => r.name.Contains("Diamond"));
+            
+        }
+        diamond = itemCount[index]; 
         return diamond;
     }
 
