@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c6ccf3802959e4cbdfaca2874fe716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mythrThrowType: 0
+  circleParentObj: {fileID: 0}
   destroyTime: 5
   ballOwner: {fileID: 0}
 --- !u!65 &7927000929440075158
@@ -236,5 +238,5 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 1
-  m_Emitting: 1
+  m_Autodestruct: 0
+  m_Emitting: 0

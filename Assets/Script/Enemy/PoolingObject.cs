@@ -40,7 +40,7 @@ public class PoolingObject : MonoBehaviour
 
     void Start()
     {
-        ThrowArrow();
+        //ThrowArrow();
         
     }
 
@@ -56,7 +56,7 @@ public class PoolingObject : MonoBehaviour
     {
         
         //rb.isKinematic = true;
-        GetComponent<Collider>().enabled = true;
+       // GetComponent<Collider>().enabled = true;
 
         //transform.LookAt(player.transform.forward);
         //rb.AddForce(Vector3.forward,ForceMode.Force);
