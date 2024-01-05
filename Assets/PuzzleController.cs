@@ -54,12 +54,10 @@ public class PuzzleController : MonoBehaviour
             StartCoroutine(StoneStart(StoneArray));
         }
     }
-
     public void DoneEnemyMission()
     {
-        StartCoroutine(StoneStart(StoneArray1));
+        rockButton.transform.GetChild(1).transform.DOLocalMove(new Vector3(0, 0, 0), 1f).SetEase(Ease.Linear).OnComplete(() => StartCoroutine(StoneStart(StoneArray1)));
     }
-
     public void EnemyDead()
     {
         killedEnemy++;
