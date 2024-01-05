@@ -10,12 +10,12 @@ public class GhostAnimator : MonoBehaviour
     private void Start()
     {
         player = Player.instance;
-        
+        poolingObjectSpawner = GetComponent<PoolingObjectSpawner>();
     }
 
     public void Throw()
     {
-        poolingObjectSpawner = GetComponent<PoolingObjectSpawner>();
+        
         print("throw");
        // var currentBall = Instantiate(ballPrefab, rightHand.transform.position, Quaternion.identity);
        poolingObjectSpawner._pool?.Get();

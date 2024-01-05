@@ -42,8 +42,12 @@ public class TntObject : MonoBehaviour
                         
                         for (int i = 0; i < varilList.Count; i++)
                         {
-                            varilList[i].GetComponent<MeshRenderer>().enabled = false;
-                            varilList[i].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                            if (varilList[i]!= null)
+                            {
+                                varilList[i].GetComponent<MeshRenderer>().enabled = false;
+                                varilList[i].gameObject.transform.GetChild(0).gameObject.SetActive(true); 
+                            }
+                           
                         }
                     }
                 });
