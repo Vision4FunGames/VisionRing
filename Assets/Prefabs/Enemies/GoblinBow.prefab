@@ -2069,6 +2069,7 @@ GameObject:
   - component: {fileID: 2923813580176414460}
   - component: {fileID: 2923813580176414404}
   - component: {fileID: 1751839462}
+  - component: {fileID: 8349660138998003921}
   m_Layer: 10
   m_Name: GoblinBow
   m_TagString: Enemy
@@ -2194,6 +2195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 3
+  attackCountdown: 0
 --- !u!114 &2923813580176414461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,6 +2236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 15
   target: {fileID: 0}
+  attack: 0
   bombActiveted: 0
   bombexp: 0
 --- !u!136 &1751839462
@@ -2250,6 +2253,23 @@ CapsuleCollider:
   m_Height: 3.68
   m_Direction: 1
   m_Center: {x: 0, y: 1.53, z: 0}
+--- !u!114 &8349660138998003921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2923813580176414450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7be6af967ed2b438b42a56ab1df5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkeletType: 5
+  chestPrefab: {fileID: 8064687337860177436, guid: cedf4b7c74572594f8a0ff9255faaa2e, type: 3}
+  boss: {fileID: 0}
+  rnd: 0
+  coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
 --- !u!1 &2995381590773435056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 2317649135807769842}
   ballPrefab: {fileID: 1780452116442104122, guid: b4a0b8328e26d8842848bb412ea8bb21, type: 3}
+  curr: {fileID: 0}
   poolingObjectSpawner: {fileID: 0}
 --- !u!1 &4471514413890916663
 GameObject:

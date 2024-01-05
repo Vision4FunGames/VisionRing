@@ -33,6 +33,7 @@ public class DropChest : MonoBehaviour
          rnd = Random.Range(1, 100);
          if (rnd <= 85)
         {
+            
             var coin = Instantiate(coinPrefab, new Vector3(bossTransform.x, bossTransform.y+2f, bossTransform.z),Quaternion.identity);
             if (rnd <10)
             {

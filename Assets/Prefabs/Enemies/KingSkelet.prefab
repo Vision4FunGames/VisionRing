@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 2147106697}
   - component: {fileID: 2147106700}
   - component: {fileID: 1293535107}
+  - component: {fileID: 8773402191891094612}
   m_Layer: 10
   m_Name: KingSkelet
   m_TagString: Enemy
@@ -94,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 10
   target: {fileID: 0}
+  attack: 0
   bombActiveted: 0
   bombexp: 0
 --- !u!114 &5653933587837560478
@@ -132,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 1
+  attackCountdown: 0
 --- !u!114 &5653933587837560472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +218,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.69, y: 1.67, z: 3.22}
   m_Center: {x: 0.039535522, y: 5.23, z: 0}
+--- !u!114 &8773402191891094612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653933587837560473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7be6af967ed2b438b42a56ab1df5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkeletType: 5
+  chestPrefab: {fileID: 8064687337860177436, guid: cedf4b7c74572594f8a0ff9255faaa2e, type: 3}
+  boss: {fileID: 0}
+  rnd: 0
+  coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
 --- !u!1001 &937768434
 PrefabInstance:
   m_ObjectHideFlags: 0
