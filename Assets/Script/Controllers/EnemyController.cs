@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public bool bombActiveted;
     [HideInInspector] public bool bombexp;
     private Enemy enemy;
-
+    private CharacterAnimator characterController;
     void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
         target = Player.instance.transform;
         agent = GetComponent<NavMeshAgent>();
         combatManager = GetComponent<CharacterCombat>();
+        characterController = GetComponent<CharacterAnimator>();
     }
 
     void Update()
@@ -76,7 +77,7 @@ public class EnemyController : MonoBehaviour
                     agent.SetDestination(target.position);
                 }
 
-                if (distance <= agent.stoppingDistance)
+                if (distance <= agent.stoppingDistance && !characterController.shied)
                 {
                     // Attack
                     combatManager.Attack(Player.instance.GetComponent<PlayerStats>());

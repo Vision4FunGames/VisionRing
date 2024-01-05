@@ -11,7 +11,7 @@ public class CharacterAnimator : MonoBehaviour
     CharacterCombat combat;
     private EnemyStats enemyStats;
     private int attackCounter = 0;
-    private bool shied;
+    public bool shied;
 
     protected virtual void Start()
     {
@@ -24,7 +24,8 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void Update()
     {
-        animator.SetFloat("runspeed", navmeshAgent.velocity.magnitude / navmeshAgent.speed, .1f, Time.deltaTime);
+        if (navmeshAgent.velocity.magnitude / navmeshAgent.speed >= 0)
+            animator.SetFloat("runspeed", navmeshAgent.velocity.magnitude, .1f, Time.deltaTime);
     }
 
     protected virtual void OnAttack()
@@ -61,10 +62,11 @@ public class CharacterAnimator : MonoBehaviour
                     animator.SetTrigger("Attack");
 
                     CancelInvoke("ShieldClose");
-                    Invoke("ShieldClose", 20);
+                    Invoke("ShieldClose", 5f);
                 }
                 else
                 {
+                    ShieldClose();
                     int rand = Random.Range(0, 30);
                     if (rand < 10 && rand >= 0)
                         animator.SetTrigger("Attack2");
@@ -81,7 +83,7 @@ public class CharacterAnimator : MonoBehaviour
 
     public void ShieldClose()
     {
-        GetComponent<NavMeshAgent>().speed = 6;
+        navmeshAgent.speed = 6;
         shied = false;
         animator.SetBool("shield", true);
     }
@@ -92,9 +94,10 @@ public class CharacterAnimator : MonoBehaviour
         {
             FindObjectOfType<TabutManager>().DeadEnemy();
         }
+
         GetComponent<Collider>().enabled = false;
         enemyStats.die = true;
-        
+
         animator.SetTrigger("death_");
         navmeshAgent.speed = 0;
         enemyStats.mmProgressBar.gameObject.SetActive(false);
