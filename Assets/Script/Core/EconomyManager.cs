@@ -111,9 +111,6 @@ public class EconomyManager : MonoBehaviour
             }
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    public int GetGemAmount(int level) => level * 50;
 }

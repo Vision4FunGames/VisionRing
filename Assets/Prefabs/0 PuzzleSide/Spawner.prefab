@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3123833306162378932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4681521192576468644}
+  - component: {fileID: 8139287251299076627}
+  - component: {fileID: 1919076740919645494}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4681521192576468644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3123833306162378932}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 414.7604, y: 23.08, z: 303.2141}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8139287251299076627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3123833306162378932}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 37.182117, y: 6.620907, z: 33.72829}
+  m_Center: {x: 0.023607254, y: -3.2249012, z: 0.04704857}
+--- !u!114 &1919076740919645494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3123833306162378932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f496a2393e54e43977617872fbbecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnOptions:
+  - spawnType: 1
+    spawnCount: 2
+    levelRange: {x: 0, y: 0}
+  - spawnType: 2
+    spawnCount: 1
+    levelRange: {x: 0, y: 0}
+  spawnParticle: {fileID: 147324, guid: c51e34914bd18ff4880b11005334182e, type: 3}
+  BoxCollider: {fileID: 8139287251299076627}
+  testPrefab: {fileID: 1244007399908466913, guid: 00b9b48b47fb2c04c89aeaf3d9f6c72f, type: 3}
