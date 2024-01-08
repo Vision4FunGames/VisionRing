@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,48 +8,69 @@ public class Spider : MonoBehaviour
 {
     private Animator animator;
     [HideInInspector] public NavMeshAgent navMeshAgent;
-    [HideInInspector]public Player player;
+    [HideInInspector] public Player player;
     [HideInInspector] public float currentAttackTimer;
     public float distance;
     public bool attack;
     public float rateOfFire;
+    private float currentFlameTimer;
+    private CharacterStats characterStats;
+    private Rigidbody rb;
+    private Enemy enemy;
+    public bool tornodo;
+
+    public event System.Action OnDie;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        enemy = GetComponent<Enemy>();
+        characterStats = GetComponent<CharacterStats>();
         animator = GetComponentInChildren<Animator>();
         player = FindObjectOfType<Player>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        characterStats.mmProgressBar ??=
+            Instantiate(Resources.Load<Canvas>("EnemyHealthBar"),
+                new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity,
+                transform).GetComponentInChildren<MMProgressBar>();
+
+        characterStats.OnDie += DieSpider;
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentFlameTimer += Time.deltaTime;
         distance = Vector3.Distance(player.transform.position, transform.position);
-        
-        animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude/navMeshAgent.speed, .1f, Time.deltaTime);
-        currentAttackTimer += Time.deltaTime;
-        if (distance < 10)
-        {
-            FaceTarget();
-            if (currentAttackTimer > rateOfFire && !attack)
-                AttackNear();
-        }
 
-        if (distance is > 10 and < 30)
+        animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed, .1f, Time.deltaTime);
+        currentAttackTimer += Time.deltaTime;
+        if (!characterStats.die && !tornodo)
         {
-            FaceTarget();
-            if (currentAttackTimer > rateOfFire * 2)
+            if (distance < 10)
             {
-                if (!attack)
-                    AttackFar();
+                FaceTarget();
+                if (currentAttackTimer > rateOfFire && !attack)
+                    AttackNear();
             }
-            else
+
+            if (distance is > 10 and < 30)
             {
-                if (!attack)
+                FaceTarget();
+                if (currentAttackTimer > rateOfFire * 2)
                 {
-                    animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude/navMeshAgent.speed, .1f, Time.deltaTime);
-                    navMeshAgent.SetDestination(player.transform.position);
+                    if (!attack)
+                        AttackFar();
+                }
+                else
+                {
+                    if (!attack)
+                    {
+                        animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed, .1f,
+                            Time.deltaTime);
+                        navMeshAgent.SetDestination(player.transform.position);
+                    }
                 }
             }
         }
@@ -73,5 +95,80 @@ public class Spider : MonoBehaviour
         attack = true;
         navMeshAgent.isStopped = true;
         animator.Play("AttackFar");
+    }
+
+    public void DieSpider()
+    {
+        GetComponent<Collider>().enabled = false;
+        animator.Play("Death");
+        navMeshAgent.speed = 0;
+        characterStats.mmProgressBar.gameObject.SetActive(false);
+        if (GetComponentInParent<TornadoExit>())
+        {
+            GetComponent<Enemy>().TornadoFinish();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Tornado"))
+        {
+            enemy.TornadoStart(other.gameObject);
+        }
+
+        if (other.CompareTag("RotateFire"))
+        {
+            characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().damage);
+            ChechHealth();
+        }
+
+        if (other.CompareTag("SwordCollider"))
+        {
+            characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().damage,
+                Player.instance.GetComponent<PlayerAttack>().critChance);
+            ChechHealth();
+        }
+
+        if (other.CompareTag("Floor"))
+        {
+            rb.isKinematic = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Flame"))
+        {
+            if (currentFlameTimer > Player.instance.GetComponent<PlayerAttack>().flameDamageRateOfFire)
+            {
+                currentFlameTimer = 0;
+                enemy.AddDomoveBack();
+                characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().flameDamage);
+                ChechHealth();
+            }
+        }
+    }
+
+    public void ChechHealth()
+    {
+        if (characterStats.die)
+        {
+            DieSpider();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print(collision.gameObject.name);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.name == "ArrowRain")
+        {
+            print("aa");
+            characterStats.TakeDamage(10);
+            ChechHealth();
+        }
     }
 }

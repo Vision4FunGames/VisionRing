@@ -24,12 +24,14 @@ public class PlayerHealth : CharacterHealth
     private int healLimit = 3;
     private void Awake()
     {
+        _player = GetComponent<Player>();
         drmGameObject = GetComponentInChildren<DRMGameObject>();
         health = 100;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
         mmProgressBar = FindObjectOfType<bl_MiniMap>().GetComponentInChildren<MMProgressBar>();
-        
+        _gameManager = FindObjectOfType<GameManager>();
+
     }
 
     private void Start()

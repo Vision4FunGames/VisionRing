@@ -19,7 +19,7 @@ public class SpiderAnimatorController : MonoBehaviour
     public void AttackNear()
     {
         spider.attack = false;
-        spider.player._playerHealth.DamageAnimation(10);
+        spider.player.GetComponent<PlayerHealth>().DamageAnimation(10);
         spider.navMeshAgent.isStopped = false;
         spider.currentAttackTimer = 0;
     }

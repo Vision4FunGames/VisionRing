@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+
 public enum EnemyVariation
 {
     Variation1,
@@ -41,7 +42,6 @@ public class Enemy : Interactable
         _enemyStats = GetComponent<EnemyStats>();
         playerManager = PlayerManager.instance;
         myStats = GetComponent<CharacterStats>();
-      
     }
 
     public override void Interact()
@@ -61,31 +61,56 @@ public class Enemy : Interactable
         direction = new Vector3(direction.x, 0, direction.z);
         direction = Vector3.ClampMagnitude(direction, 2f);
         transform.DOKill();
-        transform.DOJump(direction+transform.position, 6, 1, 1)
+        transform.DOJump(direction + transform.position, 6, 1, 1)
             .OnComplete((() => transform.GetChild(0).GetComponent<BoxCollider>().enabled = true));
     }
 
     public void TornadoStart(GameObject _tornado)
     {
-        if (!_enemyStats.die)
+        if (_enemyStats)
         {
-            navMeshAgent.enabled = false;
-            collider.enabled = false;
-            enemyController.enabled = false;
-            FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
-            animator.SetBool("tornado", true);
-            transform.SetParent(_tornado.GetComponentInParent<Player>().transform.GetComponentInChildren<TornadoExit>().transform);
-            rb.isKinematic = true;
-            transform.DOMoveY(transform.position.y + 5, Random.Range(4, 10));
+            if (!_enemyStats.die)
+            {
+                navMeshAgent.enabled = false;
+                collider.enabled = false;
+                enemyController.enabled = false;
+                FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
+                animator.SetBool("tornado", true);
+                transform.SetParent(_tornado.GetComponentInParent<Player>().transform
+                    .GetComponentInChildren<TornadoExit>().transform);
+                rb.isKinematic = true;
+                transform.DOMoveY(transform.position.y + 5, Random.Range(4, 10));
+            }
+        }
+        else if (myStats)
+        {
+            if (!myStats.die)
+            {
+                navMeshAgent.enabled = false;
+                collider.enabled = false;
+                FindObjectOfType<TornadoExit>().EnemyAdd(gameObject);
+                animator.SetBool("tornado", true);
+                transform.SetParent(_tornado.GetComponentInParent<Player>().transform
+                    .GetComponentInChildren<TornadoExit>().transform);
+                rb.isKinematic = true;
+                transform.DOMoveY(transform.position.y + 5, Random.Range(4, 10));
+                if (GetComponent<Spider>())
+                    GetComponent<Spider>().tornodo = true;
+            }
         }
     }
 
     public void TornadoFinish()
     {
+      
+        navMeshAgent.enabled = true;
         transform.DOKill();
-        enemyController.enabled = true;
+        if (enemyController)
+            enemyController.enabled = true;
         FindObjectOfType<TornadoExit>().EnemyRemove(gameObject);
         AddForce();
+        if (GetComponent<Spider>())
+            GetComponent<Spider>().tornodo = false;
     }
 
     public void AddForce()
@@ -105,6 +130,6 @@ public class Enemy : Interactable
         Vector3 direction = transform.position - playerAttack.transform.position;
         direction = new Vector3(direction.x, 0, direction.z);
         direction = Vector3.ClampMagnitude(direction, 2);
-        transform.DOMove(transform.position+(direction), 1).OnComplete(() => navMeshAgent.enabled = true);
+        transform.DOMove(transform.position + (direction), 1).OnComplete(() => navMeshAgent.enabled = true);
     }
 }

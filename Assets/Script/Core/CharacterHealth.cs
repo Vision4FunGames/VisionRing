@@ -6,12 +6,12 @@ public abstract class CharacterHealth : MonoBehaviour
 {
     public delegate void DieDelegate();
 
-    private Player _player;
+    public Player _player;
     public DieDelegate OnDie;
     protected int health;
     public MMProgressBar mmProgressBar;
     [HideInInspector] public bool useShield;
-    private GameManager _gameManager;
+    public GameManager _gameManager;
     public bool IsAlive()
     {
         return health > 0;

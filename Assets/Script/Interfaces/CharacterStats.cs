@@ -17,13 +17,14 @@ public class CharacterStats : MonoBehaviour
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
     public string message;
-
+    public event System.Action OnDie;
 
     private void Awake()
     {
         currentHealth = maxHealth;
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         critPrefab = Resources.Load<DamageNumber>("CritSpreadUp");
+        OnDie += Die;
     }
 
     private void Update()
