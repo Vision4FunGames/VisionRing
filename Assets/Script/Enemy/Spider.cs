@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Spider : MonoBehaviour
 {
+    public GameObject prefabSpiderWeb;
     private Animator animator;
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public Player player;
@@ -18,12 +19,16 @@ public class Spider : MonoBehaviour
     private Rigidbody rb;
     private Enemy enemy;
     public bool tornodo;
-
+    public List<GameObject> spiderWebPool;
     public event System.Action OnDie;
 
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < 10; i++)
+        {
+            spiderWebPool.Add(Instantiate(prefabSpiderWeb));
+        }
         rb = GetComponent<Rigidbody>();
         enemy = GetComponent<Enemy>();
         characterStats = GetComponent<CharacterStats>();
@@ -38,6 +43,19 @@ public class Spider : MonoBehaviour
         characterStats.OnDie += DieSpider;
     }
 
+    public GameObject GetWeb()
+    {
+        GameObject currentWeb = spiderWebPool[0];
+        spiderWebPool.RemoveAt(0);
+        return currentWeb;
+    }
+
+    public void AddSpiderWeb(GameObject currentWeb)
+    {
+        currentWeb.SetActive(false);
+        currentWeb.GetComponent<Collider>().enabled = true;
+        spiderWebPool.Add(currentWeb);
+    }
     // Update is called once per frame
     void Update()
     {

@@ -57,8 +57,11 @@ public class PlayerManager : MonoBehaviour
         StartCoroutine(_cameraShake.Shake(.1f, magnitude * 3));
     }
 
+   
+  
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Rope"))
         {
             currentRope = other.gameObject;

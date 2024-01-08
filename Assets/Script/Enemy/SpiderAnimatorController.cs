@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class SpiderAnimatorController : MonoBehaviour
 {
     private Spider spider;
+
+    public GameObject spiderShootPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +30,18 @@ public class SpiderAnimatorController : MonoBehaviour
 
     public void AttackFar()
     {
+        GameObject currentWeb = spider.GetWeb();
+        currentWeb.SetActive(true);
+        currentWeb.transform.position = spiderShootPoint.transform.position;
+        currentWeb.GetComponent<spiderWeb>().SetParent(spider);
+        currentWeb.transform.DOMove(spider.player.transform.position, 1f).OnComplete((() =>
+        {
+            GetComponentInChildren<ParticleSystem>().Play();
+        }));
         spider.currentAttackTimer = 0;
         spider.attack = false;
         spider.navMeshAgent.isStopped = false;
     }
+
     
 }
