@@ -1,22 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
     public SpawnOptions[] spawnOptions;
     public GameObject spawnParticle;
+    public GameObject[] enemies;
+    public PuzzleSpawnType PuzzleSpawnType;
 
-    private float spawntHeigt => transform.TransformPoint(BoxCollider.center - Vector3.up * (BoxCollider.size.y * 0.5f)).y;
+    private float spawntHeigt =>
+        transform.TransformPoint(BoxCollider.center - Vector3.up * (BoxCollider.size.y * 0.5f)).y;
+
     public BoxCollider BoxCollider;
-
+    private GameObject enemyPrefab;
 
     #region Garbage[Deleteable]
+
     public GameObject testPrefab;
+
+    private void Start()
+    {
+        if (PuzzleSpawnType== PuzzleSpawnType.Start)
+        {
+            SpawnEnemy();
+        }
+        
+    }
+    
 
     [Button]
     public void HeightTest()
@@ -30,6 +48,7 @@ public class EnemySpawner : MonoBehaviour
         var sp = Instantiate(spawnParticle, so.transform.position, Quaternion.identity);
         Destroy(sp, 3.0f);
     }
+
     #endregion
 
     private void OnDrawGizmos()
@@ -41,6 +60,37 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.DrawCube(BoxCollider.center, BoxCollider.size);
         Gizmos.matrix = oldGizmosMatrix;
+    }
+
+    [Button]
+    private void SpawnEnemy()
+    {
+        if (spawnOptions!=null)
+        {
+            for (int i = 0; i < spawnOptions.Length; i++)
+            {
+                for (int j = 0; j < spawnOptions[i].spawnCount; j++)
+                {
+                    for (int k = 0; k < enemies.Length; k++)
+                    {
+                        if (enemies[i].GetComponent<EnemyStats>().SpawnEnemyType == spawnOptions[i].spawnType)
+                        {
+                            enemyPrefab = enemies[i];
+                            Debug.Log(enemyPrefab);
+                            var enemy = Instantiate(enemies[i], new Vector3(transform.position.x + Random.Range(-15f, 15f),
+                                spawntHeigt, transform.position.z + Random.Range(-15f, 15f)),Quaternion.identity);
+                            enemy.transform.SetParent(transform, true);
+                            enemy.transform.Bounce(.3f);
+                            var sp = Instantiate(spawnParticle, enemy.transform.position, Quaternion.identity);
+                            Destroy(sp, 3.0f);
+                            break;
+                        }
+                    }
+
+                    
+                }
+            }
+        }
     }
 }
 [System.Serializable]
@@ -58,6 +108,12 @@ public enum SpawnEnemyType
     Skeleton,
     Another1,
     Another2
+}
+
+public enum PuzzleSpawnType
+{
+    Trigger,
+    Start
 }
 public static class BounceExtensions
 {

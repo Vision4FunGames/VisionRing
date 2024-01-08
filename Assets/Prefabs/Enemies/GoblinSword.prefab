@@ -206,6 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 10
   target: {fileID: 0}
+  attack: 0
   bombActiveted: 0
   bombexp: 0
 --- !u!114 &6759728030344244777
@@ -231,6 +232,7 @@ MonoBehaviour:
   mmProgressBar: {fileID: 0}
   message: Killed:Goblin
   enemyType: 0
+  SpawnEnemyType: 2
 --- !u!114 &6759728030344244776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 1
+  attackCountdown: 0
 --- !u!114 &6759728030344244775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1730572391}
   isTabut: 0
+  shied: 0
 --- !u!114 &6759728030344244774
 MonoBehaviour:
   m_ObjectHideFlags: 0

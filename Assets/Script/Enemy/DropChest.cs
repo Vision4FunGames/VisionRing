@@ -13,7 +13,8 @@ public enum SkeletType
     KingSkelet,
     Boss,
     Ghost,
-    Goblin
+    Goblin,
+    Crystal
 }
 public class DropChest : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class DropChest : MonoBehaviour
     public void ChestDrop(Vector3 bossTransform)
     {
          rnd = Random.Range(1, 100);
-         if (rnd <= 85)
+         if (rnd <= 10)
         {
             
             var coin = Instantiate(coinPrefab, new Vector3(bossTransform.x, bossTransform.y+2f, bossTransform.z),Quaternion.identity);

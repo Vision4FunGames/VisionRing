@@ -5,7 +5,7 @@ using MMProgressBar = MoreMountains.Tools.MMProgressBar;
 public class EnemyStats : CharacterStats
 {
    public EnemyType enemyType;
-
+   public SpawnEnemyType SpawnEnemyType;
    private PuzzleController puzzleController;
    public event System.Action OnDie;
    private void Start()
@@ -15,7 +15,6 @@ public class EnemyStats : CharacterStats
       {
          mmProgressBar ??= Instantiate(Resources.Load<Canvas>("EnemyHealthBar"),new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity,transform).GetComponentInChildren<MMProgressBar>();
       }
-      
    }
 
    public override void Die()
@@ -32,5 +31,4 @@ public class EnemyStats : CharacterStats
       base.Die();
    }
 }
-
 public enum EnemyType { skelet, Boss , kingSkelet,Ghost , bombSkelet}

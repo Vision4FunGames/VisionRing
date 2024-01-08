@@ -43,7 +43,7 @@ public class TurnAround : MonoBehaviour
         // Eğer Player'a ulaşıldıysa Coin'i yok et
         if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)
         {
-            CollectAnimation();
+            Destroy(gameObject);
         }
         // if (!isMovingToPlayer)
         // {
