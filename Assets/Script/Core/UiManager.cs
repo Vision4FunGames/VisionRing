@@ -17,7 +17,7 @@ public class UiManager : MonoBehaviour
     public ButtonType[] ButtonType;
     public static UiManager instance;
     [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas;
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea;
 
     public TextMeshProUGUI healText;
     public GameObject menuUi;
@@ -51,6 +51,7 @@ public class UiManager : MonoBehaviour
     //Economy
     public TextMeshProUGUI contentText;
     private ShopSlot[] shopSlots;
+    
     
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
@@ -114,6 +115,8 @@ public class UiManager : MonoBehaviour
         shopUI.UpdateShop();
         onEconomyChangedCallBack.Invoke();
         contentText.text = "SHOP";
+        navigationArea.gameObject.SetActive(true);
+
     }
     
     public void ShowInventory()
@@ -146,6 +149,7 @@ public class UiManager : MonoBehaviour
         Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
         inventoryUi.UpdateUI();
         contentText.text = "BLACKSMITH";
+        navigationArea.gameObject.SetActive(true);
 
     }
 
@@ -159,7 +163,7 @@ public class UiManager : MonoBehaviour
         contentText.text = "MAGICIAN";
         Inventory.instance.onItemChangedCallback?.Invoke();
         skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-        
+        navigationArea.gameObject.SetActive(true);
         //skillUpgrade.BringCurrentSkills();
 
     }
@@ -171,7 +175,7 @@ public class UiManager : MonoBehaviour
         skillPanel.gameObject.SetActive(true);
         contentPanel.gameObject.SetActive(true);
         goldPanel.gameObject.SetActive(true);
-        
+        navigationArea.gameObject.SetActive(true);
         contentText.text = "SKILLS";
         SkillPanel.instance.onSkillUseChangeCallBack.Invoke();
        
