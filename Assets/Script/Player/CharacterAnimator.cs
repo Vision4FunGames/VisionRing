@@ -67,13 +67,15 @@ public class CharacterAnimator : MonoBehaviour
                 else
                 {
                     ShieldClose();
-                    int rand = Random.Range(0, 30);
+                    int rand = Random.Range(0, 40);
                     if (rand < 10 && rand >= 0)
                         animator.SetTrigger("Attack2");
                     else if (rand >= 10 && rand < 20)
                         animator.SetTrigger("Attack2");
                     else if (rand >= 20 && rand < 30)
                         animator.SetTrigger("Attack3");
+                    else if (rand >= 30 && rand < 40)
+                        animator.Play("Shieldattack");
                 }
 
                 attackCounter++;

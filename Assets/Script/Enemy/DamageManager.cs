@@ -27,6 +27,10 @@ public class DamageManager : MonoBehaviour
      
     }
 
+    public void ShieldAttack()
+    {
+        Player.instance.BackDoMove(gameObject);
+    }
     public void PlayerDamage()
     {
         enemyController.target.GetComponent<PlayerHealth>().DamageAnimation(characterStats.damage.GetValue());

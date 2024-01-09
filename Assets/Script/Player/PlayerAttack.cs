@@ -150,7 +150,7 @@ public class SwordAttack : MonoBehaviour
     {
         swordCollider ??= gameObject.AddComponent<BoxCollider>();
         swordCollider.size = new Vector3(5, 2, 5);
-        swordCollider.center = new Vector3(0, 0, 5);
+        swordCollider.center = new Vector3(0, 0, 2);
         swordCollider.enabled = false;
         swordCollider.tag = "SwordCollider";
         swordCollider.isTrigger = true;
