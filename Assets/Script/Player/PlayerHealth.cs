@@ -21,7 +21,8 @@ public class PlayerHealth : CharacterHealth
     public bool firstHeal;
     public float healCooldown;
     private bool isHealBuff;
-    private int healLimit = 3;
+    public int HealLimit { get; set; } = 3;
+
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -36,7 +37,7 @@ public class PlayerHealth : CharacterHealth
 
     private void Start()
     {
-        UiManager.instance.healText.text = healLimit.ToString();
+        UiManager.instance.healText.text = HealLimit.ToString();
     }
     
     private void Update()
@@ -86,15 +87,28 @@ public class PlayerHealth : CharacterHealth
 
     public void EnableHealBuff(GameObject btn)
     {
-        if ( health<100f && !isCooldown && healLimit > 0)
+        if ( health<100f && !isCooldown && HealLimit > 0)
         {
-            healLimit--;
-            UiManager.instance.healText.text = healLimit.ToString();
+            HealLimit--;
+            UiManager.instance.healText.text = HealLimit.ToString();
             healCooldown = 8f;
             isCooldown = true;
             healRate = .3f;
             HealBuff(true);
             HealBtnCoolDown(btn);
+        }
+    }
+    public void EnableHealBuff()
+    {
+        if ( health<100f && !isCooldown && HealLimit > 0)
+        {
+            HealLimit--;
+            UiManager.instance.healText.text = HealLimit.ToString();
+            healCooldown = 8f;
+            isCooldown = true;
+            healRate = .3f;
+            HealBuff(true);
+            
         }
     }
     

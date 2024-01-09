@@ -85,6 +85,13 @@ public class PlayerManager : MonoBehaviour
             other.GetComponent<CheckPoint>().shineParticle.Stop();
             ES3.Save("CheckPoint", other.transform.position);
         }
+
+        if (other.CompareTag("Heal"))
+        {
+            _playerHealth.HealLimit = 4;
+            _playerHealth.EnableHealBuff();
+            
+        }
     }
 
     public void OnTriggerStay(Collider other)
