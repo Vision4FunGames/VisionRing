@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public CharacterController _myController;
     [HideInInspector] public GameObject skillSword;
     public Transform dragT;
-    
+    public float boxforce;
     private void DisableMovement()
     {
         //StateMachine.ChangeState(PlayerIdleState);
@@ -162,13 +162,45 @@ public class Player : MonoBehaviour
         // }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Box"))
+        {
+            StateMachine.ChangeState(PlayerMovementState);
+
+        }
+    }
+
+    private Rigidbody currentboxrb;
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Box"))
+        {
+            Vector3 boxpos = other.transform.position;
+            Vector3 playerPosition = _playerAttack.transform.position;
+
+            Vector3 directionToPlayer = boxpos - playerPosition;
+
+            float angle = Vector3.Angle(transform.GetChild(0).forward, directionToPlayer);
+
+
+            if (angle < 90&& isWalk)
+            {
+                currentboxrb = other.GetComponent<Rigidbody>();
+                Vector3 dir = transform.position - other.transform.position;
+                currentboxrb.AddForce(dir*boxforce*Time.deltaTime,ForceMode.Impulse);
+            }
+           
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Box"))
         {
             if (_myController.isGrounded)
             {
-                var boxObject = other.gameObject;
+              /*  var boxObject = other.gameObject;
                 float minDis = Vector3.Distance(transform.position,
                     boxObject.GetComponent<BoxItem>().playerDragPos[0].transform.position);
                 int currentİndex = 0;
@@ -191,18 +223,19 @@ public class Player : MonoBehaviour
                         boxObject.transform.parent = dragT;
                         boxObject.transform.localPosition = new Vector3(0, 0, 0);
                     }));
+            */
+              PlayerBox = new PlayerBox(this, StateMachine,other.gameObject); 
+              StateMachine.ChangeState(PlayerBox);
             }
-          
+              
         }
-
         if (other.CompareTag("RockPuzzle"))
         {
             other.gameObject.GetComponentInParent<PuzzleController>().DoneEnemyMission();
             other.isTrigger = false;
         }
     }
-
-    public void BackDoMove(GameObject enemy)
+        public void BackDoMove(GameObject enemy)
     {
         Vector3 dir = transform.position - enemy.transform.position;
         dir = Vector3.ClampMagnitude(dir, 2);

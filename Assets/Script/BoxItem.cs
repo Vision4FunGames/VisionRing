@@ -32,8 +32,8 @@ public class BoxItem : MonoBehaviour
 
         if (other.gameObject.CompareTag("Floor"))
         {
-            transform.position = startPos;
-            Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
+          //  transform.position = startPos;
+          //  Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
         }
     }
 }
