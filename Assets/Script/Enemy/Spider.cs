@@ -22,13 +22,20 @@ public class Spider : MonoBehaviour
     public List<GameObject> spiderWebPool;
     public event System.Action OnDie;
 
+    public bool mini;
+
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 10; i++)
+        if (!mini)
         {
-            spiderWebPool.Add(Instantiate(prefabSpiderWeb));
+            for (int i = 0; i < 10; i++)
+            {
+                spiderWebPool.Add(Instantiate(prefabSpiderWeb));
+            }
         }
+
+
         rb = GetComponent<Rigidbody>();
         enemy = GetComponent<Enemy>();
         characterStats = GetComponent<CharacterStats>();
@@ -56,6 +63,7 @@ public class Spider : MonoBehaviour
         currentWeb.GetComponent<Collider>().enabled = true;
         spiderWebPool.Add(currentWeb);
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -66,20 +74,46 @@ public class Spider : MonoBehaviour
         currentAttackTimer += Time.deltaTime;
         if (!characterStats.die && !tornodo)
         {
-            if (distance < 10)
+            if (distance < 10 && !mini)
+            {
+                FaceTarget();
+                if (currentAttackTimer > rateOfFire && !attack)
+                    AttackNear();
+            }
+            if (distance < 5 && mini)
             {
                 FaceTarget();
                 if (currentAttackTimer > rateOfFire && !attack)
                     AttackNear();
             }
 
-            if (distance is > 10 and < 30)
+            if (distance is > 10 and < 30 && mini)
+            {
+                FaceTarget();
+                if (!attack)
+                {
+                    animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed, .1f,
+                        Time.deltaTime);
+                    navMeshAgent.SetDestination(player.transform.position);
+                }
+            }
+
+            if (distance is > 10 and < 30 && !mini)
             {
                 FaceTarget();
                 if (currentAttackTimer > rateOfFire * 2)
                 {
-                    if (!attack)
-                        AttackFar();
+                    int rand = Random.Range(0, 40);
+                    if (rand < 0)
+                    {
+                        if (!attack)
+                            AttackFar();
+                    }
+                    else
+                    {
+                        if (!attack)
+                            SpawnMini();
+                    }
                 }
                 else
                 {
@@ -92,6 +126,13 @@ public class Spider : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SpawnMini()
+    {
+        attack = true;
+        navMeshAgent.isStopped = true;
+        animator.Play("Spawn");
     }
 
     public void FaceTarget()
