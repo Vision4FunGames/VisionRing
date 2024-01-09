@@ -50,7 +50,7 @@ public class BirlesikGolem : MonoBehaviour
         if (prefab != null)
         {
             healthBar = Instantiate(prefab, FindObjectOfType<ShopUI>().transform, false);
-            healthBar.gameObject.SetActive(true);
+            healthBar.gameObject.SetActive(false);
         }
         else
         {
@@ -73,6 +73,7 @@ public class BirlesikGolem : MonoBehaviour
             if (distance < 50)
             {
                 sleep = false;
+                healthBar.gameObject.SetActive(false);
             }
         }
         else
