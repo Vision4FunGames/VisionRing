@@ -35,23 +35,18 @@ public class TntObject : MonoBehaviour
                 {
                     explosionParticle.Play();
                     GetComponent<MeshRenderer>().enabled = false;
+                    startParticle.gameObject.SetActive(false);
                     circleParentObj.gameObject.SetActive(false);
                     camShake.ShakeCam(.1f,5f);
-                    if (varilList!=null)
+                    for (int i = 0; i < varilList.Count; i++)
                     {
-                        
-                        for (int i = 0; i < varilList.Count; i++)
+                        if (varilList[i].gameObject != null)
                         {
-                            if (varilList[i]!= null)
-                            {
-                                varilList[i].GetComponent<MeshRenderer>().enabled = false;
-                                varilList[i].gameObject.transform.GetChild(0).gameObject.SetActive(true); 
-                            }
-                           
+                            varilList[i].GetComponent<FragileObject>().BrokeTheObject();
                         }
                     }
                 });
-            Destroy(gameObject,6f);
+            Destroy(transform.parent.gameObject,5f);
         }
     }
 

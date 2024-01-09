@@ -6,7 +6,7 @@ using Random = System.Random;
 
 public class Wındlıne : MonoBehaviour
 {
-    private float timer = 5f;
+    private float timer = 1f;
 
     private void Update()
     {
@@ -14,7 +14,7 @@ public class Wındlıne : MonoBehaviour
         if (timer <= 0)
         {
             ChangePosition();
-            timer = 5f;
+            timer = 1f;
         }
 
     }
@@ -23,6 +23,7 @@ public class Wındlıne : MonoBehaviour
     {
         float x = UnityEngine.Random.Range(-10f, 10f);
         float y = UnityEngine.Random.Range(5f, 9f);
-        transform.localPosition = new Vector3(x,y, transform.localPosition.z);
+        float z = UnityEngine.Random.Range(-16f, 10f);
+        transform.localPosition = new Vector3(x,y,z);
     }
 }

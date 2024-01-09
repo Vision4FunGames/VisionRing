@@ -9,10 +9,14 @@ public class FragileObject : MonoBehaviour
     {
         if (other.CompareTag("SwordCollider"))
         {
-            GetComponent<MeshRenderer>().enabled = false;
-            transform.GetChild(0).gameObject.SetActive(true);
-            Destroy(gameObject, 2f);
+          BrokeTheObject();
         }
-        
+    }
+
+    public void BrokeTheObject()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+        transform.GetChild(0).gameObject.SetActive(true);
+        Destroy(gameObject, 2f);
     }
 }
