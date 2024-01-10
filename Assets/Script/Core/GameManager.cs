@@ -1,5 +1,7 @@
 using System;
 using Cinemachine;
+using Exoa.TutorialEngine;
+using PixelCrushers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +9,8 @@ public enum GameState
 {
     Play,
     Pause,
-    GameOver
+    GameOver,
+    Tutorial
 }
 
 public class GameManager : MonoBehaviour
@@ -16,17 +19,44 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public static event Action<GameState> onGameStateChanged;
     public CinemachineVirtualCamera playerVCam;
+    public int tutorialCounter = 1;
+    private string tutorialName = "1.";
+    public bool tutorial;
     private void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
     }
-
     private void Start()
     {
-        UpdateGameState(GameState.Play);
+        if (!tutorial)
+        {
+            EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
+            UpdateGameState(GameState.Tutorial); 
+            Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
+            TutorialLoader.instance.Load(tutorialName+tutorialCounter);
+            TutorialEvents.OnTutorialComplete += TutorialChange;
+        }
+        else
+        {
+            UpdateGameState(GameState.Play);
+        }
+    
+    }
+    private void TutorialChange()
+    {
+        TutorialEvents.OnTutorialComplete -= TutorialChange;
+        tutorialCounter++;
+        gameState = GameState.Tutorial;
+
     }
 
+    public void TutorialLoad()
+    {
+        gameState = GameState.Pause;
+        TutorialLoader.instance.Load(tutorialName + tutorialCounter);
+        TutorialEvents.OnTutorialComplete += TutorialChange;
+    }
     private void Update()
     {
          /* Test Actionları */
@@ -49,6 +79,8 @@ public class GameManager : MonoBehaviour
             case GameState.Play:
                 break;
             case GameState.GameOver:
+                break;
+            case GameState.Tutorial:
                 break;
         }
         

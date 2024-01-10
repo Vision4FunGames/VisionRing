@@ -29,11 +29,10 @@ public class BoxItem : MonoBehaviour
             GetComponent<Collider>().isTrigger = false;
             Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
         }
-
-        if (other.gameObject.CompareTag("Floor"))
+        if (other.gameObject.CompareTag("BoxPointTutorial"))
         {
-          //  transform.position = startPos;
-          //  Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
+            Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
+            GameManager.instance.TutorialLoad();
         }
     }
 }

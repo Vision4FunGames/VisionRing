@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using DG.Tweening;
+using Exoa.TutorialEngine;
 using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
@@ -199,6 +200,7 @@ public class UiManager : MonoBehaviour
         CloseAllUI();
         gamePlay.gameObject.SetActive(true);
         playerHealthBarCanvas.SetActive(true);
+       
     }
 
     public void ChestPanelUI()

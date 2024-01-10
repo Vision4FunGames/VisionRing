@@ -44,10 +44,10 @@ namespace Exoa.TutorialEngine
         {
             counter = 0;
             tempText = s.text;
-            contentText.text = "";
+            //contentText.text = "";
             Debug.Log(tempText + "Temp text");
-            FillTextInput();
-           // contentText.text = s.text;
+            //FillTextInput();
+            contentText.text = s.text;
             UpdateHGroup();
             
         }

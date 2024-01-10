@@ -74,7 +74,11 @@ namespace Exoa.TutorialEngine
 
         protected static Tutorial LoadOffline(string name)
         {
-            TextAsset json = Resources.Load<TextAsset>("Tutorials/" + name);
+            TextAsset json = Resources.Load<TextAsset>("Tutorial/" + name);
+            if (json==null)
+            {
+                return null;
+            }
             return JsonUtility.FromJson<Tutorial>(json.text);
         }
 

@@ -23,7 +23,7 @@ public class EquipmentManager : MonoBehaviour
     }
 
     static EquipmentManager _instance;
-    private GameObject currentWeapon, currentInventoryWeapon;
+    public GameObject currentWeapon, currentInventoryWeapon;
 
     public delegate void OnItemAdded();
 
