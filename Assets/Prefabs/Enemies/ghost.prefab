@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1147057597
 Transform:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.334}
+      maxColor: {r: 0.48504806, g: 0.9433962, b: 0.6872307, a: 0.334}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -7067,6 +7067,7 @@ MonoBehaviour:
   mmProgressBar: {fileID: 0}
   message: 
   enemyType: 3
+  SpawnEnemyType: 0
 --- !u!114 &2622531187056102403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7079,7 +7080,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97518330f7662a743b13ce7b26cbfc62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 3
+  attackRate: 5
+  attackCountdown: 0
 --- !u!114 &2622531187056102428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7094,6 +7096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4162873894117454467}
   isTabut: 0
+  shied: 0
 --- !u!54 &2622531187056102429
 Rigidbody:
   m_ObjectHideFlags: 0

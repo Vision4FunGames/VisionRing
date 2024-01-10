@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 6990322353510697262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 417.26846, y: 29.994484, z: 738.86115}
-  m_LocalScale: {x: 1.692668, y: 1.692668, z: 1.692668}
+  m_LocalScale: {x: 1.4056218, y: 1.4056218, z: 1.4056218}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1655522402360214282}
@@ -442,6 +442,22 @@ PrefabInstance:
     - target: {fileID: 455352, guid: 2a764fe434920144799e801ce6f949fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19894862, guid: 2a764fe434920144799e801ce6f949fd, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19894862, guid: 2a764fe434920144799e801ce6f949fd, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.9215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 19894862, guid: 2a764fe434920144799e801ce6f949fd, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.86666673
+      objectReference: {fileID: 0}
+    - target: {fileID: 19894862, guid: 2a764fe434920144799e801ce6f949fd, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5058824
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a764fe434920144799e801ce6f949fd, type: 3}
