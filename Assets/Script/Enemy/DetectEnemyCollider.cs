@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DetectEnemyCollider : MonoBehaviour
 {
+    private CharacterAnimator characterAnimator;
     private Enemy enemy;
     private EnemyStats _enemyStats;
     private PlayerAttack _playerAttack;
@@ -12,11 +13,11 @@ public class DetectEnemyCollider : MonoBehaviour
 
     private void Awake()
     {
+        characterAnimator = GetComponent<CharacterAnimator>();
         rb = GetComponent<Rigidbody>();
         enemy = GetComponent<Enemy>();
         _enemyStats = GetComponent<EnemyStats>();
         _playerAttack = Player.instance.GetComponent<PlayerAttack>();
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,12 +43,17 @@ public class DetectEnemyCollider : MonoBehaviour
 
             if (_enemyStats.enemyType == EnemyType.kingSkelet)
             {
-                if (angle < 90)
-                    _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
-                else
+                if (characterAnimator.shied)
                 {
-                    Player.instance.BackDoMove(gameObject);
+                    if (angle < 90)
+                        _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
+                    else
+                    {
+                        Player.instance.BackDoMove(gameObject);
+                    }
                 }
+                else
+                    _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
             }
             else
                 _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
