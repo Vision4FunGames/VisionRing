@@ -14,13 +14,14 @@ public class PlayerHealth : CharacterHealth
     Material _playerMaterial;
     [HideInInspector] public GameObject _damageNumbersPro;
     private bool isCooldown;
-    
+
     [Header("Heal Buff")] public float healRate;
     public GameObject healBuffParticle;
     public float healTime;
     public bool firstHeal;
     public float healCooldown;
     private bool isHealBuff;
+    private float newHealth;
     public int HealLimit { get; set; } = 3;
 
     private void Awake()
@@ -32,19 +33,20 @@ public class PlayerHealth : CharacterHealth
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
         mmProgressBar = FindObjectOfType<bl_MiniMap>().GetComponentInChildren<MMProgressBar>();
         _gameManager = FindObjectOfType<GameManager>();
-
+        mmProgressBar.LerpForegroundBarDurationIncreasing = 3f;
     }
 
     private void Start()
     {
         UiManager.instance.healText.text = HealLimit.ToString();
     }
-    
+
     private void Update()
     {
         if (isHealBuff)
         {
             healTime -= Time.deltaTime;
+
             if (healTime <= 0)
             {
                 isHealBuff = false;
@@ -82,12 +84,12 @@ public class PlayerHealth : CharacterHealth
                 damage);
         newDamageNumber.followedTarget = transform;
     }
-    
+
     #region HealBuff
 
     public void EnableHealBuff(GameObject btn)
     {
-        if ( health<100f && !isCooldown && HealLimit > 0)
+        if (health < 100f && !isCooldown && HealLimit > 0)
         {
             HealLimit--;
             UiManager.instance.healText.text = HealLimit.ToString();
@@ -98,9 +100,10 @@ public class PlayerHealth : CharacterHealth
             HealBtnCoolDown(btn);
         }
     }
+
     public void EnableHealBuff()
     {
-        if ( health<100f && !isCooldown && HealLimit > 0)
+        if (health < 100f && !isCooldown && HealLimit > 0)
         {
             HealLimit--;
             UiManager.instance.healText.text = HealLimit.ToString();
@@ -108,52 +111,19 @@ public class PlayerHealth : CharacterHealth
             isCooldown = true;
             healRate = .3f;
             HealBuff(true);
-            
         }
     }
-    
-    
+
+
     public void HealBuff(bool isFirst)
     {
-        firstHeal = isFirst;
-      
-        if (firstHeal)
-        {
-           
-            isHealBuff = true;
-            healTime = 3f;
-            healBuffParticle.gameObject.SetActive(true);
-        }
-        else
-        {
-            
-            health += (int)(20f*healRate);
-            Debug.Log("Health: " + health + " Islem: " + 20 * healRate);
-           mmProgressBar.UpdateBar(health, 0, 100);
-            if (health >= 100)
-            {
-                health = 100;
-                mmProgressBar.UpdateBar(health, 0, 100);
-                DisableHealBuff();
-                StopCoroutine(HealCor());
-            }
-        }
-        StartCoroutine(HealCor());
-    }
-    
-    IEnumerator HealCor()
-    {
-        yield return new WaitForSeconds(.5f);
-        if (isHealBuff)
-        {
-            Debug.Log("HealBuff COr");
-            HealBuff(false);
-        }
-    }
-    public void DisableHealBuff()
-    {
-        healBuffParticle.gameObject.SetActive(false);
-        isHealBuff = false;
+        isHealBuff = true;
+        healTime = 3f;
+        healBuffParticle.gameObject.SetActive(true);
+        health +=  (60f * healRate);
+        mmProgressBar.UpdateBar(health, 0, 100);
+        if (newHealth > 100)
+            newHealth = 100;
     }
 
     public void HealBtnCoolDown(GameObject btn)
@@ -162,5 +132,6 @@ public class PlayerHealth : CharacterHealth
         btnImage.fillAmount = 0f;
         btnImage.DOFillAmount(360f, 8f).SetEase(Ease.Linear);
     }
-    #endregion    
+
+    #endregion
 }

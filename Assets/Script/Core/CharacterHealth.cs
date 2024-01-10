@@ -8,7 +8,7 @@ public abstract class CharacterHealth : MonoBehaviour
 
     public Player _player;
     public DieDelegate OnDie;
-    protected int health;
+    protected float health;
     public MMProgressBar mmProgressBar;
     [HideInInspector] public bool useShield;
     public GameManager _gameManager;
@@ -17,7 +17,7 @@ public abstract class CharacterHealth : MonoBehaviour
         return health > 0;
     }
 
-    public int GetHealth()
+    public float GetHealth()
     {
         return health;
     }
@@ -28,7 +28,7 @@ public abstract class CharacterHealth : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         if (!useShield)
         {
