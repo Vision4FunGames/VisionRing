@@ -17,7 +17,7 @@ public class BossDetect : MonoBehaviour
     {
         if (other.CompareTag("SwordCollider"))
         {
-            bossManager.BossTakeSwordDamage(playerAttack.damage * 10);
+            bossManager.BossTakeSwordDamage(playerAttack.damage * 2);
         }
 
         if (other.CompareTag("Tornado"))

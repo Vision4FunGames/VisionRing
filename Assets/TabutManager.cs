@@ -23,14 +23,12 @@ public class TabutManager : MonoBehaviour
     {
         for (int i = 0; i < spawnPos.Count; i++)
         {
-            GameObject currentEnemy = Instantiate(Resources.Load("SkeletTabut")) as GameObject;
-            if (currentEnemy != null)
-            {
-                currentEnemy.transform.position = spawnPos[i].transform.position;
-                currentEnemy.GetComponent<EnemyController>().lookRadius = 30;
-                currentEnemy.GetComponent<CharacterAnimator>().isTabut = true;
-                liveEnemy++;
-            }
+            Vector3 currentPos = new Vector3(spawnPos[i].transform.position.x, spawnPos[i].transform.position.y + 5,
+                spawnPos[i].transform.position.z);
+            GameObject currentEnemy = Instantiate(Resources.Load("SkeletTabut"),currentPos,Quaternion.identity,null) as GameObject;
+            currentEnemy.GetComponent<EnemyController>().lookRadius = 30;
+            currentEnemy.GetComponent<CharacterAnimator>().isTabut = true;
+            liveEnemy++;
         }
     }
 

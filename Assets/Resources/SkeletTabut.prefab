@@ -1252,6 +1252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3998161474a8745b4572b47b381b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bomb: {fileID: 0}
   characterStats: {fileID: 0}
 --- !u!114 &2829339583835940176
 MonoBehaviour:
@@ -3112,6 +3113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   interactionTransform: {fileID: 0}
+  myVariation: 0
 --- !u!54 &6713213740092522203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3155,6 +3157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
+  target: {fileID: 0}
+  attack: 0
+  bombActiveted: 0
+  bombexp: 0
 --- !u!114 &6713213740092522207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3174,8 +3180,11 @@ MonoBehaviour:
   armor:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
+  critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
+  message: 
   enemyType: 0
+  SpawnEnemyType: 1
 --- !u!114 &6713213740092522206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3189,8 +3198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 1
-  attackDelay: 0.4
-  attackSpeed: 1
+  attackCountdown: 0
 --- !u!114 &6713213740092522211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3204,6 +3212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6713213741612937974}
+  isTabut: 0
+  shied: 0
 --- !u!114 &5940553758485119289
 MonoBehaviour:
   m_ObjectHideFlags: 0
