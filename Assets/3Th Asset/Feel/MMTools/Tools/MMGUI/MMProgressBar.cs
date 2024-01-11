@@ -344,8 +344,7 @@ namespace MoreMountains.Tools
 	        
 			if (CurrentState != MMProgressBarStates.Idle)
 			{
-				if ((CurrentState == MMProgressBarStates.Decreasing) ||
-				    (CurrentState == MMProgressBarStates.InDecreasingDelay))
+				if (CurrentState is MMProgressBarStates.Decreasing or MMProgressBarStates.InDecreasingDelay)
 				{
 					if (_newPercent >= BarTarget)
 					{
@@ -353,8 +352,7 @@ namespace MoreMountains.Tools
 						SetBar01(BarTarget);
 					}
 				}
-				if ((CurrentState == MMProgressBarStates.Increasing) ||
-				    (CurrentState == MMProgressBarStates.InIncreasingDelay))
+				if (CurrentState is MMProgressBarStates.Increasing or MMProgressBarStates.InIncreasingDelay)
 				{
 					if (_newPercent <= BarTarget)
 					{

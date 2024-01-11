@@ -33,6 +33,7 @@ public class BoxItem : MonoBehaviour
         {
             Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
             GameManager.instance.TutorialLoad();
+            
         }
     }
 }

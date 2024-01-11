@@ -21,7 +21,7 @@ public class InventorySlot : MonoBehaviour
     public void AddItem (Item newItem,int count)
     {
         item = newItem;
-        if (_inventoryType == InventoryType.Inventory||_inventoryType == InventoryType.Upgrade)
+        if (_inventoryType is InventoryType.Inventory or InventoryType.Upgrade)
         {
             backGImage.sprite = UiManager.instance.itemLevelSprites[newItem.itemLevel];
         }

@@ -402,7 +402,7 @@ namespace MoreMountains.Feedbacks
 					break;
 				case Spaces.Self:
 					target.position = _workInitialPosition;
-					if ((Mode == Modes.AtoB) || (Mode == Modes.ToDestination))
+					if (Mode is Modes.AtoB or Modes.ToDestination)
 					{
 						newPosition -= _workInitialPosition;
 					}

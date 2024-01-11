@@ -15,21 +15,36 @@ public class FoxManager : MonoBehaviour
     public Vector3 foxBaseTransform;
     private Animator foxAnim;
     public int foxHintCounter;
-
+    public Transform waterJumpPos;
+    public bool tutorial;
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        if (!GameManager.instance.tutorial)
+        {
+            agent.Stop();
+            agent.enabled = false;
+        }
         player = Player.instance.transform;
         foxAnim = GetComponent<Animator>();
         foxBaseTransform = transform.position;
             // _movementPlayer = player.gameObject.GetComponent<PlayerMovement>();
-        agent = GetComponent<NavMeshAgent>();
+        
         timer = wanderingTimer;
         foxHintCounter = 0;
     }
 
     void Update()
     {
-        NavMeshStart();
+        if (agent.isActiveAndEnabled  && !tutorial)
+        {
+            NavMeshStart();
+        }
+        else if (tutorial)
+        {
+            FinishTutorial();
+        }
+
     }
 
     public void NavMeshStart()
@@ -44,12 +59,17 @@ public class FoxManager : MonoBehaviour
                 agent.SetDestination(position);
                 foxAnim.SetBool("standupBool",true);
                 foxAnim.SetBool("sitBool",false);
+               
             }
         }
         if(distance <= agent.stoppingDistance)
         {
             foxAnim.SetBool("standupBool",false);
             foxAnim.SetBool("sitBool",true);
+            if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter ==5)
+            {
+                GameManager.instance.TutorialLoad();
+            }
         }
     }
     void OnDrawGizmosSelected()
@@ -69,5 +89,30 @@ public class FoxManager : MonoBehaviour
         transform.position = player.transform.position;
         agent.enabled = true;
         stop = false;
+    }
+
+    public void EnableAgent()
+    {
+        agent.enabled = true;
+    }
+
+    public void FinishTutorial()
+    {
+        tutorial = true;
+        var position = waterJumpPos.position;
+        distance = Vector3.Distance(transform.position, position);
+        distance = (int)distance;
+        if (distance > agent.stoppingDistance)
+        {
+            agent.SetDestination(position);
+            foxAnim.SetBool("standupBool",true);
+            foxAnim.SetBool("sitBool",false);
+        }
+        if(distance <= agent.stoppingDistance)
+        {
+            foxAnim.SetBool("standupBool",false);
+            foxAnim.SetBool("sitBool",true);
+            foxAnim.SetTrigger("jump");
+        }
     }
 }

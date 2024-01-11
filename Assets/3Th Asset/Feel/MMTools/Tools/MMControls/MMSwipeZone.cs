@@ -190,7 +190,7 @@ namespace MoreMountains.Tools
 		/// <param name="angle">Angle in degrees.</param>
 		protected virtual MMPossibleSwipeDirections AngleToSwipeDirection(float angle)
 		{
-			if ((angle < 45) || (angle >= 315))
+			if (angle is < 45 or >= 315)
 			{
 				return MMPossibleSwipeDirections.Right;
 			}

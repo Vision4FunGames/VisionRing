@@ -44,10 +44,10 @@ namespace Exoa.TutorialEngine
         {
             counter = 0;
             tempText = s.text;
-            //contentText.text = "";
+            contentText.text = "";
             Debug.Log(tempText + "Temp text");
-            //FillTextInput();
-            contentText.text = s.text;
+            FillTextInput();
+            //contentText.text = s.text;
             UpdateHGroup();
             
         }
@@ -63,12 +63,27 @@ namespace Exoa.TutorialEngine
     IEnumerator FillTheText()
         {
             yield return new WaitForSeconds(0.05f);
-            contentText.text += tempText[counter].ToString();
-            if(counter != tempText.Length)
+            if (counter != tempText.Length)
             {
-                counter++;
-                FillTextInput();
+                if (tempText[counter].ToString() == "*")
+                {
+                    contentText.text += GameManager.instance.PlayerName;
+                    counter++;
+                    FillTextInput();
+                }
+                else
+                {
+                    contentText.text += tempText[counter].ToString();
+                
+                    {
+                        counter++;
+                        FillTextInput();
+                    }
+                }
             }
+           
+          
+                
             
         }
 

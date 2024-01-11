@@ -168,7 +168,7 @@ namespace Exoa.TutorialEngine
         {
             if (debug) Debug.Log("tutorialState:" + tutorialState);
 
-            if (tutorialState == State.Inactive || tutorialState == State.Completed)
+            if (tutorialState is State.Inactive or State.Completed)
             {
                 return;
             }

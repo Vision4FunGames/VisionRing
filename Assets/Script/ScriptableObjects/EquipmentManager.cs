@@ -194,8 +194,7 @@ public class EquipmentManager : MonoBehaviour
                 new Vector3(rightHand.transform.position.x, rightHand.transform.position.y,
                     rightHand.transform.position.z),
                 Quaternion.identity);
-            if (currentWeapon.GetComponentInChildren<GunType>().myGunType == CurrentGunType.sword ||
-                currentWeapon.GetComponentInChildren<GunType>().myGunType == CurrentGunType.spear)
+            if (currentWeapon.GetComponentInChildren<GunType>().myGunType is CurrentGunType.sword or CurrentGunType.spear)
             {
                 currentWeapon.transform.parent = rightHand.transform;
                 currentWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);

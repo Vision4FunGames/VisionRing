@@ -401,7 +401,7 @@ public class Waypoint_Indicator : MonoBehaviour
     {
         #region Check for Camera Tags
         //Check to see if the Tag Name is blank
-        if (camera_tag_name == "" || camera_tag_name == null || camera_tag_name == " ")
+        if (camera_tag_name is "" or null or " ")
         {
             //Tag name is blank please add a tag
             if (!multiCam)
@@ -456,7 +456,7 @@ public class Waypoint_Indicator : MonoBehaviour
     {
         #region Check for Canvas Tags
         //Make sure th Tag Name is blank
-        if (canvas_tag_name == "" || canvas_tag_name == null || canvas_tag_name == " ")
+        if (canvas_tag_name is "" or null or " ")
         {
             //Tag name is blank please add a tag
             Debug.LogError("Canvas tag name field is blank! See waypoint_indicator.cs on Game Object: \"" + gameObject.name + "\"");
@@ -3368,7 +3368,7 @@ public class Waypoint_Indicator : MonoBehaviour
         if (!distanceTargetDefined)
         {
             //Check to see if the Tag Name is blank
-            if (distCalTargetTag == "" || distCalTargetTag == null || distCalTargetTag == " ")
+            if (distCalTargetTag is "" or null or " ")
             {
                 //Tag name is blank please add a tag
                 Debug.LogWarning("Distance Calculation Tag was left blank on Game Object: \"" + gameObject.name + "\". Using the Camera tagged: \"" + camera_tag_name + "\" for distance calculations by default.");

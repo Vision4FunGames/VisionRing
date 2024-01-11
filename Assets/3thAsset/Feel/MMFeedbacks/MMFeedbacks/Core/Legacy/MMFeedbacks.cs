@@ -255,7 +255,7 @@ namespace MoreMountains.Feedbacks
 		/// <param name="feedbacksOwner"></param>
 		public virtual void Initialization(GameObject owner)
 		{
-			if ((SafeMode == MMFeedbacks.SafeModes.RuntimeOnly) || (SafeMode == MMFeedbacks.SafeModes.Full))
+			if (SafeMode is MMFeedbacks.SafeModes.RuntimeOnly or MMFeedbacks.SafeModes.Full)
 			{
 				AutoRepair();
 			}

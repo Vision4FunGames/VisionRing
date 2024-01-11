@@ -129,7 +129,7 @@ namespace MoreMountains.Tools
 			}
 
 			// we round to the closest angle
-			if (RotationMode == RotationModes.Strict4Directions || RotationMode == RotationModes.Strict8Directions)
+			if (RotationMode is RotationModes.Strict4Directions or RotationModes.Strict8Directions)
 			{
 				CurrentAngle = MMMaths.RoundToClosest(CurrentAngle, _possibleAngleValues);
 			}

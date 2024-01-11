@@ -31,7 +31,7 @@ public class Equipment : Item {
     public override void Use (InventoryType type)
     {
         // Called when pressed in the inventory
-        if (type == InventoryType.Equip || type == InventoryType.Inventory)
+        if (type is InventoryType.Equip or InventoryType.Inventory)
         { 
             if (!showInInventory)
                 {

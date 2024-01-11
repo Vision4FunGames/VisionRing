@@ -409,8 +409,7 @@ namespace Landscaper
 							terrainPosition.x /= terrainOnCell.Size.x;
 							terrainPosition.z /= terrainOnCell.Size.z;
 
-							if (terrainPosition.x < 0 || terrainPosition.x > 1 ||
-								terrainPosition.z < 0 || terrainPosition.z > 1)
+							if (terrainPosition.x is < 0 or > 1 || terrainPosition.z is < 0 or > 1)
 								continue;
 
 							normalizedTerrainPosition = new Vector2(terrainPosition.x, terrainPosition.z);

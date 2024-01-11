@@ -58,7 +58,7 @@ namespace MoreMountains.Tools
 		public static void DebugLogCommand(string command)
 		{
 			// if the command is empty we output an empty line
-			if (command == string.Empty || command == null)
+			if (command is "" or null)
 			{
 				LogCommand("", "#ff2a00");
 				return; 

@@ -72,7 +72,7 @@
                     Debug.Log ("NavMeshTask - Path is being calculated.");
                 }
                 else {
-                    if (Agent.pathStatus == NavMeshPathStatus.PathInvalid || Agent.pathStatus == NavMeshPathStatus.PathPartial){
+                    if (Agent.pathStatus is NavMeshPathStatus.PathInvalid or NavMeshPathStatus.PathPartial){
                         Debug.Log ("NavMeshTask - Path invalid.");
                         //TODO: Handle invalid pathing.
                     }

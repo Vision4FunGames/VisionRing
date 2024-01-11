@@ -66,10 +66,10 @@ namespace Script.Player.PlayerStateMachine
             
             if (_player._myController.isGrounded)
             {
-                if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter == 2)
-                {
-                    GameManager.instance.TutorialLoad();
-                }
+                // if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter == 4)
+                // {
+                //     GameManager.instance.TutorialLoad();
+                // }
                 //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
                 _playerVelocity.y = 3;
                 ChangeAnimationState(playerJumpAnimationString);
@@ -98,10 +98,13 @@ namespace Script.Player.PlayerStateMachine
             if (PlayerDirection().magnitude > 0.5)
             {
                     _player.isWalk = true;
-                    if ((GameManager.instance.gameState == GameState.Tutorial)&&(GameManager.instance.tutorialCounter ==2))
+                    if (GameManager.instance.gameState == GameState.Tutorial)
                     {
-                        GameManager.instance.TutorialLoad();
-                       
+                        if (GameManager.instance.tutorialCounter is 2 or 4)
+                        {
+                            GameManager.instance.TutorialLoad();
+                        }
+                        
                     }
              }
             else

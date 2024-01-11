@@ -158,7 +158,7 @@ namespace MoreMountains.Feedbacks
 			float intensityMultiplier = ComputeIntensity(feedbacksIntensity, position);
 			if (Active || Owner.AutoPlayOnEnable)
 			{
-				if ((Mode == Modes.Absolute) || (Mode == Modes.Additive))
+				if (Mode is Modes.Absolute or Modes.Additive)
 				{
 					if (!AllowAdditivePlays && (_coroutine != null))
 					{

@@ -30,7 +30,7 @@ namespace MoreMountains.Feedbacks
 			}
 			else if (Method == Methods.SceneName)
 			{
-				return ((SceneName == null) || (SceneName == ""));
+				return SceneName is null or "";
 			}
 			return false;
 		}

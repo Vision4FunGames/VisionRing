@@ -6,12 +6,18 @@ public class EnemyStats : CharacterStats
 {
    public EnemyType enemyType;
    public SpawnEnemyType SpawnEnemyType;
+   public bool tutorial;
    private PuzzleController puzzleController;
+   private TutoCage tutoCage;
    public event System.Action OnDie;
    private void Start()
    {
+      if (tutorial)
+      {
+         tutoCage = GetComponentInParent<TutoCage>();
+      }
       puzzleController = GetComponentInParent<PuzzleController>();
-      if (enemyType == EnemyType.skelet || enemyType == EnemyType.kingSkelet)
+      if (enemyType is EnemyType.skelet or EnemyType.kingSkelet)
       {
          mmProgressBar ??= Instantiate(Resources.Load<Canvas>("EnemyHealthBar"),new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity,transform).GetComponentInChildren<MMProgressBar>();
       }
@@ -22,6 +28,11 @@ public class EnemyStats : CharacterStats
       if (puzzleController != null)
       {
          puzzleController.EnemyDead();
+      }
+
+      if (tutorial)
+      {
+         tutoCage.EnemyDied();
       }
       if (OnDie !=null)
       {

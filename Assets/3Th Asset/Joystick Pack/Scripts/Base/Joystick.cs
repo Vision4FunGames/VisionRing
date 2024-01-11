@@ -149,7 +149,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             float angle = Vector2.Angle(input, Vector2.up);
             if (snapAxis == AxisOptions.Horizontal)
             {
-                if (angle < 22.5f || angle > 157.5f)
+                if (angle is < 22.5f or > 157.5f)
                     return 0;
                 else
                     return (value > 0) ? 1 : -1;

@@ -56,7 +56,7 @@ namespace MoreMountains.Tools
 		/// <returns>The object pool name.</returns>
 		protected override string DetermineObjectPoolName()
 		{
-			if ((MutualizedPoolName == null) || (MutualizedPoolName == ""))
+			if (MutualizedPoolName is null or "")
 			{
 				return ("[MultipleObjectPooler] " + this.name);	
 			}

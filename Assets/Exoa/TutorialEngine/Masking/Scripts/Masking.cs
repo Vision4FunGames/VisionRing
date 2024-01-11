@@ -742,9 +742,7 @@ namespace Maskable
 
 		public static bool IsImageTypeSupported(Image.Type type)
 		{
-			return type == Image.Type.Simple
-				|| type == Image.Type.Sliced
-				|| type == Image.Type.Tiled;
+			return type is Image.Type.Simple or Image.Type.Sliced or Image.Type.Tiled;
 		}
 
 		void CalculateMaskParameters()

@@ -116,7 +116,7 @@ namespace MoreMountains.Tools
 					return 1f;
 				}
                 
-				if (CooldownState == CooldownStates.Consuming || CooldownState == CooldownStates.Stopped)
+				if (CooldownState is CooldownStates.Consuming or CooldownStates.Stopped)
 				{
 					return 0f;
 				}
