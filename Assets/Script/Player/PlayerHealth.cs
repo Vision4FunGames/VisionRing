@@ -63,6 +63,10 @@ public class PlayerHealth : CharacterHealth
                 isCooldown = false;
             }
         }
+        if (Input.GetKey(KeyCode.K))
+        {
+            DamageText(10);
+        }
     }
 
     public void DamageAnimation(int damage)
@@ -82,6 +86,7 @@ public class PlayerHealth : CharacterHealth
             _damageNumbersPro.GetComponent<DamageNumber>().Spawn(
                 new Vector3(transform.localPosition.x, transform.localPosition.y + 2f, transform.localPosition.z),
                 damage);
+        newDamageNumber.transform.localScale = new Vector3(2, 2, 2);
         newDamageNumber.followedTarget = transform;
     }
 
