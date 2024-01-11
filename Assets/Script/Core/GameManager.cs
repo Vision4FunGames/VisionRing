@@ -15,6 +15,8 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject villageSpawnPos;
+
     public static GameManager instance;
     public GameState gameState;
     public static event Action<GameState> onGameStateChanged;
@@ -112,6 +114,14 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        PlayerPrefs.SetInt("StartVillage",0);
+        
         SceneManager.LoadScene(0);
+    }
+
+    public void RestartGameResume()
+    {
+        PlayerPrefs.SetInt("StartVillage", 1);
+
     }
 }

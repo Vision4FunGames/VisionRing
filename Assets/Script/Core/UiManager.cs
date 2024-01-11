@@ -244,7 +244,6 @@ public class UiManager : MonoBehaviour
     public void DeadUI()
     {
         deadPanel.gameObject.SetActive(true);
-        deadPanel.GetComponent<Image>().DOFade(1f, 4f);
     }
 }
 

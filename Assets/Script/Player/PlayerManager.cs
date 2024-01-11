@@ -16,14 +16,26 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
     public bool edit;
+    private Vector3 startPlayerPos;
+
     #region Singleton
 
     public static PlayerManager instance;
 
     private void Awake()
     {
-        Vector3 startPlayerPos = ES3.Load("CheckPoint", transform.position) + new Vector3(0,0,-4);
-        if(!edit)
+        
+        if (PlayerPrefs.GetInt("StartVillage") == 0 || !PlayerPrefs.HasKey("StartVillage"))
+        {
+            startPlayerPos = FindObjectOfType<GameManager>().villageSpawnPos.transform.position;
+        }
+
+        if (PlayerPrefs.GetInt("StartVillage") == 1)
+        {
+            startPlayerPos = ES3.Load("CheckPoint", transform.position) + new Vector3(0, 0, -4);
+        }
+
+        if (!edit)
             transform.position = startPlayerPos;
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
@@ -57,11 +69,9 @@ public class PlayerManager : MonoBehaviour
         StartCoroutine(_cameraShake.Shake(.1f, magnitude * 3));
     }
 
-   
-  
+
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.CompareTag("Rope"))
         {
             currentRope = other.gameObject;
@@ -90,7 +100,6 @@ public class PlayerManager : MonoBehaviour
         {
             _playerHealth.HealLimit = 4;
             _playerHealth.EnableHealBuff();
-            
         }
     }
 
@@ -115,12 +124,12 @@ public class PlayerManager : MonoBehaviour
             player._playerAnimator.SetBool("yurumeBool", false);
             Destroy(sessizImage.gameObject);
         }
+
         if (other.CompareTag("CheckPoint"))
         {
             other.GetComponent<CheckPoint>().healParticle.Stop();
             other.GetComponent<CheckPoint>().campFireParticle.Stop();
             other.GetComponent<CheckPoint>().shineParticle.Play();
-       
         }
     }
 
@@ -170,7 +179,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DisableStun()
     {
-        _playerAttack.isStun =false;
+        _playerAttack.isStun = false;
         player.isMovement = true;
         player.speed = player.baseSpeed;
         player.rotSpeed = 5;
