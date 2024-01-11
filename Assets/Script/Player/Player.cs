@@ -2,15 +2,20 @@ using System;
 using DG.Tweening;
 using MoreMountains.Tools;
 using Script.Player.PlayerStateMachine;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
+using Update = UnityEngine.PlayerLoop.Update;
 
 public class Player : MonoBehaviour
 {
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
-
+    private NavMeshAgent agent;
+    private bool tutorial;
     #region Singleton
 
     public static Player instance;
@@ -262,7 +267,14 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         StateMachine.CurrentPlayerState.PhysicUpdate();
+        if (tutorial)
+        {
+            NavmeshControl();
+        }
+        
+        
     }
+    
 
     private void OnEnable()
     {
@@ -274,5 +286,29 @@ public class Player : MonoBehaviour
     {
         GameManager.onGameStateChanged -= DisableMovement;
         _playerHealth.OnDie -= DisableMovement;
+    }
+
+    public void FinishTutorial()
+    {
+        tutorial = true;
+        transform.AddComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = 12f;
+        GetComponent<CharacterController>().enabled = false;
+        UiManager.instance.CloseAllUI();
+    }
+
+    public void NavmeshControl()
+    {
+        var position = GameManager.instance.foxManager.transform.position;
+        float distance = Vector3.Distance(transform.position, position);
+        distance = (int)distance;
+        if (distance > agent.stoppingDistance)
+        {
+            agent.SetDestination(position);
+            _playerAnimator.SetFloat("runspeed", agent.velocity.magnitude);
+            transform.GetChild(0).LookAt(transform.GetChild(0).position +
+                                                 position * (rotSpeed * Time.deltaTime));
+        }
     }
 }

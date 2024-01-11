@@ -98,6 +98,7 @@ public class FoxManager : MonoBehaviour
 
     public void FinishTutorial()
     {
+        agent.speed = 15f;
         tutorial = true;
         var position = waterJumpPos.position;
         distance = Vector3.Distance(transform.position, position);

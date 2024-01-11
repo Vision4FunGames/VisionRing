@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> onGameStateChanged;
     public string PlayerName;
     public CinemachineVirtualCamera playerVCam;
+    public CinemachineVirtualCamera cinematicVCam;
     public int tutorialCounter = 1;
     private string tutorialName = "1.";
     public bool tutorial;
@@ -57,17 +58,16 @@ public class GameManager : MonoBehaviour
         if (tutorialCounter>5)
         {
             foxManager.FinishTutorial();
+            CinematicCamEnable(Player.instance.transform);
+            Player.instance.FinishTutorial();
         }
         else
         {
             UpdateGameState(GameState.Tutorial);
+            CinematicCamDisable();
         }
        
-        if (playerVCam.Follow == foxManager.transform)
-        {
-            playerVCam.Follow = Player.instance.transform;
-            playerVCam.LookAt = Player.instance.transform;
-        }
+       
         
     }
 
@@ -76,8 +76,7 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Pause;
         if (tutorialCounter == 4)
         {
-            playerVCam.Follow = foxManager.transform;
-            playerVCam.LookAt = foxManager.transform;
+            CinematicCamEnable(foxManager.transform);
         }
         TutorialLoader.instance.Load(tutorialName + tutorialCounter);
         TutorialEvents.OnTutorialComplete += TutorialChange;
@@ -122,6 +121,18 @@ public class GameManager : MonoBehaviour
     public void RestartGameResume()
     {
         PlayerPrefs.SetInt("StartVillage", 1);
+    }
 
+    public void CinematicCamEnable(Transform target)
+    {
+        playerVCam.gameObject.SetActive(false);
+        cinematicVCam.gameObject.SetActive(true);
+        cinematicVCam.Follow = target;
+        cinematicVCam.LookAt = target;
+    }
+    public void CinematicCamDisable()
+    {
+        playerVCam.gameObject.SetActive(true);
+        cinematicVCam.gameObject.SetActive(false);
     }
 }
