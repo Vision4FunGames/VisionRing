@@ -87,7 +87,7 @@ public class Spider : MonoBehaviour
                     AttackNear();
             }
 
-            if (distance is > 10 and < 30 && mini)
+            if (distance is > 5 and < 30 && mini)
             {
                 FaceTarget();
                 if (!attack)

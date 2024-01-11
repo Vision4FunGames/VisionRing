@@ -59,4 +59,8 @@ public class SpiderAnimatorController : MonoBehaviour
         spider.attack = false;
         spider.navMeshAgent.isStopped = false;
     }
+    public void DeathEnemy()
+    {
+        Destroy(transform.parent.gameObject, 3);
+    }
 }
