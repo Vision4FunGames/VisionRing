@@ -11,13 +11,15 @@ public class PoolingObjectSpawner : MonoBehaviour
     public ObjectPool<PoolingObject> _pool;
     private GhostAnimator ghostAnimator;
     private Player player;
+    private Transform target;
     void Start()
     {
         player = Player.instance;
         ghostAnimator = GetComponent<GhostAnimator>();
+        target = GetComponentInParent<EnemyController>().target;
         _pool = new ObjectPool<PoolingObject>(CreateGhostBall, OnTakeBallFromPool, OnReturnBallToPool, OnDestroyBall, false,
             5, 10);
-
+        
       
     }
 
@@ -29,7 +31,7 @@ public class PoolingObjectSpawner : MonoBehaviour
         
         _poolingObject.SetPool(_pool);
         _poolingObject.ballOwner = GetComponent<DamageManager>();
-        
+        _poolingObject.target = target;
        // Destroy(poolingObject,poolingObject.destroyTime);
         //assign the ghostball`s pool
 
@@ -44,7 +46,7 @@ public class PoolingObjectSpawner : MonoBehaviour
         poolingObject.transform.localPosition = ghostAnimator.rightHand.transform.position;
         //activate
         poolingObject.gameObject.SetActive(true);
-        poolingObject.ThrowArrow();
+        poolingObject.ThrowArrow(target);
     }
 
     private void OnReturnBallToPool(PoolingObject poolingObject)

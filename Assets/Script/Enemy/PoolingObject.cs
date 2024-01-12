@@ -28,6 +28,7 @@ public class PoolingObject : MonoBehaviour
 
     private Rigidbody rb;
 
+    public Transform target;
     // Start is called before the first frame update
     private Player player;
     float elapsedTime = 0f;
@@ -52,9 +53,12 @@ public class PoolingObject : MonoBehaviour
         deactivateBulletAfterTimeCoroutine = StartCoroutine(DeactivateBulletAfterTime());
     }
 
-    public void ThrowArrow()
+    public void ThrowArrow(Transform target)
     {
-        
+        if (target ==null)
+        {
+            target = Player.instance.transform;
+        }
         //rb.isKinematic = true;
        // GetComponent<Collider>().enabled = true;
 
@@ -62,7 +66,7 @@ public class PoolingObject : MonoBehaviour
         //rb.AddForce(Vector3.forward,ForceMode.Force);
         if (mythrThrowType == ThrowType.ghostball)
         {
-            Vector3 dir = transform.position - player.transform.position;
+            Vector3 dir = transform.position - target.position;
          
             dir = new Vector3(dir.x, 0, dir.z);
             dir = Vector3.ClampMagnitude(dir, 2);
@@ -74,7 +78,7 @@ public class PoolingObject : MonoBehaviour
         if (mythrThrowType == ThrowType.arrow)
         {
             transform.DOMove(
-                new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
+                new Vector3(target.position.x, target.position.y + 2f, target.transform.position.z),
                 .2f).SetEase(Ease.Linear);
         }
         else if (mythrThrowType == ThrowType.bomb)
@@ -83,13 +87,13 @@ public class PoolingObject : MonoBehaviour
             circleParentObj = Instantiate(Resources.Load<GameObject>("GolemCircle"));
             circleParentObj.SetActive(true);
             circleParentObj.transform.localScale = new Vector3(2, 1.5f, 2);
-            Vector3 _targetPos = player.transform.position;
+            Vector3 _targetPos = target.position;
             circleParentObj.transform.position = new Vector3(_targetPos.x, _targetPos.y+0.5f, _targetPos.z);
             circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);
             circleParentObj.transform.GetChild(1).transform.DOScale(new Vector3(1, 1, 1), 1f)
                 .OnComplete((() =>Destroy(circleParentObj.gameObject)));
             transform.DOJump(
-                new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),
+                new Vector3(target.position.x, target.position.y + 2f, target.position.z),
                 6f, 1, 1).SetEase(Ease.Linear).OnComplete(() =>
             {
                 GetComponent<Collider>().enabled = true;
@@ -119,6 +123,7 @@ public class PoolingObject : MonoBehaviour
             StopCoroutine(deactivateBulletAfterTimeCoroutine);
             _pool.Release(this);
         }
+        _pool.Release(this);
     }
 
     public void SetPool(ObjectPool<PoolingObject> pool)

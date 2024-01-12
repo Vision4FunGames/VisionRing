@@ -35,6 +35,18 @@ public class CharacterCombat : MonoBehaviour
             }
         }
     }
+
+    public void Attack()
+    {
+        if (attackCountdown <= 0f && myStats.currentHealth > 0)
+        {
+            attackCountdown = attackRate;
+            if (OnAttack != null) {
+                OnAttack ();
+            }
+        }
+    }
+    
     IEnumerator DoDamage(CharacterStats stats, float delay) {
         print ("Start");
         yield return new WaitForSeconds (delay);

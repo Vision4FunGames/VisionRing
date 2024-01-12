@@ -7,8 +7,8 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 10f;
-    private EnemyStats _enemyStats;
-    [HideInInspector] public Transform target;
+    private EnemyStats _enemyStats; 
+    public Transform target;
     NavMeshAgent agent;
     CharacterCombat combatManager;
     private float distance;
@@ -19,12 +19,17 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public bool bombexp;
     private Enemy enemy;
     private CharacterAnimator characterController;
+    public bool isAttackStaff;
     void Start()
     {
         enemy = GetComponent<Enemy>();
         _gameManager = FindObjectOfType<GameManager>();
         _enemyStats = GetComponent<EnemyStats>();
-        target = Player.instance.transform;
+        if (!isAttackStaff)
+        {
+            target = Player.instance.transform;
+        }
+        
         agent = GetComponent<NavMeshAgent>();
         combatManager = GetComponent<CharacterCombat>();
         characterController = GetComponent<CharacterAnimator>();
@@ -61,8 +66,15 @@ public class EnemyController : MonoBehaviour
                         agent.velocity = Vector3.zero; // Hareketi sıfırla
                         attack = true; // Ateş etmeye başla
                         // Geri çekilme mesafesi kadar geriye doğru git
-
-                        combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                        if (!isAttackStaff)
+                        {
+                            combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                        }
+                        else
+                        {
+                            combatManager.Attack();
+                        }
+                        
                         FaceTarget();
                     }
                 }
@@ -80,7 +92,14 @@ public class EnemyController : MonoBehaviour
                 if (distance <= agent.stoppingDistance && !characterController.shied)
                 {
                     // Attack
-                    combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                    if (!isAttackStaff)
+                    {
+                        combatManager.Attack(Player.instance.GetComponent<PlayerStats>());
+                    }
+                    else
+                    {
+                        combatManager.Attack();
+                    }
                     FaceTarget();
                 }
             }
