@@ -17,7 +17,7 @@ public class EnemyStats : CharacterStats
          tutoCage = GetComponentInParent<TutoCage>();
       }
       puzzleController = GetComponentInParent<PuzzleController>();
-      if (enemyType is EnemyType.skelet or EnemyType.kingSkelet)
+      if (enemyType is EnemyType.skelet or EnemyType.kingSkelet or EnemyType.Ghost)
       {
          mmProgressBar ??= Instantiate(Resources.Load<Canvas>("EnemyHealthBar"),new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity,transform).GetComponentInChildren<MMProgressBar>();
       }
