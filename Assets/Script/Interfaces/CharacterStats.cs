@@ -31,7 +31,7 @@ public class CharacterStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            DamageVFX(10,false);
+            DamageVFX(10, false);
         }
     }
 
@@ -51,6 +51,8 @@ public class CharacterStats : MonoBehaviour
             Die();
             die = true;
         }
+
+        print(currentHealth);
     }
 
     public void TakeDamage(int damage, float critChance)
@@ -77,11 +79,13 @@ public class CharacterStats : MonoBehaviour
 
             //damage = Mathf.Clamp(damage, 0, int.MaxValue);
             currentHealth -= damage;
-
+            print(currentHealth);
             DamageAnimation();
             UpdateHealthBar();
         }
-        else if (currentHealth <= 0)
+
+        
+        if (currentHealth <= 0)
         {
             Die();
             die = true;

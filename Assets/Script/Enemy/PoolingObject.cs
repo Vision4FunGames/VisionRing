@@ -103,6 +103,7 @@ public class PoolingObject : MonoBehaviour
     public void closeTrigger()
     {
         GetComponent<Collider>().enabled = false;
+        gameObject.SetActive(false);
     }
     // Update is called once per frame
     void Update()
