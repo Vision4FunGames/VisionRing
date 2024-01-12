@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using MoreMountains.Tools;
 using Script.Player.PlayerStateMachine;
@@ -15,7 +17,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
     private NavMeshAgent agent;
-    private bool tutorial;
+    public bool tutorial;
+    
     #region Singleton
 
     public static Player instance;
@@ -54,8 +57,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public float animSpeed;
     public float speed;
     public float rotSpeed = 5;
-    [HideInInspector] public float baseSpeed;
-    [HideInInspector] public Animator _playerAnimator;
+    [HideInInspector] public float baseSpeed; 
+    public Animator _playerAnimator;
     public DynamicJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
     [HideInInspector] public GameObject skillSword;
@@ -300,15 +303,28 @@ public class Player : MonoBehaviour
 
     public void NavmeshControl()
     {
+        StartCoroutine(FinishCinematic());
         var position = GameManager.instance.foxManager.transform.position;
         float distance = Vector3.Distance(transform.position, position);
         distance = (int)distance;
         if (distance > agent.stoppingDistance)
         {
             agent.SetDestination(position);
-            _playerAnimator.SetFloat("runspeed", agent.velocity.magnitude);
-            transform.GetChild(0).LookAt(transform.GetChild(0).position +
-                                                 position * (rotSpeed * Time.deltaTime));
+            _playerAnimator.SetFloat("RunSpeed", agent.velocity.magnitude);
+            
+            Debug.Log(_playerAnimator.GetFloat("RunSpeed"));
+            transform.GetChild(0).LookAt(transform.GetChild(0).position + new Vector3(position.x,0,position.z) * (rotSpeed * Time.deltaTime));
+        }
+        else
+        {
+            _playerAnimator.SetFloat("RunSpeed", 0);
         }
     }
+
+    IEnumerator FinishCinematic()
+    {
+        yield return new WaitForSeconds(5f);
+        GameManager.instance.EndOfTheCinematic();
+    }
+
 }

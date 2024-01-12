@@ -135,4 +135,9 @@ public class GameManager : MonoBehaviour
         playerVCam.gameObject.SetActive(true);
         cinematicVCam.gameObject.SetActive(false);
     }
+
+    public void EndOfTheCinematic()
+    {
+        // Panel yapilacak buraya 
+    }
 }

@@ -45,7 +45,7 @@ namespace Script.Player.PlayerStateMachine
                     dJump = false;
                     _playerVelocity.y = -0.5f;
                 }
-
+                
                 Movement();
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -87,16 +87,18 @@ namespace Script.Player.PlayerStateMachine
 
         public void Movement()
         {
-            _player.animSpeed = (Mathf.Abs(_player._fixedJoystick.Horizontal) +
-                                 Mathf.Abs(_player._fixedJoystick.Vertical)) * _player.animValue;
-            _player._myController.Move(PlayerDirection() * (Time.deltaTime * _player.speed));
-            _player._playerAnimator.SetFloat(RunSpeed, _player.animSpeed);
-            _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
-                                                 new Vector3(_player._fixedJoystick.Horizontal, 0f,
-                                                     _player._fixedJoystick.Vertical) *
-                                                 (_player.rotSpeed * Time.deltaTime));
-            if (PlayerDirection().magnitude > 0.5)
+            if (!global::Player.instance.tutorial)
             {
+                _player.animSpeed = (Mathf.Abs(_player._fixedJoystick.Horizontal) +
+                                     Mathf.Abs(_player._fixedJoystick.Vertical)) * _player.animValue;
+                _player._myController.Move(PlayerDirection() * (Time.deltaTime * _player.speed));
+                _player._playerAnimator.SetFloat(RunSpeed, _player.animSpeed);
+                _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
+                                                     new Vector3(_player._fixedJoystick.Horizontal, 0f,
+                                                         _player._fixedJoystick.Vertical) *
+                                                     (_player.rotSpeed * Time.deltaTime));
+                if (PlayerDirection().magnitude > 0.5)
+                {
                     _player.isWalk = true;
                     if (GameManager.instance.gameState == GameState.Tutorial)
                     {
@@ -106,11 +108,13 @@ namespace Script.Player.PlayerStateMachine
                         }
                         
                     }
-             }
-            else
-            {
-                _player.isWalk = false;
+                }
+                else
+                {
+                    _player.isWalk = false;
+                }
             }
+            
         }
 
         public override void ChangeAnimationState(string newAnim)
