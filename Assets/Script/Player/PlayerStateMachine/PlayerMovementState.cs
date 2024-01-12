@@ -45,7 +45,7 @@ namespace Script.Player.PlayerStateMachine
                     dJump = false;
                     _playerVelocity.y = -0.5f;
                 }
-                
+
                 Movement();
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -61,9 +61,28 @@ namespace Script.Player.PlayerStateMachine
             }
         }
 
+        public void PlayerMovemetSound()
+        {
+            print(_player._myController.isGrounded);
+            print(_player._myController.velocity.magnitude);
+            if (_player._myController.isGrounded && _player._myController.velocity.magnitude > 2 &&
+                !_player.playerSound.audioSource.isPlaying)
+            {
+                print("Soundİceri");
+                _player.playerSound.audioSource.volume = Random.Range(.8f, 1f);
+                _player.playerSound.audioSource.pitch = Random.Range(.8f, 1f);
+                _player.playerSound.audioSource.clip = _player.playerSound.footStep;
+                _player.playerSound.audioSource.Play();
+            }
+
+            if (!_player._myController.isGrounded || _player._myController.velocity.magnitude < 2)
+            {
+                _player.playerSound.audioSource.Stop();
+            }
+        }
+
         public void Jump()
         {
-            
             if (_player._myController.isGrounded)
             {
                 // if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter == 4)
@@ -92,6 +111,7 @@ namespace Script.Player.PlayerStateMachine
                 _player.animSpeed = (Mathf.Abs(_player._fixedJoystick.Horizontal) +
                                      Mathf.Abs(_player._fixedJoystick.Vertical)) * _player.animValue;
                 _player._myController.Move(PlayerDirection() * (Time.deltaTime * _player.speed));
+                PlayerMovemetSound();
                 _player._playerAnimator.SetFloat(RunSpeed, _player.animSpeed);
                 _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
                                                      new Vector3(_player._fixedJoystick.Horizontal, 0f,
@@ -106,7 +126,6 @@ namespace Script.Player.PlayerStateMachine
                         {
                             GameManager.instance.TutorialLoad();
                         }
-                        
                     }
                 }
                 else
@@ -114,7 +133,6 @@ namespace Script.Player.PlayerStateMachine
                     _player.isWalk = false;
                 }
             }
-            
         }
 
         public override void ChangeAnimationState(string newAnim)

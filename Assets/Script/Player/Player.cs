@@ -14,6 +14,7 @@ using Update = UnityEngine.PlayerLoop.Update;
 
 public class Player : MonoBehaviour
 {
+    [HideInInspector] public PlayerSound playerSound;
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
     private NavMeshAgent agent;
@@ -93,6 +94,7 @@ public class Player : MonoBehaviour
             instance = this;
         }
 
+        playerSound = GetComponent<PlayerSound>();
         _playerAttack = GetComponent<PlayerAttack>();
         uiManager = FindObjectOfType<UiManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
@@ -312,8 +314,8 @@ public class Player : MonoBehaviour
             agent.SetDestination(position);
             _playerAnimator.SetFloat("RunSpeed", agent.velocity.magnitude);
             
-            Debug.Log(_playerAnimator.GetFloat("RunSpeed"));
-            transform.GetChild(0).LookAt(transform.GetChild(0).position + new Vector3(position.x,0,position.z) * (rotSpeed * Time.deltaTime));
+            //Debug.Log(_playerAnimator.GetFloat("RunSpeed"));
+            //transform.GetChild(0).LookAt(transform.GetChild(0).position + new Vector3(position.x,0,position.z) * (rotSpeed * Time.deltaTime));
         }
         else
         {
