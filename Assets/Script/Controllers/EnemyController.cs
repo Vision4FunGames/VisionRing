@@ -9,9 +9,10 @@ public class EnemyController : MonoBehaviour
     public float lookRadius = 10f;
     private EnemyStats _enemyStats; 
     public Transform target;
+    private Transform startTarget;
     NavMeshAgent agent;
     CharacterCombat combatManager;
-    private float distance;
+    private float distance,playerDistance;
     private GameManager _gameManager;
     private float retrieveDistance = 3f;
     public bool attack;
@@ -22,6 +23,7 @@ public class EnemyController : MonoBehaviour
     public bool isAttackStaff;
     void Start()
     {
+        startTarget = target;
         enemy = GetComponent<Enemy>();
         _gameManager = FindObjectOfType<GameManager>();
         _enemyStats = GetComponent<EnemyStats>();
@@ -41,7 +43,20 @@ public class EnemyController : MonoBehaviour
         if (target)
         {
             distance = Vector3.Distance(target.position, transform.position);
+            playerDistance = Vector3.Distance(Player.instance.transform.position, transform.position);
+            if (playerDistance<= lookRadius)
+            {
+                target = Player.instance.transform;
+                isAttackStaff = false;
+            }
+            else
+            {
+                isAttackStaff = true;
+                target = startTarget;
+            }
         }
+
+        
 
 
         // If inside the radius

@@ -78,7 +78,8 @@ private void Awake()
         
         if (tutorialSection == 0 && tutorialCounter>5)
         {
-            foxManager.FinishTutorial();
+            foxManager.FinishTutorial(); 
+            EndOfTheCinematic();
             //CinematicCamEnable(Player.instance.transform);
             //Player.instance.FinishTutorial();
             

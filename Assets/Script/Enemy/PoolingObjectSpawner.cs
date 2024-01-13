@@ -25,7 +25,7 @@ public class PoolingObjectSpawner : MonoBehaviour
 
     private PoolingObject CreateGhostBall()
     {
-        
+        target = GetComponentInParent<EnemyController>().target;
         PoolingObject _poolingObject = Instantiate(ghostAnimator.ballPrefab, ghostAnimator.rightHand.transform.position,
          new Quaternion(0,0,0,0));
         
@@ -40,6 +40,7 @@ public class PoolingObjectSpawner : MonoBehaviour
 
     private void OnTakeBallFromPool(PoolingObject poolingObject)
     {
+        target = GetComponentInParent<EnemyController>().target;
         //set the transform and rotation
       //  Vector3 pos = new Vector3(ghostAnimator.rightHand.transform.position.x,ghostAnimator.rightHand.transform.position.y,go)
         poolingObject.transform.LookAt(player.transform);
