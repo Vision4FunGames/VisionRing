@@ -9,8 +9,9 @@ using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : PuzzleConditionTrigger
 {
+    public Transform navMeshPlane;
     public SpawnOptions[] spawnOptions;
     public GameObject spawnParticle;
     public GameObject[] enemies;
@@ -20,36 +21,25 @@ public class EnemySpawner : MonoBehaviour
         transform.TransformPoint(BoxCollider.center - Vector3.up * (BoxCollider.size.y * 0.5f)).y;
 
     public BoxCollider BoxCollider;
-    private GameObject enemyPrefab;
-
-    #region Garbage[Deleteable]
-
-    public GameObject testPrefab;
-
     private void Start()
     {
-        if (PuzzleSpawnType== PuzzleSpawnType.Start)
+        if (PuzzleSpawnType == PuzzleSpawnType.Start)
         {
             SpawnEnemy();
         }
-        
     }
-    
+    public void OnValidate() => SetupPlane();
 
     [Button]
-    public void HeightTest()
+    public void SetupPlane()
     {
-        var so = EditorUtility.InstantiatePrefab(testPrefab) as GameObject;
-        var targetPos = transform.position;
-        targetPos.y = spawntHeigt;
-        so.transform.position = targetPos;
-        so.transform.SetParent(transform, true);
-        so.transform.Bounce(0.3f);
-        var sp = Instantiate(spawnParticle, so.transform.position, Quaternion.identity);
-        Destroy(sp, 3.0f);
+        var pos = BoxCollider.center;
+        navMeshPlane.transform.localPosition = pos;
+        var childPos = navMeshPlane.transform.position;
+        childPos.y = spawntHeigt + 0.1f;
+        navMeshPlane.transform.position = childPos;
+        navMeshPlane.transform.localScale = new Vector3(BoxCollider.size.x, 1.1f, BoxCollider.size.z);
     }
-
-    #endregion
 
     private void OnDrawGizmos()
     {
@@ -62,35 +52,57 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.matrix = oldGizmosMatrix;
     }
 
+    public Transform testPrefab;
     [Button]
+    public void SpawnTest()
+    {
+        var spawned = Instantiate(testPrefab, transform);
+        var pos = GetPoint();
+        spawned.transform.localPosition = pos;
+
+        var cp = spawned.transform.position;
+        cp.y = spawntHeigt;
+        spawned.transform.position = cp;
+
+    }
     private void SpawnEnemy()
     {
-        if (spawnOptions!=null)
-        {
-            for (int i = 0; i < spawnOptions.Length; i++)
-            {
-                for (int j = 0; j < spawnOptions[i].spawnCount; j++)
-                {
-                    for (int k = 0; k < enemies.Length; k++)
-                    {
-                        if (enemies[i].GetComponent<EnemyStats>().SpawnEnemyType == spawnOptions[i].spawnType)
-                        {
-                            enemyPrefab = enemies[i];
-                            Debug.Log(enemyPrefab);
-                            var enemy = Instantiate(enemies[i], new Vector3(transform.position.x + Random.Range(-15f, 15f),
-                                spawntHeigt, transform.position.z + Random.Range(-15f, 15f)),Quaternion.identity);
-                            enemy.transform.SetParent(transform, true);
-                            enemy.transform.Bounce(.3f);
-                            var sp = Instantiate(spawnParticle, enemy.transform.position, Quaternion.identity);
-                            Destroy(sp, 3.0f);
-                            break;
-                        }
-                    }
 
-                    
+        for (int i = 0; i < spawnOptions.Length; i++)
+        {
+            for (int j = 0; j < spawnOptions[i].spawnCount; j++)
+            {
+                for (int k = 0; k < enemies.Length; k++)
+                {
+                    if (enemies[i].GetComponent<EnemyStats>().SpawnEnemyType == spawnOptions[i].spawnType)
+                    {
+
+
+
+                        var enemy = Instantiate(enemies[i], transform);
+                        enemy.transform.localPosition = GetPoint();
+
+                        var currentPos = enemy.transform.position;
+                        currentPos.y = spawntHeigt;
+                        enemy.transform.position = currentPos;
+                        enemy.transform.Bounce(.3f);
+                        var sp = Instantiate(spawnParticle, enemy.transform.position, Quaternion.identity);
+                        Destroy(sp, 3.0f);
+                        break;
+                    }
                 }
+
+
             }
         }
+
+    }
+    private Vector3 GetPoint()
+    {
+        var size = BoxCollider.size;
+        var randomLocalX = Random.Range(-size.x / 2, size.x / 2);
+        var randomLocalZ = Random.Range(-size.z / 2, size.z / 2);
+        return new Vector3(randomLocalX, 0, randomLocalZ);
     }
 }
 [System.Serializable]
@@ -106,8 +118,13 @@ public enum SpawnEnemyType
 {
     Null,
     Skeleton,
-    Another1,
-    Another2
+    BombSkeleton,
+    MiniSkeleton,
+    Ghost,
+    GoblinBomb,
+    GoblinBow,
+    GoblinSword,
+    Spider
 }
 
 public enum PuzzleSpawnType
