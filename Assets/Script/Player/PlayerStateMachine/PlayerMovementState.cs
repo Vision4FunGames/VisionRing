@@ -63,8 +63,8 @@ namespace Script.Player.PlayerStateMachine
 
         public void PlayerMovemetSound()
         {
-            print(_player._myController.isGrounded);
-            print(_player._myController.velocity.magnitude);
+           // print(_player._myController.isGrounded);
+            //print(_player._myController.velocity.magnitude);
             if (_player._myController.isGrounded && _player._myController.velocity.magnitude > 2 &&
                 !_player.playerSound.audioSource.isPlaying)
             {

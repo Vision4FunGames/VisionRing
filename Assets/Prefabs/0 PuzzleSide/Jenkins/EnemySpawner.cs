@@ -73,15 +73,18 @@ public class EnemySpawner : PuzzleConditionTrigger
 
     private void SpawnEnemy()
     {
+
         for (int i = 0; i < spawnOptions.Length; i++)
         {
             for (int j = 0; j < spawnOptions[i].spawnCount; j++)
             {
                 for (int k = 0; k < enemies.Length; k++)
                 {
-                    if (enemies[i].GetComponent<EnemyStats>().SpawnEnemyType == spawnOptions[i].spawnType)
+                    if (enemies[k].GetComponent<EnemyStats>().SpawnEnemyType == spawnOptions[i].spawnType)
                     {
-                        var enemy = Instantiate(enemies[i], transform);
+
+                    
+                        var enemy = Instantiate(enemies[k], transform);
                         enemy.transform.localPosition = GetPoint();
 
                         var currentPos = enemy.transform.position;
@@ -93,8 +96,11 @@ public class EnemySpawner : PuzzleConditionTrigger
                         break;
                     }
                 }
+
+
             }
         }
+
     }
 
     private Vector3 GetPoint()

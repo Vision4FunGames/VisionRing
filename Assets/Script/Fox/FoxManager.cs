@@ -21,7 +21,7 @@ public class FoxManager : MonoBehaviour
 
     private void Awake()
     {
-       
+        
     }
 
     void Start()
@@ -45,21 +45,25 @@ public class FoxManager : MonoBehaviour
         foxHintCounter = 0;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (agent.isActiveAndEnabled  && !tutorial)
+        if (agent.enabled)
         {
-            NavMeshStart();
-        }
-        else if (tutorial)
-        {
-            FinishTutorial();
+            if (!tutorial)
+            {
+                NavMeshStart();  
+            }
+            else
+            {
+                FinishTutorial();
+            }
         }
 
     }
 
     public void NavMeshStart()
     {
+        print("navmesh start");
         var position = player.position;
         distance = Vector3.Distance(transform.position, position);
         distance = (int)distance;
@@ -68,6 +72,7 @@ public class FoxManager : MonoBehaviour
             if (distance > agent.stoppingDistance)
             {
                 agent.SetDestination(position);
+                print("Navmesh startt Destination:" +position);
                 foxAnim.SetBool("standupBool",true);
                 foxAnim.SetBool("sitBool",false);
                
@@ -80,6 +85,7 @@ public class FoxManager : MonoBehaviour
             if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter ==5)
             {
                 GameManager.instance.TutorialLoad();
+                agent.enabled = false;
             }
         }
     }
@@ -88,20 +94,6 @@ public class FoxManager : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, wanderingRadius);
     }
-    public void GoToPlayer()
-    {
-        stop = true;
-        agent.enabled = false;
-        Invoke("GoToPlayer2",3);
-    }
-
-    public void GoToPlayer2()
-    {
-        transform.position = player.transform.position;
-        agent.enabled = true;
-        stop = false;
-    }
-
     public void EnableAgent()
     {
         agent.enabled = true;
@@ -109,22 +101,22 @@ public class FoxManager : MonoBehaviour
 
     public void FinishTutorial()
     {
-        agent.speed = 15f;
-        tutorial = true;
-        var position = waterJumpPos.position;
-        distance = Vector3.Distance(transform.position, position);
-        distance = (int)distance;
-        if (distance > agent.stoppingDistance)
+        //agent.speed = 15f;
+        if (!tutorial)
         {
-            agent.SetDestination(position);
+            agent.enabled = true;
+            tutorial = true;
+            agent.SetDestination(waterJumpPos.position);
             foxAnim.SetBool("standupBool",true);
             foxAnim.SetBool("sitBool",false);
         }
+        
+        
         if(distance <= agent.stoppingDistance)
         {
             foxAnim.SetBool("standupBool",false);
             foxAnim.SetBool("sitBool",true);
-            foxAnim.SetTrigger("jump");
+            //foxAnim.SetTrigger("jump");
         }
     }
 }

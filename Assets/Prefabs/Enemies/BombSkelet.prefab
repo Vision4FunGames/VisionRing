@@ -94,8 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 18.87
   target: {fileID: 0}
+  attack: 0
   bombActiveted: 0
   bombexp: 0
+  isAttackStaff: 0
 --- !u!114 &7259325393426359758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 20
+  attackCountdown: 0
 --- !u!114 &5669365912484514813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4531082028504698067}
   isTabut: 0
+  shied: 0
 --- !u!54 &1277293974222824960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -188,6 +192,8 @@ MonoBehaviour:
   mmProgressBar: {fileID: 0}
   message: 
   enemyType: 4
+  SpawnEnemyType: 2
+  tutorial: 0
 --- !u!65 &4531082028634813001
 BoxCollider:
   m_ObjectHideFlags: 0

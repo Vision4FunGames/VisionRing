@@ -30,7 +30,7 @@ public class NpcPatrol : MonoBehaviour
     
     void Update()
     {
-        if (patroling)
+        if (patroling && GameManager.instance.tutorial)
         {
             animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed * 2f);
             Move(waypoints[currentWaypointIndex]);

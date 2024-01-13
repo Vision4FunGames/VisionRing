@@ -149,6 +149,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (tutorial)
+        {
+            NavmeshControl();
+        }
         StateMachine.CurrentPlayerState.FrameUpdate();
         if (uiManager.attackJoystick.input.magnitude > 0.98f && _skillCoolDown.CanUse(0))
         {
@@ -272,10 +276,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         StateMachine.CurrentPlayerState.PhysicUpdate();
-        if (tutorial)
-        {
-            NavmeshControl();
-        }
+        
         
         
     }
@@ -306,7 +307,7 @@ public class Player : MonoBehaviour
 
     public void NavmeshControl()
     {
-        StartCoroutine(FinishCinematic());
+        //StartCoroutine(FinishCinematic());
         var position = GameManager.instance.foxManager.transform.position;
         float distance = Vector3.Distance(transform.position, position);
         distance = (int)distance;

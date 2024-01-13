@@ -16,11 +16,11 @@ public class GhostAnimator : MonoBehaviour
     public void Throw()
     {
         
-        print("throw");
+//        print("throw");
        // var currentBall = Instantiate(ballPrefab, rightHand.transform.position, Quaternion.identity);
        poolingObjectSpawner._pool?.Get();
-       print("Count Active" + poolingObjectSpawner._pool.CountActive);
-       print("Count All : " + poolingObjectSpawner._pool.CountAll);
+      // print("Count Active" + poolingObjectSpawner._pool.CountActive);
+       //print("Count All : " + poolingObjectSpawner._pool.CountAll);
        GetComponent<DamageManager>().closeBallPart();
        // currentBall.transform.DOMove(new Vector3(player.transform.position.x, player.transform.position.y + 2f, player.transform.position.z),.2f).OnComplete(()=>Destroy(currentBall.gameObject));
     }

@@ -75,11 +75,12 @@ private void Awake()
         tutorialCounter++;
         PlayerPrefs.SetInt("TutorialCounter",tutorialCounter);
         PlayerPrefs.SetInt("TutorialSection", tutorialSection);
-        if (tutorialCounter>5)
+        
+        if (tutorialSection == 0 && tutorialCounter>5)
         {
             foxManager.FinishTutorial();
-            CinematicCamEnable(Player.instance.transform);
-            Player.instance.FinishTutorial();
+            //CinematicCamEnable(Player.instance.transform);
+            //Player.instance.FinishTutorial();
             
         }
         else
@@ -100,10 +101,27 @@ private void Awake()
             CinematicCamEnable(foxManager.transform);
         }
 
-        if (tutorialSection == 1 && tutorialCounter == 1)
+        if (tutorialSection == 1)
         {
-            CinematicCamEnable(baskan.transform);
+            if (tutorialCounter ==1)
+            {
+                CinematicCamEnable(baskan.transform);
+            }
+            else if (tutorialCounter ==3)
+            {
+                CinematicCamEnable(merchant.transform);
+            }
+            else if (tutorialCounter == 4)
+            {
+                CinematicCamEnable(blacksmith.transform);
+            }
+            else if (tutorialCounter == 5)
+            {
+                CinematicCamEnable(magician.transform);
+            }
         }
+       
+       
         TutorialLoader.instance.Load(tutorialName + tutorialCounter);
         TutorialEvents.OnTutorialComplete += TutorialChange;
     }
