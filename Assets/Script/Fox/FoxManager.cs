@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,10 +18,20 @@ public class FoxManager : MonoBehaviour
     public int foxHintCounter;
     public Transform waterJumpPos;
     public bool tutorial;
+
+    private void Awake()
+    {
+       
+    }
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        if (!GameManager.instance.tutorial)
+        // if (PlayerPrefs.HasKey("Edit"))
+        // {
+        //     transform.position = PlayerManager.instance.startPlayerPos + new Vector3(0, 0, 5f);
+        // }
+        if (!GameManager.instance.tutorial && GameManager.instance.tutorialSection ==0)
         {
             agent.Stop();
             agent.enabled = false;

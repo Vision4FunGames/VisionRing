@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
@@ -16,7 +17,8 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
     public bool edit;
-    private Vector3 startPlayerPos;
+    public Vector3 startPlayerPos;
+    public GameObject pet;
 
     #region Singleton
 
@@ -24,19 +26,41 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        
+
+        if (PlayerPrefs.HasKey("Edit"))
+        {
+            edit = false;
+        }
         if (PlayerPrefs.GetInt("StartVillage") == 0 || !PlayerPrefs.HasKey("StartVillage"))
         {
-            startPlayerPos = FindObjectOfType<GameManager>().villageSpawnPos.transform.position;
+            if (PlayerPrefs.HasKey("TutorialSection"))
+            {
+                int section = PlayerPrefs.GetInt("TutorialSection");
+                if (section==1)
+                {
+                    startPlayerPos = FindObjectOfType<GameManager>().tutorial1SpawnPos.transform.position;
+                }
+                else
+                {
+                    startPlayerPos = FindObjectOfType<GameManager>().villageSpawnPos.transform.position; 
+                }
+                
+            }
+            
         }
-
         if (PlayerPrefs.GetInt("StartVillage") == 1)
         {
             startPlayerPos = ES3.Load("CheckPoint", transform.position) + new Vector3(0, 0, -4);
         }
 
         if (!edit)
+        {
             transform.position = startPlayerPos;
+            pet.GetComponent<NavMeshAgent>().enabled = false;
+            pet.transform.position = startPlayerPos + new Vector3(5f, 0, 0);
+            pet.GetComponent<NavMeshAgent>().enabled = true;
+        }
+            
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();

@@ -20,6 +20,7 @@ public class UiManager : MonoBehaviour
     [Header("UI Objects")]
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea;
 
+    public GameObject sceneUI;
     public TextMeshProUGUI healText;
     public GameObject menuUi;
     [Header("Skill Buttons")] public Button[] skillButtons;
@@ -180,6 +181,14 @@ public class UiManager : MonoBehaviour
         contentText.text = "SKILLS";
         SkillPanel.instance.onSkillUseChangeCallBack.Invoke();
        
+    }
+
+    public void SceneChange()
+    {
+        sceneUI.gameObject.SetActive(true);
+        sceneUI.transform.GetChild(0).transform.localScale = new Vector3(0, 0, 0);
+        sceneUI.transform.GetChild(0).transform.DOScale(20f, 5f);
+        GameManager.instance.RestartGame();
     }
 
     public void CloseAllUI()

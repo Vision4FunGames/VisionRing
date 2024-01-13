@@ -16,7 +16,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public GameObject villageSpawnPos;
-
+    public GameObject tutorial1SpawnPos;
     public static GameManager instance;
     public GameState gameState;
     public static event Action<GameState> onGameStateChanged;
@@ -24,21 +24,29 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera playerVCam;
     public CinemachineVirtualCamera cinematicVCam;
     public int tutorialCounter = 1;
-    private string tutorialName = "1.";
+    public int tutorialSection;
+    private string tutorialName;
     public bool tutorial;
     public FoxManager foxManager;
     private void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
+        if (PlayerPrefs.HasKey("TutorialCounter"))
+        {
+            tutorialCounter = PlayerPrefs.GetInt("TutorialCounter");
+            tutorialSection = PlayerPrefs.GetInt("TutorialSection");
+        }
     }
     private void Start()
     {
+
+        
+        tutorialName = tutorialSection + ".";
         PlayerName = "Patakoz";
         foxManager = FindObjectOfType<FoxManager>();
-        if (!tutorial)
+        if (!tutorial && tutorialSection==0 && tutorialCounter == 0)
         {
-
             EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
             UpdateGameState(GameState.Tutorial); 
             Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
@@ -49,17 +57,19 @@ public class GameManager : MonoBehaviour
         {
             
         }
-    
     }
     private void TutorialChange()
     {
         TutorialEvents.OnTutorialComplete -= TutorialChange;
         tutorialCounter++;
+        PlayerPrefs.SetInt("TutorialCounter",tutorialCounter);
+        PlayerPrefs.SetInt("TutorialSection", tutorialSection);
         if (tutorialCounter>5)
         {
             foxManager.FinishTutorial();
             CinematicCamEnable(Player.instance.transform);
             Player.instance.FinishTutorial();
+            
         }
         else
         {
@@ -74,7 +84,7 @@ public class GameManager : MonoBehaviour
     public void TutorialLoad()
     {
         gameState = GameState.Pause;
-        if (tutorialCounter == 4)
+        if (tutorialSection ==0 && tutorialCounter == 4)
         {
             CinematicCamEnable(foxManager.transform);
         }
@@ -113,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        PlayerPrefs.SetString("Edit", "false");
         PlayerPrefs.SetInt("StartVillage",0);
         
         SceneManager.LoadScene(0);
@@ -138,6 +149,11 @@ public class GameManager : MonoBehaviour
 
     public void EndOfTheCinematic()
     {
+        tutorialSection++;
+        tutorialCounter = 0;
+        PlayerPrefs.SetInt("TutorialSection",tutorialSection);
+        PlayerPrefs.SetInt("TutorialCounter",tutorialCounter);
+        UiManager.instance.SceneChange();
         // Panel yapilacak buraya 
     }
 }

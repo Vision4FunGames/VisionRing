@@ -295,10 +295,11 @@ public class Player : MonoBehaviour
 
     public void FinishTutorial()
     {
+        //transform.GetChild(0).transform.rotation = Quaternion.identity;
         tutorial = true;
         transform.AddComponent<NavMeshAgent>();
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = 12f;
+        agent.speed = 6f;
         GetComponent<CharacterController>().enabled = false;
         UiManager.instance.CloseAllUI();
     }
@@ -327,6 +328,13 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         GameManager.instance.EndOfTheCinematic();
+    }
+
+    public void SavePosition(Transform pos)
+    {
+        PlayerPrefs.SetFloat("x",pos.position.x);
+        PlayerPrefs.SetFloat("y", pos.position.y);
+        PlayerPrefs.SetFloat("z", pos.position.z);
     }
 
 }

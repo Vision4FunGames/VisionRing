@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Exoa.TutorialEngine;
 using UnityEngine;
 
 public class TutorialEnemies : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject[] enemies;
+    private int enemyCount;
+    
+    private void Start()
     {
-        
+        enemyCount = enemies.Length;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnemyDied()
     {
-        
+        enemyCount--;
+        if (enemyCount==0)
+        {
+            GameManager.instance.TutorialLoad();
+        }
     }
 }
