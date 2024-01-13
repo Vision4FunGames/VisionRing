@@ -6,6 +6,7 @@ using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,13 +22,17 @@ public class EnemySpawner : PuzzleConditionTrigger
         transform.TransformPoint(BoxCollider.center - Vector3.up * (BoxCollider.size.y * 0.5f)).y;
 
     public BoxCollider BoxCollider;
+
     private void Start()
     {
+        if (!GetComponent<PuzzleConditionController>())
+            gameObject.AddComponent<PuzzleConditionController>();
         if (PuzzleSpawnType == PuzzleSpawnType.Start)
         {
             SpawnEnemy();
         }
     }
+
     public void OnValidate() => SetupPlane();
 
     [Button]
@@ -53,6 +58,7 @@ public class EnemySpawner : PuzzleConditionTrigger
     }
 
     public Transform testPrefab;
+
     [Button]
     public void SpawnTest()
     {
@@ -63,11 +69,10 @@ public class EnemySpawner : PuzzleConditionTrigger
         var cp = spawned.transform.position;
         cp.y = spawntHeigt;
         spawned.transform.position = cp;
-
     }
+
     private void SpawnEnemy()
     {
-
         for (int i = 0; i < spawnOptions.Length; i++)
         {
             for (int j = 0; j < spawnOptions[i].spawnCount; j++)
@@ -76,9 +81,6 @@ public class EnemySpawner : PuzzleConditionTrigger
                 {
                     if (enemies[i].GetComponent<EnemyStats>().SpawnEnemyType == spawnOptions[i].spawnType)
                     {
-
-
-
                         var enemy = Instantiate(enemies[i], transform);
                         enemy.transform.localPosition = GetPoint();
 
@@ -91,12 +93,10 @@ public class EnemySpawner : PuzzleConditionTrigger
                         break;
                     }
                 }
-
-
             }
         }
-
     }
+
     private Vector3 GetPoint()
     {
         var size = BoxCollider.size;
@@ -105,6 +105,7 @@ public class EnemySpawner : PuzzleConditionTrigger
         return new Vector3(randomLocalX, 0, randomLocalZ);
     }
 }
+
 [System.Serializable]
 public class SpawnOptions
 {
@@ -132,9 +133,11 @@ public enum PuzzleSpawnType
     Trigger,
     Start
 }
+
 public static class BounceExtensions
 {
-    public static void Bounce(this Transform targetTransform, float bounceTime = 0.1f, bool randomDelay = false, float delay = 0.1f)
+    public static void Bounce(this Transform targetTransform, float bounceTime = 0.1f, bool randomDelay = false,
+        float delay = 0.1f)
     {
         Vector3 defaultScale = targetTransform.localScale;
         targetTransform.localScale = Vector3.zero;
@@ -142,7 +145,9 @@ public static class BounceExtensions
         float delayTime = randomDelay ? delay : 0;
         targetTransform.DOScale(defaultScale, bounceTime).SetDelay(Random.Range(delayTime / 4f, delayTime));
     }
-    public static void CloseBounce(this Transform targetTransform, float bounceTime = 0.1f, bool destroy = false, float delay = 0)
+
+    public static void CloseBounce(this Transform targetTransform, float bounceTime = 0.1f, bool destroy = false,
+        float delay = 0)
     {
         Vector3 defaultScale = targetTransform.localScale;
         targetTransform.DOScale(Vector3.zero, bounceTime).SetDelay(delay).OnComplete(() =>
