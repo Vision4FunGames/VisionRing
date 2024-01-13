@@ -30,6 +30,7 @@ public class PlayerAttack : MonoBehaviour
     public int earthSkillDamage;
     public ParticleSystem flameTFloor;
     public ParticleSystem missAttackParticle;
+
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -54,7 +55,7 @@ public class PlayerAttack : MonoBehaviour
             Attack();
         }
     }
-    
+
     public void Attack()
     {
         if (!isDead && !isStun)
@@ -67,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
                     break;
                 case CurrentGunType.arrow:
                     arrowAttack ??= playerAnimator.gameObject.AddComponent<ArrowAttack>();
-                    arrowAttack.AttackArrow(player, playerAnimator,myCurrentArrowType);
+                    arrowAttack.AttackArrow(player, playerAnimator, myCurrentArrowType);
                     break;
                 case CurrentGunType.spear:
                     break;
@@ -90,11 +91,13 @@ public class SwordAttack : MonoBehaviour
     private float comboTimer;
     [SerializeField] private string comboAttackStringAnimation = "Attack1";
     private Animator playerAnimator;
+    private Player player;
     private BoxCollider swordCollider;
 
     private void Start()
     {
         playerAnimator ??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
+        player = playerAnimator.GetComponentInParent<Player>();
         _swordParticle = Player.instance.GetComponent<PlayerAttack>().swordParticle;
         GenerateSwordCollider();
     }
@@ -156,8 +159,9 @@ public class SwordAttack : MonoBehaviour
         swordCollider.isTrigger = true;
     }
 
-    public void EnableSwordCollider()
+    public void EnableSwordCollider(int attackCount)
     {
+        player.playerSound.swordAudioSource.PlayOneShot(player.playerSound.swordHitSound[attackCount], .7f);
         swordCollider.enabled = false;
         swordCollider.enabled = true;
     }
@@ -244,7 +248,7 @@ public class ArrowAttack : MonoBehaviour
                     GameObject currentArrow = playerAttack.arrow[0];
                     currentArrow.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow.SetActive(true);
-                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy,false,false,false);
+                    currentArrow.GetComponent<Arrow>().ArrowStart(closestEnemy, false, false, false);
                     ArrowRemove();
                     break;
                 case CurrentArrowType.three:
@@ -252,25 +256,23 @@ public class ArrowAttack : MonoBehaviour
                     currentArrow2.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow2.SetActive(true);
                     ArrowRemove();
-                    currentArrow2.GetComponent<Arrow>().ArrowStart(closestEnemy,false,true,false);
+                    currentArrow2.GetComponent<Arrow>().ArrowStart(closestEnemy, false, true, false);
                     break;
                 case CurrentArrowType.split:
                     GameObject currentArrow1 = playerAttack.arrow[0];
                     currentArrow1.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow1.SetActive(true);
-                    currentArrow1.GetComponent<Arrow>().ArrowStart(closestEnemy,true,false,false);
+                    currentArrow1.GetComponent<Arrow>().ArrowStart(closestEnemy, true, false, false);
                     ArrowRemove();
                     break;
                 case CurrentArrowType.bounce:
                     GameObject currentArrow3 = playerAttack.arrow[0];
                     currentArrow3.transform.position = transform.position + new Vector3(0, 2, 0);
                     currentArrow3.SetActive(true);
-                    currentArrow3.GetComponent<Arrow>().ArrowStart(closestEnemy,false,false,true);
+                    currentArrow3.GetComponent<Arrow>().ArrowStart(closestEnemy, false, false, true);
                     ArrowRemove();
                     break;
             }
-
-           
         }
     }
 
@@ -279,7 +281,7 @@ public class ArrowAttack : MonoBehaviour
         playerAttack.arrow.RemoveAt(0);
     }
 
-    public void AttackArrow(Player player, Animator _playerAnimator , CurrentArrowType _arrowType)
+    public void AttackArrow(Player player, Animator _playerAnimator, CurrentArrowType _arrowType)
     {
         mycurrentArrowType = _arrowType;
         if (!attack)

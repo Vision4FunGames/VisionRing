@@ -7,6 +7,7 @@ using DG.Tweening;
 using MoreMountains.Tools;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerHealth : CharacterHealth
 {
@@ -74,6 +75,7 @@ public class PlayerHealth : CharacterHealth
         if (!useShield)
         {
             drmGameObject.timer = 0;
+                _player.playerSound.hitSource.PlayOneShot(_player.playerSound.hitMeSound[Random.Range(0,2)]);
             TakeDamage(damage);
             DamageText(damage);
             PlayerManager.instance.DamageHitParticle();
