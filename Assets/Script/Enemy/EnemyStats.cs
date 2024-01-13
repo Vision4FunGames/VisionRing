@@ -38,7 +38,7 @@ public class EnemyStats : CharacterStats
          _tutorialEnemies.EnemyDied();
       }
 
-      if (tutorial)
+      if (tutorial && tutoCage != null)
       {
          tutoCage.EnemyDied();
       }

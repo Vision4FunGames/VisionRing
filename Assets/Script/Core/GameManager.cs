@@ -28,26 +28,37 @@ public class GameManager : MonoBehaviour
     private string tutorialName;
     public bool tutorial;
     public FoxManager foxManager;
-    private void Awake()
+    [Header("Tutorial")] public GameObject tutorialEnemies;
+    public GameObject baskan;
+    public GameObject merchant;
+    public GameObject blacksmith;
+    public GameObject magician;
+        
+private void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
-        if (PlayerPrefs.HasKey("TutorialCounter"))
+        if (PlayerPrefs.HasKey("TutorialSection"))
         {
-            tutorialCounter = PlayerPrefs.GetInt("TutorialCounter");
+            tutorialCounter = 0;
             tutorialSection = PlayerPrefs.GetInt("TutorialSection");
+            if (tutorialSection == 1)
+            {
+                tutorialEnemies.gameObject.SetActive(true);
+            }
         }
     }
     private void Start()
     {
-
-        
         tutorialName = tutorialSection + ".";
         PlayerName = "Patakoz";
         foxManager = FindObjectOfType<FoxManager>();
-        if (!tutorial && tutorialSection==0 && tutorialCounter == 0)
+        if (!tutorial)
         {
-            EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
+            if (tutorialSection==0 && tutorialCounter == 0)
+            {
+                EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
+            }
             UpdateGameState(GameState.Tutorial); 
             Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
             TutorialLoader.instance.Load(tutorialName+tutorialCounter);
@@ -87,6 +98,11 @@ public class GameManager : MonoBehaviour
         if (tutorialSection ==0 && tutorialCounter == 4)
         {
             CinematicCamEnable(foxManager.transform);
+        }
+
+        if (tutorialSection == 1 && tutorialCounter == 1)
+        {
+            CinematicCamEnable(baskan.transform);
         }
         TutorialLoader.instance.Load(tutorialName + tutorialCounter);
         TutorialEvents.OnTutorialComplete += TutorialChange;
