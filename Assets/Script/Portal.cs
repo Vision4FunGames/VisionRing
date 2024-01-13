@@ -6,13 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public string targetPortalSceneName;
+    private Player player;
+    public GameObject targetpuzzle;
 
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+        targetpuzzle = FindObjectOfType<PuzzleController>().gameObject;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            SceneManager.LoadScene(targetPortalSceneName);
+            player.transform.position = targetpuzzle.transform.position;
+
     }
 
     // Start is called before the first frame update
