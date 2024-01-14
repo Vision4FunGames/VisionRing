@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using DG.Tweening;
 using Exoa.TutorialEngine;
 using PixelCrushers;
 using UnityEngine;
@@ -29,11 +30,17 @@ public class GameManager : MonoBehaviour
     public bool tutorial;
     public FoxManager foxManager;
     [Header("Tutorial")] public GameObject tutorialEnemies;
+    public GameObject tutorialWall;
+    public GameObject tutorialBox, tutorialBoxArea;
+    public GameObject mainSword;
     public GameObject baskan;
     public GameObject merchant;
     public GameObject blacksmith;
     public GameObject magician;
-        
+    [Header("NPC isOpen")] public bool isMerchant;
+    public bool isMagician;
+    public bool isBlacksmith;
+
 private void Awake()
     {
         instance = this;
@@ -48,9 +55,36 @@ private void Awake()
             }
         }
     }
-    private void Start()
+
+private void Start()
+{
+    #region Tutorial
+
+    if (PlayerPrefs.HasKey("Blacksmith"))
     {
-        tutorialName = tutorialSection + ".";
+        if (PlayerPrefs.GetInt("Blacksmith") == 1)
+        {
+            isBlacksmith = true;
+        }
+    }
+
+    if (PlayerPrefs.HasKey("Merchant"))
+    {
+        if (PlayerPrefs.GetInt("Merchant") == 1)
+        {
+            isMerchant = true;
+        }
+    }
+
+    if (PlayerPrefs.HasKey("Magician"))
+    {
+        if (PlayerPrefs.GetInt("Magician") == 1)
+        {
+            isMagician = true;
+        }
+    }
+    #endregion
+    tutorialName = tutorialSection + ".";
         PlayerName = "Patakoz";
         foxManager = FindObjectOfType<FoxManager>();
         if (!tutorial)
@@ -58,9 +92,9 @@ private void Awake()
             if (tutorialSection==0 && tutorialCounter == 0)
             {
                 EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
+                Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
             }
             UpdateGameState(GameState.Tutorial); 
-            Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
             TutorialLoader.instance.Load(tutorialName+tutorialCounter);
             TutorialEvents.OnTutorialComplete += TutorialChange;
         }
@@ -72,28 +106,32 @@ private void Awake()
     private void TutorialChange()
     {
         TutorialEvents.OnTutorialComplete -= TutorialChange;
+        CinematicCamDisable();
         tutorialCounter++;
         PlayerPrefs.SetInt("TutorialCounter",tutorialCounter);
         PlayerPrefs.SetInt("TutorialSection", tutorialSection);
         
-        if (tutorialSection == 0 && tutorialCounter>5)
+        if (tutorialSection == 0 && tutorialCounter >5)
         {
-            foxManager.FinishTutorial(); 
-            EndOfTheCinematic();
+            
+            if (tutorialCounter > 5)
+            {
+                foxManager.FinishTutorial();
+                EndOfTheCinematic();
+            }
+
             //CinematicCamEnable(Player.instance.transform);
             //Player.instance.FinishTutorial();
             
         }
+        
         else
         {
             UpdateGameState(GameState.Tutorial);
             CinematicCamDisable();
         }
-       
-       
-        
     }
-
+    
     public void TutorialLoad()
     {
         gameState = GameState.Pause;
@@ -105,6 +143,10 @@ private void Awake()
         if (tutorialSection == 1)
         {
             if (tutorialCounter ==1)
+            {
+                CinematicCamEnable(baskan.transform);
+            }
+            else if (tutorialCounter ==2)
             {
                 CinematicCamEnable(baskan.transform);
             }
@@ -120,6 +162,14 @@ private void Awake()
             {
                 CinematicCamEnable(magician.transform);
             }
+        }
+        else if (tutorialSection == 0 && tutorialCounter == 3)
+        {
+            CinematicCamEnable(tutorialWall.transform);
+            tutorialWall.transform.DOLocalMoveY(-1f, 2f).OnComplete((() =>
+            {
+                CinematicCamDisable();
+            }));
         }
        
        

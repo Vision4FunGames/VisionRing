@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.Player.PlayerStateMachine
@@ -122,10 +123,15 @@ namespace Script.Player.PlayerStateMachine
                     _player.isWalk = true;
                     if (GameManager.instance.gameState == GameState.Tutorial)
                     {
-                        if (GameManager.instance.tutorialCounter is 2 or 4)
+                        if (GameManager.instance.tutorialSection==0 && GameManager.instance.tutorialCounter is 2 or 4)
                         {
                             GameManager.instance.TutorialLoad();
                         }
+                        else if (GameManager.instance.tutorialSection== 1 && GameManager.instance.tutorialCounter is 2 or 3 or 4 or 5)
+                        {
+                            GameManager.instance.TutorialLoad();
+                        }
+                        
                     }
                 }
                 else

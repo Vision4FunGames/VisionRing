@@ -45,6 +45,8 @@ public class EnemyStats : CharacterStats
         
         if (_tutorialEnemies != null)
         {
+            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
             _tutorialEnemies.EnemyDied();
         }
 

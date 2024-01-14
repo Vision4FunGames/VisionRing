@@ -150,15 +150,29 @@ namespace Exoa.TutorialEngine
             Debug.Log(currentStep + "Current steepp");
             Next();
             Debug.Log(currentStep + "Current steepp");
-            if ((TutorialLoader.instance.loadedTutorialName == "2.1")&&(currentStep == 1))
+            if ((TutorialLoader.instance.loadedTutorialName == "0.0")&&(currentStep == 1))
             {
-               // UiManager.instance.boxCamOpen();
+                GameManager.instance.CinematicCamEnable(GameManager.instance.mainSword.transform);
+            }
+            else if (TutorialLoader.instance.loadedTutorialName == "0.2")
+            {
+                if (currentStep ==0)
+                {
+                    GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialBox.transform);    
+                }
+                else
+                {
+                    GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialBoxArea.transform);
+                }
+            }
+            else if (TutorialLoader.instance.loadedTutorialName == "0.3")
+            {
                 
             }
-            else
             {
-               // UiManager.instance.boxCamClose();
+                
             }
+            
 
           
             

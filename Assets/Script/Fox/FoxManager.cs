@@ -63,7 +63,7 @@ public class FoxManager : MonoBehaviour
 
     public void NavMeshStart()
     {
-        print("navmesh start");
+        //print("navmesh start");
         var position = player.position;
         distance = Vector3.Distance(transform.position, position);
         distance = (int)distance;
@@ -72,7 +72,7 @@ public class FoxManager : MonoBehaviour
             if (distance > agent.stoppingDistance)
             {
                 agent.SetDestination(position);
-                print("Navmesh startt Destination:" +position);
+               // print("Navmesh startt Destination:" +position);
                 foxAnim.SetBool("standupBool",true);
                 foxAnim.SetBool("sitBool",false);
                

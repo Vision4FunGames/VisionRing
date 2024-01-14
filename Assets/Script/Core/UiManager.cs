@@ -106,19 +106,39 @@ public class UiManager : MonoBehaviour
     }
     public void ShopUI()
     {
-        CloseAllUI();
-        shopPanel.gameObject.SetActive(true);
-        equipmentPanel.gameObject.SetActive(true);
-        inventory.gameObject.SetActive(true);
-        inventoryObject.SetActive(true);
-        goldPanel.gameObject.SetActive(true);
-        contentPanel.gameObject.SetActive(true);
-        inventoryUi.UpdateUI();
-        shopUI.UpdateShop();
-        onEconomyChangedCallBack.Invoke();
-        contentText.text = "SHOP";
-        navigationArea.gameObject.SetActive(true);
-
+        if (GameManager.instance.isMerchant)
+        {
+            CloseAllUI();
+            shopPanel.gameObject.SetActive(true);
+            equipmentPanel.gameObject.SetActive(true);
+            inventory.gameObject.SetActive(true);
+            inventoryObject.SetActive(true);
+            goldPanel.gameObject.SetActive(true);
+            contentPanel.gameObject.SetActive(true);
+            inventoryUi.UpdateUI();
+            shopUI.UpdateShop();
+            onEconomyChangedCallBack.Invoke();
+            contentText.text = "SHOP";
+            navigationArea.gameObject.SetActive(true);
+        }
+        else
+        {
+            CloseAllUI();
+            shopPanel.gameObject.SetActive(true);
+            equipmentPanel.gameObject.SetActive(true);
+            inventory.gameObject.SetActive(true);
+            inventoryObject.SetActive(true);
+            goldPanel.gameObject.SetActive(true);
+            contentPanel.gameObject.SetActive(true);
+            inventoryUi.UpdateUI();
+            shopUI.UpdateShop();
+            onEconomyChangedCallBack.Invoke();
+            contentText.text = "SHOP";
+            navigationArea.gameObject.SetActive(true);
+            GameManager.instance.isMerchant = true;
+            TutorialLoader.instance.Load("Merchant");
+            PlayerPrefs.SetInt("Merchant",1);
+        }
     }
     
     public void ShowInventory()
@@ -141,32 +161,69 @@ public class UiManager : MonoBehaviour
 
     public void BlackSmithUI()
     {
-        CloseAllUI();
-        inventory.gameObject.SetActive(true);
-        blacksmithPanel.gameObject.SetActive(true);
-        equipmentPanel.gameObject.SetActive(true);
-        inventoryObject.gameObject.SetActive(true);
-        contentPanel.gameObject.SetActive(true);
-        goldPanel.gameObject.SetActive(true);
-        Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
-        inventoryUi.UpdateUI();
-        contentText.text = "BLACKSMITH";
-        navigationArea.gameObject.SetActive(true);
+        if (GameManager.instance.isBlacksmith)
+        {
+            CloseAllUI();
+            inventory.gameObject.SetActive(true);
+            blacksmithPanel.gameObject.SetActive(true);
+            equipmentPanel.gameObject.SetActive(true);
+            inventoryObject.gameObject.SetActive(true);
+            contentPanel.gameObject.SetActive(true);
+            goldPanel.gameObject.SetActive(true);
+            Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
+            inventoryUi.UpdateUI();
+            contentText.text = "BLACKSMITH";
+            //navigationArea.gameObject.SetActive(true);
+        }
+        else
+        {
+            CloseAllUI();
+            inventory.gameObject.SetActive(true);
+            blacksmithPanel.gameObject.SetActive(true);
+            equipmentPanel.gameObject.SetActive(true);
+            inventoryObject.gameObject.SetActive(true);
+            contentPanel.gameObject.SetActive(true);
+            goldPanel.gameObject.SetActive(true);
+            Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
+            inventoryUi.UpdateUI();
+            contentText.text = "BLACKSMITH";
+            //navigationArea.gameObject.SetActive(true);
+            TutorialLoader.instance.Load("Blacksmith");
+            PlayerPrefs.SetInt("Blacksmith",1);
+        }
 
     }
 
     public void MagicianUI()
     {
-        CloseAllUI();
-        inventory.gameObject.SetActive(true);
-        magicianPanel.gameObject.SetActive(true);
-        contentPanel.gameObject.SetActive(true);
-        goldPanel.gameObject.SetActive(true);
-        contentText.text = "MAGICIAN";
-        Inventory.instance.onItemChangedCallback?.Invoke();
-        skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-        navigationArea.gameObject.SetActive(true);
-        //skillUpgrade.BringCurrentSkills();
+        if (GameManager.instance.isMagician)
+        {
+            CloseAllUI();
+            inventory.gameObject.SetActive(true);
+            magicianPanel.gameObject.SetActive(true);
+            contentPanel.gameObject.SetActive(true);
+            goldPanel.gameObject.SetActive(true);
+            contentText.text = "MAGICIAN";
+            Inventory.instance.onItemChangedCallback?.Invoke();
+            skillUpgrade.onSkillShopChangeCallBack?.Invoke();
+            navigationArea.gameObject.SetActive(true);
+            //skillUpgrade.BringCurrentSkills();
+        }
+        else
+        {
+            CloseAllUI();
+            inventory.gameObject.SetActive(true);
+            magicianPanel.gameObject.SetActive(true);
+            contentPanel.gameObject.SetActive(true);
+            goldPanel.gameObject.SetActive(true);
+            contentText.text = "MAGICIAN";
+            Inventory.instance.onItemChangedCallback?.Invoke();
+            skillUpgrade.onSkillShopChangeCallBack?.Invoke();
+            navigationArea.gameObject.SetActive(true);
+            TutorialLoader.instance.Load("Magician");
+            PlayerPrefs.SetInt("Magician",1); 
+        }
+       
 
     }
 
