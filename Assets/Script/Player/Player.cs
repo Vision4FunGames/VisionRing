@@ -297,18 +297,29 @@ public class Player : MonoBehaviour
     {
         tutorial = true;
         isMovement = false;
+       
         StateMachine.ChangeState(PlayerIdleState);
-        GameManager.instance.playerVCam.m_Follow = null;
-        GameManager.instance.playerVCam.m_LookAt = null;
         transform.GetChild(0).transform.rotation = new Quaternion(0, 0, 0,0);
+        GameManager.instance.playerVCam.m_LookAt = null;
         transform.AddComponent<NavMeshAgent>();
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = 5f;
+        agent.speed = 6f;
         GetComponent<CharacterController>().enabled = false;
         _playerAnimator.SetFloat(RunSpeed,1);
         UiManager.instance.CloseAllUI();
+        Invoke("CloseCam",7f);
     }
 
+    public void CloseCam()
+    {
+        GameManager.instance.playerVCam.m_Follow = null;
+        Invoke("EndOfTheCinema",3f);
+    }
+
+    public void EndOfTheCinema()
+    {
+        GameManager.instance.EndOfTheCinematic();
+    }
 
     IEnumerator FinishCinematic()
     {
