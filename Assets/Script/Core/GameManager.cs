@@ -166,7 +166,7 @@ private void Start()
         else if (tutorialSection == 0 && tutorialCounter == 3)
         {
             CinematicCamEnable(tutorialWall.transform);
-            tutorialWall.transform.DOLocalMoveY(-1f, 2f).OnComplete((() =>
+            tutorialWall.transform.DOLocalMoveY(-0.001f, 5f).OnComplete((() =>
             {
                 CinematicCamDisable();
             }));
@@ -225,6 +225,13 @@ private void Start()
         cinematicVCam.gameObject.SetActive(true);
         cinematicVCam.Follow = target;
         cinematicVCam.LookAt = target;
+        if (tutorialWall.name == target.name)
+        {
+            CinemachineTransposer cmoffset = cinematicVCam.GetCinemachineComponent<CinemachineTransposer>();
+            cmoffset.m_FollowOffset = new Vector3(0,29,-27);
+            print("wall");
+        }
+            
     }
     public void CinematicCamDisable()
     {
