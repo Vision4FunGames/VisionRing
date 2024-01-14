@@ -117,7 +117,8 @@ private void Start()
             if (tutorialCounter > 5)
             {
                 foxManager.FinishTutorial();
-                EndOfTheCinematic();
+                FindObjectOfType<Player>().FinishTutorial();
+                //EndOfTheCinematic();
             }
 
             //CinematicCamEnable(Player.instance.transform);

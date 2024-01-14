@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
     {
         if (tutorial)
         {
-            NavmeshControl();
+            agent.SetDestination(GameManager.instance.foxManager.transform.position);
         }
         StateMachine.CurrentPlayerState.FrameUpdate();
         if (uiManager.attackJoystick.input.magnitude > 0.98f && _skillCoolDown.CanUse(0))
@@ -186,6 +186,8 @@ public class Player : MonoBehaviour
     }
 
     private Rigidbody currentboxrb;
+    private static readonly int RunSpeed = Animator.StringToHash("RunSpeed");
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Box"))
@@ -276,9 +278,6 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         StateMachine.CurrentPlayerState.PhysicUpdate();
-        
-        
-        
     }
     
 
@@ -296,34 +295,20 @@ public class Player : MonoBehaviour
 
     public void FinishTutorial()
     {
-        //transform.GetChild(0).transform.rotation = Quaternion.identity;
         tutorial = true;
+        isMovement = false;
+        StateMachine.ChangeState(PlayerIdleState);
+        GameManager.instance.playerVCam.m_Follow = null;
+        GameManager.instance.playerVCam.m_LookAt = null;
+        transform.GetChild(0).transform.rotation = new Quaternion(0, 0, 0,0);
         transform.AddComponent<NavMeshAgent>();
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = 6f;
+        agent.speed = 5f;
         GetComponent<CharacterController>().enabled = false;
+        _playerAnimator.SetFloat(RunSpeed,1);
         UiManager.instance.CloseAllUI();
     }
 
-    public void NavmeshControl()
-    {
-        //StartCoroutine(FinishCinematic());
-        var position = GameManager.instance.foxManager.transform.position;
-        float distance = Vector3.Distance(transform.position, position);
-        distance = (int)distance;
-        if (distance > agent.stoppingDistance)
-        {
-            agent.SetDestination(position);
-            _playerAnimator.SetFloat("RunSpeed", agent.velocity.magnitude);
-            
-            //Debug.Log(_playerAnimator.GetFloat("RunSpeed"));
-            //transform.GetChild(0).LookAt(transform.GetChild(0).position + new Vector3(position.x,0,position.z) * (rotSpeed * Time.deltaTime));
-        }
-        else
-        {
-            _playerAnimator.SetFloat("RunSpeed", 0);
-        }
-    }
 
     IEnumerator FinishCinematic()
     {

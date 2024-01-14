@@ -107,16 +107,13 @@ public class FoxManager : MonoBehaviour
             agent.enabled = true;
             tutorial = true;
             agent.SetDestination(waterJumpPos.position);
-            foxAnim.SetBool("standupBool",true);
-            foxAnim.SetBool("sitBool",false);
+            foxAnim.SetBool("sitBool",true);
         }
-        
-        
         if(distance <= agent.stoppingDistance)
         {
-            foxAnim.SetBool("standupBool",false);
-            foxAnim.SetBool("sitBool",true);
+            foxAnim.SetBool("sitBool",false);
             //foxAnim.SetTrigger("jump");
         }
+      
     }
 }
