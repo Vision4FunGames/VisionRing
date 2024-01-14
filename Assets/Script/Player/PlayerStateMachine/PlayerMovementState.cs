@@ -69,7 +69,6 @@ namespace Script.Player.PlayerStateMachine
             if (_player._myController.isGrounded && _player._myController.velocity.magnitude > 2 &&
                 !_player.playerSound.audioSource.isPlaying)
             {
-                print("Soundİceri");
                 _player.playerSound.audioSource.volume = Random.Range(.8f, 1f);
                 _player.playerSound.audioSource.pitch = Random.Range(.8f, 1f);
                 _player.playerSound.audioSource.clip = _player.playerSound.footStep;

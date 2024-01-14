@@ -23,15 +23,16 @@ public class EnemyController : MonoBehaviour
     public bool isAttackStaff;
     void Start()
     {
-        startTarget = target;
+       
         enemy = GetComponent<Enemy>();
         _gameManager = FindObjectOfType<GameManager>();
         _enemyStats = GetComponent<EnemyStats>();
         if (!isAttackStaff)
         {
+       
             target = Player.instance.transform;
         }
-        
+        startTarget = target;
         agent = GetComponent<NavMeshAgent>();
         combatManager = GetComponent<CharacterCombat>();
         characterController = GetComponent<CharacterAnimator>();
@@ -96,6 +97,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
+                print("Enemys");
                 if (target)
                     agent.SetDestination(target.position);
                 else

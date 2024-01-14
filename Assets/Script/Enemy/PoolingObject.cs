@@ -83,7 +83,6 @@ public class PoolingObject : MonoBehaviour
         }
         else if (mythrThrowType == ThrowType.bomb)
         {
-            print("bomb");
             circleParentObj = Instantiate(Resources.Load<GameObject>("GolemCircle"));
             circleParentObj.SetActive(true);
             circleParentObj.transform.localScale = new Vector3(2, 1.5f, 2);

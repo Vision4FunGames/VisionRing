@@ -20,7 +20,6 @@ public class CameraController : MonoBehaviour
             
             if (Physics.Raycast(ray,out hit))
             {
-                Debug.Log(hit.transform.name);
                 if (hit.transform.gameObject.name == "Blacksmith")
                 {
                   UiManager.instance.BlackSmithUI();
