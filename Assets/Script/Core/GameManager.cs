@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial")] public GameObject tutorialEnemies;
     public GameObject tutoCage;
     public GameObject tutorialWall;
+    public GameObject tutorialCollider1, tutorialCollider2;
     public GameObject tutorialBox, tutorialBoxArea;
     public GameObject mainSword;
     public GameObject baskan;
@@ -146,23 +147,23 @@ private void Start()
         {
             if (tutorialCounter ==1)
             {
-                CinematicCamEnable(baskan.transform);
+                CinematicCamEnable(baskan.transform.GetChild(1).transform);
             }
             else if (tutorialCounter ==2)
             {
-                CinematicCamEnable(baskan.transform);
+                CinematicCamEnable(baskan.transform.GetChild(1).transform);
             }
             else if (tutorialCounter ==3)
             {
-                CinematicCamEnable(merchant.transform);
+                CinematicCamEnable(merchant.transform.GetChild(2).transform);
             }
             else if (tutorialCounter == 4)
             {
-                CinematicCamEnable(blacksmith.transform);
+                CinematicCamEnable(blacksmith.transform.GetChild(2).transform);
             }
             else if (tutorialCounter == 5)
             {
-                CinematicCamEnable(magician.transform);
+                CinematicCamEnable(magician.transform.GetChild(1).transform);
             }
         }
         else if (tutorialSection == 0 && tutorialCounter == 3)
@@ -170,6 +171,8 @@ private void Start()
             CinematicCamEnable(tutorialWall.transform);
             tutorialWall.transform.DOLocalMoveY(-0.001f, 5f).OnComplete((() =>
             {
+                tutorialCollider1.gameObject.SetActive(false);
+                tutorialCollider2.gameObject.SetActive(false);
                 CinematicCamDisable();
             }));
         }
