@@ -18,6 +18,7 @@ public class Portal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            print("Player portal");
             targetpuzzle.SetActive(true);
             player.transform.position = targetpuzzle.transform.position;
         }
