@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_contentID: -1
   m_bodyText:
-    m_text: Return to Major
+    m_text: Return to Magician
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_contentID: -1
   m_bodyText:
-    m_text: Kill them goblins
+    m_text: Please Find some diamond. Try the portal which end of the road.
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 641a501636ec3644993211c008d9a8a4, type: 3}
-  m_Name: KillGoblins
+  m_Name: MagicianPortal
   m_EditorClassIdentifier: 
   m_isInstance: 0
   m_originalAsset: {fileID: 0}
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_offerConditionsUnmetContentList: []
   m_offerContentList:
   - {fileID: 2652265253388224090}
+  - {fileID: 8942425711642269581}
   m_maxTimes: 1
   m_timesAccepted: 0
   m_cooldownSeconds: 3600
@@ -155,7 +156,7 @@ MonoBehaviour:
     - m_contentList: []
   m_counterList:
   - m_name:
-      m_text: GoblinKillCount
+      m_text: PortalUseCount
       m_stringAsset: {fileID: 0}
       m_textTable: {fileID: 0}
       m_textTableFieldID: 0
@@ -178,12 +179,12 @@ MonoBehaviour:
         m_textTable: {fileID: 0}
         m_textTableFieldID: 0
       m_message:
-        m_text: Killed
+        m_text: Collected
         m_stringAsset: {fileID: 0}
         m_textTable: {fileID: 0}
         m_textTableFieldID: 0
       m_parameter:
-        m_text: Goblin
+        m_text: Diamond
         m_stringAsset: {fileID: 0}
         m_textTable: {fileID: 0}
         m_textTableFieldID: 0
@@ -281,7 +282,7 @@ MonoBehaviour:
     m_canvasRect:
       serializedVersion: 2
       x: 197
-      y: 106
+      y: 104
       width: 120
       height: 48
   - m_id:
@@ -328,7 +329,7 @@ MonoBehaviour:
     m_canvasRect:
       serializedVersion: 2
       x: 198
-      y: 181
+      y: 182
       width: 120
       height: 35
   m_textTable: {fileID: 0}
@@ -348,7 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_contentID: -1
   m_bodyText:
-    m_text: Kill All these goblins roaming around.
+    m_text: 'I need some materials to prepare skill '
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
@@ -384,7 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_contentID: -1
   m_bodyText:
-    m_text: Have you killed all the goblins.
+    m_text: 'Did you try the portals ? Please go find that  '
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
@@ -439,6 +440,24 @@ MonoBehaviour:
   m_contentID: -1
   m_bodyText:
     m_text: Great you have done well.
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+--- !u!114 &8942425711642269581
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: Can you find them all ?
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,7 @@ public class Portal : MonoBehaviour
 {
     private Player player;
     public GameObject targetpuzzle;
-
+    public string message = "Collected:Diamond";
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -18,6 +19,7 @@ public class Portal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            QuestMachineMessages.SendCompositeMessage(this,message);
             print("Player portal");
             targetpuzzle.SetActive(true);
             player.transform.position = targetpuzzle.transform.position;

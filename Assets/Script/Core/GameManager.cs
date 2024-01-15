@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public bool tutorial;
     public FoxManager foxManager;
     [Header("Tutorial")] public GameObject tutorialEnemies;
+    public GameObject tutoCage;
     public GameObject tutorialWall;
     public GameObject tutorialBox, tutorialBoxArea;
     public GameObject mainSword;

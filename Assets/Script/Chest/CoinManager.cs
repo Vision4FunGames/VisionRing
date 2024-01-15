@@ -20,6 +20,14 @@ public class CoinManager : MonoBehaviour
   Canvas canvasMain;
   public int numberOfObjects;
   public float spawnRadius;
+
+  private int minGold, maxGold;
+  private int gold;
+  public void SetGold(int min, int max)
+  {
+    minGold = min;
+    maxGold = max;
+  }
   private void Start()
   {
     //numberOfObjects = Random.Range(2, 7);
@@ -58,10 +66,13 @@ public class CoinManager : MonoBehaviour
       Vector3 randomPos = Random.insideUnitSphere * spawnRadius; // Rastgele bir nokta oluştur
       randomPos.y = 0; // Y ekseni sabit olduğunda objeler yeryüzüne yerleştirilir
 
-      Instantiate(coin, new Vector3(transform.position.x,transform.position.y+2f,transform.position.z) + randomPos, new Quaternion(90,180,0,0),transform);
-     
+      var spawnedCoin = Instantiate(coin, new Vector3(transform.position.x,transform.position.y+2f,transform.position.z) + randomPos, new Quaternion(90,180,0,0),transform);
+      gold = Random.Range(minGold, maxGold);
+      print(gold + " CoinManager");
+      spawnedCoin.GetComponent<TurnAround>().setGoldCount(gold);
       
       // Belirtilen objeyi rastgele noktada oluştur
     }
+    transform.GetChild(0).GetComponent<TurnAround>().setGoldCount(gold);
   }
 }

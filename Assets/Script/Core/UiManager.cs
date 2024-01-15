@@ -6,6 +6,7 @@ using System.ComponentModel.Design;
 using DG.Tweening;
 using Exoa.TutorialEngine;
 using MoreMountains.Tools;
+using PixelCrushers.QuestMachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -211,17 +212,24 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            CloseAllUI();
-            inventory.gameObject.SetActive(true);
-            magicianPanel.gameObject.SetActive(true);
-            contentPanel.gameObject.SetActive(true);
-            goldPanel.gameObject.SetActive(true);
-            contentText.text = "MAGICIAN";
-            Inventory.instance.onItemChangedCallback?.Invoke();
-            skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-            navigationArea.gameObject.SetActive(true);
-            TutorialLoader.instance.Load("Magician");
-            PlayerPrefs.SetInt("Magician",1); 
+            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest()>0)
+            {
+                CloseAllUI();
+                inventory.gameObject.SetActive(true);
+                magicianPanel.gameObject.SetActive(true);
+                contentPanel.gameObject.SetActive(true);
+                goldPanel.gameObject.SetActive(true);
+                contentText.text = "MAGICIAN";
+                Inventory.instance.onItemChangedCallback?.Invoke();
+                skillUpgrade.onSkillShopChangeCallBack?.Invoke();
+                navigationArea.gameObject.SetActive(true);
+                TutorialLoader.instance.Load("Magician");
+                PlayerPrefs.SetInt("Magician",1);
+            }
+            else
+            {
+                GameManager.instance.magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+            }
         }
        
 

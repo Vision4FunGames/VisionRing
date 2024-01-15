@@ -97,7 +97,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                print("Enemys");
+//                print("Enemys");
                 if (target)
                     agent.SetDestination(target.position);
                 else

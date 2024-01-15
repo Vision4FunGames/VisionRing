@@ -28,8 +28,17 @@ public class TutoCage : MonoBehaviour
         {
             TutorialLoader.instance.Load("Ring");    
         }
+    }
 
-     
+    public void AllEnemyDie()
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+            enemies[i].GetComponent<EnemyStats>().Die();              
+            }
+        }
     }
     
 }

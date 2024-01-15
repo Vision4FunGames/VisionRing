@@ -16,6 +16,18 @@ public class TurnAround : MonoBehaviour
     private bool isInside;
     private Canvas canvasMain;
     private bool done;
+    private int goldCount;
+    private bool goldSetted;
+    public int getGoldCount() => goldCount;
+    public void setGoldCount(int value)
+    {
+      
+        goldCount = value;
+        print(goldCount + "Value Gold count equls");
+        goldSetted = true;
+        print(goldSetted);
+    }
+
     void Start()
     {
         canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
@@ -28,7 +40,9 @@ public class TurnAround : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate (Vector3.up * 50 * Time.deltaTime, Space.World);
+        if (goldSetted)
+        {
+            transform.Rotate (Vector3.up * 50 * Time.deltaTime, Space.World);
     float distanceToPlayer = Vector3.Distance(transform.position, player.position);
     if (distanceToPlayer< minDistanceToPlayer)
     {
@@ -43,6 +57,7 @@ public class TurnAround : MonoBehaviour
         // Eğer Player'a ulaşıldıysa Coin'i yok et
         if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)
         {
+            EconomyManager.instance.SetGold(goldCount);
             Destroy(gameObject);
         }
         // if (!isMovingToPlayer)
@@ -80,6 +95,8 @@ public class TurnAround : MonoBehaviour
         //     }
         // } 
     }
+        }
+        
     
         
        

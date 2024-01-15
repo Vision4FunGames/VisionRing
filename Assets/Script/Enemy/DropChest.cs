@@ -23,7 +23,7 @@ public class DropChest : MonoBehaviour
     public GameObject boss;
     public int rnd;
     public GameObject coinPrefab;
-    
+    public int minGold, maxGold;
     private void Awake()
     {
         boss = this.gameObject;
@@ -32,10 +32,10 @@ public class DropChest : MonoBehaviour
     public void ChestDrop(Vector3 bossTransform)
     {
          rnd = Random.Range(1, 100);
-         if (rnd <= 10)
+         if (rnd <= 100)
         {
-            
             var coin = Instantiate(coinPrefab, new Vector3(bossTransform.x, bossTransform.y+2f, bossTransform.z),Quaternion.identity);
+            coin.GetComponent<CoinManager>().SetGold(minGold,maxGold);
             if (rnd <10)
             {
                 if (SkeletType == SkeletType.Skelet)
@@ -84,8 +84,6 @@ public class DropChest : MonoBehaviour
 [UnityEditor.CustomEditor(typeof(DropChest))]
 public class Customditor : Editor
 {
-
-
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();

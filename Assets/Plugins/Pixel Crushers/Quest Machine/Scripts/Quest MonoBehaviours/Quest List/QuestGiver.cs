@@ -162,6 +162,12 @@ namespace PixelCrushers.QuestMachine
             }
         }
 
+        
+        public int GetCompletedQuest()
+        {
+            return completedQuests.Count;
+        }
+
         private QuestParticipantTextInfo m_myQuestGiverTextinfo = null;
         protected QuestParticipantTextInfo myQuestGiverTextInfo
         {

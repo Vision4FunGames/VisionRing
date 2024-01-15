@@ -73,7 +73,7 @@ public class PlayerHealth : CharacterHealth
 
     public void DamageAnimation(int damage)
     {
-        if (!useShield && !TutorialLoader.instance.tutorialLoaded)
+        if (!useShield && GameManager.instance.gameState != GameState.Pause)
         {
             drmGameObject.timer = 0;
                 _player.playerSound.hitSource.PlayOneShot(_player.playerSound.hitMeSound[Random.Range(0,2)]);

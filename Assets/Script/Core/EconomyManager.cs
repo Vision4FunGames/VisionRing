@@ -54,6 +54,7 @@ public class EconomyManager : MonoBehaviour
     public void SetGold(int count)
     {
         gold += count;
+        print(count + "Earned");
         UiManager.instance.onEconomyChangedCallBack.Invoke();
         Shop.instance.onItemChangedCallback.Invoke();
         PlayerPrefs.SetInt("gold",gold);
