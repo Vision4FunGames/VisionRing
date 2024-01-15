@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Exoa.TutorialEngine;
 using UnityEngine;
 
 public class TutoCage : MonoBehaviour
@@ -21,7 +22,11 @@ public class TutoCage : MonoBehaviour
             anim.SetTrigger("Open");
             GetComponent<Collider>().isTrigger = true;
             GameManager.instance.foxManager.EnableAgent();
-           
+        }
+        
+        if (enemyCount ==6)
+        {
+            TutorialLoader.instance.Load("Ring");    
         }
 
      

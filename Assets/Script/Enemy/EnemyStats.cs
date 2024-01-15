@@ -35,6 +35,7 @@ public class EnemyStats : CharacterStats
 
     public override void Die()
     {
+       
         if (puzzleController != null)
         {
             puzzleController.EnemyDead();
@@ -52,6 +53,8 @@ public class EnemyStats : CharacterStats
 
         if (tutorial && tutoCage != null)
         {
+            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
             tutoCage.EnemyDied();
         }
 

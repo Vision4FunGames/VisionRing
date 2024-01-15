@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Exoa.TutorialEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -62,7 +63,7 @@ namespace AmazingAssets.DynamicRadialMasks
 
         public void SliderValueChanged()
         {
-            if (timer > waitTime)
+            if (timer > waitTime || TutorialLoader.instance.loadedTutorialName == "Ring")
             {
                 if (radius == 100)
                 {

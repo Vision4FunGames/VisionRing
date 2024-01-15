@@ -4,6 +4,7 @@ using AmazingAssets.DynamicRadialMasks;
 using UnityEngine;
 using DamageNumbersPro;
 using DG.Tweening;
+using Exoa.TutorialEngine;
 using MoreMountains.Tools;
 using Unity.VisualScripting;
 using UnityEngine.UI;
@@ -72,7 +73,7 @@ public class PlayerHealth : CharacterHealth
 
     public void DamageAnimation(int damage)
     {
-        if (!useShield)
+        if (!useShield && !TutorialLoader.instance.tutorialLoaded)
         {
             drmGameObject.timer = 0;
                 _player.playerSound.hitSource.PlayOneShot(_player.playerSound.hitMeSound[Random.Range(0,2)]);

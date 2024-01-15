@@ -46,7 +46,7 @@ public class CharacterStats : MonoBehaviour
             DamageAnimation();
             UpdateHealthBar();
         }
-        else if (currentHealth <= 0)
+        else if (currentHealth <= 0 && !die)
         {
             Die();
             die = true;

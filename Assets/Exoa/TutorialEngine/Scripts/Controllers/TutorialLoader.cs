@@ -15,7 +15,7 @@ namespace Exoa.TutorialEngine
 
         private TutorialController tc;
 
-        [HideInInspector]
+  
         public bool tutorialLoaded;
 
         [HideInInspector]

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using AmazingAssets.DynamicRadialMasks;
+using Exoa.TutorialEngine;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -11,10 +12,24 @@ public class DrmEnemyChange : MonoBehaviour
     public GameObject[] enemies;
     private float timer, rate = 0.1f;
     bool increas = false;
+    public List<GameObject> enemyList;
+    public TutoCage _tutoCage;
     private void Start()
     {
         InıtializeEnemy();
+        if (_tutoCage)
+        {
+            TutorialInitialize();
+        }
         _drmGameObject = GetComponent<DRMGameObject>();
+    }
+
+    private void TutorialInitialize()
+    {
+        for (int i = 0; i < _tutoCage.enemies.Length; i++)
+        {
+            enemyList.Add(enemies[i]);
+        }
     }
 
     private void Update()
@@ -22,9 +37,35 @@ public class DrmEnemyChange : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > rate)
         {
-            VariationChange();
+            if (TutorialLoader.instance.loadedTutorialName == "Ring")
+            {
+                KillTheEnemies();
+            }
+            else
+            {
+                VariationChange();
+            }
+          
         }
+        
             
+    }
+
+    private void KillTheEnemies()
+    {
+        timer = 0;
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            if (enemyList[i] != null)
+            {
+                if (Vector3.Distance(enemyList[i].transform.position, transform.position) < _drmGameObject.radius)
+                {
+                    enemyList[i].GetComponent<EnemyStats>().Die();
+                    enemyList.RemoveAt(i);
+                } 
+            }
+           
+        }
     }
 
     public void VariationChange()
