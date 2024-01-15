@@ -12,13 +12,16 @@ public class Portal : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<Player>();
-        targetpuzzle = FindObjectOfType<PuzzleController>().gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
+            targetpuzzle.SetActive(true);
             player.transform.position = targetpuzzle.transform.position;
+        }
+            
 
     }
 
