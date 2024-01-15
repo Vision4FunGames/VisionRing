@@ -21,13 +21,20 @@ public class Portal : MonoBehaviour
         {
             QuestMachineMessages.SendCompositeMessage(this,message);
             print("Player portal");
+            player.isMovement = false;
             targetpuzzle.SetActive(true);
             player.transform.position = targetpuzzle.transform.position;
+            Invoke("IsMovementAgain",1f);
+            GetComponent<Collider>().enabled = false;
         }
             
 
     }
 
+    public void IsMovementAgain()
+    {
+        player.isMovement = true;
+    }
     // Start is called before the first frame update
     void Start()
     {
