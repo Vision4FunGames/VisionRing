@@ -579,7 +579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244007399908466913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.82, y: 0, z: -5.999999}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2145004, y: 1.2145004, z: 1.2145004}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -770,6 +770,8 @@ MonoBehaviour:
   boss: {fileID: 1244007399908466913}
   rnd: 11
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
+  minGold: 0
+  maxGold: 0
 --- !u!65 &2090757620
 BoxCollider:
   m_ObjectHideFlags: 0

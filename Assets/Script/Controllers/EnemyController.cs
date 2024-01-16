@@ -29,7 +29,6 @@ public class EnemyController : MonoBehaviour
         _enemyStats = GetComponent<EnemyStats>();
         if (!isAttackStaff)
         {
-       
             target = Player.instance.transform;
         }
         startTarget = target;

@@ -35,7 +35,8 @@ public class EnemyStats : CharacterStats
 
     public override void Die()
     {
-       
+        if (GetComponentInParent<EndlessSkelet>())
+            GetComponentInParent<EndlessSkelet>().DeadEnemy();
         if (puzzleController != null)
         {
             puzzleController.EnemyDead();
@@ -43,7 +44,7 @@ public class EnemyStats : CharacterStats
 
         if (puzzleConditionController)
             puzzleConditionController.DeadEnemyPuzzle();
-        
+
         if (_tutorialEnemies != null)
         {
             GetComponent<BoxCollider>().enabled = false;
