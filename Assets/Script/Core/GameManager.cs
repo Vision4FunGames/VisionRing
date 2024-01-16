@@ -3,6 +3,7 @@ using Cinemachine;
 using DG.Tweening;
 using Exoa.TutorialEngine;
 using PixelCrushers;
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -152,11 +153,18 @@ private void Start()
             //Player.instance.FinishTutorial();
             
         }
-        
         else
         {
             UpdateGameState(GameState.Tutorial);
             CinematicCamDisable();
+        }
+        if (tutorialSection == 1 && tutorialCounter ==3)
+        {
+            QuestMachineMessages.SendCompositeMessage(this, "Magician:Start");
+        }
+        else if (tutorialSection == 1 && tutorialCounter ==1)
+        {
+            QuestMachineMessages.SendCompositeMessage(this, "Goblin:Start");
         }
     }
     

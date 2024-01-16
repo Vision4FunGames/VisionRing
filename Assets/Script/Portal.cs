@@ -9,7 +9,7 @@ public class Portal : MonoBehaviour
 {
     private Player player;
     public GameObject targetpuzzle;
-    public string message = "Collected:Diamond";
+    public string message = "Entry:Portal";
     private void Awake()
     {
         player = FindObjectOfType<Player>();

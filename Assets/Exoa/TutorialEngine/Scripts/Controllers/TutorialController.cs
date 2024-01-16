@@ -165,13 +165,22 @@ namespace Exoa.TutorialEngine
                     GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialBoxArea.transform);
                 }
             }
-            else if (TutorialLoader.instance.loadedTutorialName == "0.3")
+            else if (TutorialLoader.instance.loadedTutorialName == "1.3")
             {
-                
+                if (currentStep == 1)
+                {
+                    GameManager.instance.CinematicCamEnable(GameManager.instance.merchant.transform.GetChild(2).transform);
+                }
+                else if (currentStep == 2)
+                {
+                    GameManager.instance.CinematicCamEnable(GameManager.instance.blacksmith.transform.GetChild(2).transform);
+                }
+                else if (currentStep == 3)
+                {
+                    GameManager.instance.CinematicCamEnable(GameManager.instance.magician.transform.GetChild(1).transform);
+                }
             }
-            {
-                
-            }
+            
             
 
           

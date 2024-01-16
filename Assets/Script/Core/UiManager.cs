@@ -198,6 +198,7 @@ public class UiManager : MonoBehaviour
 
     public void MagicianUI()
     {
+        
         if (GameManager.instance.isMagician)
         {
             CloseAllUI();
@@ -208,12 +209,12 @@ public class UiManager : MonoBehaviour
             contentText.text = "MAGICIAN";
             Inventory.instance.onItemChangedCallback?.Invoke();
             skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-            navigationArea.gameObject.SetActive(true);
+            //navigationArea.gameObject.SetActive(true);
             //skillUpgrade.BringCurrentSkills();
         }
         else
         {
-            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest()>0)
+            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count==0)
             {
                 CloseAllUI();
                 inventory.gameObject.SetActive(true);
@@ -223,9 +224,10 @@ public class UiManager : MonoBehaviour
                 contentText.text = "MAGICIAN";
                 Inventory.instance.onItemChangedCallback?.Invoke();
                 skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-                navigationArea.gameObject.SetActive(true);
+               // navigationArea.gameObject.SetActive(true);
                 TutorialLoader.instance.Load("Magician");
                 PlayerPrefs.SetInt("Magician",1);
+                GameManager.instance.isMagician = true;
             }
             else
             {

@@ -5,7 +5,8 @@ using UnityEngine;
 namespace PixelCrushers.QuestMachine.Wrappers
 {
 
-    public class UnityEventQuestAction : PixelCrushers.QuestMachine.UnityEventQuestAction
+    public class UnityEventQuestAction : PixelCrushers.QuestMachine.UnityEventQuestAction 
     {
+        
     }
 }

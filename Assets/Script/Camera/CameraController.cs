@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -44,6 +45,7 @@ public class CameraController : MonoBehaviour
                 }
                 else if (hit.transform.gameObject.name == "Magician")
                 {
+                    QuestMachineMessages.SendCompositeMessage(this, "Found:Magician");
                     UiManager.instance.MagicianUI();
                 }
                 

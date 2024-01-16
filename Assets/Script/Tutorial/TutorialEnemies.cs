@@ -15,6 +15,22 @@ public class TutorialEnemies : MonoBehaviour
         enemyCount = enemies.Length;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AllEnemyDead();
+        }
+    }
+
+    private void AllEnemyDead()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<EnemyStats>().Die();
+        }
+    }
+
     public void EnemyDied()
     {
         enemyCount--;
