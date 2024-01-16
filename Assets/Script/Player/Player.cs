@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerHealth _playerHealth;
     private NavMeshAgent agent;
     public bool tutorial;
-    
+
     #region Singleton
 
     public static Player instance;
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public float animSpeed;
     public float speed;
     public float rotSpeed = 5;
-    [HideInInspector] public float baseSpeed; 
+    [HideInInspector] public float baseSpeed;
     public Animator _playerAnimator;
     public DynamicJoystick _fixedJoystick;
     [HideInInspector] public CharacterController _myController;
@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
     public Transform dragT;
     public float boxforce;
     private bool isWallPassed;
+
     private void DisableMovement()
     {
         //StateMachine.ChangeState(PlayerIdleState);
@@ -103,7 +104,7 @@ public class Player : MonoBehaviour
         //_fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
-        PlayerBox = new PlayerBox(this, StateMachine,gameObject);
+        PlayerBox = new PlayerBox(this, StateMachine, gameObject);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine, false);
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
@@ -154,6 +155,7 @@ public class Player : MonoBehaviour
         {
             agent.SetDestination(GameManager.instance.foxManager.transform.position);
         }
+
         StateMachine.CurrentPlayerState.FrameUpdate();
         if (uiManager.attackJoystick.input.magnitude > 0.98f && _skillCoolDown.CanUse(0))
         {
@@ -182,7 +184,6 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Box"))
         {
             StateMachine.ChangeState(PlayerMovementState);
-
         }
     }
 
@@ -201,13 +202,14 @@ public class Player : MonoBehaviour
             float angle = Vector3.Angle(transform.GetChild(0).forward, directionToPlayer);
 
 
-            if (angle < 90&& isWalk)
+            if (angle < 90 && isWalk)
             {
                 currentboxrb = other.GetComponent<Rigidbody>();
-                Vector3 dir = transform.position - other.transform.position;
-                currentboxrb.AddForce(dir*boxforce*Time.deltaTime,ForceMode.Impulse);
+                Vector3 dir = other.transform.position - transform.position;
+                dir.y = 0;
+                dir.Normalize();
+                currentboxrb.AddForceAtPosition(dir * boxforce * Time.deltaTime, transform.position, ForceMode.Impulse);
             }
-           
         }
     }
 
@@ -217,35 +219,35 @@ public class Player : MonoBehaviour
         {
             if (_myController.isGrounded)
             {
-              /*  var boxObject = other.gameObject;
-                float minDis = Vector3.Distance(transform.position,
-                    boxObject.GetComponent<BoxItem>().playerDragPos[0].transform.position);
-                int currentİndex = 0;
-                for (int i = 0; i < boxObject.GetComponent<BoxItem>().playerDragPos.Length; i++)
-                {
-                    if (Vector3.Distance(transform.position,
-                            boxObject.GetComponent<BoxItem>().playerDragPos[i].transform.position) < minDis)
-                    {
-                        minDis = Vector3.Distance(transform.position,
-                            boxObject.GetComponent<BoxItem>().playerDragPos[i].transform.position);
-                        currentİndex = i;
-                    }
-                }
-                transform.DOMove(boxObject.GetComponent<BoxItem>().playerDragPos[currentİndex].transform.position, .1f)
-                    .OnComplete((() =>
-                    {
-                        transform.GetChild(0).LookAt(new Vector3(boxObject.transform.position.x,transform.position.y,boxObject.transform.position.z));
-                        PlayerBox = new PlayerBox(this, StateMachine,other.gameObject); 
-                        StateMachine.ChangeState(PlayerBox);
-                        boxObject.transform.parent = dragT;
-                        boxObject.transform.localPosition = new Vector3(0, 0, 0);
-                    }));
-            */
-              PlayerBox = new PlayerBox(this, StateMachine,other.gameObject); 
-              StateMachine.ChangeState(PlayerBox);
+                /*  var boxObject = other.gameObject;
+                  float minDis = Vector3.Distance(transform.position,
+                      boxObject.GetComponent<BoxItem>().playerDragPos[0].transform.position);
+                  int currentİndex = 0;
+                  for (int i = 0; i < boxObject.GetComponent<BoxItem>().playerDragPos.Length; i++)
+                  {
+                      if (Vector3.Distance(transform.position,
+                              boxObject.GetComponent<BoxItem>().playerDragPos[i].transform.position) < minDis)
+                      {
+                          minDis = Vector3.Distance(transform.position,
+                              boxObject.GetComponent<BoxItem>().playerDragPos[i].transform.position);
+                          currentİndex = i;
+                      }
+                  }
+                  transform.DOMove(boxObject.GetComponent<BoxItem>().playerDragPos[currentİndex].transform.position, .1f)
+                      .OnComplete((() =>
+                      {
+                          transform.GetChild(0).LookAt(new Vector3(boxObject.transform.position.x,transform.position.y,boxObject.transform.position.z));
+                          PlayerBox = new PlayerBox(this, StateMachine,other.gameObject); 
+                          StateMachine.ChangeState(PlayerBox);
+                          boxObject.transform.parent = dragT;
+                          boxObject.transform.localPosition = new Vector3(0, 0, 0);
+                      }));
+              */
+                PlayerBox = new PlayerBox(this, StateMachine, other.gameObject);
+                StateMachine.ChangeState(PlayerBox);
             }
-              
         }
+
         if (other.CompareTag("RockPuzzle"))
         {
             other.gameObject.GetComponentInParent<PuzzleController>().DoneEnemyMission();
@@ -261,16 +263,16 @@ public class Player : MonoBehaviour
                 GameManager.instance.tutorialCollider1.gameObject.SetActive(false);
                 GameManager.instance.tutorialCollider2.gameObject.SetActive(false);
             }
-            
         }
     }
-        public void BackDoMove(GameObject enemy)
+
+    public void BackDoMove(GameObject enemy)
     {
         Vector3 dir = transform.position - enemy.transform.position;
         dir = Vector3.ClampMagnitude(dir, 2);
         isMovement = false;
         _playerAttack.missAttackParticle.Play();
-        transform.DOMove(transform.position + (dir*2), 1f).OnComplete(()=> isMovement = true);
+        transform.DOMove(transform.position + (dir * 2), 1f).OnComplete(() => isMovement = true);
     }
 
     public void DisableSkill(float skilltime)
@@ -292,7 +294,7 @@ public class Player : MonoBehaviour
     {
         StateMachine.CurrentPlayerState.PhysicUpdate();
     }
-    
+
 
     private void OnEnable()
     {
@@ -310,23 +312,23 @@ public class Player : MonoBehaviour
     {
         tutorial = true;
         isMovement = false;
-       
+
         StateMachine.ChangeState(PlayerIdleState);
-        transform.GetChild(0).transform.rotation = new Quaternion(0, 0, 0,0);
+        transform.GetChild(0).transform.rotation = new Quaternion(0, 0, 0, 0);
         GameManager.instance.playerVCam.m_LookAt = null;
         transform.AddComponent<NavMeshAgent>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 6f;
         GetComponent<CharacterController>().enabled = false;
-        _playerAnimator.SetFloat(RunSpeed,1);
+        _playerAnimator.SetFloat(RunSpeed, 1);
         UiManager.instance.CloseAllUI();
-        Invoke("CloseCam",7f);
+        Invoke("CloseCam", 7f);
     }
 
     public void CloseCam()
     {
         GameManager.instance.playerVCam.m_Follow = null;
-        Invoke("EndOfTheCinema",3f);
+        Invoke("EndOfTheCinema", 3f);
     }
 
     public void EndOfTheCinema()
@@ -342,9 +344,8 @@ public class Player : MonoBehaviour
 
     public void SavePosition(Transform pos)
     {
-        PlayerPrefs.SetFloat("x",pos.position.x);
+        PlayerPrefs.SetFloat("x", pos.position.x);
         PlayerPrefs.SetFloat("y", pos.position.y);
         PlayerPrefs.SetFloat("z", pos.position.z);
     }
-
 }
