@@ -173,7 +173,8 @@ private void Start()
             if (tutorialCounter ==1)
             {
                 OpenTheVillageDoors();
-                CinematicCamEnable(baskan.transform.GetChild(1).transform);
+                wallFires.gameObject.SetActive(false);
+                CinematicCamEnable(villageEntryCollider.transform);
             }
             else if (tutorialCounter ==2)
             {
