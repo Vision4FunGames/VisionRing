@@ -4,6 +4,7 @@ using AmazingAssets.DynamicRadialMasks;
 using Exoa.TutorialEngine;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerAnimator : MonoBehaviour
     public GameObject fog;
     public ParticleSystem ringParticle;
     public ParticleSystem tutorialBangParticle;
-    
+    private bool playerDrop;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -26,6 +27,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             tutorialBangParticle.gameObject.SetActive(true);
             StartCoroutine(PlayerDrop());
+            UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
 
         }
         else
@@ -40,10 +42,16 @@ public class PlayerAnimator : MonoBehaviour
 
     IEnumerator PlayerDrop()
     {
-        yield return new WaitForSeconds(2f);
-        animator.SetTrigger("Dusme");
-        animator.speed = .44f;
-        GameManager.instance.tutoCage.GetComponent<TutoCage>().AllEnemyDie();
+        if (!playerDrop)
+        {
+            playerDrop = true;
+            yield return new WaitForSeconds(2f);
+            animator.SetTrigger("Dusme");
+            animator.speed = .44f;
+            GameManager.instance.tutoCage.GetComponent<TutoCage>().AllEnemyDie();
+         
+        }
+       
     }
 
     public void RingAction()

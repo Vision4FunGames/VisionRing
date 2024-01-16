@@ -21,6 +21,7 @@ public class UiManager : MonoBehaviour
     [Header("UI Objects")]
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea;
 
+    public GameObject ringBtn;
     public GameObject sceneUI;
     public TextMeshProUGUI healText;
     public GameObject menuUi;

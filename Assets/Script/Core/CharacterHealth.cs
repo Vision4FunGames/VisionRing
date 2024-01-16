@@ -1,4 +1,5 @@
 using System;
+using Exoa.TutorialEngine;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -34,6 +35,12 @@ public abstract class CharacterHealth : MonoBehaviour
         {
             health -= damageAmount;
             UpdateHealthBar();
+            if (health <=60 && !GameManager.instance.isHeal)
+            {
+                TutorialLoader.instance.Load("Heal");
+                PlayerPrefs.SetInt("Heal",1);
+                GameManager.instance.isHeal = true;
+            }
             if (health <= 0)
             {
                 Die();

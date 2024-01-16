@@ -122,11 +122,11 @@ namespace Script.Player.PlayerStateMachine
                     _player.isWalk = true;
                     if (GameManager.instance.gameState == GameState.Tutorial)
                     {
-                        if (GameManager.instance.tutorialSection==0 && GameManager.instance.tutorialCounter is 2 or 4)
+                        if (GameManager.instance.tutorialSection==0 && GameManager.instance.tutorialCounter is 2 )
                         {
                             GameManager.instance.TutorialLoad();
                         }
-                        else if (GameManager.instance.tutorialSection== 1 && GameManager.instance.tutorialCounter is 2 or 3 or 4 or 5)
+                        else if (GameManager.instance.tutorialSection== 1 && GameManager.instance.tutorialCounter is 2 or 3  or 5)
                         {
                             GameManager.instance.TutorialLoad();
                         }

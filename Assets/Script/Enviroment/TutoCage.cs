@@ -26,7 +26,9 @@ public class TutoCage : MonoBehaviour
         
         if (enemyCount ==6)
         {
-            TutorialLoader.instance.Load("Ring");    
+            UiManager.instance.ringBtn.gameObject.SetActive(true);
+            TutorialLoader.instance.Load("Ring");
+            PlayerPrefs.SetInt("Ring",1);
         }
     }
 

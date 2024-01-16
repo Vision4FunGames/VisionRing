@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public GameObject skillSword;
     public Transform dragT;
     public float boxforce;
+    private bool isWallPassed;
     private void DisableMovement()
     {
         //StateMachine.ChangeState(PlayerIdleState);
@@ -249,6 +250,18 @@ public class Player : MonoBehaviour
         {
             other.gameObject.GetComponentInParent<PuzzleController>().DoneEnemyMission();
             other.isTrigger = false;
+        }
+
+        if (other.CompareTag("WallPassed"))
+        {
+            if (GameManager.instance.tutorialCounter == 4 && !isWallPassed)
+            {
+                isWallPassed = true;
+                GameManager.instance.TutorialLoad();
+                GameManager.instance.tutorialCollider1.gameObject.SetActive(false);
+                GameManager.instance.tutorialCollider2.gameObject.SetActive(false);
+            }
+            
         }
     }
         public void BackDoMove(GameObject enemy)

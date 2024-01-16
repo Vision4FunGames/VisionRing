@@ -8,19 +8,19 @@ using UnityEngine;
 public class PrefabReplacer : MonoBehaviour
 {
     public GameObject prefab;
-    [Button]
-    public void Change()
-    {
-        var childCount = transform.childCount;
-        for (int i = 0; i < childCount; i++)
-        {
-            var data = transform.GetChild(i).Get();
-            var spawnedPrefab = EditorUtility.InstantiatePrefab(prefab) as GameObject;
-            spawnedPrefab.transform.SetParent(transform, true);
-            spawnedPrefab.transform.Set(data);
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
-    }
+    // [Button]
+    // public void Change()
+    // {
+    //     var childCount = transform.childCount;
+    //     for (int i = 0; i < childCount; i++)
+    //     {
+    //         var data = transform.GetChild(i).Get();
+    //         var spawnedPrefab = EditorUtility.InstantiatePrefab(prefab) as GameObject;
+    //         spawnedPrefab.transform.SetParent(transform, true);
+    //         spawnedPrefab.transform.Set(data);
+    //         transform.GetChild(i).gameObject.SetActive(false);
+    //     }
+    // }
 }
 public static class Extensions
 {

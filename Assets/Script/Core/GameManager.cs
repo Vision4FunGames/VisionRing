@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
+    public bool isRing;
+    public bool isHeal;
 
 private void Awake()
     {
@@ -85,9 +87,30 @@ private void Start()
             isMagician = true;
         }
     }
+
+    if (PlayerPrefs.HasKey("Ring"))
+    {
+        if (PlayerPrefs.GetInt("Ring") == 1)
+        {
+            isRing = true;
+            UiManager.instance.ringBtn.gameObject.SetActive(true);
+        }
+        else
+        {
+            UiManager.instance.ringBtn.gameObject.SetActive(false);
+        }
+    }
+
+    if (PlayerPrefs.HasKey("Heal"))
+    {
+        if (PlayerPrefs.GetInt("Heal") == 1)
+        {
+            isHeal = true;
+        }
+    }
     #endregion
     tutorialName = tutorialSection + ".";
-        PlayerName = "Patakoz";
+        PlayerName = "";
         foxManager = FindObjectOfType<FoxManager>();
         if (!tutorial)
         {
@@ -169,10 +192,8 @@ private void Start()
         else if (tutorialSection == 0 && tutorialCounter == 3)
         {
             CinematicCamEnable(tutorialWall.transform);
-            tutorialWall.transform.DOLocalMoveY(-0.001f, 5f).OnComplete((() =>
+            tutorialWall.transform.DOLocalMoveY(-1f, 5f).OnComplete((() =>
             {
-                tutorialCollider1.gameObject.SetActive(false);
-                tutorialCollider2.gameObject.SetActive(false);
                 CinematicCamDisable();
             }));
         }

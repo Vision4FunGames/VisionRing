@@ -1,12 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using DG.Tweening;
 using NaughtyAttributes;
-using TMPro;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
