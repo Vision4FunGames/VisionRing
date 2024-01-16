@@ -26,11 +26,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-
-        if (PlayerPrefs.HasKey("Edit"))
-        {
-            edit = false;
-        }
         if (PlayerPrefs.GetInt("StartVillage") == 0 || !PlayerPrefs.HasKey("StartVillage"))
         {
             if (PlayerPrefs.HasKey("TutorialSection"))
@@ -56,11 +51,10 @@ public class PlayerManager : MonoBehaviour
         if (!edit)
         {
             transform.position = startPlayerPos;
-            pet.GetComponent<NavMeshAgent>().enabled = false;
-            pet.transform.position = startPlayerPos + new Vector3(5f, 0, 0);
-            pet.GetComponent<NavMeshAgent>().enabled = true;
         }
-            
+        pet.GetComponent<NavMeshAgent>().enabled = false;
+        pet.transform.position = startPlayerPos + new Vector3(5f, 0, 0);
+        pet.GetComponent<NavMeshAgent>().enabled = true;
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
@@ -147,13 +141,6 @@ public class PlayerManager : MonoBehaviour
             player.speed = player.baseSpeed;
             player._playerAnimator.SetBool("yurumeBool", false);
             Destroy(sessizImage.gameObject);
-        }
-
-        if (other.CompareTag("CheckPoint"))
-        {
-            other.GetComponent<CheckPoint>().healParticle.Stop();
-            other.GetComponent<CheckPoint>().campFireParticle.Stop();
-            other.GetComponent<CheckPoint>().shineParticle.Play();
         }
     }
 

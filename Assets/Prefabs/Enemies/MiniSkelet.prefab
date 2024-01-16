@@ -714,6 +714,7 @@ GameObject:
   - component: {fileID: 1581168890}
   - component: {fileID: 1581168891}
   - component: {fileID: 635666913}
+  - component: {fileID: -4298041722884991297}
   m_Layer: 10
   m_Name: MiniSkelet
   m_TagString: Enemy
@@ -901,6 +902,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.69, y: 1.67, z: 3.22}
   m_Center: {x: 0.039535522, y: 5.23, z: 0}
+--- !u!114 &-4298041722884991297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930352219879185654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 0
 --- !u!1 &1944234839625677977
 GameObject:
   m_ObjectHideFlags: 0

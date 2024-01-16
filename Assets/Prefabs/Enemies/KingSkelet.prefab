@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 2147106700}
   - component: {fileID: 1293535107}
   - component: {fileID: 8773402191891094612}
+  - component: {fileID: 7588409926098096596}
   m_Layer: 10
   m_Name: KingSkelet
   m_TagString: Enemy
@@ -98,6 +99,7 @@ MonoBehaviour:
   attack: 0
   bombActiveted: 0
   bombexp: 0
+  isAttackStaff: 0
 --- !u!114 &5653933587837560478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +123,8 @@ MonoBehaviour:
   mmProgressBar: {fileID: 0}
   message: 
   enemyType: 2
+  SpawnEnemyType: 0
+  tutorial: 0
 --- !u!114 &5653933587837560479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 733932398}
   isTabut: 0
+  shied: 0
 --- !u!54 &2147106699
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -235,6 +240,21 @@ MonoBehaviour:
   boss: {fileID: 0}
   rnd: 0
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
+  minGold: 0
+  maxGold: 0
+--- !u!114 &7588409926098096596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653933587837560473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 0
 --- !u!1001 &937768434
 PrefabInstance:
   m_ObjectHideFlags: 0

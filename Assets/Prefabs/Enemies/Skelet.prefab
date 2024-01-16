@@ -564,6 +564,7 @@ GameObject:
   - component: {fileID: 2168672734020771598}
   - component: {fileID: 1956348263}
   - component: {fileID: 2090757620}
+  - component: {fileID: -737963135027442475}
   m_Layer: 10
   m_Name: Skelet
   m_TagString: Enemy
@@ -638,7 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   interactionTransform: {fileID: 0}
-  myVariation: 0
+  myVariation: 1
 --- !u!54 &1244007399908466924
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -785,6 +786,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.69, y: 1.67, z: 3.22}
   m_Center: {x: 0.039535522, y: 5.23, z: 0}
+--- !u!114 &-737963135027442475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244007399908466913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 1
 --- !u!1 &1288659648459612703
 GameObject:
   m_ObjectHideFlags: 0

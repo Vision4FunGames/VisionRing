@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 6759728030344244774}
   - component: {fileID: 1601766727}
   - component: {fileID: 1834905463}
+  - component: {fileID: 2745012303315453663}
   m_Layer: 10
   m_Name: GoblinSword
   m_TagString: Enemy
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   interactionTransform: {fileID: 543450651842388428}
-  myVariation: 1
+  myVariation: 0
 --- !u!195 &6759728030344244781
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -231,7 +232,7 @@ MonoBehaviour:
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
   critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
-  message: Killed:Goblin
+  message: Goblin:Killed
   enemyType: 0
   SpawnEnemyType: 7
   tutorial: 0
@@ -309,6 +310,19 @@ MonoBehaviour:
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
   minGold: 0
   maxGold: 0
+--- !u!114 &2745012303315453663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759728030344244772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 0
 --- !u!1001 &1857570343
 PrefabInstance:
   m_ObjectHideFlags: 0

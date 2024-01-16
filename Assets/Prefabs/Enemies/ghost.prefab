@@ -6952,6 +6952,7 @@ GameObject:
   - component: {fileID: 2622531187056102430}
   - component: {fileID: 2622531187056102431}
   - component: {fileID: 2782680113967816743}
+  - component: {fileID: -8956899929419612980}
   m_Layer: 10
   m_Name: ghost
   m_TagString: Enemy
@@ -7004,7 +7005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 11.6
   interactionTransform: {fileID: 2622531187056102425}
-  myVariation: 0
+  myVariation: 1
 --- !u!195 &2622531187056102407
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7160,6 +7161,19 @@ MonoBehaviour:
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
   minGold: 0
   maxGold: 0
+--- !u!114 &-8956899929419612980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399877509245605539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 0
 --- !u!1 &3428962898474633404
 GameObject:
   m_ObjectHideFlags: 0

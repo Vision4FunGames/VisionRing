@@ -4825,6 +4825,7 @@ GameObject:
   - component: {fileID: 9012201514013658621}
   - component: {fileID: 1017165201}
   - component: {fileID: 92790488}
+  - component: {fileID: 3947189341535530748}
   m_Layer: 9
   m_Name: BirlesikGolem
   m_TagString: Boss
@@ -4920,6 +4921,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 8.56, z: 5}
   m_Center: {x: 0, y: 10.51, z: 0}
+--- !u!114 &3947189341535530748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9012201514013658592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 0
 --- !u!1001 &690804363156776734
 PrefabInstance:
   m_ObjectHideFlags: 0

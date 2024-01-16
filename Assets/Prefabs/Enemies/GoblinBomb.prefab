@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7438867594782151846}
   - component: {fileID: 5741898620138795140}
   - component: {fileID: 6364259547591020509}
+  - component: {fileID: 3402235725298504705}
   m_Layer: 10
   m_Name: GoblinBomb
   m_TagString: Enemy
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 14.01
   interactionTransform: {fileID: 5198819879604835521}
-  myVariation: 1
+  myVariation: 0
 --- !u!114 &7438867594782151835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +105,7 @@ MonoBehaviour:
   message: Killed:Goblin
   enemyType: 0
   SpawnEnemyType: 5
-  tutorial: 0
+  tutorial: 1
 --- !u!54 &7438867594782151834
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -187,12 +188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77aa5ecd6ab30d4192daec55ed326a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 15
+  lookRadius: 20.99
   target: {fileID: 0}
   attack: 0
   bombActiveted: 0
   bombexp: 0
-  isAttackStaff: 0
+  isAttackStaff: 1
 --- !u!136 &5741898620138795140
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -226,6 +227,19 @@ MonoBehaviour:
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
   minGold: 0
   maxGold: 0
+--- !u!114 &3402235725298504705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7438867594782151824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 0
 --- !u!1001 &1076292991
 PrefabInstance:
   m_ObjectHideFlags: 0

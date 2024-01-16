@@ -14077,6 +14077,7 @@ GameObject:
   - component: {fileID: 7739261591714613184}
   - component: {fileID: 779369407}
   - component: {fileID: 2657499819718427542}
+  - component: {fileID: -6052339887399884597}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Boss
@@ -14205,6 +14206,7 @@ MonoBehaviour:
   isSkeletsLive: 0
   bossSpecialSkelet: 0
   _damageNumbersPro: {fileID: 0}
+  EnemyVariation: 0
   footParticle: {fileID: 6551606652811418656}
   tabuts: {fileID: 8614314603083375503}
   navMeshAgent: {fileID: 0}
@@ -14254,6 +14256,21 @@ MonoBehaviour:
   boss: {fileID: 0}
   rnd: 0
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
+  minGold: 0
+  maxGold: 0
+--- !u!114 &-6052339887399884597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551606651187546903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f7993b39599c3448e78489e205917f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyVariation: 1
 --- !u!1 &6551606652096569119
 GameObject:
   m_ObjectHideFlags: 0

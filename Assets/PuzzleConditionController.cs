@@ -9,6 +9,7 @@ public class PuzzleConditionController : MonoBehaviour
     public int enemyCount;
 
     public int leaveEnemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,14 +24,23 @@ public class PuzzleConditionController : MonoBehaviour
         else
         {
             enemyCount = transform.childCount;
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
         }
-       
     }
 
     public void DeadEnemyPuzzle()
     {
         leaveEnemy++;
         if (enemyCount <= leaveEnemy)
-            enemySpawner.isConditionCompleted = true;
+        {
+            if (enemySpawner)
+                enemySpawner.isConditionCompleted = true;
+            else if (GetComponent<MeshRenderer>())
+            {
+                GetComponent<MeshRenderer>().enabled = true;
+                GetComponent<Collider>().enabled = true;
+            }
+        }
     }
 }
