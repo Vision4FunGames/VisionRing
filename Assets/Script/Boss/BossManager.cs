@@ -91,6 +91,8 @@ public class BossManager : MonoBehaviour
         bossMovement.enabled = false;
         GetComponent<Collider>().enabled = false;
         GetComponentInChildren<Animator>().Play("Dead");
+        if (GetComponentInParent<EndlessSkelet>())
+            GetComponentInParent<EndlessSkelet>().DeadEnemy();
     }
     public void SpawnSkelet()
     {
