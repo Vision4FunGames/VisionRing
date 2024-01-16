@@ -126,7 +126,7 @@ namespace Script.Player.PlayerStateMachine
                         {
                             GameManager.instance.TutorialLoad();
                         }
-                        else if (GameManager.instance.tutorialSection== 1 && GameManager.instance.tutorialCounter is 2 or 3  or 5)
+                        else if (GameManager.instance.tutorialSection== 1 && GameManager.instance.tutorialCounter is 2 or 3 or 4 or 5)
                         {
                             GameManager.instance.TutorialLoad();
                         }

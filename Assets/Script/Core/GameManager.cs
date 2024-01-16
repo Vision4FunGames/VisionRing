@@ -32,13 +32,15 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial")] public GameObject tutorialEnemies;
     public GameObject tutoCage;
     public GameObject tutorialWall;
-    public GameObject tutorialCollider1, tutorialCollider2;
+    public GameObject tutorialCollider1, tutorialCollider2,villageEntryCollider;
+    public GameObject wallFires;
     public GameObject tutorialBox, tutorialBoxArea;
     public GameObject mainSword;
     public GameObject baskan;
     public GameObject merchant;
     public GameObject blacksmith;
     public GameObject magician;
+    public GameObject villageDoor, villageDoor2;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
@@ -170,6 +172,7 @@ private void Start()
         {
             if (tutorialCounter ==1)
             {
+                OpenTheVillageDoors();
                 CinematicCamEnable(baskan.transform.GetChild(1).transform);
             }
             else if (tutorialCounter ==2)
@@ -273,5 +276,16 @@ private void Start()
         PlayerPrefs.SetInt("TutorialCounter",tutorialCounter);
         UiManager.instance.SceneChange();
         // Panel yapilacak buraya 
+    }
+    public void OpenTheVillageDoors()
+    {
+        villageDoor.transform.DORotate(new Vector3(0, 90, 0),5f);
+        villageDoor2.transform.DORotate(new Vector3(0, 90, 0),5f);
+    }
+
+    public void CloseTheVillageDoors()
+    {
+        villageDoor.transform.DORotate(new Vector3(0, 0, 0), 5f);
+        villageDoor2.transform.DORotate(new Vector3(0, 0, 0), 5f);
     }
 }

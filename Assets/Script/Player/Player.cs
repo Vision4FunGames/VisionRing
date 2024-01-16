@@ -264,6 +264,14 @@ public class Player : MonoBehaviour
                 GameManager.instance.tutorialCollider2.gameObject.SetActive(false);
             }
         }
+
+        if (other.gameObject.CompareTag("VillageEntry"))
+        {
+            if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter == 1)
+            {
+                GameManager.instance.TutorialLoad();
+            }
+        }
     }
 
     public void BackDoMove(GameObject enemy)
