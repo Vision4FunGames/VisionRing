@@ -12,11 +12,19 @@ public class PuzzleConditionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemySpawner = GetComponent<EnemySpawner>();
-        for (int i = 0; i < enemySpawner.spawnOptions.Length; i++)
+        if (GetComponent<EnemySpawner>())
         {
-            enemyCount += enemySpawner.spawnOptions[i].spawnCount;
+            enemySpawner = GetComponent<EnemySpawner>();
+            for (int i = 0; i < enemySpawner.spawnOptions.Length; i++)
+            {
+                enemyCount += enemySpawner.spawnOptions[i].spawnCount;
+            }
         }
+        else
+        {
+            enemyCount = transform.childCount;
+        }
+       
     }
 
     public void DeadEnemyPuzzle()
