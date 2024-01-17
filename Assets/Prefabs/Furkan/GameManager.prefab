@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2668921968425631565}
   - component: {fileID: 1111943518}
   - component: {fileID: 1897537093}
+  - component: {fileID: 1897537109}
+  - component: {fileID: 1897537103}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,8 +52,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08278986e08766a469c41790bdfbb53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  villageSpawnPos: {fileID: 0}
+  tutorial1SpawnPos: {fileID: 0}
   gameState: 0
+  PlayerName: 
   playerVCam: {fileID: 0}
+  cinematicVCam: {fileID: 0}
+  tutorialCounter: 0
+  tutorialSection: 0
+  tutorial: 0
+  foxManager: {fileID: 0}
+  tutorialEnemies: {fileID: 0}
+  tutoCage: {fileID: 0}
+  tutorialWall: {fileID: 0}
+  tutorialCollider1: {fileID: 0}
+  tutorialCollider2: {fileID: 0}
+  villageEntryCollider: {fileID: 0}
+  wallFires: {fileID: 0}
+  tutorialBox: {fileID: 0}
+  tutorialBoxArea: {fileID: 0}
+  mainSword: {fileID: 0}
+  baskan: {fileID: 0}
+  merchant: {fileID: 0}
+  blacksmith: {fileID: 0}
+  magician: {fileID: 0}
+  villageDoor: {fileID: 0}
+  villageDoor2: {fileID: 0}
+  isMerchant: 0
+  isMagician: 0
+  isBlacksmith: 0
+  isRing: 0
+  isHeal: 0
+  currentTime: 0
+  fightBool: 0
+  fight: {fileID: 8300000, guid: 31d5e3cf0c199df46b7c1fc52003a230, type: 3}
+  stand: {fileID: 8300000, guid: 22e0d4fb37837a64aa4988cc8ae70631, type: 3}
 --- !u!114 &5038891023898458666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +103,7 @@ MonoBehaviour:
   ButtonType:
   - mySkillType: 4
     skillButton: {fileID: 0}
-  - mySkillType: 5
+  - mySkillType: 3
     skillButton: {fileID: 0}
   - mySkillType: 3
     skillButton: {fileID: 0}
@@ -85,6 +120,11 @@ MonoBehaviour:
   skillPanel: {fileID: 0}
   goldPanel: {fileID: 0}
   contentPanel: {fileID: 0}
+  playerHealthBarCanvas: {fileID: 0}
+  navigationArea: {fileID: 0}
+  ringBtn: {fileID: 0}
+  sceneUI: {fileID: 0}
+  healText: {fileID: 0}
   menuUi: {fileID: 0}
   skillButtons: []
   inventoryObject: {fileID: 0}
@@ -143,6 +183,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   collectBtn: {fileID: 0}
   upgradeWheel: {fileID: 0}
   inventoryBtnPanel: {fileID: 0}
@@ -161,6 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0f8e82e8206ff41a92ac09274d70e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
+  currentInventoryWeapon: {fileID: 0}
   ItemDatabase:
   - {fileID: 11400000, guid: 2887cbb116e6f734e9e44fd7d668e2aa, type: 2}
   - {fileID: 11400000, guid: 55cd26929c78f444dbd18b0f8c0277d4, type: 2}
@@ -356,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4d8c519e582a346aab49e5de7c5cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombparticle: {fileID: 1281527889361916805, guid: 1ff9cd8da563f594ea2e6161487e2073, type: 3}
   playerDashParticle: {fileID: 0}
   playerEnvanterParticleSystem: {fileID: 0}
 --- !u!114 &1111943518
@@ -374,7 +420,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e7887a5c9f04764b9c5b1d5b5fa5da3, type: 2}
   - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
   - {fileID: 11400000, guid: b399d225e4d2e3e4598df7dbea7a80a4, type: 2}
-  itemCount: f4010000f4010000f4010000
+  itemCount: 000000000000000000000000
 --- !u!114 &1897537093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,3 +442,112 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 4491
+--- !u!82 &1897537109
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1897537103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe659c12466bf74abd2b88946f07ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faded: 0

@@ -75,6 +75,7 @@ public class PlayerHealth : CharacterHealth
     {
         if (!useShield && GameManager.instance.gameState != GameState.Pause)
         {
+            GameManager.instance.PlayFightSound();
             drmGameObject.timer = 0;
                 _player.playerSound.hitSource.PlayOneShot(_player.playerSound.hitMeSound[Random.Range(0,2)]);
             TakeDamage(damage);

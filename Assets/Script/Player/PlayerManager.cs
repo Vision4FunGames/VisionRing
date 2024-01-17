@@ -63,6 +63,7 @@ public class PlayerManager : MonoBehaviour
             new Vector3(0, 2, 0), Quaternion.identity, transform);
         _damageParticle.transform.localPosition = new Vector3(0, 2, 0);
         _cameraShake = FindObjectOfType<CameraShake>();
+        
     }
 
     #endregion
@@ -112,6 +113,8 @@ public class PlayerManager : MonoBehaviour
             other.GetComponent<CheckPoint>().campFireParticle.Play();
             other.GetComponent<CheckPoint>().shineParticle.Stop();
             ES3.Save("CheckPoint", other.transform.position);
+            _playerHealth.HealLimit = 4;
+            _playerHealth.EnableHealBuff();
         }
 
         if (other.CompareTag("Heal"))

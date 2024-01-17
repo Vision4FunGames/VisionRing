@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial")] public GameObject tutorialEnemies;
     public GameObject tutoCage;
     public GameObject tutorialWall;
-    public GameObject tutorialCollider1, tutorialCollider2,villageEntryCollider;
+    public GameObject tutorialCollider1, tutorialCollider2, villageEntryCollider;
     public GameObject wallFires;
     public GameObject tutorialBox, tutorialBoxArea;
     public GameObject mainSword;
@@ -47,11 +47,15 @@ public class GameManager : MonoBehaviour
     public bool isBlacksmith;
     public bool isRing;
     public bool isHeal;
+    public float currentTime;
+    public bool fightBool;
+    public AudioClip fight, stand;
 
-private void Awake()
+    private void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
+        PlayStandSound();
         if (PlayerPrefs.HasKey("TutorialSection"))
         {
             tutorialCounter = 0;
@@ -63,85 +67,107 @@ private void Awake()
         }
     }
 
-private void Start()
-{
-    #region Tutorial
-
-    if (PlayerPrefs.HasKey("Blacksmith"))
+    public void PlayFightSound()
     {
-        if (PlayerPrefs.GetInt("Blacksmith") == 1)
+        if (!fightBool)
         {
-            isBlacksmith = true;
+            GetComponent<AudioSource>().clip = fight;
+            GetComponent<AudioSource>().Play();
+            fightBool = true;
         }
+        currentTime = 0;
     }
 
-    if (PlayerPrefs.HasKey("Merchant"))
+    public void PlayStandSound()
     {
-        if (PlayerPrefs.GetInt("Merchant") == 1)
-        {
-            isMerchant = true;
-        }
+        GetComponent<AudioSource>().clip = stand;
+        GetComponent<AudioSource>().Play();
     }
 
-    if (PlayerPrefs.HasKey("Magician"))
+    private void Start()
     {
-        if (PlayerPrefs.GetInt("Magician") == 1)
-        {
-            isMagician = true;
-        }
-    }
+        #region Tutorial
 
-    if (PlayerPrefs.HasKey("Ring"))
-    {
-        if (PlayerPrefs.GetInt("Ring") == 1)
+        if (PlayerPrefs.HasKey("Blacksmith"))
         {
-            isRing = true;
-            UiManager.instance.ringBtn.gameObject.SetActive(true);
+            if (PlayerPrefs.GetInt("Blacksmith") == 1)
+            {
+                isBlacksmith = true;
+            }
         }
-        else
-        {
-            UiManager.instance.ringBtn.gameObject.SetActive(false);
-        }
-    }
 
-    if (PlayerPrefs.HasKey("Heal"))
-    {
-        if (PlayerPrefs.GetInt("Heal") == 1)
+        if (PlayerPrefs.HasKey("Merchant"))
         {
-            isHeal = true;
+            if (PlayerPrefs.GetInt("Merchant") == 1)
+            {
+                isMerchant = true;
+            }
         }
-    }
-    #endregion
-    tutorialName = tutorialSection + ".";
+
+        if (PlayerPrefs.HasKey("Magician"))
+        {
+            if (PlayerPrefs.GetInt("Magician") == 1)
+            {
+                isMagician = true;
+            }
+        }
+
+        if (PlayerPrefs.HasKey("Ring"))
+        {
+            if (PlayerPrefs.GetInt("Ring") == 1)
+            {
+                isRing = true;
+                UiManager.instance.ringBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                UiManager.instance.ringBtn.gameObject.SetActive(false);
+            }
+        }
+
+        if (PlayerPrefs.HasKey("Heal"))
+        {
+            if (PlayerPrefs.GetInt("Heal") == 1)
+            {
+                isHeal = true;
+            }
+        }
+
+        #endregion
+
+        tutorialName = tutorialSection + ".";
         PlayerName = "";
         foxManager = FindObjectOfType<FoxManager>();
         if (!tutorial)
         {
-            if (tutorialSection==0 && tutorialCounter == 0)
+            if (tutorialSection == 0 && tutorialCounter == 0)
             {
                 EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
                 Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
             }
-            UpdateGameState(GameState.Tutorial); 
-            TutorialLoader.instance.Load(tutorialName+tutorialCounter);
+
+            UpdateGameState(GameState.Tutorial);
+            TutorialLoader.instance.Load(tutorialName + tutorialCounter);
             TutorialEvents.OnTutorialComplete += TutorialChange;
         }
         else
         {
-            
         }
+
+
+        PlayStandSound();
     }
+
     private void TutorialChange()
     {
         TutorialEvents.OnTutorialComplete -= TutorialChange;
         CinematicCamDisable();
         tutorialCounter++;
-        PlayerPrefs.SetInt("TutorialCounter",tutorialCounter);
+        PlayerPrefs.SetInt("TutorialCounter", tutorialCounter);
         PlayerPrefs.SetInt("TutorialSection", tutorialSection);
-        
-        if (tutorialSection == 0 && tutorialCounter >5)
+
+        if (tutorialSection == 0 && tutorialCounter > 5)
         {
-            
             if (tutorialCounter > 5)
             {
                 foxManager.FinishTutorial();
@@ -151,44 +177,44 @@ private void Start()
 
             //CinematicCamEnable(Player.instance.transform);
             //Player.instance.FinishTutorial();
-            
         }
         else
         {
             UpdateGameState(GameState.Tutorial);
             CinematicCamDisable();
         }
-        if (tutorialSection == 1 && tutorialCounter ==3)
+
+        if (tutorialSection == 1 && tutorialCounter == 3)
         {
             QuestMachineMessages.SendCompositeMessage(this, "Magician:Start");
         }
-        else if (tutorialSection == 1 && tutorialCounter ==1)
+        else if (tutorialSection == 1 && tutorialCounter == 1)
         {
             QuestMachineMessages.SendCompositeMessage(this, "Goblin:Start");
         }
     }
-    
+
     public void TutorialLoad()
     {
         gameState = GameState.Pause;
-        if (tutorialSection ==0 && tutorialCounter == 4)
+        if (tutorialSection == 0 && tutorialCounter == 4)
         {
             CinematicCamEnable(foxManager.transform);
         }
 
         if (tutorialSection == 1)
         {
-            if (tutorialCounter ==1)
+            if (tutorialCounter == 1)
             {
                 OpenTheVillageDoors();
                 wallFires.gameObject.SetActive(false);
                 CinematicCamEnable(villageEntryCollider.transform);
             }
-            else if (tutorialCounter ==2)
+            else if (tutorialCounter == 2)
             {
                 CinematicCamEnable(baskan.transform.GetChild(1).transform);
             }
-            else if (tutorialCounter ==3)
+            else if (tutorialCounter == 3)
             {
                 CinematicCamEnable(merchant.transform.GetChild(2).transform);
             }
@@ -204,26 +230,32 @@ private void Start()
         else if (tutorialSection == 0 && tutorialCounter == 3)
         {
             CinematicCamEnable(tutorialWall.transform);
-            tutorialWall.transform.DOLocalMoveY(-1f, 5f).OnComplete((() =>
-            {
-                CinematicCamDisable();
-            }));
+            tutorialWall.transform.DOLocalMoveY(-1f, 5f).OnComplete((() => { CinematicCamDisable(); }));
         }
-       
-       
+
+
         TutorialLoader.instance.Load(tutorialName + tutorialCounter);
         TutorialEvents.OnTutorialComplete += TutorialChange;
     }
+
     private void Update()
     {
-         /* Test Actionları */
-         
+        /* Test Actionları */
+
         if (Input.GetKeyDown(KeyCode.Q))
             UpdateGameState(GameState.Play);
         if (Input.GetKeyDown(KeyCode.W))
             UpdateGameState(GameState.Pause);
         if (Input.GetKeyDown(KeyCode.E))
             FindObjectOfType<PlayerHealth>().TakeDamage(10);
+
+        currentTime += Time.deltaTime;
+
+        if (currentTime > 10 && fightBool)
+        {
+            fightBool = false;
+            PlayStandSound();
+        }
     }
 
     public void UpdateGameState(GameState newState)
@@ -240,21 +272,21 @@ private void Start()
             case GameState.Tutorial:
                 break;
         }
-        
+
         onGameStateChanged?.Invoke(newState);
     }
 
     public void RestartGame()
     {
         PlayerPrefs.SetString("Edit", "false");
-        PlayerPrefs.SetInt("StartVillage",0);
-        
+        PlayerPrefs.SetInt("StartVillage", 0);
         SceneManager.LoadScene(0);
     }
 
     public void RestartGameResume()
     {
         PlayerPrefs.SetInt("StartVillage", 1);
+        SceneManager.LoadScene(0);
     }
 
     public void CinematicCamEnable(Transform target)
@@ -266,11 +298,11 @@ private void Start()
         if (tutorialWall.name == target.name)
         {
             CinemachineTransposer cmoffset = cinematicVCam.GetCinemachineComponent<CinemachineTransposer>();
-            cmoffset.m_FollowOffset = new Vector3(0,29,-27);
+            cmoffset.m_FollowOffset = new Vector3(0, 29, -27);
             print("wall");
         }
-            
     }
+
     public void CinematicCamDisable()
     {
         playerVCam.gameObject.SetActive(true);
@@ -281,15 +313,16 @@ private void Start()
     {
         tutorialSection++;
         tutorialCounter = 0;
-        PlayerPrefs.SetInt("TutorialSection",tutorialSection);
-        PlayerPrefs.SetInt("TutorialCounter",tutorialCounter);
+        PlayerPrefs.SetInt("TutorialSection", tutorialSection);
+        PlayerPrefs.SetInt("TutorialCounter", tutorialCounter);
         UiManager.instance.SceneChange();
         // Panel yapilacak buraya 
     }
+
     public void OpenTheVillageDoors()
     {
-        villageDoor.transform.DORotate(new Vector3(0, 90, 0),5f);
-        villageDoor2.transform.DORotate(new Vector3(0, 90, 0),5f);
+        villageDoor.transform.DORotate(new Vector3(0, 90, 0), 5f);
+        villageDoor2.transform.DORotate(new Vector3(0, 90, 0), 5f);
     }
 
     public void CloseTheVillageDoors()
