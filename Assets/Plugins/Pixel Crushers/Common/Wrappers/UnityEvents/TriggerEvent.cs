@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Pixel Crushers. All rights reserved.
 
 using PixelCrushers.QuestMachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PixelCrushers.Wrappers
@@ -14,7 +15,7 @@ namespace PixelCrushers.Wrappers
     [AddComponentMenu("Pixel Crushers/Common/UnityEvents/Trigger Event")]
     public class TriggerEvent : PixelCrushers.TriggerEvent
     {
-        
+
     }
 
 }

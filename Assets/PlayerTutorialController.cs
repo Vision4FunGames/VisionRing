@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Numerics;
 using UnityEditor;
 using UnityEngine;
@@ -20,14 +21,16 @@ public class PlayerTutorialController : MonoBehaviour
       isActive = true;
    }
 
+   public void IndicatorClose()
+   {
+      indicator.gameObject.SetActive(false);
+   }
+
    private void Update()
    {
       Debug.Log(isActive);
       if (isActive )
       {
-         Vector3 yon = (indicator.transform.position - target.position).normalized; 
-         Debug.Log(target.position);
-         yon.y = 0;
          transform.rotation = Quaternion.LookRotation(transform.position - target.transform.position);
       }
    }

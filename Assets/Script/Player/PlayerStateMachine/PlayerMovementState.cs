@@ -122,14 +122,14 @@ namespace Script.Player.PlayerStateMachine
                     _player.isWalk = true;
                     if (GameManager.instance.gameState == GameState.Tutorial)
                     {
-                        if (GameManager.instance.tutorialSection==0 && GameManager.instance.tutorialCounter is 2 )
-                        {
-                            GameManager.instance.TutorialLoad();
-                        }
-                        else if (GameManager.instance.tutorialSection== 1 && GameManager.instance.tutorialCounter is 3)
-                        {
-                            GameManager.instance.TutorialLoad();
-                        }
+                        // if (GameManager.instance.tutorialSection==0 && GameManager.instance.tutorialCounter is 2 )
+                        // {
+                        //     GameManager.instance.TutorialLoad();
+                        // }
+                        // else if (GameManager.instance.tutorialSection== 1 && GameManager.instance.tutorialCounter is 3)
+                        // {
+                        //     GameManager.instance.TutorialLoad();
+                        // }
                         
                     }
                 }

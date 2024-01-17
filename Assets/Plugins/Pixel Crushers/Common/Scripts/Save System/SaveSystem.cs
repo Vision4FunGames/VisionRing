@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PixelCrushers
@@ -12,10 +13,11 @@ namespace PixelCrushers
     /// This is the main Save System class. It runs as a singleton MonoBehaviour
     /// and provides static methods to save and load games.
     /// </summary>
+  
     [AddComponentMenu("")] // Use wrapper instead.
     public class SaveSystem : MonoBehaviour
     {
-
+        
         public const int NoSceneIndex = -1;
 
         /// <summary>
