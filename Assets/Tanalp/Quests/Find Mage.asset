@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8671094194956886343
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b543cc48d60f94eaf19a02d5f46611, type: 3}
+  m_Name: SetIndicatorQuestAction
+  m_EditorClassIdentifier: 
+  m_questID:
+    m_text: Magician
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_entityID:
+    m_text: 0
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_questIndicatorState: 6
 --- !u!114 &-7542612597441714831
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,7 +148,7 @@ MonoBehaviour:
   m_originalAsset: {fileID: 0}
   m_fileVersion: 1
   m_id:
-    m_text: Magiciann
+    m_text: Magician
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
@@ -172,7 +195,8 @@ MonoBehaviour:
   m_saveAllIfWaitingToStart: 0
   m_state: 0
   m_stateInfoList:
-  - m_actionList: []
+  - m_actionList:
+    - {fileID: -8671094194956886343}
     m_categorizedContentList:
     - m_contentList: []
     - m_contentList: []
@@ -282,8 +306,8 @@ MonoBehaviour:
     m_childIndexList: 01000000
     m_canvasRect:
       serializedVersion: 2
-      x: 200
-      y: 20
+      x: 195
+      y: 21
       width: 120
       height: 48
   - m_id:

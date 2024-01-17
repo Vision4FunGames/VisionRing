@@ -183,12 +183,12 @@ MonoBehaviour:
   m_originalAsset: {fileID: 0}
   m_fileVersion: 1
   m_id:
-    m_text: Quest-2299418
+    m_text: Magician2
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
   m_title:
-    m_text: Quest -2299418
+    m_text: Magician
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
@@ -367,7 +367,8 @@ MonoBehaviour:
       - m_contentList: []
       - m_contentList: []
       - m_contentList: []
-    - m_actionList: []
+    - m_actionList:
+      - {fileID: 4083009505677368254}
       m_categorizedContentList:
       - m_contentList:
         - {fileID: -5729555083782150899}
@@ -491,7 +492,7 @@ MonoBehaviour:
     m_childIndexList: 02000000
     m_canvasRect:
       serializedVersion: 2
-      x: 200
+      x: 201
       y: 175
       width: 120
       height: 48
@@ -535,6 +536,19 @@ MonoBehaviour:
     m_textTableFieldID: 0
   m_state: 0
   m_setQuestNodesToSame: 0
+--- !u!114 &4083009505677368254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94e8fb3b9b54114cbe8185003729c1b, type: 3}
+  m_Name: SceneEventQuestAction
+  m_EditorClassIdentifier: 
+  m_guid: 87ab7b6f-ead1-47ff-95b3-3e5ebfad67fb
 --- !u!114 &4223588159081655560
 MonoBehaviour:
   m_ObjectHideFlags: 1
