@@ -78,6 +78,16 @@ public class EconomyManager : MonoBehaviour
        
     }
 
+    public void EarnItem(int index,int itemCount)
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            if (i == index)
+            {
+                this.itemCount[i] += itemCount;
+            }
+        }
+    }
     private void LoadEconomy()
     {
         if (PlayerPrefs.HasKey("gold"))
@@ -111,6 +121,7 @@ public class EconomyManager : MonoBehaviour
                 }
             }
         }
+        ES3.Save("itemCount",itemCount);
     }
 
     public int GetGemAmount(int level) => level * 50;

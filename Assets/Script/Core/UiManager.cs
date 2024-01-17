@@ -55,8 +55,8 @@ public class UiManager : MonoBehaviour
     //Economy
     public TextMeshProUGUI contentText;
     private ShopSlot[] shopSlots;
-    
-    
+
+    public Quest awardQuest;
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
     private void Awake()
@@ -73,7 +73,7 @@ public class UiManager : MonoBehaviour
         gamePlay.SetActive(true);
         shopSlots = GetComponents<ShopSlot>();
         onEconomyChangedCallBack += EconomyUI;
-       
+       onEconomyChangedCallBack.Invoke();
     }
 
     public void DisableButton()
@@ -147,7 +147,6 @@ public class UiManager : MonoBehaviour
     {
         CloseAllUI();
         contentText.text = "INVENTORY";
-        EconomyManager.instance.SetGold(5000); //Build deneme
         inventory.SetActive(true);
         inventoryObject.SetActive(true);
         equipmentPanel.gameObject.SetActive(true);
@@ -199,6 +198,19 @@ public class UiManager : MonoBehaviour
     public void MagicianUI()
     {
         
+        Debug.Log(GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest());
+        Debug.Log(GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests());
+        if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest()==1)
+        {
+            GameManager.instance.magician.GetComponent<QuestGiver>().AddQuest(awardQuest);
+        }
+        else if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest() == 2)
+        {
+            EconomyManager.instance.EarnItem(0,30);
+            EconomyManager.instance.EarnItem(1,30);
+            EconomyManager.instance.EarnItem(2,30);
+        }  
+        
         if (GameManager.instance.isMagician)
         {
             CloseAllUI();
@@ -214,7 +226,8 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count==0)
+           
+            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count==0 && GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests().Count ==0)
             {
                 CloseAllUI();
                 inventory.gameObject.SetActive(true);
@@ -229,6 +242,7 @@ public class UiManager : MonoBehaviour
                 PlayerPrefs.SetInt("Magician",1);
                 GameManager.instance.isMagician = true;
             }
+            
             else
             {
                 GameManager.instance.magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();

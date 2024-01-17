@@ -12,6 +12,15 @@ namespace PixelCrushers.QuestMachine.Wrappers
     [AddComponentMenu("Pixel Crushers/Quest Machine/Quest Giver")]
     public class QuestGiver : PixelCrushers.QuestMachine.QuestGiver
     {
+        public Quest bossQuest;
+
+        public void AddQuestnew()
+        {
+            if (completedQuests.Count ==1)
+            {
+                AddQuest(bossQuest);   
+            }
+        }
     }
 
 }

@@ -37,17 +37,21 @@ public class DrmEnemyChange : MonoBehaviour
         {
             for (int i = 0; i < enemies.Length; i++)
             {
-                if (Vector3.Distance(enemies[i].transform.position, transform.position) < _drmGameObject.radius &&
-                    enemies[i].EnemyVariation == EnemyVariation.Variation2)
+                if (enemies[i] != null)
                 {
-                    enemies[i].gameObject.SetActive(true);
-                }
+                    if (Vector3.Distance(enemies[i].transform.position, transform.position) < _drmGameObject.radius &&
+                        enemies[i].EnemyVariation == EnemyVariation.Variation2)
+                    {
+                        enemies[i].gameObject.SetActive(true);
+                    }
 
-                if (Vector3.Distance(enemies[i].transform.position, transform.position) < _drmGameObject.radius &&
-                    enemies[i].EnemyVariation == EnemyVariation.Variation1)
-                {
-                    enemies[i].gameObject.SetActive(false);
+                    if (Vector3.Distance(enemies[i].transform.position, transform.position) < _drmGameObject.radius &&
+                        enemies[i].EnemyVariation == EnemyVariation.Variation1)
+                    {
+                        enemies[i].gameObject.SetActive(false);
+                    }
                 }
+                
             }
          
 
@@ -58,17 +62,21 @@ public class DrmEnemyChange : MonoBehaviour
         {
             for (int i = 0; i < enemies.Length; i++)
             {
-                if (Vector3.Distance(enemies[i].transform.position, transform.position) > _drmGameObject.radius &&
-                    enemies[i].EnemyVariation == EnemyVariation.Variation2)
+                if (enemies[i] != null)
                 {
-                    enemies[i].gameObject.SetActive(false);
-                }
+                    if (Vector3.Distance(enemies[i].transform.position, transform.position) > _drmGameObject.radius &&
+                        enemies[i].EnemyVariation == EnemyVariation.Variation2)
+                    {
+                        enemies[i].gameObject.SetActive(false);
+                    }
 
-                if (Vector3.Distance(enemies[i].transform.position, transform.position) > _drmGameObject.radius &&
-                    enemies[i].EnemyVariation == EnemyVariation.Variation1)
-                {
-                    enemies[i].gameObject.SetActive(true);
+                    if (Vector3.Distance(enemies[i].transform.position, transform.position) > _drmGameObject.radius &&
+                        enemies[i].EnemyVariation == EnemyVariation.Variation1)
+                    {
+                        enemies[i].gameObject.SetActive(true);
+                    }
                 }
+                
             }
         
             increas = false;

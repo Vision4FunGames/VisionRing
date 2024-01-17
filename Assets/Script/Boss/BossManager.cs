@@ -1,6 +1,8 @@
 using System;
 using DamageNumbersPro;
 using MoreMountains.Tools;
+using NaughtyAttributes;
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -85,8 +87,10 @@ public class BossManager : MonoBehaviour
         }
     }
 
+    [Button("DeadBoss")]
     public void DeadBoss()
     {
+        QuestMachineMessages.SendCompositeMessage(this,"Killed:Boss");
         navMeshAgent.speed = 0;
         bossMovement.enabled = false;
         GetComponent<Collider>().enabled = false;

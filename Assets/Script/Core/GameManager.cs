@@ -116,8 +116,12 @@ public class GameManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Ring") == 1)
             {
-                isRing = true;
-                UiManager.instance.ringBtn.gameObject.SetActive(true);
+                if (gameState != GameState.Tutorial)
+                {
+                    isRing = true;
+                    UiManager.instance.ringBtn.gameObject.SetActive(true);
+                }
+                
             }
             else
             {
