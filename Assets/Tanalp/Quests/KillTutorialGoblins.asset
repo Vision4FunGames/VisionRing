@@ -149,6 +149,19 @@ MonoBehaviour:
     m_textTableFieldID: 0
   m_count: 0
   m_imageNameProxy: 
+--- !u!114 &-1394677181701695298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94e8fb3b9b54114cbe8185003729c1b, type: 3}
+  m_Name: SceneEventQuestAction
+  m_EditorClassIdentifier: 
+  m_guid: f08083ab-cadc-4ac2-8df6-3f6b2dfadebf
 --- !u!114 &-809276802020909394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,8 +227,7 @@ MonoBehaviour:
   m_rememberIfAbandoned: 0
   m_deleteWhenComplete: 1
   m_autostartConditionSet:
-    m_conditionList:
-    - {fileID: 5511839422072017267}
+    m_conditionList: []
     m_conditionCountMode: 0
     m_minConditionCount: 0
     m_numTrueConditions: 0
@@ -248,7 +260,8 @@ MonoBehaviour:
       - {fileID: -6756052888636400041}
     - m_contentList:
       - {fileID: 7576709189394127089}
-  - m_actionList: []
+  - m_actionList:
+    - {fileID: -1394677181701695298}
     m_categorizedContentList:
     - m_contentList: []
     - m_contentList: []
@@ -482,26 +495,6 @@ MonoBehaviour:
   m_Name: SceneEventQuestAction
   m_EditorClassIdentifier: 
   m_guid: 8deef811-9859-4e6a-9b90-f63e1f525ff2
---- !u!114 &5511839422072017267
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 732e99ba3b575dc4dad61a69b0417c96, type: 3}
-  m_Name: QuestStateQuestCondition
-  m_EditorClassIdentifier: 
-  m_alreadyTrue: 0
-  m_requiredQuestID:
-    m_text: KillTheAttackers
-    m_stringAsset: {fileID: 0}
-    m_textTable: {fileID: 0}
-    m_textTableFieldID: 0
-  m_isNot: 0
-  m_requiredState: 0
 --- !u!114 &7495794440810412469
 MonoBehaviour:
   m_ObjectHideFlags: 1
