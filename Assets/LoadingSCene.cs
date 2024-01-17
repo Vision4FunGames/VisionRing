@@ -41,6 +41,7 @@ public class LoadingSCene : MonoBehaviour
 
    IEnumerator LoadSceneAsync()
    {
+      yield return new WaitForSeconds(.5f);
       AsyncOperation operation = SceneManager.LoadSceneAsync(1);
       while (!operation.isDone)
       {

@@ -1,16 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using MoreMountains.Tools;
 using Script.Player.PlayerStateMachine;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
-using Update = UnityEngine.PlayerLoop.Update;
 
 public class Player : MonoBehaviour
 {
@@ -271,6 +265,13 @@ public class Player : MonoBehaviour
             {
                 GameManager.instance.TutorialLoad();
             }
+        }
+
+        if (other.gameObject.CompareTag("PuzzleArea"))
+        {
+            isMovement = false;
+            transform.position = other.transform.parent.transform.position;
+            isMovement = true;
         }
     }
 
