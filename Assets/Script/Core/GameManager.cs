@@ -4,6 +4,7 @@ using DG.Tweening;
 using Exoa.TutorialEngine;
 using PixelCrushers;
 using PixelCrushers.QuestMachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
     public bool fightBool;
     public AudioClip fight, stand;
     public bool isFoxSaved;
+
+    public QuestMachineConfiguration questMachineConfiguration;
     private void Awake()
     {
         instance = this;
@@ -62,6 +65,9 @@ public class GameManager : MonoBehaviour
             tutorialSection = PlayerPrefs.GetInt("TutorialSection");
             if (tutorialSection == 1)
             {
+                questMachineConfiguration.questDatabases[0].questAssets[9].SetState(QuestState.Active);
+                questMachineConfiguration.questDatabases[0].questAssets[9].startNode.SetState(QuestNodeState.Active);
+
                 tutorialEnemies.gameObject.SetActive(true);
             }
         }
@@ -88,6 +94,11 @@ public class GameManager : MonoBehaviour
     {
         #region Tutorial
 
+        if (tutorialSection == 1)
+        {
+            Player.instance.GetComponent<QuestJournal>()
+                .AddQuest(questMachineConfiguration.questDatabases[0].questAssets[9]);
+        }
         if (PlayerPrefs.HasKey("Blacksmith"))
         {
             if (PlayerPrefs.GetInt("Blacksmith") == 1)
