@@ -28,7 +28,7 @@ public class PlayerTutorialController : MonoBehaviour
 
    private void Update()
    {
-      Debug.Log(isActive);
+     // Debug.Log(isActive);
       if (isActive )
       {
          transform.rotation = Quaternion.LookRotation(transform.position - target.transform.position);

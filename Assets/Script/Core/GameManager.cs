@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
 using Exoa.TutorialEngine;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
     public AudioClip fight, stand;
     public bool isFoxSaved;
 
+    private float DisableTimer;
     public QuestMachineConfiguration questMachineConfiguration;
     private void Awake()
     {
@@ -260,11 +263,11 @@ public class GameManager : MonoBehaviour
                 CinematicCamEnable(magician.transform.GetChild(1).transform);
             }
         }
-        else if (tutorialSection == 0 && tutorialCounter == 3)
-        {
-            CinematicCamEnable(tutorialWall.transform.GetChild(0).transform);
-            tutorialWall.transform.DOLocalMoveY(-1f, 5f).OnComplete((() => { CinematicCamDisable(); }));
-        }
+        // else if (tutorialSection == 0 && tutorialCounter == 3)
+        // {
+        //     CinematicCamEnable(tutorialWall.transform.GetChild(0).transform);
+        //     tutorialWall.transform.DOLocalMoveY(-1f, 5f).OnComplete((() => { CinematicCamDisable(); }));
+        // }
 
 
         TutorialLoader.instance.Load(tutorialName + tutorialCounter);
@@ -322,38 +325,46 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("StartVillage", 1);
         SceneManager.LoadScene(0);
     }
-
-    public void CinematicCamEnable(Transform target )
-    {
-        CinematicCamEnable(target, 0);
-    }
-
-    public void CinematicCamEnable(Transform target,float timer)
+    
+    public void CinematicCamEnable(Transform target,float timer = 0)
     {
         playerVCam.gameObject.SetActive(false);
         cinematicVCam.gameObject.SetActive(true);
         cinematicVCam.Follow = target;
         cinematicVCam.LookAt = target;
-        if (tutorialWall.name == target.name)
+        // if (tutorialWall.name == target.name)
+        // {
+        //     CinemachineTransposer cmoffset = cinematicVCam.GetCinemachineComponent<CinemachineTransposer>();
+        //     cmoffset.m_FollowOffset = new Vector3(0, 29, -27);
+        //     print("wall");
+        // }
+        print(timer + " CInematic ");
+        if (timer !=0)
         {
-            CinemachineTransposer cmoffset = cinematicVCam.GetCinemachineComponent<CinemachineTransposer>();
-            cmoffset.m_FollowOffset = new Vector3(0, 29, -27);
-            print("wall");
-        }
-
-        if (timer != 0)
-        {
-           Invoke(CinematicCamDisable(),timer);
+            CinematicCamDisable(timer);
         }
     }
 
-    public string CinematicCamDisable()
+    private void CinematicCamDisable(float timer = 0)
     {
+        if (timer !=0)
+        {
+            DisableTimer = timer;
+            StartCoroutine("DisableCamera");
+        }
+        else
+        {
+            playerVCam.gameObject.SetActive(true);
+            cinematicVCam.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator DisableCamera()
+    {
+        yield return new WaitForSeconds(DisableTimer);
         playerVCam.gameObject.SetActive(true);
         cinematicVCam.gameObject.SetActive(false);
-        return null;
     }
-
     public void EndOfTheCinematic()
     {
         tutorialSection++;
