@@ -405,7 +405,12 @@ namespace Exoa.TutorialEngine
                 //UiManager.instance.RopeCamOpen();
                 //popup.OnClickNext.AddListener(UiManager.instance.RopeCamClose);
             }
-         
+
+            if (GameManager.instance.isFoxSaved)
+            {
+                popup.foxRawImage.gameObject.SetActive(true);
+                popup.characterImage.gameObject.SetActive(false);
+            }
             popup.OnClickNext.AddListener(OnClickNext);
             popup.closeBtn.gameObject.SetActive(IsSkippable);
             popup.gameObject.SetActive(true);

@@ -56,6 +56,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI contentText;
     private ShopSlot[] shopSlots;
 
+    [Header("Image")] public RawImage foxRaw;
     public Quest awardQuest;
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;

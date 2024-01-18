@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -52,9 +53,8 @@ public class PlayerManager : MonoBehaviour
         {
             transform.position = startPlayerPos;
         }
-        pet.GetComponent<NavMeshAgent>().enabled = false;
-        pet.transform.position = startPlayerPos + new Vector3(5f, 0, 0);
-        pet.GetComponent<NavMeshAgent>().enabled = true;
+
+      
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
@@ -64,6 +64,17 @@ public class PlayerManager : MonoBehaviour
         _damageParticle.transform.localPosition = new Vector3(0, 2, 0);
         _cameraShake = FindObjectOfType<CameraShake>();
         
+    }
+
+
+    private void Start()
+    {
+        if (GameManager.instance.tutorialSection !=0)
+        {
+            pet.GetComponent<NavMeshAgent>().enabled = false;
+            pet.transform.position = startPlayerPos + new Vector3(5f, 0, 0);
+            pet.GetComponent<NavMeshAgent>().enabled = true;
+        }
     }
 
     #endregion

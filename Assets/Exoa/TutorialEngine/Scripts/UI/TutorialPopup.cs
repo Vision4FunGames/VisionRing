@@ -18,6 +18,8 @@ namespace Exoa.TutorialEngine
          public RectTransform PopupRt { get => popupRt; set => popupRt = value; }
         public int counter;
         public string tempText;
+        public Image characterImage;
+        public RawImage foxRawImage;
         
 
         /// <summary>

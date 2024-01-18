@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Script.Player.PlayerStateMachine;
 using UnityEngine;
 
@@ -32,8 +33,8 @@ public class BoxItem : MonoBehaviour
         if (other.gameObject.CompareTag("BoxPointTutorial"))
         {
             Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
-            GameManager.instance.TutorialLoad();
-            
+            Invoke(GameManager.instance.TutorialLoad(),2f);
+            transform.DOMove(other.gameObject.transform.position,.5f);
         }
     }
 }

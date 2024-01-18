@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Exoa.TutorialEngine;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class TutoCage : MonoBehaviour
 {
@@ -42,5 +44,24 @@ public class TutoCage : MonoBehaviour
             }
         }
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            KillEnemy();
+        }
+    }
+
+    private void KillEnemy()
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].GetComponent<EnemyStats>().Die();
+                break;
+            }
+        }
+    }
 }

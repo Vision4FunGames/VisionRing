@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     public float currentTime;
     public bool fightBool;
     public AudioClip fight, stand;
-
+    public bool isFoxSaved;
     private void Awake()
     {
         instance = this;
@@ -137,6 +137,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (PlayerPrefs.HasKey("FoxSaved"))
+        {
+            if (PlayerPrefs.GetInt("FoxSaved")== 1)
+            {
+                isFoxSaved = true;
+            }
+        }
+
         #endregion
 
         tutorialName = tutorialSection + ".";
@@ -198,12 +206,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TutorialLoad()
+    public string TutorialLoad()
     {
         gameState = GameState.Pause;
         if (tutorialSection == 0 && tutorialCounter == 4)
         {
             CinematicCamEnable(foxManager.transform);
+        }
+        else if (tutorialSection == 0 && tutorialCounter ==5)
+        {
+            isFoxSaved = true;
+            PlayerPrefs.SetInt("FoxSaved", 1);
+        }
+        {
+            
         }
 
         if (tutorialSection == 1)
@@ -233,13 +249,14 @@ public class GameManager : MonoBehaviour
         }
         else if (tutorialSection == 0 && tutorialCounter == 3)
         {
-            CinematicCamEnable(tutorialWall.transform);
+            CinematicCamEnable(tutorialWall.transform.GetChild(0).transform);
             tutorialWall.transform.DOLocalMoveY(-1f, 5f).OnComplete((() => { CinematicCamDisable(); }));
         }
 
 
         TutorialLoader.instance.Load(tutorialName + tutorialCounter);
         TutorialEvents.OnTutorialComplete += TutorialChange;
+        return null;
     }
 
     private void Update()

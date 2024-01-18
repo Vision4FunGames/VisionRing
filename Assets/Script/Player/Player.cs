@@ -273,6 +273,15 @@ public class Player : MonoBehaviour
             transform.position = other.transform.parent.transform.position;
             isMovement = true;
         }
+
+        if (other.gameObject.CompareTag("TutorialIncreaser"))
+        {
+            if (GameManager.instance.tutorialSection == 0 && GameManager.instance.tutorialCounter == 2)
+            {
+                other.gameObject.GetComponent<Collider>().enabled = false;
+                GameManager.instance.TutorialLoad();
+            }
+        }
     }
 
     public void BackDoMove(GameObject enemy)
