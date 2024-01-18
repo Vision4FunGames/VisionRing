@@ -14,7 +14,8 @@ public class TutoSword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, transform.localRotation.y + Time.deltaTime * 20f, 0);
+        
+        transform.Rotate(0, (transform.rotation.y) + Time.deltaTime * 20f, 0);
     }
 
     private void OnTriggerEnter(Collider other)

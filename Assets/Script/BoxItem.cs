@@ -32,9 +32,14 @@ public class BoxItem : MonoBehaviour
         }
         if (other.gameObject.CompareTag("BoxPointTutorial"))
         {
+            other.gameObject.GetComponent<Collider>().enabled = false;
+            GameManager.instance.isBox = true;
             Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
-            Invoke(GameManager.instance.TutorialLoad(),2f);
-            transform.DOMove(other.gameObject.transform.position,.5f);
+            //Invoke(GameManager.instance.TutorialLoad(),2f);
+            transform.DOMove(other.gameObject.transform.position,2f).OnComplete((() => GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialWall.transform.GetChild(0),3f)));
+           
+            
+            
         }
     }
-}
+} 

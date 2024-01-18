@@ -23,6 +23,7 @@ namespace Exoa.TutorialEngine
         public Button hiddenBtn;
         public RectTransform hiddenBtnRt;
         public RectTransform mask;
+        public GameObject handImage;
         private int currentStep = -1;
         public float maskScale = 1.2f;
         public float nextTime;
@@ -350,11 +351,13 @@ namespace Exoa.TutorialEngine
 
                 if (s.isClickable && rt != null && btn != null)
                 {
+                    handImage.gameObject.SetActive(true);
                     hiddenBtn.gameObject.SetActive(true);
                     hiddenBtn.onClick.AddListener(btn.onClick.Invoke);
                 }
                 else
                 {
+                    handImage.gameObject.SetActive(false);
                     hiddenBtn.gameObject.SetActive(false);
                 }
 

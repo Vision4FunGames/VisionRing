@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public bool isBlacksmith;
     public bool isRing;
     public bool isHeal;
+    public bool isBox;
     public float currentTime;
     public bool fightBool;
     public AudioClip fight, stand;
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
 
         if (tutorialSection == 1)
         {
+            //Quest quest = new Quest(questMachineConfiguration)
             Player.instance.GetComponent<QuestJournal>()
                 .AddQuest(questMachineConfiguration.questDatabases[0].questAssets[9]);
         }
@@ -321,7 +323,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void CinematicCamEnable(Transform target)
+    public void CinematicCamEnable(Transform target )
+    {
+        CinematicCamEnable(target, 0);
+    }
+
+    public void CinematicCamEnable(Transform target,float timer)
     {
         playerVCam.gameObject.SetActive(false);
         cinematicVCam.gameObject.SetActive(true);
@@ -333,12 +340,18 @@ public class GameManager : MonoBehaviour
             cmoffset.m_FollowOffset = new Vector3(0, 29, -27);
             print("wall");
         }
+
+        if (timer != 0)
+        {
+           Invoke(CinematicCamDisable(),timer);
+        }
     }
 
-    public void CinematicCamDisable()
+    public string CinematicCamDisable()
     {
         playerVCam.gameObject.SetActive(true);
         cinematicVCam.gameObject.SetActive(false);
+        return null;
     }
 
     public void EndOfTheCinematic()
