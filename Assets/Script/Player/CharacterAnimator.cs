@@ -98,6 +98,7 @@ public class CharacterAnimator : MonoBehaviour
         }
 
         GetComponent<Collider>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
         enemyStats.die = true;
 
         animator.SetTrigger("death_");
