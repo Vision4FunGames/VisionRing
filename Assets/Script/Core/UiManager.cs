@@ -57,7 +57,7 @@ public class UiManager : MonoBehaviour
     private ShopSlot[] shopSlots;
 
     [Header("Image")] public RawImage foxRaw;
-    public Quest awardQuest;
+    
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
     private void Awake()
@@ -198,14 +198,8 @@ public class UiManager : MonoBehaviour
 
     public void MagicianUI()
     {
-        
-        Debug.Log(GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest());
-        Debug.Log(GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests());
-        if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest()==1)
-        {
-            GameManager.instance.magician.GetComponent<QuestGiver>().AddQuest(awardQuest);
-        }
-        else if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest() == 2)
+
+        if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest() == 2)
         {
             EconomyManager.instance.EarnItem(0,30);
             EconomyManager.instance.EarnItem(1,30);

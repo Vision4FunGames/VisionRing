@@ -195,7 +195,6 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<Player>().FinishTutorial();
                 //EndOfTheCinematic();
             }
-
             //CinematicCamEnable(Player.instance.transform);
             //Player.instance.FinishTutorial();
         }
@@ -205,13 +204,10 @@ public class GameManager : MonoBehaviour
             CinematicCamDisable();
         }
 
-        if (tutorialSection == 1 && tutorialCounter == 3)
-        {
-            QuestMachineMessages.SendCompositeMessage(this, "Magician:Start");
-        }
-        else if (tutorialSection == 1 && tutorialCounter == 1)
+        if (tutorialSection == 1 && tutorialCounter == 1)
         {
             baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+            
         }
     }
 
@@ -383,5 +379,10 @@ public class GameManager : MonoBehaviour
     public void IndicatorDefine(GameObject gameObject)
     {
         gameObject.GetComponent<Waypoint_Indicator>().enabled = true;
+    }
+
+    public void IndicatorClose( GameObject gameObject)
+    {
+        gameObject.GetComponent<Waypoint_Indicator>().enabled = false;
     }
 }

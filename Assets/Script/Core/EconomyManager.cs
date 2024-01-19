@@ -125,4 +125,11 @@ public class EconomyManager : MonoBehaviour
     }
 
     public int GetGemAmount(int level) => level * 50;
+
+    public void EarnRewards()
+    {
+        EarnItem(0,30);
+        EarnItem(1,30);
+        EarnItem(2,30);
+    }
 }

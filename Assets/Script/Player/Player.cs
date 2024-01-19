@@ -235,10 +235,7 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.CompareTag("VillageEntry"))
         {
-            if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter == 2)
-            {
-                GameManager.instance.TutorialLoad();
-            }
+            GameManager.instance.TutorialLoad();
         }
 
         if (other.gameObject.CompareTag("PuzzleArea"))

@@ -23,7 +23,8 @@ public class CameraController : MonoBehaviour
             {
                 if (hit.transform.gameObject.name == "Blacksmith")
                 {
-                  UiManager.instance.BlackSmithUI();
+                    UiManager.instance.BlackSmithUI();
+                    QuestMachineMessages.SendCompositeMessage(this,"Meet:Blacksmith");
                 }
 
                 else if (hit.transform.gameObject.name == "pouch")
@@ -48,6 +49,11 @@ public class CameraController : MonoBehaviour
                     QuestMachineMessages.SendCompositeMessage(this, "Found:Magician");
                     UiManager.instance.MagicianUI();
                 }
+                else if (hit.transform.gameObject.name == "Baskan")
+                {
+                    GameManager.instance.baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();    
+                }
+                
                 
                 
               
