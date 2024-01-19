@@ -48,7 +48,7 @@ public class BoxItem : MonoBehaviour
                 GameManager.instance.isBox = true;
                 Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
                 //Invoke(GameManager.instance.TutorialLoad(),2f);
-          
+            
                 transform.DOMove(other.gameObject.transform.position,2f).OnComplete(() =>
                 {
                     GameManager.instance.tutorialWall.transform.DOLocalMoveY(-1f, 5f);

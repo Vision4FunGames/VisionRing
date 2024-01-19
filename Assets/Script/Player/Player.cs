@@ -245,7 +245,7 @@ public class Player : MonoBehaviour
         {
             isMovement = false;
             transform.position = other.transform.parent.transform.position;
-            isMovement = true;
+            Invoke("IsMovementAgain",1f);
         }
 
         if (other.gameObject.CompareTag("TutorialIncreaser"))
@@ -274,7 +274,10 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+    public void IsMovementAgain()
+    {
+        isMovement = true;
+    }
     public void BackDoMove(GameObject enemy)
     {
         Vector3 dir = transform.position - enemy.transform.position;
