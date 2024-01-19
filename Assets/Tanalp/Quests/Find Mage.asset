@@ -73,19 +73,6 @@ MonoBehaviour:
     m_textTableFieldID: 0
   m_state: 2
   m_setQuestNodesToSame: 1
---- !u!114 &-2721640979181882795
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94e8fb3b9b54114cbe8185003729c1b, type: 3}
-  m_Name: SceneEventQuestAction
-  m_EditorClassIdentifier: 
-  m_guid: 21b31bb5-7689-45b1-aef0-6976c346f56a
 --- !u!114 &-2203579707316936871
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,9 +189,10 @@ MonoBehaviour:
   m_cooldownSecondsRemaining: 0
   m_noRepeatIfSuccessful: 0
   m_saveAllIfWaitingToStart: 0
-  m_state: 0
+  m_state: 5
   m_stateInfoList:
-  - m_actionList: []
+  - m_actionList:
+    - {fileID: 3504690111753509142}
     m_categorizedContentList:
     - m_contentList: []
     - m_contentList: []
@@ -344,7 +332,7 @@ MonoBehaviour:
       - m_contentList: []
       - m_contentList: []
     - m_actionList:
-      - {fileID: -2721640979181882795}
+      - {fileID: 8053820383566772834}
       m_categorizedContentList:
       - m_contentList: []
       - m_contentList: []
@@ -439,3 +427,39 @@ MonoBehaviour:
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
+--- !u!114 &3504690111753509142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b543cc48d60f94eaf19a02d5f46611, type: 3}
+  m_Name: SetIndicatorQuestAction
+  m_EditorClassIdentifier: 
+  m_questID:
+    m_text: Magician
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_entityID:
+    m_text: 0
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_questIndicatorState: 4
+--- !u!114 &8053820383566772834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94e8fb3b9b54114cbe8185003729c1b, type: 3}
+  m_Name: SceneEventQuestAction
+  m_EditorClassIdentifier: 
+  m_guid: dd0044cb-fbc7-429f-80ae-85ddb1605a9b

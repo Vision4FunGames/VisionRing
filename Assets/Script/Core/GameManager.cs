@@ -67,13 +67,6 @@ public class GameManager : MonoBehaviour
         {
             tutorialCounter = 0;
             tutorialSection = PlayerPrefs.GetInt("TutorialSection");
-            if (tutorialSection == 1)
-            {
-                questMachineConfiguration.questDatabases[0].questAssets[9].SetState(QuestState.Active);
-                questMachineConfiguration.questDatabases[0].questAssets[9].startNode.SetState(QuestNodeState.Active);
-
-                tutorialEnemies.gameObject.SetActive(true);
-            }
         }
     }
 
@@ -100,9 +93,9 @@ public class GameManager : MonoBehaviour
 
         if (tutorialSection == 1)
         {
-            //Quest quest = new Quest(questMachineConfiguration)
-            Player.instance.GetComponent<QuestJournal>()
-                .AddQuest(questMachineConfiguration.questDatabases[0].questAssets[9]);
+            // //Quest quest = new Quest(questMachineConfiguration)
+            // Player.instance.GetComponent<QuestJournal>()
+            //     .AddQuest(questMachineConfiguration.questDatabases[0].questAssets[9]);
         }
         if (PlayerPrefs.HasKey("Blacksmith"))
         {
@@ -218,7 +211,7 @@ public class GameManager : MonoBehaviour
         }
         else if (tutorialSection == 1 && tutorialCounter == 1)
         {
-            QuestMachineMessages.SendCompositeMessage(this, "Goblin:Start");
+            baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
         }
     }
 
@@ -385,5 +378,10 @@ public class GameManager : MonoBehaviour
     {
         villageDoor.transform.DORotate(new Vector3(0, 0, 0), 5f);
         villageDoor2.transform.DORotate(new Vector3(0, 0, 0), 5f);
+    }
+
+    public void IndicatorDefine(GameObject gameObject)
+    {
+        gameObject.GetComponent<Waypoint_Indicator>().enabled = true;
     }
 }

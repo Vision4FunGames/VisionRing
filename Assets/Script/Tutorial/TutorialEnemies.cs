@@ -40,4 +40,15 @@ public class TutorialEnemies : MonoBehaviour
             GameManager.instance.TutorialLoad();
         }
     }
+
+    public void EnemiesIndiacatorOpen()
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].GetComponent<Waypoint_Indicator>().enabled = true;
+            }
+        }
+    }
 }
