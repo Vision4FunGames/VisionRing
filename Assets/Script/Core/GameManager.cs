@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
     {
         TutorialEvents.OnTutorialComplete -= TutorialChange;
         CinematicCamDisable();
+        print("Counter : " + tutorialCounter);
         tutorialCounter++;
         PlayerPrefs.SetInt("TutorialCounter", tutorialCounter);
         PlayerPrefs.SetInt("TutorialSection", tutorialSection);

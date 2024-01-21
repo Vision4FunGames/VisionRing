@@ -467,4 +467,25 @@ public class EquipmentManager : MonoBehaviour
     }
 
     #endregion
+
+    #region EarnItem
+
+    public void EarnItem(Equipment equipment)
+    {
+        if (Inventory.instance.items.Contains(equipment))
+        {
+            int index = Inventory.instance.items.FindIndex(r => r.name.Contains(equipment.name));
+            Inventory.instance.itemsCount[index]++;
+        }
+        else
+        {
+            Inventory.instance.items.Add(equipment);
+            Inventory.instance.itemsCount.Add(1);
+        }
+        //Inventory.instance.items.Add(this);
+        Inventory.instance.onItemChangedCallback.Invoke();
+        
+    }
+
+    #endregion'
 }

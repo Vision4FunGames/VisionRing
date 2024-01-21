@@ -247,27 +247,22 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.CompareTag("TutorialIncreaser"))
         {
-            if (GameManager.instance.tutorialSection == 0 && GameManager.instance.tutorialCounter is 2 or 3 or 4)
+            if (GameManager.instance.tutorialSection == 0 && GameManager.instance.tutorialCounter is 2 )
             {
-                if (GameManager.instance.tutorialCounter != 2)
+                GameManager.instance.TutorialLoad();
+            }
+            else if (GameManager.instance.tutorialCounter is 3 or 4 )
+            {
+                if (!GameManager.instance.isBox)
                 {
-                    if (!GameManager.instance.isBox)
-                    {
-                        GameManager.instance.tutorialCounter = 2;
-                        GameManager.instance.TutorialLoad();
-                    }
-                    else
-                    {
-                        other.gameObject.GetComponent<Collider>().enabled = false;
-                        GameManager.instance.TutorialLoad();  
-                    }
+                    GameManager.instance.tutorialCounter = 2;
+                    GameManager.instance.TutorialLoad();
                 }
                 else
                 {
-                    GameManager.instance.TutorialLoad();
+                    other.gameObject.GetComponent<Collider>().enabled = false;
+                    GameManager.instance.TutorialLoad();  
                 }
-
-
             }
         }
     }
