@@ -8,6 +8,7 @@ public class PuzzleChest : MonoBehaviour
 {
     public float dropObjectCount;
     public Object[] chestItem;
+    bool chestOpen;
 
     private void Awake()
     {
@@ -18,8 +19,12 @@ public class PuzzleChest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GetComponent<Animator>().SetTrigger("Open");
-            Invoke("ChestOpen", 1f);
+            if (!chestOpen)
+            {
+                chestOpen = true;
+                GetComponent<Animator>().SetTrigger("Open");
+                Invoke("ChestOpen", 1f);
+            }
         }
     }
 
@@ -28,7 +33,7 @@ public class PuzzleChest : MonoBehaviour
         for (int i = 0; i < dropObjectCount; i++)
         {
             GameObject currentOBject = (GameObject)Instantiate(chestItem[Random.Range(0, chestItem.Length)],
-                transform.position+new Vector3(0,1,0), Quaternion.identity, transform);
+                transform.position + new Vector3(0, 1, 0), Quaternion.identity, transform);
             currentOBject.GetComponent<ChestDropObj>().Jumping();
         }
     }

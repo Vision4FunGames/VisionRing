@@ -26,6 +26,8 @@ public class PlayerAnimator : MonoBehaviour
         if (TutorialLoader.instance.loadedTutorialName == "Ring")
         {
             tutorialBangParticle.gameObject.SetActive(true);
+            Invoke("MovementAvailbe",4);
+            GetComponentInParent<Player>().isMovement = false;
             StartCoroutine(PlayerDrop());
             UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
 
@@ -54,6 +56,10 @@ public class PlayerAnimator : MonoBehaviour
        
     }
 
+    public void MovementAvailbe()
+    {
+        GetComponentInParent<Player>().isMovement = true;
+    }
     public void RingAction()
     {
         DRM.GetComponent<DRMGameObject>().SliderValueChanged();
@@ -63,6 +69,7 @@ public class PlayerAnimator : MonoBehaviour
     public void RingActionEnd()
     {
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
+        GetComponentInParent<Player>().isMovement = true;
         //ringParticle.Stop();
     }
 

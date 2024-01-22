@@ -101,10 +101,9 @@ public class UiManager : MonoBehaviour
             EconomyManager.instance.SetGold(5000);
         }
 
-        if (chapter1.frame + 1 == (long)chapter1.frameCount)
+        if (chapter1.frame + 1 == (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
         {
             chapter1.gameObject.SetActive(false);
-            
         }
     }
 
