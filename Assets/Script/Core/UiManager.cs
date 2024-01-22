@@ -274,7 +274,7 @@ public class UiManager : MonoBehaviour
         // sceneUI.transform.GetChild(0).transform.localScale = new Vector3(0, 0, 0);
         // sceneUI.transform.GetChild(0).transform.DOScale(20f, 5f);
         // GameManager.instance.RestartGame();
-        Player.instance.TurnBackFromTutorial();
+       
         chapter1.gameObject.SetActive(true);
         PlayerPrefs.SetInt("StartVillage", 0);
         Player.instance.transform.position = GameManager.instance.tutorial1SpawnPos.transform.position;
@@ -285,9 +285,9 @@ public class UiManager : MonoBehaviour
         GameManager.instance.tutorialCounter = 0;
         GameManager.instance.TutorialLoad();
         
-       
+        Player.instance.TurnB();
     }
-
+    
     public void CloseAllUI()
     {
         for (int i = 0; i < UiPanels.Count; i++)

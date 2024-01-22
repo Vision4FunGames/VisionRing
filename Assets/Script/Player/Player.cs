@@ -329,6 +329,10 @@ public class Player : MonoBehaviour
         Invoke("CloseCam", 7f);
     }
 
+    public void TurnB()
+    {
+        Invoke("TurnBackFromTutorial",2f);
+    }
     public void TurnBackFromTutorial()
     {
         tutorial = false;
