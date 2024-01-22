@@ -88,6 +88,17 @@ public class EconomyManager : MonoBehaviour
             }
         }
     }
+
+    public void EarnUpgradeItem(UpgradeItem upgradeItem)
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            if (itemList[i].name == upgradeItem.name)
+            {
+                itemCount[i]++;
+            }
+        }
+    }
     private void LoadEconomy()
     {
         if (PlayerPrefs.HasKey("gold"))

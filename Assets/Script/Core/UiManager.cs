@@ -109,6 +109,7 @@ public class UiManager : MonoBehaviour
     }
     public void ShopUI()
     {
+        QuestMachineMessages.SendCompositeMessage(this,"Meet:Merchant");
         if (GameManager.instance.isMerchant)
         {
             CloseAllUI();
@@ -122,7 +123,7 @@ public class UiManager : MonoBehaviour
             shopUI.UpdateShop();
             onEconomyChangedCallBack.Invoke();
             contentText.text = "SHOP";
-            navigationArea.gameObject.SetActive(true);
+            //navigationArea.gameObject.SetActive(true);
         }
         else
         {
@@ -137,7 +138,7 @@ public class UiManager : MonoBehaviour
             shopUI.UpdateShop();
             onEconomyChangedCallBack.Invoke();
             contentText.text = "SHOP";
-            navigationArea.gameObject.SetActive(true);
+            //navigationArea.gameObject.SetActive(true);
             GameManager.instance.isMerchant = true;
             TutorialLoader.instance.Load("Merchant");
             PlayerPrefs.SetInt("Merchant",1);

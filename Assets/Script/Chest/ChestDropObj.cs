@@ -33,7 +33,7 @@ public class ChestDropObj : MonoBehaviour
 
         if (Vector3.Distance(player.transform.position, transform.position) < 1 && !isF)
         {
-            EquipmentManager.instance.EarnUpgradeItem(upItem);
+            EconomyManager.instance.EarnUpgradeItem(upItem);
             isF = true;
             Destroy(gameObject);
         }

@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     public bool isFoxSaved;
 
     private float DisableTimer;
-    public QuestMachineConfiguration questMachineConfiguration;
+    
     private void Awake()
     {
         instance = this;
@@ -173,6 +173,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            
         }
 
 
@@ -223,9 +224,6 @@ public class GameManager : MonoBehaviour
         {
             isFoxSaved = true;
             PlayerPrefs.SetInt("FoxSaved", 1);
-        }
-        {
-            
         }
 
         if (tutorialSection == 1)
