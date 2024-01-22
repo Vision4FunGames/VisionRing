@@ -47,6 +47,7 @@ public class TutorialEnemies : MonoBehaviour
         {
             if (enemies[i] != null)
             {
+                print("enemis"+enemies[i].name);
                 enemies[i].GetComponent<Waypoint_Indicator>().enabled = true;
             }
         }
