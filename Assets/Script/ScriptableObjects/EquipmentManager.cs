@@ -486,6 +486,22 @@ public class EquipmentManager : MonoBehaviour
         Inventory.instance.onItemChangedCallback.Invoke();
         
     }
+    public void EarnUpgradeItem(UpgradeItem equipment)
+    {
+        if (Inventory.instance.items.Contains(equipment))
+        {
+            int index = Inventory.instance.items.FindIndex(r => r.name.Contains(equipment.name));
+            Inventory.instance.itemsCount[index]++;
+        }
+        else
+        {
+            Inventory.instance.items.Add(equipment);
+            Inventory.instance.itemsCount.Add(1);
+        }
+        //Inventory.instance.items.Add(this);
+        Inventory.instance.onItemChangedCallback.Invoke();
+        
+    }
 
     #endregion'
 }

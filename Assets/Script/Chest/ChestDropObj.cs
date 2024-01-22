@@ -5,11 +5,14 @@ using Random = UnityEngine.Random;
 
 public class ChestDropObj : MonoBehaviour
 {
+    private bool isF;
+    public UpgradeItem upItem;
     private Player player;
     private bool playerFollow;
     private void Awake()
     {
         player = FindObjectOfType<Player>();
+        
     }
 
     public void Jumping()
@@ -28,8 +31,10 @@ public class ChestDropObj : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 1);
         }
 
-        if (Vector3.Distance(player.transform.position, transform.position) < 1)
+        if (Vector3.Distance(player.transform.position, transform.position) < 1 && !isF)
         {
+            EquipmentManager.instance.EarnUpgradeItem(upItem);
+            isF = true;
             Destroy(gameObject);
         }
     }
@@ -40,3 +45,4 @@ public class ChestDropObj : MonoBehaviour
         playerFollow = true;
     }
 }
+
