@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
         }
 
         #endregion
-
+      
         tutorialName = tutorialSection + ".";
         PlayerName = "";
         foxManager = FindObjectOfType<FoxManager>();
@@ -216,6 +216,7 @@ public class GameManager : MonoBehaviour
 
     public string TutorialLoad()
     {
+        tutorialName = tutorialSection + ".";
         gameState = GameState.Pause;
         if (tutorialSection == 0 && tutorialCounter == 4)
         {

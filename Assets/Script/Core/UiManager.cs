@@ -9,9 +9,11 @@ using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class UiManager : MonoBehaviour
 {
@@ -57,7 +59,7 @@ public class UiManager : MonoBehaviour
     private ShopSlot[] shopSlots;
 
     [Header("Image")] public RawImage foxRaw;
-    
+    [Header("Chapters")] public VideoPlayer chapter1;
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
     private void Awake()
@@ -97,6 +99,12 @@ public class UiManager : MonoBehaviour
         if (Input.GetButtonDown("Inventory"))
         {
             EconomyManager.instance.SetGold(5000);
+        }
+
+        if (chapter1.frame + 1 == (long)chapter1.frameCount)
+        {
+            chapter1.gameObject.SetActive(false);
+            
         }
     }
 
@@ -263,10 +271,22 @@ public class UiManager : MonoBehaviour
 
     public void SceneChange()
     {
-        sceneUI.gameObject.SetActive(true);
-        sceneUI.transform.GetChild(0).transform.localScale = new Vector3(0, 0, 0);
-        sceneUI.transform.GetChild(0).transform.DOScale(20f, 5f);
-        GameManager.instance.RestartGame();
+        // sceneUI.gameObject.SetActive(true);
+        // sceneUI.transform.GetChild(0).transform.localScale = new Vector3(0, 0, 0);
+        // sceneUI.transform.GetChild(0).transform.DOScale(20f, 5f);
+        // GameManager.instance.RestartGame();
+        Player.instance.TurnBackFromTutorial();
+        chapter1.gameObject.SetActive(true);
+        PlayerPrefs.SetInt("StartVillage", 0);
+        Player.instance.transform.position = GameManager.instance.tutorial1SpawnPos.transform.position;
+        PlayerManager.instance.pet.GetComponent<NavMeshAgent>().enabled = false;
+        PlayerManager.instance.pet.transform.position = Player.instance.transform.position + new Vector3(5f, 0, 0);
+        PlayerManager.instance.pet.GetComponent<NavMeshAgent>().enabled = true;
+        GameManager.instance.tutorialSection = 1;
+        GameManager.instance.tutorialCounter = 0;
+        GameManager.instance.TutorialLoad();
+        
+       
     }
 
     public void CloseAllUI()
