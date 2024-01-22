@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject blacksmith;
     public GameObject magician;
     public GameObject villageDoor, villageDoor2;
+    public GameObject tutorialIncreaserFirst;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;

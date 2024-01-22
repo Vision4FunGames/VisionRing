@@ -57,6 +57,7 @@ public class BoxItem : MonoBehaviour
                 });
             }
             GameManager.instance.tutorialCounter = 3;
+            GameManager.instance.tutorialIncreaserFirst.GetComponent<Collider>().isTrigger = false;
         }
     }
 } 
