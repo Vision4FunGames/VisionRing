@@ -9,7 +9,7 @@ public class PlayerSound : MonoBehaviour
     public AudioClip footStep;
     public AudioSource audioSource;
     public AudioSource hitSource;
-    
+    public AudioClip jump;  
     public AudioSource swordAudioSource;
     // Start is called before the first frame update
     void Start()

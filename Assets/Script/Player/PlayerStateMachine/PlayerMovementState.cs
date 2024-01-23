@@ -75,7 +75,7 @@ namespace Script.Player.PlayerStateMachine
                 _player.playerSound.audioSource.Play();
             }
 
-            if (!_player._myController.isGrounded || _player._myController.velocity.magnitude < 2)
+            if (_player._myController.velocity.magnitude < 2 )
             {
                 _player.playerSound.audioSource.Stop();
             }
@@ -91,6 +91,8 @@ namespace Script.Player.PlayerStateMachine
                 // }
                 //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
                 _playerVelocity.y = 3;
+                _player.playerSound.audioSource.clip = _player.playerSound.jump;
+                _player.playerSound.audioSource.Play();
                 ChangeAnimationState(playerJumpAnimationString);
                 //_playerVelocity.y += gravityValue * Time.deltaTime;
                 _player._myController.Move(_playerVelocity * Time.deltaTime);
@@ -98,6 +100,8 @@ namespace Script.Player.PlayerStateMachine
             else if (!_player._myController.isGrounded && !dJump)
             {
                 dJump = true;
+                _player.playerSound.audioSource.clip = _player.playerSound.jump;
+                _player.playerSound.audioSource.Play();
                 _playerVelocity.y = 4;
                 ChangeAnimationState(playerDoubleJumpAnimationString);
                 //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
