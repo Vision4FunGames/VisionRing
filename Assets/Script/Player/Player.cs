@@ -335,12 +335,10 @@ public class Player : MonoBehaviour
     }
     public void TurnBackFromTutorial()
     {
-        tutorial = false;
         isMovement = true;
         StateMachine.ChangeState(PlayerMovementState);
         GameManager.instance.playerVCam.m_LookAt = transform;
         GameManager.instance.playerVCam.m_Follow = transform;
-        agent.enabled = false;
         GetComponent<CharacterController>().enabled = true;
         UiManager.instance.GamePlayUI();
         PlayerManager.instance.pet.GetComponent<FoxManager>().tutorial = false;

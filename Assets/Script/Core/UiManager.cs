@@ -105,6 +105,7 @@ public class UiManager : MonoBehaviour
         {
             chapter1.gameObject.SetActive(false);
         }
+        
     }
 
     public void MenuUI()
@@ -276,6 +277,8 @@ public class UiManager : MonoBehaviour
         // GameManager.instance.RestartGame();
        
         chapter1.gameObject.SetActive(true);
+        Player.instance.tutorial = false;
+        Player.instance.GetComponent<NavMeshAgent>().enabled = false;
         PlayerPrefs.SetInt("StartVillage", 0);
         Player.instance.transform.position = GameManager.instance.tutorial1SpawnPos.transform.position;
         PlayerManager.instance.pet.GetComponent<NavMeshAgent>().enabled = false;
