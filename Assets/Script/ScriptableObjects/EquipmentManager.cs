@@ -93,6 +93,11 @@ public class EquipmentManager : MonoBehaviour
         inventory.itemsCount = ES3.Load("InvItemCount", inventory.itemsCount);
         inventory.upgradeItems = ES3.Load("upgradeItems", inventory.upgradeItems);
         EconomyManager.instance.itemCount = ES3.Load("itemCount", EconomyManager.instance.itemCount);
+
+        for (int i = 0; i < defaultWear.Length; i++)
+        {
+            defaultWear[i].icon = Resources.Load<Sprite>("ItemSprite/" + defaultWear[i].name);
+        }
         EquipmentInitialize();
     }
 

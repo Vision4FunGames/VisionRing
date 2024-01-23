@@ -263,7 +263,7 @@ public class UiManager : MonoBehaviour
         skillPanel.gameObject.SetActive(true);
         contentPanel.gameObject.SetActive(true);
         goldPanel.gameObject.SetActive(true);
-        navigationArea.gameObject.SetActive(true);
+        //navigationArea.gameObject.SetActive(true);
         contentText.text = "SKILLS";
         SkillPanel.instance.onSkillUseChangeCallBack.Invoke();
        

@@ -22,13 +22,14 @@ public class GameManager : MonoBehaviour
 {
     public GameObject villageSpawnPos;
     public GameObject tutorial1SpawnPos;
+    public GameObject tutorialStartPos;
     public static GameManager instance;
     public GameState gameState;
     public static event Action<GameState> onGameStateChanged;
     public string PlayerName;
     public CinemachineVirtualCamera playerVCam;
     public CinemachineVirtualCamera cinematicVCam;
-    public int tutorialCounter = 1;
+    public int tutorialCounter = 0;
     public int tutorialSection;
     private string tutorialName;
     public bool tutorial;
@@ -209,6 +210,7 @@ public class GameManager : MonoBehaviour
 
         if (tutorialSection == 1 && tutorialCounter == 1)
         {
+            tutorialEnemies.gameObject.SetActive(true);
             baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
             
         }

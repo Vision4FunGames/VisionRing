@@ -36,6 +36,10 @@ public class PlayerManager : MonoBehaviour
                 {
                     startPlayerPos = FindObjectOfType<GameManager>().tutorial1SpawnPos.transform.position;
                 }
+                else if (section ==0)
+                {
+                    startPlayerPos = FindObjectOfType<GameManager>().tutorialStartPos.transform.position; 
+                }
                 else
                 {
                     startPlayerPos = FindObjectOfType<GameManager>().villageSpawnPos.transform.position; 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 
 public class SkillCoolDown : MonoBehaviour
@@ -25,7 +26,7 @@ public class SkillCoolDown : MonoBehaviour
         onSkillChangeCallBack += UpdateSkillButton;
         for (int i = 0; i < skillsArray.Length; i++)
         {
-            skillsArray[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + skillsArray[i].skillName);
+        skillsArray[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + skillsArray[i].skillName);
         }
 
         LoadSkill();
@@ -34,6 +35,10 @@ public class SkillCoolDown : MonoBehaviour
     public void LoadSkill()
     {
         _currentSkills = ES3.Load("currentSkills", _currentSkills);
+        for (int i = 0; i < _currentSkills.Count; i++)
+        {
+            _currentSkills[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + _currentSkills[i].skillName);
+        }
         Debug.Log("Loaded SKills");
         onSkillChangeCallBack.Invoke();
     }
@@ -124,7 +129,7 @@ public class Skills
     public string skillName;
     public float coolDown;
     public float coolDownTime;
-    [HideInInspector] public Sprite skillImage;
+    [ES3NonSerializable] public Sprite skillImage;
     public int skillLevel;
     public SkillNecessary[] necessariesName;
 }
