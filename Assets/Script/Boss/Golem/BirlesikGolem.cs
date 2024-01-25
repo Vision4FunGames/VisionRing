@@ -33,10 +33,11 @@ public class BirlesikGolem : MonoBehaviour
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     private bool damageAttack;
     private float currentFlameTimer;
-
+    Canvas canvasMain;
 
     private void Start()
     {
+        canvasMain = GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponent<Canvas>();
         _collider = GetComponentInChildren<Collider>();
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         baseHealth = health;
@@ -49,7 +50,7 @@ public class BirlesikGolem : MonoBehaviour
         MMProgressBar prefab = Resources.Load<MMProgressBar>("BirlesikGolem");
         if (prefab != null)
         {
-            healthBar = Instantiate(prefab, FindObjectOfType<ShopUI>().transform, false);
+            healthBar = Instantiate(prefab,canvasMain.transform, false);
             healthBar.gameObject.SetActive(false);
         }
         else

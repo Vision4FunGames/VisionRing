@@ -11,7 +11,7 @@ public class CollectItemAnimation : MonoBehaviour
     Canvas canvasMain;
     private void Start()
     {
-        canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
+        canvasMain = GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponent<Canvas>();
       
     }
     private void OnTriggerEnter(Collider other)

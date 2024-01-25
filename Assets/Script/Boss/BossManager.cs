@@ -18,7 +18,6 @@ public class BossManager : MonoBehaviour
     public ParticleSystem footParticle;
     public GameObject tabuts;
     private float bossBaseHealth;
-    private Canvas mainCanvas;
     public NavMeshAgent navMeshAgent;
     private bool sleep;
     private Player player;
@@ -35,7 +34,6 @@ public class BossManager : MonoBehaviour
         player = FindObjectOfType<Player>();
         bossMovement = GetComponent<BossMovement>();
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
-        mainCanvas = GameObject.FindWithTag("mainCanvas").GetComponent<Canvas>();
     }
 
     private void Update()

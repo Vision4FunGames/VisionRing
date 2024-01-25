@@ -351,7 +351,7 @@ namespace Exoa.TutorialEngine
 
                 if (s.isClickable && rt != null && btn != null)
                 {
-                    handImage.gameObject.SetActive(true);
+                   // handImage.gameObject.SetActive(true);
                     hiddenBtn.gameObject.SetActive(true);
                     hiddenBtn.onClick.AddListener(btn.onClick.Invoke);
                 }

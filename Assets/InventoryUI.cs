@@ -26,9 +26,8 @@ public class InventoryUI : MonoBehaviour {
     void Start ()
     {
         equipmentManager = EquipmentManager.instance;
-        inventory = Inventory.instance;
+        inventory = inventoryUI.GetComponent<Inventory>();
         inventory.onItemChangedCallback += UpdateUI;
-        
         inventory.gameObject.SetActive(false);
         int counter = 0;
     }
