@@ -25,7 +25,7 @@ public class LoadingSCene : MonoBehaviour
 
    private void Update()
    {
-      if (videoPlayer.frame+1 == (long)videoPlayer.frameCount && tutorial.gameObject.activeSelf)
+      if (videoPlayer.frame-1 == (long)videoPlayer.frameCount && tutorial.gameObject.activeSelf)
       {
          tutorial.gameObject.SetActive(false);
          ShowLoadingScene();

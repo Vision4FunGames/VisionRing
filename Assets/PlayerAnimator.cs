@@ -30,18 +30,25 @@ public class PlayerAnimator : MonoBehaviour
             GetComponentInParent<Player>().isMovement = false;
             StartCoroutine(PlayerDrop());
             UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
+            Invoke("RingSound",2f);
 
         }
         else
         {
             animator.SetTrigger("Ring");
             Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
+            Invoke("RingSound",2f);
         }
         
         //ringParticle.Play();
       
     }
 
+    public void RingSound()
+    {
+        GetComponent<AudioSource>().clip =  GetComponentInParent<PlayerSound>().ringSound;
+        GetComponent<AudioSource>().Play();
+    }
     IEnumerator PlayerDrop()
     {
         if (!playerDrop)
