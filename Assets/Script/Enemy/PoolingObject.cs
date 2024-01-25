@@ -122,7 +122,7 @@ public class PoolingObject : MonoBehaviour
             StopCoroutine(deactivateBulletAfterTimeCoroutine);
             _pool.Release(this);
         }
-        //_pool.Release(this);
+        _pool.Release(this);
     }
 
     public void SetPool(ObjectPool<PoolingObject> pool)
