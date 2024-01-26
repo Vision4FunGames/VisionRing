@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Exoa.TutorialEngine;
 using PixelCrushers.QuestMachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,13 @@ public class Portal : MonoBehaviour
             targetpuzzle.SetActive(true);
             player.transform.position = targetpuzzle.transform.position;
             Invoke("IsMovementAgain",1f);
+            if (!GameManager.instance.isDungeon)
+            {
+                GameManager.instance.isDungeon = true;
+                PlayerPrefs.SetInt("isDungeon",1);
+                TutorialLoader.instance.Load("Dungeon");
+            }
+         
         }
     }
 

@@ -41,6 +41,13 @@ public abstract class CharacterHealth : MonoBehaviour
                 PlayerPrefs.SetInt("Heal",1);
                 GameManager.instance.isHeal = true;
             }
+
+            if (health <= 98 && !GameManager.instance.isDash)
+            {
+                TutorialLoader.instance.Load("Dash");
+                PlayerPrefs.SetInt("Dash",1);
+                GameManager.instance.isDash = true;
+            }
             if (health <= 0)
             {
                 Die();

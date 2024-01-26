@@ -18,8 +18,8 @@ public class TutorialHand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        parentTransform = transform.parent.transform;
-        transform.rotation = Quaternion.Euler(parentTransform.rotation.x,parentTransform.rotation.y,parentTransform.rotation.z * -1);
-        transform.localPosition = new Vector3(0, -70, 0);
+        // parentTransform = transform.parent.transform;
+        // transform.rotation = Quaternion.Euler(parentTransform.rotation.x,parentTransform.rotation.y,parentTransform.rotation.z * -1);
+        // transform.localPosition = new Vector3(0, -70, 0);
     }
 }

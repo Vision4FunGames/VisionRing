@@ -1,6 +1,8 @@
 ﻿using Exoa.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -188,6 +190,11 @@ namespace Exoa.TutorialEngine
                     GameManager.instance.CinematicCamDisable();
                 }
             }
+            else if (TutorialLoader.instance.loadedTutorialName == "Dash")
+            {
+                StopCoroutine(DashMove());
+                //handImage.transform.DOKill();
+            }
             
             
 
@@ -358,9 +365,13 @@ namespace Exoa.TutorialEngine
 
                 if (s.isClickable && rt != null && btn != null)
                 {
-                   // handImage.gameObject.SetActive(true);
                     hiddenBtn.gameObject.SetActive(true);
                     hiddenBtn.onClick.AddListener(btn.onClick.Invoke);
+                }
+
+                if (s.isClickable)
+                {
+                    handImage.gameObject.SetActive(true);
                 }
                 else
                 {
@@ -406,15 +417,32 @@ namespace Exoa.TutorialEngine
             currentBgColor = currentStep == 0 ? initBGColor : normalBGColor;
 
         }
+        public void DashTutorial()
+        {
+            handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).OnComplete(() =>
+            {
+                handImage.transform.localPosition = new Vector3(0, 0, 0);
+                StartCoroutine(DashMove());
+            });
+           // UiManager.instance.attackJoystick.transform
+
+
+        }
+
+       public IEnumerator DashMove()
+       {
+           yield return new WaitForSeconds(1f);
+           DashTutorial();
+       }
 
         private void ShowTutorial()
         {
             popup.OnClickNext.RemoveAllListeners();
-            if ((TutorialLoader.instance.loadedTutorialName == "2.2")&&(currentStep == -1))
+            if (TutorialLoader.instance.loadedTutorialName == "Dash")
             {
-                //UiManager.instance.RopeCamOpen();
-                //popup.OnClickNext.AddListener(UiManager.instance.RopeCamClose);
+                DashTutorial();
             }
+            
 
             if (GameManager.instance.isFoxSaved)
             {

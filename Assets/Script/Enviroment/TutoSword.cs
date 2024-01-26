@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Exoa.TutorialEngine;
 using UnityEngine;
 
 public class TutoSword : MonoBehaviour
@@ -22,8 +23,10 @@ public class TutoSword : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.TutorialLoad();
+             GameManager.instance.TutorialLoad();
+            //TutorialLoader.instance.Load("Dash");
             EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = true;
+            UiManager.instance.attackJoystick.gameObject.SetActive(true);
             Destroy(gameObject);
         }
     }

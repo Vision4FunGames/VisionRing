@@ -117,8 +117,8 @@ public class SkillCoolDown : MonoBehaviour
             _skillImages.Add(UiManager.instance.ButtonType[i].skillButton.transform.GetChild(0)
                 .GetComponent<Image>());
             //SkillPanel Buttons
-            
-            UiManager.instance.skillPanel.transform.GetChild(i).GetComponent<InventorySlot>().AddSkill(_currentSkills[i]);
+            UiManager.instance.skillPanel.transform.GetChild(0).GetChild(i).GetComponent<InventorySlot>().AddSkill(_currentSkills[i]);
+             
         }
     }
 }

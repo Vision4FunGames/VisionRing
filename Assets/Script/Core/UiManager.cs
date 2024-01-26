@@ -213,12 +213,12 @@ public class UiManager : MonoBehaviour
     public void MagicianUI()
     {
 
-        if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest() == 2)
-        {
-            EconomyManager.instance.EarnItem(0,30);
-            EconomyManager.instance.EarnItem(1,30);
-            EconomyManager.instance.EarnItem(2,30);
-        }  
+        // if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest() == 2)
+        // {
+        //     EconomyManager.instance.EarnItem(0,30);
+        //     EconomyManager.instance.EarnItem(1,30);
+        //     EconomyManager.instance.EarnItem(2,30);
+        // }  
         
         if (GameManager.instance.isMagician)
         {

@@ -263,6 +263,7 @@ public class Player : MonoBehaviour
                 {
                     other.gameObject.GetComponent<Collider>().enabled = false;
                     GameManager.instance.TutorialLoad();  
+                  
                 }
             }
         }

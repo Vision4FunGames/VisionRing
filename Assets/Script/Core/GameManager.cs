@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     public bool isBox;
     public bool isColosseum;
     public bool isDash;
+    public bool isDungeon;
     public float currentTime;
     public bool fightBool;
     public AudioClip fight, stand;
@@ -151,6 +152,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (PlayerPrefs.HasKey("Dash"))
+        {
+            if (PlayerPrefs.GetInt("Dash")==1)
+            {
+                isDash = true;
+            }
+        }
         if (PlayerPrefs.HasKey("FoxSaved"))
         {
             if (PlayerPrefs.GetInt("FoxSaved")== 1)
@@ -167,6 +175,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (PlayerPrefs.HasKey("isDungeon"))
+        {
+            isDungeon = true;
+        }
+
         #endregion
       
         tutorialName = tutorialSection + ".";
@@ -181,8 +194,8 @@ public class GameManager : MonoBehaviour
             }
 
             UpdateGameState(GameState.Tutorial);
-            TutorialLoader.instance.Load(tutorialName + tutorialCounter);
-            TutorialEvents.OnTutorialComplete += TutorialChange;
+           TutorialLoader.instance.Load(tutorialName + tutorialCounter);
+           TutorialEvents.OnTutorialComplete += TutorialChange;
         }
         else
         {
@@ -403,4 +416,6 @@ public class GameManager : MonoBehaviour
     {
         gameObject.GetComponent<Waypoint_Indicator>().enabled = false;
     }
+
+    
 }

@@ -76,7 +76,8 @@ public class SkillPanel : MonoBehaviour
         var slot = Instantiate(skillRowPrefab);
         slot.GetComponent<SkillRow>().index = 0;
         slot.transform.parent = skillParent.transform;
-        
+        slot.transform.localScale = new Vector3(1, 1, 1);
+
     }
     // Update is called once per frame
     void Update()
