@@ -34,6 +34,9 @@ public class BoxItem : MonoBehaviour
         {
           
         }
+
+        if (other.CompareTag("PuzzleArea"))
+            transform.position = startPos;
     }
 
     private float distance;

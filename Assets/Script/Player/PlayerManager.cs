@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     private ParticleSystem _damageParticle;
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
+    [HideInInspector] public float currentPortalTime, portalTime;
     public bool edit;
     public Vector3 startPlayerPos;
     public GameObject pet;
@@ -27,6 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        portalTime = 7;
         if (PlayerPrefs.GetInt("StartVillage") == 0 || !PlayerPrefs.HasKey("StartVillage"))
         {
             if (PlayerPrefs.HasKey("TutorialSection"))
@@ -164,6 +166,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        currentPortalTime += Time.deltaTime;
         if (Isrope && Input.GetKeyDown(KeyCode.Space))
         {
             RopeFinish();

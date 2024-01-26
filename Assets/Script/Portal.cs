@@ -17,18 +17,16 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PlayerManager>().currentPortalTime > other.GetComponent<PlayerManager>().portalTime)
         {
+            other.GetComponent<PlayerManager>().currentPortalTime = 0;
             QuestMachineMessages.SendCompositeMessage(this,message);
             print("Player portal");
             player.isMovement = false;
             targetpuzzle.SetActive(true);
             player.transform.position = targetpuzzle.transform.position;
             Invoke("IsMovementAgain",1f);
-            GetComponent<Collider>().enabled = false;
         }
-            
-
     }
 
     public void IsMovementAgain()
