@@ -8,6 +8,7 @@ using Exoa.TutorialEngine;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
@@ -101,6 +102,10 @@ public class UiManager : MonoBehaviour
             EconomyManager.instance.SetGold(5000);
         }
 
+        if (chapter1.gameObject.activeSelf)
+        {
+            print(chapter1.frame + " Frame ");
+        }
         if (chapter1.frame + 1 == (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
         {
             chapter1.gameObject.SetActive(false);
@@ -275,7 +280,7 @@ public class UiManager : MonoBehaviour
         // sceneUI.transform.GetChild(0).transform.localScale = new Vector3(0, 0, 0);
         // sceneUI.transform.GetChild(0).transform.DOScale(20f, 5f);
         // GameManager.instance.RestartGame();
-       
+        ringBtn.gameObject.SetActive(false);
         chapter1.gameObject.SetActive(true);
         Player.instance.tutorial = false;
         Player.instance.GetComponent<NavMeshAgent>().enabled = false;

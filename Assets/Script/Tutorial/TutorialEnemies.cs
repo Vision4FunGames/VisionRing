@@ -38,6 +38,7 @@ public class TutorialEnemies : MonoBehaviour
         if (enemyCount==0)
         {
             GameManager.instance.TutorialLoad();
+            print("Tutorial Loaded enemies All died");
         }
     }
 

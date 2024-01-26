@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public GameObject blacksmith;
     public GameObject magician;
     public GameObject villageDoor, villageDoor2;
+    public GameObject colosseum;
     public GameObject tutorialIncreaserFirst;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
     public bool isRing;
     public bool isHeal;
     public bool isBox;
+    public bool isColosseum;
+    public bool isDash;
     public float currentTime;
     public bool fightBool;
     public AudioClip fight, stand;
@@ -106,7 +109,7 @@ public class GameManager : MonoBehaviour
                 isBlacksmith = true;
             }
         }
-
+        
         if (PlayerPrefs.HasKey("Merchant"))
         {
             if (PlayerPrefs.GetInt("Merchant") == 1)
@@ -153,6 +156,14 @@ public class GameManager : MonoBehaviour
             if (PlayerPrefs.GetInt("FoxSaved")== 1)
             {
                 isFoxSaved = true;
+            }
+        }
+
+        if (PlayerPrefs.HasKey("Colosseum"))
+        {
+            if (PlayerPrefs.GetInt("Colosseum")==1)
+            {
+                isColosseum = true;
             }
         }
 
@@ -216,6 +227,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void MagicianGaveRing()
+    {
+        PlayerPrefs.SetInt("Ring",1);
+    }
     public string TutorialLoad()
     {
         tutorialName = tutorialSection + ".";
@@ -337,7 +352,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void CinematicCamDisable(float timer = 0)
+    public void CinematicCamDisable(float timer = 0)
     {
         if (timer !=0)
         {

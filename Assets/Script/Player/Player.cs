@@ -236,6 +236,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("VillageEntry"))
         {
             GameManager.instance.TutorialLoad();
+            other.gameObject.GetComponent<Collider>().enabled = false;
         }
 
         if (other.gameObject.CompareTag("PuzzleArea"))
@@ -264,6 +265,18 @@ public class Player : MonoBehaviour
                     GameManager.instance.TutorialLoad();  
                 }
             }
+        }
+
+        if (other.gameObject.CompareTag("colosseumTutorial"))
+        {
+            if (!GameManager.instance.isColosseum)
+            {
+                GameManager.instance.CinematicCamEnable(GameManager.instance.colosseum.transform);
+                GameManager.instance.isColosseum = true;
+                TutorialLoader.instance.Load("Colosseum");
+                PlayerPrefs.SetInt("Colosseum",1); 
+            }
+           
         }
     }
     public void IsMovementAgain()

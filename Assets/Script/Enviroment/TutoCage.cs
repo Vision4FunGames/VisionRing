@@ -30,7 +30,7 @@ public class TutoCage : MonoBehaviour
         {
             UiManager.instance.ringBtn.gameObject.SetActive(true);
             TutorialLoader.instance.Load("Ring");
-            PlayerPrefs.SetInt("Ring",1);
+            
         }
     }
 
@@ -47,7 +47,7 @@ public class TutoCage : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.Y))    
         {
             KillEnemy();
         }

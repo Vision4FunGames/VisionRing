@@ -181,6 +181,13 @@ namespace Exoa.TutorialEngine
                     GameManager.instance.CinematicCamEnable(GameManager.instance.magician.transform.GetChild(1).transform);
                 }
             }
+            else if (TutorialLoader.instance.loadedTutorialName == "Colosseum")
+            {
+                if (currentStep == 1)
+                {
+                    GameManager.instance.CinematicCamDisable();
+                }
+            }
             
             
 

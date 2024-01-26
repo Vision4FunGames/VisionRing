@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using PixelCrushers.QuestMachine;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -51,7 +52,8 @@ public class CameraController : MonoBehaviour
                 }
                 else if (hit.transform.gameObject.name == "Baskan")
                 {
-                    GameManager.instance.baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();    
+                    var giver = GameManager.instance.baskan.GetComponent<QuestGiver>();
+                    giver.StartDialogueWithPlayer();
                 }
                 
                 
