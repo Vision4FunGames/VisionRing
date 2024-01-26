@@ -291,11 +291,15 @@ public class UiManager : MonoBehaviour
         PlayerManager.instance.pet.GetComponent<NavMeshAgent>().enabled = true;
         GameManager.instance.tutorialSection = 1;
         GameManager.instance.tutorialCounter = 0;
-        GameManager.instance.TutorialLoad();
+        Invoke("LoadTuto",3f);
         
         Player.instance.TurnB();
     }
-    
+
+    private void LoadTuto()
+    {
+        GameManager.instance.TutorialLoad();
+    }
     public void CloseAllUI()
     {
         for (int i = 0; i < UiPanels.Count; i++)

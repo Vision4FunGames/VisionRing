@@ -26,7 +26,7 @@ public class PouchManager : MonoBehaviour
         player = Player.instance;
         equipmentManager = EquipmentManager.instance;
         
-        canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
+        canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponentInChildren<Canvas>();
         
         
     }
