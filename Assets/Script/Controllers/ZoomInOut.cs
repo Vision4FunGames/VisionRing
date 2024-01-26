@@ -41,6 +41,6 @@ public class ZoomInOut : MonoBehaviour
             if (touchesPrevPosDif < touchesCurPosDif)
                 cm.m_Lens.FieldOfView -= zoomModifier;
         }
-        cmF.m_FollowOffset = new Vector3(0, zoomModifier, -zoomModifier);
+        cmF.m_FollowOffset = new Vector3(0, zoomModifier, -zoomModifier-3);
     }
 }
