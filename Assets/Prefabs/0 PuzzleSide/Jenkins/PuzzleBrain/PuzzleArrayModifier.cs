@@ -7,6 +7,7 @@ public class PuzzleArrayModifier : MonoBehaviour
     public Vector3 side;
     public bool refresh;
 
+#if !UNITY_EDITOR_WIN && !PLATFORM_ANDROID
     public void OnValidate()
     {
         if (!refresh) return;
@@ -18,5 +19,6 @@ public class PuzzleArrayModifier : MonoBehaviour
 
             target.transform.localPosition = targetPos;
         }
-    }
+    } 
+#endif
 }
