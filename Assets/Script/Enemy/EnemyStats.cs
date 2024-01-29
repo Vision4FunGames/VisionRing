@@ -35,8 +35,22 @@ public class EnemyStats : CharacterStats
 
     public override void Die()
     {
+        if (OnDie != null)
+        {
+            OnDie();
+        }
+        die = true;
+
+        if (GetComponent<CapsuleCollider>())
+            GetComponent<CapsuleCollider>().enabled = false;
+        
         if (GetComponentInParent<EndlessSkelet>())
+        {
             GetComponentInParent<EndlessSkelet>().DeadEnemy();
+        }
+
+        FindObjectOfType<DrmEnemyChange>().EnemyVariationsList.Remove(GetComponent<EnemyVariations>());
+        
         if (puzzleController != null)
         {
             puzzleController.EnemyDead();
@@ -58,12 +72,6 @@ public class EnemyStats : CharacterStats
             GetComponent<CapsuleCollider>().enabled = false;
             tutoCage.EnemyDied();
         }
-
-        if (OnDie != null)
-        {
-            OnDie();
-        }
-
         base.Die();
     }
 }

@@ -10,6 +10,7 @@ public class DrmEnemyChange : MonoBehaviour
 {
     public DRMGameObject _drmGameObject;
     public EnemyVariations[] enemies;
+    public List<EnemyVariations> EnemyVariationsList;
     public GameObject[] boss;
     private float timer, rate = 0.1f;
     bool increas = false;
@@ -35,20 +36,20 @@ public class DrmEnemyChange : MonoBehaviour
         timer = 0;
         if (_drmGameObject.increaseEnes)
         {
-            for (int i = 0; i < enemies.Length; i++)
+            for (int i = 0; i < EnemyVariationsList.Count; i++)
             {
-                if (enemies[i] != null)
+                if (EnemyVariationsList[i] != null)
                 {
-                    if (Vector3.Distance(enemies[i].transform.position, transform.position) < _drmGameObject.radius &&
-                        enemies[i].EnemyVariation == EnemyVariation.Variation2)
+                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) < _drmGameObject.radius &&
+                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation2)
                     {
-                        enemies[i].gameObject.SetActive(true);
+                        EnemyVariationsList[i].gameObject.SetActive(true);
                     }
 
-                    if (Vector3.Distance(enemies[i].transform.position, transform.position) < _drmGameObject.radius &&
-                        enemies[i].EnemyVariation == EnemyVariation.Variation1)
+                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) < _drmGameObject.radius &&
+                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation1)
                     {
-                        enemies[i].gameObject.SetActive(false);
+                        EnemyVariationsList[i].gameObject.SetActive(false);
                     }
                 }
                 
@@ -60,20 +61,20 @@ public class DrmEnemyChange : MonoBehaviour
 
         if (!_drmGameObject.increaseEnes)
         {
-            for (int i = 0; i < enemies.Length; i++)
+            for (int i = 0; i < EnemyVariationsList.Count; i++)
             {
-                if (enemies[i] != null)
+                if (EnemyVariationsList[i] != null)
                 {
-                    if (Vector3.Distance(enemies[i].transform.position, transform.position) > _drmGameObject.radius &&
-                        enemies[i].EnemyVariation == EnemyVariation.Variation2)
+                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) > _drmGameObject.radius &&
+                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation2)
                     {
-                        enemies[i].gameObject.SetActive(false);
+                        EnemyVariationsList[i].gameObject.SetActive(false);
                     }
 
-                    if (Vector3.Distance(enemies[i].transform.position, transform.position) > _drmGameObject.radius &&
-                        enemies[i].EnemyVariation == EnemyVariation.Variation1)
+                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) > _drmGameObject.radius &&
+                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation1)
                     {
-                        enemies[i].gameObject.SetActive(true);
+                        EnemyVariationsList[i].gameObject.SetActive(true);
                     }
                 }
                 
@@ -86,10 +87,15 @@ public class DrmEnemyChange : MonoBehaviour
     public void InıtializeEnemy()
     {
         enemies = FindObjectsOfType<EnemyVariations>();
+
         for (int i = 0; i < enemies.Length; i++)
         {
-            if (enemies[i].EnemyVariation== EnemyVariation.Variation2)
-                enemies[i].gameObject.SetActive(false);
+            EnemyVariationsList.Add(enemies[i]);
+        }
+        for (int i = 0; i < EnemyVariationsList.Count; i++)
+        {
+            if (EnemyVariationsList[i].EnemyVariation== EnemyVariation.Variation2)
+                EnemyVariationsList[i].gameObject.SetActive(false);
         }
     }
 }
