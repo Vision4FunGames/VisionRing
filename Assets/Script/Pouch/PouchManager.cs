@@ -1,5 +1,7 @@
 
+using System.Xml.Schema;
 using PixelCrushers.QuestMachine;
+using TMPro;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -17,15 +19,16 @@ public class PouchManager : MonoBehaviour
     private EquipmentManager equipmentManager;
     public GameObject itemTextImage;
     
-    
+
     public GameObject pouchPanel;
     public GameObject inventorySlot,descriptionImage;
-    
+    public Canvas worldCanvas;
+    public TextMeshProUGUI itemWorldText;
     private void Start()
     {
         player = Player.instance;
         equipmentManager = EquipmentManager.instance;
-        
+        worldCanvas = GetComponentInChildren<Canvas>();
         canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponentInChildren<Canvas>();
         
         
@@ -120,6 +123,9 @@ public class PouchManager : MonoBehaviour
             int chest = UnityEngine.Random.Range(0, equipmentManager.chestItems.Length);
             item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[chest]);
             item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
+
+            var item1text = Instantiate(itemWorldText, worldCanvas.transform);
+            item1text.text = item1.GetComponent<InventorySlot>().GetItemName() + " X1";
             current.gameObject.SetActive(false);
         }
     }
@@ -133,7 +139,7 @@ public class PouchManager : MonoBehaviour
           ///  Vector3 buttonppos = Camera.main.WorldToScreenPoint(this.transform.position);
            // current.transform.position = buttonppos + offsett;
            int rndItemCount = UnityEngine.Random.Range(0, 100);
-           if (rndItemCount <= 10)
+           if (rndItemCount <= 50)
            {
                rndItemCount = 1;
            }

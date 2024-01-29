@@ -11,7 +11,7 @@ public class CollectItemAnimation : MonoBehaviour
     Canvas canvasMain;
     private void Start()
     {
-        canvasMain = GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponent<Canvas>();
+        canvasMain = GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponentInChildren<Canvas>();
       
     }
     private void OnTriggerEnter(Collider other)
@@ -25,6 +25,7 @@ public class CollectItemAnimation : MonoBehaviour
             {
                 items[i].UseItem();
             }
+            
         }
     }
 

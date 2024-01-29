@@ -42,6 +42,11 @@ public class InventorySlot : MonoBehaviour
        // removeButton.interactable = true;
     }
 
+    public string GetItemName()
+    {
+        return item.name;
+    }
+
     public void AddItem(Item newItem)
     {
         item = newItem;
@@ -156,7 +161,7 @@ public class InventorySlot : MonoBehaviour
     {
         slotIndex = index;
     }
-
+    
 }
 public enum InventoryType
 {

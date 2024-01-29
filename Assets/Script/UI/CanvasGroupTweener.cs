@@ -8,7 +8,7 @@ public class CanvasGroupTweener : MonoBehaviour
     public float time = 0.1f;
     public CanvasGroup canvasGroup;
 
-    private void Start()
+    private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
