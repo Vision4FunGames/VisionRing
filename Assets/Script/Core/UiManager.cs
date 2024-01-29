@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Linq;
 using DG.Tweening;
 using Exoa.TutorialEngine;
 using MoreMountains.Tools;
@@ -24,6 +25,8 @@ public class UiManager : MonoBehaviour
     [Header("UI Objects")]
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea;
 
+    public CanvasGroup CanvasGroup;
+    public float canvasTime;
     public GameObject ringBtn;
     public GameObject sceneUI;
     public TextMeshProUGUI healText;
@@ -116,9 +119,10 @@ public class UiManager : MonoBehaviour
     public void MenuUI()
     {
         CloseAllUI();
-        
-        inventory.gameObject.SetActive(true);
-        menuUi.gameObject.SetActive(true);
+        OpenUI(inventory);
+        OpenUI(menuUi);
+        // inventory.gameObject.SetActive(true);
+        // menuUi.gameObject.SetActive(true);
     }
     public void ShopUI()
     {
@@ -126,32 +130,35 @@ public class UiManager : MonoBehaviour
         if (GameManager.instance.isMerchant)
         {
             CloseAllUI();
-            shopPanel.gameObject.SetActive(true);
-            equipmentPanel.gameObject.SetActive(true);
-            inventory.gameObject.SetActive(true);
-            inventoryObject.SetActive(true);
-            goldPanel.gameObject.SetActive(true);
-            contentPanel.gameObject.SetActive(true);
+            Invoke("OpenUI",canvasTime);
+            
+            OpenUI(shopPanel);
+            OpenUI(equipmentPanel);
+            OpenUI(inventory);
+            OpenUI(inventoryObject);
+            OpenUI(goldPanel);
+            OpenUI(contentPanel);
+            
             inventoryUi.UpdateUI();
             shopUI.UpdateShop();
             onEconomyChangedCallBack.Invoke();
             contentText.text = "SHOP";
-            //navigationArea.gameObject.SetActive(true);
+            
         }
         else
         {
             CloseAllUI();
-            shopPanel.gameObject.SetActive(true);
-            equipmentPanel.gameObject.SetActive(true);
-            inventory.gameObject.SetActive(true);
-            inventoryObject.SetActive(true);
-            goldPanel.gameObject.SetActive(true);
-            contentPanel.gameObject.SetActive(true);
+            Invoke("OpenUI",canvasTime);
+            OpenUI(shopPanel);
+            OpenUI(equipmentPanel);
+            OpenUI(inventory);
+            OpenUI(inventoryObject);
+            OpenUI(goldPanel);
+            OpenUI(contentPanel);
             inventoryUi.UpdateUI();
             shopUI.UpdateShop();
             onEconomyChangedCallBack.Invoke();
             contentText.text = "SHOP";
-            //navigationArea.gameObject.SetActive(true);
             GameManager.instance.isMerchant = true;
             TutorialLoader.instance.Load("Merchant");
             PlayerPrefs.SetInt("Merchant",1);
@@ -161,13 +168,14 @@ public class UiManager : MonoBehaviour
     public void ShowInventory()
     {
         CloseAllUI();
+        
         contentText.text = "INVENTORY";
-        inventory.SetActive(true);
-        inventoryObject.SetActive(true);
-        equipmentPanel.gameObject.SetActive(true);
-        currentItems.gameObject.SetActive(true);
-        goldPanel.gameObject.SetActive(true);
-        contentPanel.gameObject.SetActive(true);
+        OpenUI(currentItems);
+        OpenUI(equipmentPanel);
+        OpenUI(inventory);
+        OpenUI(inventoryObject);
+        OpenUI(goldPanel);
+        OpenUI(contentPanel);
         Inventory.instance.InventoryTypeChange(InventoryType.Inventory);
         inventoryUi.ShowSelected("All");
         inventoryUi.UpdateUI();
@@ -177,56 +185,38 @@ public class UiManager : MonoBehaviour
 
     public void BlackSmithUI()
     {
-        if (GameManager.instance.isBlacksmith)
+        CloseAllUI();
+            
+        Invoke("OpenUI",canvasTime);
+        OpenUI(inventory);
+        OpenUI(blacksmithPanel);
+        OpenUI(equipmentPanel);
+        OpenUI(inventoryObject);
+        OpenUI(contentPanel);
+        OpenUI(goldPanel);
+        Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
+        inventoryUi.UpdateUI();
+        contentText.text = "BLACKSMITH";
+        if (!GameManager.instance.isBlacksmith)
         {
-            CloseAllUI();
-            inventory.gameObject.SetActive(true);
-            blacksmithPanel.gameObject.SetActive(true);
-            equipmentPanel.gameObject.SetActive(true);
-            inventoryObject.gameObject.SetActive(true);
-            contentPanel.gameObject.SetActive(true);
-            goldPanel.gameObject.SetActive(true);
-            Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
-            inventoryUi.UpdateUI();
-            contentText.text = "BLACKSMITH";
-            //navigationArea.gameObject.SetActive(true);
-        }
-        else
-        {
-            CloseAllUI();
-            inventory.gameObject.SetActive(true);
-            blacksmithPanel.gameObject.SetActive(true);
-            equipmentPanel.gameObject.SetActive(true);
-            inventoryObject.gameObject.SetActive(true);
-            contentPanel.gameObject.SetActive(true);
-            goldPanel.gameObject.SetActive(true);
-            Inventory.instance.InventoryTypeChange(InventoryType.Upgrade);
-            inventoryUi.UpdateUI();
-            contentText.text = "BLACKSMITH";
-            //navigationArea.gameObject.SetActive(true);
             TutorialLoader.instance.Load("Blacksmith");
             PlayerPrefs.SetInt("Blacksmith",1);
         }
-
     }
 
     public void MagicianUI()
     {
 
-        // if (GameManager.instance.magician.GetComponent<QuestGiver>().GetCompletedQuest() == 2)
-        // {
-        //     EconomyManager.instance.EarnItem(0,30);
-        //     EconomyManager.instance.EarnItem(1,30);
-        //     EconomyManager.instance.EarnItem(2,30);
-        // }  
+       
         
         if (GameManager.instance.isMagician)
         {
             CloseAllUI();
-            inventory.gameObject.SetActive(true);
-            magicianPanel.gameObject.SetActive(true);
-            contentPanel.gameObject.SetActive(true);
-            goldPanel.gameObject.SetActive(true);
+            Invoke("OpenUI",canvasTime);
+            OpenUI(inventory);
+            OpenUI(magicianPanel);
+            OpenUI(contentPanel);
+            OpenUI(goldPanel);
             contentText.text = "MAGICIAN";
             Inventory.instance.onItemChangedCallback?.Invoke();
             skillUpgrade.onSkillShopChangeCallBack?.Invoke();
@@ -239,10 +229,11 @@ public class UiManager : MonoBehaviour
             if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count==0 && GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests().Count ==0)
             {
                 CloseAllUI();
-                inventory.gameObject.SetActive(true);
-                magicianPanel.gameObject.SetActive(true);
-                contentPanel.gameObject.SetActive(true);
-                goldPanel.gameObject.SetActive(true);
+                Invoke("OpenUI",canvasTime);
+                OpenUI(inventory);
+                OpenUI(magicianPanel);
+                OpenUI(contentPanel);
+                OpenUI(goldPanel);
                 contentText.text = "MAGICIAN";
                 Inventory.instance.onItemChangedCallback?.Invoke();
                 skillUpgrade.onSkillShopChangeCallBack?.Invoke();
@@ -264,10 +255,11 @@ public class UiManager : MonoBehaviour
     public void SkillUI()
     {
         CloseAllUI();
-        inventory.gameObject.SetActive(true);
-        skillPanel.gameObject.SetActive(true);
-        contentPanel.gameObject.SetActive(true);
-        goldPanel.gameObject.SetActive(true);
+        Invoke("OpenUI",canvasTime);
+        OpenUI(inventory);
+        OpenUI(skillPanel);
+        OpenUI(contentPanel);
+        OpenUI(goldPanel);
         //navigationArea.gameObject.SetActive(true);
         contentText.text = "SKILLS";
         SkillPanel.instance.onSkillUseChangeCallBack.Invoke();
@@ -302,10 +294,31 @@ public class UiManager : MonoBehaviour
     }
     public void CloseAllUI()
     {
+        
         for (int i = 0; i < UiPanels.Count; i++)
         {
-            UiPanels[i].gameObject.SetActive(false);
+           // UiPanels[i].gameObject.SetActive(false);
+           var tweener = UiPanels[i].gameObject.GetComponent<CanvasGroupTweener>();
+           if (tweener != null)
+           {
+              tweener.Close();
+           }
+           else
+           {
+               UiPanels[i].gameObject.SetActive(false);
+           }
+          
         }
+    }
+
+    public void  OpenUI(GameObject gameObject)
+    {
+        var tweener = gameObject.GetComponent<CanvasGroupTweener>();
+        if (tweener!=null)
+        {
+            tweener.Open();
+        }
+        
     }
     // public void UpdatePlayerHealthBar(float health)
     // {
@@ -316,16 +329,17 @@ public class UiManager : MonoBehaviour
     {
         EquipmentManager.instance.SaveUpgradeItems();
         CloseAllUI();
-        gamePlay.gameObject.SetActive(true);
-        playerHealthBarCanvas.SetActive(true);
+        OpenUI(gamePlay);
+        OpenUI(playerHealthBarCanvas);
+        
        
     }
 
     public void ChestPanelUI()
     {
         CloseAllUI();
-        inventory.gameObject.SetActive(true);
-        chestPanel.gameObject.SetActive(true);
+        OpenUI(inventory);
+        OpenUI(chestPanel);
     }
 
     public void CollectButtonOpen()

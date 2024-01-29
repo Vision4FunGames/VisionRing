@@ -58,7 +58,7 @@ public abstract class CharacterHealth : MonoBehaviour
     public void UpdateHealthBar()
     {
         if (mmProgressBar)
-            mmProgressBar.UpdateBar(health, 0, 100);
+            mmProgressBar.UpdateBar(health, 0, 300);
     }
 
     protected void Die()

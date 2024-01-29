@@ -30,7 +30,7 @@ public class PlayerHealth : CharacterHealth
     {
         _player = GetComponent<Player>();
         drmGameObject = GetComponentInChildren<DRMGameObject>();
-        health = 100;
+        health = 300;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
         mmProgressBar = FindObjectOfType<bl_MiniMap>().GetComponentInChildren<MMProgressBar>();
@@ -130,7 +130,7 @@ public class PlayerHealth : CharacterHealth
         healTime = 3f;
         healBuffParticle.gameObject.SetActive(true);
         health +=  (60f * healRate);
-        mmProgressBar.UpdateBar(health, 0, 100);
+        mmProgressBar.UpdateBar(health, 0, 300);
         if (newHealth > 100)
             newHealth = 100;
     }
