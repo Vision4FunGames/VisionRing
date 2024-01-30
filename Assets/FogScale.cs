@@ -22,7 +22,7 @@ public class FogScale : MonoBehaviour
             transform.DOKill();
             gameObject.SetActive(true);
             transform.localScale = startScale;
-            transform.DOScale(targetScale, 5).SetDelay(.4f).SetEase(Ease.Linear).OnComplete(() =>
+            transform.DOScale(targetScale, 3).SetDelay(.4f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 gameObject.SetActive(false);
                 isOpen = true;
@@ -32,7 +32,7 @@ public class FogScale : MonoBehaviour
         {
             transform.DOKill();
             gameObject.SetActive(true);
-            transform.DOScale(startScale, 4.5f).SetEase(Ease.Linear).OnComplete(() =>
+            transform.DOScale(startScale, 2.5f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 gameObject.SetActive(false);
                 isOpen = false;

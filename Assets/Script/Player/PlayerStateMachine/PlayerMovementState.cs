@@ -28,7 +28,7 @@ namespace Script.Player.PlayerStateMachine
 
         public override void EnterState()
         {
-            if (jumpPressed)
+            if (jumpPressed && !_player.ring)
                 Jump();
         }
 

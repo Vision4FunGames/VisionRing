@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerSound playerSound;
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
+    [HideInInspector] public bool ring;
     private NavMeshAgent agent;
     public bool tutorial;
 

@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        if (!isDead && !isStun)
+        if (!isDead && !isStun && !player.ring)
         {
             switch (myCurrentGunType)
             {

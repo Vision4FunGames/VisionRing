@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerAnimator : MonoBehaviour
 {
+    private Player player;
     private Animator animator;
     // Start is called before the first frame update
     public GameObject DRM;
@@ -17,31 +18,35 @@ public class PlayerAnimator : MonoBehaviour
     private bool playerDrop;
     void Start()
     {
+        player = GetComponentInParent<Player>();
         animator = GetComponent<Animator>();
     }
 
 
     public void RingBtn()
     {
-        if (TutorialLoader.instance.loadedTutorialName == "Ring")
+        if (!player.ring)
         {
-            tutorialBangParticle.gameObject.SetActive(true);
-            Invoke("MovementAvailbe",4);
-            GetComponentInParent<Player>().isMovement = false;
-            StartCoroutine(PlayerDrop());
-            UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
-            Invoke("RingSound",2f);
-
-        }
-        else
-        {
-            animator.SetTrigger("Ring");
-            Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
-            Invoke("RingSound",2f);
+            if (TutorialLoader.instance.loadedTutorialName == "Ring")
+            {
+                tutorialBangParticle.gameObject.SetActive(true);
+                Invoke("MovementAvailbe",4);
+                GetComponentInParent<Player>().isMovement = false;
+                StartCoroutine(PlayerDrop());
+                UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
+                Invoke("RingSound",2f);
+                player.ring = true;
+            }
+            else
+            {
+                animator.SetTrigger("Ring");
+                Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
+                Invoke("RingSound",2f);
+                player.ring = true;
+            }
         }
         
         //ringParticle.Play();
-      
     }
 
     public void RingSound()
@@ -66,17 +71,18 @@ public class PlayerAnimator : MonoBehaviour
     public void MovementAvailbe()
     {
         GetComponentInParent<Player>().isMovement = true;
+        player.ring = false;
     }
     public void RingAction()
     {
         DRM.GetComponent<DRMGameObject>().SliderValueChanged();
-        
     }
 
     public void RingActionEnd()
     {
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
         GetComponentInParent<Player>().isMovement = true;
+        player.ring = false;
         //ringParticle.Stop();
     }
 
