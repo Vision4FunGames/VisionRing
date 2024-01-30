@@ -101,7 +101,7 @@ public class PouchManager : MonoBehaviour
             CreateScriptedItem();
             return;
         }
-   
+        itemIndexList.Clear();
         for (int i = 0; i < count; i++)
         {
             var pouchPanel = Instantiate(this.pouchPanel, current.transform.GetChild(0));
@@ -114,31 +114,39 @@ public class PouchManager : MonoBehaviour
             rectTransform.pivot = new Vector2(0, .5f);
             item1.transform.localPosition = new Vector3(0, 0, 0);
             int chest = UnityEngine.Random.Range(0, equipmentManager.chestItems.Length);
-            if (itemIndexList.Count!=0)
+            
+            
+            if (itemIndexList.Count == 0)
+            {
+                itemIndexList.Add(chest);
+            }
+            else
             {
                 if (!itemIndexList.Contains(chest))
                 {
                     itemIndexList.Add(chest);
+                    print("Added 1 " + chest);
                 }
                 else
                 {
                     do
                     {
                         chest = Random.Range(0, equipmentManager.chestItems.Length);
-                    } while (!itemIndexList.Contains(chest));   
+                        print("Chest : " + chest );
+                    } 
+                    while (itemIndexList[0] != chest);   
+                    print(chest + " : " + itemIndexList[0]);
+                    itemIndexList.Add(chest);
                 }
             }
-            else
-            {
-                itemIndexList.Add(chest);
-            }
+                
             item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[chest]);
             item1.GetComponent<InventorySlot>().countText.text = Random.Range(1, 3).ToString();
             item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
           
             current.gameObject.SetActive(false);
         }
-        itemIndexList.Clear();
+       
     }
     private void SpawnButton()
     {
@@ -150,7 +158,7 @@ public class PouchManager : MonoBehaviour
             // Vector3 buttonppos = Camera.main.WorldToScreenPoint(this.transform.position);
             // current.transform.position = buttonppos + offsett;
            int rndItemCount = UnityEngine.Random.Range(0, 100);
-           if (rndItemCount <= 50)
+           if (rndItemCount <= 00)
            {
                rndItemCount = 1;
            }
