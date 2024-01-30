@@ -127,7 +127,7 @@ public class InventorySlot : MonoBehaviour
     // Use the item
     public void UseItem ()
     {
-        item?.Use(_inventoryType);
+        item?.Use(_inventoryType,int.Parse(countText.text));
         if (_inventoryType == InventoryType.UnEquip)
         {
             if (slotIndex != null && !item.isDefault)
@@ -141,7 +141,7 @@ public class InventorySlot : MonoBehaviour
         else if (_inventoryType == InventoryType.Collect)
         {
             Destroy(transform.parent.gameObject);
-            Player.instance.GetComponent<CollectItemAnimation>().CollectItem(item.name);
+            Player.instance.GetComponent<CollectItemAnimation>().CollectItem(item.name,int.Parse(countText.text));
             UiManager.instance.selectedPouch.GetComponent<PouchManager>().PouchInsideControl();
         }
         else if (_inventoryType == InventoryType.Skill)

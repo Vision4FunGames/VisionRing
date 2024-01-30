@@ -26,9 +26,9 @@ public class Equipment : Item {
     {
         //ssetDatabase.SaveAssets();
     }
-  
+        
     
-    public override void Use (InventoryType type)
+    public override void Use (InventoryType type,int count)
     {
         // Called when pressed in the inventory
         if (type is InventoryType.Equip or InventoryType.Inventory)

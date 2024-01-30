@@ -34,7 +34,7 @@ public class CollectItemAnimation : MonoBehaviour
     }
     
     [ButtonAttribute("CollectItem")]
-    public void CollectItem(String itemName)
+    public void CollectItem(String itemName,int count)
     {
        panel = UiManager.instance.itemTextPanel.gameObject;
         for (int i = 0; i < panel.transform.childCount; i++)
@@ -42,7 +42,7 @@ public class CollectItemAnimation : MonoBehaviour
             if (!panel.transform.GetChild(i).gameObject.activeSelf)
             {
                 panel.transform.GetChild(i).gameObject.SetActive(true);
-                panel.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = itemName;
+                panel.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = itemName + " x"+ count;
                 StartCoroutine(CloseText());
                 return;
                 

@@ -15,7 +15,7 @@ public class Item : ScriptableObject
     
     
 
-    public virtual void Use (InventoryType type)
+    public virtual void Use (InventoryType type,int Count = 0)
     {
         // Use the item
         // Something may happen
