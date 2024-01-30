@@ -5,14 +5,12 @@ using NaughtyAttributes;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-
 public class CollectItemAnimation : MonoBehaviour
 {
     Canvas canvasMain;
     private void Start()
     {
         canvasMain = GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponentInChildren<Canvas>();
-      
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,18 +23,15 @@ public class CollectItemAnimation : MonoBehaviour
             {
                 items[i].UseItem();
             }
-            
         }
     }
-
+    
     [ButtonAttribute("CollectItem")]
     public void CollectItem(Sprite sprite)
     {
-        
         for (int i = 0; i < 20; i++)
         {
-                
-                GameObject current = Instantiate(Resources.Load<GameObject>("GoldImage"), canvasMain.transform);
+            GameObject current = Instantiate(Resources.Load<GameObject>("GoldImage"), canvasMain.transform);
                 current.GetComponent<Image>().sprite = sprite;
                 Vector3 goldpos = Camera.main.WorldToScreenPoint(this.transform.position);
                 current.transform.position = goldpos+new Vector3(Random.Range(10f,100f),Random.Range(10f,100f),Random.Range(10f,100f));
@@ -44,8 +39,6 @@ public class CollectItemAnimation : MonoBehaviour
                 {
                     Destroy(current);
                 });
-            
-            
         }
     } 
 }
