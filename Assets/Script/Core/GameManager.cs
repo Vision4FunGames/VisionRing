@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private string tutorialName;
     public bool tutorial;
     public FoxManager foxManager;
+    
     [Header("Tutorial")] public GameObject tutorialEnemies;
     public GameObject tutoCage;
     public GameObject tutorialWall;
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour
     public GameObject villageDoor, villageDoor2;
     public GameObject colosseum;
     public GameObject tutorialIncreaserFirst;
+    
+    
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
@@ -61,7 +64,7 @@ public class GameManager : MonoBehaviour
     public bool fightBool;
     public AudioClip fight, stand;
     public bool isFoxSaved;
-
+    
     private float DisableTimer;
     
     private void Awake()

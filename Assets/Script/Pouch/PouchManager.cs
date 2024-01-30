@@ -84,6 +84,7 @@ public class PouchManager : MonoBehaviour
 
     public void CreateScriptedItem()
     {
+        
         var pouchPanel = Instantiate(this.pouchPanel, current.transform.GetChild(0));
         pouchPanel.transform.SetAsFirstSibling();
         var item1 = Instantiate(inventorySlot, current.transform.GetChild(0).transform.GetChild(0).transform);
@@ -96,6 +97,7 @@ public class PouchManager : MonoBehaviour
         int chest = ScriptedItemId;
         item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[chest]);
         item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
+        
         current.gameObject.SetActive(false);
     }
 
@@ -107,8 +109,6 @@ public class PouchManager : MonoBehaviour
             return;
         }
         
-
-
         for (int i = 0; i < count; i++)
         {
             var pouchPanel = Instantiate(this.pouchPanel, current.transform.GetChild(0));
@@ -123,9 +123,6 @@ public class PouchManager : MonoBehaviour
             int chest = UnityEngine.Random.Range(0, equipmentManager.chestItems.Length);
             item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[chest]);
             item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
-
-            var item1text = Instantiate(itemWorldText, worldCanvas.transform);
-            item1text.text = item1.GetComponent<InventorySlot>().GetItemName() + " X1";
             current.gameObject.SetActive(false);
         }
     }
@@ -135,9 +132,9 @@ public class PouchManager : MonoBehaviour
         {
             current = Instantiate(Resources.Load<GameObject>("PouchPopUp"), canvasMain.transform);
             //Buraya objeyi random ekleyecegiz...
-            //ar item1 = current.transform.GetComponentInChildren<>()
-          ///  Vector3 buttonppos = Camera.main.WorldToScreenPoint(this.transform.position);
-           // current.transform.position = buttonppos + offsett;
+            // ar item1 = current.transform.GetComponentInChildren<>()
+            // Vector3 buttonppos = Camera.main.WorldToScreenPoint(this.transform.position);
+            // current.transform.position = buttonppos + offsett;
            int rndItemCount = UnityEngine.Random.Range(0, 100);
            if (rndItemCount <= 50)
            {

@@ -141,7 +141,7 @@ public class InventorySlot : MonoBehaviour
         else if (_inventoryType == InventoryType.Collect)
         {
             Destroy(transform.parent.gameObject);
-            Player.instance.GetComponent<CollectItemAnimation>().CollectItem(icon.sprite);
+            Player.instance.GetComponent<CollectItemAnimation>().CollectItem(item.name);
             UiManager.instance.selectedPouch.GetComponent<PouchManager>().PouchInsideControl();
         }
         else if (_inventoryType == InventoryType.Skill)

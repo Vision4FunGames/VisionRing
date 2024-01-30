@@ -1,19 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Linq;
-using DG.Tweening;
 using Exoa.TutorialEngine;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -25,10 +17,10 @@ public class UiManager : MonoBehaviour
     [Header("UI Objects")]
     public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea;
 
+    public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
     public float canvasTime;
     public GameObject ringBtn;
-    public GameObject sceneUI;
     public TextMeshProUGUI healText;
     public GameObject menuUi;
     [Header("Skill Buttons")] public Button[] skillButtons;
@@ -60,12 +52,14 @@ public class UiManager : MonoBehaviour
     [SerializeField]private SkillUpgrade skillUpgrade;
     //Economy
     public TextMeshProUGUI contentText;
-    private ShopSlot[] shopSlots;
 
     [Header("Image")] public RawImage foxRaw;
     [Header("Chapters")] public VideoPlayer chapter1;
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
+
+    [Header("ItemCollect")] 
+    public GameObject itemTextPanel;
     private void Awake()
     {
         instance = this;
@@ -78,7 +72,6 @@ public class UiManager : MonoBehaviour
         shopUI = global::ShopUI.instance;
         inventory.SetActive(false);
         gamePlay.SetActive(true);
-        shopSlots = GetComponents<ShopSlot>();
         onEconomyChangedCallBack += EconomyUI;
        onEconomyChangedCallBack.Invoke();
     }
@@ -164,7 +157,20 @@ public class UiManager : MonoBehaviour
             PlayerPrefs.SetInt("Merchant",1);
         }
     }
-    
+
+    public void FocusMode(GameObject switchOnClick)
+    {
+        if (focusPanel.gameObject.activeSelf)
+        {
+            focusPanel.gameObject.SetActive(false);
+            switchOnClick.gameObject.SetActive(false);
+        }
+        else
+        {
+            switchOnClick.gameObject.SetActive(true);
+            focusPanel.gameObject.SetActive(true);
+        }
+    }
     public void ShowInventory()
     {
         CloseAllUI();
