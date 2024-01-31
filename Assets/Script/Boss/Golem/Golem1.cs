@@ -110,7 +110,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
         if (other.CompareTag("Player"))
         {
             checkPlayer = true;
-            other.GetComponent<PlayerHealth>().TakeDamage(40);
+            other.GetComponent<PlayerHealth>().TakeDamage(5);
             other.GetComponent<PlayerManager>().Stun(gameObject);
         }
 

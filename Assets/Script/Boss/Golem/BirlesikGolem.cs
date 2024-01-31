@@ -258,7 +258,7 @@ public class BirlesikGolem : MonoBehaviour
         if (other.CompareTag("Player") && damageAttack)
         {
             player.GetComponent<PlayerManager>().Stun(gameObject);
-            player.GetComponent<PlayerHealth>().TakeDamage(10);
+            player.GetComponent<PlayerHealth>().TakeDamage(5);
             if (move)
                 StopAttack();
         }

@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayEndVideo()
     {
-        
+        UiManager.instance.endVideo.gameObject.SetActive(true);
     }
     private void TutorialChange()
     {
