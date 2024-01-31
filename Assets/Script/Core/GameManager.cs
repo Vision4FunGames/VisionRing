@@ -210,6 +210,20 @@ public class GameManager : MonoBehaviour
         PlayStandSound();
     }
 
+    private int count;
+    public void DeadBirlesikGolem()
+    {
+        count++;
+        if (count > 1)
+        {
+            Invoke("PlayEndVideo",1);
+        }
+    }
+
+    public void PlayEndVideo()
+    {
+        
+    }
     private void TutorialChange()
     {
         TutorialEvents.OnTutorialComplete -= TutorialChange;

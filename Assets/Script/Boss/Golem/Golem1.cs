@@ -29,9 +29,10 @@ public class Golem1 : MonoBehaviour, GolemCombat
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     private bool dead;
     private float currentFlameTimer;
-
+    private GameManager _gameManager;
     private void Awake()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         baseHealth = health;
         _cameraShake = FindObjectOfType<CameraShake>();
@@ -241,6 +242,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
             GetComponent<Collider>().enabled = false;
             _animator.Play("Death");
             dead = true;
+            _gameManager.DeadBirlesikGolem();
             Destroy(gameObject, 10);
         }
     }

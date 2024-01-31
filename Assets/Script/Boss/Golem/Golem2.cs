@@ -24,11 +24,13 @@ public class Golem2 : MonoBehaviour , GolemCombat
     public ParticleSystem golemParticle , stunStar;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     private float currentFlameTimer;
+    private GameManager _gameManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         baseHealth = health;
         collider = GetComponent<Collider>();
@@ -202,6 +204,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
             
             GetComponent<Collider>().enabled = false;
             dead = true;
+            _gameManager.DeadBirlesikGolem();
             _animator.Play("Death");
             Destroy(gameObject, 10);
         }

@@ -55,6 +55,7 @@ public class UiManager : MonoBehaviour
 
     [Header("Image")] public RawImage foxRaw;
     [Header("Chapters")] public VideoPlayer chapter1;
+    public VideoPlayer endVideo;
     public delegate void OnEconomyChanged();
     public OnEconomyChanged onEconomyChangedCallBack;
 
