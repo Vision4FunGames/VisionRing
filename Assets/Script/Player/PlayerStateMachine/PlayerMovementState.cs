@@ -64,7 +64,7 @@ namespace Script.Player.PlayerStateMachine
 
         public void PlayerMovemetSound()
         {
-           // print(_player._myController.isGrounded);
+            // print(_player._myController.isGrounded);
             //print(_player._myController.velocity.magnitude);
             if (_player._myController.isGrounded && _player._myController.velocity.magnitude > 2 &&
                 !_player.playerSound.audioSource.isPlaying)
@@ -75,7 +75,7 @@ namespace Script.Player.PlayerStateMachine
                 _player.playerSound.audioSource.Play();
             }
 
-            if (_player._myController.velocity.magnitude < 2 )
+            if (_player._myController.velocity.magnitude < 2)
             {
                 _player.playerSound.audioSource.Stop();
             }
@@ -134,7 +134,6 @@ namespace Script.Player.PlayerStateMachine
                         // {
                         //     GameManager.instance.TutorialLoad();
                         // }
-                        
                     }
                 }
                 else
@@ -146,7 +145,8 @@ namespace Script.Player.PlayerStateMachine
 
         public override void ChangeAnimationState(string newAnim)
         {
-            _player._playerAnimator.Play(newAnim);
+            if (!_player.isSwim)
+                _player._playerAnimator.Play(newAnim);
         }
 
         Vector3 PlayerDirection()

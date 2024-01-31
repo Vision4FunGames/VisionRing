@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     public CurrentGunType _baseCurrentGunType;
     public bool isMovement = true;
     public bool isWalk;
+    public bool isSwim;
     [HideInInspector] public float animValue = 1;
     [HideInInspector] public float animSpeed;
     public float speed;
@@ -181,9 +182,20 @@ public class Player : MonoBehaviour
         {
             StateMachine.ChangeState(PlayerMovementState);
         }
+
+        if (other.CompareTag("water"))
+        {
+            ParticleManager.instance.swimParticle.Stop();
+            speed = 12;
+            _playerAnimator.SetTrigger("base");
+            isSwim = false;
+            print("aaaaaaaasssssassas");
+        }
     }
+
     private Rigidbody currentboxrb;
     private static readonly int RunSpeed = Animator.StringToHash("RunSpeed");
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Box"))
@@ -206,6 +218,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Box"))
@@ -228,7 +241,7 @@ public class Player : MonoBehaviour
             if (GameManager.instance.tutorialCounter == 4 && !isWallPassed)
             {
                 isWallPassed = true;
-               // GameManager.instance.TutorialLoad();
+                // GameManager.instance.TutorialLoad();
                 GameManager.instance.tutorialCollider1.gameObject.SetActive(false);
                 GameManager.instance.tutorialCollider2.gameObject.SetActive(false);
             }
@@ -244,16 +257,16 @@ public class Player : MonoBehaviour
         {
             isMovement = false;
             transform.position = other.transform.parent.transform.position;
-            Invoke("IsMovementAgain",1f);
+            Invoke("IsMovementAgain", 1f);
         }
 
         if (other.gameObject.CompareTag("TutorialIncreaser"))
         {
-            if (GameManager.instance.tutorialSection == 0 && GameManager.instance.tutorialCounter is 2 )
+            if (GameManager.instance.tutorialSection == 0 && GameManager.instance.tutorialCounter is 2)
             {
                 GameManager.instance.TutorialLoad();
             }
-            else if (GameManager.instance.tutorialCounter is 3 or 4 )
+            else if (GameManager.instance.tutorialCounter is 3 or 4)
             {
                 if (!GameManager.instance.isBox)
                 {
@@ -263,10 +276,18 @@ public class Player : MonoBehaviour
                 else
                 {
                     other.gameObject.GetComponent<Collider>().enabled = false;
-                    GameManager.instance.TutorialLoad();  
-                  
+                    GameManager.instance.TutorialLoad();
                 }
             }
+        }
+
+        if (other.CompareTag("water"))
+        {
+            isSwim = true;
+            ParticleManager.instance.swimParticle.Play();
+            speed = 5;
+            _playerAnimator.ResetTrigger("base");
+            _playerAnimator.SetTrigger("swim");
         }
 
         if (other.gameObject.CompareTag("colosseumTutorial"))
@@ -276,15 +297,16 @@ public class Player : MonoBehaviour
                 GameManager.instance.CinematicCamEnable(GameManager.instance.colosseum.transform);
                 GameManager.instance.isColosseum = true;
                 TutorialLoader.instance.Load("Colosseum");
-                PlayerPrefs.SetInt("Colosseum",1); 
+                PlayerPrefs.SetInt("Colosseum", 1);
             }
-           
         }
     }
+
     public void IsMovementAgain()
     {
         isMovement = true;
     }
+
     public void BackDoMove(GameObject enemy)
     {
         Vector3 dir = transform.position - enemy.transform.position;
@@ -346,8 +368,9 @@ public class Player : MonoBehaviour
 
     public void TurnB()
     {
-        Invoke("TurnBackFromTutorial",2f);
+        Invoke("TurnBackFromTutorial", 2f);
     }
+
     public void TurnBackFromTutorial()
     {
         isMovement = true;
@@ -358,7 +381,6 @@ public class Player : MonoBehaviour
         UiManager.instance.GamePlayUI();
         PlayerManager.instance.pet.GetComponent<FoxManager>().tutorial = false;
         _playerAnimator.speed = 1f;
-
     }
 
     public void CloseCam()
