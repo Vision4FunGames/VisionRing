@@ -72,7 +72,7 @@ public class DropChest : MonoBehaviour
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
-                    drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y + 2.70f, bossTransform.z), 2f);
+                    drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y , bossTransform.z), 2f);
                 }
             }
            

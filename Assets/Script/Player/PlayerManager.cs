@@ -131,13 +131,13 @@ public class PlayerManager : MonoBehaviour
             other.GetComponent<CheckPoint>().shineParticle.Stop();
             ES3.Save("CheckPoint", other.transform.position);
             _playerHealth.HealLimit = 4;
-            _playerHealth.EnableHealBuff();
+            _playerHealth.EnableHealBuff(true);
         }
 
         if (other.CompareTag("Heal"))
         {
             _playerHealth.HealLimit = 4;
-            _playerHealth.EnableHealBuff();
+            _playerHealth.EnableHealBuff(true);
         }
     }
 

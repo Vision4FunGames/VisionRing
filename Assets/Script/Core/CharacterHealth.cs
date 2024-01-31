@@ -1,7 +1,8 @@
 using System;
 using Exoa.TutorialEngine;
-using MoreMountains.Tools;
+using Lofelt.NiceVibrations;
 using UnityEngine;
+using MMProgressBar = MoreMountains.Tools.MMProgressBar;
 
 public abstract class CharacterHealth : MonoBehaviour
 {
@@ -17,23 +18,24 @@ public abstract class CharacterHealth : MonoBehaviour
     {
         return health > 0;
     }
-
+    
     public float GetHealth()
     {
         return health;
     }
-
+    
     private void Start()
     {
         _player = FindObjectOfType<Player>();
         _gameManager = FindObjectOfType<GameManager>();
     }
-
+    
     public void TakeDamage(float damageAmount)
     {
         if (!useShield)
         {
             health -= damageAmount;
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.Success);
             UpdateHealthBar();
             if (health <=60 && !GameManager.instance.isHeal)
             {
@@ -54,13 +56,11 @@ public abstract class CharacterHealth : MonoBehaviour
             }
         }
     }
-
     public void UpdateHealthBar()
     {
         if (mmProgressBar)
             mmProgressBar.UpdateBar(health, 0, 300);
     }
-
     protected void Die()
     {
         _gameManager.UpdateGameState(GameState.GameOver);

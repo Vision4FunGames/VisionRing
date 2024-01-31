@@ -112,15 +112,23 @@ public class PlayerHealth : CharacterHealth
         }
     }
 
-    public void EnableHealBuff()
+    public void EnableHealBuff(bool isArea)
     {
         if (health < maxHealth && !isCooldown && HealLimit > 0)
         {
             HealLimit--;
             UiManager.instance.healText.text = HealLimit.ToString();
-            healCooldown = 8f;
+            if (isArea)
+            {
+                healCooldown = 1f;
+                healRate = 5f;
+            }
+            else
+            {
+                healCooldown = 8f;
+                healRate = .3f;
+            }
             isCooldown = true;
-            healRate = .3f;
             HealBuff(true);
         }
     }
