@@ -263,7 +263,7 @@ public class EquipmentManager : MonoBehaviour
             }
 
             //equippedInventory.Remove(oldItem);
-            InventoryUI.instance.currentItemsParent.transform.GetChild(0).transform.GetChild(slotIndex)
+            InventoryUI.instance.currentItemsParent.transform.GetChild(slotIndex)
                 .GetComponent<InventorySlot>().ClearSlot();
             // Equipment has been removed so we trigger the callback
             if (onEquipmentChanged != null)

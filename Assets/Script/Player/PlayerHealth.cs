@@ -24,6 +24,7 @@ public class PlayerHealth : CharacterHealth
     public float healCooldown;
     private bool isHealBuff;
     private float newHealth;
+    private float maxHealth;
     public int HealLimit { get; set; } = 3;
 
     private void Awake()
@@ -31,6 +32,7 @@ public class PlayerHealth : CharacterHealth
         _player = GetComponent<Player>();
         drmGameObject = GetComponentInChildren<DRMGameObject>();
         health = 300;
+        maxHealth = health;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
         mmProgressBar = FindObjectOfType<bl_MiniMap>().GetComponentInChildren<MMProgressBar>();
@@ -98,7 +100,7 @@ public class PlayerHealth : CharacterHealth
 
     public void EnableHealBuff(GameObject btn)
     {
-        if (health < 100f && !isCooldown && HealLimit > 0)
+        if (health < maxHealth && !isCooldown && HealLimit > 0)
         {
             HealLimit--;
             UiManager.instance.healText.text = HealLimit.ToString();
@@ -112,7 +114,7 @@ public class PlayerHealth : CharacterHealth
 
     public void EnableHealBuff()
     {
-        if (health < 100f && !isCooldown && HealLimit > 0)
+        if (health < maxHealth && !isCooldown && HealLimit > 0)
         {
             HealLimit--;
             UiManager.instance.healText.text = HealLimit.ToString();
@@ -129,10 +131,10 @@ public class PlayerHealth : CharacterHealth
         isHealBuff = true;
         healTime = 3f;
         healBuffParticle.gameObject.SetActive(true);
-        health +=  (60f * healRate);
-        mmProgressBar.UpdateBar(health, 0, 300);
-        if (newHealth > 100)
-            newHealth = 100;
+        health +=  ((maxHealth *.6f) * healRate);
+        mmProgressBar.UpdateBar(health, 0, maxHealth);
+        if (newHealth > maxHealth)
+            newHealth = maxHealth;
     }
 
     public void HealBtnCoolDown(GameObject btn)

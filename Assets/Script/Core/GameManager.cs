@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public string PlayerName;
     public CinemachineVirtualCamera playerVCam;
     public CinemachineVirtualCamera cinematicVCam;
+    public CinemachineVirtualCamera foxVCam;
     public int tutorialCounter = 0;
     public int tutorialSection;
     private string tutorialName;
@@ -253,7 +254,7 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Pause;
         if (tutorialSection == 0 && tutorialCounter == 4)
         {
-            CinematicCamEnable(foxManager.transform);
+            FoxCamEnable();
         }
         else if (tutorialSection == 0 && tutorialCounter ==5)
         {
@@ -352,6 +353,7 @@ public class GameManager : MonoBehaviour
     public void CinematicCamEnable(Transform target,float timer = 0)
     {
         playerVCam.gameObject.SetActive(false);
+        foxVCam.gameObject.SetActive(false);
         cinematicVCam.gameObject.SetActive(true);
         cinematicVCam.Follow = target;
         cinematicVCam.LookAt = target;
@@ -379,7 +381,15 @@ public class GameManager : MonoBehaviour
         {
             playerVCam.gameObject.SetActive(true);
             cinematicVCam.gameObject.SetActive(false);
+            foxVCam.gameObject.SetActive(false);
         }
+    }
+
+    public void FoxCamEnable()
+    {
+        playerVCam.gameObject.SetActive(false);
+        cinematicVCam.gameObject.SetActive(false);
+        foxVCam.gameObject.SetActive(true);
     }
 
     IEnumerator DisableCamera()

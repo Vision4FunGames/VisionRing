@@ -127,7 +127,16 @@ public class InventorySlot : MonoBehaviour
     // Use the item
     public void UseItem ()
     {
-        item?.Use(_inventoryType,int.Parse(countText.text));
+        if (_inventoryType == InventoryType.Collect)
+        {
+            item?.Use(_inventoryType,int.Parse(countText
+                .text));
+        }
+        else
+        {
+            item?.Use(_inventoryType);
+        }
+        
         if (_inventoryType == InventoryType.UnEquip)
         {
             if (slotIndex != null && !item.isDefault)
