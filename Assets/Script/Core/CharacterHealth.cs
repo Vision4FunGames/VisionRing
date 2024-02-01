@@ -11,6 +11,7 @@ public abstract class CharacterHealth : MonoBehaviour
     public Player _player;
     public DieDelegate OnDie;
     protected float health;
+    private float maxHealth;
     public MMProgressBar mmProgressBar;
     [HideInInspector] public bool useShield;
     public GameManager _gameManager;
@@ -26,25 +27,27 @@ public abstract class CharacterHealth : MonoBehaviour
     
     private void Start()
     {
+      
         _player = FindObjectOfType<Player>();
         _gameManager = FindObjectOfType<GameManager>();
     }
     
     public void TakeDamage(float damageAmount)
     {
+        maxHealth = 300;
         if (!useShield)
         {
             health -= damageAmount;
             HapticPatterns.PlayPreset(HapticPatterns.PresetType.Success);
             UpdateHealthBar();
-            if (health <=60 && !GameManager.instance.isHeal)
+            if (health <= maxHealth *.9f && !GameManager.instance.isHeal)
             {
                 TutorialLoader.instance.Load("Heal");
                 PlayerPrefs.SetInt("Heal",1);
                 GameManager.instance.isHeal = true;
             }
 
-            if (health <= 98 && !GameManager.instance.isDash)
+            if (health <= maxHealth-10 && !GameManager.instance.isDash)
             {
                 TutorialLoader.instance.Load("Dash");
                 PlayerPrefs.SetInt("Dash",1);

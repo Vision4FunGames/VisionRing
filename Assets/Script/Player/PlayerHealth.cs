@@ -141,15 +141,35 @@ public class PlayerHealth : CharacterHealth
         healBuffParticle.gameObject.SetActive(true);
         health +=  ((maxHealth *.6f) * healRate);
         mmProgressBar.UpdateBar(health, 0, maxHealth);
-        if (newHealth > maxHealth)
-            newHealth = maxHealth;
+        if (health > maxHealth)
+            health = maxHealth;
     }
 
     public void HealBtnCoolDown(GameObject btn)
     {
+        
         var btnImage = btn.GetComponent<Image>();
         btnImage.fillAmount = 0f;
         btnImage.DOFillAmount(360f, 8f).SetEase(Ease.Linear);
+
+        var btnFill = btn.transform.GetChild(2);
+        for (int i = 0; i < btnFill.transform.childCount; i++)
+        {
+            btnFill.transform.GetChild(i).GetComponent<Image>().fillAmount = 0f;
+        }
+        FillImage(btnFill,0);
+    }
+
+    public void FillImage(Transform t,int child)
+    {
+        
+        t.GetChild(child).GetComponent<Image>().DOFillAmount(1, 2f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            if (child <3)
+            {
+               FillImage(t,child + 1);   
+            }
+        });
     }
 
     #endregion
