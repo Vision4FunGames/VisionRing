@@ -51,4 +51,9 @@ public class BossAnimationControl : MonoBehaviour
     {
         _bossManager.SpawnSkelet();
     }
+
+    public void Dead()
+    {
+        Destroy(_bossManager.gameObject,2f);
+    }
 }

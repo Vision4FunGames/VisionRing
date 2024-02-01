@@ -105,10 +105,14 @@ public class BossManager : MonoBehaviour
         navMeshAgent.speed = 0;
         bossMovement.enabled = false;
         GetComponent<Collider>().enabled = false;
+        mmProgressBar.gameObject.SetActive(false);
         GetComponentInChildren<Animator>().Play("Dead");
         if (GetComponentInParent<PuzzleConditionController>())
             GetComponentInParent<PuzzleConditionController>().DeadEnemyPuzzle();
+        
+        
     }
+    
     public void SpawnSkelet()
     {
         _shieldParticle.Play();
