@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Exoa.TutorialEngine;
 using NaughtyAttributes;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -138,6 +139,12 @@ public class PlayerManager : MonoBehaviour
         {
             _playerHealth.HealLimit = 4;
             _playerHealth.EnableHealBuff(true);
+        }
+
+        if (other.CompareTag("RealmChange"))
+        {
+            other.gameObject.GetComponent<Collider>().enabled = false;
+            TutorialLoader.instance.Load("RealmChange");
         }
     }
 

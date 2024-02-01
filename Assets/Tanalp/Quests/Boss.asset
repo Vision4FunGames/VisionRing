@@ -18,6 +18,24 @@ MonoBehaviour:
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
+--- !u!114 &-8074880345956808042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: Back to Mayor.
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
 --- !u!114 &-5581978725269079810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,6 +73,28 @@ MonoBehaviour:
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
+--- !u!114 &-3937264666809542421
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acd9aaaa3b44d5419945259bebbe84a, type: 3}
+  m_Name: IconQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_image: {fileID: 21300000, guid: 572c3ecf2337d1d4da3e67ef65d060e7, type: 3}
+  m_color: {r: 1, g: 1, b: 1, a: 1}
+  m_caption:
+    m_text: 
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_count: 0
+  m_imageNameProxy: 
 --- !u!114 &-3648920895096133557
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,7 +363,9 @@ MonoBehaviour:
       m_categorizedContentList:
       - m_contentList: []
       - m_contentList: []
-      - m_contentList: []
+      - m_contentList:
+        - {fileID: -8074880345956808042}
+        - {fileID: -3937264666809542421}
     m_conditionSet:
       m_conditionList:
       - {fileID: -5581978725269079810}
@@ -334,7 +376,7 @@ MonoBehaviour:
     m_canvasRect:
       serializedVersion: 2
       x: 200
-      y: 130
+      y: 131
       width: 120
       height: 48
   - m_id:
@@ -383,7 +425,7 @@ MonoBehaviour:
     m_childIndexList: 
     m_canvasRect:
       serializedVersion: 2
-      x: 198
+      x: 197
       y: 223
       width: 120
       height: 35

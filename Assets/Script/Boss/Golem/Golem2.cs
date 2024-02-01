@@ -2,6 +2,7 @@ using System;
 using DamageNumbersPro;
 using DG.Tweening;
 using MoreMountains.Tools;
+using PixelCrushers.QuestMachine;
 using UnityEngine;
 
 public class Golem2 : MonoBehaviour , GolemCombat
@@ -202,7 +203,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
         }
         else if(health<=0 && !dead)
         {
-            
+            QuestMachineMessages.SendCompositeMessage(this,"Killed:Boss");
             GetComponent<Collider>().enabled = false;
             dead = true;
             _gameManager.DeadBirlesikGolem();

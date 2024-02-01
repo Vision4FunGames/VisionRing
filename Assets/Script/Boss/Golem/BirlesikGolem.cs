@@ -146,7 +146,7 @@ public class BirlesikGolem : MonoBehaviour
                     _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
         }
     }
-
+    
     public void SpawnGolems()
     {
         earthQuake.transform.localPosition = new Vector3(0, 0, -16);

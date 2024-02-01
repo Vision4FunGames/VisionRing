@@ -250,6 +250,10 @@ public class GameManager : MonoBehaviour
             CinematicCamDisable();
         }
 
+        if (tutorialSection ==0 && tutorialCounter ==4)
+        {
+            Time.timeScale = 1f;
+        }
         if (tutorialSection == 1 && tutorialCounter == 1)
         {
             tutorialEnemies.gameObject.SetActive(true);

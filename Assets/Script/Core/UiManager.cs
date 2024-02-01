@@ -164,11 +164,11 @@ public class UiManager : MonoBehaviour
         if (focusPanel.gameObject.activeSelf)
         {
             focusPanel.gameObject.SetActive(false);
-            switchOnClick.gameObject.SetActive(false);
+            switchOnClick.gameObject.SetActive(true);
         }
         else
         {
-            switchOnClick.gameObject.SetActive(true);
+            switchOnClick.gameObject.SetActive(false);
             focusPanel.gameObject.SetActive(true);
         }
     }

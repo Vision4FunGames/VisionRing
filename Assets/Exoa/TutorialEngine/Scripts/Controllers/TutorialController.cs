@@ -192,8 +192,15 @@ namespace Exoa.TutorialEngine
             }
             else if (TutorialLoader.instance.loadedTutorialName == "Dash")
             {
-                StopCoroutine(DashMove());
+                DashTutorial();
                 //handImage.transform.DOKill();
+            }
+             else if (TutorialLoader.instance.loadedTutorialName== "0.3")
+            {
+                if (currentStep == 1)
+                {
+                    HandImageClick();
+                }
             }
             
             
@@ -201,6 +208,12 @@ namespace Exoa.TutorialEngine
           
             
         }
+
+        public void HandImageClick()
+        {
+            handImage.transform.DOScale(.7f, .5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        }
+       
 
         private void Update()
         {
@@ -419,11 +432,13 @@ namespace Exoa.TutorialEngine
         }
         public void DashTutorial()
         {
-            handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).OnComplete(() =>
-            {
-                handImage.transform.localPosition = new Vector3(0, 0, 0);
-                StartCoroutine(DashMove());
-            });
+                handImage.transform.DOKill();
+             handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+            // .OnComplete(() =>
+            // {
+            //     handImage.transform.localPosition = new Vector3(0, 0, 0);
+            //     StartCoroutine(DashMove());
+            // });
            // UiManager.instance.attackJoystick.transform
 
 
@@ -476,7 +491,10 @@ namespace Exoa.TutorialEngine
             //popup.OnClickNext.RemoveAllListeners();
 
             tutorialState = State.FadingOut;
-
+            if (handImage.transform.DOPlay()== 1)
+            {
+                handImage.transform.DOKill();
+            }
         }
 
 

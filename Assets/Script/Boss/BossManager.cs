@@ -1,5 +1,6 @@
 using System;
 using DamageNumbersPro;
+using Exoa.TutorialEngine;
 using MoreMountains.Tools;
 using NaughtyAttributes;
 using PixelCrushers.QuestMachine;
@@ -80,7 +81,7 @@ public class BossManager : MonoBehaviour
                 ShowDamageText(damage * 10);
                 mmProgressBar.UpdateBar(bossHealth, 0, 100);
             }
-
+            
             CheckBossHealth();
         }
     }
@@ -109,7 +110,7 @@ public class BossManager : MonoBehaviour
         GetComponentInChildren<Animator>().Play("Dead");
         if (GetComponentInParent<PuzzleConditionController>())
             GetComponentInParent<PuzzleConditionController>().DeadEnemyPuzzle();
-        
+        TutorialLoader.instance.Load("RealmChange");
         
     }
     
