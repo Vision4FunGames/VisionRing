@@ -192,7 +192,8 @@ namespace Exoa.TutorialEngine
             }
             else if (TutorialLoader.instance.loadedTutorialName == "Dash")
             {
-                DashTutorial();
+                StopCoroutine(DashMove());
+               // DashTutorial();
                 //handImage.transform.DOKill();
             }
              else if (TutorialLoader.instance.loadedTutorialName== "0.3")
@@ -284,14 +285,15 @@ namespace Exoa.TutorialEngine
                     {
                         mask.sizeDelta = maskSize2Settings.UpdateSpring(ref maskSizeSpring, targetMaskSize);
                     }
-                    Vector2 popupPositon = popup.CalculatePopupPosition(targetRect2D);
-                    popup.PopupRt.anchoredPosition = popupMoveSettings.UpdateSpring(ref popupMoveSpring, popupPositon);
+                   // Vector2 popupPositon = popup.CalculatePopupPosition(targetRect2D);
+                    popup.PopupRt.transform.localPosition =  new Vector3(0, -513, 0);
+                   // popup.PopupRt.anchoredPosition = popupMoveSettings.UpdateSpring(ref popupMoveSpring, popupPositon);
                     hiddenBtnRt.anchoredPosition = currentEndPositionValue;
                     hiddenBtnRt.sizeDelta = targetMaskSize;
                 }
                 else
                 {
-                    popup.PopupRt.anchoredPosition = popupMoveSettings.UpdateSpring(ref popupMoveSpring, Vector2.zero);
+                    //popup.PopupRt.anchoredPosition = popupMoveSettings.UpdateSpring(ref popupMoveSpring, Vector2.zero);
                 }
                 Vector4 newColorV = bgColorSettings.UpdateSpring(ref bgColorSpring, currentBgColor.ToVector4());
                 bg.color = newColorV.ToColor();
@@ -379,6 +381,8 @@ namespace Exoa.TutorialEngine
                 if (s.isClickable && rt != null && btn != null)
                 {
                     hiddenBtn.gameObject.SetActive(true);
+                    handImage.gameObject.SetActive(true);
+                    HandImageClick();
                     hiddenBtn.onClick.AddListener(btn.onClick.Invoke);
                 }
 
@@ -395,8 +399,7 @@ namespace Exoa.TutorialEngine
                 if (s.isReplacingNextButton && rt != null && btn != null)
                 {
                     popup.nextBtn.gameObject.SetActive(false);
-
-
+                    
                     hiddenBtn.onClick.AddListener(popup.nextBtn.onClick.Invoke);
                 }
                 else
@@ -432,15 +435,19 @@ namespace Exoa.TutorialEngine
         }
         public void DashTutorial()
         {
-                handImage.transform.DOKill();
-             handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+             //    handImage.transform.DOKill();
+             // handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
             // .OnComplete(() =>
             // {
             //     handImage.transform.localPosition = new Vector3(0, 0, 0);
             //     StartCoroutine(DashMove());
             // });
            // UiManager.instance.attackJoystick.transform
-
+           handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).OnComplete(() =>
+           {
+               handImage.transform.localPosition = new Vector3(0, 0, 0);
+               StartCoroutine(DashMove());
+           });
 
         }
 
@@ -455,6 +462,7 @@ namespace Exoa.TutorialEngine
             popup.OnClickNext.RemoveAllListeners();
             if (TutorialLoader.instance.loadedTutorialName == "Dash")
             {
+                
                 DashTutorial();
             }
             
@@ -491,10 +499,7 @@ namespace Exoa.TutorialEngine
             //popup.OnClickNext.RemoveAllListeners();
 
             tutorialState = State.FadingOut;
-            if (handImage.transform.DOPlay()== 1)
-            {
-                handImage.transform.DOKill();
-            }
+            handImage.gameObject.SetActive(false);
         }
 
 
