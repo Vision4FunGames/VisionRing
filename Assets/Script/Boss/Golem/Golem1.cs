@@ -30,8 +30,10 @@ public class Golem1 : MonoBehaviour, GolemCombat
     private bool dead;
     private float currentFlameTimer;
     private GameManager _gameManager;
+    private Canvas _canvas;
     private void Awake()
     {
+        _canvas =  GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponent<Canvas>();
         _gameManager = FindObjectOfType<GameManager>();
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         baseHealth = health;
@@ -47,7 +49,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
         MMProgressBar prefab = Resources.Load<MMProgressBar>("Golem1 Bar");
         if (prefab != null)
         {
-            healthBar = Instantiate(prefab, FindObjectOfType<ShopUI>().transform, false);
+            healthBar = Instantiate(prefab,_canvas.transform, false);
             healthBar.gameObject.SetActive(true);
         }
         else

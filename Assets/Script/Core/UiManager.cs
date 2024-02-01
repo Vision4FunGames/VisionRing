@@ -15,7 +15,7 @@ public class UiManager : MonoBehaviour
     public ButtonType[] ButtonType;
     public static UiManager instance;
     [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea;
+    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea , settingPanel;
 
     public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
@@ -190,6 +190,14 @@ public class UiManager : MonoBehaviour
         
     }
 
+    public void SettingUI()
+    {
+        CloseAllUI();
+        
+        Invoke("OpenUI",canvasTime);
+        OpenUI(inventory);
+        OpenUI(settingPanel);
+    }
     public void BlackSmithUI()
     {
         CloseAllUI();

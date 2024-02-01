@@ -1,14 +1,36 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    [Header("Main Menu")] 
-    public Slider mainMenu; 
-    public AudioSource mainMusicSource;
+    public Slider mainMusicVolume;
+    public Slider sfxVolume;
 
-    private void Update()
+    [Header("Main Menu")] public AudioSource mainMusicSource;
+
+    public void Start()
     {
-        mainMusicSource.volume = mainMenu.value;
+        mainMusicSource = GetComponent<AudioSource>();
+        mainMusicVolume.onValueChanged.AddListener(delegate { MainMusicVolume(); });
+        sfxVolume.onValueChanged.AddListener(delegate { SfxVolume(); });
+        MainMusicVolume();
+        SfxVolume();
+    }
+
+    public void MainMusicVolume()
+    {
+        mainMusicSource.volume = mainMusicVolume.value;
+    }
+
+    public void SfxVolume()
+    {
+        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+
+        for (int i = 0; i < audioSources.Length; i++)
+        {
+            if (!audioSources[i].GetComponent<GameManager>())
+                audioSources[i].volume = sfxVolume.value;
+        }
     }
 }

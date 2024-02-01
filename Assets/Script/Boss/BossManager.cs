@@ -26,6 +26,7 @@ public class BossManager : MonoBehaviour
     public float bossHealth;
     public MMProgressBar mmProgressBar;
     public ParticleSystem _shieldParticle;
+    Canvas canvasMain;
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -34,6 +35,17 @@ public class BossManager : MonoBehaviour
         player = FindObjectOfType<Player>();
         bossMovement = GetComponent<BossMovement>();
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
+        canvasMain = GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponent<Canvas>();
+        MMProgressBar prefab = Resources.Load<MMProgressBar>("BossHealthBar");
+        if (prefab != null)
+        {
+            mmProgressBar = Instantiate(prefab,canvasMain.transform, false);
+            mmProgressBar.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("BirlesikGolem prefab'ı bulunamadı veya yüklenemedi!");
+        }
     }
 
     private void Update()
@@ -48,6 +60,7 @@ public class BossManager : MonoBehaviour
     {
         sleep = true;
         navMeshAgent.enabled = true;
+        
         mmProgressBar.gameObject.SetActive(true);
     }
 

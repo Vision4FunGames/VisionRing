@@ -25,11 +25,12 @@ public class Golem2 : MonoBehaviour , GolemCombat
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     private float currentFlameTimer;
     private GameManager _gameManager;
-
+    Canvas canvasMain;
 
     // Start is called before the first frame update
     void Start()
     {
+        canvasMain=  GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponent<Canvas>();
         _gameManager = FindObjectOfType<GameManager>();
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         baseHealth = health;
@@ -47,7 +48,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
         MMProgressBar prefab = Resources.Load<MMProgressBar>("Golem2 Bar");
         if (prefab != null)
         {
-            healthBar = Instantiate(prefab, FindObjectOfType<ShopUI>().transform, false);
+            healthBar = Instantiate(prefab, canvasMain.transform, false);
             healthBar.gameObject.SetActive(true);
         }
         else

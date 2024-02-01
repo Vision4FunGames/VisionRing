@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1897537093}
   - component: {fileID: 1897537109}
   - component: {fileID: 1897537103}
+  - component: {fileID: 1967478086}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -54,10 +55,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   villageSpawnPos: {fileID: 0}
   tutorial1SpawnPos: {fileID: 0}
+  tutorialStartPos: {fileID: 0}
   gameState: 0
   PlayerName: 
   playerVCam: {fileID: 0}
   cinematicVCam: {fileID: 0}
+  foxVCam: {fileID: 0}
   tutorialCounter: 0
   tutorialSection: 0
   tutorial: 0
@@ -78,15 +81,22 @@ MonoBehaviour:
   magician: {fileID: 0}
   villageDoor: {fileID: 0}
   villageDoor2: {fileID: 0}
+  colosseum: {fileID: 0}
+  tutorialIncreaserFirst: {fileID: 0}
   isMerchant: 0
   isMagician: 0
   isBlacksmith: 0
   isRing: 0
   isHeal: 0
+  isBox: 0
+  isColosseum: 0
+  isDash: 0
+  isDungeon: 0
   currentTime: 0
   fightBool: 0
   fight: {fileID: 8300000, guid: 31d5e3cf0c199df46b7c1fc52003a230, type: 3}
   stand: {fileID: 8300000, guid: 22e0d4fb37837a64aa4988cc8ae70631, type: 3}
+  isFoxSaved: 0
 --- !u!114 &5038891023898458666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,8 +132,11 @@ MonoBehaviour:
   contentPanel: {fileID: 0}
   playerHealthBarCanvas: {fileID: 0}
   navigationArea: {fileID: 0}
+  settingPanel: {fileID: 0}
+  focusPanel: {fileID: 0}
+  CanvasGroup: {fileID: 0}
+  canvasTime: 0.1
   ringBtn: {fileID: 0}
-  sceneUI: {fileID: 0}
   healText: {fileID: 0}
   menuUi: {fileID: 0}
   skillButtons: []
@@ -141,7 +154,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 62faf7bb8f395c3478b3c5c57daea02a, type: 3}
   - {fileID: 21300000, guid: bf12a8cd4d715204bbfe38e14b4cd8f7, type: 3}
   itemLevelSprites:
-  - {fileID: 21300000, guid: b91f5f40bff9be741a739be1e98f9b6e, type: 3}
+  - {fileID: 21300000, guid: e80e7f99997e36645b17e8338e11f510, type: 3}
   - {fileID: 21300000, guid: fa09866f8e41b7a499c88a578487c3a8, type: 3}
   - {fileID: 21300000, guid: 50c2eba695d692e4b9a1debb742ac2f0, type: 3}
   - {fileID: 21300000, guid: 6065a493c93ca3149a0bf3a155f5b805, type: 3}
@@ -160,7 +173,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8fd540d544f679147a2b1047dcb0434a, type: 3}
   - {fileID: 21300000, guid: 08fcabf8575912e45877e2d8d9c7437d, type: 3}
   - {fileID: 21300000, guid: 9aef5fb80a7a29948b90854e66790b2f, type: 3}
-  emptySprite: {fileID: 21300000, guid: 69891f3e45e4b764c86ac6e53b0f2997, type: 3}
+  emptySprite: {fileID: 21300000, guid: e498c622e234a419a83e872a7f8f4fbe, type: 3}
   skillMaterial: {fileID: 2100000, guid: a3f7a2356cdb2604c8f48b7f17ec27fb, type: 2}
   diamondText: {fileID: 0}
   gemText: {fileID: 0}
@@ -185,13 +198,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   collectBtn: {fileID: 0}
   upgradeWheel: {fileID: 0}
   inventoryBtnPanel: {fileID: 0}
   shopBtnPanel: {fileID: 0}
   skillUpgrade: {fileID: 0}
   contentText: {fileID: 0}
+  foxRaw: {fileID: 0}
+  chapter1: {fileID: 0}
+  endVideo: {fileID: 0}
+  itemTextPanel: {fileID: 0}
 --- !u!114 &5038891023898458645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4d8c519e582a346aab49e5de7c5cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swimParticle: {fileID: 0}
   bombparticle: {fileID: 1281527889361916805, guid: 1ff9cd8da563f594ea2e6161487e2073, type: 3}
   playerDashParticle: {fileID: 0}
   playerEnvanterParticleSystem: {fileID: 0}
@@ -551,3 +568,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faded: 0
+--- !u!114 &1967478086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55744798c1d1cf7498dd51690aec7068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMusicVolume: {fileID: 0}
+  sfxVolume: {fileID: 0}
+  mainMusicSource: {fileID: 0}
