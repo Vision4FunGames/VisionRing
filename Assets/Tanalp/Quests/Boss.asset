@@ -55,6 +55,24 @@ MonoBehaviour:
     m_valueType: 0
     m_literalValue: 1
     m_counterIndex: 0
+--- !u!114 &-4598662987929224776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: Back to Mayor
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
 --- !u!114 &-4315501235178789791
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,8 +433,11 @@ MonoBehaviour:
       m_categorizedContentList:
       - m_contentList:
         - {fileID: -8983667239949240792}
-      - m_contentList: []
-      - m_contentList: []
+      - m_contentList:
+        - {fileID: 5364449114782598783}
+      - m_contentList:
+        - {fileID: -4598662987929224776}
+        - {fileID: 4331959984939336014}
     m_conditionSet:
       m_conditionList: []
       m_conditionCountMode: 1
@@ -432,6 +453,28 @@ MonoBehaviour:
   m_textTable: {fileID: 0}
   m_goalEntityTypeName: 
   m_nextContentID: 0
+--- !u!114 &4331959984939336014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acd9aaaa3b44d5419945259bebbe84a, type: 3}
+  m_Name: IconQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_image: {fileID: 21300000, guid: 572c3ecf2337d1d4da3e67ef65d060e7, type: 3}
+  m_color: {r: 1, g: 1, b: 1, a: 1}
+  m_caption:
+    m_text: 
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_count: 0
+  m_imageNameProxy: 
 --- !u!114 &4964383259776261167
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -447,6 +490,24 @@ MonoBehaviour:
   m_contentID: -1
   m_bodyText:
     m_text: Back to mayor.
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+--- !u!114 &5364449114782598783
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: 'You killed the monster go back to the mayor. '
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
