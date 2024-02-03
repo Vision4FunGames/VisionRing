@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Exoa.TutorialEngine;
+using GameAnalyticsSDK;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
 using TMPro;
@@ -14,8 +15,23 @@ public class UiManager : MonoBehaviour
     [Header("Player Button")] public Button JumpBtn;
     public ButtonType[] ButtonType;
     public static UiManager instance;
-    [Header("UI Objects")]
-    public GameObject gamePlay, inventory,currentItems,blacksmithPanel,shopPanel,equipmentPanel,magicianPanel,armorFilter,gunFilter,deadPanel,skillPanel,goldPanel,contentPanel,playerHealthBarCanvas,navigationArea , settingPanel;
+
+    [Header("UI Objects")] public GameObject gamePlay,
+        inventory,
+        currentItems,
+        blacksmithPanel,
+        shopPanel,
+        equipmentPanel,
+        magicianPanel,
+        armorFilter,
+        gunFilter,
+        deadPanel,
+        skillPanel,
+        goldPanel,
+        contentPanel,
+        playerHealthBarCanvas,
+        navigationArea,
+        settingPanel;
 
     public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
@@ -28,7 +44,7 @@ public class UiManager : MonoBehaviour
     private ShopUI shopUI;
     public GameObject inventoryObject;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
-    
+
     public MMProgressBar playerProgressBar;
     public FixedJoystick attackJoystick;
     public Sprite[] itemlevelSprites45;
@@ -39,6 +55,7 @@ public class UiManager : MonoBehaviour
     public Material skillMaterial;
 
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
+
     //Chest Scroll
     public GameObject caseScroll;
     public GameObject chestPanel;
@@ -46,25 +63,27 @@ public class UiManager : MonoBehaviour
     public List<GameObject> UiPanels = new List<GameObject>();
     public GameObject collectBtn;
     public GameObject upgradeWheel;
-    
-    public GameObject inventoryBtnPanel,shopBtnPanel;
 
-    [SerializeField]private SkillUpgrade skillUpgrade;
+    public GameObject inventoryBtnPanel, shopBtnPanel;
+
+    [SerializeField] private SkillUpgrade skillUpgrade;
+
     //Economy
     public TextMeshProUGUI contentText;
 
     [Header("Image")] public RawImage foxRaw;
     [Header("Chapters")] public VideoPlayer chapter1;
     public VideoPlayer endVideo;
+
     public delegate void OnEconomyChanged();
+
     public OnEconomyChanged onEconomyChangedCallBack;
 
-    [Header("ItemCollect")] 
-    public GameObject itemTextPanel;
+    [Header("ItemCollect")] public GameObject itemTextPanel;
+
     private void Awake()
     {
         instance = this;
-        
     }
 
     private void Start()
@@ -74,7 +93,7 @@ public class UiManager : MonoBehaviour
         inventory.SetActive(false);
         gamePlay.SetActive(true);
         onEconomyChangedCallBack += EconomyUI;
-       onEconomyChangedCallBack.Invoke();
+        onEconomyChangedCallBack.Invoke();
     }
 
     public void DisableButton()
@@ -92,6 +111,7 @@ public class UiManager : MonoBehaviour
             ButtonType[i].skillButton.enabled = true;
         }
     }
+
     private void Update()
     {
         if (Input.GetButtonDown("Inventory"))
@@ -103,11 +123,18 @@ public class UiManager : MonoBehaviour
         {
             print(chapter1.frame + " Frame ");
         }
-        if (chapter1.frame + 1 == (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
+
+        if (chapter1.frame + 5 >= (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
         {
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic02");
             chapter1.gameObject.SetActive(false);
         }
         
+        if (endVideo.frame + 5 >= (long)endVideo.frameCount && endVideo.gameObject.activeSelf)
+        {
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic03");
+            endVideo.gameObject.SetActive(false);
+        }
     }
 
     public void MenuUI()
@@ -118,31 +145,31 @@ public class UiManager : MonoBehaviour
         // inventory.gameObject.SetActive(true);
         // menuUi.gameObject.SetActive(true);
     }
+
     public void ShopUI()
     {
-        QuestMachineMessages.SendCompositeMessage(this,"Meet:Merchant");
+        QuestMachineMessages.SendCompositeMessage(this, "Meet:Merchant");
         if (GameManager.instance.isMerchant)
         {
             CloseAllUI();
-            Invoke("OpenUI",canvasTime);
-            
+            Invoke("OpenUI", canvasTime);
+
             OpenUI(shopPanel);
             OpenUI(equipmentPanel);
             OpenUI(inventory);
             OpenUI(inventoryObject);
             OpenUI(goldPanel);
             OpenUI(contentPanel);
-            
+
             inventoryUi.UpdateUI();
             shopUI.UpdateShop();
             onEconomyChangedCallBack.Invoke();
             contentText.text = "SHOP";
-            
         }
         else
         {
             CloseAllUI();
-            Invoke("OpenUI",canvasTime);
+            Invoke("OpenUI", canvasTime);
             OpenUI(shopPanel);
             OpenUI(equipmentPanel);
             OpenUI(inventory);
@@ -155,7 +182,7 @@ public class UiManager : MonoBehaviour
             contentText.text = "SHOP";
             GameManager.instance.isMerchant = true;
             TutorialLoader.instance.Load("Merchant");
-            PlayerPrefs.SetInt("Merchant",1);
+            PlayerPrefs.SetInt("Merchant", 1);
         }
     }
 
@@ -172,10 +199,11 @@ public class UiManager : MonoBehaviour
             focusPanel.gameObject.SetActive(true);
         }
     }
+
     public void ShowInventory()
     {
         CloseAllUI();
-        
+
         contentText.text = "INVENTORY";
         OpenUI(currentItems);
         OpenUI(equipmentPanel);
@@ -187,22 +215,22 @@ public class UiManager : MonoBehaviour
         inventoryUi.ShowSelected("All");
         inventoryUi.UpdateUI();
         onEconomyChangedCallBack.Invoke();
-        
     }
 
     public void SettingUI()
     {
         CloseAllUI();
-        
-        Invoke("OpenUI",canvasTime);
+
+        Invoke("OpenUI", canvasTime);
         OpenUI(inventory);
         OpenUI(settingPanel);
     }
+
     public void BlackSmithUI()
     {
         CloseAllUI();
-            
-        Invoke("OpenUI",canvasTime);
+
+        Invoke("OpenUI", canvasTime);
         OpenUI(inventory);
         OpenUI(blacksmithPanel);
         OpenUI(equipmentPanel);
@@ -215,19 +243,16 @@ public class UiManager : MonoBehaviour
         if (!GameManager.instance.isBlacksmith)
         {
             TutorialLoader.instance.Load("Blacksmith");
-            PlayerPrefs.SetInt("Blacksmith",1);
+            PlayerPrefs.SetInt("Blacksmith", 1);
         }
     }
 
     public void MagicianUI()
     {
-
-       
-        
         if (GameManager.instance.isMagician)
         {
             CloseAllUI();
-            Invoke("OpenUI",canvasTime);
+            Invoke("OpenUI", canvasTime);
             OpenUI(inventory);
             OpenUI(magicianPanel);
             OpenUI(contentPanel);
@@ -240,11 +265,11 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-           
-            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count==0 && GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests().Count ==0)
+            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0 &&
+                GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests().Count == 0)
             {
                 CloseAllUI();
-                Invoke("OpenUI",canvasTime);
+                Invoke("OpenUI", canvasTime);
                 OpenUI(inventory);
                 OpenUI(magicianPanel);
                 OpenUI(contentPanel);
@@ -252,25 +277,23 @@ public class UiManager : MonoBehaviour
                 contentText.text = "MAGICIAN";
                 Inventory.instance.onItemChangedCallback?.Invoke();
                 skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-               // navigationArea.gameObject.SetActive(true);
+                // navigationArea.gameObject.SetActive(true);
                 TutorialLoader.instance.Load("Magician");
-                PlayerPrefs.SetInt("Magician",1);
+                PlayerPrefs.SetInt("Magician", 1);
                 GameManager.instance.isMagician = true;
             }
-            
+
             else
             {
                 GameManager.instance.magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();
             }
         }
-       
-
     }
 
     public void SkillUI()
     {
         CloseAllUI();
-        Invoke("OpenUI",canvasTime);
+        Invoke("OpenUI", canvasTime);
         OpenUI(inventory);
         OpenUI(skillPanel);
         OpenUI(contentPanel);
@@ -278,7 +301,6 @@ public class UiManager : MonoBehaviour
         //navigationArea.gameObject.SetActive(true);
         contentText.text = "SKILLS";
         SkillPanel.instance.onSkillUseChangeCallBack.Invoke();
-       
     }
 
     public void SceneChange()
@@ -287,6 +309,7 @@ public class UiManager : MonoBehaviour
         // sceneUI.transform.GetChild(0).transform.localScale = new Vector3(0, 0, 0);
         // sceneUI.transform.GetChild(0).transform.DOScale(20f, 5f);
         // GameManager.instance.RestartGame();
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic02");
         ringBtn.gameObject.SetActive(false);
         chapter1.gameObject.SetActive(true);
         Player.instance.tutorial = false;
@@ -298,8 +321,8 @@ public class UiManager : MonoBehaviour
         PlayerManager.instance.pet.GetComponent<NavMeshAgent>().enabled = true;
         GameManager.instance.tutorialSection = 1;
         GameManager.instance.tutorialCounter = 0;
-        Invoke("LoadTuto",3f);
-        
+        Invoke("LoadTuto", 3f);
+
         Player.instance.TurnB();
     }
 
@@ -307,33 +330,31 @@ public class UiManager : MonoBehaviour
     {
         GameManager.instance.TutorialLoad();
     }
+
     public void CloseAllUI()
     {
-        
         for (int i = 0; i < UiPanels.Count; i++)
         {
-           // UiPanels[i].gameObject.SetActive(false);
-           var tweener = UiPanels[i].gameObject.GetComponent<CanvasGroupTweener>();
-           if (tweener != null)
-           {
-              tweener.Close();
-           }
-           else
-           {
-               UiPanels[i].gameObject.SetActive(false);
-           }
-          
+            // UiPanels[i].gameObject.SetActive(false);
+            var tweener = UiPanels[i].gameObject.GetComponent<CanvasGroupTweener>();
+            if (tweener != null)
+            {
+                tweener.Close();
+            }
+            else
+            {
+                UiPanels[i].gameObject.SetActive(false);
+            }
         }
     }
 
-    public void  OpenUI(GameObject gameObject)
+    public void OpenUI(GameObject gameObject)
     {
         var tweener = gameObject.GetComponent<CanvasGroupTweener>();
-        if (tweener!=null)
+        if (tweener != null)
         {
             tweener.Open();
         }
-        
     }
     // public void UpdatePlayerHealthBar(float health)
     // {
@@ -346,8 +367,6 @@ public class UiManager : MonoBehaviour
         CloseAllUI();
         OpenUI(gamePlay);
         OpenUI(playerHealthBarCanvas);
-        
-       
     }
 
     public void ChestPanelUI()
@@ -399,7 +418,4 @@ public class ButtonType
 {
     public SkillType mySkillType;
     public Button skillButton;
-    
 }
-
-

@@ -44,7 +44,6 @@ public class ShopUI : MonoBehaviour
         { 
             case "All":
                 counter = 0;
-                Debug.Log("ALL");
                 for (int i = 0; i < slots.Length; i++)
                 {
                     if (i < shop.shopItems.Count)

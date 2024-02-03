@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameAnalyticsSDK;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -39,7 +40,6 @@ public class SkillCoolDown : MonoBehaviour
         {
             _currentSkills[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + _currentSkills[i].skillName);
         }
-        Debug.Log("Loaded SKills");
         onSkillChangeCallBack.Invoke();
     }
 
@@ -50,7 +50,6 @@ public class SkillCoolDown : MonoBehaviour
 
     public bool CanUse(int skillindex)
     {
-        Debug.Log(skillindex + " Index");
         return skillsArray[skillindex].coolDownTime <= 0;
     }
 
@@ -118,7 +117,7 @@ public class SkillCoolDown : MonoBehaviour
                 .GetComponent<Image>());
             //SkillPanel Buttons
             UiManager.instance.skillPanel.transform.GetChild(0).GetChild(i).GetComponent<InventorySlot>().AddSkill(_currentSkills[i]);
-             
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"Wizard",_currentSkills[i].skillName);
         }
     }
 }

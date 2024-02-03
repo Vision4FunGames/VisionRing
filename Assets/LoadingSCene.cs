@@ -3,15 +3,26 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using GameAnalyticsSDK;
 
-public class LoadingSCene : MonoBehaviour
+public class LoadingSCene : MonoBehaviour,IGameAnalyticsATTListener
 {
    public GameObject tutorial, loading;
    private VideoPlayer videoPlayer;
    private void Awake()
    {
+      if(Application.platform == RuntimePlatform.IPhonePlayer)
+      {
+         GameAnalytics.RequestTrackingAuthorization(this);
+      }
+      else
+      {
+         GameAnalytics.Initialize();
+      }
+      
       if (!PlayerPrefs.HasKey("watchvideo"))
       {
+         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic00");
          videoPlayer = tutorial.GetComponent<VideoPlayer>();
          PlayerPrefs.SetInt("watchvideo",1);
          tutorial.SetActive(true);
@@ -27,6 +38,7 @@ public class LoadingSCene : MonoBehaviour
    {
       if (videoPlayer.frame+5 >= (long)videoPlayer.frameCount && tutorial.gameObject.activeSelf)
       {
+         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"Cinematic","Cinematic00");
          tutorial.gameObject.SetActive(false);
          ShowLoadingScene();
       }
@@ -48,5 +60,25 @@ public class LoadingSCene : MonoBehaviour
          yield return null;
       }
     
+   }
+
+   public void GameAnalyticsATTListenerNotDetermined()
+   {
+      GameAnalytics.Initialize();
+   }
+
+   public void GameAnalyticsATTListenerRestricted()
+   {
+      GameAnalytics.Initialize();
+   }
+
+   public void GameAnalyticsATTListenerDenied()
+   {
+      GameAnalytics.Initialize();
+   }
+
+   public void GameAnalyticsATTListenerAuthorized()
+   {
+      GameAnalytics.Initialize();
    }
 }

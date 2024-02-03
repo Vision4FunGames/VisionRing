@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using Exoa.TutorialEngine;
+using GameAnalyticsSDK;
 using Script.Player.PlayerStateMachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -257,6 +258,8 @@ public class Player : MonoBehaviour
         {
             isMovement = false;
             transform.position = other.transform.parent.transform.position;
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "Puzzle",  other.transform.parent.transform.name);
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Puzzle",  other.transform.parent.transform.name);
             Invoke("IsMovementAgain", 1f);
         }
 

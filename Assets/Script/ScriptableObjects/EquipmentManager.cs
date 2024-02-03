@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using GameAnalyticsSDK;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -174,7 +175,6 @@ public class EquipmentManager : MonoBehaviour
         //equippedInventory.Add(newItem);
         if (onEquipmentChanged != null)
             onEquipmentChanged.Invoke(newItem, oldItem);
-        Debug.Log(newItem.name + " equipped!");
         newItem.showInInventory = true;
         if (newItem.mesh)
         {
@@ -422,7 +422,7 @@ public class EquipmentManager : MonoBehaviour
                     {
                         inventory.onItemChangedCallback.Invoke();
                     }
-
+                    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"BlackSmith",eq.name);
                     ClearUpgradeSlots();
                 });
             }

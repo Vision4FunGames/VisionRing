@@ -9,6 +9,7 @@ using PixelCrushers.QuestMachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using GameAnalyticsSDK;
 
 public enum GameState
 {
@@ -18,7 +19,7 @@ public enum GameState
     Tutorial
 }
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 {
     public GameObject villageSpawnPos;
     public GameObject tutorial1SpawnPos;
@@ -208,6 +209,15 @@ public class GameManager : MonoBehaviour
 
 
         PlayStandSound();
+        
+        if(Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            GameAnalytics.RequestTrackingAuthorization(this);
+        }
+        else
+        {
+            GameAnalytics.Initialize();
+        }
     }
 
     private int count;
@@ -223,9 +233,11 @@ public class GameManager : MonoBehaviour
     public void PlayEndVideo()
     {
         UiManager.instance.endVideo.gameObject.SetActive(true);
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic03");
     }
     private void TutorialChange()
     {
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"Tutorial","TutorialPart_"+tutorialSection+""+tutorialCounter);
         TutorialEvents.OnTutorialComplete -= TutorialChange;
         CinematicCamDisable();
         print("Counter : " + tutorialCounter);
@@ -448,5 +460,24 @@ public class GameManager : MonoBehaviour
         gameObject.GetComponent<Waypoint_Indicator>().enabled = false;
     }
 
-    
+
+    public void GameAnalyticsATTListenerNotDetermined()
+    {
+        GameAnalytics.Initialize();
+    }
+
+    public void GameAnalyticsATTListenerRestricted()
+    {
+        GameAnalytics.Initialize();
+    }
+
+    public void GameAnalyticsATTListenerDenied()
+    {
+        GameAnalytics.Initialize();
+    }
+
+    public void GameAnalyticsATTListenerAuthorized()
+    {
+        GameAnalytics.Initialize();
+    }
 }
