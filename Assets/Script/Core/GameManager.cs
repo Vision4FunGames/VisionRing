@@ -69,6 +69,14 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     private UnityUIQuestDialogueUI _questDialogueUI;
     private float DisableTimer;
+    [Header("QuestTimer")]
+    public float timerKillTheAttackers;
+    public float timerFirstMeeting;
+    public float timerMerchant;
+    public float timerFindMage;
+    public float timerBoss;
+    public float timerBoss1;
+    
     
     private void Awake()
     {
@@ -486,5 +494,14 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     public void AcceptQuest(string questname)
     {
+        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "Accepted");
+        
+        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "InProgress");
+
+    }
+
+    public void SuccessQuest()
+    {
+        
     }
 }

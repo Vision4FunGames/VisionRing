@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.Events;
+using static UnityEngine.Events.UnityEvent;
+
 namespace PixelCrushers.QuestMachine
 {
 
@@ -227,11 +230,11 @@ namespace PixelCrushers.QuestMachine
             SetControlButtons(false, false, true);
             
         }
-
+        public static UnityEvent<string> OnQuestChange = new UnityEvent<string>();
         public void AcceptQuest()
         {
             acceptHandler(selectedQuest);
-            
+            OnQuestChange.Invoke(selectedQuest.name);
         }
 
         public void DeclineQuest()
