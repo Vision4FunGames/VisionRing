@@ -12,6 +12,7 @@ namespace PixelCrushers.QuestMachine.Wrappers
     [AddComponentMenu("Pixel Crushers/Quest Machine/UI/Unity UI Quest Dialogue UI")]
     public class UnityUIQuestDialogueUI : PixelCrushers.QuestMachine.UnityUIQuestDialogueUI
     {
+        
     }
 
 }

@@ -127,6 +127,7 @@ namespace Exoa.TutorialEngine
 
         private void OnTutorialLoeaded()
         {
+            popup.GetComponent<RectTransform>().localPosition = new Vector3(-23f, 109f, 0);
             steps = new List<TutorialSession.TutorialStep>();
             if (TutorialLoader.instance != null && TutorialLoader.instance.currentTutorial.tutorial_steps != null)
                 steps.AddRange(TutorialLoader.instance.currentTutorial.tutorial_steps);

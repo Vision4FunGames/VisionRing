@@ -3,7 +3,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using Unity.VisualScripting;
 namespace PixelCrushers.QuestMachine
 {
 
@@ -41,6 +41,7 @@ namespace PixelCrushers.QuestMachine
         private UnityUIIconListTemplate m_iconListTemplate;
         [SerializeField]
         private UnityUIButtonListTemplate m_buttonListTemplate;
+        
 
         #endregion
 
@@ -104,6 +105,7 @@ namespace PixelCrushers.QuestMachine
             set { m_buttonListTemplate = value; }
         }
 
+      
         #endregion
 
         #region Runtime Properties
@@ -118,7 +120,7 @@ namespace PixelCrushers.QuestMachine
         protected override UnityUIButtonListTemplate currentButtonListTemplate { get { return buttonListTemplate; } }
         protected UIScrollbarEnabler scrollbarEnabler { get; set; }
 
-        protected Quest selectedQuest { get; set; }
+        private Quest selectedQuest { get; set; }
         protected QuestParameterDelegate acceptHandler { get; set; }
         protected QuestParameterDelegate declineHandler { get; set; }
         protected QuestParameterDelegate backHandler { get; set; }
@@ -228,6 +230,7 @@ namespace PixelCrushers.QuestMachine
         public void AcceptQuest()
         {
             acceptHandler(selectedQuest);
+            
         }
 
         public void DeclineQuest()

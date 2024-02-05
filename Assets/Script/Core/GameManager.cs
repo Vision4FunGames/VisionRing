@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using GameAnalyticsSDK;
-
+using UnityEngine.UI;
 public enum GameState
 {
     Play,
@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public bool fightBool;
     public AudioClip fight, stand;
     public bool isFoxSaved;
-    
+
+    private UnityUIQuestDialogueUI _questDialogueUI;
     private float DisableTimer;
     
     private void Awake()
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     private void Start()
     {
         #region Tutorial
-
+        
         if (tutorialSection == 1)
         {
             // //Quest quest = new Quest(questMachineConfiguration)
@@ -207,6 +208,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             
         }
 
+        _questDialogueUI = FindObjectOfType<UnityUIQuestDialogueUI>();
 
         PlayStandSound();
         
@@ -479,5 +481,10 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public void GameAnalyticsATTListenerAuthorized()
     {
         GameAnalytics.Initialize();
+    }
+
+    public void AcceptQuest()
+    {
+       
     }
 }

@@ -86,7 +86,7 @@ public class FoxManager : MonoBehaviour
             foxAnim.SetBool("sitBool",true);
             if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter ==5)
             {
-                Invoke(GameManager.instance.TutorialLoad(),2f);
+                GameManager.instance.TutorialLoad();
                 //GameManager.instance.TutorialLoad();
                 agent.enabled = false;
             }

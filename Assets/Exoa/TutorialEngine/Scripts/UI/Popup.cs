@@ -16,7 +16,7 @@ namespace Exoa.TutorialEngine
         public void Center()
         {
             RectTransform rt = transform as RectTransform;
-            rt.anchoredPosition = Vector2.zero;
+            rt.anchoredPosition = new Vector2(0,100f);
         }
 
         /// <summary>
