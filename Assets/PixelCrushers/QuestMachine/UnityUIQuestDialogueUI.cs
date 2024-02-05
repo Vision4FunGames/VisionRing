@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Pixel Crushers. All rights reserved.
 
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine;
+using GameAnalyticsSDK;
+
 namespace PixelCrushers.QuestMachine
 {
 
@@ -13,7 +14,6 @@ namespace PixelCrushers.QuestMachine
     [AddComponentMenu("")] // Use wrapper.
     public class UnityUIQuestDialogueUI : UnityUIBaseUI, IQuestDialogueUI, IMessageHandler
     {
-
         #region Serialized Fields
 
         [SerializeField]
@@ -127,7 +127,7 @@ namespace PixelCrushers.QuestMachine
         protected Coroutine selectCoroutine { get; set; }
 
         #endregion
-
+        
         protected override void Awake()
         {
             base.Awake();
@@ -230,7 +230,7 @@ namespace PixelCrushers.QuestMachine
         public void AcceptQuest()
         {
             acceptHandler(selectedQuest);
-            
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"");
         }
 
         public void DeclineQuest()
