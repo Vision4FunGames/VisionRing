@@ -485,6 +485,6 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     public void AcceptQuest()
     {
-       
+       AcceptQuest();
     }
 }
