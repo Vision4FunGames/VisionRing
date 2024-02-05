@@ -220,6 +220,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         {
             GameAnalytics.Initialize();
         }
+        UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
     }
 
     private int count;
@@ -483,8 +484,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         GameAnalytics.Initialize();
     }
 
-    public void AcceptQuest()
+    public void AcceptQuest(string questname)
     {
-       AcceptQuest();
     }
 }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameAnalyticsSDK;
+using UnityEngine.Events;
 
 namespace PixelCrushers.QuestMachine
 {
@@ -145,7 +146,12 @@ namespace PixelCrushers.QuestMachine
         {
             MessageSystem.RemoveListener(this);
         }
-
+        public static UnityEvent<string> OnQuestChange = new UnityEvent<string>();
+        public void AcceptQuest()
+        {
+            acceptHandler(selectedQuest);
+            OnQuestChange.Invoke(selectedQuest.name);
+        }
         public virtual void ShowContents(QuestParticipantTextInfo speaker, List<QuestContent> contents)
         {
             Show();
@@ -227,11 +233,7 @@ namespace PixelCrushers.QuestMachine
             SetControlButtons(false, false, true);
         }
 
-        public void AcceptQuest()
-        {
-            acceptHandler(selectedQuest);
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"");
-        }
+       
 
         public void DeclineQuest()
         {
