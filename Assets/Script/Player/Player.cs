@@ -2,6 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using Exoa.TutorialEngine;
 using GameAnalyticsSDK;
+using Lofelt.NiceVibrations;
 using Script.Player.PlayerStateMachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -194,6 +195,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    private float boxTime;
     private Rigidbody currentboxrb;
     private static readonly int RunSpeed = Animator.StringToHash("RunSpeed");
 
@@ -211,6 +213,13 @@ public class Player : MonoBehaviour
 
             if (angle < 90 && isWalk)
             {
+                boxTime += Time.deltaTime;
+                if (boxTime > 0.2f)
+                {
+                    boxTime = 0;
+                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
+                }
+
                 currentboxrb = other.GetComponent<Rigidbody>();
                 Vector3 dir = other.transform.position - transform.position;
                 dir.y = 0;
@@ -258,8 +267,10 @@ public class Player : MonoBehaviour
         {
             isMovement = false;
             transform.position = other.transform.parent.transform.position;
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "Puzzle",  other.transform.parent.transform.name);
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Puzzle",  other.transform.parent.transform.name);
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "Puzzle",
+                other.transform.parent.transform.name);
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Puzzle",
+                other.transform.parent.transform.name);
             Invoke("IsMovementAgain", 1f);
         }
 
