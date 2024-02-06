@@ -150,7 +150,7 @@ namespace PixelCrushers.QuestMachine
         public void AcceptQuest()
         {
             acceptHandler(selectedQuest);
-            OnQuestChange.Invoke(selectedQuest.name);
+            OnQuestChange.Invoke(selectedQuest.id.ToString());
         }
         public virtual void ShowContents(QuestParticipantTextInfo speaker, List<QuestContent> contents)
         {

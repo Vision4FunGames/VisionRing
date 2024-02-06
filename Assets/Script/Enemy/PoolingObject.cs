@@ -122,6 +122,12 @@ public class PoolingObject : MonoBehaviour
             StopCoroutine(deactivateBulletAfterTimeCoroutine);
             _pool.Release(this);
         }
+
+        if (other.CompareTag("RockGate"))
+        {
+            StopCoroutine(deactivateBulletAfterTimeCoroutine);
+            _pool.Release(this);
+        }
         //_pool.Release(this);
     }
 

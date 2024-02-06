@@ -76,7 +76,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public float timerFindMage;
     public float timerBoss;
     public float timerBoss1;
-    
+    public float timerPortal1;
+    public float timerPortal2;
     
     private void Awake()
     {
@@ -229,6 +230,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             GameAnalytics.Initialize();
         }
         UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
+        PixelCrushers.QuestMachine.Wrappers.UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
     }
 
     private int count;
@@ -497,11 +499,88 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "Accepted");
         
         GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "InProgress");
-
+        Debug.Log(questname);
+        string tempName = questname;
+        questname = "";
+        for (int i = 0; i < tempName.Length; i++)
+        {
+            if (tempName[i] == '(')
+            {
+                break;       
+            }
+            questname += tempName[i];
+        }
+        Debug.Log(questname + " Edited ");
+        switch (questname)
+        {
+            case "KillTheAttackers":
+                timerKillTheAttackers = Time.time;
+                break;
+            case "FirstMeet":
+                timerFirstMeeting = Time.time;
+                break;
+            case "MerchantMeet":
+                timerMerchant = Time.time;
+                break;
+            case "Magician":
+                timerFindMage = Time.time;
+                break;
+            case "Monster":
+                timerBoss = Time.time;
+                break;
+            case "BigMonster":
+                timerBoss1 = Time.time;
+                break;
+            case "Magician2" :
+                timerPortal1 = Time.time;
+                break;
+            case "Portal2":
+                timerPortal2 = Time.time;
+                break;
+            case "Award":
+                break;
+        }
     }
 
-    public void SuccessQuest()
+    public void SuccessQuest(string questname)
     {
-        
+     
+        switch (questname)
+        {
+            case "KillTheAttackers":
+                timerKillTheAttackers = Time.time - timerKillTheAttackers;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerKillTheAttackers);
+                break;
+            case "FirstMeet":
+                timerFirstMeeting = Time.time - timerFirstMeeting;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFirstMeeting);
+                break;
+            case "MerchantMeet":
+                timerMerchant = Time.time - timerMerchant;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerMerchant);
+                break;
+            case "Magician":
+                timerFindMage = Time.time - timerFindMage;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFindMage);
+                break;
+            case "Monster":
+                timerBoss = Time.time - timerBoss;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerBoss);
+                break;
+            case "BigMonster":
+                timerBoss1 = Time.time - timerBoss1;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerBoss1);
+                break;
+            case "Magician2" :
+                timerPortal1 = Time.time - timerPortal1;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
+                break;
+            case "Portal2":
+                timerPortal2 = Time.time - timerPortal2;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal2);
+                break;
+            case "Award":
+                break;
+        }
     }
 }

@@ -38,7 +38,7 @@ public class TutorialEnemies : MonoBehaviour
         if (enemyCount==0)
         {
             GameManager.instance.TutorialLoad();
-            print("Tutorial Loaded enemies All died");
+           // print("Tutorial Loaded enemies All died");
         }
     }
 
@@ -48,7 +48,7 @@ public class TutorialEnemies : MonoBehaviour
         {
             if (enemies[i] != null)
             {
-                print("enemis"+enemies[i].name);
+             //   print("enemis"+enemies[i].name);
                 enemies[i].GetComponent<Waypoint_Indicator>().enabled = true;
             }
         }
