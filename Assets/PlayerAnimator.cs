@@ -30,7 +30,6 @@ public class PlayerAnimator : MonoBehaviour
             if (TutorialLoader.instance.loadedTutorialName == "Ring")
             {
                 tutorialBangParticle.gameObject.SetActive(true);
-                Invoke("MovementAvailbe",4);
                 GetComponentInParent<Player>().isMovement = false;
                 StartCoroutine(PlayerDrop());
                 Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
@@ -85,6 +84,7 @@ public class PlayerAnimator : MonoBehaviour
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
         GetComponentInParent<Player>().isMovement = true;
         player.ring = false;
+        animator.speed = .1f;
         //ringParticle.Stop();
     }
 
