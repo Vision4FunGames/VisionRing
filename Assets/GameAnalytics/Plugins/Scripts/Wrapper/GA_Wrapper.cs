@@ -48,7 +48,7 @@ namespace GameAnalyticsSDK.Wrapper
         private static void configureSdkGameEngineVersion (string unitySdkVersion)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("GameAnalytics SDK version: " + unitySdkVersion);
+              //  Debug.Log ("GameAnalytics SDK version: " + unitySdkVersion);
             }
         }
 
@@ -62,27 +62,27 @@ namespace GameAnalyticsSDK.Wrapper
         private static void configureBuild (string build)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("setBuild(" + build + ")");
+               // Debug.Log ("setBuild(" + build + ")");
             }
         }
 
         private static void configureUserId (string userId)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("configureUserId(" + userId + ")");
+               // Debug.Log ("configureUserId(" + userId + ")");
             }
         }
 
         private static void configureAutoDetectAppVersion (bool flag)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("configureAutoDetectAppVersion(" + flag + ")");
+               // Debug.Log ("configureAutoDetectAppVersion(" + flag + ")");
             }
         }
 
         public static string getUserId() {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("getUserId");
+              //  Debug.Log ("getUserId");
             }
 
             return "";
@@ -91,28 +91,28 @@ namespace GameAnalyticsSDK.Wrapper
         private static void initialize (string gamekey, string gamesecret)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("initialize(" + gamekey + "," + gamesecret + ")");
+               // Debug.Log ("initialize(" + gamekey + "," + gamesecret + ")");
             }
         }
 
         private static void setCustomDimension01 (string customDimension)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("setCustomDimension01(" + customDimension + ")");
+                //Debug.Log ("setCustomDimension01(" + customDimension + ")");
             }
         }
 
         private static void setCustomDimension02 (string customDimension)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("setCustomDimension02(" + customDimension + ")");
+                //Debug.Log ("setCustomDimension02(" + customDimension + ")");
             }
         }
 
         private static void setCustomDimension03 (string customDimension)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("setCustomDimension03(" + customDimension + ")");
+                //Debug.Log ("setCustomDimension03(" + customDimension + ")");
             }
         }
 
@@ -120,7 +120,7 @@ namespace GameAnalyticsSDK.Wrapper
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor)
             {
-                Debug.Log("setGlobalCustomEventFields(" + customFields + ")");
+               // Debug.Log("setGlobalCustomEventFields(" + customFields + ")");
             }
         }
 
@@ -149,7 +149,7 @@ namespace GameAnalyticsSDK.Wrapper
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor)
             {
-                Debug.Log("addBusinessEventWithReceipt("+currency+","+amount+","+itemType+","+itemId+","+cartType+","+receipt+","+store+","+signature+")");
+               // Debug.Log("addBusinessEventWithReceipt("+currency+","+amount+","+itemType+","+itemId+","+cartType+","+receipt+","+store+","+signature+")");
             }
         }
 #endif
@@ -158,7 +158,7 @@ namespace GameAnalyticsSDK.Wrapper
         private static void addBusinessEvent (string currency, int amount, string itemType, string itemId, string cartType, string fields, bool mergeFields)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("addBusinessEvent(" + currency + "," + amount + "," + itemType + "," + itemId + "," + cartType + ")");
+               // Debug.Log ("addBusinessEvent(" + currency + "," + amount + "," + itemType + "," + itemId + "," + cartType + ")");
             }
         }
         #endif
@@ -166,28 +166,28 @@ namespace GameAnalyticsSDK.Wrapper
         private static void addResourceEvent (int flowType, string currency, float amount, string itemType, string itemId, string fields, bool mergeFields)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("addResourceEvent(" + flowType + "," + currency + "," + amount + "," + itemType + "," + itemId + ")");
+                //Debug.Log ("addResourceEvent(" + flowType + "," + currency + "," + amount + "," + itemType + "," + itemId + ")");
             }
         }
 
         private static void addProgressionEvent (int progressionStatus, string progression01, string progression02, string progression03, string fields, bool mergeFields)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("addProgressionEvent(" + progressionStatus + "," + progression01 + "," + progression02 + "," + progression03 + ")");
+               // Debug.Log ("addProgressionEvent(" + progressionStatus + "," + progression01 + "," + progression02 + "," + progression03 + ")");
             }
         }
 
         private static void addProgressionEventWithScore (int progressionStatus, string progression01, string progression02, string progression03, int score, string fields, bool mergeFields)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("addProgressionEvent(" + progressionStatus + "," + progression01 + "," + progression02 + "," + progression03 + "," + score + ")");
+                //Debug.Log ("addProgressionEvent(" + progressionStatus + "," + progression01 + "," + progression02 + "," + progression03 + "," + score + ")");
             }
         }
 
         private static void addDesignEvent (string eventId, string fields, bool mergeFields)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {
-                Debug.Log ("addDesignEvent(" + eventId + ")");
+               // Debug.Log ("addDesignEvent(" + eventId + ")");
             }
         }
 

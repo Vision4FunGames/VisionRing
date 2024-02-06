@@ -146,7 +146,7 @@ public class PoolingObject : MonoBehaviour
         }
 
         //after the timer is over
-        Debug.Log("Released");
+       
         _pool.Release(this);
     }
 }

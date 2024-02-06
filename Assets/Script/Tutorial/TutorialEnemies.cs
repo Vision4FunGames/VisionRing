@@ -34,7 +34,6 @@ public class TutorialEnemies : MonoBehaviour
     public void EnemyDied()
     {
         enemyCount--;
-        print("Enemy Count --");
         if (enemyCount==0)
         {
             GameManager.instance.TutorialLoad();

@@ -151,10 +151,8 @@ namespace Exoa.TutorialEngine
         {
             //GameManager.Instance.fox.GetComponent<NpcButton>().isOk = false;
            // GameManager.Instance.fox.GetComponent<NpcButton>().DestroyButton();
-            Debug.Log(currentStep + "Current steepp");
-            Next();
-            Debug.Log(currentStep + "Current steepp");
-            if ((TutorialLoader.instance.loadedTutorialName == "0.0")&&(currentStep == 1))
+           Next();
+           if ((TutorialLoader.instance.loadedTutorialName == "0.0")&&(currentStep == 1))
             {
                 GameManager.instance.CinematicCamEnable(GameManager.instance.mainSword.transform);
             }
@@ -219,7 +217,7 @@ namespace Exoa.TutorialEngine
 
         private void Update()
         {
-            if (debug) Debug.Log("tutorialState:" + tutorialState);
+            
 
             if (tutorialState is State.Inactive or State.Completed)
             {
@@ -338,7 +336,6 @@ namespace Exoa.TutorialEngine
                 popup.Hide();
                 return;
             }
-            if (!debug) print("Next Tutorial Step currentStep:" + currentStep + " steps.Count:" + steps.Count);
             currentStep++;
             if (steps == null || currentStep >= steps.Count)
             {

@@ -84,7 +84,7 @@ public class PlayerAnimator : MonoBehaviour
         Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
         GetComponentInParent<Player>().isMovement = true;
         player.ring = false;
-        animator.speed = .1f;
+        animator.speed = 1f;
         //ringParticle.Stop();
     }
 

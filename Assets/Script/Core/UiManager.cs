@@ -118,12 +118,7 @@ public class UiManager : MonoBehaviour
         {
             EconomyManager.instance.SetGold(5000);
         }
-
-        if (chapter1.gameObject.activeSelf)
-        {
-            print(chapter1.frame + " Frame ");
-        }
-
+        
         if (chapter1.frame + 5 >= (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
         {
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic02");
@@ -244,6 +239,7 @@ public class UiManager : MonoBehaviour
         {
             TutorialLoader.instance.Load("Blacksmith");
             PlayerPrefs.SetInt("Blacksmith", 1);
+            GameManager.instance.isBlacksmith = true;
         }
     }
 

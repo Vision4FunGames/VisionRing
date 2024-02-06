@@ -68,7 +68,6 @@ public class CoinManager : MonoBehaviour
 
       var spawnedCoin = Instantiate(coin, new Vector3(transform.position.x,transform.position.y+2f,transform.position.z) + randomPos, new Quaternion(90,180,0,0),transform);
       gold = Random.Range(minGold, maxGold);
-      print(gold + " CoinManager");
       spawnedCoin.GetComponent<TurnAround>().setGoldCount(gold);
       
       // Belirtilen objeyi rastgele noktada oluştur

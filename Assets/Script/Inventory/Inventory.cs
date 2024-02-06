@@ -72,7 +72,6 @@ public class Inventory : MonoBehaviour
          {
             if (items.Count >= space)
             {
-                Debug.Log("Not enough room.");
                 return;
             }
             if (item.isUpgrade)
@@ -103,7 +102,6 @@ public class Inventory : MonoBehaviour
                 
             }
             item.showInInventory = false;
-            Debug.Log("Item Added to Inventory " + item.name);
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
             SaveAllItems();
@@ -128,7 +126,6 @@ public class Inventory : MonoBehaviour
             onItemChangedCallback.Invoke();
         ES3.Save("currentItems",equipmentManager.currentEquipment);
         ES3.Save("inventory",items);
-        Debug.Log("Saved");
     }
 
     public void InventoryTypeChange(InventoryType type)
@@ -148,8 +145,7 @@ public class Inventory : MonoBehaviour
         ES3.Save("upgradeItems",upgradeItems);
         ES3.Save("itemCount",EconomyManager.instance.itemCount);
         ES3.Save("InvItemCount",itemsCount);
-        Debug.Log("Saved");
-        
+
     }
     
     

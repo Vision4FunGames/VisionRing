@@ -23,9 +23,9 @@ public class TurnAround : MonoBehaviour
     {
       
         goldCount = value;
-        print(goldCount + "Value Gold count equls");
+       
         goldSetted = true;
-        print(goldSetted);
+     
     }
 
     void Start()

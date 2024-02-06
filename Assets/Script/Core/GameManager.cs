@@ -253,7 +253,6 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"Tutorial","TutorialPart_"+tutorialSection+""+tutorialCounter);
         TutorialEvents.OnTutorialComplete -= TutorialChange;
         CinematicCamDisable();
-        print("Counter : " + tutorialCounter);
         tutorialCounter++;
         PlayerPrefs.SetInt("TutorialCounter", tutorialCounter);
         PlayerPrefs.SetInt("TutorialSection", tutorialSection);
@@ -406,7 +405,6 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         //     cmoffset.m_FollowOffset = new Vector3(0, 29, -27);
         //     print("wall");
         // }
-        print(timer + " CInematic ");
         if (timer !=0)
         {
             CinematicCamDisable(timer);
@@ -499,7 +497,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "Accepted");
         
         GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "InProgress");
-        Debug.Log(questname);
+       
         string tempName = questname;
         questname = "";
         for (int i = 0; i < tempName.Length; i++)
@@ -510,7 +508,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             }
             questname += tempName[i];
         }
-        Debug.Log(questname + " Edited ");
+        
         switch (questname)
         {
             case "KillTheAttackers":
