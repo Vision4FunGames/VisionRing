@@ -33,6 +33,7 @@ public class PlayerAnimator : MonoBehaviour
                 Invoke("MovementAvailbe",4);
                 GetComponentInParent<Player>().isMovement = false;
                 StartCoroutine(PlayerDrop());
+                Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
                 UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
                 Invoke("RingSound",2f);
                 player.ring = true;
@@ -71,6 +72,7 @@ public class PlayerAnimator : MonoBehaviour
     public void MovementAvailbe()
     {
         GetComponentInParent<Player>().isMovement = true;
+        Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = true;
         player.ring = false;
     }
     public void RingAction()
