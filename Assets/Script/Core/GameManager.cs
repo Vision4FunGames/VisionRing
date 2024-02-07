@@ -89,6 +89,14 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             tutorialCounter = 0;
             tutorialSection = PlayerPrefs.GetInt("TutorialSection");
         }
+        if(Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            GameAnalytics.Initialize();
+        }
+        else
+        {
+            GameAnalytics.Initialize();
+        }
     }
 
     public void PlayFightSound()
@@ -221,14 +229,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
         PlayStandSound();
         
-        if(Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            GameAnalytics.RequestTrackingAuthorization(this);
-        }
-        else
-        {
-            GameAnalytics.Initialize();
-        }
+        
         UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
         PixelCrushers.QuestMachine.Wrappers.UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
     }

@@ -13,7 +13,7 @@ public class LoadingSCene : MonoBehaviour,IGameAnalyticsATTListener
    {
       if(Application.platform == RuntimePlatform.IPhonePlayer)
       {
-         GameAnalytics.RequestTrackingAuthorization(this);
+         GameAnalytics.Initialize();
       }
       else
       {
