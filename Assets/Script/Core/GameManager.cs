@@ -69,7 +69,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     private UnityUIQuestDialogueUI _questDialogueUI;
     private float DisableTimer;
-    [Header("QuestTimer")]
+    [Header("QuestTimer")] 
+    private QuestManager _questManager;
     public float timerKillTheAttackers;
     public float timerFirstMeeting;
     public float timerMerchant;
@@ -119,7 +120,11 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     private void Start()
     {
         #region Tutorial
-        
+
+        if (PlayerPrefs.HasKey("TutorialSection"))
+        {
+            tutorialSection = PlayerPrefs.GetInt("TutorialSection");
+        }
         if (tutorialSection == 1)
         {
             // //Quest quest = new Quest(questMachineConfiguration)
@@ -204,7 +209,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         }
 
         #endregion
-      
+
+        _questManager = GetComponent<QuestManager>();
         tutorialName = tutorialSection + ".";
         PlayerName = "";
         foxManager = FindObjectOfType<FoxManager>();
@@ -283,7 +289,14 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         {
             tutorialEnemies.gameObject.SetActive(true);
             baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
-            
+        }
+
+        if (tutorialSection ==1 && tutorialCounter == 3)
+        {
+            tutorialSection++;
+            PlayerPrefs.SetInt("TutorialSection", tutorialSection);
+            tutorial = true;
+            PlayerPrefs.SetString("Tutorial", "true");
         }
     }
 
@@ -495,10 +508,6 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     public void AcceptQuest(string questname)
     {
-        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "Accepted");
-        
-        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "InProgress");
-       
         string tempName = questname;
         questname = "";
         for (int i = 0; i < tempName.Length; i++)
@@ -509,6 +518,11 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             }
             questname += tempName[i];
         }
+        
+        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "Accepted");
+        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "InProgress");
+       
+       
         
         switch (questname)
         {
@@ -543,40 +557,66 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     public void SuccessQuest(string questname)
     {
-     
+        string tempName = questname;
+        questname = "";
+        for (int i = 0; i < tempName.Length; i++)
+        {
+            if (tempName[i] == '(')
+            {
+                break;       
+            }
+            questname += tempName[i];
+        }
+        
         switch (questname)
         {
             case "KillTheAttackers":
                 timerKillTheAttackers = Time.time - timerKillTheAttackers;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerKillTheAttackers);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "FirstMeet":
                 timerFirstMeeting = Time.time - timerFirstMeeting;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFirstMeeting);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "MerchantMeet":
                 timerMerchant = Time.time - timerMerchant;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerMerchant);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "Magician":
                 timerFindMage = Time.time - timerFindMage;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFindMage);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "Monster":
                 timerBoss = Time.time - timerBoss;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerBoss);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "BigMonster":
                 timerBoss1 = Time.time - timerBoss1;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerBoss1);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "Magician2" :
                 timerPortal1 = Time.time - timerPortal1;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "Portal2":
                 timerPortal2 = Time.time - timerPortal2;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal2);
+                _questManager.successedQuests.Add(questname);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "Award":
                 break;
