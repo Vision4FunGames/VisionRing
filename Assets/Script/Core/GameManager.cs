@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public float timerBoss1;
     public float timerPortal1;
     public float timerPortal2;
-    
+    public QuestListContainer _questListContainer;
     private void Awake()
     {
         instance = this;
@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     private void Start()
     {
+        _questManager = GetComponent<QuestManager>();
         #region Tutorial
 
         if (PlayerPrefs.HasKey("TutorialSection"))
@@ -130,6 +131,29 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             // //Quest quest = new Quest(questMachineConfiguration)
             // Player.instance.GetComponent<QuestJournal>()
             //     .AddQuest(questMachineConfiguration.questDatabases[0].questAssets[9]);
+        }
+
+        if (tutorialSection==2)
+        {
+           _questManager.successedQuests = ES3.Load("SuccessedQuest",_questManager.successedQuests);
+
+           int count = _questManager.successedQuests.Count; 
+           for (int i = 0; i <_questListContainer.questList.Count ; i++)
+           {
+               if (_questListContainer.questList[i].id.ToString() == _questManager.successedQuests[count-1])
+               {
+                   _questListContainer.questList[i].SetState(QuestState.WaitingToStart);
+               }
+           }
+            if (baskan.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+            {
+                baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+            }
+            else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+            {
+                magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();   
+            }
+            
         }
         if (PlayerPrefs.HasKey("Blacksmith"))
         {
@@ -210,7 +234,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
         #endregion
 
-        _questManager = GetComponent<QuestManager>();
+        
         tutorialName = tutorialSection + ".";
         PlayerName = "";
         foxManager = FindObjectOfType<FoxManager>();
