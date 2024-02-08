@@ -71076,13 +71076,14 @@ GameObject:
   - component: {fileID: 1433673063}
   - component: {fileID: 1433673065}
   - component: {fileID: 1433673064}
+  - component: {fileID: 1433673066}
   m_Layer: 4
   m_Name: SeaWater
   m_TagString: water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1433673060
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -71103,7 +71104,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d21dd5c8ca25044f89c1b07b4fabd9e, type: 2}
+  - {fileID: 2100000, guid: 1a127b9031564ff99a732e71b9738356, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71160,12 +71161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215d52a36f4d7494f8c9a4e8338d17b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DisablePixelLights: 1
-  m_TextureSize: 256
-  m_ClipPlaneOffset: 0.07
-  m_ReflectLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!65 &1433673064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71192,6 +71187,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 0.15, z: 10}
   m_Center: {x: -0.00000047683716, y: -0.1, z: 0}
+--- !u!114 &1433673066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433673058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165957a511184d7c94007e1366788163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: {x: 0.2, y: 0.4}
+  rotateDistance: {x: 2, y: 4}
+  depthTextureModeOn: 1
+  waterSyncWind: 0
+  windZone: {fileID: 0}
+  mirrorOn: 0
+  mirrorBackSide: 0
+  textureSize: 1024
+  clipPlaneOffset: {x: 0.1, y: 0.1, z: 10}
+  reflectLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  garbageCollection: 0
 --- !u!1001 &1434363780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86934,7 +86954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 507964874811859165, guid: 16cfd2317e3c0c74e8a3273b622f4515, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00016784668
+      value: -0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 507964874811859180, guid: 16cfd2317e3c0c74e8a3273b622f4515, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -86942,7 +86962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 507964874811859194, guid: 16cfd2317e3c0c74e8a3273b622f4515, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0001373291
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 507964874811859204, guid: 16cfd2317e3c0c74e8a3273b622f4515, type: 3}
       propertyPath: m_AnchorMax.y
