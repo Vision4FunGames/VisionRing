@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum SkillType
@@ -40,6 +41,7 @@ public class PlayerSkillState : PlayerState
 
                 break;
             case SkillType.FireRotate:
+                
                 if (SkillCoolDown.instance.CanUse(1))
                     FireRotate();
                 else
@@ -115,6 +117,14 @@ public class PlayerSkillState : PlayerState
     public void CloneSkill()
     {
         SkillCoolDown.instance.skillsArray[8].coolDownTime = SkillCoolDown.instance.skillsArray[8].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[8].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[8].coolDown;
+                break;
+            }
+        }
         UiManager.instance.DisableButton();
         List<GameObject> clones = new List<GameObject>();
         for (int i = 0; i < 3; i++)
@@ -131,6 +141,14 @@ public class PlayerSkillState : PlayerState
     public void ShieldSkill()
     {
         SkillCoolDown.instance.skillsArray[7].coolDownTime = SkillCoolDown.instance.skillsArray[7].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[7].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[7].coolDown;
+                break;
+            }
+        }
         UiManager.instance.DisableButton();
         Vector3 shieldPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 2f, _player.transform.position.z);
         GameObject shield =  GameObject.Instantiate(Resources.Load("Skills/Shield") as GameObject ,shieldPos,Quaternion.identity);
@@ -144,6 +162,14 @@ public class PlayerSkillState : PlayerState
     public void ArrowRain()
     {
         SkillCoolDown.instance.skillsArray[6].coolDownTime = SkillCoolDown.instance.skillsArray[6].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[6].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[6].coolDown;
+                break;
+            }
+        }
         UiManager.instance.DisableButton();
         Vector3 arrowPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 40f, _player.transform.position.z);
         GameObject arrowSkil =  GameObject.Instantiate(Resources.Load("Skills/ArrowRain") as GameObject ,arrowPos,Quaternion.Euler(-90,0,0));
@@ -155,6 +181,14 @@ public class PlayerSkillState : PlayerState
     public void SwordSkill()
     {
         SkillCoolDown.instance.skillsArray[5].coolDownTime = SkillCoolDown.instance.skillsArray[5].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[5].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[5].coolDown;
+                break;
+            }
+        }
         UiManager.instance.DisableButton();
         sword = GameObject.Instantiate(Resources.Load("Skills/Skill Sword") as GameObject);
         _player._playerAttack.myCurrentGunType = CurrentGunType.sword;
@@ -199,6 +233,14 @@ public class PlayerSkillState : PlayerState
     {
         UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[1].coolDownTime = SkillCoolDown.instance.skillsArray[1].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[1].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[1].coolDown;
+                break;
+            }
+        }
         GameObject currentRotat = GameObject.Instantiate(Resources.Load("Skills/FireEarth") as GameObject);
         if (currentRotat != null) currentRotat.transform.SetParent(_player.transform);
         currentRotat.transform.localPosition = new Vector3(0, 2, 0);
@@ -212,6 +254,14 @@ public class PlayerSkillState : PlayerState
     {
         UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[2].coolDownTime = SkillCoolDown.instance.skillsArray[2].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[2].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[2].coolDown;
+                break;
+            }
+        }
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/EarthShatter") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
         currentEarthShatter.transform.localPosition = new Vector3(0, 0, 0);
@@ -225,6 +275,14 @@ public class PlayerSkillState : PlayerState
     {
         UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[3].coolDownTime = SkillCoolDown.instance.skillsArray[3].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[3].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[3].coolDown;
+                break;
+            }
+        }
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/FlameThrower") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform.GetChild(0));
         _player._playerAnimator.SetBool("Flame", true);
@@ -241,6 +299,14 @@ public class PlayerSkillState : PlayerState
     {
         UiManager.instance.DisableButton();
         SkillCoolDown.instance.skillsArray[4].coolDownTime = SkillCoolDown.instance.skillsArray[4].coolDown;
+        for (int i = 0; i < SkillCoolDown.instance._currentSkills.Count; i++)
+        {
+            if (SkillCoolDown.instance._currentSkills[i].skillName == SkillCoolDown.instance.skillsArray[4].skillName)
+            {
+                SkillCoolDown.instance._currentSkills[i].coolDownTime = SkillCoolDown.instance.skillsArray[4].coolDown;
+                break;
+            }
+        }
         GameObject currentTornado = GameObject.Instantiate(Resources.Load("Skills/BasicTornado") as GameObject);
         if (currentTornado != null) currentTornado.transform.SetParent(_player.transform);
         currentTornado.transform.localPosition = new Vector3(0, 0.1f, 0);

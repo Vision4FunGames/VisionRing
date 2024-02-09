@@ -40,7 +40,7 @@ public class SkillCoolDown : MonoBehaviour
         {
             _currentSkills[i].skillImage = Resources.Load<Sprite>("SkillSprite/" + _currentSkills[i].skillName);
         }
-        onSkillChangeCallBack.Invoke();
+        onSkillChangeCallBack?.Invoke();
     }
 
     private void Update()
@@ -50,6 +50,13 @@ public class SkillCoolDown : MonoBehaviour
 
     public bool CanUse(int skillindex)
     {
+        for (int i = 0; i < _currentSkills.Count; i++)
+        {
+            if (_currentSkills[i].skillName == skillsArray[skillindex].skillName)
+            {
+                return _currentSkills[i].coolDownTime <= 0;
+            }
+        }
         return skillsArray[skillindex].coolDownTime <= 0;
     }
 
@@ -57,6 +64,7 @@ public class SkillCoolDown : MonoBehaviour
     {
         if (skillsArray[0].coolDownTime > 0)
             skillsArray[0].coolDownTime -= Time.deltaTime;
+        
         for (int i = 0; i < _currentSkills.Count; i++)
         {
             if ( _currentSkills[i].coolDownTime > 0)

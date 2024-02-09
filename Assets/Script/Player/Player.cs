@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
 
     private void DashInıtiliaze()
     {
+        _skillCoolDown.LoadSkill();
         for (int i = 0; i < uiManager.ButtonType.Length; i++)
         {
             int j = i;
@@ -338,6 +339,7 @@ public class Player : MonoBehaviour
     public void DisableSkillTime()
     {
         UiManager.instance.EnableButton();
+        Debug.Log("Button Enable ");
         _playerAttack.flameTFloor.Stop();
         _playerAnimator.SetFloat("AttackSpeed", 1);
         _playerHealth.useShield = false;
