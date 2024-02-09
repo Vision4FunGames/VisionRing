@@ -52,8 +52,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public GameObject villageDoor, villageDoor2;
     public GameObject colosseum;
     public GameObject tutorialIncreaserFirst;
-    
-    
+
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
@@ -137,7 +136,9 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         if (tutorialSection==2)
         {
            _questManager.successedQuests = ES3.Load("SuccessedQuest",_questManager.successedQuests);
-
+            OpenTheVillageDoors();
+            tutorialEnemies.gameObject.SetActive(false);
+            wallFires.gameObject.SetActive(false);
            int count = _questManager.successedQuests.Count; 
            // for (int i = 0; i <_questListContainer.questList.Count ; i++)
            // {
@@ -158,20 +159,32 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                     }
                     else
                     {
-                        if (!magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+                        if (questlist[i].id.ToString() is not "Monster" or "BigMonster")
                         {
                             questlist[i].SetState(QuestState.WaitingToStart);
-                            
-                            baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
-                            Debug.Log("Baskan quest verdi " + questlist[i].id.ToString());
-                            break;
-                        }
-                        else if (questlist[i].id.ToString() is not "Monster" or "BigMonster")
-                        {
-                            questlist[i].SetState(QuestState.WaitingToStart);
-                            baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+                            IndicatorDefine(baskan);
                             Debug.Log("Baskan quest verdi");
                             break;
+                        }
+                        else
+                        {
+                            var magicianGiver = magician.GetComponent<QuestGiver>();
+                            
+                            if (magician.GetComponent<QuestGiver>().GetCompletedQuest() is 0 or 2)
+                            {
+                               magicianGiver.questList[magicianGiver.GetCompletedQuest()].SetState(QuestState.WaitingToStart);
+                               IndicatorDefine(magician);
+                               Debug.Log("Mage Quest verdi ");
+                               break;
+                            }
+                            else
+                            {
+                                questlist[i].SetState(QuestState.WaitingToStart);
+                                //baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+                                IndicatorDefine(baskan);
+                                Debug.Log("Baskan quest verdi");
+                                break;
+                            }
                         }
                     }
                 }
@@ -190,7 +203,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                     else
                     {
                         questlist[i].SetState(QuestState.WaitingToStart);
-                        magician.GetComponent<QuestGiver>().StartDialogueWithPlayer(); 
+                        IndicatorDefine(magician);
                         break;
                     }
                 }
