@@ -10,6 +10,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using GameAnalyticsSDK;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 public enum GameState
 {
@@ -138,20 +139,63 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
            _questManager.successedQuests = ES3.Load("SuccessedQuest",_questManager.successedQuests);
 
            int count = _questManager.successedQuests.Count; 
-           for (int i = 0; i <_questListContainer.questList.Count ; i++)
-           {
-               if (_questListContainer.questList[i].id.ToString() == _questManager.successedQuests[count-1])
-               {
-                   _questListContainer.questList[i].SetState(QuestState.WaitingToStart);
-               }
-           }
+           // for (int i = 0; i <_questListContainer.questList.Count ; i++)
+           // {
+           //     if (_questListContainer.questList[i].id.ToString() == _questManager.successedQuests[count-1])
+           //     {
+           //         _questListContainer.questList[i+1]?.SetState(QuestState.WaitingToStart);
+           //     }
+           // }
             if (baskan.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
             {
-                baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+                var questlist = baskan.GetComponent<QuestGiver>().questList;
+                for (int i = 0; i < questlist.Count; i++)
+                {
+                    if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
+                    {
+                        questlist[i].SetState(QuestState.Successful);
+                        Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
+                    }
+                    else
+                    {
+                        if (!magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+                        {
+                            questlist[i].SetState(QuestState.WaitingToStart);
+                            
+                            baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+                            Debug.Log("Baskan quest verdi " + questlist[i].id.ToString());
+                            break;
+                        }
+                        else if (questlist[i].id.ToString() is not "Monster" or "BigMonster")
+                        {
+                            questlist[i].SetState(QuestState.WaitingToStart);
+                            baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+                            Debug.Log("Baskan quest verdi");
+                            break;
+                        }
+                    }
+                }
+            
             }
             else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
             {
-                magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();   
+                var questlist = magician.GetComponent<QuestGiver>().questList;
+                for (int i = 0; i < questlist.Count; i++)
+                {
+                    if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
+                    {
+                        questlist[i].SetState(QuestState.Successful);
+                        Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
+                    }
+                    else
+                    {
+                        questlist[i].SetState(QuestState.WaitingToStart);
+                        magician.GetComponent<QuestGiver>().StartDialogueWithPlayer(); 
+                        break;
+                    }
+                }
+
+                  
             }
             
         }
