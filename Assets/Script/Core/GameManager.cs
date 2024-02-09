@@ -168,27 +168,45 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                         }
                         else
                         {
-                            var magicianGiver = magician.GetComponent<QuestGiver>();
-                            
-                            if (magician.GetComponent<QuestGiver>().GetCompletedQuest() is 0 or 2)
+                            var magicianGiver = magician.GetComponent<QuestGiver>(); 
+                            if (magician.GetComponent<QuestGiver>().GetCompletedQuest() is 0 or 1)
                             {
-                               magicianGiver.questList[magicianGiver.GetCompletedQuest()].SetState(QuestState.WaitingToStart);
-                               IndicatorDefine(magician);
-                               Debug.Log("Mage Quest verdi ");
-                               break;
-                            }
-                            else
-                            {
-                                questlist[i].SetState(QuestState.WaitingToStart);
-                                //baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
-                                IndicatorDefine(baskan);
-                                Debug.Log("Baskan quest verdi");
-                                break;
+                                Debug.Log(magicianGiver.GetCompletedQuest() + " Completed quest count");
+                                for (int j = 0; j < magicianGiver.questList.Count; j++)
+                                {
+                                    if (_questManager.successedQuests.Contains(magicianGiver.questList[j].id.ToString()))
+                                    {
+                                        magicianGiver.questList[j].SetState(QuestState.Successful);
+                                        Debug.Log(magicianGiver.questList[j].id.ToString()+ " Bitirildi ");
+                                    }
+                                }
+                                if (magicianGiver.HasOfferableOrActiveQuest())
+                                {
+                                    for (int k = 0; k < magicianGiver.questList.Count; k++)
+                                    {
+                                        if (magicianGiver.questList[k].GetState()!= QuestState.Successful)
+                                        {
+                                            magicianGiver.questList[k].SetState(QuestState.WaitingToStart);
+                                            break;
+                                        }
+                                    }
+                                    IndicatorDefine(magician);
+                                    Debug.Log(magicianGiver.GetCompletedQuest() + " Completed quest count");
+                                    Debug.Log("Mage Quest verdi ");
+                                    break;
+                                }
+                                else
+                                {
+                                    questlist[i].SetState(QuestState.WaitingToStart);
+                                    //baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+                                    IndicatorDefine(baskan);
+                                    Debug.Log("Baskan quest verdi");
+                                    break;
+                                } 
                             }
                         }
                     }
                 }
-            
             }
             else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
             {
@@ -207,10 +225,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                         break;
                     }
                 }
-
-                  
             }
-            
         }
         if (PlayerPrefs.HasKey("Blacksmith"))
         {
@@ -227,7 +242,6 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 isMerchant = true;
             }
         }
-
         if (PlayerPrefs.HasKey("Magician"))
         {
             if (PlayerPrefs.GetInt("Magician") == 1)
@@ -235,7 +249,6 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 isMagician = true;
             }
         }
-
         if (PlayerPrefs.HasKey("Ring"))
         {
             if (PlayerPrefs.GetInt("Ring") == 1)
@@ -245,14 +258,12 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                     isRing = true;
                     UiManager.instance.ringBtn.gameObject.SetActive(true);
                 }
-                
             }
             else
             {
                 UiManager.instance.ringBtn.gameObject.SetActive(false);
             }
         }
-
         if (PlayerPrefs.HasKey("Heal"))
         {
             if (PlayerPrefs.GetInt("Heal") == 1)
@@ -260,7 +271,6 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 isHeal = true;
             }
         }
-
         if (PlayerPrefs.HasKey("Dash"))
         {
             if (PlayerPrefs.GetInt("Dash")==1)
@@ -626,6 +636,9 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 timerBoss1 = Time.time;
                 break;
             case "Magician2" :
+                //timerPortal1 = Time.time;
+                break;
+            case "Portal1" :
                 timerPortal1 = Time.time;
                 break;
             case "Portal2":
@@ -696,8 +709,10 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             case "Portal2":
                 timerPortal2 = Time.time - timerPortal2;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal2);
-                _questManager.successedQuests.Add(questname);
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                break;
+            case "Portal1":
+                timerPortal1 = Time.time - timerPortal1;
+                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
                 break;
             case "Award":
                 break;
