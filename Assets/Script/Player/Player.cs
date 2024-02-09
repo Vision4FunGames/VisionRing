@@ -395,6 +395,7 @@ public class Player : MonoBehaviour
         UiManager.instance.GamePlayUI();
         PlayerManager.instance.pet.GetComponent<FoxManager>().tutorial = false;
         _playerAnimator.speed = 1f;
+        ring = false;
     }
 
     public void CloseCam()

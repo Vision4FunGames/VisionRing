@@ -41,6 +41,7 @@ public class PlayerAnimator : MonoBehaviour
             else
             {
                 animator.SetTrigger("Ring");
+                Invoke("RingActionEnd",4f);
                 Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
                 Invoke("RingSound",2f);
                 player.ring = true;
