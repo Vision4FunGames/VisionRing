@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1897537109}
   - component: {fileID: 1897537103}
   - component: {fileID: 1967478086}
+  - component: {fileID: 1967478093}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -97,6 +98,15 @@ MonoBehaviour:
   fight: {fileID: 8300000, guid: 31d5e3cf0c199df46b7c1fc52003a230, type: 3}
   stand: {fileID: 8300000, guid: 22e0d4fb37837a64aa4988cc8ae70631, type: 3}
   isFoxSaved: 0
+  timerKillTheAttackers: 0
+  timerFirstMeeting: 0
+  timerMerchant: 0
+  timerFindMage: 0
+  timerBoss: 0
+  timerBoss1: 0
+  timerPortal1: 0
+  timerPortal2: 0
+  _questListContainer: {fileID: 0}
 --- !u!114 &5038891023898458666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpBtn: {fileID: 0}
   ButtonType:
-  - mySkillType: 4
+  - mySkillType: 1
     skillButton: {fileID: 0}
   - mySkillType: 3
     skillButton: {fileID: 0}
@@ -300,7 +310,7 @@ MonoBehaviour:
   _currentSkills: []
   skillsArray:
   - skillName: Dash
-    coolDown: 5
+    coolDown: 2
     coolDownTime: 0
     skillImage: {fileID: 21300000, guid: ee087f19f3a9aae4d93fdd5a60cdeffc, type: 3}
     skillLevel: 0
@@ -583,3 +593,16 @@ MonoBehaviour:
   mainMusicVolume: {fileID: 0}
   sfxVolume: {fileID: 0}
   mainMusicSource: {fileID: 0}
+--- !u!114 &1967478093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a01062d2183a544e83111103bb74a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  successedQuests: []
