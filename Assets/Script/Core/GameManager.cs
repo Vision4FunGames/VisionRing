@@ -568,6 +568,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     public void IndicatorDefine(GameObject gameObject)
     {
+        gameObject.SetActive(true);
         gameObject.GetComponent<Waypoint_Indicator>().enabled = true;
     }
 

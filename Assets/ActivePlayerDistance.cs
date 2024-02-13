@@ -30,7 +30,8 @@ public class ActivePlayerDistance : MonoBehaviour
         {
             for (int j = 0; j < ActiveObjectsArray[i].activeObjectsArray.Length; j++)
             {
-                if (Vector3.Distance(player.transform.position, ActiveObjectsArray[i].activeObjectsArray[j].transform.position) < activeDistance)
+                if (Vector3.Distance(player.transform.position,
+                        ActiveObjectsArray[i].activeObjectsArray[j].transform.position) < activeDistance)
                 {
                     if (!ActiveObjectsArray[i].activeObjectsArray[j].activeSelf)
                         ActiveObjectsArray[i].activeObjectsArray[j].SetActive(true);
@@ -38,7 +39,15 @@ public class ActivePlayerDistance : MonoBehaviour
                 else
                 {
                     if (ActiveObjectsArray[i].activeObjectsArray[j].activeSelf)
-                        ActiveObjectsArray[i].activeObjectsArray[j].SetActive(false);
+                    {
+                        if (!ActiveObjectsArray[i].activeObjectsArray[j].GetComponent<Waypoint_Indicator>())
+                            ActiveObjectsArray[i].activeObjectsArray[j].SetActive(false);
+                        else if (ActiveObjectsArray[i].activeObjectsArray[j]?.GetComponent<Waypoint_Indicator>()
+                                     .enabled == false)
+                        {
+                            ActiveObjectsArray[i].activeObjectsArray[j].SetActive(false);
+                        }
+                    }
                 }
             }
         }
