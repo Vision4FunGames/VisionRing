@@ -168,19 +168,20 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                         }
                         else
                         {
-                            var magicianGiver = magician.GetComponent<QuestGiver>(); 
-                            if (magician.GetComponent<QuestGiver>().GetCompletedQuest() is 0 or 1)
+                            var magicianGiver = magician.GetComponent<QuestGiver>();
+                            int mageSuccessed = 0;
+                            for (int j = 0; j < magicianGiver.questList.Count; j++)
                             {
-                                Debug.Log(magicianGiver.GetCompletedQuest() + " Completed quest count");
-                                for (int j = 0; j < magicianGiver.questList.Count; j++)
+                                if (_questManager.successedQuests.Contains(magicianGiver.questList[j].id.ToString()))
                                 {
-                                    if (_questManager.successedQuests.Contains(magicianGiver.questList[j].id.ToString()))
-                                    {
-                                        magicianGiver.questList[j].SetState(QuestState.Successful);
-                                        Debug.Log(magicianGiver.questList[j].id.ToString()+ " Bitirildi ");
-                                    }
-                                }
-                                if (magicianGiver.HasOfferableOrActiveQuest())
+                                    mageSuccessed++;
+                                    magicianGiver.questList[j].SetState(QuestState.Successful);
+                                }                                
+                            }
+                            if (mageSuccessed is 0 or 1)
+                            {
+                                
+                                if (mageSuccessed< magicianGiver.questList.Count)
                                 {
                                     for (int k = 0; k < magicianGiver.questList.Count; k++)
                                     {
@@ -190,8 +191,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                                             break;
                                         }
                                     }
-                                    IndicatorDefine(magician);
-                                    Debug.Log(magicianGiver.GetCompletedQuest() + " Completed quest count");
+                                    IndicatorDefine(magician.transform.parent.gameObject);
+                                    Debug.Log(mageSuccessed + " Completed quest count");
                                     Debug.Log("Mage Quest verdi ");
                                     break;
                                 }
@@ -208,24 +209,24 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                     }
                 }
             }
-            else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
-            {
-                var questlist = magician.GetComponent<QuestGiver>().questList;
-                for (int i = 0; i < questlist.Count; i++)
-                {
-                    if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
-                    {
-                        questlist[i].SetState(QuestState.Successful);
-                        Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
-                    }
-                    else
-                    {
-                        questlist[i].SetState(QuestState.WaitingToStart);
-                        IndicatorDefine(magician);
-                        break;
-                    }
-                }
-            }
+            // else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+            // {
+            //     var questlist = magician.GetComponent<QuestGiver>().questList;
+            //     for (int i = 0; i < questlist.Count; i++)
+            //     {
+            //         if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
+            //         {
+            //             questlist[i].SetState(QuestState.Successful);
+            //             Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
+            //         }
+            //         else
+            //         {
+            //             questlist[i].SetState(QuestState.WaitingToStart);
+            //             IndicatorDefine(magician);
+            //             break;
+            //         }
+            //     }
+            // }
         }
         if (PlayerPrefs.HasKey("Blacksmith"))
         {
@@ -575,6 +576,11 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public void IndicatorClose( GameObject gameObject)
     {
         gameObject.GetComponent<Waypoint_Indicator>().enabled = false;
+        if (gameObject.transform.parent.gameObject.GetComponent<Waypoint_Indicator>())
+        {
+            gameObject.transform.parent.gameObject.GetComponent<Waypoint_Indicator>().enabled = false;
+        }
+        
     }
 
 
