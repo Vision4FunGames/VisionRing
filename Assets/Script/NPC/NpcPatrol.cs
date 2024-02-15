@@ -10,6 +10,7 @@ public class NpcPatrol : MonoBehaviour
     public bool patroling = true;
     public NavMeshAgent navMeshAgent;
     public float waypointDistance = 0.5f;
+    private bool patrolStart;
     void Start()
     {
         animator.speed = movementSpeed; // Set animation speed to match movement speed
@@ -30,7 +31,7 @@ public class NpcPatrol : MonoBehaviour
     
     void Update()
     {
-        if (patroling && GameManager.instance.tutorial)
+        if (patroling && GameManager.instance.tutorial && patrolStart)
         {
             animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed * 2f);
             Move(waypoints[currentWaypointIndex]);
