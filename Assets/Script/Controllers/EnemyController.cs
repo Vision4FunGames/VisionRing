@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class EnemyController : MonoBehaviour
     private Enemy enemy;
     private CharacterAnimator characterController;
     public bool isAttackStaff;
+    
+    public float patrolRange = 10f; // Dolaşma alanının yarıçapı
+    public float patrolInterval = 3f; // Yeni hedefe gitme aralığı
+    private float timer;
+
     void Start()
     {
        
@@ -55,6 +61,13 @@ public class EnemyController : MonoBehaviour
                 target = startTarget;
             }
         }
+        else
+        {
+           
+        }
+
+        timer -= Time.deltaTime;
+       
 
         
 
@@ -93,6 +106,8 @@ public class EnemyController : MonoBehaviour
                         FaceTarget();
                     }
                 }
+               
+                
             }
             else
             {
@@ -120,8 +135,27 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+        else if (distance > lookRadius && agent != null && !_enemyStats.die && _gameManager.gameState != GameState.GameOver)
+        { 
+            if (timer <= 0)
+            {
+                SetRandomDestination();
+            }
+           
+        }
     }
 
+    void SetRandomDestination()
+    {
+        timer = patrolInterval;
+        Vector3 randomDirection = Random.insideUnitSphere * patrolRange;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, patrolRange, 1);
+        Vector3 finalPosition = hit.position;
+        agent.SetDestination(finalPosition);
+        
+    }
     // Point towards the player
     void FaceTarget()
     {
