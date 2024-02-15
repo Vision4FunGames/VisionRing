@@ -43,6 +43,8 @@ public class UiManager : MonoBehaviour
     private InventoryUI inventoryUi;
     private ShopUI shopUI;
     public GameObject inventoryObject;
+    public GameObject mapCloseBtn;
+    public GameObject mapOpenBtn;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
 
     public MMProgressBar playerProgressBar;
@@ -80,7 +82,7 @@ public class UiManager : MonoBehaviour
     public OnEconomyChanged onEconomyChangedCallBack;
 
     [Header("ItemCollect")] public GameObject itemTextPanel;
-
+    private bl_MiniMap _blMiniMap;
     private void Awake()
     {
         instance = this;
@@ -88,6 +90,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+        _blMiniMap = FindObjectOfType<bl_MiniMap>();
         inventoryUi = InventoryUI.instance;
         shopUI = global::ShopUI.instance;
         inventory.SetActive(false);
@@ -112,6 +115,36 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void MapOpen()
+    {
+        _blMiniMap.GetMiniMapSize();
+        var ui = _blMiniMap.MiniMapUI;
+        if (ui != null)
+        {
+            ui.root.anchoredPosition = _blMiniMap.FullMapPosition;
+            ui.root.sizeDelta = _blMiniMap.FullMapSize;
+            ui.root.eulerAngles = _blMiniMap.FullMapRotation;
+            ui.minimapMaskManager?.ChangeMaskType(true);
+        }
+        _blMiniMap._isPreviewFullscreen = true;
+        mapCloseBtn.SetActive(true);
+        mapOpenBtn.SetActive(false);
+    }
+
+    public void MapClose()
+    {
+        var ui = _blMiniMap.MiniMapUI;
+        if (ui != null)
+        {
+            ui.root.anchoredPosition = _blMiniMap.MiniMapPosition;
+            ui.root.sizeDelta = _blMiniMap.MiniMapSize;
+            ui.root.eulerAngles = _blMiniMap.MiniMapRotation;
+            ui.minimapMaskManager?.ChangeMaskType(false);
+        }
+        _blMiniMap._isPreviewFullscreen = false;
+        mapCloseBtn.SetActive(false);
+        mapOpenBtn.SetActive(true);
+    }
     private void Update()
     {
         if (Input.GetButtonDown("Inventory"))
