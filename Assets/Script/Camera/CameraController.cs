@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameAnalyticsSDK.Setup;
 using PixelCrushers.QuestMachine;
 using UnityEngine;
 
@@ -52,6 +53,7 @@ public class CameraController : MonoBehaviour
                 else if (hit.transform.gameObject.name == "Baskan")
                 {
                     var giver = GameManager.instance.baskan.GetComponent<QuestGiver>();
+                    Debug.Log("1st Quests State : " +giver.questList[0].GetState());
                     giver.StartDialogueWithPlayer();
                 }
                 

@@ -175,15 +175,7 @@ namespace PixelCrushers.QuestMachine
             closeButton.gameObject.SetActive(enableClose);
             backButton.gameObject.SetActive(enableBack);
             acceptButton.gameObject.SetActive(enableAcceptDecline);
-            
-            if (!selectedQuest.isAbandonable)
-            {
-                declineButton.gameObject.SetActive(false);
-            }
-            else
-            {
-                declineButton.gameObject.SetActive(enableAcceptDecline);
-            }
+            declineButton.gameObject.SetActive(enableAcceptDecline);
             if (InputDeviceManager.autoFocus)
             {
                 var selectable = enableAcceptDecline ? declineButton

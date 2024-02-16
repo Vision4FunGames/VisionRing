@@ -451,6 +451,7 @@ namespace PixelCrushers.QuestMachine
                 if (!hasContent)
                 {
                     quests.RemoveAt(i);
+                    Debug.Log("Quest Removed");
                 }
             }
         }
