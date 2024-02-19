@@ -341,6 +341,13 @@ public class UiManager : MonoBehaviour
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic02");
         ringBtn.gameObject.SetActive(false);
         chapter1.gameObject.SetActive(true);
+        
+        Invoke("AfterVideoOpen",2);
+     
+    }
+
+    public void AfterVideoOpen()
+    {
         Player.instance.tutorial = false;
         Player.instance.GetComponent<NavMeshAgent>().enabled = false;
         PlayerPrefs.SetInt("StartVillage", 0);
@@ -354,7 +361,6 @@ public class UiManager : MonoBehaviour
 
         Player.instance.TurnB();
     }
-
     private void LoadTuto()
     {
         GameManager.instance.TutorialLoad();
