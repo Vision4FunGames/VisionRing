@@ -732,6 +732,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
+                magician.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 ES3.Save("SuccessedQuest",_questManager.successedQuests);
                 break;
             case "Portal2":
@@ -743,6 +744,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
                 break;
             case "Award":
+                _questManager.successedQuests.Add(questname);
+                baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 break;
         }
     }
