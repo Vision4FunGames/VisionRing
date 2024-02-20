@@ -27,7 +27,7 @@ public class BirlesikGolem : MonoBehaviour
     private bool move;
     private float currentMovementTime;
     private float AttackTwoSpeed = 20;
-    private MMProgressBar healthBar;
+    public MMProgressBar healthBar;
     private GameObject _damageNumbersPro;
     public Transform ust, alt;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
@@ -74,7 +74,7 @@ public class BirlesikGolem : MonoBehaviour
             if (distance < 50)
             {
                 sleep = false;
-                healthBar.gameObject.SetActive(false);
+                healthBar.gameObject.SetActive(true);
             }
         }
         else

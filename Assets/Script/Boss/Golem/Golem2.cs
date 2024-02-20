@@ -29,7 +29,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
     Canvas canvasMain;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         canvasMain=  GameObject.FindGameObjectWithTag("GamePlayCanvas").GetComponent<Canvas>();
         _gameManager = FindObjectOfType<GameManager>();
