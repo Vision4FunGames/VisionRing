@@ -56,12 +56,6 @@ public class CameraController : MonoBehaviour
                         //Debug.Log("1st Quests State : " +giver.questList[0].GetState());
                     giver.StartDialogueWithPlayer();
                 }
-                
-                
-                
-              
-                
-
             }
         }
     }
