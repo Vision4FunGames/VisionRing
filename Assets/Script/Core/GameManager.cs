@@ -52,7 +52,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public GameObject villageDoor, villageDoor2;
     public GameObject colosseum;
     public GameObject tutorialIncreaserFirst;
-
+    public GameObject firstLevelEnemies;
+    public GameObject realmChange;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
@@ -187,11 +188,20 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 {
                     isRing = true;
                     UiManager.instance.ringBtn.gameObject.SetActive(true);
+                    UiManager.instance.ringBtn.GetComponent<Button>().enabled = true;
                 }
             }
             else
             {
                 UiManager.instance.ringBtn.gameObject.SetActive(false);
+            }
+        }
+
+        if (PlayerPrefs.HasKey("FirstEnemies"))
+        {
+            if (PlayerPrefs.GetString("FirstEnemies")== "True")
+            {
+                firstLevelEnemies.gameObject.SetActive(true);
             }
         }
         if (PlayerPrefs.HasKey("Heal"))
@@ -277,21 +287,25 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             //         _questListContainer.questList[i+1]?.SetState(QuestState.WaitingToStart);
             //     }
             // }
-            if (baskan.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+            if (baskan.GetComponent<QuestGiver>().questList.Count != 0)
             {
                 var questlist = baskan.GetComponent<QuestGiver>().questList;
-                for (int i = 0; i < questlist.Count; i++)
+                int counter = questlist.Count;
+                for (int i = 0; i < counter; i++)
                 {
                     if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
                     {
                       // 
                         Debug.Log(questlist[i].id.ToString() + " Bitirildi ");
                         questlist[i].SetState(QuestState.Successful);
-                       
+                        questlist[i].BecomeUnofferable();
+                        questlist.RemoveAt(i);
+                        i--;
+                        counter--;
                     }
                     else
                     {
-                        if (questlist[i].id.ToString() is not "Monster" or "BigMonster")
+                        if (questlist[i].id.ToString() != "Monster" && questlist[i].id.ToString() != "BigMonster")
                         {
                             questlist[i].SetState(QuestState.WaitingToStart);
                             IndicatorDefine(baskan);
@@ -300,6 +314,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                         }
                         else
                         {
+                            firstLevelEnemies.gameObject.SetActive(true);
+                            PlayerPrefs.SetString("FirstEnemies","True");
                             var magicianGiver = magician.GetComponent<QuestGiver>();
                             int mageSuccessed = 0;
                             for (int j = 0; j < magicianGiver.questList.Count; j++)
@@ -406,6 +422,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public void MagicianGaveRing()
     {
         PlayerPrefs.SetInt("Ring",1);
+        UiManager.instance.ringBtn.GetComponent<Button>().enabled = true;
     }
     public string TutorialLoad()
     {
@@ -666,7 +683,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 break;
         }
     }
-
+    
     public void SuccessQuest(string questname)
     {
         string tempName = questname;
@@ -687,32 +704,40 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerKillTheAttackers);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
+             
+                // baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                QuestLoad();
                 break;
             case "FirstMeet":
                 timerFirstMeeting = Time.time - timerFirstMeeting;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFirstMeeting);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
+                
+                // baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                QuestLoad();
                 break;
             case "MerchantMeet":
                 timerMerchant = Time.time - timerMerchant;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerMerchant);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
+            
+              // baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                QuestLoad();
                 break;
             case "Magician":
                 timerFindMage = Time.time - timerFindMage;
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFindMage);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                magician.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
+               
+                //magician.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                QuestLoad();   
                 break;
             case "Monster":
                 timerBoss = Time.time - timerBoss;
@@ -720,6 +745,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
                 ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                QuestLoad();
                 break;
             case "BigMonster":
                 timerBoss1 = Time.time - timerBoss1;
@@ -733,8 +759,10 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                magician.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
+                realmChange.SetActive(true);
+                //  magician.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                QuestLoad();
                 break;
             case "Portal2":
                 timerPortal2 = Time.time - timerPortal2;
@@ -745,8 +773,12 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
                 break;
             case "Award":
+                IndicatorClose(magician);
+                IndicatorClose(magician.transform.parent.gameObject);
                 _questManager.successedQuests.Add(questname);
-                baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
+                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                QuestLoad();
+                //baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 break;
         }
     }
