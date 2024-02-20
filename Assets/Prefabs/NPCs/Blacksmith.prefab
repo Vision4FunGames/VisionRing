@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 9061928385306153927}
   - component: {fileID: 2829657454784652554}
   - component: {fileID: 2829657454784652555}
+  - component: {fileID: 7693810809181656506}
   m_Layer: 0
   m_Name: Blacksmith
   m_TagString: Untagged
@@ -124,7 +125,7 @@ MonoBehaviour:
   offScreenScaleWithRange: 0
   reverseOffScreenSpriteScaleWithRange: 0
   offScreenSpriteHide: 0
-  enableGameObject: 0
+  enableGameObject: 1
   gameObjectDepth: 0
   offScreenObjectRotates: 0
   onScreenGameObject: {fileID: 0}
@@ -144,7 +145,7 @@ MonoBehaviour:
   offScreenGameObjectFadeWithRange: 0
   offScreenGameObjectScaleWithRange: 0
   reverseOffScreenGameObjectScaleWithRange: 0
-  offScreenGameObjectHide: 0
+  offScreenGameObjectHide: 1
   enableText: 0
   textDepth: 0
   textDescription: Hello!
@@ -195,12 +196,28 @@ MonoBehaviour:
   toggleSetupOptions: 1
   toggleParentOptions: 0
   toggleSpriteOptions: 1
-  toggleGameObjectOptions: 0
+  toggleGameObjectOptions: 1
   toggleTextOptions: 0
   toggleDiameterOptions: 0
   toggleCenteredSpriteOptions: 0
   toggleCenteredPrefabOptions: 0
   toggleRadiusGizmoOptions: 0
+--- !u!114 &7693810809181656506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061928385306153924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc487e2bd480d24799818d69312f1fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_questIndicatorUI: {fileID: 0}
+  m_hasQuestToOfferState: 0
+  m_hasQuestButCannotOfferState: 0
+  m_checkSinglePlayerJournal: 1
 --- !u!1001 &2362514087086795165
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7047,6 +7047,8 @@ MonoBehaviour:
   bombActiveted: 0
   bombexp: 0
   isAttackStaff: 0
+  patrolRange: 10
+  patrolInterval: 3
 --- !u!114 &2622531187056102402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7160,8 +7162,8 @@ MonoBehaviour:
   boss: {fileID: 0}
   rnd: 0
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
-  minGold: 0
-  maxGold: 0
+  minGold: 5
+  maxGold: 10
 --- !u!114 &-8956899929419612980
 MonoBehaviour:
   m_ObjectHideFlags: 0

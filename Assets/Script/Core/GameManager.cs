@@ -284,8 +284,10 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 {
                     if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
                     {
-                        questlist[i].SetState(QuestState.Successful);
+                      // 
                         Debug.Log(questlist[i].id.ToString() + " Bitirildi ");
+                        questlist[i].SetState(QuestState.Successful);
+                       
                     }
                     else
                     {
@@ -312,31 +314,30 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                             if (mageSuccessed is 0 or 1)
                             {
 
-                                if (mageSuccessed < magicianGiver.questList.Count)
-                                {
-                                    for (int k = 0; k < magicianGiver.questList.Count; k++)
-                                    {
-                                        if (magicianGiver.questList[k].GetState() != QuestState.Successful)
-                                        {
-                                            magicianGiver.questList[k].SetState(QuestState.WaitingToStart);
-                                            break;
-                                        }
-                                    }
 
-                                    IndicatorDefine(magician.transform.parent.gameObject);
-                                    Debug.Log(mageSuccessed + " Completed quest count");
-                                    Debug.Log("Mage Quest verdi ");
-                                    break;
-                                }
-                                else
+                                for (int k = 0; k < magicianGiver.questList.Count; k++)
                                 {
+                                    if (magicianGiver.questList[k].GetState() != QuestState.Successful)
+                                    {
+                                        magicianGiver.questList[k].SetState(QuestState.WaitingToStart);
+                                        break;
+                                    }
+                                }
+
+                                IndicatorDefine(magician.transform.parent.gameObject);
+                                Debug.Log(mageSuccessed + " Completed quest count");
+                                Debug.Log("Mage Quest verdi ");
+                                break;
+                            }
+                            else
+                            {
                                     questlist[i].SetState(QuestState.WaitingToStart);
                                     //baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
                                     IndicatorDefine(baskan);
                                     Debug.Log("Baskan quest verdi");
                                     break;
-                                }
                             }
+                            
                         }
                     }
                 }

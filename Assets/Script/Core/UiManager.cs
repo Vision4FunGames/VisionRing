@@ -278,7 +278,7 @@ public class UiManager : MonoBehaviour
 
     public void MagicianUI()
     {
-        if (GameManager.instance.isMagician)
+        if (GameManager.instance.isMagician && GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0 )
         {
             CloseAllUI();
             Invoke("OpenUI", canvasTime);

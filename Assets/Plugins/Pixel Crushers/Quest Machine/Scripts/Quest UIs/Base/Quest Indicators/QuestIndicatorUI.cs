@@ -47,6 +47,7 @@ namespace PixelCrushers.QuestMachine
                     break;
                 case (int)QuestIndicatorState.Offer:
                     SetActive(m_offer, value);
+                    Debug.Log("Offer Acildi");
                     break;
                 case (int)QuestIndicatorState.TalkDisabled:
                     SetActive(m_talkDisabled, value);
