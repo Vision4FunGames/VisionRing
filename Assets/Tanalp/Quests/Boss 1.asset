@@ -18,6 +18,33 @@ MonoBehaviour:
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
+--- !u!114 &-6798533071827852144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005ad42cc1945d043becd6daacec5a25, type: 3}
+  m_Name: ButtonQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_image: {fileID: 21300000, guid: a2b73d690767b4761be7543e102d97e6, type: 3}
+  m_color: {r: 1, g: 1, b: 1, a: 1}
+  m_caption:
+    m_text: 
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_count: 0
+  m_imageNameProxy: 
+  m_groupNumber: -1
+  m_actionList:
+  - {fileID: 2548288362877828235}
+  m_actionsProxy:
+    actions: []
 --- !u!114 &-5581978725269079810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -37,6 +64,24 @@ MonoBehaviour:
     m_valueType: 0
     m_literalValue: 2
     m_counterIndex: 0
+--- !u!114 &-4364570586405512740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: You killed the boss and saved us. Thank You!
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
 --- !u!114 &-4315501235178789791
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,6 +115,37 @@ MonoBehaviour:
   m_contentID: -1
   m_bodyText:
     m_text: Kill the monster. He is end of the way. Follow the way
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+--- !u!114 &-2639398858254175308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94e8fb3b9b54114cbe8185003729c1b, type: 3}
+  m_Name: SceneEventQuestAction
+  m_EditorClassIdentifier: 
+  m_guid: 07fc795a-a48f-4261-be9b-0a4204803560
+--- !u!114 &-1673160995748893106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: Back to the mayor.
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
@@ -295,7 +371,8 @@ MonoBehaviour:
       - m_contentList: []
       - m_contentList: []
       - m_contentList: []
-    - m_actionList: []
+    - m_actionList:
+      - {fileID: -2639398858254175308}
       m_categorizedContentList:
       - m_contentList: []
       - m_contentList: []
@@ -311,7 +388,7 @@ MonoBehaviour:
       m_conditionCountMode: 1
       m_minConditionCount: 0
       m_numTrueConditions: 0
-    m_childIndexList: 02000000
+    m_childIndexList: 03000000
     m_canvasRect:
       serializedVersion: 2
       x: 200
@@ -362,13 +439,99 @@ MonoBehaviour:
     m_childIndexList: 
     m_canvasRect:
       serializedVersion: 2
-      x: 197
-      y: 223
+      x: 189
+      y: 272
       width: 120
       height: 35
+  - m_id:
+      m_text: Condition 3
+      m_stringAsset: {fileID: 0}
+      m_textTable: {fileID: 0}
+      m_textTableFieldID: 0
+    m_internalName:
+      m_text: 
+      m_stringAsset: {fileID: 0}
+      m_textTable: {fileID: 0}
+      m_textTableFieldID: 0
+    m_nodeType: 4
+    m_isOptional: 0
+    m_state: 0
+    m_speaker:
+      m_text: 
+      m_stringAsset: {fileID: 0}
+      m_textTable: {fileID: 0}
+      m_textTableFieldID: 0
+    m_stateInfoList:
+    - m_actionList: []
+      m_categorizedContentList:
+      - m_contentList: []
+      - m_contentList: []
+      - m_contentList: []
+    - m_actionList: []
+      m_categorizedContentList:
+      - m_contentList:
+        - {fileID: -4364570586405512740}
+        - {fileID: -6798533071827852144}
+      - m_contentList: []
+      - m_contentList:
+        - {fileID: -1673160995748893106}
+        - {fileID: 605953623650758120}
+    - m_actionList: []
+      m_categorizedContentList:
+      - m_contentList: []
+      - m_contentList: []
+      - m_contentList: []
+    m_conditionSet:
+      m_conditionList:
+      - {fileID: 3591201973015383482}
+      m_conditionCountMode: 1
+      m_minConditionCount: 0
+      m_numTrueConditions: 0
+    m_childIndexList: 02000000
+    m_canvasRect:
+      serializedVersion: 2
+      x: 200
+      y: 203
+      width: 120
+      height: 48
   m_textTable: {fileID: 0}
   m_goalEntityTypeName: 
   m_nextContentID: 0
+--- !u!114 &605953623650758120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acd9aaaa3b44d5419945259bebbe84a, type: 3}
+  m_Name: IconQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_image: {fileID: 21300000, guid: 572c3ecf2337d1d4da3e67ef65d060e7, type: 3}
+  m_color: {r: 1, g: 1, b: 1, a: 1}
+  m_caption:
+    m_text: 
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_count: 0
+  m_imageNameProxy: 
+--- !u!114 &2548288362877828235
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94e8fb3b9b54114cbe8185003729c1b, type: 3}
+  m_Name: SceneEventQuestAction
+  m_EditorClassIdentifier: 
+  m_guid: fdc88ac3-aafd-48c4-94b6-f362f8b54577
 --- !u!114 &3045544364184852315
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -382,6 +545,31 @@ MonoBehaviour:
   m_Name: SceneEventQuestAction
   m_EditorClassIdentifier: 
   m_guid: 1e3f87ea-31e1-4f73-a96c-3bb921fb27a6
+--- !u!114 &3591201973015383482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2f2b9c7056cd343a6b11365c05d91a, type: 3}
+  m_Name: QuestNodeStateQuestCondition
+  m_EditorClassIdentifier: 
+  m_alreadyTrue: 0
+  m_requiredQuestID:
+    m_text: BigMonster
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_requiredQuestNodeID:
+    m_text: Condition 3
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_isNot: 0
+  m_requiredState: 2
 --- !u!114 &4964383259776261167
 MonoBehaviour:
   m_ObjectHideFlags: 1

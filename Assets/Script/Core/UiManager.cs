@@ -75,6 +75,7 @@ public class UiManager : MonoBehaviour
 
     [Header("Image")] public RawImage foxRaw;
     [Header("Chapters")] public VideoPlayer chapter1;
+    public VideoPlayer chapter3;
     public VideoPlayer endVideo;
 
     public delegate void OnEconomyChanged();
@@ -158,10 +159,10 @@ public class UiManager : MonoBehaviour
             chapter1.gameObject.SetActive(false);
         }
         
-        if (endVideo.frame + 5 >= (long)endVideo.frameCount && endVideo.gameObject.activeSelf)
+        if (chapter3.frame + 5 >= (long)chapter3.frameCount && chapter3.gameObject.activeSelf)
         {
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic03");
-            endVideo.gameObject.SetActive(false);
+            chapter3.gameObject.SetActive(false);
         }
     }
 

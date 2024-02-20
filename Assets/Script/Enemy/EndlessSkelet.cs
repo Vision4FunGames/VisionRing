@@ -48,6 +48,7 @@ public class EndlessSkelet : MonoBehaviour
         int rnd = Random.Range(0, enemyPrefabList.Count);
         GameObject _currentEnemy = Instantiate(enemyPrefabList[rnd], transform.TransformPoint(tempPos),
             Quaternion.identity, transform);
+        _currentEnemy.GetComponent<EnemyStats>().tutorial = false;
         drmEnemyChange.EnemyVariationsList.Add(_currentEnemy.GetComponent<EnemyVariations>());
         if (drmGameObject.increaseEnes &&
             _currentEnemy.GetComponent<EnemyVariations>().EnemyVariation == EnemyVariation.Variation2)

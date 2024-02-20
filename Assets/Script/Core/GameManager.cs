@@ -367,14 +367,19 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         count++;
         if (count > 1)
         {
-            Invoke("PlayEndVideo",1);
+            Invoke("PlayChapter3",1);
         }
     }
 
+    public void PlayChapter3()
+    {
+        UiManager.instance.chapter3.gameObject.SetActive(true);
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic03");
+    }
     public void PlayEndVideo()
     {
         UiManager.instance.endVideo.gameObject.SetActive(true);
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic03");
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic04");
     }
     private void TutorialChange()
     {

@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
                 else if (hit.transform.gameObject.name == "Baskan")
                 {
                     var giver = GameManager.instance.baskan.GetComponent<QuestGiver>();
-                    Debug.Log("1st Quests State : " +giver.questList[0].GetState());
+                        //Debug.Log("1st Quests State : " +giver.questList[0].GetState());
                     giver.StartDialogueWithPlayer();
                 }
                 
