@@ -50,6 +50,7 @@ public abstract class CharacterHealth : MonoBehaviour
             if (health <= maxxHealth-10 && !GameManager.instance.isDash)
             {
                 TutorialLoader.instance.Load("Dash");
+                TutorialController.instance.mask.transform.GetChild(0).transform.gameObject.SetActive(true);
                 PlayerPrefs.SetInt("Dash",1);
                 GameManager.instance.isDash = true;
             }

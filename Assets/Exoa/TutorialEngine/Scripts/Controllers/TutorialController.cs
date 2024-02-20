@@ -190,11 +190,11 @@ namespace Exoa.TutorialEngine
                 }
             }
             else if (TutorialLoader.instance.loadedTutorialName == "Dash")
-            {
-                StopCoroutine(DashMove());
+           {
+               mask.gameObject.transform.GetChild(0).gameObject.SetActive(false);
                // DashTutorial();
-                //handImage.transform.DOKill();
-            }
+               //handImage.transform.DOKill();
+           }
              else if (TutorialLoader.instance.loadedTutorialName== "0.3")
             {
                 if (currentStep == 1)
@@ -431,29 +431,9 @@ namespace Exoa.TutorialEngine
             currentBgColor = currentStep == 0 ? initBGColor : normalBGColor;
 
         }
-        public void DashTutorial()
-        {
-             //    handImage.transform.DOKill();
-             // handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
-            // .OnComplete(() =>
-            // {
-            //     handImage.transform.localPosition = new Vector3(0, 0, 0);
-            //     StartCoroutine(DashMove());
-            // });
-           // UiManager.instance.attackJoystick.transform
-           handImage.transform.DOLocalMove(new Vector3(0, -100, 0), 2f).OnComplete(() =>
-           {
-               handImage.transform.localPosition = new Vector3(0, 0, 0);
-               StartCoroutine(DashMove());
-           });
+       
 
-        }
-
-       public IEnumerator DashMove()
-       {
-           yield return new WaitForSeconds(1f);
-           DashTutorial();
-       }
+      
 
         private void ShowTutorial()
         {
@@ -461,7 +441,7 @@ namespace Exoa.TutorialEngine
             if (TutorialLoader.instance.loadedTutorialName == "Dash")
             {
                 
-                DashTutorial();
+              
             }
             
 
