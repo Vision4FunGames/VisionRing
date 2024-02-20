@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public GameObject tutorialIncreaserFirst;
     public GameObject firstLevelEnemies;
     public GameObject realmChange;
+    public GameObject seaWater;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
@@ -223,6 +224,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             if (PlayerPrefs.GetInt("FoxSaved")== 1)
             {
                 isFoxSaved = true;
+                seaWater.transform.localPosition = new Vector3(89.502594f,-31f,-113.304504f);
             }
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
+using ToonyColorsPro.ShaderGenerator;
 using Random = System.Random;
 
 public class CharacterStats : MonoBehaviour
@@ -105,9 +106,20 @@ public class CharacterStats : MonoBehaviour
         for (int i = 0; i < _skinnedMeshRenderers.Length; i++)
         {
             int index = i;
-            _skinnedMeshRenderers[i].material.DOColor(Color.red, .1f).SetEase(Ease.Linear)
-                .OnComplete((() =>
-                    _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
+            if (CPIManager.instance.enemyDamageAnimation)
+            {
+                _skinnedMeshRenderers[i].material.SetColor("_EmissionColor",Color.white);
+                _skinnedMeshRenderers[i].material.DOColor(Color.white,.1f).SetEase(Ease.Linear)
+                    .OnComplete((() =>
+                        _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
+            }
+            else
+            {
+                _skinnedMeshRenderers[i].material.DOColor(Color.red, .1f).SetEase(Ease.Linear)
+                    .OnComplete((() =>
+                        _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
+            }
+           
         }
     }
 

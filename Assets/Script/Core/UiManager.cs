@@ -357,6 +357,7 @@ public class UiManager : MonoBehaviour
         PlayerManager.instance.pet.GetComponent<NavMeshAgent>().enabled = true;
         GameManager.instance.tutorialSection = 1;
         GameManager.instance.tutorialCounter = 0;
+        GameManager.instance.seaWater.transform.localPosition = new Vector3(89.502594f,-31f,-113.304504f);
         Invoke("LoadTuto", 3f);
 
         Player.instance.TurnB();
