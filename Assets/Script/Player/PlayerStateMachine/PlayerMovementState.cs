@@ -80,7 +80,7 @@ namespace Script.Player.PlayerStateMachine
                 _player.playerSound.audioSource.Play();
             }
 
-            if (_player._myController.velocity.magnitude < 2)
+            if (_player._myController.velocity.magnitude < 2 && _player.playerSound.audioSource.clip != _player.playerSound.earnItemSound)
             {
                 _player.playerSound.audioSource.Stop();
             }

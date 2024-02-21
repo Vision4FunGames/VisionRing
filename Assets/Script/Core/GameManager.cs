@@ -503,6 +503,10 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             UpdateGameState(GameState.Pause);
         if (Input.GetKeyDown(KeyCode.E))
             FindObjectOfType<PlayerHealth>().TakeDamage(10);
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            EconomyManager.instance.EarnRewards();
+        }
         currentTime += Time.deltaTime;
 
         if (currentTime > 10 && fightBool)

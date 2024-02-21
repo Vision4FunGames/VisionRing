@@ -87,8 +87,7 @@ public class EconomyManager : MonoBehaviour
                 this.itemCount[i] += itemCount;
             }
         }
-        PlayerManager.instance.earnItemParticle.Play();
-        HapticPatterns.PlayPreset(HapticPatterns.PresetType.Warning);
+        
     }
 
     public void EarnUpgradeItem(UpgradeItem upgradeItem)
@@ -144,5 +143,9 @@ public class EconomyManager : MonoBehaviour
         EarnItem(0,30);
         EarnItem(1,30);
         EarnItem(2,30);
+        PlayerManager.instance.earnItemParticle.Play();
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.Warning);
+        Player.instance.playerSound.audioSource.clip = Player.instance.playerSound.earnItemSound;
+        Player.instance.playerSound.audioSource.Play();
     }
 }

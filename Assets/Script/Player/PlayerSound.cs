@@ -12,7 +12,7 @@ public class PlayerSound : MonoBehaviour
     public AudioSource hitSource;
     public AudioClip jump;  
     public AudioSource swordAudioSource;
-
+    public AudioClip earnItemSound;
     public AudioClip ringSound;
     // Start is called before the first frame update
     void Start()
