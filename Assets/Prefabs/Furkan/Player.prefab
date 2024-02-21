@@ -61,7 +61,7 @@ MonoBehaviour:
   shaderData_RingCount:
   - 1
   shaderData_Phase:
-  - 1435.8889
+  - 617.8656
   shaderData_Frequency:
   - 14.85
   shaderData_Smooth:
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 10
-  timer: 82.12775
+  timer: 25.446655
   increaseEnes: 0
   radius: 0
   intensity: 0.7
@@ -96,8 +96,8 @@ MonoBehaviour:
   edgeSize: 2.77
   ringCount: 1
   frequency: 14.85
-  phaseSpeed: 20
-  currentPhase: 1442.5555
+  phaseSpeed: 40
+  currentPhase: 617.8656
   smooth: 0.46
   slider: {fileID: 0}
   displayAllProperties: 1
@@ -17388,7 +17388,7 @@ MonoBehaviour:
   - {fileID: 2631297511777863791}
   - {fileID: 2631297511090115849}
   - {fileID: 2631297511090115849}
-  damage: 15
+  damage: 25
   critChance: 0
   myCurrentArrowType: 0
   myCurrentGunType: 0
@@ -17606,11 +17606,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1fe047041f764eb48b0c5868c85128ca, type: 3}
   - {fileID: 8300000, guid: 14071aad852c9f54a8d231d20a7cd335, type: 3}
   footStep: {fileID: 8300000, guid: a1a0bfda3d34dd049beed6482279bd31, type: 3}
+  swim: {fileID: 8300000, guid: 9f3a7ecc4088dc84d8862bf57b4e3bc9, type: 3}
   audioSource: {fileID: 0}
   hitSource: {fileID: 129153990}
-  jump: {fileID: 0}
+  jump: {fileID: 8300000, guid: 8737c2f8b864b7b42983ee5b69f71ccd, type: 3}
   swordAudioSource: {fileID: 1826498683}
-  ringSound: {fileID: 0}
+  ringSound: {fileID: 8300000, guid: 4e9bff56ee93c6f42b214141e44e763d, type: 3}
 --- !u!1 &2678434383242843462
 GameObject:
   m_ObjectHideFlags: 0
@@ -23579,6 +23580,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4973639886222762, guid: 529f03ad21f893a41af74febfcc4bc1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198172825824383920, guid: 529f03ad21f893a41af74febfcc4bc1b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198633978275743286, guid: 529f03ad21f893a41af74febfcc4bc1b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198984311128947964, guid: 529f03ad21f893a41af74febfcc4bc1b, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -192,7 +192,6 @@ public class Player : MonoBehaviour
             speed = 12;
             _playerAnimator.SetTrigger("base");
             isSwim = false;
-            print("aaaaaaaasssssassas");
         }
     }
 

@@ -203,6 +203,7 @@ public class Golem2 : MonoBehaviour , GolemCombat
         }
         else if(health<=0 && !dead)
         {
+            healthBar.gameObject.SetActive(false);
             QuestMachineMessages.SendCompositeMessage(this,"Killed:Boss");
             GetComponent<Collider>().enabled = false;
             dead = true;

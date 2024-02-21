@@ -71,7 +71,12 @@ namespace Script.Player.PlayerStateMachine
             {
                 _player.playerSound.audioSource.volume = Random.Range(.8f, 1f);
                 _player.playerSound.audioSource.pitch = Random.Range(.8f, 1f);
-                _player.playerSound.audioSource.clip = _player.playerSound.footStep;
+                if (!_player.isSwim)
+                    _player.playerSound.audioSource.clip = _player.playerSound.footStep;
+                else
+                {
+                    _player.playerSound.audioSource.clip = _player.playerSound.swim;
+                }
                 _player.playerSound.audioSource.Play();
             }
 
