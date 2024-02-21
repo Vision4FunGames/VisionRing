@@ -325,6 +325,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                                 if (_questManager.successedQuests.Contains(magicianGiver.questList[j].id.ToString()))
                                 {
                                     mageSuccessed++;
+                                    realmChange.gameObject.SetActive(true);
                                     magicianGiver.questList[j].SetState(QuestState.Successful);
                                 }
                             }

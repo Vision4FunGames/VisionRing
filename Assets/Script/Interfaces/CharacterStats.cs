@@ -1,11 +1,9 @@
-using System;
 using DamageNumbersPro;
 using UnityEngine;
 using DG.Tweening;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
-using ToonyColorsPro.ShaderGenerator;
-using Random = System.Random;
+
 
 public class CharacterStats : MonoBehaviour
 {

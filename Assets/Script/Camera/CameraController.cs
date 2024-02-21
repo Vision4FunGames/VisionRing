@@ -53,7 +53,23 @@ public class CameraController : MonoBehaviour
                 else if (hit.transform.gameObject.name == "Baskan")
                 {
                     var giver = GameManager.instance.baskan.GetComponent<QuestGiver>();
-                        //Debug.Log("1st Quests State : " +giver.questList[0].GetState());
+                    if (QuestManager.instance.successedQuests.Count > 0)
+                    {
+                        if (QuestManager.instance.successedQuests[QuestManager.instance.successedQuests.Count-1] == "Award")
+                        {
+                            for (int i = 0; i < giver.questList.Count; i++)
+                            {
+                                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
+                                if (giver.questList[i].id.ToString() == "Monster")
+                                {
+                                    giver.questList[i].SetState(QuestState.WaitingToStart);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                   
+                    //Debug.Log("1st Quests State : " +giver.questList[0].GetState());
                     giver.StartDialogueWithPlayer();
                 }
             }
