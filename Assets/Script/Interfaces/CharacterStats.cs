@@ -18,6 +18,7 @@ public class CharacterStats : MonoBehaviour
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
     public string message;
+    public bool damageEmissionBoolean;
     public event System.Action OnDie;
 
     private void Awake()
@@ -85,7 +86,7 @@ public class CharacterStats : MonoBehaviour
             UpdateHealthBar();
         }
 
-        
+
         if (currentHealth <= 0)
         {
             Die();
@@ -99,27 +100,38 @@ public class CharacterStats : MonoBehaviour
 
     public void DamageAnimation()
     {
-        transform.GetChild(0).DOScale(new Vector3(1.5f, 1.5f, 1.5f), .1f).OnComplete(() =>
+        if (damageEmissionBoolean)
         {
-            transform.GetChild(0).DOScale(new Vector3(1f, 1f, 1f), .1f);
-        });
-        for (int i = 0; i < _skinnedMeshRenderers.Length; i++)
-        {
-            int index = i;
-            if (CPIManager.instance.enemyDamageAnimation)
+            transform.GetChild(0).DOScale(new Vector3(1.2f, 1.2f, 1.2f), .05f).OnComplete(() =>
             {
-                _skinnedMeshRenderers[i].material.SetColor("_EmissionColor",Color.white);
-                _skinnedMeshRenderers[i].material.DOColor(Color.white,.1f).SetEase(Ease.Linear)
+                transform.GetChild(0).DOScale(new Vector3(1f, 1f, 1f), .05f);
+            });
+            for (int i = 0; i < _skinnedMeshRenderers.Length; i++)
+            {
+                int index = i;
+                _skinnedMeshRenderers[i].material.SetColor("_EmissionColor", Color.white);
+                _skinnedMeshRenderers[i].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)
                     .OnComplete((() =>
-                        _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
+                            {
+                                _skinnedMeshRenderers[index].material.SetColor("_EmissionColor", Color.black);
+                            }
+                        ));
             }
-            else
+        }
+        else
+        {
+            transform.GetChild(0).DOScale(new Vector3(1.5f, 1.5f, 1.5f), .1f).OnComplete(() =>
             {
+                transform.GetChild(0).DOScale(new Vector3(1f, 1f, 1f), .1f);
+            });
+
+            for (int i = 0; i < _skinnedMeshRenderers.Length; i++)
+            {
+                int index = i;
                 _skinnedMeshRenderers[i].material.DOColor(Color.red, .1f).SetEase(Ease.Linear)
-                    .OnComplete((() =>
-                        _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f).SetEase(Ease.Linear)));
+                    .OnComplete((() => { _skinnedMeshRenderers[index].material.DOColor(Color.white, .1f); }
+                        ));
             }
-           
         }
     }
 
