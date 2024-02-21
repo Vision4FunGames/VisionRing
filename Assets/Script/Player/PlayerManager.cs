@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     private GameObject currentRope;
     private CameraShake _cameraShake;
     private ParticleSystem _damageParticle;
+    [HideInInspector]public ParticleSystem earnItemParticle;
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
     [HideInInspector] public float currentPortalTime, portalTime;
@@ -66,9 +67,13 @@ public class PlayerManager : MonoBehaviour
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
         instance = this;
+        earnItemParticle =  Instantiate(Resources.Load("LevelupCylinderBlue", typeof(ParticleSystem)) as ParticleSystem,
+            new Vector3(0, 2, 0), Quaternion.identity, transform);
+        earnItemParticle.transform.localPosition = new Vector3(0, 0, 0);
         _damageParticle = Instantiate(Resources.Load("ShadowExplosion2", typeof(ParticleSystem)) as ParticleSystem,
             new Vector3(0, 2, 0), Quaternion.identity, transform);
         _damageParticle.transform.localPosition = new Vector3(0, 2, 0);
+        
         _cameraShake = FindObjectOfType<CameraShake>();
         
     }

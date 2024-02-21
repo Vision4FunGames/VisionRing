@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Lofelt.NiceVibrations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -86,6 +87,8 @@ public class EconomyManager : MonoBehaviour
                 this.itemCount[i] += itemCount;
             }
         }
+        PlayerManager.instance.earnItemParticle.Play();
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.Warning);
     }
 
     public void EarnUpgradeItem(UpgradeItem upgradeItem)
