@@ -189,6 +189,13 @@ namespace Exoa.TutorialEngine
                     GameManager.instance.CinematicCamDisable();
                 }
             }
+           else if (TutorialLoader.instance.loadedTutorialName == "Campfire")
+           {
+               if (currentStep == 1)
+               {
+                   GameManager.instance.CinematicCamDisable();
+               }
+           }
             else if (TutorialLoader.instance.loadedTutorialName == "Dash")
            {
                mask.gameObject.transform.GetChild(0).gameObject.SetActive(false);

@@ -2,6 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using Exoa.TutorialEngine;
 using GameAnalyticsSDK;
+using GameAnalyticsSDK.Setup;
 using Lofelt.NiceVibrations;
 using Script.Player.PlayerStateMachine;
 using Unity.VisualScripting;
@@ -313,6 +314,19 @@ public class Player : MonoBehaviour
                 TutorialLoader.instance.Load("Colosseum");
                 PlayerPrefs.SetInt("Colosseum", 1);
             }
+        }
+
+        if (other.CompareTag("CampTutorial"))
+        {
+            
+            if (!GameManager.instance.isCampfire)
+            {
+                TutorialLoader.instance.Load("Campfire");
+                GameManager.instance.CinematicCamEnable(GameManager.instance.campFire.transform);
+                GameManager.instance.isCampfire = true;
+                PlayerPrefs.SetInt("Campfire", 1);
+            }
+            other.gameObject.GetComponent<Collider>().enabled = false;
         }
     }
 

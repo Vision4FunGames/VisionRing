@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public GameObject firstLevelEnemies;
     public GameObject realmChange;
     public GameObject seaWater;
+    public GameObject campFire;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public bool fightBool;
     public AudioClip fight, stand;
     public bool isFoxSaved;
-
+    public bool isCampfire;
     private UnityUIQuestDialogueUI _questDialogueUI;
     private float DisableTimer;
     [Header("QuestTimer")] 
@@ -233,6 +234,14 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             if (PlayerPrefs.GetInt("Colosseum")==1)
             {
                 isColosseum = true;
+            }
+        }
+
+        if (PlayerPrefs.HasKey("Campfire"))
+        {
+            if (PlayerPrefs.GetInt("Campfire") ==1)
+            {
+                isCampfire = true;
             }
         }
 
