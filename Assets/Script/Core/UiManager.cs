@@ -84,6 +84,7 @@ public class UiManager : MonoBehaviour
 
     [Header("ItemCollect")] public GameObject itemTextPanel;
     private bl_MiniMap _blMiniMap;
+
     private void Awake()
     {
         instance = this;
@@ -127,6 +128,7 @@ public class UiManager : MonoBehaviour
             ui.root.eulerAngles = _blMiniMap.FullMapRotation;
             ui.minimapMaskManager?.ChangeMaskType(true);
         }
+
         _blMiniMap._isPreviewFullscreen = true;
         mapCloseBtn.SetActive(true);
         mapOpenBtn.SetActive(false);
@@ -142,26 +144,29 @@ public class UiManager : MonoBehaviour
             ui.root.eulerAngles = _blMiniMap.MiniMapRotation;
             ui.minimapMaskManager?.ChangeMaskType(false);
         }
+
         _blMiniMap._isPreviewFullscreen = false;
         mapCloseBtn.SetActive(false);
         mapOpenBtn.SetActive(true);
     }
+
     private void Update()
     {
         if (Input.GetButtonDown("Inventory"))
         {
             EconomyManager.instance.SetGold(5000);
         }
-        
+
         if (chapter1.frame + 5 >= (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
         {
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic02");
             chapter1.gameObject.SetActive(false);
         }
-        
+
         if (chapter3.frame + 5 >= (long)chapter3.frameCount && chapter3.gameObject.activeSelf)
         {
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic03");
+            GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
             chapter3.gameObject.SetActive(false);
         }
     }
@@ -279,7 +284,8 @@ public class UiManager : MonoBehaviour
 
     public void MagicianUI()
     {
-        if (GameManager.instance.isMagician && GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0 )
+        if (GameManager.instance.isMagician &&
+            GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0)
         {
             CloseAllUI();
             Invoke("OpenUI", canvasTime);
@@ -342,9 +348,8 @@ public class UiManager : MonoBehaviour
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic02");
         ringBtn.gameObject.SetActive(false);
         chapter1.gameObject.SetActive(true);
-        
-        Invoke("AfterVideoOpen",2);
-     
+
+        Invoke("AfterVideoOpen", 2);
     }
 
     public void AfterVideoOpen()
@@ -358,11 +363,12 @@ public class UiManager : MonoBehaviour
         PlayerManager.instance.pet.GetComponent<NavMeshAgent>().enabled = true;
         GameManager.instance.tutorialSection = 1;
         GameManager.instance.tutorialCounter = 0;
-        GameManager.instance.seaWater.transform.localPosition = new Vector3(89.502594f,-31f,-113.304504f);
+        GameManager.instance.seaWater.transform.localPosition = new Vector3(89.502594f, -31f, -113.304504f);
         Invoke("LoadTuto", 3f);
 
         Player.instance.TurnB();
     }
+
     private void LoadTuto()
     {
         GameManager.instance.TutorialLoad();

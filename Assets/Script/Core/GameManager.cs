@@ -374,6 +374,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public void PlayChapter3()
     {
         UiManager.instance.chapter3.gameObject.SetActive(true);
+        GetComponent<SoundManager>().mainMusicSource.volume = 0f;
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic03");
     }
     public void PlayEndVideo()
