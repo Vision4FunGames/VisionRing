@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 using GameAnalyticsSDK;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
+
 public enum GameState
 {
     Play,
@@ -20,7 +21,7 @@ public enum GameState
     Tutorial
 }
 
-public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
+public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
 {
     public GameObject villageSpawnPos;
     public GameObject tutorial1SpawnPos;
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     private string tutorialName;
     public bool tutorial;
     public FoxManager foxManager;
-    
+
     [Header("Tutorial")] public GameObject tutorialEnemies;
     public GameObject tutoCage;
     public GameObject tutorialWall;
@@ -72,8 +73,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public bool isCampfire;
     private UnityUIQuestDialogueUI _questDialogueUI;
     private float DisableTimer;
-    [Header("QuestTimer")] 
-    private QuestManager _questManager;
+    [Header("QuestTimer")] private QuestManager _questManager;
     public float timerKillTheAttackers;
     public float timerFirstMeeting;
     public float timerMerchant;
@@ -82,7 +82,9 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     public float timerBoss1;
     public float timerPortal1;
     public float timerPortal2;
+    public GameObject SkeletBoss;
     public QuestListContainer _questListContainer;
+
     private void Awake()
     {
         instance = this;
@@ -93,7 +95,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             tutorialCounter = 0;
             tutorialSection = PlayerPrefs.GetInt("TutorialSection");
         }
-        if(Application.platform == RuntimePlatform.IPhonePlayer)
+
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
             GameAnalytics.Initialize();
         }
@@ -111,6 +114,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             GetComponent<AudioSource>().Play();
             fightBool = true;
         }
+
         currentTime = 0;
     }
 
@@ -123,12 +127,14 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     private void Start()
     {
         _questManager = GetComponent<QuestManager>();
-        
+
         #region Tutorial
+
         if (PlayerPrefs.HasKey("TutorialSection"))
         {
             tutorialSection = PlayerPrefs.GetInt("TutorialSection");
         }
+
         if (tutorialSection == 1)
         {
             // //Quest quest = new Quest(questMachineConfiguration)
@@ -138,28 +144,27 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
         if (tutorialSection == 2)
         {
-           
-           QuestLoad();
+            QuestLoad();
         }
-            // else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
-            // {
-            //     var questlist = magician.GetComponent<QuestGiver>().questList;
-            //     for (int i = 0; i < questlist.Count; i++)
-            //     {
-            //         if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
-            //         {
-            //             questlist[i].SetState(QuestState.Successful);
-            //             Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
-            //         }
-            //         else
-            //         {
-            //             questlist[i].SetState(QuestState.WaitingToStart);
-            //             IndicatorDefine(magician);
-            //             break;
-            //         }
-            //     }
-            // }
-        
+        // else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+        // {
+        //     var questlist = magician.GetComponent<QuestGiver>().questList;
+        //     for (int i = 0; i < questlist.Count; i++)
+        //     {
+        //         if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
+        //         {
+        //             questlist[i].SetState(QuestState.Successful);
+        //             Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
+        //         }
+        //         else
+        //         {
+        //             questlist[i].SetState(QuestState.WaitingToStart);
+        //             IndicatorDefine(magician);
+        //             break;
+        //         }
+        //     }
+        // }
+
         if (PlayerPrefs.HasKey("Blacksmith"))
         {
             if (PlayerPrefs.GetInt("Blacksmith") == 1)
@@ -167,7 +172,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 isBlacksmith = true;
             }
         }
-        
+
         if (PlayerPrefs.HasKey("Merchant"))
         {
             if (PlayerPrefs.GetInt("Merchant") == 1)
@@ -175,6 +180,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 isMerchant = true;
             }
         }
+
         if (PlayerPrefs.HasKey("Magician"))
         {
             if (PlayerPrefs.GetInt("Magician") == 1)
@@ -182,6 +188,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 isMagician = true;
             }
         }
+
         if (PlayerPrefs.HasKey("Ring"))
         {
             if (PlayerPrefs.GetInt("Ring") == 1)
@@ -201,11 +208,12 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
         if (PlayerPrefs.HasKey("FirstEnemies"))
         {
-            if (PlayerPrefs.GetString("FirstEnemies")== "True")
+            if (PlayerPrefs.GetString("FirstEnemies") == "True")
             {
                 firstLevelEnemies.gameObject.SetActive(true);
             }
         }
+
         if (PlayerPrefs.HasKey("Heal"))
         {
             if (PlayerPrefs.GetInt("Heal") == 1)
@@ -213,25 +221,27 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 isHeal = true;
             }
         }
+
         if (PlayerPrefs.HasKey("Dash"))
         {
-            if (PlayerPrefs.GetInt("Dash")==1)
+            if (PlayerPrefs.GetInt("Dash") == 1)
             {
                 isDash = true;
             }
         }
+
         if (PlayerPrefs.HasKey("FoxSaved"))
         {
-            if (PlayerPrefs.GetInt("FoxSaved")== 1)
+            if (PlayerPrefs.GetInt("FoxSaved") == 1)
             {
                 isFoxSaved = true;
-                seaWater.transform.localPosition = new Vector3(89.502594f,-31f,-113.304504f);
+                seaWater.transform.localPosition = new Vector3(89.502594f, -31f, -113.304504f);
             }
         }
 
         if (PlayerPrefs.HasKey("Colosseum"))
         {
-            if (PlayerPrefs.GetInt("Colosseum")==1)
+            if (PlayerPrefs.GetInt("Colosseum") == 1)
             {
                 isColosseum = true;
             }
@@ -239,7 +249,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
         if (PlayerPrefs.HasKey("Campfire"))
         {
-            if (PlayerPrefs.GetInt("Campfire") ==1)
+            if (PlayerPrefs.GetInt("Campfire") == 1)
             {
                 isCampfire = true;
             }
@@ -252,7 +262,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
         #endregion
 
-        
+
         tutorialName = tutorialSection + ".";
         PlayerName = "";
         foxManager = FindObjectOfType<FoxManager>();
@@ -265,119 +275,121 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             }
 
             UpdateGameState(GameState.Tutorial);
-           TutorialLoader.instance.Load(tutorialName + tutorialCounter);
-           TutorialEvents.OnTutorialComplete += TutorialChange;
+            TutorialLoader.instance.Load(tutorialName + tutorialCounter);
+            TutorialEvents.OnTutorialComplete += TutorialChange;
         }
         else
         {
-            
         }
 
         _questDialogueUI = FindObjectOfType<UnityUIQuestDialogueUI>();
 
         PlayStandSound();
-        
-        
+
+
         UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
         PixelCrushers.QuestMachine.Wrappers.UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
     }
 
     public void QuestLoad()
     {
-         
-        
-            _questManager.successedQuests = ES3.Load("SuccessedQuest", _questManager.successedQuests);
-            OpenTheVillageDoors();
-            tutorialEnemies.gameObject.SetActive(false);
-            wallFires.gameObject.SetActive(false);
-            int count = _questManager.successedQuests.Count;
-            // for (int i = 0; i <_questListContainer.questList.Count ; i++)
-            // {
-            //     if (_questListContainer.questList[i].id.ToString() == _questManager.successedQuests[count-1])
-            //     {
-            //         _questListContainer.questList[i+1]?.SetState(QuestState.WaitingToStart);
-            //     }
-            // }
-            if (baskan.GetComponent<QuestGiver>().questList.Count != 0)
+        _questManager.successedQuests = ES3.Load("SuccessedQuest", _questManager.successedQuests);
+        OpenTheVillageDoors();
+        tutorialEnemies.gameObject.SetActive(false);
+        wallFires.gameObject.SetActive(false);
+        int count = _questManager.successedQuests.Count;
+        // for (int i = 0; i <_questListContainer.questList.Count ; i++)
+        // {
+        //     if (_questListContainer.questList[i].id.ToString() == _questManager.successedQuests[count-1])
+        //     {
+        //         _questListContainer.questList[i+1]?.SetState(QuestState.WaitingToStart);
+        //     }
+        // }
+        if (baskan.GetComponent<QuestGiver>().questList.Count != 0)
+        {
+            var questlist = baskan.GetComponent<QuestGiver>().questList;
+            int counter = questlist.Count;
+            for (int i = 0; i < counter; i++)
             {
-                var questlist = baskan.GetComponent<QuestGiver>().questList;
-                int counter = questlist.Count;
-                for (int i = 0; i < counter; i++)
+                if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
                 {
-                    if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
+                    // 
+                    Debug.Log(questlist[i].id.ToString() + " Bitirildi ");
+                    questlist[i].SetState(QuestState.Successful);
+                    questlist[i].BecomeUnofferable();
+                    questlist.RemoveAt(i);
+                    i--;
+                    counter--;
+                }
+                else
+                {
+                    if (questlist[i].id.ToString() != "Monster" && questlist[i].id.ToString() != "BigMonster")
                     {
-                      // 
-                        Debug.Log(questlist[i].id.ToString() + " Bitirildi ");
-                        questlist[i].SetState(QuestState.Successful);
-                        questlist[i].BecomeUnofferable();
-                        questlist.RemoveAt(i);
-                        i--;
-                        counter--;
+                        questlist[i].SetState(QuestState.WaitingToStart);
+                        IndicatorDefine(baskan);
+                        Debug.Log("Baskan quest verdi");
+                        break;
                     }
                     else
                     {
-                        if (questlist[i].id.ToString() != "Monster" && questlist[i].id.ToString() != "BigMonster")
+                        firstLevelEnemies.gameObject.SetActive(true);
+                        PlayerPrefs.SetString("FirstEnemies", "True");
+                        var magicianGiver = magician.GetComponent<QuestGiver>();
+                        int mageSuccessed = 0;
+                        for (int j = 0; j < magicianGiver.questList.Count; j++)
                         {
-                            questlist[i].SetState(QuestState.WaitingToStart);
-                            IndicatorDefine(baskan);
-                            Debug.Log("Baskan quest verdi");
+                            if (_questManager.successedQuests.Contains(magicianGiver.questList[j].id.ToString()))
+                            {
+                                mageSuccessed++;
+                                realmChange.gameObject.SetActive(true);
+                                magicianGiver.questList[j].SetState(QuestState.Successful);
+                            }
+                        }
+
+                        if (mageSuccessed is 0 or 1)
+                        {
+                            for (int k = 0; k < magicianGiver.questList.Count; k++)
+                            {
+                                if (magicianGiver.questList[k].GetState() != QuestState.Successful)
+                                {
+                                    magicianGiver.questList[k].SetState(QuestState.WaitingToStart);
+                                    break;
+                                }
+                            }
+
+                            IndicatorDefine(magician.transform.parent.gameObject);
+                            Debug.Log(mageSuccessed + " Completed quest count");
+                            Debug.Log("Mage Quest verdi ");
                             break;
                         }
                         else
                         {
-                            firstLevelEnemies.gameObject.SetActive(true);
-                            PlayerPrefs.SetString("FirstEnemies","True");
-                            var magicianGiver = magician.GetComponent<QuestGiver>();
-                            int mageSuccessed = 0;
-                            for (int j = 0; j < magicianGiver.questList.Count; j++)
+                            questlist[i].SetState(QuestState.WaitingToStart);
+                            //baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+                            IndicatorDefine(baskan);
+                            Debug.Log("Baskan quest verdi");
+                            if (questlist[i].id.ToString() == "BigMonster")
                             {
-                                if (_questManager.successedQuests.Contains(magicianGiver.questList[j].id.ToString()))
-                                {
-                                    mageSuccessed++;
-                                    realmChange.gameObject.SetActive(true);
-                                    magicianGiver.questList[j].SetState(QuestState.Successful);
-                                }
+                                Debug.Log("Sasirtti");
+                                Destroy(SkeletBoss.gameObject);
                             }
 
-                            if (mageSuccessed is 0 or 1)
-                            {
-
-
-                                for (int k = 0; k < magicianGiver.questList.Count; k++)
-                                {
-                                    if (magicianGiver.questList[k].GetState() != QuestState.Successful)
-                                    {
-                                        magicianGiver.questList[k].SetState(QuestState.WaitingToStart);
-                                        break;
-                                    }
-                                }
-
-                                IndicatorDefine(magician.transform.parent.gameObject);
-                                Debug.Log(mageSuccessed + " Completed quest count");
-                                Debug.Log("Mage Quest verdi ");
-                                break;
-                            }
-                            else
-                            {
-                                    questlist[i].SetState(QuestState.WaitingToStart);
-                                    //baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
-                                    IndicatorDefine(baskan);
-                                    Debug.Log("Baskan quest verdi");
-                                    break;
-                            }
-                            
+                            break;
                         }
                     }
                 }
             }
+        }
     }
+
     private int count;
+
     public void DeadBirlesikGolem()
     {
         count++;
         if (count > 1)
         {
-            Invoke("PlayChapter3",1);
+            Invoke("PlayChapter3", 1);
         }
     }
 
@@ -385,16 +397,19 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
     {
         UiManager.instance.chapter3.gameObject.SetActive(true);
         GetComponent<SoundManager>().mainMusicSource.volume = 0f;
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic03");
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic03");
     }
+
     public void PlayEndVideo()
     {
         UiManager.instance.endVideo.gameObject.SetActive(true);
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,"Cinematic","Cinematic04");
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic04");
     }
+
     private void TutorialChange()
     {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"Tutorial","TutorialPart_"+tutorialSection+""+tutorialCounter);
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Tutorial",
+            "TutorialPart_" + tutorialSection + "" + tutorialCounter);
         TutorialEvents.OnTutorialComplete -= TutorialChange;
         CinematicCamDisable();
         tutorialCounter++;
@@ -418,17 +433,18 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             CinematicCamDisable();
         }
 
-        if (tutorialSection ==0 && tutorialCounter ==4)
+        if (tutorialSection == 0 && tutorialCounter == 4)
         {
             Time.timeScale = 1f;
         }
+
         if (tutorialSection == 1 && tutorialCounter == 1)
         {
             tutorialEnemies.gameObject.SetActive(true);
             baskan.GetComponent<QuestGiver>().StartDialogueWithPlayer();
         }
 
-        if (tutorialSection ==1 && tutorialCounter == 3)
+        if (tutorialSection == 1 && tutorialCounter == 3)
         {
             tutorialSection++;
             PlayerPrefs.SetInt("TutorialSection", tutorialSection);
@@ -439,9 +455,10 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     public void MagicianGaveRing()
     {
-        PlayerPrefs.SetInt("Ring",1);
+        PlayerPrefs.SetInt("Ring", 1);
         UiManager.instance.ringBtn.GetComponent<Button>().enabled = true;
     }
+
     public string TutorialLoad()
     {
         tutorialName = tutorialSection + ".";
@@ -450,7 +467,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         {
             FoxCamEnable();
         }
-        else if (tutorialSection == 0 && tutorialCounter ==5)
+        else if (tutorialSection == 0 && tutorialCounter == 5)
         {
             isFoxSaved = true;
             PlayerPrefs.SetInt("FoxSaved", 1);
@@ -507,6 +524,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         {
             EconomyManager.instance.EarnRewards();
         }
+
         currentTime += Time.deltaTime;
 
         if (currentTime > 10 && fightBool)
@@ -546,8 +564,8 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         PlayerPrefs.SetInt("StartVillage", 1);
         SceneManager.LoadScene(0);
     }
-    
-    public void CinematicCamEnable(Transform target,float timer = 0)
+
+    public void CinematicCamEnable(Transform target, float timer = 0)
     {
         playerVCam.gameObject.SetActive(false);
         foxVCam.gameObject.SetActive(false);
@@ -560,7 +578,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         //     cmoffset.m_FollowOffset = new Vector3(0, 29, -27);
         //     print("wall");
         // }
-        if (timer !=0)
+        if (timer != 0)
         {
             CinematicCamDisable(timer);
         }
@@ -568,7 +586,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
 
     public void CinematicCamDisable(float timer = 0)
     {
-        if (timer !=0)
+        if (timer != 0)
         {
             DisableTimer = timer;
             StartCoroutine("DisableCamera");
@@ -594,6 +612,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         playerVCam.gameObject.SetActive(true);
         cinematicVCam.gameObject.SetActive(false);
     }
+
     public void EndOfTheCinematic()
     {
         tutorialSection++;
@@ -622,14 +641,13 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         gameObject.GetComponent<Waypoint_Indicator>().enabled = true;
     }
 
-    public void IndicatorClose( GameObject gameObject)
+    public void IndicatorClose(GameObject gameObject)
     {
         gameObject.GetComponent<Waypoint_Indicator>().enabled = false;
         if (gameObject.transform.parent.gameObject.GetComponent<Waypoint_Indicator>())
         {
             gameObject.transform.parent.gameObject.GetComponent<Waypoint_Indicator>().enabled = false;
         }
-        
     }
 
 
@@ -661,16 +679,16 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         {
             if (tempName[i] == '(')
             {
-                break;       
+                break;
             }
+
             questname += tempName[i];
         }
-        
-        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "Accepted");
-        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, questname, questname, "InProgress");
-       
-       
-        
+
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, questname, questname, "Accepted");
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, questname, questname, "InProgress");
+
+
         switch (questname)
         {
             case "KillTheAttackers":
@@ -691,10 +709,10 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
             case "BigMonster":
                 timerBoss1 = Time.time;
                 break;
-            case "Magician2" :
+            case "Magician2":
                 //timerPortal1 = Time.time;
                 break;
-            case "Portal1" :
+            case "Portal1":
                 timerPortal1 = Time.time;
                 break;
             case "Portal2":
@@ -704,7 +722,7 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
                 break;
         }
     }
-    
+
     public void SuccessQuest(string questname)
     {
         string tempName = questname;
@@ -713,91 +731,101 @@ public class GameManager : MonoBehaviour,IGameAnalyticsATTListener
         {
             if (tempName[i] == '(')
             {
-                break;       
+                break;
             }
+
             questname += tempName[i];
         }
-        
+
         switch (questname)
         {
             case "KillTheAttackers":
                 timerKillTheAttackers = Time.time - timerKillTheAttackers;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerKillTheAttackers);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerKillTheAttackers);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-             
+
                 // baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
                 QuestLoad();
                 break;
             case "FirstMeet":
                 timerFirstMeeting = Time.time - timerFirstMeeting;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFirstMeeting);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerFirstMeeting);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                
+
                 // baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
                 QuestLoad();
                 break;
             case "MerchantMeet":
                 timerMerchant = Time.time - timerMerchant;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerMerchant);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerMerchant);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-            
-              // baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+
+                // baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
                 QuestLoad();
                 break;
             case "Magician":
                 timerFindMage = Time.time - timerFindMage;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerFindMage);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerFindMage);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-               
+
                 //magician.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
-                QuestLoad();   
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
+                QuestLoad();
                 break;
             case "Monster":
                 timerBoss = Time.time - timerBoss;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerBoss);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerBoss);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
                 QuestLoad();
                 break;
             case "BigMonster":
                 timerBoss1 = Time.time - timerBoss1;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerBoss1);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerBoss1);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
                 break;
-            case "Magician2" :
+            case "Magician2":
                 timerPortal1 = Time.time - timerPortal1;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerPortal1);
                 _questManager.successedQuests.Add(questname);
                 Debug.Log(questname + " Tamamlandi ");
                 realmChange.SetActive(true);
                 //  magician.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
                 QuestLoad();
                 break;
             case "Portal2":
                 timerPortal2 = Time.time - timerPortal2;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal2);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerPortal2);
                 break;
             case "Portal1":
                 timerPortal1 = Time.time - timerPortal1;
-                GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, questname, questname, "InProgress",(int)timerPortal1);
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, questname, questname, "InProgress",
+                    (int)timerPortal1);
                 break;
             case "Award":
                 IndicatorClose(magician);
                 IndicatorClose(magician.transform.parent.gameObject);
                 _questManager.successedQuests.Add(questname);
-                ES3.Save("SuccessedQuest",_questManager.successedQuests);
+                ES3.Save("SuccessedQuest", _questManager.successedQuests);
                 QuestLoad();
                 //baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 break;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AeLa.EasyFeedback;
 using Exoa.TutorialEngine;
 using GameAnalyticsSDK;
 using MoreMountains.Tools;
@@ -108,7 +109,7 @@ public class UiManager : MonoBehaviour
             ButtonType[i].skillButton.enabled = false;
         }
     }
-
+   
     public void EnableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)
@@ -169,6 +170,7 @@ public class UiManager : MonoBehaviour
             GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
             chapter3.gameObject.SetActive(false);
         }
+        
     }
 
     public void MenuUI()
@@ -220,6 +222,15 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    private void FeedBackOpen()
+    {
+       FindObjectOfType<FeedbackForm>().Show();
+    }
+
+    public void FeedBackOpenWait()
+    {
+        Invoke("FeedBackOpen",.5f);
+    }
     public void FocusMode(GameObject switchOnClick)
     {
         if (focusPanel.gameObject.activeSelf)
