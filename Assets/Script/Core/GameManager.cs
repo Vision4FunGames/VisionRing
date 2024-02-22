@@ -10,6 +10,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using GameAnalyticsSDK;
+using NaughtyAttributes;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
@@ -391,16 +392,18 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         }
     }
 
+    [Button("Chapter3")]
     public void PlayChapter3()
     {
         UiManager.instance.chapter3.gameObject.SetActive(true);
         GetComponent<SoundManager>().mainMusicSource.volume = 0f;
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic03");
     }
-
+    
     public void PlayEndVideo()
     {
         UiManager.instance.endVideo.gameObject.SetActive(true);
+        GetComponent<SoundManager>().mainMusicSource.volume = 0f;
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic04");
     }
 

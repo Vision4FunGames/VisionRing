@@ -161,6 +161,7 @@ public class UiManager : MonoBehaviour
         if (chapter1.frame + 5 >= (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
         {
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic02");
+            GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
             chapter1.gameObject.SetActive(false);
         }
 
@@ -359,7 +360,7 @@ public class UiManager : MonoBehaviour
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Cinematic", "Cinematic02");
         ringBtn.gameObject.SetActive(false);
         chapter1.gameObject.SetActive(true);
-
+        GetComponent<SoundManager>().mainMusicSource.volume = 0f;
         Invoke("AfterVideoOpen", 2);
     }
 
