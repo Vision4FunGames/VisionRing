@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using GameAnalyticsSDK;
+using Lofelt.NiceVibrations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -486,6 +487,10 @@ public class EquipmentManager : MonoBehaviour
         }
         //Inventory.instance.items.Add(this);
         Inventory.instance.onItemChangedCallback.Invoke();
+        PlayerManager.instance.earnItemParticle.Play();
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.Warning);
+        Player.instance.playerSound.audioSource.clip = Player.instance.playerSound.earnItemSound;
+        Player.instance.playerSound.audioSource.Play();
     }
 
     #endregion'
