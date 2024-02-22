@@ -235,10 +235,9 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
             if (PlayerPrefs.GetInt("FoxSaved") == 1)
             {
                 isFoxSaved = true;
-                seaWater.transform.localPosition = new Vector3(89.502594f, -31f, -113.304504f);
+                seaWater.transform.DOLocalMove(new Vector3(89.502594f, -31f, -113.304504f),2f);
             }
         }
-
         if (PlayerPrefs.HasKey("Colosseum"))
         {
             if (PlayerPrefs.GetInt("Colosseum") == 1)
@@ -246,7 +245,6 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
                 isColosseum = true;
             }
         }
-
         if (PlayerPrefs.HasKey("Campfire"))
         {
             if (PlayerPrefs.GetInt("Campfire") == 1)
@@ -346,7 +344,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
                             }
                         }
 
-                        if (mageSuccessed is 0 or 1)
+                        if (mageSuccessed is 0 or 1 && magicianGiver.questList.Count > 0)
                         {
                             for (int k = 0; k < magicianGiver.questList.Count; k++)
                             {
