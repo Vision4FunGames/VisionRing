@@ -63,7 +63,12 @@ public class SkillCoolDown : MonoBehaviour
     public void CoolDownImage()
     {
         if (skillsArray[0].coolDownTime > 0)
+        {
             skillsArray[0].coolDownTime -= Time.deltaTime;
+            float fillAmount = 1 - (skillsArray[0].coolDownTime / skillsArray[0].coolDown);
+            UiManager.instance.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = fillAmount;
+        }
+          
         
         for (int i = 0; i < _currentSkills.Count; i++)
         {

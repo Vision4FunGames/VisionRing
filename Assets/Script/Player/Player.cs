@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
         PlayerMovementState = new PlayerMovementState(this, StateMachine, false);
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
         dashSprite = Resources.Load<Sprite>("SkillSprite/Dash");
-        attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         skillSword = GetComponentInChildren<SwordSkill>().gameObject;
         DashInıtiliaze();
     }
@@ -166,11 +166,17 @@ public class Player : MonoBehaviour
 
         if (uiManager.attackJoystick.input.magnitude > 0.98f)
         {
-            uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = dashSprite;
+            //uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = dashSprite;
+            uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                dashSprite;
+            uiManager.attackJoystick.transform.GetChild(0).GetChild(1).GetComponent<Image>().enabled = false;
         }
         else
         {
-            uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = attackSprite;
+            uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                attackSprite;
+            uiManager.attackJoystick.transform.GetChild(0).GetChild(1).GetComponent<Image>().enabled = true;
+            //uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = attackSprite;
         }
 
         // if (Input.GetKeyDown(KeyCode.B))
