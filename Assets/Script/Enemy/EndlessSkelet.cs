@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AmazingAssets.DynamicRadialMasks;
 using UnityEngine;
@@ -25,7 +24,7 @@ public class EndlessSkelet : MonoBehaviour
         if (currentEnemy < enemyCount)
         {
             currentTime += Time.deltaTime;
-            if (currentTime > 2)
+            if (currentTime > 20)
             {
                 currentTime = 0;
                 EnemySpawn();
