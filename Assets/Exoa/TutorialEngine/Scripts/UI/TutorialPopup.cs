@@ -66,6 +66,8 @@ namespace Exoa.TutorialEngine
             yield return new WaitForSeconds(0.05f);
             if (counter != tempText.Length)
             {
+                nextBtn.interactable = false;
+                TutorialController.instance.hiddenBtn.enabled = false;
                 if (tempText[counter].ToString() == "*")
                 {
                     contentText.text += GameManager.instance.PlayerName;
@@ -81,6 +83,11 @@ namespace Exoa.TutorialEngine
                         FillTextInput();
                     }
                 }
+            }
+            else
+            {
+                nextBtn.interactable = true;
+                TutorialController.instance.hiddenBtn.enabled = true;
             }
         }
 

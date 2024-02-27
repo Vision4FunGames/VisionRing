@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool ring;
     private NavMeshAgent agent;
     public bool tutorial;
+    public bool isDamageable = true;
 
     #region Singleton
 

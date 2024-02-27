@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using GameAnalyticsSDK;
 using NaughtyAttributes;
+using UnityEngine.Assertions.Must;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
@@ -145,6 +146,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
 
         if (tutorialSection == 2)
         {
+            tutorial = true;
             QuestLoad();
         }
         // else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
@@ -423,6 +425,8 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
             {
                 foxManager.FinishTutorial();
                 FindObjectOfType<Player>().FinishTutorial();
+                var foxgate = GameObject.FindWithTag("FoxGate");
+                foxgate.GetComponent<Collider>().enabled = false;
                 //EndOfTheCinematic();
             }
             //CinematicCamEnable(Player.instance.transform);

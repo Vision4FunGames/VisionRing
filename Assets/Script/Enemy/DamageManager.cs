@@ -33,7 +33,11 @@ public class DamageManager : MonoBehaviour
     }
     public void PlayerDamage()
     {
-        enemyController.target.GetComponent<PlayerHealth>().DamageAnimation(characterStats.damage.GetValue());
+        if (Player.instance.isDamageable)
+        {
+            enemyController.target.GetComponent<PlayerHealth>().DamageAnimation(characterStats.damage.GetValue());
+        }
+        
     }
 
     public void PlayerCharge()

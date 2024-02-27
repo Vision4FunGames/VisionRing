@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Script.CombatScript;
 using UnityEngine;
@@ -30,7 +31,8 @@ public class PlayerAttack : MonoBehaviour
     public int earthSkillDamage;
     public ParticleSystem flameTFloor;
     public ParticleSystem missAttackParticle;
-
+    private bool hold = false;
+    
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -53,6 +55,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Attack();
+            StopCoroutine(Hold());
         }
     }
 
@@ -76,6 +79,24 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void HoldAttack()
+    {
+        
+        StartCoroutine(Hold());
+    }
+    public IEnumerator Hold()
+    {
+        yield return new WaitForSeconds(.25f);
+        Attack();
+        Debug.Log("Attack ");
+        HoldAttack();
+    }
+
+    public void StopHoldAttack()
+    {
+        StopCoroutine(Hold());
+        hold = false;
+    }
     public void ChangeGunType(CurrentGunType currentGunType)
     {
         myCurrentGunType = currentGunType;

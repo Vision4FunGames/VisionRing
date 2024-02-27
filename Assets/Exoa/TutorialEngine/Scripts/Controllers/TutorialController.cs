@@ -444,6 +444,7 @@ namespace Exoa.TutorialEngine
 
         private void ShowTutorial()
         {
+            Player.instance.isDamageable = false;
             popup.OnClickNext.RemoveAllListeners();
             if (TutorialLoader.instance.loadedTutorialName == "Dash")
             {
@@ -482,7 +483,7 @@ namespace Exoa.TutorialEngine
         public void HideTutorial()
         {
             //popup.OnClickNext.RemoveAllListeners();
-
+            Player.instance.isDamageable = true;
             tutorialState = State.FadingOut;
             handImage.gameObject.SetActive(false);
         }

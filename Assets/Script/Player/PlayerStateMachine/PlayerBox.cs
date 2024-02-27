@@ -16,12 +16,14 @@ public class PlayerBox : PlayerState
 
     public override void EnterState()
     {
+        UiManager.instance.attackJoystick.gameObject.SetActive(false);
         base.EnterState();
         _player._playerAnimator.SetBool(Box,true);
     }
 
     public override void ExitState()
     {
+        UiManager.instance.attackJoystick.gameObject.SetActive(true);
         base.ExitState();
         _player._playerAnimator.SetBool(Box,false);
     }
