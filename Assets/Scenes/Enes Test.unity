@@ -214,6 +214,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 557290644862900238, guid: 8a9879242943a2544bd9772b3d3d31e6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 12.567139
+      objectReference: {fileID: 0}
     - target: {fileID: 557290646038771754, guid: 8a9879242943a2544bd9772b3d3d31e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -302,9 +306,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DailyWishPanel [CanvasGroup]
       objectReference: {fileID: 0}
-    - target: {fileID: 557290646794317414, guid: 8a9879242943a2544bd9772b3d3d31e6, type: 3}
+    - target: {fileID: 557290646702277069, guid: 8a9879242943a2544bd9772b3d3d31e6, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 557290646794317414, guid: 8a9879242943a2544bd9772b3d3d31e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a9879242943a2544bd9772b3d3d31e6, type: 3}
@@ -537,7 +545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6859b8e8b7108004785958dc5896eaac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeInterval: 0
   dailyDrawTxtLeft: {fileID: 856113016}
   dailyTxtLeft: {fileID: 2077509721}
   _drawCount: 1
@@ -553,7 +560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6b4505089cf7942adc13aa5d894f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeInterval: 0
 --- !u!4 &2005428886
 Transform:
   m_ObjectHideFlags: 0

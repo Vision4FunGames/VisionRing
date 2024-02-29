@@ -8,9 +8,7 @@ public class WorldTimeAPIController : MonoBehaviour
 {
     private const string WorldTimeAPIURL = "http://worldtimeapi.org/api/timezone/Europe/Istanbul";
     public DateTime globalTimeLast;
-    public float timeInterval;
    
-    [Button("Get GlobalTime")]
     public async Task GetGlobalTime()
     {
         using (HttpClient httpClient = new HttpClient())

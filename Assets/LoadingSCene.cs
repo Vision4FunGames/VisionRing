@@ -36,7 +36,7 @@ public class LoadingSCene : MonoBehaviour,IGameAnalyticsATTListener
 
    private void Update()
    {
-      if (videoPlayer.frame+5 >= (long)videoPlayer.frameCount && tutorial.gameObject.activeSelf)
+      if (videoPlayer&&videoPlayer.frame+400 >= (long)videoPlayer.frameCount && tutorial.gameObject.activeSelf)
       {
          GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"Cinematic","Cinematic00");
          tutorial.gameObject.SetActive(false);
@@ -54,13 +54,16 @@ public class LoadingSCene : MonoBehaviour,IGameAnalyticsATTListener
    IEnumerator LoadSceneAsync()
    {
       yield return new WaitForSeconds(.5f);
+     
       AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+      
       while (!operation.isDone)
       {
          yield return null;
       }
     
    }
+   
 
    public void GameAnalyticsATTListenerNotDetermined()
    {
