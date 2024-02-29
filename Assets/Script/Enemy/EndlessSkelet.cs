@@ -24,7 +24,7 @@ public class EndlessSkelet : MonoBehaviour
         if (currentEnemy < enemyCount)
         {
             currentTime += Time.deltaTime;
-            if (currentTime > 20)
+            if (currentTime > 7)
             {
                 currentTime = 0;
                 EnemySpawn();
