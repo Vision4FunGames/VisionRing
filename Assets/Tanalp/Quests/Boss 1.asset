@@ -45,6 +45,24 @@ MonoBehaviour:
   - {fileID: 2548288362877828235}
   m_actionsProxy:
     actions: []
+--- !u!114 &-6238967624873255799
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
+  m_Name: BodyTextQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_bodyText:
+    m_text: Back to the mayor.
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
 --- !u!114 &-5581978725269079810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,24 +149,6 @@ MonoBehaviour:
   m_Name: SceneEventQuestAction
   m_EditorClassIdentifier: 
   m_guid: 07fc795a-a48f-4261-be9b-0a4204803560
---- !u!114 &-1673160995748893106
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ed0c4e68ee98946bb5016adda42373, type: 3}
-  m_Name: BodyTextQuestContent
-  m_EditorClassIdentifier: 
-  m_contentID: -1
-  m_bodyText:
-    m_text: Back to the mayor.
-    m_stringAsset: {fileID: 0}
-    m_textTable: {fileID: 0}
-    m_textTableFieldID: 0
 --- !u!114 &-1376511086810304127
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,14 +473,14 @@ MonoBehaviour:
         - {fileID: -4364570586405512740}
         - {fileID: -6798533071827852144}
       - m_contentList: []
-      - m_contentList:
-        - {fileID: -1673160995748893106}
-        - {fileID: 605953623650758120}
+      - m_contentList: []
     - m_actionList: []
       m_categorizedContentList:
       - m_contentList: []
       - m_contentList: []
-      - m_contentList: []
+      - m_contentList:
+        - {fileID: -6238967624873255799}
+        - {fileID: 9018635195687711892}
     m_conditionSet:
       m_conditionList:
       - {fileID: 3591201973015383482}
@@ -497,28 +497,6 @@ MonoBehaviour:
   m_textTable: {fileID: 0}
   m_goalEntityTypeName: 
   m_nextContentID: 0
---- !u!114 &605953623650758120
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acd9aaaa3b44d5419945259bebbe84a, type: 3}
-  m_Name: IconQuestContent
-  m_EditorClassIdentifier: 
-  m_contentID: -1
-  m_image: {fileID: 21300000, guid: 572c3ecf2337d1d4da3e67ef65d060e7, type: 3}
-  m_color: {r: 1, g: 1, b: 1, a: 1}
-  m_caption:
-    m_text: 
-    m_stringAsset: {fileID: 0}
-    m_textTable: {fileID: 0}
-    m_textTableFieldID: 0
-  m_count: 0
-  m_imageNameProxy: 
 --- !u!114 &2548288362877828235
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -588,3 +566,25 @@ MonoBehaviour:
     m_stringAsset: {fileID: 0}
     m_textTable: {fileID: 0}
     m_textTableFieldID: 0
+--- !u!114 &9018635195687711892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acd9aaaa3b44d5419945259bebbe84a, type: 3}
+  m_Name: IconQuestContent
+  m_EditorClassIdentifier: 
+  m_contentID: -1
+  m_image: {fileID: 21300000, guid: 572c3ecf2337d1d4da3e67ef65d060e7, type: 3}
+  m_color: {r: 1, g: 1, b: 1, a: 1}
+  m_caption:
+    m_text: 
+    m_stringAsset: {fileID: 0}
+    m_textTable: {fileID: 0}
+    m_textTableFieldID: 0
+  m_count: 0
+  m_imageNameProxy: 
