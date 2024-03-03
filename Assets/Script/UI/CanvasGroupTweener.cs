@@ -10,7 +10,7 @@ public class CanvasGroupTweener : MonoBehaviour
 
     private void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
     }
 
     public void Open()
