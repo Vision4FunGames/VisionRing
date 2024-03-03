@@ -10,9 +10,10 @@ public class RewardManager : WorldTimeAPIController
     private WorldTimeAPIController _worldTimeAPIController;
     public DateTime globalTimeLast;
     public DateTime dailyDrawTime;
-    
-    
-    [Header("Daily")] 
+
+
+    [Header("Daily")]
+    private DailyRewardManager dailyRewardManager;
     public TextMeshProUGUI dailyDrawTxtLeft;
     public TextMeshProUGUI dailyTxtLeft;
     public double _drawCount;
@@ -20,6 +21,7 @@ public class RewardManager : WorldTimeAPIController
     private void Awake()
     {
         _worldTimeAPIController = FindObjectOfType<WorldTimeAPIController>();
+        dailyRewardManager = FindObjectOfType<DailyRewardManager>();
         if (PlayerPrefs.HasKey("DailyDraw"))
         {
             dailyDrawTime = DateTime.Parse(PlayerPrefs.GetString("DailyDraw"));
@@ -42,6 +44,12 @@ public class RewardManager : WorldTimeAPIController
         }
     }
 
+    public void CollectDailyReward()
+    {
+        CollectDaily();
+        dailyRewardManager.Collect();
+
+    }
     public void CheckDailyDrawReward()
     {
         currentDraw = (dailyDrawTime-DateTime.Now).TotalSeconds;
