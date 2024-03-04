@@ -246,6 +246,7 @@ namespace PixelCrushers.QuestMachine
             if (quest == null) return null;
             var result = base.AddQuest(quest);
             CheckTrackingToggles(StringField.GetStringValue(quest.id));
+            
             return result;
         }
 
