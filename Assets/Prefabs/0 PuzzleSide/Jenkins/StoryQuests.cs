@@ -10,6 +10,7 @@ public class StoryQuests : ScriptableObject
 public class StoryInfoLine
 {
     public string header;
+    public string id;
     [Multiline(8)] public string info;
     public bool hasReward;
     public RewardType rewardType;
