@@ -35,14 +35,18 @@ public class DamageManager : MonoBehaviour
     {
         if (Player.instance.isDamageable)
         {
-            enemyController.target.GetComponent<PlayerHealth>().DamageAnimation(characterStats.damage.GetValue());
+            var playerHealth = enemyController.target.GetComponent<PlayerHealth>();
+            float damageReduce = playerHealth.armor.GetValue() * characterStats.damage.GetValue();
+            float damage = characterStats.damage.GetValue();
+            Debug.Log("Damage : " + damage + " Damage Reduce : " + damageReduce);
+            playerHealth.DamageAnimation((int)damage-(int)damageReduce);
         }
         
     }
 
     public void PlayerCharge()
     {
-        enemyController.target.GetComponent<PlayerHealth>().DamageAnimation(characterStats.damage.GetValue() * 14 / 10);
+        enemyController.target.GetComponent<PlayerHealth>().DamageAnimation((int)(characterStats.damage.GetValue() * 14 / 10));
     }
 
     public void ChestDrop()

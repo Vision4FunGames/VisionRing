@@ -8,8 +8,8 @@ using UnityEngine;
 public class Equipment : Item {
 
     public EquipmentSlot equipSlot;		// What slot to equip it in
-    public int armorModifier;
-    public int damageModifier;
+    public float armorModifier;
+    public float damageModifier;
     public float critChance;
     public int itemSet;
    [ES3NonSerializable] public SkinnedMeshRenderer mesh;

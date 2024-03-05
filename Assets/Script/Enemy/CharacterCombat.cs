@@ -51,6 +51,6 @@ public class CharacterCombat : MonoBehaviour
         print ("Start");
         yield return new WaitForSeconds (delay);
         Debug.Log (transform.name + " swings for " + myStats.damage.GetValue () + " damage");
-        enemyStats.TakeDamage (myStats.damage.GetValue ());
+        enemyStats.TakeDamage ((int)myStats.damage.GetValue());
     }
 }

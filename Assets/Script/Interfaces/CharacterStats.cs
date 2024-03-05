@@ -8,7 +8,7 @@ using PixelCrushers.QuestMachine;
 public class CharacterStats : MonoBehaviour
 {
     public bool die;
-    public int maxHealth = 100;
+    public int maxHealth = 300;
     public int currentHealth { get; private set; }
     public Stat damage;
     public Stat armor;
@@ -39,7 +39,7 @@ public class CharacterStats : MonoBehaviour
     {
         if (currentHealth > 0 && !die)
         {
-            damage -= armor.GetValue();
+            // damage -= armor*armor.GetValue();
             damage = Mathf.Clamp(damage, 0, int.MaxValue);
             currentHealth -= damage;
             DamageVFX(damage, false);
@@ -66,7 +66,7 @@ public class CharacterStats : MonoBehaviour
 
         if (currentHealth > 0 && !die)
         {
-            damage -= armor.GetValue();
+            // damage -= armor.GetValue();
             if (crit)
             {
                 damage *= 2;

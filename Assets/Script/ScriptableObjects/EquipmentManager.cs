@@ -66,9 +66,15 @@ public class EquipmentManager : MonoBehaviour
     public Item[] chestItems, upgradeItems;
 
     public Equipment selectedChestItem;
-
+    private PlayerHealth playerHealth;
     void Start()
     {
+        playerHealth = FindObjectOfType<PlayerHealth>();
+        if (onEquipmentChanged ==null)
+        {
+            onEquipmentChanged += playerHealth.OnEquipmentChanged;
+        }
+      
         _player = FindObjectOfType<Player>();
         _playerAttack = FindObjectOfType<PlayerAttack>();
         ResetObjects();
@@ -82,6 +88,7 @@ public class EquipmentManager : MonoBehaviour
         LoadEquipment();
         EquipAllDefault();
         onItemAddedCallback += UpdateUpgradeSlots;
+       
         
     }
 
@@ -174,8 +181,7 @@ public class EquipmentManager : MonoBehaviour
         // An item has been equipped so we trigger the callback
         currentEquipment[slotIndex] = newItem;
         //equippedInventory.Add(newItem);
-        if (onEquipmentChanged != null)
-            onEquipmentChanged.Invoke(newItem, oldItem);
+        
         newItem.showInInventory = true;
         if (newItem.mesh)
         {
@@ -239,8 +245,11 @@ public class EquipmentManager : MonoBehaviour
                 inventoryPlayerAnim.SetTrigger("Bow");
             }
         }
+        if (onEquipmentChanged != null)
+            onEquipmentChanged.Invoke(newItem, oldItem);
         CheckItemSet();
         //equippedItems [itemIndex] = newMesh.gameObject;
+        
     }
 
     public void Unequip(int slotIndex)

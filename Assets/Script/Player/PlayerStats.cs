@@ -1,16 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
+   
+
+    private void Start()
+    {
+        
+    }
+
     public override void Die()
     {
         base.Die();
         //Kill the Player 
         PlayerManager.instance.KillPlayer();
     }
-    void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
+    public void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
     {
         if (newItem != null) {
             armor.AddModifier (newItem.armorModifier);
