@@ -41,7 +41,8 @@ public class Player : MonoBehaviour
     public PlayerStateMachine StateMachine { get; set; }
     public PlayerIdleState PlayerIdleState { get; set; }
     public PlayerMovementState PlayerMovementState { get; set; }
-
+    
+    public PlayerHorseState PlayerHorseState { get; set; }
     public PlayerSkillState PlayerSkillState { get; set; }
 
     public PlayerBox PlayerBox { get; set; }
@@ -105,12 +106,14 @@ public class Player : MonoBehaviour
         //_fixedJoystick = FindObjectOfType<FixedJoystick>();
         _myController = GetComponent<CharacterController>();
         StateMachine = new PlayerStateMachine();
+        PlayerHorseState = new PlayerHorseState(this, StateMachine);
         PlayerBox = new PlayerBox(this, StateMachine, gameObject);
         PlayerIdleState = new PlayerIdleState(this, StateMachine);
         PlayerMovementState = new PlayerMovementState(this, StateMachine, false);
         _skillCoolDown = FindObjectOfType<SkillCoolDown>();
         dashSprite = Resources.Load<Sprite>("SkillSprite/Dash");
-        attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        attackSprite = uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>()
+            .sprite;
         skillSword = GetComponentInChildren<SwordSkill>().gameObject;
         DashInıtiliaze();
     }
@@ -325,7 +328,6 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("CampTutorial"))
         {
-            
             if (!GameManager.instance.isCampfire)
             {
                 TutorialLoader.instance.Load("Campfire");
@@ -333,6 +335,7 @@ public class Player : MonoBehaviour
                 GameManager.instance.isCampfire = true;
                 PlayerPrefs.SetInt("Campfire", 1);
             }
+
             other.gameObject.GetComponent<Collider>().enabled = false;
         }
     }
