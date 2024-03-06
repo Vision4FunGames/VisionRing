@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerSound playerSound;
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
-    [HideInInspector] public bool ring;
+    [HideInInspector] public bool ring,horse;
     private NavMeshAgent agent;
     public bool tutorial;
     public bool isDamageable = true;
@@ -309,6 +309,12 @@ public class Player : MonoBehaviour
         if (other.CompareTag("water"))
         {
             isSwim = true;
+         
+            if (FindObjectOfType<Horse>().playerAttach)
+            {
+                FindObjectOfType<Horse>().CallHorse();
+            }
+           
             ParticleManager.instance.swimParticle.Play();
             speed = 5;
             _playerAnimator.ResetTrigger("base");

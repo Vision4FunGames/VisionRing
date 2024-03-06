@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerHorseState : PlayerState
 {
+    private float gravityValue = -9.81f;
     public Vector3 _playerVelocity;
     public PlayerHorseState(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
     {
@@ -40,6 +41,7 @@ public class PlayerHorseState : PlayerState
     public override void FrameUpdate()
     {
         Movement();
+        _playerVelocity.y += gravityValue * Time.deltaTime;
         base.FrameUpdate();
     }
 

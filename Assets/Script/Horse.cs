@@ -34,6 +34,7 @@ public class Horse : MonoBehaviour
         else
         {
             playerAttach = false;
+            _player.horse = false;
             _player.speed = _player.baseSpeed;
             _player._playerAnimator.SetBool("horse",false);
             _player.StateMachine.ChangeState(_player.PlayerMovementState);
@@ -75,6 +76,7 @@ public class Horse : MonoBehaviour
                 _player.speed = _player.baseSpeed * 2;
                 callHorse = false;
                 playerAttach = true;
+                _player.horse = true;
             }
         }
         if (playerAttach)
