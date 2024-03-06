@@ -19,7 +19,7 @@ public class RandomPointNavmesh : MonoBehaviour
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
             UnityEngine.AI.NavMeshHit hit;
-            if (UnityEngine.AI.NavMesh.SamplePosition(randomPoint, out hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas))
+            if (UnityEngine.AI.NavMesh.SamplePosition(randomPoint, out hit, 4.0f, UnityEngine.AI.NavMesh.AllAreas))
             {
                 result = hit.position;
                 isCorrect = true;

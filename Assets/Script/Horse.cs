@@ -18,6 +18,7 @@ public class Horse : MonoBehaviour
         _player = FindObjectOfType<Player>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         randomPointNavmesh = GetComponent<RandomPointNavmesh>();
+        _navMeshAgent.enabled = true;
     }
 
     [Button("Call Horse")]
@@ -28,6 +29,7 @@ public class Horse : MonoBehaviour
             HorsePosition();
             _animator.SetFloat("HorseSpeed", 1);
             callHorse = true;
+            jumpPlayer = false;
         }
         else
         {
@@ -46,8 +48,10 @@ public class Horse : MonoBehaviour
         if (Vector3.Distance(_player.transform.position, pos) > 40 &&
             Mathf.Abs(_player.transform.position.y - pos.y) < 2)
         {
+            _navMeshAgent.enabled = false;
             transform.position = pos;
             vposCamera = pos;
+            _navMeshAgent.enabled = true;
         }
         else
         {
