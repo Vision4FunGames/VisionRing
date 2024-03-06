@@ -795,6 +795,8 @@ MonoBehaviour:
   bombActiveted: 0
   bombexp: 0
   isAttackStaff: 0
+  patrolRange: 10
+  patrolInterval: 3
 --- !u!114 &6512186244140242534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,6 +890,7 @@ MonoBehaviour:
   critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
   message: 
+  damageEmissionBoolean: 1
   enemyType: 0
   SpawnEnemyType: 3
   tutorial: 0

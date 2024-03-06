@@ -213,6 +213,8 @@ MonoBehaviour:
   bombActiveted: 0
   bombexp: 0
   isAttackStaff: 0
+  patrolRange: 10
+  patrolInterval: 3
 --- !u!114 &6759728030344244777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +237,7 @@ MonoBehaviour:
   critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
   message: Killed:Goblin
+  damageEmissionBoolean: 1
   enemyType: 0
   SpawnEnemyType: 7
   tutorial: 1
