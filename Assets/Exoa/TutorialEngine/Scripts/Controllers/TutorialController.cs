@@ -227,7 +227,6 @@ namespace Exoa.TutorialEngine
 
         private void Update()
         {
-
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (popup.contentText.text != popup.tempText)
