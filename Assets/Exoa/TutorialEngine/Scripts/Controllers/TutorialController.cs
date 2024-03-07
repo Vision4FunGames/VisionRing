@@ -151,7 +151,8 @@ namespace Exoa.TutorialEngine
         {
             //GameManager.Instance.fox.GetComponent<NpcButton>().isOk = false;
            // GameManager.Instance.fox.GetComponent<NpcButton>().DestroyButton();
-           Next();
+           
+               Next();
            if ((TutorialLoader.instance.loadedTutorialName == "0.0")&&(currentStep == 1))
             {
                 GameManager.instance.CinematicCamEnable(GameManager.instance.mainSword.transform);
@@ -208,7 +209,9 @@ namespace Exoa.TutorialEngine
                 {
                     HandImageClick();
                 }
-            }
+            } 
+           
+             
             
             
 
@@ -224,8 +227,15 @@ namespace Exoa.TutorialEngine
 
         private void Update()
         {
-            
 
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (popup.contentText.text != popup.tempText)
+                {
+                    popup.contentText.text = popup.tempText;
+                    popup.counter = popup.tempText.Length;
+                }
+            }
             if (tutorialState is State.Inactive or State.Completed)
             {
                 return;
