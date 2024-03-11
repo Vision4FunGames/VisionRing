@@ -30,6 +30,7 @@ public class UIQuestData : MonoBehaviour
 
     public void FillTheButtons()
     {
+        completedQuestList = ES3.Load("SuccessedQuest", QuestManager.instance.successedQuests);
         InitializeActiveQuest();
         bool isAlreadyInstantiate = false;
         if (completedQuestList.Count > 0)
@@ -57,6 +58,7 @@ public class UIQuestData : MonoBehaviour
                         {
                             var button = Instantiate(buttonPrefab, buttonParent);
                             button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = storyQuests.questLine[j].header + "  <sprite name="+"check"+">";
+                            button.transform.SetAsFirstSibling();
                             button.GetComponent<Image>().color = Color.black;
                             var text = storyQuests.questLine[j].info;
                             button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => FillInfoText(text));
