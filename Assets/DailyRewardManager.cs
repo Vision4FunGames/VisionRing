@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 
 public class DailyRewardManager : MonoBehaviour
 {
-    public Image currentReward;
+    public GameObject currentReward;
+    public GameObject decimalPos;
     public Image selector;
     public Image[] imageArray;
     private int currentIndex;
@@ -18,14 +19,17 @@ public class DailyRewardManager : MonoBehaviour
     private float randomRotateTime;
     private float currentTime = 0;
     private bool spin;
+    private bool _decimalBool;
+    private int rewardCount;
 
     private void Start()
     {
         baseDelayTime = delayTime;
     }
 
-    public void Collect()
+    public void Collect(bool decimalBool)
     {
+        _decimalBool = decimalBool;
         StartCoroutine(MoveThroughArray());
     }
 
@@ -54,22 +58,43 @@ public class DailyRewardManager : MonoBehaviour
             else
                 delayTime = Mathf.Lerp(delayTime, maxDelayTime, 0.01f);
 
+
             if (delayTime > maxDelayTime - 0.1f)
             {
-                Invoke("OpenReward",1f);
+                if (!_decimalBool)
+                    Invoke("OpenReward", 1f);
+                else
+                {
+                    Invoke("OpenRewardDecimal", 1f);
+                }
+
                 break;
             }
         }
     }
-    
-    [NaughtyAttributes.Button("bb")]
+
     public void OpenReward()
     {
-        currentReward.gameObject.SetActive(true);
+        currentReward = Instantiate(Resources.Load<GameObject>("Reward"), transform, false);
         currentReward.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f).OnComplete((() =>
         {
             currentReward.transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
         }));
+        spin = false;
+    }
+
+    public void OpenRewardDecimal()
+    {
+        if (rewardCount < 10)
+        {
+            currentReward = Instantiate(Resources.Load<GameObject>("Reward"), transform, false);
+            currentReward.transform.DOLocalMove(decimalPos.transform.GetChild(rewardCount).transform.localPosition, 0.2f);
+            currentReward.transform.DOScale(new Vector3(0.65f, 0.65f, 0.65f), 0.2f).OnComplete((() =>
+            {
+                currentReward.transform.DOScale(new Vector3(0.4f, 0.4f, 0.4f), 0.2f).OnComplete(OpenRewardDecimal);
+            }));
+        }
+        rewardCount++;
         spin = false;
     }
 }

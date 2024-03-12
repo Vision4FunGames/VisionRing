@@ -35,20 +35,32 @@ public class RewardManager : WorldTimeAPIController
         if (_drawCount > 0)
         {
             _drawCount--;
-            await _worldTimeAPIController.GetGlobalTime();
-            globalTimeLast = _worldTimeAPIController.globalTimeLast;
-            dailyDrawTime = globalTimeLast.AddHours(24);
-            PlayerPrefs.SetString("DailyDraw",dailyDrawTime.ToString());
-            InvokeRepeating("CheckDailyDrawReward", 1f, 1f);
-            Debug.Log(globalTimeLast);
+            if (_drawCount < 0)
+            {
+                await _worldTimeAPIController.GetGlobalTime();
+                globalTimeLast = _worldTimeAPIController.globalTimeLast;
+                dailyDrawTime = globalTimeLast.AddHours(24);
+                PlayerPrefs.SetString("DailyDraw",dailyDrawTime.ToString());
+                InvokeRepeating("CheckDailyDrawReward", 1f, 1f);
+                Debug.Log(globalTimeLast);
+            }
         }
     }
 
     public void CollectDailyReward()
     {
         CollectDaily();
-        dailyRewardManager.Collect();
+        dailyRewardManager.Collect(false);
 
+    }
+
+    public void CollectDailyDecimal()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            CollectDaily();
+        }
+        dailyRewardManager.Collect(true); 
     }
     public void CheckDailyDrawReward()
     {
