@@ -17,7 +17,7 @@ public class BossDetect : MonoBehaviour
     {
         if (other.CompareTag("SwordCollider"))
         {
-            bossManager.BossTakeSwordDamage(playerAttack.damage * 2);
+            bossManager.BossTakeSwordDamage(playerAttack.CalculateDamage() * 2);
         }
 
         if (other.CompareTag("Tornado"))
@@ -27,7 +27,7 @@ public class BossDetect : MonoBehaviour
 
         if (other.CompareTag("RotateFire"))
         {
-            bossManager.BossTakeSwordDamage(playerAttack.damage);
+            bossManager.BossTakeSwordDamage(playerAttack.CalculateDamage());
         }
     }
 
@@ -43,7 +43,7 @@ public class BossDetect : MonoBehaviour
             if (currentFlameTimer > playerAttack.flameDamageRateOfFire)
             {
                 currentFlameTimer = 0;
-                bossManager.BossTakeSwordDamage(playerAttack.damage);
+                bossManager.BossTakeSwordDamage(playerAttack.CalculateDamage());
             }
         }
     }

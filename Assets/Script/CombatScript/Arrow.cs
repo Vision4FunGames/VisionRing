@@ -142,7 +142,7 @@ namespace Script.CombatScript
                     Invoke("CloseArrow", 1);
                 }
 
-                other.GetComponent<EnemyStats>().TakeDamage(playerAttack.damage);
+                other.GetComponent<EnemyStats>().TakeDamage(playerAttack.CalculateDamage());
             }
         }
     }

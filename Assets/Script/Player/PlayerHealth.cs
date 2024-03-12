@@ -39,10 +39,8 @@ public class PlayerHealth : CharacterHealth
         _gameManager = FindObjectOfType<GameManager>();
         mmProgressBar.LerpForegroundBarDurationIncreasing = 3f;
     }
-
     private void Start()
     {
-        
         UiManager.instance.healText.text = HealLimit.ToString();
     }
 

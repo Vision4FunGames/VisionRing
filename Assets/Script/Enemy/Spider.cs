@@ -177,13 +177,13 @@ public class Spider : MonoBehaviour
 
         if (other.CompareTag("RotateFire"))
         {
-            characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().damage);
+            characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().CalculateDamage());
             ChechHealth();
         }
 
         if (other.CompareTag("SwordCollider"))
         {
-            characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().damage,
+            characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().CalculateDamage(),
                 Player.instance.GetComponent<PlayerAttack>().critChance);
             ChechHealth();
         }

@@ -125,7 +125,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
         if (other.CompareTag("SwordCollider"))
         {
             if (!dead)
-                TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+                TakeDamage(_player.GetComponent<PlayerAttack>().CalculateDamage());
         }
 
         if (other.CompareTag("Tornado"))
@@ -135,7 +135,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
 
         if (other.CompareTag("RotateFire"))
         {
-            TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+            TakeDamage(_player.GetComponent<PlayerAttack>().CalculateDamage());
         }
     }
     private void OnTriggerStay(Collider other)
@@ -145,7 +145,7 @@ public class Golem1 : MonoBehaviour, GolemCombat
             if (currentFlameTimer > _player.GetComponent<PlayerAttack>().flameDamageRateOfFire)
             {
                 currentFlameTimer = 0;
-                TakeDamage(_player.GetComponent<PlayerAttack>().damage);
+                TakeDamage(_player.GetComponent<PlayerAttack>().CalculateDamage());
             }
         }
     }

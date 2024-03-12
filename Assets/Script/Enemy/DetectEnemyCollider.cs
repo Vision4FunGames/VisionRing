@@ -29,7 +29,7 @@ public class DetectEnemyCollider : MonoBehaviour
 
         if (other.CompareTag("RotateFire"))
         {
-            _enemyStats.TakeDamage(_playerAttack.damage);
+            _enemyStats.TakeDamage(_playerAttack.CalculateDamage());
         }
 
         if (other.CompareTag("SwordCollider"))
@@ -46,17 +46,17 @@ public class DetectEnemyCollider : MonoBehaviour
                 if (characterAnimator.shied)
                 {
                     if (angle < 90)
-                        _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
+                        _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), _playerAttack.critChance);
                     else
                     {
                         Player.instance.BackDoMove(gameObject);
                     }
                 }
                 else
-                    _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
+                    _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), _playerAttack.critChance);
             }
             else
-                _enemyStats.TakeDamage(_playerAttack.damage, _playerAttack.critChance);
+                _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), _playerAttack.critChance);
         }
 
         if (other.CompareTag("Floor"))

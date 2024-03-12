@@ -252,7 +252,7 @@ public class BirlesikGolem : MonoBehaviour
     {
         if (other.CompareTag("SwordCollider"))
         {
-            TakeDamage(player.GetComponent<PlayerAttack>().damage);
+            TakeDamage(player.GetComponent<PlayerAttack>().CalculateDamage());
         }
 
         if (other.CompareTag("Player") && damageAttack)
@@ -268,7 +268,7 @@ public class BirlesikGolem : MonoBehaviour
         }
         if (other.CompareTag("RotateFire"))
         {
-            TakeDamage(player.GetComponent<PlayerAttack>().damage);
+            TakeDamage(player.GetComponent<PlayerAttack>().CalculateDamage());
         }
     }
     private void OnTriggerStay(Collider other)
@@ -278,7 +278,7 @@ public class BirlesikGolem : MonoBehaviour
             if (currentFlameTimer > player.GetComponent<PlayerAttack>().flameDamageRateOfFire)
             {
                 currentFlameTimer = 0;
-                TakeDamage(player.GetComponent<PlayerAttack>().damage);
+                TakeDamage(player.GetComponent<PlayerAttack>().CalculateDamage());
             }
         }
     }
