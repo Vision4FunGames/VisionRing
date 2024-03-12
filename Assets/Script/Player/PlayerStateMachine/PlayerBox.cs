@@ -44,6 +44,15 @@ public class PlayerBox : PlayerState
                                                  _player._fixedJoystick.Vertical) *
                                              (_player.speed * Time.deltaTime));
         
+        if (PlayerDirection().magnitude > 0.5)
+        {
+            _player.isWalk = true;
+        }
+        else
+        {
+            _player.isWalk = false;
+        }
+        
     }
     Vector3 PlayerDirection()   
     {

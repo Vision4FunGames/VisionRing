@@ -39,6 +39,7 @@ public class Horse : MonoBehaviour
             _player._playerAnimator.SetBool("horse",false);
             _player.StateMachine.ChangeState(_player.PlayerMovementState);
             _navMeshAgent.SetDestination(vposCamera);
+            _animator.SetFloat("HorseSpeed", 1);
         }
     }
 

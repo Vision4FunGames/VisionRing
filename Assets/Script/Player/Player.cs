@@ -195,6 +195,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Box"))
         {
             StateMachine.ChangeState(PlayerMovementState);
+            currentboxrb.velocity = Vector3.zero;
         }
 
         if (other.CompareTag("water"))
