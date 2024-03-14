@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class RewardManager : WorldTimeAPIController
 {
@@ -10,7 +13,7 @@ public class RewardManager : WorldTimeAPIController
     private WorldTimeAPIController _worldTimeAPIController;
     public DateTime globalTimeLast;
     public DateTime dailyDrawTime;
-
+    public List<UpgradeItem> upgradeItems;
 
     [Header("Daily")]
     private DailyRewardManager dailyRewardManager;
@@ -22,6 +25,12 @@ public class RewardManager : WorldTimeAPIController
     {
         _worldTimeAPIController = FindObjectOfType<WorldTimeAPIController>();
         dailyRewardManager = FindObjectOfType<DailyRewardManager>();
+
+        for (int i = 0; i < dailyRewardManager.imageArray.Length; i++)
+        {
+            dailyRewardManager.imageArray[i].transform.GetChild(1).GetComponent<Image>().sprite =
+                upgradeItems[Random.Range(0, 2)].icon;
+        }
         if (PlayerPrefs.HasKey("DailyDraw"))
         {
             dailyDrawTime = DateTime.Parse(PlayerPrefs.GetString("DailyDraw"));
