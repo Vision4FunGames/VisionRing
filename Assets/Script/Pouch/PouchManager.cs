@@ -134,7 +134,7 @@ public class PouchManager : MonoBehaviour
                         chest = Random.Range(0, equipmentManager.chestItems.Length);
                         print("Chest : " + chest );
                     } 
-                    while (itemIndexList[0] != chest);   
+                    while (itemIndexList[0] == chest);   
                     print(chest + " : " + itemIndexList[0]);
                     itemIndexList.Add(chest);
                 }

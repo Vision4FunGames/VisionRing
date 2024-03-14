@@ -88,7 +88,16 @@ public class Equipment : Item {
 
         if (type == InventoryType.Collect)
         {
-            Inventory.instance.items.Add(this);
+            if (Inventory.instance.items.Contains(this))
+            {
+                int index = Inventory.instance.items.FindIndex(r => r.name.Contains(this.name));
+                Inventory.instance.itemsCount[index]++;
+            }
+            else
+            {
+                Inventory.instance.items.Add(this);
+                Inventory.instance.itemsCount.Add(1);
+            }
             Inventory.instance.onItemChangedCallback.Invoke();
         }
 

@@ -36,7 +36,7 @@ public class CollectItemAnimation : MonoBehaviour
     public void CollectItem(Item item,int count)
     {
        panel = UiManager.instance.itemTextPanel.gameObject;
-        for (int i = 0; i < panel.transform.childCount; i++)
+        for (int i = 0; i < count; i++)
         {
             if (!panel.transform.GetChild(i).gameObject.activeSelf)
             {
