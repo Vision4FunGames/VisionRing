@@ -17,6 +17,10 @@ public class EndlessSkelet : MonoBehaviour
     {
         drmGameObject = FindObjectOfType<DRMGameObject>();
         drmEnemyChange = FindObjectOfType<DrmEnemyChange>();
+        for (int i = 0; i < enemyCount; i++)
+        {
+            EnemySpawn();
+        }
     }
 
     public void Update()
@@ -24,10 +28,13 @@ public class EndlessSkelet : MonoBehaviour
         if (currentEnemy < enemyCount)
         {
             currentTime += Time.deltaTime;
-            if (currentTime > 7)
+            if (currentTime > 30)
             {
                 currentTime = 0;
-                EnemySpawn();
+                for (int i = 0; i < enemyCount; i++)
+                {
+                    EnemySpawn();
+                }
             }
         }
     }
