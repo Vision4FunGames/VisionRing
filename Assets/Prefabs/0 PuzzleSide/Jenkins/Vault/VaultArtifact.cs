@@ -17,6 +17,7 @@ public class VaultArtifact : ScriptableObject
 
   
     public int[] gemCost;
+    public int gemCostMultiplier;
 
     [Space(10)]
     public string devLog;
