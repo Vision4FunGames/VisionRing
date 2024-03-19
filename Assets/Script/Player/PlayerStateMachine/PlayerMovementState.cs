@@ -88,28 +88,31 @@ namespace Script.Player.PlayerStateMachine
 
         public void Jump()
         {
-            if (_player._myController.isGrounded)
+            if (!_player.horse)
             {
-                // if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter == 4)
-                // {
-                //     GameManager.instance.TutorialLoad();
-                // }
-                //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
-                _playerVelocity.y = 3;
-                _player.playerSound.audioSource.clip = _player.playerSound.jump;
-                _player.playerSound.audioSource.Play();
-                ChangeAnimationState(playerJumpAnimationString);
-                //_playerVelocity.y += gravityValue * Time.deltaTime;
-                _player._myController.Move(_playerVelocity * Time.deltaTime);
-            }
-            else if (!_player._myController.isGrounded && !dJump)
-            {
-                dJump = true;
-                _player.playerSound.audioSource.clip = _player.playerSound.jump;
-                _player.playerSound.audioSource.Play();
-                _playerVelocity.y = 4;
-                ChangeAnimationState(playerDoubleJumpAnimationString);
-                //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
+                if (_player._myController.isGrounded)
+                {
+                    // if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter == 4)
+                    // {
+                    //     GameManager.instance.TutorialLoad();
+                    // }
+                    //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
+                    _playerVelocity.y = 3;
+                    _player.playerSound.audioSource.clip = _player.playerSound.jump;
+                    _player.playerSound.audioSource.Play();
+                    ChangeAnimationState(playerJumpAnimationString);
+                    //_playerVelocity.y += gravityValue * Time.deltaTime;
+                    _player._myController.Move(_playerVelocity * Time.deltaTime);
+                }
+                else if (!_player._myController.isGrounded && !dJump)
+                {
+                    dJump = true;
+                    _player.playerSound.audioSource.clip = _player.playerSound.jump;
+                    _player.playerSound.audioSource.Play();
+                    _playerVelocity.y = 4;
+                    ChangeAnimationState(playerDoubleJumpAnimationString);
+                    //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
+                }
             }
         }
 
