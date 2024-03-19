@@ -36,7 +36,8 @@ public class DamageManager : MonoBehaviour
         if (Player.instance.isDamageable)
         {
             var playerHealth = enemyController.target.GetComponent<PlayerHealth>();
-            float damageReduce = playerHealth.armor.GetValue() * characterStats.damage.GetValue();
+            var playerStats = enemyController.target.GetComponent<PlayerStats>();
+            float damageReduce = playerStats.armor.GetValue() * characterStats.damage.GetValue();
             float damage = characterStats.damage.GetValue();
             Debug.Log("Damage : " + damage + " Damage Reduce : " + damageReduce);
             playerHealth.DamageAnimation((int)damage-(int)damageReduce);

@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-   
-
+    
     private void Start()
     {
         
@@ -23,12 +22,16 @@ public class PlayerStats : CharacterStats
         if (newItem != null) {
             armor.AddModifier (newItem.armorModifier);
             damage.AddModifier (newItem.damageModifier);
+            health.AddModifier(newItem.hpModifier);
+            critChance.AddModifier(newItem.critChanceModifier);
         }
 
         if (oldItem != null)
         {
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.armorModifier);
+            health.RemoveModifier(oldItem.hpModifier);
+            critChance.RemoveModifier(oldItem.critChanceModifier);
         }
 
     }

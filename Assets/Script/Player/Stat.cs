@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class Stat {
 
-    public int baseValue;	// Starting value
+    public float baseValue;	// Starting value
 
     // Keep a list of all the modifiers on this stat
     private List<float> modifiers = new List<float>();

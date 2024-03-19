@@ -66,13 +66,13 @@ public class EquipmentManager : MonoBehaviour
     public Item[] chestItems, upgradeItems;
 
     public Equipment selectedChestItem;
-    private PlayerHealth playerHealth;
+    private PlayerStats playerStats;
     void Start()
     {
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        playerStats = FindObjectOfType<PlayerStats>();
         if (onEquipmentChanged ==null)
         {
-            onEquipmentChanged += playerHealth.OnEquipmentChanged;
+            onEquipmentChanged += playerStats.OnEquipmentChanged;
         }
       
         _player = FindObjectOfType<Player>();

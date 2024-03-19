@@ -3,15 +3,16 @@ using UnityEngine;
 using DG.Tweening;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
-
-
 public class CharacterStats : MonoBehaviour
 {
+    
     public bool die;
     public int maxHealth = 300;
     public int currentHealth { get; private set; }
     public Stat damage;
     public Stat armor;
+    public Stat health;
+    public Stat critChance;
     public DamageNumber prefab, critPrefab;
     private SkinnedMeshRenderer[] _skinnedMeshRenderers;
     public MMProgressBar mmProgressBar;
@@ -58,7 +59,7 @@ public class CharacterStats : MonoBehaviour
     public void TakeDamage(int damage, float critChance)
     {
         bool crit = false;
-        int rnd = UnityEngine.Random.Range(0, 10);
+        int rnd = UnityEngine.Random.Range(1, 100);
         if (rnd <= critChance * 100)
         {
             crit = true;

@@ -10,7 +10,8 @@ public class Equipment : Item {
     public EquipmentSlot equipSlot;		// What slot to equip it in
     public float armorModifier;
     public float damageModifier;
-    public float critChance;
+    public float hpModifier;
+    public float critChanceModifier;
     public int itemSet;
    [ES3NonSerializable] public SkinnedMeshRenderer mesh;
    
@@ -119,7 +120,7 @@ public class Equipment : Item {
         isDefault = item.isDefault;
         isUpgrade = item.isUpgrade;
         prefab = item.prefab;
-        critChance = item.critChance;
+        critChanceModifier = item.critChanceModifier;
         itemSet = item.itemSet;
 
     }

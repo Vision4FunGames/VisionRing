@@ -32,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
     public ParticleSystem flameTFloor;
     public ParticleSystem missAttackParticle;
     private bool hold = false;
-    private PlayerHealth playerHealth;
+    private PlayerStats playerStats;
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = GetComponent<PlayerHealth>();
+        playerStats = GetComponent<PlayerStats>();
         playerAnimator = GetComponentInChildren<Animator>();
         for (int i = 0; i < 30; i++)
         {
@@ -106,7 +106,7 @@ public class PlayerAttack : MonoBehaviour
 
     public int CalculateDamage()
     {
-        damage = (int)(playerHealth.damage.GetValue());
+        damage = (int)(playerStats.damage.GetValue());
         return damage;
     }
 }

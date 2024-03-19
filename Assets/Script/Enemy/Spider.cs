@@ -184,7 +184,7 @@ public class Spider : MonoBehaviour
         if (other.CompareTag("SwordCollider"))
         {
             characterStats.TakeDamage(Player.instance.GetComponent<PlayerAttack>().CalculateDamage(),
-                Player.instance.GetComponent<PlayerAttack>().critChance);
+                Player.instance.GetComponent<PlayerStats>().critChance.GetValue());
             ChechHealth();
         }
 

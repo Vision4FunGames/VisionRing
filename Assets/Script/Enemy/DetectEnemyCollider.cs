@@ -10,6 +10,7 @@ public class DetectEnemyCollider : MonoBehaviour
     private Player player;
     private Rigidbody rb;
     private float currentFlameTimer;
+    private PlayerStats playerStats;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class DetectEnemyCollider : MonoBehaviour
         enemy = GetComponent<Enemy>();
         _enemyStats = GetComponent<EnemyStats>();
         _playerAttack = Player.instance.GetComponent<PlayerAttack>();
+        playerStats = Player.instance.GetComponent<PlayerStats>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,17 +48,17 @@ public class DetectEnemyCollider : MonoBehaviour
                 if (characterAnimator.shied)
                 {
                     if (angle < 90)
-                        _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), _playerAttack.critChance);
+                        _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), playerStats.critChance.GetValue());
                     else
                     {
                         Player.instance.BackDoMove(gameObject);
                     }
                 }
                 else
-                    _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), _playerAttack.critChance);
+                    _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), playerStats.critChance.GetValue());
             }
             else
-                _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), _playerAttack.critChance);
+                _enemyStats.TakeDamage(_playerAttack.CalculateDamage(), playerStats.critChance.GetValue());
         }
 
         if (other.CompareTag("Floor"))
