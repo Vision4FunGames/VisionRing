@@ -1,18 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
 using Exoa.TutorialEngine;
-using PixelCrushers;
 using PixelCrushers.QuestMachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using GameAnalyticsSDK;
 using NaughtyAttributes;
-using UnityEngine.Assertions.Must;
-using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public enum GameState
@@ -86,12 +81,13 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     public float timerPortal2;
     public GameObject SkeletBoss;
     public QuestListContainer _questListContainer;
-
     private void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
         PlayStandSound();
+
+       
         if (PlayerPrefs.HasKey("TutorialSection"))
         {
             tutorialCounter = 0;

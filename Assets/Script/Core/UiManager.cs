@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using AeLa.EasyFeedback;
+using DG.Tweening;
 using Exoa.TutorialEngine;
 using GameAnalyticsSDK;
 using MoreMountains.Tools;
 using PixelCrushers.QuestMachine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -41,12 +43,14 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI healText;
     public GameObject menuUi;
     public Button autoMoveBtn;
+    public Button playerNameConfirm;
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
     private ShopUI shopUI;
     public GameObject inventoryObject;
     public GameObject mapCloseBtn;
     public GameObject mapOpenBtn;
+    public TMP_InputField playerNameInput;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
 
     public MMProgressBar playerProgressBar;
@@ -94,6 +98,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+        playerNameConfirm.onClick.AddListener(PlayerNameSave);
         autoMoveBtn.onClick.AddListener(Player.instance.AutoMoveStart);
         autoMoveBtn.gameObject.SetActive(false);
         _blMiniMap = FindObjectOfType<bl_MiniMap>();
@@ -103,6 +108,16 @@ public class UiManager : MonoBehaviour
         gamePlay.SetActive(true);
         onEconomyChangedCallBack += EconomyUI;
         onEconomyChangedCallBack.Invoke();
+        if (PlayerPrefs.HasKey("playerName"))
+        {
+            GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
+            playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
+            Debug.Log( "Player name"+ GameManager.instance.PlayerName);
+        }
+        else
+        {
+            playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
+        }
     }
 
     public void DisableButton()
@@ -112,13 +127,20 @@ public class UiManager : MonoBehaviour
             ButtonType[i].skillButton.enabled = false;
         }
     }
-   
+
     public void EnableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)
         {
             ButtonType[i].skillButton.enabled = true;
         }
+    }
+
+    public void PlayerNameSave()
+    {
+        GameManager.instance.PlayerName = playerNameInput.text;
+        PlayerPrefs.SetString("playerName", playerNameInput.text);
+        playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
     }
 
     public void MapOpen()
@@ -174,7 +196,6 @@ public class UiManager : MonoBehaviour
             GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
             chapter3.gameObject.SetActive(false);
         }
-        
     }
 
     public void MenuUI()
@@ -228,13 +249,14 @@ public class UiManager : MonoBehaviour
 
     private void FeedBackOpen()
     {
-       FindObjectOfType<FeedbackForm>().Show();
+        FindObjectOfType<FeedbackForm>().Show();
     }
 
     public void FeedBackOpenWait()
     {
-        Invoke("FeedBackOpen",.5f);
+        Invoke("FeedBackOpen", .5f);
     }
+
     public void FocusMode(GameObject switchOnClick)
     {
         if (focusPanel.gameObject.activeSelf)
