@@ -15,11 +15,12 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerSound playerSound;
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
-    [HideInInspector] public bool ring,horse;
+    [HideInInspector] public bool ring, horse;
     private NavMeshAgent agent;
     public bool tutorial;
     public bool isDamageable = true;
     public Transform autoMoveTarget;
+
     #region Singleton
 
     public static Player instance;
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
 
     #region Movement Variable
 
+    public bool autoMove;
     public CurrentArrowType _baseCurrentArrowType;
     public CurrentGunType _baseCurrentGunType;
     public bool isMovement = true;
@@ -92,8 +94,14 @@ public class Player : MonoBehaviour
 
     public void AutoMoveStart()
     {
-        StateMachine.ChangeState(PlayerAutoMove);
+        if (!autoMove)
+        {
+            autoMove = true;
+            StateMachine.ChangeState(PlayerAutoMove);
+        }
+           
     }
+
     private void Awake()
     {
         baseSpeed = speed;
@@ -315,12 +323,12 @@ public class Player : MonoBehaviour
         if (other.CompareTag("water"))
         {
             isSwim = true;
-         
+
             if (FindObjectOfType<Horse>().playerAttach)
             {
                 FindObjectOfType<Horse>().CallHorse();
             }
-           
+
             ParticleManager.instance.swimParticle.Play();
             speed = 5;
             _playerAnimator.ResetTrigger("base");

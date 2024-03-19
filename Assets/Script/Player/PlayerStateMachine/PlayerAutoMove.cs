@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class PlayerAutoMove : PlayerState
 {
     private NavMeshAgent navMeshAgent;
-    
+
     public PlayerAutoMove(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
     {
     }
@@ -15,13 +15,15 @@ public class PlayerAutoMove : PlayerState
     public override void EnterState()
     {
         navMeshAgent = _player.AddComponent<NavMeshAgent>();
-        _player.transform.GetChild(0).eulerAngles  = Vector3.zero;
+        _player.transform.GetChild(0).eulerAngles = Vector3.zero;
         base.EnterState();
     }
 
     public override void ExitState()
     {
+        _player.autoMove = false;
         Destroy(_player.GetComponent<NavMeshAgent>());
+        UiManager.instance.autoMoveBtn.gameObject.SetActive(false);
         base.ExitState();
     }
 
@@ -34,6 +36,14 @@ public class PlayerAutoMove : PlayerState
         {
             _player.StateMachine.ChangeState(_player.PlayerMovementState);
         }
+
+        Vector3 directions = new Vector3(_player._fixedJoystick.Horizontal, 0,
+            _player._fixedJoystick.Vertical);
+        if (directions.magnitude > 0.5f)
+        {
+            _player.StateMachine.ChangeState(_player.PlayerMovementState);
+        }
+
         base.FrameUpdate();
     }
 

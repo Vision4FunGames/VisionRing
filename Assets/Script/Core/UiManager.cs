@@ -40,6 +40,7 @@ public class UiManager : MonoBehaviour
     public GameObject ringBtn;
     public TextMeshProUGUI healText;
     public GameObject menuUi;
+    public Button autoMoveBtn;
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
     private ShopUI shopUI;
@@ -93,6 +94,8 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+        autoMoveBtn.onClick.AddListener(Player.instance.AutoMoveStart);
+        autoMoveBtn.gameObject.SetActive(false);
         _blMiniMap = FindObjectOfType<bl_MiniMap>();
         inventoryUi = InventoryUI.instance;
         shopUI = global::ShopUI.instance;
