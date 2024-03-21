@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
 
                 else if (hit.transform.gameObject.name == "pouch")
                 {
-                    hit.transform.gameObject.GetComponent<PouchManager>().OpenPouchPanel();
+                  //  hit.transform.gameObject.GetComponent<PouchManager>().OpenPouchPanel();
                     UiManager.instance.selectedPouch = hit.transform.gameObject;
                 }
                 else if (hit.transform.gameObject.name == "Chest")

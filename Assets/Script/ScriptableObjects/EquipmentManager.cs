@@ -63,7 +63,7 @@ public class EquipmentManager : MonoBehaviour
     public GameObject inventoryHand, inventoryLeftHand;
     public Equipment[] upgradeEquipment;
     public InventorySlot[] upgradeSlots;
-    public Item[] chestItems, upgradeItems;
+    public Item[] chestItems, upgradeItems,dropUsableItems;
 
     public Equipment selectedChestItem;
     private PlayerStats playerStats;
@@ -100,7 +100,8 @@ public class EquipmentManager : MonoBehaviour
         inventory.items = ES3.Load("inventory", inventory.items);
         inventory.itemsCount.Clear();
         inventory.itemsCount = ES3.Load("InvItemCount", inventory.itemsCount);
-        inventory.upgradeItems = ES3.Load("upgradeItems", inventory.upgradeItems);
+        inventory.usableItems = ES3.Load("usableItems", inventory.usableItems);
+        inventory.usableItemsCount = ES3.Load("usableItemsCount", inventory.usableItemsCount);
         EconomyManager.instance.itemCount = ES3.Load("itemCount", EconomyManager.instance.itemCount);
 
         for (int i = 0; i < defaultWear.Length; i++)

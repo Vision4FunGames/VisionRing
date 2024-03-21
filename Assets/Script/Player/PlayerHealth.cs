@@ -94,20 +94,7 @@ public class PlayerHealth : CharacterHealth
         newDamageNumber.transform.localScale = new Vector3(2, 2, 2);
         newDamageNumber.followedTarget = transform;
     }
-    public void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
-    {
-        if (newItem != null) {
-            armor.AddModifier (newItem.armorModifier);
-            damage.AddModifier (newItem.damageModifier);
-        }
-
-        if (oldItem != null)
-        {
-            armor.RemoveModifier(oldItem.armorModifier);
-            damage.RemoveModifier(oldItem.armorModifier);
-        }
-
-    }
+   
     #region HealBuff
 
     public void EnableHealBuff(GameObject btn)

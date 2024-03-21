@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "Item", order = 2)]
+[CreateAssetMenu(fileName = "Itemmm", menuName = "Item", order = 2)]
 public class Item : ScriptableObject
 {
     public string name = "New ScriptableObject";
@@ -24,7 +24,12 @@ public class Item : ScriptableObject
     // Call this method to remove the item from inventory
     public void RemoveFromInventory ()
     {
-        Inventory.instance.Remove(this);
+        Inventory.instance.Remove(this,false);
+    }
+
+    public void RemoveFromUsable()
+    {
+        Inventory.instance.Remove(this, true);
     }
     public void RemoveFromEquippedInventory(int slotIndex)
     {

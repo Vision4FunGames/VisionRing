@@ -62,6 +62,7 @@ public class InventoryUI : MonoBehaviour {
             case "All":
                 UiManager.instance.InventoryFilter("");
                 int ecoCounter = 0;
+                int usableCounter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
                     if (i < inventory.items.Count)
@@ -79,6 +80,12 @@ public class InventoryUI : MonoBehaviour {
                             slots[i].ClearSlot();
                         }
                         ecoCounter++;
+                    }
+                    else if (usableCounter < inventory.usableItems.Count && inventory.usableItemsCount[usableCounter] > 0)
+                    {
+                        slots[i].AddItem(inventory.usableItems[usableCounter],inventory.usableItemsCount[usableCounter]);
+                        slots[i]._inventoryType = InventoryType.Usable;
+                        usableCounter++;
                     }
                     else
                     {
@@ -255,6 +262,7 @@ public class InventoryUI : MonoBehaviour {
     public void ConvertToEquipmentList()
     {
         listEq.Clear();
+       
         for (int i = 0; i < inventory.items.Count; i++)
         {
             listEq.Add((Equipment)inventory.items[i]);

@@ -102,6 +102,8 @@ public class PouchManager : MonoBehaviour
             return;
         }
         itemIndexList.Clear();
+        int luck = Random.Range(0, 100);
+        
         for (int i = 0; i < count; i++)
         {
             var pouchPanel = Instantiate(this.pouchPanel, current.transform.GetChild(0));
@@ -139,11 +141,21 @@ public class PouchManager : MonoBehaviour
                     itemIndexList.Add(chest);
                 }
             }
-                
-            item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[chest]);
-            item1.GetComponent<InventorySlot>().countText.text = Random.Range(1, 3).ToString();
-            item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
-          
+
+            if (luck <50)
+            {
+                item1.GetComponent<InventorySlot>().AddItem(equipmentManager.dropUsableItems[0]);
+                item1.GetComponent<InventorySlot>().countText.text = "";
+                item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
+                current.gameObject.SetActive(false);
+                break;
+            }
+            else
+            {
+                item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[chest]);
+                item1.GetComponent<InventorySlot>().countText.text = Random.Range(1, 3).ToString();
+                item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
+            }
             current.gameObject.SetActive(false);
         }
        

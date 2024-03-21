@@ -7,8 +7,8 @@ using MMProgressBar = MoreMountains.Tools.MMProgressBar;
 public abstract class CharacterHealth : MonoBehaviour
 {
     public delegate void DieDelegate();
-    public Stat damage;
-    public Stat armor;
+    // public Stat damage;
+    // public Stat armor;
     public Player _player;
     public DieDelegate OnDie;
     protected float health;

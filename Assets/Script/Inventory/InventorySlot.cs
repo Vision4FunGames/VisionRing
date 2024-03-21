@@ -8,7 +8,8 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
    // public Button removeButton;
-     Item item;	// Current item in the slot
+     Item item;
+     private UsableItem usableItem;// Current item in the slot
     public bool isEquipped = false;
     public InventoryType _inventoryType;
 
@@ -21,7 +22,7 @@ public class InventorySlot : MonoBehaviour
     public void AddItem (Item newItem,int count)
     {
         item = newItem;
-        if (_inventoryType is InventoryType.Inventory or InventoryType.Upgrade)
+        if (_inventoryType is InventoryType.Inventory or InventoryType.Upgrade or InventoryType.Usable)
         {
             backGImage.sprite = UiManager.instance.itemLevelSprites[newItem.itemLevel];
         }
@@ -121,7 +122,7 @@ public class InventorySlot : MonoBehaviour
     // If the remove button is pressed, this function will be called.
     public void RemoveItemFromInventory ()
     {
-        Inventory.instance.Remove(item);
+        Inventory.instance.Remove(item,false);
     }
 
     // Use the item
@@ -131,6 +132,10 @@ public class InventorySlot : MonoBehaviour
         {
             item?.Use(_inventoryType,int.Parse(countText
                 .text));
+        }
+        else if (_inventoryType == InventoryType.Usable)
+        {
+            
         }
         else
         {
@@ -165,6 +170,32 @@ public class InventorySlot : MonoBehaviour
             SkillPanel.instance.ChangeSkill();
             
         }
+        else if (_inventoryType == InventoryType.Usable)
+        {
+            usableItem = (UsableItem)item;
+            if (item!=null)
+            {
+               var popUp = Instantiate(Resources.Load("UsablePopUp")as GameObject);
+                popUp.transform.parent = transform.parent.transform.parent.transform.parent.transform.parent;
+                popUp.transform.position = new Vector3(transform.position.x -20f,transform.position.y,transform.position.z);
+
+                popUp.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    item.Use(InventoryType.Usable, 0);
+                });
+                popUp.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    Destroy(popUp);
+                });
+                popUp.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    usableItem.RemoveFromUsable();
+                    Destroy(popUp);
+                });
+            }
+            
+            
+        }
     }
     public void SetSlotIndex(int index)
     {
@@ -183,6 +214,7 @@ public enum InventoryType
     Collect,
     Skill,
     CurrentSkill,
-    Inventory
+    Inventory,
+    Usable
 }
 
