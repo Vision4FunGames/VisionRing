@@ -142,10 +142,10 @@ public class PouchManager : MonoBehaviour
                 }
             }
 
-            if (luck <50)
+            if (luck <5)
             {
                 item1.GetComponent<InventorySlot>().AddItem(equipmentManager.dropUsableItems[0]);
-                item1.GetComponent<InventorySlot>().countText.text = "";
+                item1.GetComponent<InventorySlot>().countText.text = "1";
                 item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
                 current.gameObject.SetActive(false);
                 break;

@@ -14,6 +14,18 @@ public class UsableItem : Item
         {
             TownScroll();
         }
+        if (type == InventoryType.Collect)
+        {
+            // Inventory.instance.upgradeItems.Add(this);
+            for (int i = 0; i < Inventory.instance.usableItems.Count; i++)
+            {
+                if (Inventory.instance.usableItems[i] == this)
+                {
+                    Inventory.instance.usableItemsCount[i] += 1;
+                }
+            }
+            Inventory.instance.onItemChangedCallback.Invoke();
+        }
     }
 
     private void TownScroll()

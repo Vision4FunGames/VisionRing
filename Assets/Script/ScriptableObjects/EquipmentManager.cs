@@ -100,8 +100,8 @@ public class EquipmentManager : MonoBehaviour
         inventory.items = ES3.Load("inventory", inventory.items);
         inventory.itemsCount.Clear();
         inventory.itemsCount = ES3.Load("InvItemCount", inventory.itemsCount);
-        inventory.usableItems = ES3.Load("usableItems", inventory.usableItems);
-        inventory.usableItemsCount = ES3.Load("usableItemsCount", inventory.usableItemsCount);
+        inventory.usableItems = ES3.Load("UsableItems", inventory.usableItems);
+        inventory.usableItemsCount = ES3.Load("UsableItemsCount", inventory.usableItemsCount);
         EconomyManager.instance.itemCount = ES3.Load("itemCount", EconomyManager.instance.itemCount);
 
         for (int i = 0; i < defaultWear.Length; i++)

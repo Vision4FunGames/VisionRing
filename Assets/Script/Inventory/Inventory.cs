@@ -122,7 +122,7 @@ public class Inventory : MonoBehaviour
         if (isUsableItem)
         {
             index = usableItems.FindIndex(r => r.name.Contains(item.name));
-            if (usableItemsCount[index] > 1)
+            if (usableItemsCount[index] >= 1)
             {
                 usableItemsCount[index]--;
             }
@@ -149,6 +149,8 @@ public class Inventory : MonoBehaviour
             onItemChangedCallback.Invoke();
         ES3.Save("currentItems",equipmentManager.currentEquipment);
         ES3.Save("inventory",items);
+        ES3.Save("UsableItems", usableItems);
+        ES3.Save("UsableItemsCount", usableItemsCount);
     }
 
     public void InventoryTypeChange(InventoryType type)
