@@ -7,10 +7,10 @@ using Random = UnityEngine.Random;
 
 public class DailyRewardManager : MonoBehaviour
 {
+    public AlignSpin _alignSpin;
     public GameObject currentReward;
     public GameObject decimalPos;
     public Image[] selector;
-    public Image[] imageArray;
     private int currentIndex;
     public float delayTime = 0.1f;
 
@@ -24,6 +24,15 @@ public class DailyRewardManager : MonoBehaviour
     private void Start()
     {
         _rewardManager = FindObjectOfType<RewardManager>();
+        _alignSpin = GetComponentInChildren<AlignSpin>();
+        
+        float radius = 2f;
+        for (int i = 0; i < selector.Length; i++)
+        {
+            float angle = i * Mathf.PI*2f / selector.Length;
+            Vector3 newPos = new Vector3(Mathf.Cos(angle)*radius, 0, Mathf.Sin(angle)*radius);
+            selector[i].transform.position = newPos;
+        }
     }
 
     public void Collect(bool decimalBool)
@@ -39,17 +48,17 @@ public class DailyRewardManager : MonoBehaviour
         float delayT = 0;
         if (!_decimalBool)
         {
-            StartCoroutine(selector[0].GetComponent<Selector>().Move(delayT));
+            StartCoroutine(selector[0].GetComponent<Selector>().Move(delayT,0));
         }
 
         else
         {
             for (int i = 0; i < selector.Length; i++)
             {
-                delayT += 0.15f;
+                //delayT += 0.15f;
                 selector[i].gameObject.SetActive(true);
                 selector[i].GetComponent<Selector>()._decimalBool = true;
-                StartCoroutine(selector[i].GetComponent<Selector>().Move(delayT));
+                StartCoroutine(selector[i].GetComponent<Selector>().Move(delayT,i));
             }
         }
 
@@ -59,7 +68,7 @@ public class DailyRewardManager : MonoBehaviour
     public void OpenReward(GameObject _selector)
     {
         currentReward = Instantiate(Resources.Load<GameObject>("Reward"), transform, false);
-        currentReward.transform.GetChild(1).GetComponent<Image>().sprite =
+        currentReward.transform.GetChild(0).GetComponent<Image>().sprite =
             _selector.transform.parent.transform.GetChild(1).GetComponent<Image>().sprite;
         currentReward.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f).OnComplete((() =>
         {

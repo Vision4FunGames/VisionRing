@@ -26,11 +26,7 @@ public class RewardManager : WorldTimeAPIController
         _worldTimeAPIController = FindObjectOfType<WorldTimeAPIController>();
         dailyRewardManager = FindObjectOfType<DailyRewardManager>();
 
-        for (int i = 0; i < dailyRewardManager.imageArray.Length; i++)
-        {
-            dailyRewardManager.imageArray[i].transform.GetChild(1).GetComponent<Image>().sprite =
-                upgradeItems[Random.Range(0, 2)].icon;
-        }
+       
         if (PlayerPrefs.HasKey("DailyDraw"))
         {
             dailyDrawTime = DateTime.Parse(PlayerPrefs.GetString("DailyDraw"));

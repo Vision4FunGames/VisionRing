@@ -22,9 +22,11 @@ public class Selector : MonoBehaviour
         _dailyRewardManager = FindObjectOfType<DailyRewardManager>();
     }
 
-    public IEnumerator Move(float startDelay)
+    public IEnumerator Move(float startDelay,int currentIn)
     {
         yield return new WaitForSeconds(startDelay);
+      
+        currentIndex = currentIn;
         gameObject.SetActive(true);
         randomRotateTime = Random.Range(1f, 3f);
         spin = true;
@@ -32,9 +34,12 @@ public class Selector : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(delayTime);
-            currentIndex = (currentIndex + 1) %_dailyRewardManager.imageArray.Length;
-            transform.SetParent(_dailyRewardManager.imageArray[currentIndex].transform);
+            currentIndex = (currentIndex + 1) %_dailyRewardManager._alignSpin.spinPool.Count;
+            transform.SetParent(_dailyRewardManager._alignSpin.spinPool[currentIndex].transform);
+            transform.GetComponent<RectTransform>().sizeDelta = transform.parent.GetComponent<RectTransform>().sizeDelta;
+            transform.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             transform.localPosition = Vector3.zero;
+            transform.localEulerAngles = Vector3.zero;
             if (currentTime > randomRotateTime)
             {
                 delayTime = Mathf.Lerp(delayTime, maxDelayTime, 0.2f);
