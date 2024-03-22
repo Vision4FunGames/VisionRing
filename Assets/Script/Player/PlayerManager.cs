@@ -121,13 +121,13 @@ public class PlayerManager : MonoBehaviour
             RopeStart();
         }
 
-        if (other.CompareTag("Bush"))
+        if (other.CompareTag("Bush")&& !sessizImage)
         {
             player.speed = player.baseSpeed / 2;
             player._playerAnimator.SetBool("yurumeBool", true);
             sessizImage =
                 Instantiate(Resources.Load("SessizImage"),
-                    GameObject.FindWithTag("mainCanvas").transform) as GameObject;
+                   UiManager.instance.gamePlay.transform.GetChild(0).transform) as GameObject;
         }
 
         if (other.CompareTag("CheckPoint"))
@@ -168,7 +168,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Bush"))
+        if (other.CompareTag("Bush") )
         {
             player.speed = player.baseSpeed;
             player._playerAnimator.SetBool("yurumeBool", false);
