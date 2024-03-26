@@ -65,12 +65,19 @@ public class CollectItemAnimation : MonoBehaviour
 
     IEnumerator CloseText()
     {
+        for (int i = 0; i < panel.transform.childCount ; i++)
+        {
+            panel.transform.GetChild(i).transform.DOLocalMove(new Vector3(0, 300, 0), 3f);
+        } 
+       
         yield return new WaitForSeconds(3f);
         if (panel != null)
         {
             for (int i = 0; i < panel.transform.childCount ; i++)
             {
+                panel.transform.GetChild(i).GetComponent<CanvasGroupTweener>().Close();
                 panel.transform.GetChild(i).gameObject.SetActive(false);
+                panel.transform.localPosition = new Vector3(0, 0, 0);
             } 
         }
        

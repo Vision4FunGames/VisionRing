@@ -34,22 +34,27 @@ public class TntObject : MonoBehaviour
                 .OnComplete(() =>
                 {
                     explosionParticle.Play();
+                    BrokeTheVarils();
                     GetComponent<MeshRenderer>().enabled = false;
                     startParticle.gameObject.SetActive(false);
                     circleParentObj.gameObject.SetActive(false);
                     camShake.ShakeCam(.1f,5f);
-                    for (int i = 0; i < varilList.Count; i++)
-                    {
-                        if (varilList[i].gameObject != null)
-                        {
-                            varilList[i].GetComponent<FragileObject>().BrokeTheObject();
-                        }
-                    }
+                   
                 });
-            Destroy(transform.parent.gameObject,5f);
+            Destroy(transform.parent.gameObject,8f);
         }
     }
 
+    public void BrokeTheVarils()
+    {
+        for (int i = 0; i < varilList.Count; i++)
+        {
+            if (varilList[i].gameObject != null)
+            {
+                varilList[i].GetComponent<FragileObject>().BrokeTheObject();
+            }
+        }
+    }
     private void DamageAnimation()
     {
         var mesh = GetComponent<MeshRenderer>();
