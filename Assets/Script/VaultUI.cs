@@ -10,9 +10,10 @@ public class VaultUI : MonoBehaviour
     public GameObject vaultBtnParent;
     public List<VaultItem> vaultItems;
 
+    public Image vaultİcon;
     public TextMeshProUGUI infoVault;
     public TextMeshProUGUI vaultName;
-
+    
     private void Awake()
     {
         for (int i = 0; i < vaultArtifacts.Count; i++)
@@ -22,12 +23,14 @@ public class VaultUI : MonoBehaviour
             vaultItems[i].VaultArtifact = vaultArtifacts[i];
             var i1 = i;
             vaultItems[i].vaultBtn.onClick.AddListener(delegate { ClickVault(i1); });
+            vaultItems[i].vaultBtn.transform.GetChild(0).GetComponent<Image>().sprite = vaultArtifacts[i].icon;
         }
     }
 
     public void ClickVault(int index)
     {
         Debug.Log(index);
+        vaultİcon.sprite = vaultArtifacts[index].icon;
         infoVault.text = vaultItems[index].VaultArtifact.artifactJobInfo;
         vaultName.text = vaultItems[index].VaultArtifact.artifactName;
     }

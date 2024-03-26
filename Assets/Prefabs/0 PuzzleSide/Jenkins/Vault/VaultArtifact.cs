@@ -9,7 +9,7 @@ public class VaultArtifact : ScriptableObject
     public string artifactName;
 
     public string artifactJobInfo;
-
+    
     public int maxLevel;
 
     public float startBoost;
@@ -19,6 +19,8 @@ public class VaultArtifact : ScriptableObject
     public int[] gemCost;
     public int gemCostMultiplier;
 
+    public Sprite icon;
+    
     [Space(10)]
     public string devLog;
 }
