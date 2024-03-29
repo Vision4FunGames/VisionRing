@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +14,16 @@ public class VaultUI : MonoBehaviour
     public Image vaultİcon;
     public TextMeshProUGUI infoVault;
     public TextMeshProUGUI vaultName;
-    
+    public TextMeshProUGUI vaultMultipier, vaultMultiperTo;
+    public TextMeshProUGUI buyBtnText;
+    public Button buyBtn;
+    public int currentIndex;
+    public float currentBoost;
+    public float levelBoost;
+
     private void Awake()
     {
+        buyBtn.onClick.AddListener(BuyVault);
         for (int i = 0; i < vaultArtifacts.Count; i++)
         {
             vaultItems.Add(new VaultItem());
@@ -24,15 +32,64 @@ public class VaultUI : MonoBehaviour
             var i1 = i;
             vaultItems[i].vaultBtn.onClick.AddListener(delegate { ClickVault(i1); });
             vaultItems[i].vaultBtn.transform.GetChild(0).GetComponent<Image>().sprite = vaultArtifacts[i].icon;
+            
+            if (!PlayerPrefs.HasKey(vaultItems[i].VaultArtifact.artifactName))
+            {
+                PlayerPrefs.SetInt(vaultItems[i].VaultArtifact.artifactName, 1);
+            }
+
+            vaultItems[i].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+                "Level" + PlayerPrefs.GetInt(vaultItems[i].VaultArtifact.artifactName);
         }
+
+        ClickVault(0);
     }
 
     public void ClickVault(int index)
     {
-        Debug.Log(index);
-        vaultİcon.sprite = vaultArtifacts[index].icon;
-        infoVault.text = vaultItems[index].VaultArtifact.artifactJobInfo;
-        vaultName.text = vaultItems[index].VaultArtifact.artifactName;
+        currentIndex = index;
+        int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
+        if (vaultLevel < 49)
+        {
+            levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) * vaultItems[currentIndex].VaultArtifact.boostPerLevel;
+            currentBoost = (vaultItems[currentIndex].VaultArtifact.startBoost) +
+                           ((vaultItems[currentIndex].VaultArtifact.startBoost) * levelBoost);
+
+            vaultİcon.sprite = vaultArtifacts[index].icon;
+            infoVault.text = vaultItems[index].VaultArtifact.artifactJobInfo;
+            vaultName.text = vaultItems[index].VaultArtifact.artifactName;
+        
+
+            vaultMultipier.text = "x" + currentBoost;
+            vaultMultiperTo.text = "x" + (currentBoost +  vaultItems[currentIndex].VaultArtifact.boostPerLevel);
+            buyBtnText.text =
+                "" + vaultItems[index].VaultArtifact
+                    .gemCost[PlayerPrefs.GetInt(vaultItems[index].VaultArtifact.artifactName)] *
+                vaultItems[index].VaultArtifact.gemCostMultiplier;
+            vaultItems[index].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+                "Level" + PlayerPrefs.GetInt(vaultItems[index].VaultArtifact.artifactName);
+        }
+       
+    }
+
+    public void BuyVault()
+    {
+      
+        int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
+        if (vaultLevel < 49)
+        {
+            PlayerPrefs.SetInt(vaultItems[currentIndex].VaultArtifact.artifactName, vaultLevel + 1);
+            levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) * vaultItems[currentIndex].VaultArtifact.boostPerLevel;
+            currentBoost = vaultItems[currentIndex].VaultArtifact.startBoost +  levelBoost;
+
+            vaultMultipier.text = "x" + currentBoost;
+            vaultMultiperTo.text = "x" + (currentBoost +   vaultItems[currentIndex].VaultArtifact.boostPerLevel);
+            buyBtnText.text = "" + vaultItems[currentIndex].VaultArtifact.gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)] *
+                vaultItems[currentIndex].VaultArtifact.gemCostMultiplier;
+            vaultItems[currentIndex].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+                "Level" + PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
+        }
+      
     }
 }
 
