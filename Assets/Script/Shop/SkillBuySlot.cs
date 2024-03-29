@@ -18,7 +18,7 @@ public class SkillBuySlot : MonoBehaviour
     public int slotIndex;
     private SkillUpgrade skillUpgrade;
     public TextMeshProUGUI buyText;
-    
+    public TextMeshProUGUI contentText;
     private void Start()
     {
         skillUpgrade = GetComponentInParent<SkillUpgrade>();
@@ -31,6 +31,7 @@ public class SkillBuySlot : MonoBehaviour
             skill.skillLevel = 5;
         }
         skillSlot.GetComponent<InventorySlot>().icon.sprite = skill.skillImage;
+        contentText.text = skill.skillDescription;
         if (skill.skillLevel<= UiManager.instance.itemlevelSprites45.Length)
         {
             skillSlot.GetComponent<InventorySlot>().backGImage.sprite = UiManager.instance.itemlevelSprites45[skill.skillLevel];
