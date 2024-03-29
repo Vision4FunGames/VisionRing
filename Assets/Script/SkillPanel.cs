@@ -53,6 +53,7 @@ public class SkillPanel : MonoBehaviour
         for (int i = 0; i < skillRows.Length; i++)
         {
             skillRows[i].slot.AddSkill(skillCoolDown._currentSkills[i]);
+            skillRows[i].skillDescriptionText.text = skillCoolDown._currentSkills[i].skillDescription;
             skillRows[i].slot.slotIndex = i;
         }
 

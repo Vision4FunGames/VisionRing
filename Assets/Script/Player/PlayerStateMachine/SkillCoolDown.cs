@@ -144,6 +144,7 @@ public class Skills
     [ES3NonSerializable] public Sprite skillImage;
     public int skillLevel;
     public SkillNecessary[] necessariesName;
+    public String skillDescription;
 }
 
 

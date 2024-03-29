@@ -526,6 +526,11 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
             EconomyManager.instance.EarnRewards();
         }
 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            UiManager.instance.MagicianUI();
+        }
+
         currentTime += Time.deltaTime;
 
         if (currentTime > 10 && fightBool)
