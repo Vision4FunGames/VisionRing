@@ -112,7 +112,7 @@ public class UiManager : MonoBehaviour
         {
             GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
             playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
-            Debug.Log( "Player name"+ GameManager.instance.PlayerName);
+            Debug.Log("Player name" + GameManager.instance.PlayerName);
         }
         else
         {
@@ -504,6 +504,19 @@ public class UiManager : MonoBehaviour
     {
         deadPanel.gameObject.SetActive(true);
     }
+
+    public void SkillPopUp(Skills skill)
+    {
+        var popup = Instantiate(Resources.Load("SkillInfoPopUp"), magicianPanel.transform);
+        SkillInfoPopUp skillInfoPopUp = popup.GetComponent<SkillInfoPopUp>();
+        skillInfoPopUp.skillNameText.text = skill.skillName;
+        skillInfoPopUp.currentLevelText.text = skill.skillLevel.ToString();
+        skillInfoPopUp.SkillInfoText.text = skill.skillDescription;
+        skillInfoPopUp.coolDownText.text = skill.coolDown.ToString();
+        skillInfoPopUp.currentDamageText.text = skill.skillName;
+        skillInfoPopUp.upgradeEffectText.text = skill.skillName;
+    }
+
 }
 
 [Serializable]

@@ -31,6 +31,7 @@ public class SkillBuySlot : MonoBehaviour
             skill.skillLevel = 5;
         }
         skillSlot.GetComponent<InventorySlot>().icon.sprite = skill.skillImage;
+        skillSlot.GetComponent<InventorySlot>().AddSkill(skill);
         contentText.text = skill.skillDescription;
         if (skill.skillLevel<= UiManager.instance.itemlevelSprites45.Length)
         {

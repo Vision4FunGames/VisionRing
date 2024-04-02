@@ -16,7 +16,7 @@ public class InventorySlot : MonoBehaviour
     public Image backGImage;
     // Add item to the slot
     public int slotIndex;
-
+    private Skills skill;
     public TextMeshProUGUI countText;
     //For Upgrade Items to Unequip
     public void AddItem (Item newItem,int count)
@@ -67,7 +67,7 @@ public class InventorySlot : MonoBehaviour
 
     public void AddSkill(Skills skill)
     {
-
+        this.skill = skill;
         switch (skill.skillName)
         {
             case "FireRotate":
@@ -196,6 +196,10 @@ public class InventorySlot : MonoBehaviour
             
             
         }
+        else if (_inventoryType == InventoryType.SkillInfo)
+        {
+            UiManager.instance.SkillPopUp(skill);
+        }
     }
     public void SetSlotIndex(int index)
     {
@@ -215,6 +219,7 @@ public enum InventoryType
     Skill,
     CurrentSkill,
     Inventory,
-    Usable
+    Usable,
+    SkillInfo
 }
 

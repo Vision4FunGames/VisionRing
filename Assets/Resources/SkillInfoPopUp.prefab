@@ -105,7 +105,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 30.41
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1850,8 +1850,9 @@ GameObject:
   - component: {fileID: 6887608501340051897}
   - component: {fileID: 6887608501340051896}
   - component: {fileID: 6887608501340051899}
+  - component: {fileID: 5781496108096970291}
   m_Layer: 5
-  m_Name: Popup01_Demo
+  m_Name: SkillInfoPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1866,7 +1867,7 @@ RectTransform:
   m_GameObject: {fileID: 6887608501340051845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.51395, y: 0.51395, z: 0.51395}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6887608501027014723}
@@ -1934,6 +1935,24 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.3019608}
   m_EffectDistance: {x: 0, y: -11}
   m_UseGraphicAlpha: 1
+--- !u!114 &5781496108096970291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6887608501340051845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b047fc036cb8447aa30e64519778c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillNameText: {fileID: 3147145388628086469}
+  currentLevelText: {fileID: 5564165934077465068}
+  SkillInfoText: {fileID: 2009257205650167714}
+  coolDownText: {fileID: 7100505105123507983}
+  currentDamageText: {fileID: 5092940600238432084}
+  upgradeEffectText: {fileID: 2090987338982441042}
 --- !u!1 &6887608501423421345
 GameObject:
   m_ObjectHideFlags: 0
