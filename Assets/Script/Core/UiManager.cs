@@ -34,7 +34,8 @@ public class UiManager : MonoBehaviour
         contentPanel,
         playerHealthBarCanvas,
         navigationArea,
-        settingPanel;
+        settingPanel,
+        vaultPanel;
 
     public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
