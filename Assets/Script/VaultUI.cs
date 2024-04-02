@@ -10,7 +10,6 @@ public class VaultUI : MonoBehaviour
     public List<VaultArtifact> vaultArtifacts;
     public GameObject vaultBtnParent;
     public List<VaultItem> vaultItems;
-
     public Image vaultİcon;
     public TextMeshProUGUI infoVault;
     public TextMeshProUGUI vaultName;
@@ -32,7 +31,7 @@ public class VaultUI : MonoBehaviour
             var i1 = i;
             vaultItems[i].vaultBtn.onClick.AddListener(delegate { ClickVault(i1); });
             vaultItems[i].vaultBtn.transform.GetChild(0).GetComponent<Image>().sprite = vaultArtifacts[i].icon;
-            
+
             if (!PlayerPrefs.HasKey(vaultItems[i].VaultArtifact.artifactName))
             {
                 PlayerPrefs.SetInt(vaultItems[i].VaultArtifact.artifactName, 1);
@@ -41,7 +40,7 @@ public class VaultUI : MonoBehaviour
             vaultItems[i].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
                 "Level" + PlayerPrefs.GetInt(vaultItems[i].VaultArtifact.artifactName);
         }
-
+        
         ClickVault(0);
     }
 
@@ -51,17 +50,18 @@ public class VaultUI : MonoBehaviour
         int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
         if (vaultLevel < 49)
         {
-            levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) * vaultItems[currentIndex].VaultArtifact.boostPerLevel;
+            levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) *
+                         vaultItems[currentIndex].VaultArtifact.boostPerLevel;
             currentBoost = (vaultItems[currentIndex].VaultArtifact.startBoost) +
                            ((vaultItems[currentIndex].VaultArtifact.startBoost) * levelBoost);
 
             vaultİcon.sprite = vaultArtifacts[index].icon;
             infoVault.text = vaultItems[index].VaultArtifact.artifactJobInfo;
             vaultName.text = vaultItems[index].VaultArtifact.artifactName;
-        
+
 
             vaultMultipier.text = "x" + currentBoost;
-            vaultMultiperTo.text = "x" + (currentBoost +  vaultItems[currentIndex].VaultArtifact.boostPerLevel);
+            vaultMultiperTo.text = "x" + (currentBoost + vaultItems[currentIndex].VaultArtifact.boostPerLevel);
             buyBtnText.text =
                 "" + vaultItems[index].VaultArtifact
                     .gemCost[PlayerPrefs.GetInt(vaultItems[index].VaultArtifact.artifactName)] *
@@ -69,27 +69,60 @@ public class VaultUI : MonoBehaviour
             vaultItems[index].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
                 "Level" + PlayerPrefs.GetInt(vaultItems[index].VaultArtifact.artifactName);
         }
-       
     }
 
     public void BuyVault()
     {
-      
+        float currentd = Player.instance.GetComponent<PlayerStats>().damage.GetValue();
+
+
         int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
         if (vaultLevel < 49)
         {
             PlayerPrefs.SetInt(vaultItems[currentIndex].VaultArtifact.artifactName, vaultLevel + 1);
-            levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) * vaultItems[currentIndex].VaultArtifact.boostPerLevel;
-            currentBoost = vaultItems[currentIndex].VaultArtifact.startBoost +  levelBoost;
+            levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) *
+                         vaultItems[currentIndex].VaultArtifact.boostPerLevel;
+            currentBoost = vaultItems[currentIndex].VaultArtifact.startBoost + levelBoost;
 
             vaultMultipier.text = "x" + currentBoost;
-            vaultMultiperTo.text = "x" + (currentBoost +   vaultItems[currentIndex].VaultArtifact.boostPerLevel);
-            buyBtnText.text = "" + vaultItems[currentIndex].VaultArtifact.gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)] *
+            vaultMultiperTo.text = "x" + (currentBoost + vaultItems[currentIndex].VaultArtifact.boostPerLevel);
+            buyBtnText.text = "" + vaultItems[currentIndex].VaultArtifact
+                    .gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)] *
                 vaultItems[currentIndex].VaultArtifact.gemCostMultiplier;
             vaultItems[currentIndex].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
                 "Level" + PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
+            SetCharacters(vaultItems[currentIndex].VaultArtifact.artifactName, currentBoost);
         }
-      
+    }
+
+    public void SetCharacters(string vaultName, float currentBoost)
+    {
+        switch (vaultName)
+        {
+            case "Antique Sword":
+                if (currentBoost > 1)
+                {
+                    Player.instance.GetComponent<PlayerStats>().damage.ZeroIndexRemove();
+                }
+
+                float currentDamage = Player.instance.GetComponent<PlayerStats>().damage.GetValue() * currentBoost;
+                currentDamage -= Player.instance.GetComponent<PlayerStats>().damage.GetValue();
+
+                Player.instance.GetComponent<PlayerStats>().damage.AddModifier(currentDamage);
+                break;
+            case "Antique Armor":
+                break;
+            case "Antique Boots":
+                break;
+            case "Antique Helmet":
+                break;
+            case "Wizards Legacy":
+                break;
+            case "Midas Ring":
+                break;
+            case "The Blessing of Priapos":
+                break;
+        }
     }
 }
 
