@@ -91,8 +91,9 @@ public class VaultUI : MonoBehaviour
 
     public void BuyVault()
     {
+        
         float currentd = Player.instance.GetComponent<PlayerStats>().damage.GetValue();
-
+       
 
         int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
         if (vaultLevel < 49)
@@ -137,11 +138,11 @@ public class VaultUI : MonoBehaviour
                 {
                     Player.instance.GetComponent<PlayerStats>().health.ZeroIndexRemove();
                 }
-
                 float health = Player.instance.GetComponent<PlayerStats>().health.GetValue() * currentBoost;
                 health -= Player.instance.GetComponent<PlayerStats>().health.GetValue();
-
                 Player.instance.GetComponent<PlayerStats>().health.AddModifier(health);
+                Player.instance.GetComponent<PlayerStats>().maxHealth =
+                    (int)Player.instance.GetComponent<PlayerStats>().health.GetValue();
                 break;
             case "Wizards Legacy":
                 break;
@@ -152,7 +153,6 @@ public class VaultUI : MonoBehaviour
         }
     }
 }
-
 [Serializable]
 public class VaultItem
 {
