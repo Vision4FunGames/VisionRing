@@ -42,6 +42,24 @@ public class VaultUI : MonoBehaviour
         }
         
         ClickVault(0);
+       
+    }
+
+    private void Start()
+    {
+        StartPlayerStat();
+    }
+
+    public void StartPlayerStat()
+    {
+        for (int i = 0; i < vaultArtifacts.Count; i++)
+        {
+            levelBoost = PlayerPrefs.GetInt(vaultItems[i].VaultArtifact.artifactName) *
+                         vaultItems[i].VaultArtifact.boostPerLevel;
+            currentBoost = (vaultItems[i].VaultArtifact.startBoost) +
+                           ((vaultItems[i].VaultArtifact.startBoost) * levelBoost);
+            SetCharacters(vaultItems[i].VaultArtifact.artifactName,currentBoost);
+        }
     }
 
     public void ClickVault(int index)
@@ -115,6 +133,15 @@ public class VaultUI : MonoBehaviour
             case "Antique Boots":
                 break;
             case "Antique Helmet":
+                if (currentBoost > 1)
+                {
+                    Player.instance.GetComponent<PlayerStats>().health.ZeroIndexRemove();
+                }
+
+                float health = Player.instance.GetComponent<PlayerStats>().health.GetValue() * currentBoost;
+                health -= Player.instance.GetComponent<PlayerStats>().health.GetValue();
+
+                Player.instance.GetComponent<PlayerStats>().health.AddModifier(health);
                 break;
             case "Wizards Legacy":
                 break;
