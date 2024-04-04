@@ -130,6 +130,17 @@ public class VaultUI : MonoBehaviour
                 Player.instance.GetComponent<PlayerStats>().damage.AddModifier(currentDamage);
                 break;
             case "Antique Armor":
+                if (currentBoost > 1)
+                {
+                    Player.instance.GetComponent<PlayerStats>().armor.ZeroIndexRemove();
+                }
+
+                float currentArmor = Player.instance.GetComponent<PlayerStats>().armor.GetValue() * currentBoost;
+                currentArmor -= Player.instance.GetComponent<PlayerStats>().armor.GetValue();
+
+                Player.instance.GetComponent<PlayerStats>().armor.AddModifier(currentArmor);
+                Player.instance.GetComponent<PlayerStats>().armorValue =
+                    (int)Player.instance.GetComponent<PlayerStats>().armor.GetValue();
                 break;
             case "Antique Boots":
                 break;
