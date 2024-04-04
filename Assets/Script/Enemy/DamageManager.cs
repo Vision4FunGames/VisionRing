@@ -24,34 +24,33 @@ public class DamageManager : MonoBehaviour
             ghostAnimator = GetComponent<GhostAnimator>();
             ballParticleSystem = ghostAnimator.transform.GetComponentInChildren<ParticleSystem>();
         }
-     
     }
 
     public void ShieldAttack()
     {
         Player.instance.BackDoMove(gameObject);
     }
+
     public void PlayerDamage()
     {
         if (Player.instance.isDamageable)
         {
-            if (enemyController.target == Player.instance.transform) 
+            if (enemyController.target == Player.instance.transform)
             {
                 var playerHealth = enemyController.target.GetComponent<PlayerHealth>();
                 var playerStats = enemyController.target.GetComponent<PlayerStats>();
-                float damageReduce = playerStats.armor.GetValue() * characterStats.damage.GetValue();
+                double damageReduce =  Math.Max(0.5, 1 - (double) playerStats.armor.GetValue() / (2 * characterStats.damage.GetValue()));
                 float damage = characterStats.damage.GetValue();
                 Debug.Log("Damage : " + damage + " Damage Reduce : " + damageReduce);
-                    playerHealth.DamageAnimation((int)damage-(int)damageReduce);
-                    //playerHealth.DamageAnimation(20);
+                playerHealth.DamageAnimation((int)(damage * damageReduce));
             }
         }
-             
     }
 
     public void PlayerCharge()
     {
-        enemyController.target.GetComponent<PlayerHealth>().DamageAnimation((int)(characterStats.damage.GetValue() * 14 / 10));
+        enemyController.target.GetComponent<PlayerHealth>()
+            .DamageAnimation((int)(characterStats.damage.GetValue() * 14 / 10));
     }
 
     public void ChestDrop()
@@ -65,12 +64,12 @@ public class DamageManager : MonoBehaviour
         enemyController.GetComponentInChildren<Animator>().speed = 0;
         ballParticleSystem.Play();
         ballParticleSystem.transform.DOKill();
-        
+
         ballParticleSystem.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1f).OnComplete((() => StartAnim()));
         enemyController.GetComponent<NavMeshAgent>().speed = 0;
         //enemyController.GetComponentInChildren<Animator>().speed = 0;
-        
     }
+
     public void StopAnim()
     {
         GetComponentInParent<EnemyStats>().die = true;
@@ -80,21 +79,20 @@ public class DamageManager : MonoBehaviour
         circleParentObj.SetActive(true);
         circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);
         circleParentObj.transform.GetChild(1).transform.DOScale(new Vector3(1, 1, 1), 2f)
-            .OnComplete((() =>Destroy(circleParentObj.gameObject)));
+            .OnComplete((() => Destroy(circleParentObj.gameObject)));
         Invoke("StartAnim", 2);
     }
 
     public void StartAnim()
     {
         enemyController.GetComponentInChildren<Animator>().speed = 1;
-       
     }
 
     public void closeBallPart()
     {
         if (ballParticleSystem)
         {
-            ballParticleSystem.transform.localScale=Vector3.zero;
+            ballParticleSystem.transform.localScale = Vector3.zero;
             ballParticleSystem.Stop();
             enemyController.GetComponent<NavMeshAgent>().speed = 6;
         }
@@ -107,12 +105,11 @@ public class DamageManager : MonoBehaviour
 
     public void BombExp()
     {
-        
         GetComponent<SphereCollider>().enabled = true;
         ParticleSystem bombParticle = Instantiate(ParticleManager.instance.bombparticle);
         bombParticle.transform.localScale = new Vector3(6, 6, 6);
         bombParticle.gameObject.transform.position = transform.position;
-        Invoke("closeTrigger",.1f);
+        Invoke("closeTrigger", .1f);
         bomb.SetActive(false);
         Destroy(gameObject, 5);
     }
@@ -121,6 +118,7 @@ public class DamageManager : MonoBehaviour
     {
         GetComponent<SphereCollider>().enabled = false;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

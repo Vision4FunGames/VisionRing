@@ -7,6 +7,7 @@ public class CharacterStats : MonoBehaviour
 {
     
     public bool die;
+    public int armorValue;
     public int maxHealth = 300;
     public int currentHealth { get; private set; }
     public Stat damage;
