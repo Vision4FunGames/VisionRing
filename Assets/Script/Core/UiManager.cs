@@ -77,6 +77,7 @@ public class UiManager : MonoBehaviour
 
     [SerializeField] private SkillUpgrade skillUpgrade;
 
+    [HideInInspector] private SkillInfoPopUp currentSkillPopUp;
     //Economy
     public TextMeshProUGUI contentText;
 
@@ -322,45 +323,45 @@ public class UiManager : MonoBehaviour
 
     public void MagicianUI()
     {
-        // if (GameManager.instance.isMagician &&
-        //     GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0)
-        // {
-        //     CloseAllUI();
-        //     Invoke("OpenUI", canvasTime);
-        //     OpenUI(inventory);
-        //     OpenUI(magicianPanel);
-        //     OpenUI(contentPanel);
-        //     OpenUI(goldPanel);
-        //     contentText.text = "MAGICIAN";
-        //     Inventory.instance.onItemChangedCallback?.Invoke();
-        //     skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-        //     //navigationArea.gameObject.SetActive(true);
-        //     //skillUpgrade.BringCurrentSkills();
-        // }
-        // else
-        // {
-        //     if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0 &&
-        //         GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests().Count == 0)
-        //     {
-        //         CloseAllUI();
-        //         Invoke("OpenUI", canvasTime);
-        //         OpenUI(inventory);
-        //         OpenUI(magicianPanel);
-        //         OpenUI(contentPanel);
-        //         OpenUI(goldPanel);
-        //         contentText.text = "MAGICIAN";
-        //         Inventory.instance.onItemChangedCallback?.Invoke();
-        //         skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-        //         // navigationArea.gameObject.SetActive(true);
-        //         TutorialLoader.instance.Load("Magician");
-        //         PlayerPrefs.SetInt("Magician", 1);
-        //         GameManager.instance.isMagician = true;
-        //     }
-        //
-        //     else
-        //     {
-        //         GameManager.instance.magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();
-        //     }
+        if (GameManager.instance.isMagician &&
+            GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0)
+        {
+            CloseAllUI();
+            Invoke("OpenUI", canvasTime);
+            OpenUI(inventory);
+            OpenUI(magicianPanel);
+            OpenUI(contentPanel);
+            OpenUI(goldPanel);
+            contentText.text = "MAGICIAN";
+            Inventory.instance.onItemChangedCallback?.Invoke();
+            skillUpgrade.onSkillShopChangeCallBack?.Invoke();
+            //navigationArea.gameObject.SetActive(true);
+            //skillUpgrade.BringCurrentSkills();
+        }
+        else
+        {
+            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0 &&
+                GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests().Count == 0)
+            {
+                CloseAllUI();
+                Invoke("OpenUI", canvasTime);
+                OpenUI(inventory);
+                OpenUI(magicianPanel);
+                OpenUI(contentPanel);
+                OpenUI(goldPanel);
+                contentText.text = "MAGICIAN";
+                Inventory.instance.onItemChangedCallback?.Invoke();
+                skillUpgrade.onSkillShopChangeCallBack?.Invoke();
+                // navigationArea.gameObject.SetActive(true);
+                TutorialLoader.instance.Load("Magician");
+                PlayerPrefs.SetInt("Magician", 1);
+                GameManager.instance.isMagician = true;
+            }
+        
+            else
+            {
+                GameManager.instance.magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();
+            }
         CloseAllUI();
         Invoke("OpenUI", canvasTime);
         OpenUI(inventory);
@@ -374,7 +375,7 @@ public class UiManager : MonoBehaviour
         TutorialLoader.instance.Load("Magician");
         PlayerPrefs.SetInt("Magician", 1);
         GameManager.instance.isMagician = true;
-        // }
+        }
     }
 
     public void SkillUI()
@@ -508,14 +509,21 @@ public class UiManager : MonoBehaviour
 
     public void SkillPopUp(Skills skill)
     {
-        var popup = Instantiate(Resources.Load("SkillInfoPopUp"), magicianPanel.transform);
-        SkillInfoPopUp skillInfoPopUp = popup.GetComponent<SkillInfoPopUp>();
-        skillInfoPopUp.skillNameText.text = skill.skillName;
-        skillInfoPopUp.currentLevelText.text = skill.skillLevel.ToString();
-        skillInfoPopUp.SkillInfoText.text = skill.skillDescription;
-        skillInfoPopUp.coolDownText.text = skill.coolDown.ToString();
-        skillInfoPopUp.currentDamageText.text = skill.skillName;
-        skillInfoPopUp.upgradeEffectText.text = skill.skillName;
+        if (currentSkillPopUp ==null)
+        {
+            var popup = Instantiate(Resources.Load("SkillInfoPopUp"), magicianPanel.transform);
+            currentSkillPopUp = popup.GetComponent<SkillInfoPopUp>();
+        }
+        else
+        {
+            currentSkillPopUp.gameObject.SetActive(true);
+        }
+        currentSkillPopUp.skillNameText.text = skill.skillName;
+        currentSkillPopUp.currentLevelText.text = skill.skillLevel.ToString();
+        currentSkillPopUp.SkillInfoText.text = skill.skillDescription;
+        currentSkillPopUp.coolDownText.text = skill.coolDown.ToString();
+        currentSkillPopUp.currentDamageText.text = skill.skillName;
+        currentSkillPopUp.upgradeEffectText.text = skill.skillName;
     }
 
 }

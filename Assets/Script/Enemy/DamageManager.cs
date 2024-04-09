@@ -42,7 +42,8 @@ public class DamageManager : MonoBehaviour
                 float damageReduce = playerStats.armor.GetValue() * characterStats.damage.GetValue();
                 float damage = characterStats.damage.GetValue();
                 Debug.Log("Damage : " + damage + " Damage Reduce : " + damageReduce);
-                playerHealth.DamageAnimation((int)damage-(int)damageReduce);
+                    playerHealth.DamageAnimation((int)damage-(int)damageReduce);
+                    //playerHealth.DamageAnimation(20);
             }
         }
              

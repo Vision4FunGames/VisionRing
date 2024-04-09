@@ -57,7 +57,7 @@ namespace PixelCrushers.QuestMachine
 
         public virtual void Assign(Sprite sprite, Color color, int count, string caption, List<QuestAction> actions)
         {
-            base.Assign(sprite, color, count, caption);
+            base.Assign(sprite, Color.white, count, caption);
             this.actions = actions;
             button.onClick.RemoveAllListeners();
             if (actions != null) button.onClick.AddListener(ExecuteActions);
