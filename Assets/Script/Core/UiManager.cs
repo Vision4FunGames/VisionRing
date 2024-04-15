@@ -37,6 +37,7 @@ public class UiManager : MonoBehaviour
         settingPanel,
         vaultPanel;
 
+    public TextMeshProUGUI playerLevel;
     public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
     public float canvasTime;

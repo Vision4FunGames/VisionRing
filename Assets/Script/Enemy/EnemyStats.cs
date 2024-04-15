@@ -48,7 +48,7 @@ public class EnemyStats : CharacterStats
         {
             GetComponentInParent<EndlessSkelet>().DeadEnemy();
         }
-
+        Player.instance.GetComponent<PlayerLevel>().ExpCalculate(10);
         FindObjectOfType<DrmEnemyChange>().EnemyVariationsList.Remove(GetComponent<EnemyVariations>());
         
         if (puzzleController != null)

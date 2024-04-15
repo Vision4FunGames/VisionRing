@@ -40,9 +40,8 @@ public class VaultUI : MonoBehaviour
             vaultItems[i].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
                 "Level" + PlayerPrefs.GetInt(vaultItems[i].VaultArtifact.artifactName);
         }
-        
+
         ClickVault(0);
-       
     }
 
     private void Start()
@@ -58,7 +57,7 @@ public class VaultUI : MonoBehaviour
                          vaultItems[i].VaultArtifact.boostPerLevel;
             currentBoost = (vaultItems[i].VaultArtifact.startBoost) +
                            ((vaultItems[i].VaultArtifact.startBoost) * levelBoost);
-            SetCharacters(vaultItems[i].VaultArtifact.artifactName,currentBoost);
+            SetCharacters(vaultItems[i].VaultArtifact.artifactName, currentBoost);
         }
     }
 
@@ -91,9 +90,8 @@ public class VaultUI : MonoBehaviour
 
     public void BuyVault()
     {
-        
         float currentd = Player.instance.GetComponent<PlayerStats>().damage.GetValue();
-       
+
 
         int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
         if (vaultLevel < 49)
@@ -128,6 +126,8 @@ public class VaultUI : MonoBehaviour
                 currentDamage -= Player.instance.GetComponent<PlayerStats>().damage.GetValue();
 
                 Player.instance.GetComponent<PlayerStats>().damage.AddModifier(currentDamage);
+                Player.instance.GetComponent<PlayerAttack>().damage =
+                    (int)Player.instance.GetComponent<PlayerStats>().damage.GetValue();
                 break;
             case "Antique Armor":
                 if (currentBoost > 1)
@@ -149,6 +149,7 @@ public class VaultUI : MonoBehaviour
                 {
                     Player.instance.GetComponent<PlayerStats>().health.ZeroIndexRemove();
                 }
+
                 float health = Player.instance.GetComponent<PlayerStats>().health.GetValue() * currentBoost;
                 health -= Player.instance.GetComponent<PlayerStats>().health.GetValue();
                 Player.instance.GetComponent<PlayerStats>().health.AddModifier(health);
@@ -156,6 +157,15 @@ public class VaultUI : MonoBehaviour
                     (int)Player.instance.GetComponent<PlayerStats>().health.GetValue();
                 break;
             case "Wizards Legacy":
+                if (currentBoost > 1)
+                {
+                    float currentExpBoost =
+                        (Player.instance.GetComponent<PlayerLevel>().expBaseBoost * currentBoost);
+
+                    currentExpBoost -= Player.instance.GetComponent<PlayerLevel>().expBaseBoost;
+                    Player.instance.GetComponent<PlayerLevel>().expBoost = currentExpBoost+1;
+                }
+
                 break;
             case "Midas Ring":
                 break;
@@ -164,6 +174,7 @@ public class VaultUI : MonoBehaviour
         }
     }
 }
+
 [Serializable]
 public class VaultItem
 {
