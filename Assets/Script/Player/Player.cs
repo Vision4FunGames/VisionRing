@@ -2,7 +2,6 @@ using System.Collections;
 using DG.Tweening;
 using Exoa.TutorialEngine;
 using GameAnalyticsSDK;
-using GameAnalyticsSDK.Setup;
 using Lofelt.NiceVibrations;
 using Script.Player.PlayerStateMachine;
 using Unity.VisualScripting;
@@ -214,7 +213,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("water"))
         {
             ParticleManager.instance.swimParticle.Stop();
-            speed = 12;
+            speed = baseSpeed;
             _playerAnimator.SetTrigger("base");
             isSwim = false;
         }
