@@ -48,5 +48,10 @@ public class PlayerLevel : MonoBehaviour
         UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString();
         if (currentExp > levelsExpPool[currentLevel - 1])
             LevelUp();
+        var unlockObjects = FindObjectsOfType<UnlockButton>();
+        for (int i = 0; i < unlockObjects.Length; i++)
+        {
+            unlockObjects[i].CheckPlayerLevelForUnlock();
+        }
     }
 }
