@@ -96,16 +96,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   die: 0
+  armorValue: 0
   maxHealth: 100
   damage:
     baseValue: 5
   armor:
+    baseValue: 0
+  health:
+    baseValue: 0
+  critChance:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
   critPrefab: {fileID: 0}
   mmProgressBar: {fileID: 0}
   message: Killed:Goblin
   damageEmissionBoolean: 1
+  enemyExp: {fileID: 11400000, guid: f593af73f41eee6439d8acee902e955f, type: 2}
   enemyType: 0
   SpawnEnemyType: 5
   tutorial: 1
@@ -232,6 +238,7 @@ MonoBehaviour:
   coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
   minGold: 1
   maxGold: 3
+  coinDropChance: 0
 --- !u!114 &3402235725298504705
 MonoBehaviour:
   m_ObjectHideFlags: 0

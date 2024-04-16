@@ -5,11 +5,13 @@ public class PlayerLevel : MonoBehaviour
 {
     public int currentLevel;
     public float currentExp;
-    public float[] levelsExpPool;
+    public int[] levelsExpPool;
     public float expBoost;
     public float expBaseBoost;
+    public ExpSocket playerexp;
     private void Start()
     {
+        levelsExpPool = playerexp.experience;
         if (!PlayerPrefs.HasKey("CurrentLevel"))
         {
             currentLevel = 1;
@@ -26,7 +28,7 @@ public class PlayerLevel : MonoBehaviour
         UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString();
     }
 
-    public void ExpCalculate(int expValue)
+    public void ExpCalculate(float expValue)
     {
         currentExp += (expBoost * expValue);
         CheckLevel();

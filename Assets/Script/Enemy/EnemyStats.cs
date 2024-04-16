@@ -1,9 +1,10 @@
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using MMProgressBar = MoreMountains.Tools.MMProgressBar;
 
 public class EnemyStats : CharacterStats
 {
+    public int level;
+    public ExpSocket enemyExp;
     public EnemyType enemyType;
     public SpawnEnemyType SpawnEnemyType;
     public bool tutorial;
@@ -15,6 +16,7 @@ public class EnemyStats : CharacterStats
 
     private void Start()
     {
+        level = 1;
         if (tutorial)
         {
             tutoCage = GetComponentInParent<TutoCage>();
@@ -48,7 +50,9 @@ public class EnemyStats : CharacterStats
         {
             GetComponentInParent<EndlessSkelet>().DeadEnemy();
         }
-        Player.instance.GetComponent<PlayerLevel>().ExpCalculate(10);
+
+       
+        Player.instance.GetComponent<PlayerLevel>().ExpCalculate( enemyExp.GetExp(1));
         FindObjectOfType<DrmEnemyChange>().EnemyVariationsList.Remove(GetComponent<EnemyVariations>());
         
         if (puzzleController != null)
