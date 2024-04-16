@@ -24,6 +24,7 @@ public class DropChest : MonoBehaviour
     public int rnd;
     public GameObject coinPrefab;
     public int minGold, maxGold;
+    public int coinDropChance;
     private void Awake()
     {
         boss = this.gameObject;
@@ -32,7 +33,7 @@ public class DropChest : MonoBehaviour
     public void ChestDrop(Vector3 bossTransform)
     {
          rnd = Random.Range(1, 100);
-         if (rnd <= 100)
+         if (rnd <= coinDropChance)
         {
             var coin = Instantiate(coinPrefab, new Vector3(bossTransform.x, bossTransform.y+2f, bossTransform.z),Quaternion.identity);
             coin.GetComponent<CoinManager>().SetGold(minGold,maxGold);
