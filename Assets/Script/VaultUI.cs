@@ -10,7 +10,7 @@ public class VaultUI : MonoBehaviour
     public List<VaultArtifact> vaultArtifacts;
     public GameObject vaultBtnParent;
     public List<VaultItem> vaultItems;
-    public Image vaultİcon;
+    public Image vaultIcon;
     public TextMeshProUGUI infoVault;
     public TextMeshProUGUI vaultName;
     public TextMeshProUGUI vaultMultipier, vaultMultiperTo;
@@ -71,7 +71,7 @@ public class VaultUI : MonoBehaviour
         currentBoost = (vaultItems[currentIndex].VaultArtifact.startBoost) +
                        ((vaultItems[currentIndex].VaultArtifact.startBoost) * levelBoost);
 
-        vaultİcon.sprite = vaultArtifacts[index].icon;
+        vaultIcon.sprite = vaultArtifacts[index].icon;
         infoVault.text = vaultItems[index].VaultArtifact.artifactJobInfo;
         vaultName.text = vaultItems[index].VaultArtifact.artifactName;
 
