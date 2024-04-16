@@ -19,7 +19,7 @@ public class VaultUI : MonoBehaviour
     public int currentIndex;
     public float currentBoost;
     public float levelBoost;
-
+    public float currentGoldBoost;
     private void Awake()
     {
         buyBtn.onClick.AddListener(BuyVault);
@@ -143,7 +143,7 @@ public class VaultUI : MonoBehaviour
             case "Antique Boots":
                 if (currentBoost > 1)
                 {
-                    float currentSpeed = (1 * currentBoost)+1;
+                    float currentSpeed = (1 * currentBoost) + 1;
                     Player.instance.speed = currentSpeed + Player.instance.baseSpeed;
                 }
 
@@ -172,6 +172,14 @@ public class VaultUI : MonoBehaviour
 
                 break;
             case "Midas Ring":
+                if (currentBoost > 1)
+                {
+                     currentGoldBoost =(int)
+                        (1 * currentBoost);
+                }
+
+                break;
+            case "The Blessing of Zeus":
                 break;
             case "The Blessing of Priapos":
                 break;

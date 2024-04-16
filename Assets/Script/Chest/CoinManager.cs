@@ -20,7 +20,7 @@ public class CoinManager : MonoBehaviour
   Canvas canvasMain;
   public int numberOfObjects;
   public float spawnRadius;
-
+  private VaultUI _vaultUI;
   private int minGold, maxGold;
   private int gold;
   public void SetGold(int min, int max)
@@ -30,6 +30,7 @@ public class CoinManager : MonoBehaviour
   }
   private void Start()
   {
+    _vaultUI = FindObjectOfType<VaultUI>();
     //numberOfObjects = Random.Range(2, 7);
     canvasMain = GameObject.FindGameObjectWithTag("mainCanvas").GetComponent<Canvas>();
     SpawnCoin();
@@ -68,8 +69,9 @@ public class CoinManager : MonoBehaviour
 
       var spawnedCoin = Instantiate(coin, new Vector3(transform.position.x,transform.position.y+2f,transform.position.z) + randomPos, new Quaternion(90,180,0,0),transform);
       gold = Random.Range(minGold, maxGold);
+      gold *= (int)_vaultUI.currentGoldBoost;
       spawnedCoin.GetComponent<TurnAround>().setGoldCount(gold);
-      
+      Debug.Log("gold"+gold);
       // Belirtilen objeyi rastgele noktada oluştur
     }
     transform.GetChild(0).GetComponent<TurnAround>().setGoldCount(gold);

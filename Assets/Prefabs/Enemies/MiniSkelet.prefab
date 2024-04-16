@@ -715,6 +715,7 @@ GameObject:
   - component: {fileID: 1581168891}
   - component: {fileID: 635666913}
   - component: {fileID: -4298041722884991297}
+  - component: {fileID: -185614001237001865}
   m_Layer: 10
   m_Name: MiniSkelet
   m_TagString: Enemy
@@ -881,10 +882,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   die: 0
+  armorValue: 0
   maxHealth: 100
   damage:
-    baseValue: 0
+    baseValue: 8
   armor:
+    baseValue: 0
+  health:
+    baseValue: 0
+  critChance:
     baseValue: 0
   prefab: {fileID: 8130553911094169867, guid: 1e86811f02747ec45a3ff6546e76fe6a, type: 3}
   critPrefab: {fileID: 0}
@@ -920,6 +926,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyVariation: 1
+--- !u!114 &-185614001237001865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930352219879185654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7be6af967ed2b438b42a56ab1df5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkeletType: 0
+  chestPrefab: {fileID: 8064687337860177436, guid: cedf4b7c74572594f8a0ff9255faaa2e, type: 3}
+  boss: {fileID: 0}
+  rnd: 0
+  coinPrefab: {fileID: 8199633799663924596, guid: 264e1bd733b5270479a30e0731152eec, type: 3}
+  minGold: 1
+  maxGold: 5
+  coinDropChance: 10
 --- !u!1 &1944234839625677977
 GameObject:
   m_ObjectHideFlags: 0
