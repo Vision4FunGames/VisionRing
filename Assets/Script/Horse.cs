@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Horse : MonoBehaviour
 {
     public float speed;
+    public float baseSpeed;
     public bool callHorse, playerAttach,jumpPlayer;
     private Player _player;
     private NavMeshAgent _navMeshAgent;
@@ -14,6 +15,7 @@ public class Horse : MonoBehaviour
     private Animator _animator;
     private void Awake()
     {
+        baseSpeed = speed;
         _animator = GetComponentInChildren<Animator>();
         _player = FindObjectOfType<Player>();
         _navMeshAgent = GetComponent<NavMeshAgent>();

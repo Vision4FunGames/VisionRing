@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class VaultUI : MonoBehaviour
 {
+    private Horse _horse;
     public List<VaultArtifact> vaultArtifacts;
     public GameObject vaultBtnParent;
     public List<VaultItem> vaultItems;
@@ -20,8 +21,10 @@ public class VaultUI : MonoBehaviour
     public float currentBoost;
     public float levelBoost;
     public float currentGoldBoost;
+
     private void Awake()
     {
+        _horse = FindObjectOfType<Horse>();
         buyBtn.onClick.AddListener(BuyVault);
         for (int i = 0; i < vaultArtifacts.Count; i++)
         {
@@ -174,12 +177,14 @@ public class VaultUI : MonoBehaviour
             case "Midas Ring":
                 if (currentBoost > 1)
                 {
-                     currentGoldBoost =(int)
+                    currentGoldBoost = (int)
                         (1 * currentBoost);
                 }
 
                 break;
             case "The Blessing of Zeus":
+                float currentHorseSpeed = (1 * currentBoost) + 1;
+                _horse.speed = currentHorseSpeed +_horse.baseSpeed;
                 break;
             case "The Blessing of Priapos":
                 break;
