@@ -20,6 +20,7 @@ public class PlayerSkillState : PlayerState
 {
     private SkillType _skillType;
     private GameObject sword;
+
     public PlayerSkillState(Player player, PlayerStateMachine playerStateMachine, SkillType mySkillType) : base(player,
         playerStateMachine)
     {
@@ -29,6 +30,7 @@ public class PlayerSkillState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+
         switch (_skillType)
         {
             case SkillType.Dash:
@@ -41,7 +43,7 @@ public class PlayerSkillState : PlayerState
 
                 break;
             case SkillType.FireRotate:
-                
+
                 if (SkillCoolDown.instance.CanUse(1))
                     FireRotate();
                 else
@@ -102,6 +104,7 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
             case SkillType.Clone:
                 if (SkillCoolDown.instance.CanUse(8))
@@ -110,6 +113,7 @@ public class PlayerSkillState : PlayerState
                 {
                     _player.StateMachine.ChangeState(_player.PlayerMovementState);
                 }
+
                 break;
         }
     }
@@ -125,6 +129,7 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         UiManager.instance.DisableButton();
         List<GameObject> clones = new List<GameObject>();
         for (int i = 0; i < 3; i++)
@@ -132,12 +137,14 @@ public class PlayerSkillState : PlayerState
             clones.Add(Instantiate(Resources.Load("Skills/Clone") as GameObject));
             clones[i].transform.position = _player.transform.position;
             clones[i].SetActive(true);
-            Destroy(clones[i].gameObject,20);
+            Destroy(clones[i].gameObject, 20);
         }
+
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-       
+
         _player.DisableSkill(20);
     }
+
     public void ShieldSkill()
     {
         SkillCoolDown.instance.skillsArray[7].coolDownTime = SkillCoolDown.instance.skillsArray[7].coolDown;
@@ -149,16 +156,20 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         UiManager.instance.DisableButton();
-        Vector3 shieldPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 2f, _player.transform.position.z);
-        GameObject shield =  GameObject.Instantiate(Resources.Load("Skills/Shield") as GameObject ,shieldPos,Quaternion.identity);
+        Vector3 shieldPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 2f,
+            _player.transform.position.z);
+        GameObject shield = GameObject.Instantiate(Resources.Load("Skills/Shield") as GameObject, shieldPos,
+            Quaternion.identity);
         _player._playerHealth.useShield = true;
         shield.GetComponent<ParticleSystem>().Play();
         shield.transform.SetParent(_player.transform);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-        Destroy(shield,20);
+        Destroy(shield, 20);
         _player.DisableSkill(20);
     }
+
     public void ArrowRain()
     {
         SkillCoolDown.instance.skillsArray[6].coolDownTime = SkillCoolDown.instance.skillsArray[6].coolDown;
@@ -170,14 +181,18 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         UiManager.instance.DisableButton();
-        Vector3 arrowPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 40f, _player.transform.position.z);
-        GameObject arrowSkil =  GameObject.Instantiate(Resources.Load("Skills/ArrowRain") as GameObject ,arrowPos,Quaternion.Euler(-90,0,0));
+        Vector3 arrowPos = new Vector3(_player.transform.position.x, _player.transform.position.y + 40f,
+            _player.transform.position.z);
+        GameObject arrowSkil = GameObject.Instantiate(Resources.Load("Skills/ArrowRain") as GameObject, arrowPos,
+            Quaternion.Euler(-90, 0, 0));
         arrowSkil.GetComponent<ParticleSystem>().Play();
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-        Destroy(arrowSkil,10);
+        Destroy(arrowSkil, 10);
         _player.DisableSkill(10);
     }
+
     public void SwordSkill()
     {
         SkillCoolDown.instance.skillsArray[5].coolDownTime = SkillCoolDown.instance.skillsArray[5].coolDown;
@@ -189,6 +204,7 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         UiManager.instance.DisableButton();
         sword = GameObject.Instantiate(Resources.Load("Skills/Skill Sword") as GameObject);
         _player._playerAttack.myCurrentGunType = CurrentGunType.sword;
@@ -199,14 +215,14 @@ public class PlayerSkillState : PlayerState
             sword.transform.localPosition = Vector3.zero;
             sword.transform.localScale = new Vector3(1, 1, 1);
         }
+
         _player._playerAnimator.SetFloat("AttackSpeed", 0.5f);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
-        Destroy(sword,10);
+        Destroy(sword, 10);
         _player.DisableSkill(10);
     }
 
-   
-   
+
     public void DashSkill()
     {
         _player.isDamageable = false;
@@ -243,13 +259,13 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         GameObject currentRotat = GameObject.Instantiate(Resources.Load("Skills/FireEarth") as GameObject);
         if (currentRotat != null) currentRotat.transform.SetParent(_player.transform);
         currentRotat.transform.localPosition = new Vector3(0, 2, 0);
         _player.StateMachine.ChangeState(_player.PlayerMovementState);
         GameObject.Destroy(currentRotat, SkillCoolDown.instance.skillsArray[1].coolDown / 2);
         _player.DisableSkill(SkillCoolDown.instance.skillsArray[1].coolDown / 2);
-
     }
 
     public void EarthQuick()
@@ -264,6 +280,7 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/EarthShatter") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform);
         currentEarthShatter.transform.localPosition = new Vector3(0, 0, 0);
@@ -285,6 +302,7 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         GameObject currentEarthShatter = GameObject.Instantiate(Resources.Load("Skills/FlameThrower") as GameObject);
         if (currentEarthShatter != null) currentEarthShatter.transform.SetParent(_player.transform.GetChild(0));
         _player._playerAnimator.SetBool("Flame", true);
@@ -309,6 +327,7 @@ public class PlayerSkillState : PlayerState
                 break;
             }
         }
+
         GameObject currentTornado = GameObject.Instantiate(Resources.Load("Skills/BasicTornado") as GameObject);
         if (currentTornado != null) currentTornado.transform.SetParent(_player.transform);
         currentTornado.transform.localPosition = new Vector3(0, 0.1f, 0);

@@ -138,8 +138,11 @@ public class Player : MonoBehaviour
             int j = i;
             uiManager.ButtonType[i].skillButton.onClick.AddListener((() =>
             {
-                PlayerSkillState = new PlayerSkillState(this, StateMachine, uiManager.ButtonType[j].mySkillType);
-                StateMachine.ChangeState(PlayerSkillState);
+                if (!horse)
+                {
+                    PlayerSkillState = new PlayerSkillState(this, StateMachine, uiManager.ButtonType[j].mySkillType);
+                    StateMachine.ChangeState(PlayerSkillState);
+                }
             }));
         }
 
