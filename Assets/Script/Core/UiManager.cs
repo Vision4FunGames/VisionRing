@@ -354,11 +354,8 @@ public class UiManager : MonoBehaviour
                 Inventory.instance.onItemChangedCallback?.Invoke();
                 skillUpgrade.onSkillShopChangeCallBack?.Invoke();
                 // navigationArea.gameObject.SetActive(true);
-                TutorialLoader.instance.Load("Magician");
-                PlayerPrefs.SetInt("Magician", 1);
-                GameManager.instance.isMagician = true;
+               
             }
-        
             else
             {
                 GameManager.instance.magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();
@@ -373,9 +370,12 @@ public class UiManager : MonoBehaviour
         Inventory.instance.onItemChangedCallback?.Invoke();
         skillUpgrade.onSkillShopChangeCallBack?.Invoke();
         // navigationArea.gameObject.SetActive(true);
-        TutorialLoader.instance.Load("Magician");
-        PlayerPrefs.SetInt("Magician", 1);
-        GameManager.instance.isMagician = true;
+        if (!GameManager.instance.isMagician)
+        {
+            TutorialLoader.instance.Load("Magician");
+            PlayerPrefs.SetInt("Magician", 1);
+            GameManager.instance.isMagician = true;
+        }
         }
     }
 
@@ -450,6 +450,11 @@ public class UiManager : MonoBehaviour
         if (tweener != null)
         {
             tweener.Open();
+        }
+
+        if (gameObject == goldPanel) 
+        {
+            onEconomyChangedCallBack.Invoke();
         }
     }
     // public void UpdatePlayerHealthBar(float health)

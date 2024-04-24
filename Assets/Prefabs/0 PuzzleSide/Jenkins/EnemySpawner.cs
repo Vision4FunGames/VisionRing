@@ -77,7 +77,7 @@ public class EnemySpawner : PuzzleConditionTrigger
                     {
                         var enemy = Instantiate(enemies[k], transform);
                         enemy.transform.localPosition = GetPoint();
-
+                        enemy.gameObject.GetComponent<EnemyVariations>().EnemyVariation = EnemyVariation.Variation1;
                         var currentPos = enemy.transform.position;
                         currentPos.y = spawntHeigt;
                         enemy.transform.position = currentPos;

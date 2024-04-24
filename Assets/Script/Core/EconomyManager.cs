@@ -133,6 +133,7 @@ public class EconomyManager : MonoBehaviour
                 }
             }
         }
+        UiManager.instance.onEconomyChangedCallBack.Invoke();
         ES3.Save("itemCount",itemCount);
     }
 
