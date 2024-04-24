@@ -67,8 +67,15 @@ public class PlayerAttack : MonoBehaviour
             switch (myCurrentGunType)
             {
                 case CurrentGunType.sword:
-                    swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
-                    swordAttack.AttackSword(player, playerAnimator);
+                    if (GameManager.instance.tutorialSection ==0 && GameManager.instance.tutorialCounter <= 1)
+                    {
+                     
+                    }
+                    else
+                    {
+                        swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
+                        swordAttack.AttackSword(player, playerAnimator);
+                    }
                     break;
                 case CurrentGunType.arrow:
                     arrowAttack ??= playerAnimator.gameObject.AddComponent<ArrowAttack>();

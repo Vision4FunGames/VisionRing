@@ -163,10 +163,6 @@ namespace Exoa.TutorialEngine
                 {
                     GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialBox.transform);    
                 }
-                else
-                {
-                    GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialBoxArea.transform);
-                }
             }
             else if (TutorialLoader.instance.loadedTutorialName == "1.3")
             {

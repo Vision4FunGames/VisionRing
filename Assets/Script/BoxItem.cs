@@ -42,25 +42,25 @@ public class BoxItem : MonoBehaviour
     private float distance;
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("BoxPointTutorial"))
-        {
-            distance = Vector3.Distance(transform.position, other.transform.position);
-            if (Vector3.Distance(transform.position, other.transform.position) < 1f)
-            {
-                other.gameObject.GetComponent<Collider>().enabled = false;
-                GameManager.instance.isBox = true;
-                Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
-                //Invoke(GameManager.instance.TutorialLoad(),2f);
-            
-                transform.DOMove(other.gameObject.transform.position,2f).OnComplete(() =>
-                {
-                    GameManager.instance.tutorialWall.transform.DOLocalMoveY(-1f, 5f);
-                    GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialWall.transform.GetChild(0).transform,
-                        3f);
-                });
-            }
-            GameManager.instance.tutorialCounter = 3;
-            GameManager.instance.tutorialIncreaserFirst.GetComponent<Collider>().isTrigger = false;
-        }
+        // if (other.CompareTag("BoxPointTutorial"))
+        // {
+        //     distance = Vector3.Distance(transform.position, other.transform.position);
+        //     if (Vector3.Distance(transform.position, other.transform.position) < 1f)
+        //     {
+        //         other.gameObject.GetComponent<Collider>().enabled = false;
+        //         GameManager.instance.isBox = true;
+        //         Player.instance.StateMachine.ChangeState(new PlayerMovementState(Player.instance,Player.instance.StateMachine,false));
+        //         //Invoke(GameManager.instance.TutorialLoad(),2f);
+        //     
+        //         transform.DOMove(other.gameObject.transform.position,2f).OnComplete(() =>
+        //         {
+        //             GameManager.instance.tutorialWall.transform.DOLocalMoveY(-1f, 5f);
+        //             GameManager.instance.CinematicCamEnable(GameManager.instance.tutorialWall.transform.GetChild(0).transform,
+        //                 3f);
+        //         });
+        //     }
+        //     GameManager.instance.tutorialCounter = 3;
+        //     GameManager.instance.tutorialIncreaserFirst.GetComponent<Collider>().isTrigger = false;
+        // }
     }
 } 

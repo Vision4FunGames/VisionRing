@@ -275,13 +275,13 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("WallPassed"))
         {
-            if (GameManager.instance.tutorialCounter == 4 && !isWallPassed)
-            {
-                isWallPassed = true;
-                // GameManager.instance.TutorialLoad();
-                GameManager.instance.tutorialCollider1.gameObject.SetActive(false);
-                GameManager.instance.tutorialCollider2.gameObject.SetActive(false);
-            }
+            // if (GameManager.instance.tutorialCounter == 4 && !isWallPassed)
+            // {
+            //     isWallPassed = true;
+            //     // GameManager.instance.TutorialLoad();
+            //     GameManager.instance.tutorialCollider1.gameObject.SetActive(false);
+            //     GameManager.instance.tutorialCollider2.gameObject.SetActive(false);
+            // }
         }
 
         if (other.gameObject.CompareTag("VillageEntry"))
@@ -309,16 +309,8 @@ public class Player : MonoBehaviour
             }
             else if (GameManager.instance.tutorialCounter is 3 or 4)
             {
-                if (!GameManager.instance.isBox)
-                {
-                    GameManager.instance.tutorialCounter = 2;
-                    GameManager.instance.TutorialLoad();
-                }
-                else
-                {
-                    other.gameObject.GetComponent<Collider>().enabled = false;
-                    GameManager.instance.TutorialLoad();
-                }
+                other.gameObject.GetComponent<Collider>().enabled = false;
+                GameManager.instance.TutorialLoad();
             }
         }
 

@@ -119,7 +119,7 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
+            // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
         }
     }
 
