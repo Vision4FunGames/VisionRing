@@ -115,7 +115,6 @@ public class UiManager : MonoBehaviour
         {
            // GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
            // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
-            Debug.Log("Player name" + GameManager.instance.PlayerName);
         }
         else
         {
