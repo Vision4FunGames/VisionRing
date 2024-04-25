@@ -59,6 +59,7 @@ namespace Exoa.TutorialEngine
 
             loadedTutorialName = name;
             ProcessTutorial(sendLoadedEvent);
+            GameManager.instance.InitTutorialAnalytics(name);
         }
 
         protected virtual void ProcessTutorial(bool sendLoadedEvent)

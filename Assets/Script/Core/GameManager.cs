@@ -407,8 +407,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
 
     private void TutorialChange()
     {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Tutorial",
-            "TutorialPart_" + tutorialSection + "" + tutorialCounter);
+      
         TutorialEvents.OnTutorialComplete -= TutorialChange;
         CinematicCamDisable();
         tutorialCounter++;
@@ -621,6 +620,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
 
     public void EndOfTheCinematic()
     {
+        
         tutorialSection++;
         tutorialCounter = 0;
         PlayerPrefs.SetInt("TutorialSection", tutorialSection);
@@ -838,5 +838,11 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
                 //baskan.GetComponent<QuestGiver>().questList[0].SetState(QuestState.WaitingToStart);
                 break;
         }
+    }
+
+    public void InitTutorialAnalytics(string tutorialName)
+    {
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Tutorial",
+            "TutorialName_" + tutorialName);
     }
 }
