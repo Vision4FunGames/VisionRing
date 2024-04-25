@@ -27,25 +27,25 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (!player.ring)
         {
-            if (TutorialLoader.instance.loadedTutorialName == "Ring")
-            {
-                tutorialBangParticle.gameObject.SetActive(true);
-                GetComponentInParent<Player>().isMovement = false;
-                StartCoroutine(PlayerDrop());
-                Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
-                UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
-                Invoke("RingSound",2f);
-                Invoke("RingActionEnd",7f);
-                player.ring = true;
-            }
-            else
-            {
+            // if (TutorialLoader.instance.loadedTutorialName == "Ring")
+            // {
+            //     tutorialBangParticle.gameObject.SetActive(true);
+            //     GetComponentInParent<Player>().isMovement = false;
+            //     StartCoroutine(PlayerDrop());
+            //     Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
+            //     UiManager.instance.ringBtn.GetComponent<Button>().enabled = false;
+            //     Invoke("RingSound",2f);
+            //     Invoke("RingActionEnd",7f);
+            //     player.ring = true;
+            // }
+            // else
+            // {
                 animator.SetTrigger("Ring");
                 Invoke("RingActionEnd",4f);
                 Player.instance._fixedJoystick.GetComponent<DynamicJoystick>().enabled = false;
                 Invoke("RingSound",2f);
                 player.ring = true;
-            }
+            // }
         }
         
         //ringParticle.Play();

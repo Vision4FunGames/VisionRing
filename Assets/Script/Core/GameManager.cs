@@ -414,9 +414,9 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         PlayerPrefs.SetInt("TutorialCounter", tutorialCounter);
         PlayerPrefs.SetInt("TutorialSection", tutorialSection);
 
-        if (tutorialSection == 0 && tutorialCounter > 5)
+        if (tutorialSection == 0 && tutorialCounter > 8)
         {
-            if (tutorialCounter > 5)
+            if (tutorialCounter > 8)
             {
                 foxManager.FinishTutorial();
                 FindObjectOfType<Player>().FinishTutorial();
@@ -467,7 +467,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         {
             FoxCamEnable();
         }
-        else if (tutorialSection == 0 && tutorialCounter == 5)
+        else if (tutorialSection == 0 && tutorialCounter ==8)
         {
             isFoxSaved = true;
             PlayerPrefs.SetInt("FoxSaved", 1);

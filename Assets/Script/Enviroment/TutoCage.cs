@@ -21,17 +21,19 @@ public class TutoCage : MonoBehaviour
         enemyCount--;
         if (enemyCount == 0)
         {
-            anim.SetTrigger("Open");
-            GetComponent<Collider>().isTrigger = true;
-            GameManager.instance.foxManager.EnableAgent();
-        }
-        
-        if (enemyCount ==6)
-        {
+            GameManager.instance.TutorialLoad();
             UiManager.instance.ringBtn.gameObject.SetActive(true);
-            TutorialLoader.instance.Load("Ring");
-            
+            // anim.SetTrigger("Open");
+            // GetComponent<Collider>().isTrigger = true;
+            // GameManager.instance.foxManager.EnableAgent();
         }
+        //
+        // if (enemyCount ==6)
+        // {
+        //     UiManager.instance.ringBtn.gameObject.SetActive(true);
+        //     TutorialLoader.instance.Load("Ring");
+        //     
+        // }
     }
 
     public void AllEnemyDie()
