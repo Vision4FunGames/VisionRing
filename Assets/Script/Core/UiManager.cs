@@ -113,8 +113,8 @@ public class UiManager : MonoBehaviour
         onEconomyChangedCallBack.Invoke();
         if (PlayerPrefs.HasKey("playerName"))
         {
-            GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
-            playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
+           // GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
+           // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
             Debug.Log("Player name" + GameManager.instance.PlayerName);
         }
         else

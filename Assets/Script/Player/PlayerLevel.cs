@@ -9,6 +9,7 @@ public class PlayerLevel : MonoBehaviour
     public float expBoost;
     public float expBaseBoost;
     public ExpSocket playerexp;
+    private int _percent;
     private void Start()
     {
         levelsExpPool = playerexp.experience;
@@ -25,7 +26,8 @@ public class PlayerLevel : MonoBehaviour
             currentExp = PlayerPrefs.GetFloat("CurrentExp");
         }
 
-        UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString();
+        PercenCalculate();
+        UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"i%"+_percent;
     }
 
     public void ExpCalculate(float expValue)
@@ -34,8 +36,15 @@ public class PlayerLevel : MonoBehaviour
         CheckLevel();
     }
 
+    public void PercenCalculate()
+    {
+        Debug.Log("percenttt"+(int)((currentExp / levelsExpPool[currentLevel - 1]) * 100));
+        _percent = (int)((currentExp / levelsExpPool[currentLevel - 1]) * 100); 
+        UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"i%"+_percent;
+    }
     public void CheckLevel()
     {
+        PercenCalculate();
         if (levelsExpPool[currentLevel] < currentExp && currentLevel < levelsExpPool.Length)
             LevelUp();
     }
@@ -47,7 +56,8 @@ public class PlayerLevel : MonoBehaviour
         currentExp = extraexp;
         PlayerPrefs.SetFloat("CurrentExp", currentExp);
         PlayerPrefs.SetInt("CurrentLevel", currentLevel);
-        UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString();
+        PercenCalculate();
+        UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"i%"+_percent;
         if (currentExp > levelsExpPool[currentLevel - 1])
             LevelUp();
         var unlockObjects = FindObjectsOfType<UnlockButton>();
