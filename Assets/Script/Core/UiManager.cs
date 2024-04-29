@@ -63,7 +63,7 @@ public class UiManager : MonoBehaviour
     public Sprite[] skillBGSprites;
     public Sprite emptySprite = null;
     public Material skillMaterial;
-
+   
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
 
     //Chest Scroll
@@ -111,6 +111,7 @@ public class UiManager : MonoBehaviour
         gamePlay.SetActive(true);
         onEconomyChangedCallBack += EconomyUI;
         onEconomyChangedCallBack.Invoke();
+        
         if (PlayerPrefs.HasKey("playerName"))
         {
            // GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
@@ -138,6 +139,7 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    
     public void PlayerNameSave()
     {
         GameManager.instance.PlayerName = playerNameInput.text;
