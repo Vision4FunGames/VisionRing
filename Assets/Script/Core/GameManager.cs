@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     public GameObject realmChange;
     public GameObject seaWater;
     public GameObject campFire;
+    public GameObject tutoVaril;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;
@@ -466,6 +467,15 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         if (tutorialSection == 0 && tutorialCounter == 4)
         {
             FoxCamEnable();
+            var cage = tutoCage.GetComponent<TutoCage>();
+            for (int i = 0; i <cage.enemies.Length ; i++)
+            {
+                cage.enemies[i].GetComponent<Waypoint_Indicator>().enabled = true;
+            }
+        }
+        else if (tutorialSection == 0 && tutorialCounter == 6)
+        {
+            CinematicCamEnable(tutoVaril.transform);
         }
         else if (tutorialSection == 0 && tutorialCounter ==8)
         {
@@ -845,4 +855,6 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Tutorial",
             "TutorialName_" + tutorialName);
     }
+
+    
 }

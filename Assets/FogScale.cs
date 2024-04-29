@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
+using Exoa.TutorialEngine;
 
 public class FogScale : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class FogScale : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 isOpen = true;
+                if (GameManager.instance.tutorialSection== 0 && GameManager.instance.tutorialCounter == 6)
+                {
+                    GameManager.instance.TutorialLoad();
+                }
             });
         }
         else
@@ -36,6 +41,10 @@ public class FogScale : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 isOpen = false;
+                if (GameManager.instance.tutorialSection== 0 && GameManager.instance.tutorialCounter == 8)
+                {
+                    GameManager.instance.tutoCage.GetComponent<TutoCage>().cageZone.gameObject.SetActive(true);
+                }
             });
         }
     }

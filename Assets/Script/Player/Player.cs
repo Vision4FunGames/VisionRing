@@ -352,6 +352,11 @@ public class Player : MonoBehaviour
 
             other.gameObject.GetComponent<Collider>().enabled = false;
         }
+
+        if (other.gameObject.CompareTag("CageZone"))
+        {
+            GameManager.instance.tutoCage.GetComponent<TutoCage>().SaveTheFox();
+        }
     }
 
     public void IsMovementAgain()

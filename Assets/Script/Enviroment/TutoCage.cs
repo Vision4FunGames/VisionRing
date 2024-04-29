@@ -10,6 +10,8 @@ public class TutoCage : MonoBehaviour
     public GameObject[] enemies;
     private Animator anim;
     private int enemyCount;
+    public GameObject cageZone;
+
     void Start()
     {
         enemyCount = enemies.Length;
@@ -42,14 +44,14 @@ public class TutoCage : MonoBehaviour
         {
             if (enemies[i] != null)
             {
-            enemies[i].GetComponent<EnemyStats>().Die();              
+                enemies[i].GetComponent<EnemyStats>().Die();
             }
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))    
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             KillEnemy();
         }
@@ -66,4 +68,17 @@ public class TutoCage : MonoBehaviour
             }
         }
     }
+
+    public void SaveTheFox()
+    {
+        anim.SetTrigger("Open");
+
+      
+    }
+    public void CageDoorOpened()
+    {
+        GetComponent<Collider>().isTrigger = true;
+        GameManager.instance.foxManager.EnableAgent();
+    }
+
 }

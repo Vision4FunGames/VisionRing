@@ -63,16 +63,17 @@ namespace AmazingAssets.DynamicRadialMasks
 
         public void SliderValueChanged()
         {
-            if (timer > waitTime || TutorialLoader.instance.loadedTutorialName == "Ring")
+            if (timer > waitTime || TutorialLoader.instance.loadedTutorialName == "Ring" || TutorialLoader.instance.loadedTutorialName == "0.5")
             {
                 if (radius == 100)
                 {
-
+        
                     transform.GetChild(0).GetComponent<FogScale>().StartScale();
                     decrease = true;
                     increaseEnes = false;
                     ter1.enabled = true;
                     ter2.enabled = false;
+                    
                 }
 
                 if (radius!=100)
@@ -82,6 +83,7 @@ namespace AmazingAssets.DynamicRadialMasks
                     increaseEnes = true;
                     ter1.enabled = false;
                     ter2.enabled = true;
+                    
                 }
             }
         }

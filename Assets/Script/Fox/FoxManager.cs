@@ -84,7 +84,7 @@ public class FoxManager : MonoBehaviour
         {
             foxAnim.SetBool("standupBool",false);
             foxAnim.SetBool("sitBool",true);
-            if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter ==5)
+            if (GameManager.instance.gameState == GameState.Tutorial && GameManager.instance.tutorialCounter ==8)
             {
                 GameManager.instance.TutorialLoad();
                 //GameManager.instance.TutorialLoad();
@@ -107,8 +107,10 @@ public class FoxManager : MonoBehaviour
         //agent.speed = 15f;
         if (!tutorial)
         {
+            
             agent.enabled = true;
             tutorial = true;
+            GameManager.instance.tutoCage.GetComponent<NavMeshObstacle>().enabled = true;
             agent.SetDestination(waterJumpPos.position);
             foxAnim.SetBool("sitBool",true);
         }
