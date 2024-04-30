@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
         }
 
         StateMachine.CurrentPlayerState.FrameUpdate();
-        if (uiManager.attackJoystick.input.magnitude > 0.98f && _skillCoolDown.CanUse(0))
+        if (uiManager.attackJoystick.input.magnitude > 0.98f && _skillCoolDown.CanUse(0) && !horse)
         {
             PlayerSkillState = new PlayerSkillState(this, StateMachine, SkillType.Dash);
             StateMachine.ChangeState(PlayerSkillState);
