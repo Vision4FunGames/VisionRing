@@ -34,8 +34,10 @@ public class FragileObject : MonoBehaviour
             isBroken = true;
             GetComponent<MeshRenderer>().enabled = false;
             transform.GetChild(0).gameObject.SetActive(true);
-            
-            KeyOut();
+            if (hasKey)
+            {
+                KeyOut();
+            }
             Destroy(gameObject, 5f); 
 
         }
