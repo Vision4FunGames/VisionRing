@@ -53,7 +53,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2735640341234319819, guid: 163a9bffa97a27c4c97fb370fb42f9d2, type: 2}
+  - {fileID: 3373603598322536305, guid: cf4f37abd4e7e724da3b2662b9787068, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,16 +133,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   permanent: 0
-  lifetime: 2
+  lifetime: 0.5
   unscaledTime: 0
   enable3DGame: 1
   faceCameraView: 1
-  renderThroughWalls: 1
+  renderThroughWalls: 0
   consistentScreenSize: 1
   distanceScalingSettings:
-    baseDistance: 15
-    closeDistance: 5
-    farDistance: 50
+    baseDistance: 5
+    closeDistance: 0.5
+    farDistance: 10.79
     closeScale: 2
     farScale: 0.5
   cameraOverride: {fileID: 0}
@@ -293,11 +293,11 @@ MonoBehaviour:
   enableShakeFadeOut: 1
   shakeOffsetFadeOut: {x: 0, y: 1.5}
   shakeFrequencyFadeOut: 2
-  enableLerp: 1
+  enableLerp: 0
   lerpSettings:
     speed: 5
-    minX: -50
-    maxX: 50
+    minX: -1
+    maxX: 1
     minY: 0.5
     maxY: 1
     randomFlip: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   shakeSettings:
     offset: {x: 0.005, y: 0.005}
     frequency: 50
-  enableFollowing: 1
+  enableFollowing: 0
   followedTarget: {fileID: 0}
   followSettings:
     speed: 10
@@ -627,7 +627,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2735640341234319819, guid: 163a9bffa97a27c4c97fb370fb42f9d2, type: 2}
+  - {fileID: 3373603598322536305, guid: cf4f37abd4e7e724da3b2662b9787068, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -715,7 +715,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2735640341234319819, guid: 163a9bffa97a27c4c97fb370fb42f9d2, type: 2}
+  - {fileID: 3373603598322536305, guid: cf4f37abd4e7e724da3b2662b9787068, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

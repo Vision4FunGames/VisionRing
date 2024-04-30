@@ -1,3 +1,4 @@
+using System;
 using DamageNumbersPro;
 using GameAnalyticsSDK.Setup;
 using UnityEngine;
@@ -35,6 +36,14 @@ public class PlayerLevel : MonoBehaviour
 
         PercenCalculate();
         UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"i%"+_percent;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ExpCalculate(150);
+        }
     }
 
     public void ExpCalculate(float expValue)
@@ -78,8 +87,9 @@ public class PlayerLevel : MonoBehaviour
         _levelUpParticle.Play();
         DamageNumber newDamageNumber =
             _levelUpText.GetComponent<DamageNumber>().Spawn(
-                new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z),
-                "Level"+currentLevel,transform);
+                new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                "Level "+currentLevel);
+        newDamageNumber.SetFollowedTarget(transform);
         newDamageNumber.transform.localScale = new Vector3(2, 2, 2);
     }
 }
