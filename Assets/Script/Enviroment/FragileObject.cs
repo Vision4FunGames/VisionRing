@@ -11,6 +11,7 @@ public class FragileObject : MonoBehaviour
     public float moveSpeed = 3f;
     public float spawnRadius = 2f;
     private bool isBroken = false;
+    [SerializeField]private bool hasKey;
     private void Start()
     {
         player = Player.instance.transform;
@@ -33,6 +34,7 @@ public class FragileObject : MonoBehaviour
             isBroken = true;
             GetComponent<MeshRenderer>().enabled = false;
             transform.GetChild(0).gameObject.SetActive(true);
+            
             KeyOut();
             Destroy(gameObject, 5f); 
 
