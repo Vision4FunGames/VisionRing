@@ -113,6 +113,7 @@ public class FoxManager : MonoBehaviour
             GameManager.instance.tutoCage.GetComponent<NavMeshObstacle>().enabled = true;
             agent.SetDestination(waterJumpPos.position);
             foxAnim.SetBool("sitBool",true);
+            UiManager.instance.CinematicCanvasOpen();
         }
         if(distance <= agent.stoppingDistance)
         {

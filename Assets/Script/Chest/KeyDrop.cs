@@ -22,7 +22,7 @@ public class KeyDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x,player.position.y+2f,player.position.z), 3f *2* Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x,player.position.y+2f,player.position.z), 5f *2* Time.deltaTime);
         
         // Eğer Player'a ulaşıldıysa Coin'i yok et
         if (Vector3.Distance(transform.position, new Vector3(player.position.x,player.position.y +2f,player.position.z)) < 0.1f)

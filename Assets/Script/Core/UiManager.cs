@@ -35,7 +35,8 @@ public class UiManager : MonoBehaviour
         playerHealthBarCanvas,
         navigationArea,
         settingPanel,
-        vaultPanel;
+        vaultPanel,
+        cinematicCanvas;
 
     public TextMeshProUGUI playerLevel;
     public GameObject focusPanel;
@@ -145,6 +146,13 @@ public class UiManager : MonoBehaviour
         GameManager.instance.PlayerName = playerNameInput.text;
         PlayerPrefs.SetString("playerName", playerNameInput.text);
         playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
+    }
+
+    public void CinematicCanvasOpen()
+    {
+        cinematicCanvas.GetComponent<CanvasGroup>().DOFade(1, 1f);
+        cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 470, 0), 2f);
+        cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().transform.DOLocalMove(new Vector3(0, -470, 0), 2f);
     }
 
     public void MapOpen()
