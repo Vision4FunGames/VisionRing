@@ -714,6 +714,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
                 break;
             case "FirstMeet":
                 timerFirstMeeting = Time.time;
+             Invoke("HorseTutorial",3f);
                 break;
             case "MerchantMeet":
                 timerMerchant = Time.time;
@@ -739,6 +740,11 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
             case "Award":
                 break;
         }
+    }
+
+    public void HorseTutorial()
+    {
+        TutorialLoader.instance.Load("Horse");
     }
 
     public void SuccessQuest(string questname)

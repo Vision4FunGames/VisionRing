@@ -357,6 +357,11 @@ public class Player : MonoBehaviour
         {
             GameManager.instance.tutoCage.GetComponent<TutoCage>().SaveTheFox();
         }
+
+        if (other.gameObject.CompareTag("DungeonBox"))
+        {
+            TutorialLoader.instance.Load("DungeonBox");
+        }
     }
 
     public void IsMovementAgain()
