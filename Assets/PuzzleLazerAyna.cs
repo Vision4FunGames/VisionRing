@@ -1,33 +1,40 @@
-using System;
-using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PuzzleLazerAyna : MonoBehaviour
 {
+    public bool boolEmpty;
     private LineRenderer _lineRenderer;
     public GameObject lineDetectObject;
+    public GameObject lineNextDetectObject;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Lazer"))
+        if (other.CompareTag("Lazer") && !boolEmpty)
         {
+            boolEmpty = true;
             lineDetectObject = other.gameObject;
+            if (other.GetComponentInParent<PuzzleLazerAyna>())
+                other.GetComponentInParent<PuzzleLazerAyna>().lineNextDetectObject = gameObject;
             SetLazerCompenent();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Lazer"))
+        if (other.CompareTag("Lazer") && lineDetectObject == other.gameObject)
         {
+            if (lineNextDetectObject)
+                lineNextDetectObject.GetComponentInParent<PuzzleLazerAyna>().DeleteLazerPos();
             DeleteLazerPos();
         }
     }
 
     public void DeleteLazerPos()
     {
+        boolEmpty = false;
         Vector3 currentPos = lineDetectObject.transform.forward * 40;
-        lineDetectObject.GetComponentInParent<LineRenderer>().SetPosition(1,new Vector3(0,0,currentPos.z));
+        lineDetectObject.GetComponentInParent<LineRenderer>().SetPosition(1, new Vector3(0, 0, currentPos.z));
         _lineRenderer.enabled = false;
         GetComponentInChildren<MeshCollider>().enabled = false;
     }
@@ -43,6 +50,8 @@ public class PuzzleLazerAyna : MonoBehaviour
             collider.sharedMesh = mesh;
             collider.tag = "Lazer";
         }
+
+        collider.enabled = true;
     }
 
     public void SetLazerCompenent()
@@ -52,8 +61,8 @@ public class PuzzleLazerAyna : MonoBehaviour
         _lineRenderer.enabled = true;
         _lineRenderer.material =
             lineDetectObject.GetComponentInParent<LineRenderer>().material;
-        float distance = Vector3.Distance (transform.position, lineDetectObject.transform.position);
-        lineDetectObject.GetComponentInParent<LineRenderer>().SetPosition(1,new Vector3(0,0,distance));
+        float distance = Vector3.Distance(transform.position, lineDetectObject.transform.position);
+        lineDetectObject.GetComponentInParent<LineRenderer>().SetPosition(1, new Vector3(0, 0, distance));
         _lineRenderer.ResetBounds();
         _lineRenderer.SetPosition(0,
             new Vector3(0, 0, 0));
