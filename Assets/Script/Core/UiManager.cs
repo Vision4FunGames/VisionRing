@@ -154,7 +154,12 @@ public class UiManager : MonoBehaviour
         cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 470, 0), 2f);
         cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().transform.DOLocalMove(new Vector3(0, -470, 0), 2f);
     }
-
+	public void CinematicCanvasClose()
+	{
+		cinematicCanvas.GetComponent<CanvasGroup>().DOFade(0,1f);
+		cinematicCanvas.transform.GetChild(0).gameObject.SetActive(false);
+		cinematicCanvas.transform.GetChild(1).gameObject.SetActive(false);
+	}
     public void MapOpen()
     {
         _blMiniMap.GetMiniMapSize();
