@@ -47,7 +47,6 @@ public abstract class CharacterHealth : MonoBehaviour
                 PlayerPrefs.SetInt("Heal",1);
                 GameManager.instance.isHeal = true;
             }
-
             if (health <= maxxHealth-10 && !GameManager.instance.isDash)
             {
                 TutorialLoader.instance.Load("Dash");

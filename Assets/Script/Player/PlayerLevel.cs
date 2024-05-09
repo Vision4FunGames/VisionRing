@@ -35,7 +35,7 @@ public class PlayerLevel : MonoBehaviour
         }
 
         PercenCalculate();
-        UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"i%"+_percent;
+        UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"   %"+_percent;
     }
 
     private void Update()
