@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RandomPointNavmesh : MonoBehaviour
 {
-    public float range = 10.0f;
     private Player _player;
 
     private void Start()
@@ -32,9 +31,10 @@ public class RandomPointNavmesh : MonoBehaviour
 
     
 
-    public Vector3 RandomPoint()
+    public Vector3 RandomPoint(float range)
     {
         Vector3 point;
+        Debug.Log(range+"Range");
         if (RandomPoint(_player.transform.position, range, out point))
         {
             Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);

@@ -7,12 +7,13 @@ public class Horse : MonoBehaviour
 {
     public float speed;
     public float baseSpeed;
-    public bool callHorse, playerAttach,jumpPlayer;
+    public bool callHorse, playerAttach, jumpPlayer;
     private Player _player;
     private NavMeshAgent _navMeshAgent;
     private RandomPointNavmesh randomPointNavmesh;
     private Vector3 vposCamera;
     private Animator _animator;
+
     private void Awake()
     {
         baseSpeed = speed;
@@ -28,7 +29,7 @@ public class Horse : MonoBehaviour
     {
         if (!playerAttach)
         {
-            HorsePosition();
+            HorsePosition(80);
             _animator.SetFloat("HorseSpeed", 1);
             callHorse = true;
             jumpPlayer = false;
@@ -38,28 +39,54 @@ public class Horse : MonoBehaviour
             playerAttach = false;
             _player.horse = false;
             _player.speed = _player.baseSpeed;
-            _player._playerAnimator.SetBool("horse",false);
+            _player._playerAnimator.SetBool("horse", false);
             _player.StateMachine.ChangeState(_player.PlayerMovementState);
-            _navMeshAgent.SetDestination(vposCamera);
-            _animator.SetFloat("HorseSpeed", 1);
+            HorsePositionBack(10);
         }
     }
 
-    public void HorsePosition()
+    public void HorsePositionBack(float range)
     {
-        Vector3 pos = randomPointNavmesh.RandomPoint();
+        Vector3 pos = randomPointNavmesh.RandomPoint(range);
 
-        if (Vector3.Distance(_player.transform.position, pos) > 40 &&
+        if (Vector3.Distance(_player.transform.position, pos) > 10 &&
             Mathf.Abs(_player.transform.position.y - pos.y) < 2)
         {
             _navMeshAgent.enabled = false;
             transform.position = pos;
             vposCamera = pos;
             _navMeshAgent.enabled = true;
+            _navMeshAgent.SetDestination(vposCamera);
+            _animator.SetFloat("HorseSpeed", 1);
         }
         else
         {
-            HorsePosition();
+            HorsePosition(range);
+        }
+    }
+    public void HorsePosition(float range)
+    {
+        if (Vector3.Distance(_player.transform.position, transform.position) > 30)
+        {
+            Vector3 pos = randomPointNavmesh.RandomPoint(range);
+
+            if (Vector3.Distance(_player.transform.position, pos) > 10 &&
+                Mathf.Abs(_player.transform.position.y - pos.y) < 2)
+            {
+                _navMeshAgent.enabled = false;
+                transform.position = pos;
+                vposCamera = pos;
+                _navMeshAgent.enabled = true;
+            }
+            else
+            {
+                HorsePosition(range);
+            }
+        }
+        else
+        {
+            _navMeshAgent.enabled = false;
+            _navMeshAgent.enabled = true;
         }
     }
 
@@ -82,12 +109,18 @@ public class Horse : MonoBehaviour
                 _player.horse = true;
             }
         }
+
         if (playerAttach)
         {
             _animator.SetFloat("HorseSpeed",
                 Mathf.Abs(_player._fixedJoystick.Vertical) + Mathf.Abs(_player._fixedJoystick.Horizontal));
             transform.position = _player.transform.position;
             transform.rotation = _player.transform.GetChild(0).rotation;
+        }
+
+        if (!_player.horse && Vector3.Distance(transform.position, vposCamera) < 2 && !callHorse)
+        {
+            _animator.SetFloat("HorseSpeed", 0);
         }
     }
 }
