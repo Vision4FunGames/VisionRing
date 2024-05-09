@@ -156,9 +156,10 @@ public class UiManager : MonoBehaviour
     }
 	public void CinematicCanvasClose()
 	{
-		cinematicCanvas.GetComponent<CanvasGroup>().DOFade(0,1f);
-		cinematicCanvas.transform.GetChild(0).gameObject.SetActive(false);
-		cinematicCanvas.transform.GetChild(1).gameObject.SetActive(false);
+		cinematicCanvas.GetComponent<CanvasGroup>().DOFade(0,3f);
+        cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 603f, 0), 2f);
+        cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().transform.DOLocalMove(new Vector3(0, -603f, 0), 2f);
+		
 	}
     public void MapOpen()
     {
@@ -425,6 +426,7 @@ public class UiManager : MonoBehaviour
 
     public void AfterVideoOpen()
     {
+        CinematicCanvasClose();
         Player.instance.tutorial = false;
         Player.instance.GetComponent<NavMeshAgent>().enabled = false;
         PlayerPrefs.SetInt("StartVillage", 0);
