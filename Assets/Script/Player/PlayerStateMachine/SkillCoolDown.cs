@@ -139,13 +139,21 @@ public class SkillCoolDown : MonoBehaviour
 public class Skills
 {
     public string skillName;
+    public float skillDamage;
+    public float skillDamageUpgradeRate;
     public float coolDown;
     public float coolDownTime;
+    public float coolDownUpgradeRate;
+    public float currentCriticalRate;
+    public float criticalUpgradeRate;
     [ES3NonSerializable] public Sprite skillImage;
     public int skillLevel;
     public SkillNecessary[] necessariesName;
     public String skillDescription;
+    
+    
 }
+
 
 
 // public partial class SkillNecessary : ScriptableObject

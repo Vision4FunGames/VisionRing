@@ -546,10 +546,18 @@ public class UiManager : MonoBehaviour
         }
         currentSkillPopUp.skillNameText.text = skill.skillName;
         currentSkillPopUp.currentLevelText.text = skill.skillLevel.ToString();
+        currentSkillPopUp.nextLevelText.text = (skill.skillLevel + 1).ToString();
         currentSkillPopUp.SkillInfoText.text = skill.skillDescription;
-        currentSkillPopUp.coolDownText.text = skill.coolDown.ToString();
-        currentSkillPopUp.currentDamageText.text = skill.skillName;
-        currentSkillPopUp.upgradeEffectText.text = skill.skillName;
+        currentSkillPopUp.currentCoolDownText.text = skill.coolDown.ToString();
+        currentSkillPopUp.upgradeCoolDownText.text =
+            (skill.coolDown - (skill.coolDown * skill.coolDownUpgradeRate)).ToString();
+        currentSkillPopUp.currentDamageText.text = skill.skillDamage.ToString();
+        currentSkillPopUp.upgradeDamageText.text =
+            (skill.skillDamage + (skill.skillDamage * skill.skillDamageUpgradeRate)).ToString();
+        currentSkillPopUp.skillIcon.sprite = skill.skillImage;
+        currentSkillPopUp.evoCostText.text = skill.necessariesName[skill.skillLevel].evolutionCost.ToString();
+        currentSkillPopUp.upgradeCostText.text = skill.necessariesName[skill.skillLevel].upgradeCost.ToString();
+
     }
 
 }

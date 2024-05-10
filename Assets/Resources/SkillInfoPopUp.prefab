@@ -398,7 +398,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 372.935, y: -580.8554}
+  m_AnchoredPosition: {x: 372.935, y: -666.92426}
   m_SizeDelta: {x: 745.87, y: 109.9282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2086846047440571285
@@ -1499,7 +1499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 372.935, y: -1369.6924}
+  m_AnchoredPosition: {x: 372.935, y: -1584.8645}
   m_SizeDelta: {x: 745.87, y: 109.9282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &129079708338965981
@@ -2574,7 +2574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 372.935, y: -843.801}
+  m_AnchoredPosition: {x: 372.935, y: -972.9043}
   m_SizeDelta: {x: 745.87, y: 109.9282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &33535181241894967
@@ -3270,7 +3270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 372.935, y: -317.90976}
+  m_AnchoredPosition: {x: 372.935, y: -360.94418}
   m_SizeDelta: {x: 745.87, y: 109.9282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &173834631074558766
@@ -3643,7 +3643,7 @@ GameObject:
   - component: {fileID: 2800284052323402205}
   - component: {fileID: 8806302985237931116}
   m_Layer: 5
-  m_Name: cost
+  m_Name: UpgradeCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3801,7 +3801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 372.935, y: -1106.7467}
+  m_AnchoredPosition: {x: 372.935, y: -1278.8844}
   m_SizeDelta: {x: 745.87, y: 109.9282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4813898348493622303
@@ -4159,12 +4159,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b047fc036cb8447aa30e64519778c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillNameText: {fileID: 3147145388628086469}
-  currentLevelText: {fileID: 5564165934077465068}
-  SkillInfoText: {fileID: 2009257205650167714}
-  coolDownText: {fileID: 7100505105123507983}
-  currentDamageText: {fileID: 5092940600238432084}
+  skillNameText: {fileID: 6887608501027014720}
+  skillIcon: {fileID: 3934319264092764392}
+  currentLevelText: {fileID: 2730485458344602570}
+  nextLevelText: {fileID: 6758978172211902285}
+  SkillInfoText: {fileID: 1476733735735669247}
+  currentCoolDownText: {fileID: 903254334206774798}
+  upgradeCoolDownText: {fileID: 5276437378831285245}
+  currentDamageText: {fileID: 8137887057504802351}
+  upgradeDamageText: {fileID: 6197187471061524218}
   upgradeEffectText: {fileID: 2090987338982441042}
+  evoCostText: {fileID: 2047928482159069992}
+  upgradeCostText: {fileID: 8806302985237931116}
 --- !u!1 &6887608501423421345
 GameObject:
   m_ObjectHideFlags: 0
@@ -5677,7 +5683,7 @@ GameObject:
   - component: {fileID: 3545914345745768955}
   - component: {fileID: 2047928482159069992}
   m_Layer: 5
-  m_Name: cdSecond
+  m_Name: EvoCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
