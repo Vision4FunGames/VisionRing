@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TutoSword : MonoBehaviour
 {
+    public GameObject tutorialRestriction;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,9 @@ public class TutoSword : MonoBehaviour
             //TutorialLoader.instance.Load("Dash");
             EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = true;
             UiManager.instance.attackJoystick.gameObject.SetActive(true);
+            tutorialRestriction.GetComponent<Collider>().isTrigger = true;
             Destroy(gameObject);
+            
         }
     }
 }
