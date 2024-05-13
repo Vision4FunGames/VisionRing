@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     private string tutorialName;
     public bool tutorial;
     public FoxManager foxManager;
-
+    public GameObject MinimapOriginObj;
     [Header("Tutorial")] public GameObject tutorialEnemies;
     public GameObject tutoCage;
     public GameObject tutorialWall;
@@ -123,6 +123,22 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         GetComponent<AudioSource>().Play();
     }
 
+    private GameObject teleportPos;
+    public void PlayerTeleport(GameObject tpPos)
+    {
+        teleportPos = tpPos;
+        Player.instance.teleportParticle.Play();
+        UiManager.instance.MapClose();
+        Player.instance._myController.enabled = false;
+        Invoke("Teleport",2);
+    }
+
+    public void Teleport()
+    {
+        Player.instance.transform.position = teleportPos.transform.position;
+        Player.instance._myController.enabled = true;
+        Player.instance.teleportParticle.Stop();
+    }
     private void Start()
     {
         _questManager = GetComponent<QuestManager>();

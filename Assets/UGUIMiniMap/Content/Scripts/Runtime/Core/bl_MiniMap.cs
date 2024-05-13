@@ -651,6 +651,7 @@ public sealed class bl_MiniMap : MonoBehaviour
         }
         mapPointer = Instantiate(MapPointerPrefab, Position, Quaternion.identity) as GameObject;
         mapPointer.GetComponent<bl_MapPointerBase>().SetColor(playerColor);
+        GameManager.instance.PlayerTeleport(mapPointer);
     }
 
     /// <summary>

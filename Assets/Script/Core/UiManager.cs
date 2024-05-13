@@ -161,6 +161,8 @@ public class UiManager : MonoBehaviour
         cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().transform.DOLocalMove(new Vector3(0, -603f, 0), 2f);
 		
 	}
+
+    private float baseZoom;
     public void MapOpen()
     {
         _blMiniMap.GetMiniMapSize();
@@ -169,12 +171,18 @@ public class UiManager : MonoBehaviour
         {
             ui.root.anchoredPosition = _blMiniMap.FullMapPosition;
             ui.root.sizeDelta = _blMiniMap.FullMapSize;
+
+            ui.root.anchoredPosition =Vector2.zero;
+            ui.root.sizeDelta = new Vector2(Screen.height - 100, Screen.height - 100);
             ui.root.eulerAngles = _blMiniMap.FullMapRotation;
             ui.minimapMaskManager?.ChangeMaskType(true);
+            _blMiniMap.Target = GameManager.instance.MinimapOriginObj.transform;
+            baseZoom = _blMiniMap.Zoom;
+            _blMiniMap.Zoom = 500;
         }
 
         _blMiniMap._isPreviewFullscreen = true;
-        mapCloseBtn.SetActive(true);
+        //mapCloseBtn.SetActive(true);
         mapOpenBtn.SetActive(false);
     }
 
@@ -187,8 +195,10 @@ public class UiManager : MonoBehaviour
             ui.root.sizeDelta = _blMiniMap.MiniMapSize;
             ui.root.eulerAngles = _blMiniMap.MiniMapRotation;
             ui.minimapMaskManager?.ChangeMaskType(false);
+            _blMiniMap.Target = Player.instance.transform.GetChild(0).transform;
+            _blMiniMap.Zoom = baseZoom;
         }
-
+        
         _blMiniMap._isPreviewFullscreen = false;
         mapCloseBtn.SetActive(false);
         mapOpenBtn.SetActive(true);

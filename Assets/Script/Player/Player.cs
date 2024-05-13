@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public bool tutorial;
     public bool isDamageable = true;
     public Transform autoMoveTarget;
-
+    public ParticleSystem teleportParticle;
     #region Singleton
 
     public static Player instance;
