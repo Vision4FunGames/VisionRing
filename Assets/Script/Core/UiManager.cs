@@ -165,6 +165,10 @@ public class UiManager : MonoBehaviour
     private float baseZoom;
     public void MapOpen()
     {
+        if (_blMiniMap == null)
+        {
+            _blMiniMap = FindObjectOfType<bl_MiniMap>();
+        }
         _blMiniMap.GetMiniMapSize();
         var ui = _blMiniMap.MiniMapUI;
         if (ui != null)

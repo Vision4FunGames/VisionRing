@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 1897537103}
   - component: {fileID: 1967478086}
   - component: {fileID: 1967478093}
+  - component: {fileID: 1967478101}
+  - component: {fileID: 1967478110}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -66,6 +68,7 @@ MonoBehaviour:
   tutorialSection: 0
   tutorial: 0
   foxManager: {fileID: 0}
+  MinimapOriginObj: {fileID: 0}
   tutorialEnemies: {fileID: 0}
   tutoCage: {fileID: 0}
   tutorialWall: {fileID: 0}
@@ -84,6 +87,11 @@ MonoBehaviour:
   villageDoor2: {fileID: 0}
   colosseum: {fileID: 0}
   tutorialIncreaserFirst: {fileID: 0}
+  firstLevelEnemies: {fileID: 0}
+  realmChange: {fileID: 0}
+  seaWater: {fileID: 0}
+  campFire: {fileID: 0}
+  tutoVaril: {fileID: 0}
   isMerchant: 0
   isMagician: 0
   isBlacksmith: 0
@@ -98,6 +106,7 @@ MonoBehaviour:
   fight: {fileID: 8300000, guid: 31d5e3cf0c199df46b7c1fc52003a230, type: 3}
   stand: {fileID: 8300000, guid: 22e0d4fb37837a64aa4988cc8ae70631, type: 3}
   isFoxSaved: 0
+  isCampfire: 0
   timerKillTheAttackers: 0
   timerFirstMeeting: 0
   timerMerchant: 0
@@ -106,6 +115,7 @@ MonoBehaviour:
   timerBoss1: 0
   timerPortal1: 0
   timerPortal2: 0
+  SkeletBoss: {fileID: 0}
   _questListContainer: {fileID: 0}
 --- !u!114 &5038891023898458666
 MonoBehaviour:
@@ -143,14 +153,22 @@ MonoBehaviour:
   playerHealthBarCanvas: {fileID: 0}
   navigationArea: {fileID: 0}
   settingPanel: {fileID: 0}
+  vaultPanel: {fileID: 0}
+  cinematicCanvas: {fileID: 0}
+  playerLevel: {fileID: 0}
   focusPanel: {fileID: 0}
   CanvasGroup: {fileID: 0}
   canvasTime: 0.1
   ringBtn: {fileID: 0}
   healText: {fileID: 0}
   menuUi: {fileID: 0}
+  autoMoveBtn: {fileID: 0}
+  playerNameConfirm: {fileID: 0}
   skillButtons: []
   inventoryObject: {fileID: 0}
+  mapCloseBtn: {fileID: 0}
+  mapOpenBtn: {fileID: 0}
+  playerNameInput: {fileID: 0}
   dashCoolDownLast: 0
   rotateFireLast: 0
   earthquickLast: 0
@@ -208,6 +226,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   collectBtn: {fileID: 0}
   upgradeWheel: {fileID: 0}
   inventoryBtnPanel: {fileID: 0}
@@ -216,6 +235,7 @@ MonoBehaviour:
   contentText: {fileID: 0}
   foxRaw: {fileID: 0}
   chapter1: {fileID: 0}
+  chapter3: {fileID: 0}
   endVideo: {fileID: 0}
   itemTextPanel: {fileID: 0}
 --- !u!114 &5038891023898458645
@@ -293,6 +313,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e7887a5c9f04764b9c5b1d5b5fa5da3, type: 2}
   - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
   upgradeItems: []
+  dropUsableItems:
+  - {fileID: 11400000, guid: a546a078b23ec394693a24f9184ffd56, type: 2}
   selectedChestItem: {fileID: 0}
 --- !u!114 &4138459671566022656
 MonoBehaviour:
@@ -310,8 +332,13 @@ MonoBehaviour:
   _currentSkills: []
   skillsArray:
   - skillName: Dash
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 2
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: ee087f19f3a9aae4d93fdd5a60cdeffc, type: 3}
     skillLevel: 0
     necessariesName:
@@ -319,9 +346,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 80081d1a76f65b24191f61cd522ee567, type: 2}
     - {fileID: 11400000, guid: 592667a335bdd814cbc7a052bef226bf, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
   - skillName: FireRotate
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 5
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: 39c589d8231659a47955c13b0e04d231, type: 3}
     skillLevel: 0
     necessariesName:
@@ -331,9 +364,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: Fires in a circle around the player, dealing area damage
   - skillName: EarthQ
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 5
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: d7a192199c42cc044931d84cd1c069b8, type: 3}
     skillLevel: 0
     necessariesName:
@@ -343,9 +382,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
   - skillName: FlameT
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 1
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: ce3a862e1bd3b784bb8dbd75d8ea7e14, type: 3}
     skillLevel: 0
     necessariesName:
@@ -355,9 +400,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
   - skillName: Tornado
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 5
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: e8f3c323a7f2d044991ae47fe6fe7b94, type: 3}
     skillLevel: 0
     necessariesName:
@@ -367,9 +418,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
   - skillName: Sword
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 5
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: ee087f19f3a9aae4d93fdd5a60cdeffc, type: 3}
     skillLevel: 0
     necessariesName:
@@ -379,9 +436,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
   - skillName: ArrowRain
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 5
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: ee087f19f3a9aae4d93fdd5a60cdeffc, type: 3}
     skillLevel: 0
     necessariesName:
@@ -391,9 +454,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
   - skillName: Shield
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 5
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: ee087f19f3a9aae4d93fdd5a60cdeffc, type: 3}
     skillLevel: 0
     necessariesName:
@@ -403,9 +472,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
   - skillName: Clone
+    skillDamage: 0
+    skillDamageUpgradeRate: 0
     coolDown: 5
     coolDownTime: 0
+    coolDownUpgradeRate: 0
+    currentCriticalRate: 0
+    criticalUpgradeRate: 0
     skillImage: {fileID: 21300000, guid: ee087f19f3a9aae4d93fdd5a60cdeffc, type: 3}
     skillLevel: 0
     necessariesName:
@@ -415,6 +490,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
     - {fileID: 11400000, guid: 823685c0baa41d24c99799f35593ef24, type: 2}
+    skillDescription: 
 --- !u!114 &2668921968425631565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,3 +682,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   successedQuests: []
+--- !u!114 &1967478101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ecc2b559b9445344b189ade5ce37c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  ActiveObjectsArray:
+  - activeObjectsArray:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - activeObjectsArray:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  refreshTime: 0.25
+  activeDistance: 50
+--- !u!114 &1967478110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038891023898458665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fcc2eaa6d2873439bf9e78104af4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamageAnimation: 0

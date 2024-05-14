@@ -178,10 +178,11 @@ public class InventorySlot : MonoBehaviour
                var popUp = Instantiate(Resources.Load("UsablePopUp")as GameObject);
                 popUp.transform.parent = transform.parent.transform.parent.transform.parent.transform.parent;
                 popUp.transform.position = new Vector3(transform.position.x -20f,transform.position.y,transform.position.z);
-
+    
                 popUp.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
                 {
                     item.Use(InventoryType.Usable, 0);
+                    Destroy(popUp);
                 });
                 popUp.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() =>
                 {
