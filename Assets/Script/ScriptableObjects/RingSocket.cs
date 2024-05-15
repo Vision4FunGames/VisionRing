@@ -7,5 +7,5 @@ public class RingSocket : ScriptableObject
 {
     public int maxLevel;
     public int[] stoneCost;
-    public int HPMultiplier,ATKMultiplier,DEFMultiplier;
+    public float HPMultiplier,ATKMultiplier,DEFMultiplier;
 }
