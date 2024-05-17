@@ -31,15 +31,19 @@ public class RingUpgrade : MonoBehaviour
     [Header("_________________________________")]
     public Button pinkBtn;
     public TextMeshProUGUI pinkLevelText;
+    public TextMeshProUGUI pinkCost;
     private int pinkLevelVal;
     [Header("_________________________________")]
     public Button blueBtn;
     public TextMeshProUGUI blueLevelText;
+    public TextMeshProUGUI blueCost;
     private int blueLevelVal;
     [Header("_________________________________")]
     public Button redBtn;
     public TextMeshProUGUI redLevelText;
+    public TextMeshProUGUI redCost;
     private int redLevelVal;
+    
 
 
 
@@ -69,7 +73,7 @@ public class RingUpgrade : MonoBehaviour
             CurrentStoneText();
             pinkLevelVal++;
             pinkLevelText.text = pinkLevelVal.ToString();
-            
+            pinkCost.text = pinkSocket.stoneCost[pinkLevelVal].ToString();
             HP.value += hpMulpVal*pinkSocket.HPMultiplier;
             ATK.value += atkMulpVal*pinkSocket.ATKMultiplier;
             DEF.value += defMulpVal*pinkSocket.DEFMultiplier;
@@ -84,7 +88,7 @@ public class RingUpgrade : MonoBehaviour
             CurrentStoneText();
             redLevelVal++;
             redLevelText.text = redLevelVal.ToString();
-            
+            redCost.text = redSocket.stoneCost[redLevelVal].ToString();
             HP.value += hpMulpVal*redSocket.HPMultiplier;
             ATK.value += atkMulpVal*redSocket.ATKMultiplier;
             DEF.value += defMulpVal*redSocket.DEFMultiplier;
@@ -99,7 +103,7 @@ public class RingUpgrade : MonoBehaviour
             CurrentStoneText();
             blueLevelVal++;
             blueLevelText.text = blueLevelVal.ToString();
-            
+            blueCost.text = blueSocket.stoneCost[blueLevelVal].ToString();
             HP.value += hpMulpVal*blueSocket.HPMultiplier;
             ATK.value += atkMulpVal*blueSocket.ATKMultiplier;
             DEF.value += defMulpVal*blueSocket.DEFMultiplier;
