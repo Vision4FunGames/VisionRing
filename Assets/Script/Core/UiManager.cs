@@ -148,17 +148,21 @@ public class UiManager : MonoBehaviour
         playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
     }
 
+    
     public void CinematicCanvasOpen()
-    {
-        cinematicCanvas.GetComponent<CanvasGroup>().DOFade(1, 1f);
-        cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 470, 0), 2f);
-        cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().transform.DOLocalMove(new Vector3(0, -470, 0), 2f);
+    { 
+        
+        RectTransform rectTransform = cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>();
+     
+        rectTransform.DOAnchorPos(Vector2.zero, 2f);
+       
+        cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(Vector2.zero, 2f);
     }
 	public void CinematicCanvasClose()
 	{
 		cinematicCanvas.GetComponent<CanvasGroup>().DOFade(0,3f);
-        cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 603f, 0), 2f);
-        cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().transform.DOLocalMove(new Vector3(0, -603f, 0), 2f);
+        cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 200f), 2f);
+        cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -200f), 2f);
 		
 	}
 

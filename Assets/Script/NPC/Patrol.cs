@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NpcPatrol : MonoBehaviour
+public class Patrol : MonoBehaviour
 {
     public Transform[] waypoints;    // Array of waypoints for the NPC to follow
     public float movementSpeed = 2f; // Speed at which the NPC moves
@@ -13,7 +15,7 @@ public class NpcPatrol : MonoBehaviour
     private bool patrolStart;
     void Start()
     {
-        animator.speed = movementSpeed; // Set animation speed to match movement speed
+        // animator.speed = movementSpeed; // Set animation speed to match movement speed
         currentWaypointIndex = 0;       // Start from the first waypoint
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -30,7 +32,7 @@ public class NpcPatrol : MonoBehaviour
     
     void Update()
     {
-        if (patroling && GameManager.instance.tutorial && patrolStart)
+        if (patroling)
         {
             animator.SetFloat("runspeed", navMeshAgent.velocity.magnitude / navMeshAgent.speed * 2f);
             Move(waypoints[currentWaypointIndex]);
@@ -54,4 +56,3 @@ public class NpcPatrol : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10);
     }
 }
- 

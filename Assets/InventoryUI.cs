@@ -71,7 +71,7 @@ public class InventoryUI : MonoBehaviour {
                     }
                     else if ((ecoCounter < EconomyManager.instance.itemList.Count)&&(EconomyManager.instance.itemCount[ecoCounter] > 0))
                     {
-                        if (EconomyManager.instance.itemList[ecoCounter].name != "Diamond")
+                        if (EconomyManager.instance.itemList[ecoCounter].showInInventory)
                         {
                             slots[i].AddItem(EconomyManager.instance.itemList[ecoCounter],EconomyManager.instance.itemCount[ecoCounter]);
                         }

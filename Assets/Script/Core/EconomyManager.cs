@@ -19,6 +19,7 @@ public class EconomyManager : MonoBehaviour
     [Header("Items")] public List<Item> itemList = new List<Item>();
     public List<int> itemCount = new List<int>();
 
+
     [SerializeField]
     private int diamond { get; set; }
     private int coin { get; set; }
@@ -144,6 +145,7 @@ public class EconomyManager : MonoBehaviour
         EarnItem(0,30);
         EarnItem(1,30);
         EarnItem(2,30);
+        ES3.Save("itemCount",itemCount);
         PlayerManager.instance.earnItemParticle.Play();
         HapticPatterns.PlayPreset(HapticPatterns.PresetType.Warning);
         Player.instance.playerSound.audioSource.clip = Player.instance.playerSound.earnItemSound;
