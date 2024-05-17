@@ -19,15 +19,15 @@ public class RingUpgrade : MonoBehaviour
     [Header("_________________________________")]
     public int HPMinValue;
     public int HPMaxValue;
-
+    public int currentHPval;
     [Header("_________________________________")]
     public int ATKMinValue;
     public int ATKMaxValue;
-
+    public int currentATKVal;
     [Header("_________________________________")]
     public int DEFMinValue;
     public int DEFMaxValue;
-
+    public int currentDEFVal;
     [Header("_________________________________")]
     public Button pinkBtn;
     public TextMeshProUGUI pinkLevelText;
@@ -60,9 +60,12 @@ public class RingUpgrade : MonoBehaviour
         redBtn.onClick.AddListener(BuyRed);
         blueBtn.onClick.AddListener(BuyBlue);
 
-        hpMulpVal = 1 / ((pinkSocket.HPMultiplier + redSocket.HPMultiplier + blueSocket.HPMultiplier)*50);
-        atkMulpVal = 1 / ((pinkSocket.ATKMultiplier + redSocket.ATKMultiplier + blueSocket.ATKMultiplier)*50);
-        defMulpVal = 1 / ((pinkSocket.DEFMultiplier + redSocket.DEFMultiplier + blueSocket.DEFMultiplier)*50);
+        hpMulpVal = 1 / ((pinkSocket.HPMultiplier + redSocket.HPMultiplier + blueSocket.HPMultiplier)*49);
+        atkMulpVal = 1 / ((pinkSocket.ATKMultiplier + redSocket.ATKMultiplier + blueSocket.ATKMultiplier)*49);
+        defMulpVal = 1 / ((pinkSocket.DEFMultiplier + redSocket.DEFMultiplier + blueSocket.DEFMultiplier)*49);
+        currentDEFVal = DEFMinValue;
+        currentATKVal = ATKMinValue;
+        currentHPval = HPMinValue;
     }
 
     public void BuyPink()
@@ -72,45 +75,53 @@ public class RingUpgrade : MonoBehaviour
             currentValuePink -= pinkSocket.stoneCost[pinkLevelVal];
             CurrentStoneText();
             pinkLevelVal++;
-            pinkLevelText.text = pinkLevelVal.ToString();
+            pinkLevelText.text = (pinkLevelVal+1).ToString();
             pinkCost.text = pinkSocket.stoneCost[pinkLevelVal].ToString();
             HP.value += hpMulpVal*pinkSocket.HPMultiplier;
             ATK.value += atkMulpVal*pinkSocket.ATKMultiplier;
             DEF.value += defMulpVal*pinkSocket.DEFMultiplier;
+            SetCharacterPower();
         }
     }
-
+    
     public void BuyRed()
     {
-        if (redSocket.stoneCost[redLevelVal] < currentValueRed-1&& redLevelVal+1<redSocket.stoneCost.Length)
+        if (redSocket.stoneCost[redLevelVal] < currentValueRed&& redLevelVal+1<redSocket.stoneCost.Length)
         {
             currentValueRed -= pinkSocket.stoneCost[redLevelVal];
             CurrentStoneText();
             redLevelVal++;
-            redLevelText.text = redLevelVal.ToString();
+            redLevelText.text = (redLevelVal+1).ToString();
             redCost.text = redSocket.stoneCost[redLevelVal].ToString();
             HP.value += hpMulpVal*redSocket.HPMultiplier;
             ATK.value += atkMulpVal*redSocket.ATKMultiplier;
             DEF.value += defMulpVal*redSocket.DEFMultiplier;
+            SetCharacterPower();
         }
     }
 
     public void BuyBlue()
     {
-        if (blueSocket.stoneCost[blueLevelVal] < currentValueBlue-1&& blueLevelVal+1<blueSocket.stoneCost.Length)
+        if (blueSocket.stoneCost[blueLevelVal] < currentValueBlue&& blueLevelVal+1<blueSocket.stoneCost.Length)
         {
             currentValueBlue -= pinkSocket.stoneCost[blueLevelVal];
             CurrentStoneText();
             blueLevelVal++;
-            blueLevelText.text = blueLevelVal.ToString();
+            blueLevelText.text = (blueLevelVal+1).ToString();
             blueCost.text = blueSocket.stoneCost[blueLevelVal].ToString();
             HP.value += hpMulpVal*blueSocket.HPMultiplier;
             ATK.value += atkMulpVal*blueSocket.ATKMultiplier;
             DEF.value += defMulpVal*blueSocket.DEFMultiplier;
+            SetCharacterPower();
         }
     }
 
-
+    public void SetCharacterPower()
+    {
+        currentDEFVal = (int)(Mathf.Ceil(DEFMaxValue*DEF.value));
+        currentATKVal =(int)(Mathf.Ceil(ATKMaxValue*ATK.value));
+        currentHPval = (int)(Mathf.Ceil(HPMaxValue*HP.value));
+    }
     public void CurrentStoneText()
     {
         currentPink.text = currentValuePink.ToString();
