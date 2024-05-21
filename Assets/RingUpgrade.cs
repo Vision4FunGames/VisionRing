@@ -86,6 +86,7 @@ public class RingUpgrade : MonoBehaviour
         currentValueRed = EconomyManager.instance.GetStoneCount("LifeStone");
         currentValueBlue = EconomyManager.instance.GetStoneCount("LightStone");
 
+
         CurrentStoneText();
     }
 
@@ -142,6 +143,21 @@ public class RingUpgrade : MonoBehaviour
         currentDEFVal = (int)(Mathf.Ceil(DEFMaxValue * DEF.value));
         currentATKVal = (int)(Mathf.Ceil(ATKMaxValue * ATK.value));
         currentHPval = (int)(Mathf.Ceil(HPMaxValue * HP.value));
+
+        Player.instance.GetComponent<PlayerStats>().damage.ZeroIndexRemove();
+        Player.instance.GetComponent<PlayerStats>().armor.ZeroIndexRemove();
+        Player.instance.GetComponent<PlayerStats>().health.ZeroIndexRemove();
+        
+        Player.instance.GetComponent<PlayerStats>().armor
+            .AddModifier(Player.instance.GetComponent<PlayerStats>().armor.GetValue() + currentDEFVal);
+        Player.instance.GetComponent<PlayerStats>().armorValue =
+            (int)Player.instance.GetComponent<PlayerStats>().armor.GetValue();
+        Player.instance.GetComponent<PlayerStats>().damage
+            .AddModifier(Player.instance.GetComponent<PlayerStats>().damage.GetValue() + currentATKVal);
+        Player.instance.GetComponent<PlayerStats>().health
+            .AddModifier(Player.instance.GetComponent<PlayerStats>().health.GetValue() + currentHPval);
+        Player.instance.GetComponent<PlayerStats>().maxHealth =
+            (int)Player.instance.GetComponent<PlayerStats>().health.GetValue();
     }
 
     public void CurrentStoneText()
