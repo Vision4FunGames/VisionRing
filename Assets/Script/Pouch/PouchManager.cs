@@ -21,7 +21,9 @@ public class PouchManager : MonoBehaviour
     public GameObject itemTextImage;
     public GameObject pouchPanel;
     public GameObject inventorySlot,descriptionImage;
-    private List<int> itemIndexList; 
+    private List<int> itemIndexList;
+    public StoneChance stoneChance;
+    
     private void Start()
     {
         player = Player.instance;
@@ -148,7 +150,7 @@ public class PouchManager : MonoBehaviour
                 item1.GetComponent<InventorySlot>().countText.text = "1";
                 item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
                 current.gameObject.SetActive(false);
-                break;
+               
             }
             else
             {
@@ -157,6 +159,7 @@ public class PouchManager : MonoBehaviour
                 item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
             }
             current.gameObject.SetActive(false);
+            DropStone(pouchPanel, stoneChance);
         }
        
     }
@@ -187,9 +190,7 @@ public class PouchManager : MonoBehaviour
                CreateItem(2);
                
            }
-           
-           
-            //item1Text.GetComponent<TextMeshPro>().text = 
+           //item1Text.GetComponent<TextMeshPro>().text = 
             // item1Slot.GetComponent<RectTransform>().SetPivotAndAnchors();
         }
         // else
@@ -217,5 +218,32 @@ public class PouchManager : MonoBehaviour
             Destroy(transform.parent.gameObject);
             Destroy(current.gameObject);
         }
+    }
+
+    public void DropStone(GameObject panel,StoneChance stoneChance)
+    {
+        var item1 = Instantiate(inventorySlot, current.transform.GetChild(0).transform.GetChild(0).transform);
+        var rectTransform = item1.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(150, 150);
+        rectTransform.anchorMin = new Vector2(0, .5f);
+        rectTransform.anchorMax = new Vector2(0, .5f);
+        rectTransform.pivot = new Vector2(0, .5f);
+        item1.transform.localPosition = new Vector3(0, 0, 0);
+        int chest = ScriptedItemId;
+        if (stoneChance == StoneChance.Darkstone)
+        {
+            item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[4]);
+        }
+        else if  (stoneChance == StoneChance.LightStone)
+        {
+            item1.GetComponent<InventorySlot>().AddItem(equipmentManager.chestItems[5]);   
+        }
+        
+        item1.GetComponent<InventorySlot>()._inventoryType = InventoryType.Collect;
+    }
+    public enum StoneChance
+    {
+        Darkstone,
+        LightStone,
     }
 }

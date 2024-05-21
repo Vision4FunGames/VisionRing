@@ -21,10 +21,11 @@ public class DropChest : MonoBehaviour
     public SkeletType SkeletType;
     public GameObject chestPrefab;
     public GameObject boss;
-    public int rnd;
+    public int rnd = 20;
     public GameObject coinPrefab;
     public int minGold, maxGold;
     public int coinDropChance;
+    public PouchManager.StoneChance stoneChance;
     private void Awake()
     {
         boss = this.gameObject;
@@ -32,7 +33,7 @@ public class DropChest : MonoBehaviour
 
     public void ChestDrop(Vector3 bossTransform)
     {
-         rnd = Random.Range(1, 100);
+         //rnd = Random.Range(1, 100);
          if (rnd <= coinDropChance)
         {
             var coin = Instantiate(coinPrefab, new Vector3(bossTransform.x, bossTransform.y+2f, bossTransform.z),Quaternion.identity);
@@ -42,36 +43,42 @@ public class DropChest : MonoBehaviour
                 if (SkeletType == SkeletType.Skelet)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y - 5, bossTransform.z),Quaternion.identity);
+                    drop.transform.GetChild(0).GetComponent<PouchManager>().stoneChance = stoneChance;
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y, bossTransform.z), 2f);
                 }
                 else if (SkeletType == SkeletType.Boss)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
+                    drop.transform.GetChild(0).GetComponent<PouchManager>().stoneChance = stoneChance;
                     drop.transform.DOScale(new Vector3(3f, 3f, 3f), .1f).SetEase(Ease.OutBounce).SetDelay(4f);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y, bossTransform.z), 2f).SetDelay(4f);;
                 }
                 else if (SkeletType== SkeletType.MiniSkelet)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
+                    drop.transform.GetChild(0).GetComponent<PouchManager>().stoneChance = stoneChance;
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y + 2.65f, bossTransform.z), 2f);
                 }
                 else if (SkeletType== SkeletType.KingSkelet)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
+                    drop.transform.GetChild(0).GetComponent<PouchManager>().stoneChance = stoneChance;
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y + 2.70f, bossTransform.z), 2f);
                 }
                 else if (SkeletType== SkeletType.Ghost)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
+                    drop.transform.GetChild(0).GetComponent<PouchManager>().stoneChance = stoneChance;
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y + 2.70f, bossTransform.z), 2f);
                 }
                 else if (SkeletType== SkeletType.Goblin)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y-5, bossTransform.z),Quaternion.identity);
+                    drop.transform.GetChild(0).GetComponent<PouchManager>().stoneChance = stoneChance;
                     drop.transform.DOScale(new Vector3(1f, 1f, 1f),.1f).SetEase(Ease.OutBounce);
                     drop.transform.DOMove(new Vector3(bossTransform.x, bossTransform.y , bossTransform.z), 2f);
                 }
