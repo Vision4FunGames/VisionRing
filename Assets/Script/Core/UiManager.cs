@@ -64,7 +64,7 @@ public class UiManager : MonoBehaviour
     public Sprite[] skillBGSprites;
     public Sprite emptySprite = null;
     public Material skillMaterial;
-   
+    public Button StoneBtn;
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
 
     //Chest Scroll
@@ -102,6 +102,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+        StoneBtn.onClick.AddListener(StonePanelOpen);
         playerNameConfirm.onClick.AddListener(PlayerNameSave);
         autoMoveBtn.onClick.AddListener(Player.instance.AutoMoveStart);
         autoMoveBtn.gameObject.SetActive(false);
@@ -140,7 +141,28 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    
+    private Camera _camera;
+    public void StonePanelOpen()
+    {
+        CloseAllUI();
+        GameManager.instance.StonePanel.SetActive(true);
+        _camera = Camera.main;
+        _camera.gameObject.SetActive(false);
+    }
+
+   
+    public void CloseStonePanel()
+    {
+        GamePlayUI();
+        GameManager.instance.StonePanel.SetActive(false);
+        _camera.gameObject.SetActive(true);
+    }
+
+    public void StoneBtnActive()
+    {
+        StoneBtn.interactable = true;
+        StoneBtn.GetComponentInChildren<TextMeshProUGUI>().text = "RING";
+    }
     public void PlayerNameSave()
     {
         GameManager.instance.PlayerName = playerNameInput.text;

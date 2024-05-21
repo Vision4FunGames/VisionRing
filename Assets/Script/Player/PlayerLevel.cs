@@ -36,6 +36,10 @@ public class PlayerLevel : MonoBehaviour
 
         PercenCalculate();
         UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"   %"+_percent;
+        if (currentLevel >= 2)
+        {
+            UiManager.instance.StoneBtnActive();
+        }
     }
 
     private void Update()
@@ -80,6 +84,11 @@ public class PlayerLevel : MonoBehaviour
         for (int i = 0; i < unlockObjects.Length; i++)
         {
             unlockObjects[i].CheckPlayerLevelForUnlock();
+        }
+
+        if (currentLevel >= 2)
+        {
+            UiManager.instance.StoneBtnActive();
         }
     }
     public void LevelUpText()
