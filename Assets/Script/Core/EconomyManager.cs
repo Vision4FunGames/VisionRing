@@ -151,4 +151,15 @@ public class EconomyManager : MonoBehaviour
         Player.instance.playerSound.audioSource.clip = Player.instance.playerSound.earnItemSound;
         Player.instance.playerSound.audioSource.Play();
     }
+    public int GetStoneCount(string itemName)
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            if (itemList[i].name == itemName)
+            {
+                return itemCount[i];
+            }
+        }
+        return 0;
+    }
 }
