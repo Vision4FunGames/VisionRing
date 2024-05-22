@@ -12,7 +12,7 @@ public abstract class CharacterHealth : MonoBehaviour
     public Player _player;
     public DieDelegate OnDie;
     protected float health;
-    private float maxxHealth;
+    private float maxxHealth; 
     public MMProgressBar mmProgressBar;
     [HideInInspector] public bool useShield;
     public GameManager _gameManager;

@@ -556,6 +556,10 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         {
             UiManager.instance.MagicianUI();
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            EconomyManager.instance.SetGold(1000);
+        }
 
         currentTime += Time.deltaTime;
 
