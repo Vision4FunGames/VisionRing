@@ -133,6 +133,11 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void VaultOpen()
+    {
+        CloseAllUI();
+        OpenUI(vaultPanel);
+    }
     public void EnableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)
