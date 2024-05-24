@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class VaultUI : MonoBehaviour
 {
+    public int vaultCount;
+    public TextMeshProUGUI vaultGem;
     private Horse _horse;
     public List<VaultArtifact> vaultArtifacts;
     public GameObject vaultBtnParent;
@@ -44,6 +46,7 @@ public class VaultUI : MonoBehaviour
         }
 
         ClickVault(0);
+         vaultGem.text=PlayerPrefs.GetInt("vaultgem").ToString();
     }
 
     private void Start()
@@ -81,10 +84,9 @@ public class VaultUI : MonoBehaviour
         vaultMultipier.text = "x" + currentBoost;
         vaultMultiperTo.text = "x" + (currentBoost + vaultItems[currentIndex].VaultArtifact.boostPerLevel);
         buyBtnText.text =
-            "" + vaultItems[index].VaultArtifact
-                .gemCost[PlayerPrefs.GetInt(vaultItems[index].VaultArtifact.artifactName)] *
-            vaultItems[index].VaultArtifact.gemCostMultiplier;
-        vaultItems[index].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+            "" + vaultItems[currentIndex].VaultArtifact
+                .gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)];
+                vaultItems[index].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
             "Level" + PlayerPrefs.GetInt(vaultItems[index].VaultArtifact.artifactName);
     }
 
@@ -92,24 +94,32 @@ public class VaultUI : MonoBehaviour
     {
         float currentd = Player.instance.GetComponent<PlayerStats>().damage.GetValue();
 
-
-        int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
-        if (vaultLevel < 49)
+        if (vaultCount > vaultItems[currentIndex].VaultArtifact
+                .gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)])
         {
-            PlayerPrefs.SetInt(vaultItems[currentIndex].VaultArtifact.artifactName, vaultLevel + 1);
-            levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) *
-                         vaultItems[currentIndex].VaultArtifact.boostPerLevel;
-            currentBoost = vaultItems[currentIndex].VaultArtifact.startBoost + levelBoost;
+            int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
+            if (vaultLevel < 49)
+            {
+                vaultCount -= vaultItems[currentIndex].VaultArtifact
+                    .gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)];
+                vaultGem.text = vaultCount.ToString();
+                PlayerPrefs.SetInt("vaultgem",vaultCount);
+                PlayerPrefs.SetInt(vaultItems[currentIndex].VaultArtifact.artifactName, vaultLevel + 1);
+                levelBoost = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName) *
+                             vaultItems[currentIndex].VaultArtifact.boostPerLevel;
+                currentBoost = vaultItems[currentIndex].VaultArtifact.startBoost + levelBoost;
 
-            vaultMultipier.text = "x" + currentBoost;
-            vaultMultiperTo.text = "x" + (currentBoost + vaultItems[currentIndex].VaultArtifact.boostPerLevel);
-            buyBtnText.text = "" + vaultItems[currentIndex].VaultArtifact
-                    .gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)] *
-                vaultItems[currentIndex].VaultArtifact.gemCostMultiplier;
-            vaultItems[currentIndex].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
-                "Level" + PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
-            SetCharacters(vaultItems[currentIndex].VaultArtifact.artifactName, currentBoost);
+                vaultMultipier.text = "x" + currentBoost;
+                vaultMultiperTo.text = "x" + (currentBoost + vaultItems[currentIndex].VaultArtifact.boostPerLevel);
+                buyBtnText.text = "" + vaultItems[currentIndex].VaultArtifact
+                        .gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)] *
+                    vaultItems[currentIndex].VaultArtifact.gemCostMultiplier;
+                vaultItems[currentIndex].vaultBtn.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+                    "Level" + PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
+                SetCharacters(vaultItems[currentIndex].VaultArtifact.artifactName, currentBoost);
+            }
         }
+        
     }
 
     public void SetCharacters(string vaultName, float currentBoost)

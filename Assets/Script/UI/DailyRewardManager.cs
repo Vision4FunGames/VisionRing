@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -22,16 +23,17 @@ public class DailyRewardManager : MonoBehaviour
     private int rewardCount;
     private RewardManager _rewardManager;
     private int decimalcount;
+
     private void Start()
     {
         _rewardManager = FindObjectOfType<RewardManager>();
         _alignSpin = GetComponentInChildren<AlignSpin>();
-        
+
         float radius = 2f;
         for (int i = 0; i < selector.Length; i++)
         {
-            float angle = i * Mathf.PI*2f / selector.Length;
-            Vector3 newPos = new Vector3(Mathf.Cos(angle)*radius, 0, Mathf.Sin(angle)*radius);
+            float angle = i * Mathf.PI * 2f / selector.Length;
+            Vector3 newPos = new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
             selector[i].transform.position = newPos;
         }
     }
@@ -49,7 +51,7 @@ public class DailyRewardManager : MonoBehaviour
         float delayT = 0;
         if (!_decimalBool)
         {
-            StartCoroutine(selector[0].GetComponent<Selector>().Move(delayT,0));
+            StartCoroutine(selector[0].GetComponent<Selector>().Move(delayT, 0));
         }
 
         else
@@ -59,7 +61,7 @@ public class DailyRewardManager : MonoBehaviour
                 //delayT += 0.15f;
                 selector[i].gameObject.SetActive(true);
                 selector[i].GetComponent<Selector>()._decimalBool = true;
-                StartCoroutine(selector[i].GetComponent<Selector>().Move(delayT,i));
+                StartCoroutine(selector[i].GetComponent<Selector>().Move(delayT, i));
             }
         }
 
@@ -76,6 +78,12 @@ public class DailyRewardManager : MonoBehaviour
             currentReward.transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
         }));
         spin = false;
+        FindObjectOfType<VaultUI>().vaultCount =
+            int.Parse(_selector.transform.parent.transform.GetComponentInChildren<TextMeshProUGUI>().text);
+        
+        PlayerPrefs.SetInt("vaultgem",     int.Parse(_selector.transform.parent.transform.GetComponentInChildren<TextMeshProUGUI>().text));
+
+        FindObjectOfType<VaultUI>().vaultGem.text = FindObjectOfType<VaultUI>().vaultCount.ToString();
         Invoke("ResetDaily", 3);
     }
 
@@ -87,6 +95,7 @@ public class DailyRewardManager : MonoBehaviour
             OpenRewardDecimal();
         }
     }
+
     public void OpenRewardDecimal()
     {
         if (rewardCount < 10)
@@ -109,5 +118,7 @@ public class DailyRewardManager : MonoBehaviour
 
     public void ResetDaily()
     {
+        UiManager.instance.CloseAllUI();
+        UiManager.instance.GamePlayUI();
     }
 }

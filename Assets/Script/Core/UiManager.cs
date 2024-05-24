@@ -135,8 +135,10 @@ public class UiManager : MonoBehaviour
 
     public void VaultOpen()
     {
+        FindObjectOfType<VaultUI>().vaultGem.text = FindObjectOfType<VaultUI>().vaultCount.ToString();
         CloseAllUI();
         OpenUI(vaultPanel);
+        
     }
     public void EnableButton()
     {
