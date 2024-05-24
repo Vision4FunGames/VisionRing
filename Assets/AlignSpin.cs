@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -66,9 +67,10 @@ public class AlignSpin : MonoBehaviour
             this.InstantiateInCircle(new Vector3(0, 0, 0), 12, 280, 0);
         else
         {
-            for (int i = 0; i < spinObj.Length; i++)
+            for (int i = 0; i < spinPool.Count; i++)
             {
                 spinPool[i].GetComponent<Image>().sprite = spinObj[Random.Range(0, spinObj.Length)];
+                spinPool[i].GetComponentInChildren<TextMeshProUGUI>().text = Random.Range(50, 250).ToString();
             }
         }
     }

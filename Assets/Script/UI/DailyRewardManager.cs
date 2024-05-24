@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class DailyRewardManager : MonoBehaviour
 {
+    public Button CollectBtn;
     public AlignSpin _alignSpin;
     public GameObject currentReward;
     public GameObject decimalPos;
@@ -68,8 +69,8 @@ public class DailyRewardManager : MonoBehaviour
     public void OpenReward(GameObject _selector)
     {
         currentReward = Instantiate(Resources.Load<GameObject>("Reward"), transform, false);
-        currentReward.transform.GetChild(0).GetComponent<Image>().sprite =
-            _selector.transform.parent.transform.GetChild(1).GetComponent<Image>().sprite;
+        currentReward.transform.GetChild(1).GetComponent<Image>().sprite =
+            _selector.transform.parent.transform.GetChild(0).GetComponent<Image>().sprite;
         currentReward.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f).OnComplete((() =>
         {
             currentReward.transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);

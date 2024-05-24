@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class RewardManager : WorldTimeAPIController
 {
@@ -31,6 +29,11 @@ public class RewardManager : WorldTimeAPIController
         {
             dailyDrawTime = DateTime.Parse(PlayerPrefs.GetString("DailyDraw"));
             InvokeRepeating("CheckDailyDrawReward", 1f, 1f);
+
+            if (dailyDrawTime.Second > 1)
+            {
+                dailyRewardManager.CollectBtn.interactable = false;
+            }
         }
             
     }
@@ -40,7 +43,7 @@ public class RewardManager : WorldTimeAPIController
         if (_drawCount > 0)
         {
             _drawCount--;
-            if (_drawCount < 0)
+            if (_drawCount <= 0)
             {
                 await _worldTimeAPIController.GetGlobalTime();
                 globalTimeLast = _worldTimeAPIController.globalTimeLast;
@@ -69,11 +72,18 @@ public class RewardManager : WorldTimeAPIController
     }
     public void CheckDailyDrawReward()
     {
+        
         currentDraw = (dailyDrawTime-DateTime.Now).TotalSeconds;
         TimeSpan t = TimeSpan.FromSeconds(currentDraw);
         dailyDrawTxtLeft.text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s", 
             t.Hours, 
             t.Minutes, 
             t.Seconds);
+        
+        if (t.Seconds <= 0)
+        {
+            dailyRewardManager.CollectBtn.interactable = true;
+        }
     }
+    
 }
