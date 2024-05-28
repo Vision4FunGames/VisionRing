@@ -29,7 +29,7 @@ public class RewardManager : WorldTimeAPIController
         {
             dailyDrawTime = DateTime.Parse(PlayerPrefs.GetString("DailyDraw"));
             InvokeRepeating("CheckDailyDrawReward", 1f, 1f);
-
+            
             if (dailyDrawTime.Second > 1)
             {
                 dailyRewardManager.CollectBtn.interactable = false;
@@ -47,6 +47,7 @@ public class RewardManager : WorldTimeAPIController
             {
                 await _worldTimeAPIController.GetGlobalTime();
                 globalTimeLast = _worldTimeAPIController.globalTimeLast;
+                //dailyDrawTime = globalTimeLast.AddMinutes(5);
                 dailyDrawTime = globalTimeLast.AddHours(24);
                 PlayerPrefs.SetString("DailyDraw",dailyDrawTime.ToString());
                 InvokeRepeating("CheckDailyDrawReward", 1f, 1f);
@@ -75,12 +76,16 @@ public class RewardManager : WorldTimeAPIController
         
         currentDraw = (dailyDrawTime-DateTime.Now).TotalSeconds;
         TimeSpan t = TimeSpan.FromSeconds(currentDraw);
-        dailyDrawTxtLeft.text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s", 
-            t.Hours, 
-            t.Minutes, 
-            t.Seconds);
+        if (t.Seconds >= 0 && t.Minutes >=0 && t.Hours >=0)
+        {
+            dailyDrawTxtLeft.text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s", 
+                t.Hours, 
+                t.Minutes, 
+                t.Seconds);
+        }
+       
         
-        if (t.Seconds <= 0)
+        if (t.Seconds <= 0 && t.Minutes <=0 && t.Hours <=0)
         {
             dailyRewardManager.CollectBtn.interactable = true;
         }
