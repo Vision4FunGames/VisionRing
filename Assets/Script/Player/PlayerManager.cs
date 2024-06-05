@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     public bool edit;
     public Vector3 startPlayerPos;
     public GameObject pet;
-
+    private GameObject currentBuildObj;
     #region Singleton
 
     public static PlayerManager instance;
@@ -151,8 +151,39 @@ public class PlayerManager : MonoBehaviour
             other.gameObject.GetComponent<Collider>().enabled = false;
             TutorialLoader.instance.Load("RealmChange");
         }
+
+        if (other.CompareTag("Build"))
+        {
+            UiManager.instance.buildBtn.gameObject.SetActive(true);
+            currentBuildObj = other.gameObject;
+            Vector3 goldpos = Camera.main.WorldToScreenPoint(currentBuildObj.transform.position);
+            UiManager.instance.buildBtn.transform.position = goldpos;
+        }
     }
 
+    public void BuildStartObj()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (i == 9)
+            {
+                GameObject c = Instantiate(Resources.Load("WoodPile"),transform)as GameObject;
+                c.transform.localPosition = new Vector3(0,1,0);
+                c.GetComponent<BuildObjMove>().MoveBuild(currentBuildObj.transform,i*0.1f,true);
+            }
+            else
+            {
+                GameObject c = Instantiate(Resources.Load("WoodPile"),transform)as GameObject;
+                c.transform.localPosition = new Vector3(0,1,0);
+                c.GetComponent<BuildObjMove>().MoveBuild(currentBuildObj.transform,i*0.1f,false);
+            }
+        }
+    }
+
+    public void BuildFinishObj()
+    {
+        currentBuildObj.GetComponentInChildren<ParticleSystem>().Play();
+    }
     public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Fire"))
@@ -173,6 +204,11 @@ public class PlayerManager : MonoBehaviour
             player.speed = player.baseSpeed;
             player._playerAnimator.SetBool("yurumeBool", false);
             Destroy(sessizImage.gameObject);
+        }
+
+        if (other.CompareTag("Build"))
+        {
+            UiManager.instance.buildBtn.gameObject.SetActive(false);
         }
     }
 

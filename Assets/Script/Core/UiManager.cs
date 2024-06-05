@@ -38,6 +38,8 @@ public class UiManager : MonoBehaviour
         vaultPanel,
         cinematicCanvas;
 
+    
+    public  Button buildBtn;
     public TextMeshProUGUI playerLevel;
     public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
@@ -102,6 +104,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+        buildBtn.onClick.AddListener(PlayerManager.instance.BuildStartObj);
         StoneBtn.onClick.AddListener(StonePanelOpen);
         playerNameConfirm.onClick.AddListener(PlayerNameSave);
         autoMoveBtn.onClick.AddListener(Player.instance.AutoMoveStart);
