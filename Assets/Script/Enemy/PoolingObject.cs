@@ -12,7 +12,8 @@ public enum ThrowType
 {
     arrow,
     bomb,
-    ghostball
+    ghostball,
+    wizard
 }
 
 public class PoolingObject : MonoBehaviour
@@ -100,6 +101,26 @@ public class PoolingObject : MonoBehaviour
                 ParticleSystem bomb = Instantiate(ParticleManager.instance.bombparticle, transform.position,
                     Quaternion.identity, null);
                 Destroy(bomb.gameObject, 2f);
+            });
+        } else if (mythrThrowType == ThrowType.wizard)
+        {
+            circleParentObj = Instantiate(Resources.Load<GameObject>("GolemCircle"));
+            circleParentObj.SetActive(true);
+            circleParentObj.transform.localScale = new Vector3(2, 1.5f, 2);
+            Vector3 _targetPos = target.position;
+            circleParentObj.transform.position = new Vector3(_targetPos.x, _targetPos.y+0.5f, _targetPos.z);
+            circleParentObj.transform.GetChild(1).transform.localScale = new Vector3(0, 0, 0);
+            circleParentObj.transform.GetChild(1).transform.DOScale(new Vector3(1, 1, 1), 1f)
+                .OnComplete((() =>Destroy(circleParentObj.gameObject)));
+            transform.DOJump(
+                new Vector3(target.position.x, target.position.y + 2f, target.position.z),
+                6f, 1, 1).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                GetComponent<Collider>().enabled = true;
+                Invoke("closeTrigger",.1f);
+                //ParticleSystem bomb = Instantiate(ParticleManager.instance.bombparticle, transform.position,
+                //    Quaternion.identity, null);
+                // Destroy(bomb.gameObject, 2f);
             });
         }
     }
