@@ -61,7 +61,7 @@ MonoBehaviour:
   shaderData_RingCount:
   - 1
   shaderData_Phase:
-  - 282.25745
+  - 37.84663
   shaderData_Frequency:
   - 14.85
   shaderData_Smooth:
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 10
-  timer: 17.056433
+  timer: 11.279499
   increaseEnes: 0
   radius: 0
   intensity: 0.7
@@ -97,7 +97,7 @@ MonoBehaviour:
   ringCount: 1
   frequency: 14.85
   phaseSpeed: 40
-  currentPhase: 282.25745
+  currentPhase: 51.179962
   smooth: 0.46
   slider: {fileID: 0}
   displayAllProperties: 1
@@ -17253,6 +17253,8 @@ GameObject:
   - component: {fileID: 1391811994}
   - component: {fileID: 1391812008}
   - component: {fileID: 1391812019}
+  - component: {fileID: 6494312265799395836}
+  - component: {fileID: 1263520821174996489}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -17651,6 +17653,54 @@ MonoBehaviour:
   message: 
   damageEmissionBoolean: 0
 --- !u!114 &1391812019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631297512559623440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbacf6d156945774084cd7e943eff5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 0
+  currentExp: 0
+  levelsExpPool: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  expBoost: 1
+  expBaseBoost: 1
+  playerexp: {fileID: 11400000, guid: ab03a21b16d66c64e91554952021c95d, type: 2}
+  _levelUpText: {fileID: 0}
+  _levelUpParticle: {fileID: 0}
+--- !u!114 &6494312265799395836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631297512559623440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c988e3011b444dbc928aa032cb25f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  die: 0
+  armorValue: 1
+  maxHealth: 300
+  damage:
+    baseValue: 25
+  armor:
+    baseValue: 1
+  health:
+    baseValue: 300
+  critChance:
+    baseValue: 0
+  prefab: {fileID: 0}
+  critPrefab: {fileID: 0}
+  mmProgressBar: {fileID: 0}
+  message: 
+  damageEmissionBoolean: 0
+--- !u!114 &1263520821174996489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

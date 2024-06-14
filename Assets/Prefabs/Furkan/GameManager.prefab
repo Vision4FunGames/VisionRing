@@ -92,6 +92,7 @@ MonoBehaviour:
   seaWater: {fileID: 0}
   campFire: {fileID: 0}
   tutoVaril: {fileID: 0}
+  StonePanel: {fileID: 0}
   isMerchant: 0
   isMagician: 0
   isBlacksmith: 0
@@ -155,6 +156,7 @@ MonoBehaviour:
   settingPanel: {fileID: 0}
   vaultPanel: {fileID: 0}
   cinematicCanvas: {fileID: 0}
+  buildBtn: {fileID: 0}
   playerLevel: {fileID: 0}
   focusPanel: {fileID: 0}
   CanvasGroup: {fileID: 0}
@@ -203,6 +205,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9aef5fb80a7a29948b90854e66790b2f, type: 3}
   emptySprite: {fileID: 21300000, guid: e498c622e234a419a83e872a7f8f4fbe, type: 3}
   skillMaterial: {fileID: 2100000, guid: a3f7a2356cdb2604c8f48b7f17ec27fb, type: 2}
+  StoneBtn: {fileID: 0}
   diamondText: {fileID: 0}
   gemText: {fileID: 0}
   goldText: {fileID: 0}
@@ -312,6 +315,9 @@ MonoBehaviour:
   chestItems:
   - {fileID: 11400000, guid: 2e7887a5c9f04764b9c5b1d5b5fa5da3, type: 2}
   - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
+  - {fileID: 11400000, guid: 4f24002a53cc65b4dbef0b05a7f402d7, type: 2}
+  - {fileID: 11400000, guid: 9e94bd48f1712e24d86e977995ac8df8, type: 2}
+  - {fileID: 11400000, guid: 3ec3c57eec0717640804a5ca5581d482, type: 2}
   upgradeItems: []
   dropUsableItems:
   - {fileID: 11400000, guid: a546a078b23ec394693a24f9184ffd56, type: 2}
@@ -523,7 +529,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e7887a5c9f04764b9c5b1d5b5fa5da3, type: 2}
   - {fileID: 11400000, guid: 82605de7e038afa4baf419028b128548, type: 2}
   - {fileID: 11400000, guid: b399d225e4d2e3e4598df7dbea7a80a4, type: 2}
-  itemCount: 000000000000000000000000
+  - {fileID: 11400000, guid: 3ec3c57eec0717640804a5ca5581d482, type: 2}
+  - {fileID: 11400000, guid: 4f24002a53cc65b4dbef0b05a7f402d7, type: 2}
+  - {fileID: 11400000, guid: 9e94bd48f1712e24d86e977995ac8df8, type: 2}
+  itemCount: 000000000000000000000000000000000000000000000000
 --- !u!114 &1897537093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,9 +706,6 @@ MonoBehaviour:
   player: {fileID: 0}
   ActiveObjectsArray:
   - activeObjectsArray:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
