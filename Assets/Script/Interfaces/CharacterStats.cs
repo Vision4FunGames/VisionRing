@@ -9,7 +9,7 @@ public class CharacterStats : MonoBehaviour
     public bool die;
     public int armorValue;
     public int maxHealth = 300;
-    public int currentHealth { get; private set; }
+    public int currentHealth { get; set; }
     public Stat damage;
     public Stat armor;
     public Stat health;
@@ -57,6 +57,13 @@ public class CharacterStats : MonoBehaviour
         print(currentHealth);
     }
 
+    public void Heal(int healValue)
+    {
+        currentHealth += healValue;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+        UpdateHealthBar();
+    }
     public void TakeDamage(int damage, float critChance)
     {
         bool crit = false;
@@ -159,6 +166,7 @@ public class CharacterStats : MonoBehaviour
         QuestMachineMessages.SendCompositeMessage(this, message);
     }
 
+   
     public void UpdateHealthBar()
     {
         if (mmProgressBar)

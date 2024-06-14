@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -26,9 +27,9 @@ public class PoolingObject : MonoBehaviour
     private ObjectPool<PoolingObject> _pool;
 
     private Coroutine deactivateBulletAfterTimeCoroutine;
-
+    public GameObject wizardHealthPrefab;
     private Rigidbody rb;
-
+    private GameObject _wizard;
     public Transform target;
     // Start is called before the first frame update
     private Player player;
@@ -54,7 +55,7 @@ public class PoolingObject : MonoBehaviour
         deactivateBulletAfterTimeCoroutine = StartCoroutine(DeactivateBulletAfterTime());
     }
 
-    public void ThrowArrow(Transform target)
+    public void ThrowArrow(Transform target,GameObject wizard)
     {
         if (target ==null)
         {
@@ -104,6 +105,7 @@ public class PoolingObject : MonoBehaviour
             });
         } else if (mythrThrowType == ThrowType.wizard)
         {
+            _wizard = wizard;
             circleParentObj = Instantiate(Resources.Load<GameObject>("GolemCircle"));
             circleParentObj.SetActive(true);
             circleParentObj.transform.localScale = new Vector3(2, 1.5f, 2);
@@ -142,6 +144,12 @@ public class PoolingObject : MonoBehaviour
             ballOwner?.PlayerDamage();
             StopCoroutine(deactivateBulletAfterTimeCoroutine);
             _pool.Release(this);
+            if (mythrThrowType == ThrowType.wizard && _wizard)
+            {
+                GameObject currentW=Instantiate(wizardHealthPrefab, transform.position, quaternion.identity);
+                currentW.GetComponent<wizardHealthSkill>().MoveTarget(_wizard);
+                _wizard = null;
+            }
         }
 
         if (other.CompareTag("RockGate"))
