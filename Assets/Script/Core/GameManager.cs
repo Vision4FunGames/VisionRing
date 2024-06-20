@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     }
     private void Start()
     {
+        Player.instance.transform.position = villageSpawnPos.transform.position;
         // _questManager = GetComponent<QuestManager>();
         //
         //  #region Tutorial
