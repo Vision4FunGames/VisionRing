@@ -69,7 +69,8 @@ public class PlayerAttack : MonoBehaviour
                 case CurrentGunType.sword:
                     if (GameManager.instance.tutorialSection ==0 && GameManager.instance.tutorialCounter <= 1)
                     {
-                     
+                        swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
+                        swordAttack.AttackSword(player, playerAnimator);
                     }
                     else
                     {

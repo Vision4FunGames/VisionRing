@@ -90,11 +90,11 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         PlayStandSound();
 
        
-        if (PlayerPrefs.HasKey("TutorialSection"))
-        {
-            tutorialCounter = 0;
-            tutorialSection = PlayerPrefs.GetInt("TutorialSection");
-        }
+        // if (PlayerPrefs.HasKey("TutorialSection"))
+        // {
+        //     tutorialCounter = 0;
+        //     tutorialSection = PlayerPrefs.GetInt("TutorialSection");
+        // }
 
         if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
@@ -142,168 +142,166 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     }
     private void Start()
     {
-        _questManager = GetComponent<QuestManager>();
-
-        #region Tutorial
-
-        if (PlayerPrefs.HasKey("TutorialSection"))
-        {
-            tutorialSection = PlayerPrefs.GetInt("TutorialSection");
-        }
-
-        if (tutorialSection == 1)
-        {
-            // //Quest quest = new Quest(questMachineConfiguration)
-            // Player.instance.GetComponent<QuestJournal>()
-            //     .AddQuest(questMachineConfiguration.questDatabases[0].questAssets[9]);
-        }
-
-        if (tutorialSection == 2)
-        {
-            tutorial = true;
-            QuestLoad();
-        }
-        // else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
-        // {
-        //     var questlist = magician.GetComponent<QuestGiver>().questList;
-        //     for (int i = 0; i < questlist.Count; i++)
-        //     {
-        //         if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
-        //         {
-        //             questlist[i].SetState(QuestState.Successful);
-        //             Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
-        //         }
-        //         else
-        //         {
-        //             questlist[i].SetState(QuestState.WaitingToStart);
-        //             IndicatorDefine(magician);
-        //             break;
-        //         }
-        //     }
-        // }
-
-        if (PlayerPrefs.HasKey("Blacksmith"))
-        {
-            if (PlayerPrefs.GetInt("Blacksmith") == 1)
-            {
-                isBlacksmith = true;
-            }
-        }
-
-        if (PlayerPrefs.HasKey("Merchant"))
-        {
-            if (PlayerPrefs.GetInt("Merchant") == 1)
-            {
-                isMerchant = true;
-            }
-        }
-
-        if (PlayerPrefs.HasKey("Magician"))
-        {
-            if (PlayerPrefs.GetInt("Magician") == 1)
-            {
-                isMagician = true;
-            }
-        }
-
-        if (PlayerPrefs.HasKey("Ring"))
-        {
-            if (PlayerPrefs.GetInt("Ring") == 1)
-            {
-                if (gameState != GameState.Tutorial)
-                {
-                    isRing = true;
-                    UiManager.instance.ringBtn.gameObject.SetActive(true);
-                    UiManager.instance.ringBtn.GetComponent<Button>().enabled = true;
-                }
-            }
-            else
-            {
-                UiManager.instance.ringBtn.gameObject.SetActive(false);
-            }
-        }
-
-        if (PlayerPrefs.HasKey("FirstEnemies"))
-        {
-            if (PlayerPrefs.GetString("FirstEnemies") == "True")
-            {
-                firstLevelEnemies.gameObject.SetActive(true);
-            }
-        }
-
-        if (PlayerPrefs.HasKey("Heal"))
-        {
-            if (PlayerPrefs.GetInt("Heal") == 1)
-            {
-                isHeal = true;
-            }
-        }
-
-        if (PlayerPrefs.HasKey("Dash"))
-        {
-            if (PlayerPrefs.GetInt("Dash") == 1)
-            {
-                isDash = true;
-            }
-        }
-
-        if (PlayerPrefs.HasKey("FoxSaved"))
-        {
-            if (PlayerPrefs.GetInt("FoxSaved") == 1)
-            {
-                isFoxSaved = true;
-                seaWater.transform.DOLocalMove(new Vector3(89.502594f, -31f, -113.304504f),2f);
-            }
-        }
-        if (PlayerPrefs.HasKey("Colosseum"))
-        {
-            if (PlayerPrefs.GetInt("Colosseum") == 1)
-            {
-                isColosseum = true;
-            }
-        }
-        if (PlayerPrefs.HasKey("Campfire"))
-        {
-            if (PlayerPrefs.GetInt("Campfire") == 1)
-            {
-                isCampfire = true;
-            }
-        }
-
-        if (PlayerPrefs.HasKey("isDungeon"))
-        {
-            isDungeon = true;
-        }
-
-        #endregion
-
-
-        tutorialName = tutorialSection + ".";
-        PlayerName = "";
-        foxManager = FindObjectOfType<FoxManager>();
-        if (!tutorial)
-        {
-            if (tutorialSection == 0 && tutorialCounter == 0)
-            {
-                EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
-                Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
-            }
-
-            UpdateGameState(GameState.Tutorial);
-            TutorialLoader.instance.Load(tutorialName + tutorialCounter);
-            TutorialEvents.OnTutorialComplete += TutorialChange;
-        }
-        else
-        {
-        }
-
-        _questDialogueUI = FindObjectOfType<UnityUIQuestDialogueUI>();
-
-        PlayStandSound();
-
-
-        UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
-        PixelCrushers.QuestMachine.Wrappers.UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
+        // _questManager = GetComponent<QuestManager>();
+        //
+        //  #region Tutorial
+        // //
+        // // if (PlayerPrefs.HasKey("TutorialSection"))
+        // // {
+        // //     tutorialSection = PlayerPrefs.GetInt("TutorialSection");
+        // // }
+        // //
+        // // if (tutorialSection == 1)
+        // // {
+        // //     // //Quest quest = new Quest(questMachineConfiguration)
+        // //     // Player.instance.GetComponent<QuestJournal>()
+        // //     //     .AddQuest(questMachineConfiguration.questDatabases[0].questAssets[9]);
+        // // }
+        // //
+        // // if (tutorialSection == 2)
+        // // {
+        // //     tutorial = true;
+        // //     QuestLoad();
+        // // }
+        // // // else if (magician.GetComponent<QuestGiver>().HasOfferableOrActiveQuest())
+        // // // {
+        // // //     var questlist = magician.GetComponent<QuestGiver>().questList;
+        // // //     for (int i = 0; i < questlist.Count; i++)
+        // // //     {
+        // // //         if (_questManager.successedQuests.Contains(questlist[i].id.ToString()))
+        // // //         {
+        // // //             questlist[i].SetState(QuestState.Successful);
+        // // //             Debug.Log(questlist[i].id.ToString()+ " Bitirildi ");
+        // // //         }
+        // // //         else
+        // // //         {
+        // // //             questlist[i].SetState(QuestState.WaitingToStart);
+        // // //             IndicatorDefine(magician);
+        // // //             break;
+        // // //         }
+        // // //     }
+        // // // }
+        // //
+        // // if (PlayerPrefs.HasKey("Blacksmith"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Blacksmith") == 1)
+        // //     {
+        // //         isBlacksmith = true;
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("Merchant"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Merchant") == 1)
+        // //     {
+        // //         isMerchant = true;
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("Magician"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Magician") == 1)
+        // //     {
+        // //         isMagician = true;
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("Ring"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Ring") == 1)
+        // //     {
+        // //         if (gameState != GameState.Tutorial)
+        // //         {
+        // //             isRing = true;
+        // //             UiManager.instance.ringBtn.gameObject.SetActive(true);
+        // //             UiManager.instance.ringBtn.GetComponent<Button>().enabled = true;
+        // //         }
+        // //     }
+        // //     else
+        // //     {
+        // //         UiManager.instance.ringBtn.gameObject.SetActive(false);
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("FirstEnemies"))
+        // // {
+        // //     if (PlayerPrefs.GetString("FirstEnemies") == "True")
+        // //     {
+        // //         firstLevelEnemies.gameObject.SetActive(true);
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("Heal"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Heal") == 1)
+        // //     {
+        // //         isHeal = true;
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("Dash"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Dash") == 1)
+        // //     {
+        // //         isDash = true;
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("FoxSaved"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("FoxSaved") == 1)
+        // //     {
+        // //         isFoxSaved = true;
+        // //         seaWater.transform.DOLocalMove(new Vector3(89.502594f, -31f, -113.304504f),2f);
+        // //     }
+        // // }
+        // // if (PlayerPrefs.HasKey("Colosseum"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Colosseum") == 1)
+        // //     {
+        // //         isColosseum = true;
+        // //     }
+        // // }
+        // // if (PlayerPrefs.HasKey("Campfire"))
+        // // {
+        // //     if (PlayerPrefs.GetInt("Campfire") == 1)
+        // //     {
+        // //         isCampfire = true;
+        // //     }
+        // // }
+        // //
+        // // if (PlayerPrefs.HasKey("isDungeon"))
+        // // {
+        // //     isDungeon = true;
+        // // }
+        // // tutorialName = tutorialSection + ".";
+        // // PlayerName = "";
+        // // foxManager = FindObjectOfType<FoxManager>();
+        // // if (!tutorial)
+        // // {
+        // //     if (tutorialSection == 0 && tutorialCounter == 0)
+        // //     {
+        // //         EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
+        // //         Player.instance._fixedJoystick.transform.GetChild(0).gameObject.SetActive(true);
+        // //     }
+        // //
+        // //     UpdateGameState(GameState.Tutorial);
+        // //     TutorialLoader.instance.Load(tutorialName + tutorialCounter);
+        // //     TutorialEvents.OnTutorialComplete += TutorialChange;
+        // // }
+        // #endregion
+        //
+        //
+        //
+        //
+        //
+        // _questDialogueUI = FindObjectOfType<UnityUIQuestDialogueUI>();
+        //
+        // PlayStandSound();
+        //
+        //
+        // UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
+        // PixelCrushers.QuestMachine.Wrappers.UnityUIQuestDialogueUI.OnQuestChange.AddListener(AcceptQuest);
     }
 
     public void QuestLoad()
