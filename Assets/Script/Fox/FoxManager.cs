@@ -32,12 +32,12 @@ public class FoxManager : MonoBehaviour
         //     transform.position = PlayerManager.instance.startPlayerPos + new Vector3(0, 0, 5f);
         // }
         foxAnim = GetComponent<Animator>();
-        if (!GameManager.instance.tutorial && GameManager.instance.tutorialSection ==0)
-        {
-            agent.Stop();
-            agent.enabled = false;
-            foxAnim.SetBool("sitBool",true);
-        }
+        // if (!GameManager.instance.tutorial && GameManager.instance.tutorialSection ==0)
+        // {
+        //     agent.Stop();
+        //     agent.enabled = false;
+        //     foxAnim.SetBool("sitBool",true);
+        // }
         player = Player.instance.transform;
        
         foxBaseTransform = transform.position;
