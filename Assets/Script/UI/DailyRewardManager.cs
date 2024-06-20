@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -23,9 +24,12 @@ public class DailyRewardManager : MonoBehaviour
     private int rewardCount;
     private RewardManager _rewardManager;
     private int decimalcount;
+    public bool baseScene;
 
     private void Start()
     {
+        if (!baseScene)
+            gameObject.SetActive(false);
         _rewardManager = FindObjectOfType<RewardManager>();
         _alignSpin = GetComponentInChildren<AlignSpin>();
 
@@ -80,8 +84,9 @@ public class DailyRewardManager : MonoBehaviour
         spin = false;
         FindObjectOfType<VaultUI>().vaultCount =
             int.Parse(_selector.transform.parent.transform.GetComponentInChildren<TextMeshProUGUI>().text);
-        
-        PlayerPrefs.SetInt("vaultgem",     int.Parse(_selector.transform.parent.transform.GetComponentInChildren<TextMeshProUGUI>().text));
+
+        PlayerPrefs.SetInt("vaultgem",
+            int.Parse(_selector.transform.parent.transform.GetComponentInChildren<TextMeshProUGUI>().text));
 
         FindObjectOfType<VaultUI>().vaultGem.text = FindObjectOfType<VaultUI>().vaultCount.ToString();
         Invoke("ResetDaily", 3);
