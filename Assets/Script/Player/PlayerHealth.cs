@@ -5,6 +5,7 @@ using UnityEngine;
 using DamageNumbersPro;
 using DG.Tweening;
 using Exoa.TutorialEngine;
+using MapMinimap;
 using MoreMountains.Tools;
 using Unity.VisualScripting;
 using UnityEngine.UI;
@@ -35,7 +36,7 @@ public class PlayerHealth : CharacterHealth
         maxHealth = health;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
-        mmProgressBar = FindObjectOfType<bl_MiniMap>().GetComponentInChildren<MMProgressBar>();
+        mmProgressBar = FindObjectOfType<Minimap>().GetComponentInChildren<MMProgressBar>();
         _gameManager = FindObjectOfType<GameManager>();
         mmProgressBar.LerpForegroundBarDurationIncreasing = 3f;
     }
