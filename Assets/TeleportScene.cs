@@ -15,7 +15,7 @@ public class TeleportScene : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tp.TeleportScene(sceneName);
+            tp.DungeonScene(sceneName);
         }
     }
 }

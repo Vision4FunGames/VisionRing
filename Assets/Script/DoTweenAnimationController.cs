@@ -49,6 +49,7 @@ public class DoTweenAnimationController : MonoBehaviour
         }
     }
 
+    
     private IEnumerator MoveWithBothWays()
     {
         Vector3 originalLocation = transform.position;

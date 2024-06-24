@@ -9,6 +9,15 @@ public class TeleportManager : MonoBehaviour
 
    public void TeleportScene(String sceneName)
    {
+      String sceneKey = SceneManager.GetActiveScene().name;
+      Debug.Log(sceneKey);
+      SceneManager.LoadScene(sceneName);
+   }
+
+   public void DungeonScene(String sceneName)
+   {
+      String sceneKey = SceneManager.GetActiveScene().name;
+      Debug.Log(sceneKey);
       SceneManager.LoadScene(sceneName);
    }
 
