@@ -15,7 +15,7 @@ public class HideOutManager : MonoBehaviour
         for (int i = 0; i < stones.Length; i++)
         {
             stones[i].gameObject.SetActive(true);
-            stones[i].StartMove(0.1f*i);
+            stones[i].StartMove(0.05f*i);
         }
     }
   

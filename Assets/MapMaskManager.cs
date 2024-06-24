@@ -1,25 +1,42 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapMaskManager : MonoBehaviour
 {
     public int dungeonLevel;
-    public RectTransform maskObj;
     public MapLevelSetting[] mapLevelSettings;
+
+
+    private void Start()
+    {
+        dungeonLevel = 0;
+        MapMaskUpdate();
+    }
 
     [Button("LevelMapTest")]
     public void MapMaskUpdate()
     {
-        maskObj.localPosition = mapLevelSettings[dungeonLevel].maskPos;
-        maskObj.SetWidth(mapLevelSettings[dungeonLevel].maskScale.x);
-        maskObj.SetHeight(mapLevelSettings[dungeonLevel].maskScale.y);
+        for (int i = 0; i < mapLevelSettings.Length; i++)
+        {
+            if (dungeonLevel == i)
+            {
+                mapLevelSettings[i]._maskImage.SetActive(true);
+                mapLevelSettings[i].levelButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                mapLevelSettings[i]._maskImage.SetActive(false);
+                mapLevelSettings[i].levelButton.gameObject.SetActive(false);
+            }
+        }
     }
 }
 
- [Serializable]
+[Serializable]
 public class MapLevelSetting
 {
-    public Vector3 maskPos;
-    public Vector2 maskScale;
+    public GameObject _maskImage;
+    public Button levelButton;
 }

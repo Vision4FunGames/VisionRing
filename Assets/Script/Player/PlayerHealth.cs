@@ -36,7 +36,6 @@ public class PlayerHealth : CharacterHealth
         maxHealth = health;
         _playerMaterial = Resources.Load("PlayerMaterial/boy1") as Material;
         _damageNumbersPro = Resources.Load("Spread Up") as GameObject;
-        mmProgressBar = FindObjectOfType<Minimap>().GetComponentInChildren<MMProgressBar>();
         _gameManager = FindObjectOfType<GameManager>();
         mmProgressBar.LerpForegroundBarDurationIncreasing = 3f;
     }

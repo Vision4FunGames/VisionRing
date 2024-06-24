@@ -21,7 +21,7 @@ public class DoTweenAnimationController : MonoBehaviour
         MOVEMENT_ONE_TWOWAY
     }
 
-    
+
     public void StartMove(float delay)
     {
         if (_doTweenType == DoTweenType.MOVEMENT_ONE_WAY)
@@ -29,8 +29,18 @@ public class DoTweenAnimationController : MonoBehaviour
             if (_targetLocation == Vector3.zero)
                 _targetLocation = new Vector3(transform.position.x, 0, transform.position.z);
 
-            transform.DOLocalMove(_targetLocation, _moveDuration).SetEase(_moveEase).SetDelay(delay);
-        }else if (_doTweenType == DoTweenType.MOVEMENT_ONE_TWOWAY)
+            transform.DOLocalMove(_targetLocation, _moveDuration).SetEase(_moveEase).SetDelay(delay)
+                .OnComplete((() =>
+                {
+                    ParticleSystem particleSystem = Instantiate(Resources.Load<ParticleSystem>("SmokeExplosionWhite"));
+                    particleSystem.transform.SetParent(transform);
+                    particleSystem.transform.localPosition = Vector3.zero;
+                    particleSystem.transform.localScale = new Vector3(3, 3, 32);
+                    particleSystem.Play();
+                    Destroy(particleSystem.gameObject,3);
+                }));
+        }
+        else if (_doTweenType == DoTweenType.MOVEMENT_ONE_TWOWAY)
         {
             if (_targetLocation == Vector3.zero)
                 _targetLocation = transform.position;
@@ -38,6 +48,7 @@ public class DoTweenAnimationController : MonoBehaviour
             StartCoroutine(MoveWithBothWays());
         }
     }
+
     private IEnumerator MoveWithBothWays()
     {
         Vector3 originalLocation = transform.position;
@@ -45,5 +56,4 @@ public class DoTweenAnimationController : MonoBehaviour
         yield return new WaitForSeconds(_moveDuration);
         transform.DOMove(originalLocation, _moveDuration).SetEase(_moveEase);
     }
- 
 }
