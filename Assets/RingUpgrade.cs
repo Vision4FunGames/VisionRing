@@ -71,9 +71,9 @@ public class RingUpgrade : MonoBehaviour
         redBtn.onClick.AddListener(BuyRed);
         blueBtn.onClick.AddListener(BuyBlue);
 
-        hpMulpVal = 1 / ((pinkSocket.HPMultiplier + redSocket.HPMultiplier + blueSocket.HPMultiplier) * 49);
-        atkMulpVal = 1 / ((pinkSocket.ATKMultiplier + redSocket.ATKMultiplier + blueSocket.ATKMultiplier) * 49);
-        defMulpVal = 1 / ((pinkSocket.DEFMultiplier + redSocket.DEFMultiplier + blueSocket.DEFMultiplier) * 49);
+        hpMulpVal = 1 / ((pinkSocket.HPMultiplier + redSocket.HPMultiplier + blueSocket.HPMultiplier) * (blueSocket.maxLevel-1));
+        atkMulpVal = 1 / ((pinkSocket.ATKMultiplier + redSocket.ATKMultiplier + blueSocket.ATKMultiplier) * (blueSocket.maxLevel-1));
+        defMulpVal = 1 / ((pinkSocket.DEFMultiplier + redSocket.DEFMultiplier + blueSocket.DEFMultiplier) * (blueSocket.maxLevel-1));
         currentDEFVal = DEFMinValue;
         currentATKVal = ATKMinValue;
         currentHPval = HPMinValue;

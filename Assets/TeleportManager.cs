@@ -7,10 +7,9 @@ public class TeleportManager : MonoBehaviour
    public Scene baseScene;
 
 
-   public void TeleportScene(String sceneName)
+   public void TeleportScene(int sceneName)
    {
-      String sceneKey = SceneManager.GetActiveScene().name;
-      Debug.Log(sceneKey);
+      PlayerPrefs.SetInt("MapLevel",sceneName-1);
       SceneManager.LoadScene(sceneName);
    }
 

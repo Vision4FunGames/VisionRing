@@ -7,10 +7,18 @@ public class MapMaskManager : MonoBehaviour
 {
     public int currentMapLevel;
     public MapLevelSetting[] mapLevelSettings;
-    
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("MapLevel"))
+        {
+            PlayerPrefs.SetInt("MapLevel",0);
+        }
+        currentMapLevel = PlayerPrefs.GetInt("MapLevel");
+    }
+
     private void Start()
     {
-        currentMapLevel = 0;
         MapMaskUpdate();
     }
 
