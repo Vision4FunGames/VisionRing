@@ -13,6 +13,7 @@ public class Equipment : Item {
     public float hpModifier;
     public float critChanceModifier;
     public int itemSet;
+    public int mapLevel;
    [ES3NonSerializable] public SkinnedMeshRenderer mesh;
    
    [ES3NonSerializable] public GameObject prefab;

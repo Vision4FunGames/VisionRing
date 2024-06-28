@@ -24,12 +24,13 @@ public class ShopUI : MonoBehaviour
 
     private Shop shop;
     List<Equipment> listEq = new List<Item>().Cast<Equipment>().ToList();
+    private MapMaskManager map;
     void Start()
     {
         shop = Shop.instance;
         shop.onItemChangedCallback += UpdateShop;
         UpdateShop();
-        
+         map = GameManager.instance.GetComponentInChildren<MapMaskManager>();
     }
     
     public void UpdateShop()
@@ -46,7 +47,7 @@ public class ShopUI : MonoBehaviour
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if (i < shop.shopItems.Count)
+                    if (i < shop.shopItems.Count && map.currentMapLevel == listEq[i].mapLevel )//Current Level == shopItems[i].mapLevel;
                     {
                         slots[i].AddItem(shop.shopItems[i]);
                         shopSlots[i].AddItem(listEq[i]);
@@ -65,7 +66,7 @@ public class ShopUI : MonoBehaviour
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Body))
+                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Body)  && map.currentMapLevel == listEq[i].mapLevel)
                     {
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
@@ -85,7 +86,7 @@ public class ShopUI : MonoBehaviour
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Weapon))
+                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Weapon) && map.currentMapLevel == listEq[i].mapLevel)
                     {
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
@@ -105,7 +106,7 @@ public class ShopUI : MonoBehaviour
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Feet))
+                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Feet) && map.currentMapLevel == listEq[i].mapLevel)
                     {
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;
@@ -125,7 +126,7 @@ public class ShopUI : MonoBehaviour
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Head))
+                    if ((i < shop.shopItems.Count) && (listEq[i].equipSlot == EquipmentSlot.Head) && map.currentMapLevel == listEq[i].mapLevel)
                     {
                         shopSlots[i].AddItem(listEq[i]);
                         shopSlots[i].index = i;

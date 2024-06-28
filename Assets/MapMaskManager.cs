@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class MapMaskManager : MonoBehaviour
 {
-    public int dungeonLevel;
+    public int currentMapLevel;
     public MapLevelSetting[] mapLevelSettings;
-
-
+    
     private void Start()
     {
-        dungeonLevel = 0;
+        currentMapLevel = 0;
         MapMaskUpdate();
     }
 
@@ -20,7 +19,7 @@ public class MapMaskManager : MonoBehaviour
     {
         for (int i = 0; i < mapLevelSettings.Length; i++)
         {
-            if (dungeonLevel == i)
+            if (currentMapLevel == i)
             {
                 mapLevelSettings[i]._maskImage.SetActive(true);
                 mapLevelSettings[i].levelButton.gameObject.SetActive(true);
