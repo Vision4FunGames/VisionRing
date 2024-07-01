@@ -8,6 +8,7 @@ public class RingUpgrade : MonoBehaviour
 {
     public int currentValuePink, currentValueRed, currentValueBlue;
     public TextMeshProUGUI currentPink, currentBlue, currentRed;
+    public GameObject[] blueStonesUpgrade, redStonesUpgrade, pinkStonesUprage;
     public Slider HP, ATK, DEF;
 
 
