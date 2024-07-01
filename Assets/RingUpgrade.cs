@@ -95,6 +95,7 @@ public class RingUpgrade : MonoBehaviour
         if (pinkSocket.stoneCost[pinkLevelVal] < currentValuePink && pinkLevelVal + 1 < pinkSocket.stoneCost.Length)
         {
             currentValuePink -= pinkSocket.stoneCost[pinkLevelVal];
+            EconomyManager.instance.SetStoneCount("DarkStone", currentValuePink);
             CurrentStoneText();
             pinkLevelVal++;
             pinkLevelText.text = (pinkLevelVal + 1).ToString();
@@ -111,6 +112,7 @@ public class RingUpgrade : MonoBehaviour
         if (redSocket.stoneCost[redLevelVal] < currentValueRed && redLevelVal + 1 < redSocket.stoneCost.Length)
         {
             currentValueRed -= pinkSocket.stoneCost[redLevelVal];
+            EconomyManager.instance.SetStoneCount("LifeStone", currentValueRed);
             CurrentStoneText();
             redLevelVal++;
             redLevelText.text = (redLevelVal + 1).ToString();
@@ -127,6 +129,7 @@ public class RingUpgrade : MonoBehaviour
         if (blueSocket.stoneCost[blueLevelVal] < currentValueBlue && blueLevelVal + 1 < blueSocket.stoneCost.Length)
         {
             currentValueBlue -= pinkSocket.stoneCost[blueLevelVal];
+            EconomyManager.instance.SetStoneCount("LightStone", currentValueBlue);
             CurrentStoneText();
             blueLevelVal++;
             blueLevelText.text = (blueLevelVal + 1).ToString();

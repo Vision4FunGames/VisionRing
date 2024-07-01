@@ -557,6 +557,7 @@ public class UiManager : MonoBehaviour
         goldText.text = EconomyManager.instance.GetGold().ToString();
         diamondText.text = EconomyManager.instance.GetDiamond().ToString();
         gemText.text = EconomyManager.instance.GetGem().ToString();
+        ES3.Save("itemCount",EconomyManager.instance.itemCount);
     }
 
     public void InventoryFilter(String type)

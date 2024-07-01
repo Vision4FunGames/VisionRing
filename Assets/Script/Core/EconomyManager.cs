@@ -117,7 +117,9 @@ public class EconomyManager : MonoBehaviour
         {
             coin = PlayerPrefs.GetInt("coin");
         }
-        
+
+        itemCount = ES3.Load("itemCount", itemCount);
+
     }
 
     public void SpendItems(List<UpgradeItem> itemList,List<int> itemCount)
@@ -161,5 +163,19 @@ public class EconomyManager : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    public void SetStoneCount(string itemName,int count)
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            if (itemList[i].name == itemName)
+            {
+                itemCount[i] = count;
+                UiManager.instance.onEconomyChangedCallBack.Invoke();
+                return;
+            }
+        }
+      
     }
 }
