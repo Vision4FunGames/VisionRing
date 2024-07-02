@@ -36,10 +36,12 @@ public class DropChest : MonoBehaviour
          //rnd = Random.Range(1, 100);
          if (rnd <= coinDropChance)
         {
+            Debug.Log("DropRoot");
             var coin = Instantiate(coinPrefab, new Vector3(bossTransform.x, bossTransform.y+2f, bossTransform.z),Quaternion.identity);
             coin.GetComponent<CoinManager>().SetGold(minGold,maxGold);
             if (rnd <10)
             {
+                Debug.Log("Drop");
                 if (SkeletType == SkeletType.Skelet)
                 {
                     var drop = Instantiate(chestPrefab, new Vector3(bossTransform.x, bossTransform.y - 5, bossTransform.z),Quaternion.identity);

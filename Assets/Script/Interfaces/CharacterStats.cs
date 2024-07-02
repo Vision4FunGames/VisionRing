@@ -88,7 +88,6 @@ public class CharacterStats : MonoBehaviour
 
             //damage = Mathf.Clamp(damage, 0, int.MaxValue);
             currentHealth -= damage;
-            print(currentHealth);
             DamageAnimation();
             UpdateHealthBar();
         }

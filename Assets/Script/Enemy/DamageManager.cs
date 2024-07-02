@@ -41,7 +41,6 @@ public class DamageManager : MonoBehaviour
                 var playerStats = enemyController.target.GetComponent<PlayerStats>();
                 double damageReduce =  Math.Max(0.5, 1 - (double) playerStats.armor.GetValue() / (2 * characterStats.damage.GetValue()));
                 float damage = characterStats.damage.GetValue();
-                Debug.Log("Damage : " + damage + " Damage Reduce : " + damageReduce);
                 playerHealth.DamageAnimation((int)(damage * damageReduce));
             }
         }

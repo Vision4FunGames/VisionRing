@@ -71,7 +71,6 @@ public class CoinManager : MonoBehaviour
       gold = Random.Range(minGold, maxGold);
       gold *= (int)_vaultUI.currentGoldBoost;
       spawnedCoin.GetComponent<TurnAround>().setGoldCount(gold);
-      Debug.Log("gold"+gold);
       // Belirtilen objeyi rastgele noktada oluştur
     }
     transform.GetChild(0).GetComponent<TurnAround>().setGoldCount(gold);
