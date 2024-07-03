@@ -29,12 +29,12 @@ public class MapMaskManager : MonoBehaviour
         {
             if (currentMapLevel == i)
             {
-                mapLevelSettings[i]._maskImage.SetActive(true);
+                mapLevelSettings[i]._maskImage.GetComponent<CanvasMaskFade>().ImageFadeOpen();
                 mapLevelSettings[i].levelButton.gameObject.SetActive(true);
             }
             else
             {
-                mapLevelSettings[i]._maskImage.SetActive(false);
+                mapLevelSettings[i]._maskImage.GetComponent<CanvasMaskFade>().ImageFadeClose();
                 mapLevelSettings[i].levelButton.gameObject.SetActive(false);
             }
         }
