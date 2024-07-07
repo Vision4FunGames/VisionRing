@@ -24,6 +24,7 @@ public class HideOutManager : MonoBehaviour
         currentPos = playerCamPos;
         player = FindObjectOfType<Player>();
         hideOutBuildBtn.onClick.AddListener(BuildBase);
+        BuildAlreadyBase();
     }
 
     public void BuildAlreadyBase()
