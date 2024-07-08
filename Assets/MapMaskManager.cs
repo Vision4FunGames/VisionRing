@@ -1,6 +1,7 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MapMaskManager : MonoBehaviour
@@ -12,9 +13,10 @@ public class MapMaskManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("MapLevel"))
         {
-            PlayerPrefs.SetInt("MapLevel",0);
+            PlayerPrefs.SetInt("MapLevel", 0);
         }
-        currentMapLevel = PlayerPrefs.GetInt("MapLevel");
+
+        currentMapLevel = PlayerPrefs.GetInt("MapLevel") - 1;
     }
 
     private void Start()
@@ -30,13 +32,37 @@ public class MapMaskManager : MonoBehaviour
             if (currentMapLevel == i)
             {
                 mapLevelSettings[i]._maskImage.GetComponent<CanvasMaskFade>().ImageFadeOpen();
-                mapLevelSettings[i].levelButton.gameObject.SetActive(true);
             }
             else
             {
                 mapLevelSettings[i]._maskImage.GetComponent<CanvasMaskFade>().ImageFadeClose();
                 mapLevelSettings[i].levelButton.gameObject.SetActive(false);
             }
+
+            if (currentMapLevel >= i)
+                mapLevelSettings[i].levelButton.gameObject.SetActive(true);
+        }
+    }
+
+    public void MapMaskSet()
+    {
+        for (int i = 0; i < mapLevelSettings.Length; i++)
+        {
+            if (currentMapLevel == i)
+            {
+                mapLevelSettings[i]._maskImage.GetComponent<CanvasMaskFade>().ImageOpen();
+            }
+            else
+            {
+                mapLevelSettings[i]._maskImage.GetComponent<CanvasMaskFade>().ImageClose();
+                mapLevelSettings[i].levelButton.gameObject.SetActive(false);
+            }
+
+            if (currentMapLevel >= i)
+                mapLevelSettings[i].levelButton.gameObject.SetActive(true);
+
+            if (SceneManager.GetActiveScene().buildIndex == i)
+                mapLevelSettings[i-1].levelButton.gameObject.SetActive(false);
         }
     }
 }

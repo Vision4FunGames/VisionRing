@@ -15,6 +15,19 @@ public class CanvasMaskFade : MonoBehaviour
         Image = GetComponent<Image>();
     }
 
+    public void ImageClose()
+    {
+        Image = GetComponent<Image>();
+        Image.DOKill();
+        Image.color = new Color(1, 1, 1, 0);
+    }
+    public void ImageOpen()
+    {
+        Image = GetComponent<Image>();
+        Image.DOKill();
+        Image.color = new Color(1, 1, 1, 1);
+    }
+
     [Button("FadeClose")]
     public void ImageFadeClose()
     {
