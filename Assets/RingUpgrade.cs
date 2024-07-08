@@ -9,7 +9,8 @@ public class RingUpgrade : MonoBehaviour
 {
     public int currentValuePink, currentValueRed, currentValueBlue;
     public TextMeshProUGUI currentPink, currentBlue, currentRed;
-    public GameObject[] blueStonesUpgrade, redStonesUpgrade, pinkStonesUprage;
+    public GameObject[] blueStonesUpgrade, redStonesUpgrade;
+    public Color[] pinkStonesUprage;
     public Slider HP, ATK, DEF;
 
 
@@ -81,6 +82,16 @@ public class RingUpgrade : MonoBehaviour
         pinkLevelVal = PlayerPrefs.GetInt("pinkLevelVal");
         redLevelVal = PlayerPrefs.GetInt("redLevelVal");
         blueLevelVal = PlayerPrefs.GetInt("blueLevelVal");
+        
+        pinkLevelText.text = (pinkLevelVal + 1).ToString();
+        pinkCost.text = pinkSocket.stoneCost[pinkLevelVal].ToString();
+        
+        redLevelText.text = (redLevelVal + 1).ToString();
+        redCost.text = redSocket.stoneCost[redLevelVal].ToString();
+        
+        blueLevelText.text = (blueLevelVal + 1).ToString();
+        blueCost.text = blueSocket.stoneCost[blueLevelVal].ToString();
+        
         
         CurrentStoneText();
         pinkBtn.onClick.AddListener(BuyPink);
@@ -173,49 +184,39 @@ public class RingUpgrade : MonoBehaviour
 
     public void RingModelUprage()
     {
-        foreach (GameObject stone in blueStonesUpgrade)
-        {
-            stone.SetActive(false);
-        }
+       
         int index = blueLevelVal / 3;
         
-        if (index >= 0 && index < blueStonesUpgrade.Length)
+        if (index > 0 && index < blueStonesUpgrade.Length)
         {
-            blueStonesUpgrade[index].SetActive(true);
+            blueStonesUpgrade[index].GetComponent<RingScale>().ScaleUp();
         }else if (index >= blueStonesUpgrade.Length)
         {
-            blueStonesUpgrade[blueStonesUpgrade.Length - 1].SetActive(true);
+            blueStonesUpgrade[blueStonesUpgrade.Length - 1].GetComponent<RingScale>().ScaleUp();
+            blueStonesUpgrade[1].GetComponent<RingScale>().ScaleUp();
         }
         
-        foreach (GameObject stone in redStonesUpgrade)
-        {
-            stone.SetActive(false);
-        } 
+       
         index = redLevelVal / 3;
         
-        if (index >= 0 && index < redStonesUpgrade.Length)
+        if (index > 0 && index < redStonesUpgrade.Length)
         {
-            redStonesUpgrade[index].SetActive(true);
+            redStonesUpgrade[index].GetComponent<RingScale>().ScaleUp();
         } else if (index >= redStonesUpgrade.Length)
         {
-            redStonesUpgrade[redStonesUpgrade.Length - 1].SetActive(true);
+            redStonesUpgrade[redStonesUpgrade.Length - 1].GetComponent<RingScale>().ScaleUp();
+            redStonesUpgrade[1].GetComponent<RingScale>().ScaleUp();
+        }
+
+        if (index >= 3)
+        {
+            redStonesUpgrade[index-3].GetComponent<RingScale>().ScaleDown();
         }
         
-        foreach (GameObject stone in pinkStonesUprage)
-        {
-            stone.SetActive(false);
-        } 
-        
+     
         index = pinkLevelVal / 3;
             
-        if (index >= 0 && index < pinkStonesUprage.Length)
-        {
-            pinkStonesUprage[index].SetActive(true);
-        }
-        else if (index >= pinkStonesUprage.Length)
-        {
-            pinkStonesUprage[pinkStonesUprage.Length - 1].SetActive(true);
-        }
+       
     }
     [Button("sss")]
     public void SetStonesss()
