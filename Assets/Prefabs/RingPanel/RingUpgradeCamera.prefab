@@ -541,7 +541,7 @@ RectTransform:
   - {fileID: 9035539306701071337}
   - {fileID: 3561343246652328859}
   m_Father: {fileID: 1093828710980957655}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -3100,7 +3100,7 @@ RectTransform:
   m_Children:
   - {fileID: 2164452029295046456}
   m_Father: {fileID: 1093828710980957655}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6008,6 +6008,82 @@ Transform:
   m_Father: {fileID: 6551655640634204700}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3695541371052462507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4106423570963755573}
+  - component: {fileID: 6826461669725077005}
+  - component: {fileID: 3420542488077106885}
+  m_Layer: 14
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4106423570963755573
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695541371052462507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1093828710980957655}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6826461669725077005
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695541371052462507}
+  m_CullTransparentMesh: 1
+--- !u!114 &3420542488077106885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695541371052462507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3703918772541814363
 GameObject:
   m_ObjectHideFlags: 0
@@ -8197,7 +8273,7 @@ RectTransform:
   - {fileID: 2164452030681084700}
   - {fileID: 2164452029108925498}
   m_Father: {fileID: 1093828710980957655}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -9313,6 +9389,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 4106423570963755573}
   - {fileID: 2362464253822713534}
   - {fileID: 1592288379076140858}
   - {fileID: 2164452029101989994}
@@ -9591,9 +9668,13 @@ MonoBehaviour:
   currentPink: {fileID: 2164452029664585774}
   currentBlue: {fileID: 2164452030494103011}
   currentRed: {fileID: 2164452030565561843}
+  blueStonesUpgrade: []
+  redStonesUpgrade: []
+  pinkStonesUprage: []
   HP: {fileID: 7145367579016309916}
   ATK: {fileID: 7417757403507297036}
   DEF: {fileID: 4565442012819810340}
+  ringGlow: {fileID: 0}
   blueSocket: {fileID: 11400000, guid: a967869b25985d244a66e38e7b854fb0, type: 2}
   redSocket: {fileID: 11400000, guid: 2881fbc22e9e40b4e9713a8dca7cdf86, type: 2}
   pinkSocket: {fileID: 11400000, guid: 9fb9ef2973c5ae64b8fa3c07704eb0ba, type: 2}

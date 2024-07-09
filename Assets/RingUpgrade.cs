@@ -12,7 +12,8 @@ public class RingUpgrade : MonoBehaviour
     public GameObject[] blueStonesUpgrade, redStonesUpgrade;
     public Color[] pinkStonesUprage;
     public Slider HP, ATK, DEF;
-
+    public ParticleSystem ringGlow;
+    private ParticleSystem.MainModule ringGlowsettings;
 
     [Header("_________________________________")]
     public RingSocket blueSocket;
@@ -66,15 +67,17 @@ public class RingUpgrade : MonoBehaviour
 
     private void Start()
     {
+        ringGlowsettings = ringGlow.main;
         if (!PlayerPrefs.HasKey("HpVal"))
         {
-            PlayerPrefs.SetFloat("HpVal",0);
-            PlayerPrefs.SetFloat("AtkVal",0);
-            PlayerPrefs.SetFloat("DefVal",0);
-            PlayerPrefs.SetInt("pinkLevelVal",0);
-            PlayerPrefs.SetInt("redLevelVal",0);
-            PlayerPrefs.SetInt("blueLevelVal",0);
+            PlayerPrefs.SetFloat("HpVal", 0);
+            PlayerPrefs.SetFloat("AtkVal", 0);
+            PlayerPrefs.SetFloat("DefVal", 0);
+            PlayerPrefs.SetInt("pinkLevelVal", 0);
+            PlayerPrefs.SetInt("redLevelVal", 0);
+            PlayerPrefs.SetInt("blueLevelVal", 0);
         }
+
         HP.value = PlayerPrefs.GetFloat("HpVal");
         ATK.value = PlayerPrefs.GetFloat("AtkVal");
         DEF.value = PlayerPrefs.GetFloat("DefVal");
@@ -82,22 +85,22 @@ public class RingUpgrade : MonoBehaviour
         pinkLevelVal = PlayerPrefs.GetInt("pinkLevelVal");
         redLevelVal = PlayerPrefs.GetInt("redLevelVal");
         blueLevelVal = PlayerPrefs.GetInt("blueLevelVal");
-        
+
         pinkLevelText.text = (pinkLevelVal + 1).ToString();
         pinkCost.text = pinkSocket.stoneCost[pinkLevelVal].ToString();
-        
+
         redLevelText.text = (redLevelVal + 1).ToString();
         redCost.text = redSocket.stoneCost[redLevelVal].ToString();
-        
+
         blueLevelText.text = (blueLevelVal + 1).ToString();
         blueCost.text = blueSocket.stoneCost[blueLevelVal].ToString();
-        
-        
+
+
         CurrentStoneText();
         pinkBtn.onClick.AddListener(BuyPink);
         redBtn.onClick.AddListener(BuyRed);
         blueBtn.onClick.AddListener(BuyBlue);
-        
+
         hpMulpVal = 1 / ((pinkSocket.HPMultiplier + redSocket.HPMultiplier + blueSocket.HPMultiplier) *
                          (blueSocket.maxLevel - 1));
         atkMulpVal = 1 / ((pinkSocket.ATKMultiplier + redSocket.ATKMultiplier + blueSocket.ATKMultiplier) *
@@ -108,7 +111,7 @@ public class RingUpgrade : MonoBehaviour
         currentATKVal = ATKMinValue;
         currentHPval = HPMinValue;
         SetCharacterPower();
-        RingModelUprage();
+        RingModelLoad();
     }
 
     private void OnEnable()
@@ -129,7 +132,7 @@ public class RingUpgrade : MonoBehaviour
             EconomyManager.instance.SetStoneCount("DarkStone", currentValuePink);
             CurrentStoneText();
             pinkLevelVal++;
-            PlayerPrefs.SetInt("pinkLevelVal",pinkLevelVal);
+            PlayerPrefs.SetInt("pinkLevelVal", pinkLevelVal);
             pinkLevelText.text = (pinkLevelVal + 1).ToString();
             pinkCost.text = pinkSocket.stoneCost[pinkLevelVal].ToString();
             HP.value += hpMulpVal * pinkSocket.HPMultiplier;
@@ -137,8 +140,6 @@ public class RingUpgrade : MonoBehaviour
             DEF.value += defMulpVal * pinkSocket.DEFMultiplier;
             SetCharacterPower();
             RingModelUprage();
-          
-            
         }
     }
 
@@ -150,16 +151,15 @@ public class RingUpgrade : MonoBehaviour
             EconomyManager.instance.SetStoneCount("LifeStone", currentValueRed);
             CurrentStoneText();
             redLevelVal++;
-            PlayerPrefs.SetInt("redLevelVal",redLevelVal);
+            PlayerPrefs.SetInt("redLevelVal", redLevelVal);
             redLevelText.text = (redLevelVal + 1).ToString();
             redCost.text = redSocket.stoneCost[redLevelVal].ToString();
             HP.value += hpMulpVal * redSocket.HPMultiplier;
             ATK.value += atkMulpVal * redSocket.ATKMultiplier;
             DEF.value += defMulpVal * redSocket.DEFMultiplier;
             SetCharacterPower();
-            
-            RingModelUprage();
 
+            RingModelUprage();
         }
     }
 
@@ -171,7 +171,7 @@ public class RingUpgrade : MonoBehaviour
             EconomyManager.instance.SetStoneCount("LightStone", currentValueBlue);
             CurrentStoneText();
             blueLevelVal++;
-            PlayerPrefs.SetInt("blueLevelVal",blueLevelVal);
+            PlayerPrefs.SetInt("blueLevelVal", blueLevelVal);
             blueLevelText.text = (blueLevelVal + 1).ToString();
             blueCost.text = blueSocket.stoneCost[blueLevelVal].ToString();
             HP.value += hpMulpVal * blueSocket.HPMultiplier;
@@ -182,42 +182,59 @@ public class RingUpgrade : MonoBehaviour
         }
     }
 
-    public void RingModelUprage()
+    public void RingModelLoad()
     {
-       
-        int index = blueLevelVal / 3;
-        
-        if (index > 0 && index < blueStonesUpgrade.Length)
+        for (int i = 0; i < blueStonesUpgrade.Length; i++)
         {
-            blueStonesUpgrade[index].GetComponent<RingScale>().ScaleUp();
-        }else if (index >= blueStonesUpgrade.Length)
-        {
-            blueStonesUpgrade[blueStonesUpgrade.Length - 1].GetComponent<RingScale>().ScaleUp();
-            blueStonesUpgrade[1].GetComponent<RingScale>().ScaleUp();
-        }
-        
-       
-        index = redLevelVal / 3;
-        
-        if (index > 0 && index < redStonesUpgrade.Length)
-        {
-            redStonesUpgrade[index].GetComponent<RingScale>().ScaleUp();
-        } else if (index >= redStonesUpgrade.Length)
-        {
-            redStonesUpgrade[redStonesUpgrade.Length - 1].GetComponent<RingScale>().ScaleUp();
-            redStonesUpgrade[1].GetComponent<RingScale>().ScaleUp();
+            if (blueLevelVal > i)
+            {
+                blueStonesUpgrade[i].GetComponent<RingScale>().ScaleUp();
+            }
         }
 
-        if (index >= 3)
+        for (int i = 0; i < redStonesUpgrade.Length; i++)
         {
-            redStonesUpgrade[index-3].GetComponent<RingScale>().ScaleDown();
+            if (redLevelVal > i)
+            {
+                redStonesUpgrade[i].GetComponent<RingScale>().ScaleUp();
+            }
         }
         
-     
-        index = pinkLevelVal / 3;
-            
-       
+        if (pinkLevelVal >= 0 && pinkStonesUprage.Length > pinkLevelVal)
+        {
+            ringGlowsettings.startColor = pinkStonesUprage[pinkLevelVal];
+        }
     }
+
+    public void RingModelUprage()
+    {
+        int index = blueLevelVal;
+        if (index >= 0 && index < blueStonesUpgrade.Length)
+        {
+            blueStonesUpgrade[index].GetComponent<RingScale>().ScaleUp();
+        }
+
+
+        index = redLevelVal - 1;
+
+        if (index >= 0 && index < redStonesUpgrade.Length)
+        {
+            redStonesUpgrade[index].GetComponent<RingScale>().ScaleUp();
+        }
+
+        if (index >= 3 && redStonesUpgrade.Length > index)
+        {
+            redStonesUpgrade[index - 3].GetComponent<RingScale>().ScaleDown();
+        }
+
+        index = pinkLevelVal - 1;
+
+        if (index >= 0 && pinkStonesUprage.Length > index)
+        {
+            ringGlowsettings.startColor = pinkStonesUprage[index];
+        }   
+    }
+
     [Button("sss")]
     public void SetStonesss()
     {
@@ -232,11 +249,11 @@ public class RingUpgrade : MonoBehaviour
         currentDEFVal = (int)(Mathf.Ceil(DEFMaxValue * DEF.value));
         currentATKVal = (int)(Mathf.Ceil(ATKMaxValue * ATK.value));
         currentHPval = (int)(Mathf.Ceil(HPMaxValue * HP.value));
-        
-        PlayerPrefs.SetFloat("HpVal",HP.value);
-        PlayerPrefs.SetFloat("AtkVal",ATK.value);
-        PlayerPrefs.SetFloat("DefVal",DEF.value);
-        
+
+        PlayerPrefs.SetFloat("HpVal", HP.value);
+        PlayerPrefs.SetFloat("AtkVal", ATK.value);
+        PlayerPrefs.SetFloat("DefVal", DEF.value);
+
         Player.instance.GetComponent<PlayerStats>().damage.ZeroIndexRemove();
         Player.instance.GetComponent<PlayerStats>().armor.ZeroIndexRemove();
         Player.instance.GetComponent<PlayerStats>().health.ZeroIndexRemove();
