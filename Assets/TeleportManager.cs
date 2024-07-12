@@ -5,7 +5,14 @@ using UnityEngine.SceneManagement;
 public class TeleportManager : MonoBehaviour
 {
     public Scene baseScene;
-
+    public GameObject[] dungeons;
+    public GameObject dungeonSpawnPoint;
+    private Player player;
+    private GameObject currentDungeon;
+    private void Start()
+    {
+        player = Player.instance;
+    }
 
     public void TeleportScene(int sceneName)
     {
@@ -15,11 +22,17 @@ public class TeleportManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void DungeonScene(String sceneName)
+    public void DungeonScene(int dungeonLevel)
     {
-        String sceneKey = SceneManager.GetActiveScene().name;
-        Debug.Log(sceneKey);
-        SceneManager.LoadScene(sceneName);
+         currentDungeon = Instantiate(dungeons[dungeonLevel],dungeonSpawnPoint.transform.position,Quaternion.identity);
+         player.teleportParticle.Play();
+        Invoke("MoveTeleportPlayer",2f);
+    }
+
+    public void MoveTeleportPlayer()
+    {
+        player.transform.position = currentDungeon.transform.GetChild(0).position;
+        player.teleportParticle.Stop();
     }
 
     public void BaseSceneReturn()

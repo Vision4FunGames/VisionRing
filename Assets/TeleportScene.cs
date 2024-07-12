@@ -4,7 +4,7 @@ using UnityEngine;
 public class TeleportScene : MonoBehaviour
 {
     private TeleportManager tp;
-    public String sceneName;
+    public int sceneName;
 
     private void Awake()
     {
