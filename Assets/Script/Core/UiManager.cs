@@ -70,6 +70,7 @@ public class UiManager : MonoBehaviour
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
 
     //Chest Scroll
+    public Image backGroundImage;
     public GameObject caseScroll;
     public GameObject chestPanel;
     public GameObject selectedPouch;

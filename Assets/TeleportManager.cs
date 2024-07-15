@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class TeleportManager : MonoBehaviour
     public GameObject dungeonSpawnPoint;
     private Player player;
     private GameObject currentDungeon;
+
     private void Start()
     {
         player = Player.instance;
@@ -24,13 +26,15 @@ public class TeleportManager : MonoBehaviour
 
     public void DungeonScene(int dungeonLevel)
     {
-         currentDungeon = Instantiate(dungeons[dungeonLevel],dungeonSpawnPoint.transform.position,Quaternion.identity);
-         player.teleportParticle.Play();
-        Invoke("MoveTeleportPlayer",2f);
+        UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
+        currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position, Quaternion.identity);
+        player.teleportParticle.Play();
+        Invoke("MoveTeleportPlayer", 2f);
     }
 
     public void MoveTeleportPlayer()
     {
+        UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = currentDungeon.transform.GetChild(0).position;
         player.teleportParticle.Stop();
     }
