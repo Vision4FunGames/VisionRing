@@ -69,7 +69,7 @@ public class EnemySpawner : PuzzleConditionTrigger
 
         for (int i = 0; i < spawnOptions.Length; i++)
         {
-            for (int j = 0; j < spawnOptions[i].spawnCount; j++)
+            for (int j = 0; j < spawnOptions[j].spawnCount; j++)
             {
                 for (int k = 0; k < enemies.Length; k++)
                 {

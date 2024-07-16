@@ -15,6 +15,7 @@ public class TeleportScene : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GetComponent<Collider>().enabled = false;
             tp.DungeonScene(sceneName);
         }
     }
