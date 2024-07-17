@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,7 +13,7 @@ public class CharacterAnimator : MonoBehaviour
     private EnemyStats enemyStats;
     private int attackCounter = 0;
     public bool shied;
-
+    public GameObject sword;
     protected virtual void Start()
     {
         navmeshAgent = GetComponent<NavMeshAgent>();
@@ -104,11 +105,41 @@ public class CharacterAnimator : MonoBehaviour
         enemyStats.die = true;
 
         animator.SetTrigger("death_");
+        GoBack();
         navmeshAgent.speed = 0;
+        navmeshAgent.enabled = false;
         enemyStats.mmProgressBar.gameObject.SetActive(false);
         if (GetComponentInParent<TornadoExit>())
         {
             GetComponent<Enemy>().TornadoFinish();
         }
     }
+
+    private Vector3 deathPos;
+    public void GoBack()
+    {
+        animator.speed = .5f;
+        Vector3 direction = transform.position-PlayerManager.instance.transform.position  ;
+        direction = direction.normalized;
+        GetComponentInChildren<Dissolver>().MaterializeDissolve();
+        if (sword)
+        {
+            sword.gameObject.SetActive(false);
+        }
+        Invoke("PuffParticleSpawn",1);
+         deathPos = direction*5+ new Vector3(0,direction.y+4,0);
+        transform.DOJump(deathPos, 2f,1,3).SetEase(Ease.OutCirc).OnComplete(() =>
+        {
+            Destroy(transform.gameObject, 1);
+        });
+    }
+
+    public void PuffParticleSpawn()
+    {
+        GameObject currentparticle = Instantiate(ParticleManager.instance.smokeDeath.gameObject);
+        currentparticle.transform.position = deathPos;
+        currentparticle.GetComponent<ParticleSystem>().Play();
+        Destroy(currentparticle.gameObject,4);
+    }
+    
 }

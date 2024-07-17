@@ -1,6 +1,7 @@
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : PuzzleConditionTrigger
@@ -75,13 +76,17 @@ public class EnemySpawner : PuzzleConditionTrigger
                 {
                     if (enemies[k].GetComponent<EnemyStats>().SpawnEnemyType == spawnOptions[i].spawnType)
                     {
-                        var enemy = Instantiate(enemies[k], transform);
+                        var enemy = Instantiate(enemies[k]);
+                        enemy.GetComponent<NavMeshAgent>().enabled = false;
+                        enemy.transform.SetParent(transform);
                         enemy.transform.localPosition = GetPoint();
                         enemy.gameObject.GetComponent<EnemyVariations>().EnemyVariation = EnemyVariation.Variation1;
                         var currentPos = enemy.transform.position;
                         currentPos.y = spawntHeigt;
                         enemy.transform.position = currentPos;
+                        enemy.GetComponent<NavMeshAgent>().enabled = true;
                         enemy.transform.Bounce(.3f);
+                       
                         var sp = Instantiate(spawnParticle, enemy.transform.position, Quaternion.identity);
                         Destroy(sp, 3.0f);
                         break;

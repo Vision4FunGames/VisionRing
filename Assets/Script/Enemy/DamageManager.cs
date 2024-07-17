@@ -99,7 +99,8 @@ public class DamageManager : MonoBehaviour
 
     public void DeathEnemy()
     {
-        Destroy(transform.parent.gameObject, 3);
+       
+      
     }
 
     public void BombExp()

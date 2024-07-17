@@ -11,14 +11,16 @@ public class CameraShake : MonoBehaviour
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private CinemachineTransposer _cinemachineTransposer;
     public float magnitude, duration;
-    private Vector3 _basePosition;
-    private bool _shake;
-
+    private Vector3 _basePosition , dungeonPos , currentPos;
+    public bool _shake;
+    
     private void Awake()
     {
         cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
         _cinemachineTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
         _basePosition = _cinemachineTransposer.m_FollowOffset;
+        dungeonPos = _basePosition * 1.25f;
+        currentPos = _basePosition;
     }
 
     
@@ -36,6 +38,17 @@ public class CameraShake : MonoBehaviour
     public void ShakeBoss()
     {
         StartCoroutine(Shake(2f, 2f));
+    }
+
+    public void DungeonStart()
+    {
+        _shake = false;
+        currentPos = dungeonPos;
+    }
+
+    public void DungeonEnd()
+    {
+        currentPos = _basePosition;
     }
 
     public IEnumerator Shake(float duration, float magnitude)
@@ -64,7 +77,7 @@ public class CameraShake : MonoBehaviour
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1, 1) * magnitude;
             _cinemachineTransposer.m_FollowOffset = Vector3.Lerp(_cinemachineTransposer.m_FollowOffset,
-                _basePosition + new Vector3(x, 0, y), 0.025f);
+                currentPos + new Vector3(x, 0, y), 0.025f);
             //_cinemachineTransposer.m_FollowOffset = _basePosition + new Vector3(x,0,y);
             elapsed += Time.deltaTime;
             yield return 0;
@@ -77,6 +90,6 @@ public class CameraShake : MonoBehaviour
     {
         if (!_shake)
             _cinemachineTransposer.m_FollowOffset =
-                Vector3.Lerp(_cinemachineTransposer.m_FollowOffset, _basePosition, 0.025f);
+                Vector3.Lerp(_cinemachineTransposer.m_FollowOffset, currentPos, 0.025f);
     }
 }

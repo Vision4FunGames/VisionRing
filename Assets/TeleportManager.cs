@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TeleportManager : MonoBehaviour
 {
+    private CameraShake _cameraShake;
     public Scene baseScene;
     public GameObject[] dungeons;
     public GameObject dungeonSpawnPoint;
@@ -14,6 +15,7 @@ public class TeleportManager : MonoBehaviour
     private void Start()
     {
         player = Player.instance;
+        _cameraShake = FindObjectOfType<CameraShake>();
     }
 
     public void TeleportScene(int sceneName)
@@ -29,6 +31,7 @@ public class TeleportManager : MonoBehaviour
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
         currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position, Quaternion.identity);
         player.teleportParticle.Play();
+        player.isMovement = false;
         Invoke("MoveTeleportPlayer", 2f);
     }
 
@@ -36,6 +39,8 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = currentDungeon.transform.GetChild(0).position;
+        player.isMovement = true;
+        _cameraShake.DungeonStart();
         player.teleportParticle.Stop();
     }
 
