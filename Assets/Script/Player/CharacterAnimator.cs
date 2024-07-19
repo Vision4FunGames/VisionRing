@@ -119,16 +119,17 @@ public class CharacterAnimator : MonoBehaviour
     public void GoBack()
     {
         animator.speed = .5f;
-        Vector3 direction = transform.position-PlayerManager.instance.transform.position  ;
+        Vector3 direction = transform.position-PlayerManager.instance.transform.position;
         direction = direction.normalized;
         GetComponentInChildren<Dissolver>().MaterializeDissolve();
         if (sword)
         {
             sword.gameObject.SetActive(false);
         }
-        Invoke("PuffParticleSpawn",1);
+        Invoke("PuffParticleSpawn",2);
          deathPos = direction*5+ new Vector3(0,direction.y+4,0);
-        transform.DOJump(deathPos, 2f,1,3).SetEase(Ease.OutCirc).OnComplete(() =>
+         
+        transform.DOLocalJump(transform.position+deathPos, 2f,1,Random.Range(3.25f,3.75f)).SetEase(Ease.OutCubic).OnComplete(() =>
         {
             Destroy(transform.gameObject, 1);
         });

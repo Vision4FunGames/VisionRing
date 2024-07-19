@@ -85,8 +85,9 @@ public class EnemySpawner : PuzzleConditionTrigger
                         currentPos.y = spawntHeigt;
                         enemy.transform.position = currentPos;
                         enemy.GetComponent<NavMeshAgent>().enabled = true;
+                        enemy.transform.SetParent(null);
+                        enemy.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                         enemy.transform.Bounce(.3f);
-                       
                         var sp = Instantiate(spawnParticle, enemy.transform.position, Quaternion.identity);
                         Destroy(sp, 3.0f);
                         break;
