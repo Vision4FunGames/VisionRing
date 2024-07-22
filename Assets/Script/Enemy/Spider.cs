@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Spider : MonoBehaviour
 {
+    public ParticleSystem ppppp;
     public GameObject prefabSpiderWeb;
     private Animator animator;
     [HideInInspector] public NavMeshAgent navMeshAgent;
@@ -166,8 +168,37 @@ public class Spider : MonoBehaviour
         {
             GetComponent<Enemy>().TornadoFinish();
         }
+        GoBack();
     }
+    private Vector3 deathPos;
+    public GameObject sword;
 
+    public void GoBack()
+    {
+        animator.speed = .5f;
+        Vector3 direction = transform.position-PlayerManager.instance.transform.position;
+        direction = direction.normalized;
+        GetComponentInChildren<Dissolver>().MaterializeDissolve();
+        if (sword)
+        {
+            sword.gameObject.SetActive(false);
+        }
+        Invoke("PuffParticleSpawn",2);
+        deathPos = direction*5+ new Vector3(0,direction.y+4,0);
+         
+        transform.DOLocalJump(transform.position+deathPos, 2f,1,Random.Range(3.25f,3.75f)).SetEase(Ease.OutCubic).OnComplete(() =>
+        {
+            Destroy(transform.gameObject, 1);
+        });
+    }
+    public void PuffParticleSpawn()
+    {
+        ppppp.Play();
+        // GameObject currentparticle = Instantiate(ParticleManager.instance.smokeDeath.gameObject);
+        // currentparticle.transform.position = deathPos;
+        // currentparticle.GetComponent<ParticleSystem>().Play();
+        // Destroy(currentparticle.gameObject,4);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Tornado"))

@@ -126,7 +126,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             sword.gameObject.SetActive(false);
         }
-        Invoke("PuffParticleSpawn",2);
+        Invoke("PuffParticleSpawn",1.5f);
          deathPos = direction*5+ new Vector3(0,direction.y+4,0);
          
         transform.DOLocalJump(transform.position+deathPos, 2f,1,Random.Range(3.25f,3.75f)).SetEase(Ease.OutCubic).OnComplete(() =>
@@ -135,12 +135,14 @@ public class CharacterAnimator : MonoBehaviour
         });
     }
 
+    public ParticleSystem ppppp;
     public void PuffParticleSpawn()
     {
-        GameObject currentparticle = Instantiate(ParticleManager.instance.smokeDeath.gameObject);
-        currentparticle.transform.position = deathPos;
-        currentparticle.GetComponent<ParticleSystem>().Play();
-        Destroy(currentparticle.gameObject,4);
+        ppppp.Play();
+        // GameObject currentparticle = Instantiate(ParticleManager.instance.smokeDeath.gameObject);
+        // currentparticle.transform.position = deathPos;
+        // currentparticle.GetComponent<ParticleSystem>().Play();
+        // Destroy(currentparticle.gameObject,4);
     }
     
 }

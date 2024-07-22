@@ -195,8 +195,13 @@ public class SwordAttack : MonoBehaviour
         swordCollider.isTrigger = true;
     }
 
+    public void SlowMotion()
+    {
+        PlayerManager.instance.SlowMotion();
+    }
     public void EnableSwordCollider(int attackCount)
     {
+       
         player.playerSound.swordAudioSource.PlayOneShot(player.playerSound.swordHitSound[attackCount], .7f);
         swordCollider.enabled = false;
         swordCollider.enabled = true;
@@ -204,9 +209,11 @@ public class SwordAttack : MonoBehaviour
 
     public void ParticleSword(int index)
     {
+        
         _swordParticle[index].Play();
         if (index == 2)
         {
+          
             PlayerManager.instance.CameraShakePlayer(.4f, 2f);
             PlayerManager.instance.CameraShakeCombo(.6f, .7f);
         }
@@ -230,6 +237,7 @@ public class SwordAttack : MonoBehaviour
 
     public void ComboAttackReset()
     {
+        
         comboCounter = 0;
         if (playerAnimator.GetComponentInParent<Player>().speed < 5)
         {

@@ -1,14 +1,15 @@
 using System;
 using DG.Tweening;
 using Exoa.TutorialEngine;
-using NaughtyAttributes;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    private bool _slowMotionBool;
+    public float timeSc, timeScWaitCurrent;
+    public float timeScWait;
     private PlayerAttack _playerAttack;
     private PlayerHealth _playerHealth;
     private Player player;
@@ -16,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     private GameObject currentRope;
     private CameraShake _cameraShake;
     private ParticleSystem _damageParticle;
-    [HideInInspector]public ParticleSystem earnItemParticle;
+    [HideInInspector] public ParticleSystem earnItemParticle;
     [HideInInspector] public GameObject sessizImage;
     private float currentTime, delayTime = 2;
     [HideInInspector] public float currentPortalTime, portalTime;
@@ -24,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     public Vector3 startPlayerPos;
     public GameObject pet;
     private GameObject currentBuildObj;
+
     #region Singleton
 
     public static PlayerManager instance;
@@ -36,22 +38,21 @@ public class PlayerManager : MonoBehaviour
             if (PlayerPrefs.HasKey("TutorialSection"))
             {
                 int section = PlayerPrefs.GetInt("TutorialSection");
-                if (section==1)
+                if (section == 1)
                 {
                     startPlayerPos = FindObjectOfType<GameManager>().tutorial1SpawnPos.transform.position;
                 }
-                else if (section ==0)
+                else if (section == 0)
                 {
-                    startPlayerPos = FindObjectOfType<GameManager>().tutorialStartPos.transform.position; 
+                    startPlayerPos = FindObjectOfType<GameManager>().tutorialStartPos.transform.position;
                 }
                 else
                 {
-                    startPlayerPos = FindObjectOfType<GameManager>().villageSpawnPos.transform.position; 
+                    startPlayerPos = FindObjectOfType<GameManager>().villageSpawnPos.transform.position;
                 }
-                
             }
-            
         }
+
         if (PlayerPrefs.GetInt("StartVillage") == 1)
         {
             startPlayerPos = ES3.Load("CheckPoint", transform.position) + new Vector3(0, 0, -4);
@@ -62,26 +63,25 @@ public class PlayerManager : MonoBehaviour
             transform.position = startPlayerPos;
         }
 
-      
+
         _playerAttack = GetComponent<PlayerAttack>();
         _playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
         instance = this;
-        earnItemParticle =  Instantiate(Resources.Load("LevelupCylinderBlue", typeof(ParticleSystem)) as ParticleSystem,
+        earnItemParticle = Instantiate(Resources.Load("LevelupCylinderBlue", typeof(ParticleSystem)) as ParticleSystem,
             new Vector3(0, 2, 0), Quaternion.identity, transform);
         earnItemParticle.transform.localPosition = new Vector3(0, 0, 0);
         _damageParticle = Instantiate(Resources.Load("ShadowExplosion2", typeof(ParticleSystem)) as ParticleSystem,
             new Vector3(0, 2, 0), Quaternion.identity, transform);
         _damageParticle.transform.localPosition = new Vector3(0, 2, 0);
-        
+
         _cameraShake = FindObjectOfType<CameraShake>();
-        
     }
 
 
     private void Start()
     {
-        if (GameManager.instance.tutorialSection !=0)
+        if (GameManager.instance.tutorialSection != 0)
         {
             pet.GetComponent<NavMeshAgent>().enabled = false;
             pet.transform.position = startPlayerPos + new Vector3(5f, 0, 0);
@@ -121,13 +121,13 @@ public class PlayerManager : MonoBehaviour
             RopeStart();
         }
 
-        if (other.CompareTag("Bush")&& !sessizImage)
+        if (other.CompareTag("Bush") && !sessizImage)
         {
             player.speed = player.baseSpeed / 2;
             player._playerAnimator.SetBool("yurumeBool", true);
             sessizImage =
                 Instantiate(Resources.Load("SessizImage"),
-                   UiManager.instance.gamePlay.transform.GetChild(0).transform) as GameObject;
+                    UiManager.instance.gamePlay.transform.GetChild(0).transform) as GameObject;
         }
 
         if (other.CompareTag("CheckPoint"))
@@ -167,15 +167,15 @@ public class PlayerManager : MonoBehaviour
         {
             if (i == 9)
             {
-                GameObject c = Instantiate(Resources.Load("WoodPile"),transform)as GameObject;
-                c.transform.localPosition = new Vector3(0,1,0);
-                c.GetComponent<BuildObjMove>().MoveBuild(currentBuildObj.transform,i*0.1f,true);
+                GameObject c = Instantiate(Resources.Load("WoodPile"), transform) as GameObject;
+                c.transform.localPosition = new Vector3(0, 1, 0);
+                c.GetComponent<BuildObjMove>().MoveBuild(currentBuildObj.transform, i * 0.1f, true);
             }
             else
             {
-                GameObject c = Instantiate(Resources.Load("WoodPile"),transform)as GameObject;
-                c.transform.localPosition = new Vector3(0,1,0);
-                c.GetComponent<BuildObjMove>().MoveBuild(currentBuildObj.transform,i*0.1f,false);
+                GameObject c = Instantiate(Resources.Load("WoodPile"), transform) as GameObject;
+                c.transform.localPosition = new Vector3(0, 1, 0);
+                c.GetComponent<BuildObjMove>().MoveBuild(currentBuildObj.transform, i * 0.1f, false);
             }
         }
     }
@@ -184,6 +184,7 @@ public class PlayerManager : MonoBehaviour
     {
         currentBuildObj.GetComponentInChildren<ParticleSystem>().Play();
     }
+
     public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Fire"))
@@ -197,9 +198,22 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void SlowMotion()
+    {
+        if (timeScWaitCurrent > timeScWait)
+        {
+            timeScWaitCurrent = 0;
+            _slowMotionBool = true;
+            DOTween.To(() => timeSc, x => timeSc = x, .2f, .2f).OnComplete(() =>
+            {
+                DOTween.To(() => timeSc, x => timeSc = x, 1f, .2f).SetDelay(.2f).OnComplete(() => { _slowMotionBool = false; });
+            });
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Bush") )
+        if (other.CompareTag("Bush"))
         {
             player.speed = player.baseSpeed;
             player._playerAnimator.SetBool("yurumeBool", false);
@@ -214,6 +228,14 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        timeScWaitCurrent += Time.deltaTime;
+        if (_slowMotionBool)
+        {
+            Time.timeScale = timeSc;
+        }
+        else
+            Time.timeScale = 1;
+
         currentPortalTime += Time.deltaTime;
         if (Isrope && Input.GetKeyDown(KeyCode.Space))
         {

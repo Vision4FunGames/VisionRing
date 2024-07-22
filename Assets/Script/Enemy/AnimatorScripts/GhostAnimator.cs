@@ -26,6 +26,6 @@ public class GhostAnimator : MonoBehaviour
     }
     public void DeathEnemy()
     {
-        Destroy(transform.parent.gameObject);
+        //Destroy(transform.parent.gameObject);
     }
 }

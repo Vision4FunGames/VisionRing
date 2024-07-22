@@ -226,8 +226,22 @@ ModelImporter:
           postInfinity: 3
           rotationOrder: 4
       events:
+      - time: 0.058479533
+        functionName: SlowMotion
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
       - time: 0.44264647
         functionName: EnableSwordCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
+      - time: 0.5935294
+        functionName: ParticleSword
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -236,23 +250,16 @@ ModelImporter:
       - time: 0.78555804
         functionName: DisableCollider
         data: 
-        objectReferenceParameter: {fileID: 5461400893039353818, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8660033
         functionName: ComboAttackReset
         data: 
-        objectReferenceParameter: {fileID: 5461400893039353818, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
-        messageOptions: 0
-      - time: 0.5935294
-        functionName: ParticleSword
-        data: 
-        objectReferenceParameter: {fileID: 5461400893039353818, guid: a6cbe2f29cad94d45903eb322edb15da, type: 3}
-        floatParameter: 0
-        intParameter: 2
         messageOptions: 0
       transformMask: []
       maskType: 3

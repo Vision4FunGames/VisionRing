@@ -190,7 +190,8 @@ public class Dissolver : MonoBehaviour
             }
             yield return null;
         }
-
+       // GetComponentInParent<CharacterAnimator>()?.PuffParticleSpawn();
+       // GetComponentInParent<Spider>()?.PuffParticleSpawn();
         m_Finished = true;
     }
 
@@ -212,7 +213,8 @@ public class Dissolver : MonoBehaviour
             yield return null;
         }
 
-
+        //GetComponentInParent<Spider>()?.PuffParticleSpawn();
+        //GetComponentInParent<CharacterAnimator>()?.PuffParticleSpawn();
         m_Finished = true;
     }
 }
