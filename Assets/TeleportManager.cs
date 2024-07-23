@@ -28,11 +28,21 @@ public class TeleportManager : MonoBehaviour
 
     public void DungeonScene(int dungeonLevel)
     {
-        UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
-        currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position, Quaternion.identity);
-        player.teleportParticle.Play();
-        player.isMovement = false;
-        Invoke("MoveTeleportPlayer", 2f);
+        if (dungeonLevel == 0)
+        {
+            UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
+            player.teleportParticle.Play();
+            player.isMovement = false;
+            Invoke("BaseSceneReturn", 2f);
+        }
+        else
+        {
+            UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
+            currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position, Quaternion.identity);
+            player.teleportParticle.Play();
+            player.isMovement = false;
+            Invoke("MoveTeleportPlayer", 2f);
+        }
     }
 
     public void MoveTeleportPlayer()
@@ -46,6 +56,10 @@ public class TeleportManager : MonoBehaviour
 
     public void BaseSceneReturn()
     {
-        SceneManager.LoadScene(1);
+        UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
+        player.transform.position = Vector3.zero;
+        player.isMovement = true;
+        _cameraShake.DungeonEnd();
+        player.teleportParticle.Stop();
     }
 }
