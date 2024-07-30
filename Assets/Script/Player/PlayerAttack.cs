@@ -33,6 +33,8 @@ public class PlayerAttack : MonoBehaviour
     public ParticleSystem missAttackParticle;
     private bool hold = false;
     private PlayerStats playerStats;
+    public DecalCreaters decalCreaters;
+    
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -129,12 +131,13 @@ public class SwordAttack : MonoBehaviour
     private Animator playerAnimator;
     private Player player;
     private BoxCollider swordCollider;
-
+    private DecalCreaters _decalCreaters;
     private void Start()
     {
         playerAnimator ??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
         player = playerAnimator.GetComponentInParent<Player>();
         _swordParticle = Player.instance.GetComponent<PlayerAttack>().swordParticle;
+        _decalCreaters = Player.instance.GetComponent<PlayerAttack>().decalCreaters;
         GenerateSwordCollider();
     }
 
@@ -209,11 +212,10 @@ public class SwordAttack : MonoBehaviour
 
     public void ParticleSword(int index)
     {
-        
+        _decalCreaters.ThrowRaycast();
         _swordParticle[index].Play();
         if (index == 2)
         {
-          
             PlayerManager.instance.CameraShakePlayer(.4f, 2f);
             PlayerManager.instance.CameraShakeCombo(.6f, .7f);
         }

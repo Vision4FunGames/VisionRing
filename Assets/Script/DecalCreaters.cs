@@ -12,9 +12,11 @@ public class DecalCreaters : MonoBehaviour
         RaycastHit objectHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         Debug.DrawRay(transform.position, fwd * 50, Color.green);
-        if (Physics.Raycast(transform.position, fwd, out objectHit, 5))
+        if (Physics.Raycast(transform.position, fwd, out objectHit, 8))
         {
-            GameObject curremt = Instantiate(decal, objectHit.point,quaternion.identity);
+            GameObject current = Instantiate(decal, objectHit.point,quaternion.identity);
+            current.transform.LookAt(transform);
+            Destroy(current.gameObject,5);
         }
     }
 }

@@ -1,15 +1,19 @@
-using System;
 using DG.Tweening;
+using GameAnalyticsSDK.Setup;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TeleportManager : MonoBehaviour
 {
+    public TeleportScene[] teleports;
+    public GameObject twoSideTeleport;
     private CameraShake _cameraShake;
     public Scene baseScene;
     public GameObject[] dungeons;
     public GameObject dungeonSpawnPoint;
     private Player player;
+    private int currentDungeonValue;
     private GameObject currentDungeon;
 
     private void Start()
@@ -38,7 +42,8 @@ public class TeleportManager : MonoBehaviour
         else
         {
             UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
-            currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position, Quaternion.identity);
+            currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position,
+                Quaternion.identity);
             player.teleportParticle.Play();
             player.isMovement = false;
             Invoke("MoveTeleportPlayer", 2f);
@@ -49,7 +54,7 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = currentDungeon.transform.GetChild(0).position;
-        player.isMovement = true;
+        playerMovementStart();
         _cameraShake.DungeonStart();
         player.teleportParticle.Stop();
     }
@@ -58,8 +63,22 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = Vector3.zero;
-        player.isMovement = true;
+        playerMovementStart();
         _cameraShake.DungeonEnd();
         player.teleportParticle.Stop();
+    }
+
+
+    public void playerMovementStart()
+    {
+        player.isMovement = true;
+    }
+
+    public void TeleportSpawn()
+    {
+        GameObject baseTeleport = Instantiate(twoSideTeleport, player.transform.position + new Vector3(0, 1, 0),
+            quaternion.identity);
+        baseTeleport.GetComponentInChildren<TwoSideTeleport>().targetTeleport = teleports[currentDungeonValue].gameObject;
+        teleports[currentDungeonValue].targetTeleport = baseTeleport;
     }
 }
