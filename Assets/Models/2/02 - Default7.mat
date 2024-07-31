@@ -10,7 +10,8 @@ Material:
   m_Name: 02 - Default7
   m_Shader: {fileID: 4800000, guid: 70ef48c49f8bb994a88a1550d326460f, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _INVERTDISSOLVE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -109,7 +110,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.14142135
     - _GlossyReflections: 1
-    - _InvertDissolve: 0
+    - _InvertDissolve: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -122,7 +123,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeEmission: {r: 1, g: 0.5235849, b: 0.5235849, a: 1}
+    - _EdgeEmission: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OccludeColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

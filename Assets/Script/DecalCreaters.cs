@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DecalCreaters : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class DecalCreaters : MonoBehaviour
         {
             GameObject current = Instantiate(decal, objectHit.point,quaternion.identity);
             current.transform.LookAt(transform);
+            current.transform.eulerAngles =
+                new Vector3(current.transform.eulerAngles.x, current.transform.eulerAngles.y,Random.Range(-20f,20f));
             Destroy(current.gameObject,5);
         }
     }
