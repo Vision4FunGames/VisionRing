@@ -35,7 +35,10 @@ public class PuzzleConditionController : MonoBehaviour
         if (enemyCount <= leaveEnemy)
         {
             if (enemySpawner)
+            {
+                GetComponentInParent<TutorialCondition>().TutorialComplete();
                 enemySpawner.isConditionCompleted = true;
+            }
             else if (GetComponent<MeshRenderer>())
             {
                 GetComponent<MeshRenderer>().enabled = true;

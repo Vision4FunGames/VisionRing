@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &431012562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 431012564}
+  - component: {fileID: 431012563}
+  m_Layer: 0
+  m_Name: DecalCreators
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &431012564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431012562}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.016689016, y: 2.1999094, z: 0.8000501}
+  m_LocalScale: {x: 0.80000013, y: 0.8, z: 0.80000037}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2631297510898300616}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &431012563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431012562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898253dccc8bb664581f5292dcb83eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decal: {fileID: 7161239173892478535, guid: b69ea3e25e8ee3640969d9dda5a795e7, type: 3}
 --- !u!1 &731524867
 GameObject:
   m_ObjectHideFlags: 0
@@ -19,7 +64,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &731524871
 Transform:
   m_ObjectHideFlags: 0
@@ -61,7 +106,7 @@ MonoBehaviour:
   shaderData_RingCount:
   - 1
   shaderData_Phase:
-  - 199.39926
+  - 212.73259
   shaderData_Frequency:
   - 14.85
   shaderData_Smooth:
@@ -17144,6 +17189,7 @@ Transform:
   - {fileID: 7289979743448083018}
   - {fileID: 2526104153915114689}
   - {fileID: 8020616302477939808}
+  - {fileID: 431012564}
   m_Father: {fileID: 2631297512559623445}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17255,6 +17301,8 @@ GameObject:
   - component: {fileID: 1391811994}
   - component: {fileID: 1391812008}
   - component: {fileID: 1391812019}
+  - component: {fileID: 1768800889}
+  - component: {fileID: 1768800890}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -17410,6 +17458,7 @@ MonoBehaviour:
   earthSkillDamage: 10
   flameTFloor: {fileID: 1609428125}
   missAttackParticle: {fileID: 1962159892}
+  decalCreaters: {fileID: 431012563}
 --- !u!114 &8020616301625844294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17422,6 +17471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18676c7bc53a3304f916e3e0a35408bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeSc: 1
+  timeScWaitCurrent: 0
+  timeScWait: 50
   earnItemParticle: {fileID: 0}
   sessizImage: {fileID: 0}
   currentPortalTime: 0
@@ -17664,7 +17716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbacf6d156945774084cd7e943eff5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
+  currentLevel: 10
   currentExp: 0
   levelsExpPool: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   expBoost: 1
@@ -17672,6 +17724,41 @@ MonoBehaviour:
   playerexp: {fileID: 11400000, guid: ab03a21b16d66c64e91554952021c95d, type: 2}
   _levelUpText: {fileID: 0}
   _levelUpParticle: {fileID: 0}
+--- !u!114 &1768800889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631297512559623440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa42cae27e9c4c67823452fe29faac30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  type: 5
+  icon: {fileID: 21300000, guid: e64be7a877cb44b7a9f77adc55953ed1, type: 3}
+  priority: 0
+  autorotate: 0
+  autoscale: 0
+  scale: 1
+  title: 
+  desc: 
+--- !u!114 &1768800890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631297512559623440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d393993f46b7e44fb3172a3ad1dc66d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 1
+  reveal_id: 0
 --- !u!1 &2678434383242843462
 GameObject:
   m_ObjectHideFlags: 0

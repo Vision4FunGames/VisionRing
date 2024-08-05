@@ -119,6 +119,7 @@ public class CharacterAnimator : MonoBehaviour
     public void GoBack()
     {
         animator.speed = .5f;
+        transform.SetParent(null);
         Vector3 direction = transform.position-PlayerManager.instance.transform.position;
         direction = direction.normalized;
         GetComponentInChildren<Dissolver>().MaterializeDissolve();

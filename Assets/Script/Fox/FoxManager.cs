@@ -1,4 +1,4 @@
-using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,7 +21,7 @@ public class FoxManager : MonoBehaviour
 
     private void Awake()
     {
-        
+       
     }
 
     void Start()
@@ -102,12 +102,18 @@ public class FoxManager : MonoBehaviour
         agent.enabled = true;
     }
 
+    public void TutorialFoxFinish()
+    {
+        Vector3 pos = transform.localPosition+new Vector3(0,0,7f);
+        foxAnim.SetBool("sitBool",false);
+        transform.DOLocalMove(pos, 1f).SetDelay(1).OnComplete(EnableAgent);
+        //Invoke("EnableAgent",1f);
+    }
     public void FinishTutorial()
     {
         //agent.speed = 15f;
         if (!tutorial)
         {
-            
             agent.enabled = true;
             tutorial = true;
             GameManager.instance.tutoCage.GetComponent<NavMeshObstacle>().enabled = true;
