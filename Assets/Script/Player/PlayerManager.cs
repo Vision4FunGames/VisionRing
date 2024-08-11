@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     public Vector3 startPlayerPos;
     public GameObject pet;
     private GameObject currentBuildObj;
+    public SolarSystem SolarSystem;
 
     #region Singleton
 
@@ -243,6 +244,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void SolarSystemStart()
+    {
+        SolarSystem.SlorThrow();
+    }
     public void RopeStart()
     {
         transform.GetComponent<CharacterController>().enabled = false;

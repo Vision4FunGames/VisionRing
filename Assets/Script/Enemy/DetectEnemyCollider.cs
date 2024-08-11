@@ -34,6 +34,11 @@ public class DetectEnemyCollider : MonoBehaviour
             _enemyStats.TakeDamage(_playerAttack.CalculateDamage());
         }
 
+        if (other.CompareTag("Solar"))
+        {
+            GetComponent<Waypoint_Indicator>().enabled = true;
+        }
+
         if (other.CompareTag("SwordCollider"))
         {
             Vector3 enemyPosition = transform.position;
