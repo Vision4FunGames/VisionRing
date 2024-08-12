@@ -18,7 +18,7 @@ public class DrmEnemyChange : MonoBehaviour
     private void Start()
     {
         _drmGameObject = GetComponent<DRMGameObject>();
-        InıtializeEnemy();
+       InıtializeEnemy();
     }
 
     private void Update()
@@ -40,22 +40,14 @@ public class DrmEnemyChange : MonoBehaviour
             {
                 if (EnemyVariationsList[i] != null)
                 {
-                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) < _drmGameObject.radius &&
-                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation2)
+                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) <
+                        _drmGameObject.radius)
                     {
-                        EnemyVariationsList[i].gameObject.SetActive(true);
-                    }
-
-                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) < _drmGameObject.radius &&
-                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation1)
-                    {
-                        EnemyVariationsList[i].gameObject.SetActive(false);
+                        Debug.Log("0");
+                        EnemyVariationsList[i].VariationChange(0);
                     }
                 }
-                
             }
-         
-
             increas = true;
         }
 
@@ -65,17 +57,12 @@ public class DrmEnemyChange : MonoBehaviour
             {
                 if (EnemyVariationsList[i] != null)
                 {
-                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) > _drmGameObject.radius &&
-                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation2)
+                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) >
+                        _drmGameObject.radius)
                     {
-                        EnemyVariationsList[i].gameObject.SetActive(false);
-                    }
-
-                    if (Vector3.Distance(EnemyVariationsList[i].transform.position, transform.position) > _drmGameObject.radius &&
-                        EnemyVariationsList[i].EnemyVariation == EnemyVariation.Variation1)
-                    {
-                        EnemyVariationsList[i].gameObject.SetActive(true);
-                    }
+                        Debug.Log("1");
+                        EnemyVariationsList[i].VariationChange(1);
+                    }                       
                 }
                 
             }
@@ -92,10 +79,6 @@ public class DrmEnemyChange : MonoBehaviour
         {
             EnemyVariationsList.Add(enemies[i]);
         }
-        for (int i = 0; i < EnemyVariationsList.Count; i++)
-        {
-            if (EnemyVariationsList[i].EnemyVariation== EnemyVariation.Variation2)
-                EnemyVariationsList[i].gameObject.SetActive(false);
-        }
+       
     }
 }

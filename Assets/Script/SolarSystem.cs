@@ -1,12 +1,20 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class SolarSystem : MonoBehaviour
 {
     private Player player;
+    private PostProcessVolume _processVolume;
+    LensDistortion lensDistortion;
+    private AmbientOcclusion _ambientOcclusion;
+    public AnimationCurve SolarAnimationCurve;
     public void Start()
     {
+        _processVolume = FindObjectOfType<PostProcessVolume>();
+       
+        _processVolume.profile.TryGetSettings(out lensDistortion);
+        lensDistortion.intensity.value = 10f;
     }
 
    
@@ -15,11 +23,17 @@ public class SolarSystem : MonoBehaviour
    {
        gameObject.SetActive(true);
        transform.DOKill();
-       transform.localScale = new Vector3(0.520004f, 0.73148f, 0.620004f);
-       transform.DOScale(new Vector3(215.520004f,259.383148f,215.520004f), 10).OnComplete((() =>
+       transform.localScale = new Vector3(0.52f, 0.73f, 0.62f);
+       transform.DOScale(new Vector3(30, 35, 30), .6f).SetEase(SolarAnimationCurve).OnComplete((() =>
        {
-           transform.localScale = new Vector3(215.520004f, 259.383148f, 215.520004f);
-           gameObject.SetActive(false);
+           DOTween.To(() =>  lensDistortion.intensity.value , x =>  lensDistortion.intensity.value  = x,  50, 0.1f).OnComplete((() =>
+               DOTween.To(() =>  lensDistortion.intensity.value , x =>  lensDistortion.intensity.value  = x,  0, 0.05f)));
+           transform.DOScale(new Vector3(215.52f,259.38f,215.52f), 1).OnComplete((() =>
+           {
+               transform.localScale = new Vector3(215.52f, 259.38f, 215.52f);
+               gameObject.SetActive(false);
+           }));
        }));
+       
    }
 }

@@ -9,6 +9,7 @@ namespace AmazingAssets.DynamicRadialMasks
     [ExecuteAlways]
     public class DRMGameObject : MonoBehaviour
     {
+        public bool staticDrm;
         private SphereCollider sphereCollider;
         public float waitTime;
         public float timer;
@@ -40,7 +41,8 @@ namespace AmazingAssets.DynamicRadialMasks
             _drmEnemyChange = GetComponent<DrmEnemyChange>();
             currentPhase = 0;
             timer = waitTime;
-            BreafStart();
+            if (staticDrm)
+                BreafStart();
         }
 
         void Update()
@@ -96,7 +98,6 @@ namespace AmazingAssets.DynamicRadialMasks
         }
 
 
-       
         public void BreafStart()
         {
             baseRadius = radius;
@@ -111,6 +112,16 @@ namespace AmazingAssets.DynamicRadialMasks
                     DOTween.To(() => radius, x => radius = x, baseRadius - 1, breafDuration)
                         .OnComplete(() => { BreafRadial(); });
                 });
+        }
+
+        public void OpenWorld()
+        {
+            if (radius > 99)
+                DOTween.To(() => radius, x => radius = x, 0, 0.25f).OnComplete((() => increaseEnes=true));
+            else if (radius < 2)
+            {
+                DOTween.To(() => radius, x => radius = x, 100, 0.25f).OnComplete((() => increaseEnes=false));
+            }
         }
     }
 }
