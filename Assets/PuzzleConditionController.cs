@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PuzzleConditionController : MonoBehaviour
@@ -24,8 +25,11 @@ public class PuzzleConditionController : MonoBehaviour
         else
         {
             enemyCount = transform.childCount;
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<Collider>().enabled = false;
+            if (GetComponent<MeshRenderer>())
+            {
+                GetComponent<MeshRenderer>().enabled = false;
+                GetComponent<Collider>().enabled = false;
+            }
         }
     }
 
@@ -38,6 +42,13 @@ public class PuzzleConditionController : MonoBehaviour
             {
                 GetComponentInParent<TutorialCondition>().TutorialComplete();
                 enemySpawner.isConditionCompleted = true;
+            }
+
+            if (GetComponent<TaskPrefab>())
+            {
+                GetComponent<TaskPrefab>().isCompleted = true;
+                transform.parent.DOScale(Vector3.zero, 1);
+                Destroy(transform.parent.gameObject, 1f);
             }
             else if (GetComponent<MeshRenderer>())
             {

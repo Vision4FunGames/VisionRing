@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    private Player _player;
     public float radius = 3f;
     public Transform interactionTransform;
     private bool isFocus = false;
@@ -14,12 +13,12 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        _player = Player.instance;
+      
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        player = _player.transform;
+        player = Player.instance.transform;
     }
 
     public virtual void Interact()

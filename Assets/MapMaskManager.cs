@@ -14,9 +14,12 @@ public class MapMaskManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("MapLevel"))
         {
             PlayerPrefs.SetInt("MapLevel", 0);
+            currentMapLevel = PlayerPrefs.GetInt("MapLevel");
         }
-
-        currentMapLevel = PlayerPrefs.GetInt("MapLevel") - 1;
+        else
+        {
+            currentMapLevel = PlayerPrefs.GetInt("MapLevel") - 1;
+        }
     }
 
     private void Start()
@@ -62,7 +65,7 @@ public class MapMaskManager : MonoBehaviour
                 mapLevelSettings[i].levelButton.gameObject.SetActive(true);
 
             if (SceneManager.GetActiveScene().buildIndex == i)
-                mapLevelSettings[i-1].levelButton.gameObject.SetActive(false);
+                mapLevelSettings[i - 1].levelButton.gameObject.SetActive(false);
         }
     }
 }

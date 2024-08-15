@@ -1,36 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Exoa.TutorialEngine;
+using DG.Tweening;
 using UnityEngine;
 
 public class TutoSword : MonoBehaviour
 {
-    public GameObject tutorialRestriction;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        Invoke("CloseSwords", .5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CloseSwords()
     {
-        
-       // transform.Rotate(0, (transform.rotation.y) + Time.deltaTime * 20f, 0);
+        EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = false;
+        UiManager.instance.attackJoystick.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-             GameManager.instance.TutorialLoad();
-            //TutorialLoader.instance.Load("Dash");
             EquipmentManager.instance.currentWeapon.GetComponent<MeshRenderer>().enabled = true;
             UiManager.instance.attackJoystick.gameObject.SetActive(true);
-            tutorialRestriction.GetComponent<Collider>().isTrigger = true;
-            Destroy(gameObject);
-            
+            GetComponentInParent<TaskPrefab>().isCompleted = true;
+            transform.parent.DOScale(Vector3.zero, 1);
+            Destroy(transform.parent.gameObject, 1f);
         }
     }
 }

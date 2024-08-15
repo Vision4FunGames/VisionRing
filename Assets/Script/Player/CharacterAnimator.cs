@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class CharacterAnimator : MonoBehaviour
 {
+    
     public Animator animator;
     [HideInInspector] public bool isTabut;
     NavMeshAgent navmeshAgent;
@@ -21,6 +22,7 @@ public class CharacterAnimator : MonoBehaviour
         enemyStats = GetComponent<EnemyStats>();
         combat.OnAttack += OnAttack;
         enemyStats.OnDie += DieAnimation;
+        animator.SetBool("spawType",true);
     }
 
     protected virtual void Update()

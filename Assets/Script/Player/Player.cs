@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         }
            
     }
-
+    
     private void Awake()
     {
         baseSpeed = speed;
