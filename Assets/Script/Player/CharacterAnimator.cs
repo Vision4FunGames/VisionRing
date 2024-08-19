@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class CharacterAnimator : MonoBehaviour
 {
-    
+    public bool task;
     public Animator animator;
     [HideInInspector] public bool isTabut;
     NavMeshAgent navmeshAgent;
@@ -15,6 +15,7 @@ public class CharacterAnimator : MonoBehaviour
     private int attackCounter = 0;
     public bool shied;
     public GameObject sword;
+    public ParticleSystem spwn;
     protected virtual void Start()
     {
         navmeshAgent = GetComponent<NavMeshAgent>();
@@ -22,9 +23,21 @@ public class CharacterAnimator : MonoBehaviour
         enemyStats = GetComponent<EnemyStats>();
         combat.OnAttack += OnAttack;
         enemyStats.OnDie += DieAnimation;
-        animator.SetBool("spawType",true);
+        
+        if (task)
+        {
+            navmeshAgent.enabled = false;
+            animator.SetBool("spawType", true);
+            spwn.Play();
+            Invoke("navmeshEnable",1.5f);
+        }
     }
 
+    public void navmeshEnable()
+    {
+        navmeshAgent.enabled = true;
+
+    }
     protected virtual void Update()
     {
         if (navmeshAgent.velocity.magnitude / navmeshAgent.speed >= 0)
@@ -103,7 +116,7 @@ public class CharacterAnimator : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         if (GetComponent<BoxCollider>())
             GetComponent<BoxCollider>().enabled = false;
-        
+
         enemyStats.die = true;
 
         animator.SetTrigger("death_");
@@ -118,27 +131,28 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     private Vector3 deathPos;
+
     public void GoBack()
     {
         animator.speed = .5f;
         transform.SetParent(null);
-        Vector3 direction = transform.position-PlayerManager.instance.transform.position;
+        Vector3 direction = transform.position - PlayerManager.instance.transform.position;
         direction = direction.normalized;
         GetComponentInChildren<Dissolver>().MaterializeDissolve();
         if (sword)
         {
             sword.gameObject.SetActive(false);
         }
-        Invoke("PuffParticleSpawn",1.5f);
-         deathPos = direction*5+ new Vector3(0,direction.y+4,0);
-         
-        transform.DOLocalJump(transform.position+deathPos, 2f,1,Random.Range(3.25f,3.75f)).SetEase(Ease.OutCubic).OnComplete(() =>
-        {
-            Destroy(transform.gameObject, 1);
-        });
+
+        Invoke("PuffParticleSpawn", 1.5f);
+        deathPos = direction * 5 + new Vector3(0, direction.y + 4, 0);
+
+        transform.DOLocalJump(transform.position + deathPos, 2f, 1, Random.Range(3.25f, 3.75f)).SetEase(Ease.OutCubic)
+            .OnComplete(() => { Destroy(transform.gameObject, 1); });
     }
 
     public ParticleSystem ppppp;
+
     public void PuffParticleSpawn()
     {
         ppppp.Play();
@@ -147,5 +161,4 @@ public class CharacterAnimator : MonoBehaviour
         // currentparticle.GetComponent<ParticleSystem>().Play();
         // Destroy(currentparticle.gameObject,4);
     }
-    
 }

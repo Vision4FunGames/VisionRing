@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour
             else
             {
 //                print("Enemys");
-                if (target)
+                if (target && agent.enabled)
                     agent.SetDestination(target.position);
                 else
                 {
@@ -133,7 +133,7 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-        else if (distance > lookRadius && agent != null && !_enemyStats.die && _gameManager.gameState != GameState.GameOver)
+        else if (distance > lookRadius && agent != null && agent.enabled && !_enemyStats.die && _gameManager.gameState != GameState.GameOver)
         { 
             if (timer <= 0)
             {

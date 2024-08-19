@@ -9,7 +9,7 @@ public class HideOutTask : MonoBehaviour
     void Start()
     {
         GameObject hideout = FindObjectOfType<HideOutManager>().gameObject;
-        hideout.transform.DOScale(Vector3.one,1f);
+        hideout.transform.DOScale(Vector3.one,1f).SetDelay(1);
     }
 
     // Update is called once per frame

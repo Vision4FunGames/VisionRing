@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ParticleManager : MonoBehaviour
 {
+    public ParticleSystem purifyParticle;
     public ParticleSystem smokeDeath;
     public ParticleSystem swimParticle;
     public ParticleSystem bombparticle;
