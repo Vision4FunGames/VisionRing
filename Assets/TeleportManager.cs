@@ -30,6 +30,13 @@ public class TeleportManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void TeleportOpenAll()
+    {
+        for (int i = 0; i < teleports.Length; i++)
+        {
+            teleports[i].gameObject.SetActive(true);
+        }
+    }
     public void DungeonScene(int dungeonLevel)
     {
         if (dungeonLevel == 0)

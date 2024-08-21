@@ -55,7 +55,6 @@ public class HideOutManager : MonoBehaviour
         hideOut = true;
         canvas.SetActive(false);
         player.isMovement = false;
-
         DOTween.To(() => currentPos, x => currentPos = x, hideOutCamPos, 2).OnComplete((() =>
         {
             DOTween.To(() => drmGameObject.baseRadius, x => drmGameObject.baseRadius = x, maxRadius, 2)
@@ -66,6 +65,10 @@ public class HideOutManager : MonoBehaviour
                         hideOut = false;
                         player.isMovement = true;
                         PlayerPrefs.SetInt("HideOut" + SceneManager.GetActiveScene().name, 1);
+                        if (!PlayerPrefs.HasKey("HideOutReward"))
+                        {
+                            FindObjectOfType<TaskReward>().rewardPanel.transform.DOScale(new Vector3(1, 1, 1), .5f);
+                        }
                     }));
                 });
         }));

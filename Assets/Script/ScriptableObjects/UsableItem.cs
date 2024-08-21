@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "UpgradeItem", menuName = "UsableItem", order = 3)]
 public class UsableItem : Item
@@ -13,9 +9,9 @@ public class UsableItem : Item
     {
         if (type == InventoryType.Usable)
         {
-            if (this.name == "TownScroll")
+            if (this.name == "DungeonPortal")
             {
-                TownScroll();
+                DungeonPortal();
             }
         }
         else if (type == InventoryType.Collect)
@@ -41,6 +37,19 @@ public class UsableItem : Item
        
     }
 
+    private void DungeonPortal()
+    {
+      
+        FindObjectOfType<TeleportManager>().TeleportOpenAll();
+        ResetScreen();
+    }
+
+    public void ResetScreen()
+    {
+        RemoveFromUsable();
+        UiManager.instance.CloseAllUI();
+        UiManager.instance.GamePlayUI();
+    }
     public void PopupOpen()
     {
         popUp = Instantiate(Resources.Load("UsablePopUp")as GameObject);

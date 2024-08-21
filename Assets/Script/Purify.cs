@@ -13,13 +13,14 @@ public class Purify : MonoBehaviour
         objCount = transform.childCount;
         if (PlayerPrefs.HasKey("Purify"))
             gameObject.SetActive(false);
-        else
+    }
+
+    public void StartPurify()
+    {
+        for (int i = 0; i < transform.childCount; i++)
         {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).GetComponent<Collider>().enabled = true;
-                transform.GetChild(i).GetComponent<Outline>().enabled = true;
-            }
+            transform.GetChild(i).GetComponent<Collider>().enabled = true;
+            transform.GetChild(i).GetComponent<Outline>().enabled = true;
         }
     }
 
@@ -28,9 +29,9 @@ public class Purify : MonoBehaviour
         currentObj++;
         if (objCount == currentObj)
         {
-           PlayerPrefs.SetInt("Purify",1);
-           GetComponent<TaskPrefab>().isCompleted = true;
-           Destroy(gameObject,1);
+            PlayerPrefs.SetInt("Purify", 1);
+            GetComponentInParent<TaskPrefab>().isCompleted = true;
+            Destroy(transform.parent.gameObject, 1);
         }
     }
 }
