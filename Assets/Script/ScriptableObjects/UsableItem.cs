@@ -5,7 +5,8 @@ public class UsableItem : Item
 {
     public GameObject popUp;
     public Transform popUpTransform;
-    public override void Use(InventoryType type,int count = 0)
+
+    public override void Use(InventoryType type, int count = 0)
     {
         if (type == InventoryType.Usable)
         {
@@ -24,6 +25,7 @@ public class UsableItem : Item
                     Inventory.instance.usableItemsCount[i] += 1;
                 }
             }
+
             Inventory.instance.onItemChangedCallback.Invoke();
         }
     }
@@ -34,13 +36,14 @@ public class UsableItem : Item
         UiManager.instance.CloseAllUI();
         UiManager.instance.MapOpen();
         UiManager.instance.GamePlayUI();
-       
     }
 
     private void DungeonPortal()
     {
-      
+        FindObjectOfType<InventoryTask>().UseItem();
         FindObjectOfType<TeleportManager>().TeleportOpenAll();
+        Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1f);
+        FindObjectOfType<TaskPrefab>().isCompleted = true;
         ResetScreen();
     }
 
@@ -50,14 +53,12 @@ public class UsableItem : Item
         UiManager.instance.CloseAllUI();
         UiManager.instance.GamePlayUI();
     }
+
     public void PopupOpen()
     {
-        popUp = Instantiate(Resources.Load("UsablePopUp")as GameObject);
+        popUp = Instantiate(Resources.Load("UsablePopUp") as GameObject);
         popUp.transform.parent = popUpTransform.parent.transform.parent.transform.parent.transform.parent;
         popUpTransform.position = new Vector3(0, 0, 0);
-        
     }
 }
-    // Start is called before the first frame update
-
-
+// Start is called before the first frame update

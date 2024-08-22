@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,5 +24,8 @@ public class TaskReward : MonoBehaviour
         Inventory.instance.usableItemsCount[0] += 1; 
         Inventory.instance.SaveAllItems();
         rewardPanel.transform.DOScale(Vector3.zero, .5f);
+        Destroy(FindObjectOfType<TaskPrefab>().gameObject,2);
+        FindObjectOfType<TaskPrefab>().isCompleted = true;
+        FindObjectOfType<UiManager>().isTaskInventory = true;
     }
 }

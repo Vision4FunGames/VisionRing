@@ -57,7 +57,7 @@ public class UiManager : MonoBehaviour
     public GameObject mapOpenBtn;
     public TMP_InputField playerNameInput;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
-
+    public  bool isTaskInventory;
     public MMProgressBar playerProgressBar;
     public FixedJoystick attackJoystick;
     public Sprite[] itemlevelSprites45;
@@ -342,6 +342,11 @@ public class UiManager : MonoBehaviour
 
     public void ShowInventory()
     {
+        if (isTaskInventory)
+        {
+            FindObjectOfType<InventoryTask>().OpenInventory();
+        }
+        
         CloseAllUI();
 
         contentText.text = "INVENTORY";
