@@ -26,6 +26,6 @@ public class InventoryTask : MonoBehaviour
     {
         GetComponent<TaskPrefab>().isCompleted = true;
         transform.parent.DOScale(Vector3.zero, 1);
-        Destroy(transform.parent.gameObject, 1f);
+        Destroy(transform.gameObject, 1f);
     }
 }

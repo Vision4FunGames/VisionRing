@@ -22,7 +22,7 @@ public class HideOutManager : MonoBehaviour
     {
         mfollowOfset = GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>();
         playerCamPos = new Vector3(18.7801094f, 25f, -23.4532204f);
-        hideOutCamPos = new Vector3(33.8899994f, 43.5099983f, -42.3300285f);
+        hideOutCamPos = new Vector3(29f, 48f, -32);
         currentPos = playerCamPos;
         player = FindObjectOfType<Player>();
         hideOutBuildBtn.onClick.AddListener(BuildBase);

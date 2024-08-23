@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    public bool solarTutorial;
     private bool _slowMotionBool;
     public float timeSc, timeScWaitCurrent;
     public float timeScWait;
@@ -207,7 +208,8 @@ public class PlayerManager : MonoBehaviour
             _slowMotionBool = true;
             DOTween.To(() => timeSc, x => timeSc = x, .2f, .2f).OnComplete(() =>
             {
-                DOTween.To(() => timeSc, x => timeSc = x, 1f, .2f).SetDelay(.2f).OnComplete(() => { _slowMotionBool = false; });
+                DOTween.To(() => timeSc, x => timeSc = x, 1f, .2f).SetDelay(.2f)
+                    .OnComplete(() => { _slowMotionBool = false; });
             });
         }
     }
@@ -246,8 +248,16 @@ public class PlayerManager : MonoBehaviour
 
     public void SolarSystemStart()
     {
+        if (solarTutorial)
+        {
+            solarTutorial = false;
+            FindObjectOfType<TaskPrefab>().isCompleted = true;
+            Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1);
+        }
+
         SolarSystem.SlorThrow();
     }
+
     public void RopeStart()
     {
         transform.GetComponent<CharacterController>().enabled = false;

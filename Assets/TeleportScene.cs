@@ -34,14 +34,12 @@ public class TeleportScene : MonoBehaviour
             Invoke("EnableCollider", 4f);
             if (tpCount !=0)
             {
-               
                 TpStart();
             }
             else 
             {
                 tpCount++;
                 tp.DungeonScene(sceneName);
-              
             }
         }
     }
@@ -66,6 +64,5 @@ public class TeleportScene : MonoBehaviour
         _player.teleportParticle.Play();
         _player.isMovement = false;
         Invoke("Tp", 2f);
-      
     }
 }

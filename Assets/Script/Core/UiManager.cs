@@ -67,6 +67,7 @@ public class UiManager : MonoBehaviour
     public Sprite emptySprite = null;
     public Material skillMaterial;
     public Button StoneBtn;
+    public Button sonarBtn;
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
 
     //Chest Scroll

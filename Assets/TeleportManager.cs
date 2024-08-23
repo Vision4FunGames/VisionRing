@@ -1,5 +1,4 @@
 using DG.Tweening;
-using GameAnalyticsSDK.Setup;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,11 +14,14 @@ public class TeleportManager : MonoBehaviour
     private Player player;
     private int currentDungeonValue;
     private GameObject currentDungeon;
+    public bool isTutorial;
 
     private void Start()
     {
         player = Player.instance;
         _cameraShake = FindObjectOfType<CameraShake>();
+        if (PlayerPrefs.HasKey("DungeonTutorial"))
+            TeleportOpenAll();
     }
 
     public void TeleportScene(int sceneName)
@@ -37,6 +39,7 @@ public class TeleportManager : MonoBehaviour
             teleports[i].gameObject.SetActive(true);
         }
     }
+
     public void DungeonScene(int dungeonLevel)
     {
         if (dungeonLevel == 0)
@@ -48,6 +51,7 @@ public class TeleportManager : MonoBehaviour
         }
         else
         {
+            Debug.Log(dungeonLevel);
             UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
             currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position,
                 Quaternion.identity);
@@ -55,6 +59,8 @@ public class TeleportManager : MonoBehaviour
             player.isMovement = false;
             Invoke("MoveTeleportPlayer", 2f);
         }
+
+       
     }
 
     public void MoveTeleportPlayer()
@@ -79,13 +85,20 @@ public class TeleportManager : MonoBehaviour
     public void playerMovementStart()
     {
         player.isMovement = true;
+        if (isTutorial)
+        {
+            FindObjectOfType<TaskPrefab>().isCompleted = true;
+            Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1f);
+            isTutorial = false;
+        }
     }
 
     public void TeleportSpawn()
     {
         GameObject baseTeleport = Instantiate(twoSideTeleport, player.transform.position + new Vector3(0, 1, 0),
             quaternion.identity);
-        baseTeleport.GetComponentInChildren<TwoSideTeleport>().targetTeleport = teleports[currentDungeonValue].gameObject;
+        baseTeleport.GetComponentInChildren<TwoSideTeleport>().targetTeleport =
+            teleports[currentDungeonValue].gameObject;
         teleports[currentDungeonValue].targetTeleport = baseTeleport;
     }
 }
