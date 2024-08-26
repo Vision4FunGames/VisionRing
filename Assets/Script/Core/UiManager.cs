@@ -49,6 +49,7 @@ public class UiManager : MonoBehaviour
     public GameObject menuUi;
     public Button autoMoveBtn;
     public Button playerNameConfirm;
+    public GameObject TaskSolarPopUp;
     [Header("Skill Buttons")] public Button[] skillButtons;
     private InventoryUI inventoryUi;
     private ShopUI shopUI;
@@ -118,7 +119,10 @@ public class UiManager : MonoBehaviour
         gamePlay.SetActive(true);
         onEconomyChangedCallBack += EconomyUI;
         onEconomyChangedCallBack.Invoke();
-        
+        if (PlayerPrefs.HasKey("solarTuto"))
+        {
+            sonarBtn.gameObject.SetActive(true);
+        }
         if (PlayerPrefs.HasKey("playerName"))
         {
            // GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
@@ -129,7 +133,6 @@ public class UiManager : MonoBehaviour
             // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
         }
     }
-
     public void DisableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)

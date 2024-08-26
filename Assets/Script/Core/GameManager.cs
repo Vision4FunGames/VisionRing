@@ -106,6 +106,11 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         }
     }
 
+    public void CurrentTutorialComplete()
+    {
+        FindObjectOfType<TaskPrefab>().isCompleted = true;
+        Destroy(FindObjectOfType<TaskPrefab>().gameObject,1);
+    }
     public void PlayFightSound()
     {
         if (!fightBool)

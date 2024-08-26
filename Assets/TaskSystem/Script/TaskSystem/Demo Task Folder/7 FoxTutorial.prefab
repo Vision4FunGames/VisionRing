@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8777727620994306963}
   - component: {fileID: 8667355138563948235}
   - component: {fileID: 2130123660387434385}
+  - component: {fileID: -4947301231288579363}
+  - component: {fileID: 2371628253522954416}
   m_Layer: 0
   m_Name: 7 FoxTutorial
   m_TagString: Untagged
@@ -89,9 +91,9 @@ MonoBehaviour:
   onScreenSpriteScaleWithRange: 0
   reverseOnScreenSpriteScaleWithRange: 0
   onScreenSpriteHide: 1
-  offScreenSprite: {fileID: 21300000, guid: c9b43e357f55a40eeb713ddc18e0347d, type: 3}
-  offScreenSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  offScreenSpriteSize: 1
+  offScreenSprite: {fileID: 21300000, guid: b92acb18119a3bb4bb85ff34a6d08215, type: 3}
+  offScreenSpriteColor: {r: 0.8679245, g: 0.56653315, b: 0.093342766, a: 1}
+  offScreenSpriteSize: 0.2
   offScreenSpriteOffset: {x: 0, y: 0}
   offScreenSpriteRotation: 0
   offScreenSpriteFadeWithRange: 0
@@ -187,6 +189,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec82e355ddd064499056227a759a305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-4947301231288579363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600234082165517147}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2371628253522954416
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600234082165517147}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2600234082218527551
 PrefabInstance:
   m_ObjectHideFlags: 0

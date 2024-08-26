@@ -89,6 +89,8 @@ public class EnemySpawner : PuzzleConditionTrigger
                             enemy.transform.SetParent(null);
                         enemy.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                         enemy.transform.Bounce(.3f);
+                        if (GetComponentInParent<SaveTheFox>())
+                            enemy.GetComponent<DetectEnemyCollider>().foxTutorial = true;
                         var sp = Instantiate(spawnParticle, enemy.transform.position, Quaternion.identity);
                         Destroy(sp, 3.0f);
                     }

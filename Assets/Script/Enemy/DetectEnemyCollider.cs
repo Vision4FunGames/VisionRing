@@ -11,6 +11,7 @@ public class DetectEnemyCollider : MonoBehaviour
     private Rigidbody rb;
     private float currentFlameTimer;
     private PlayerStats playerStats;
+    public bool foxTutorial;
 
     private void Awake()
     {
@@ -34,7 +35,7 @@ public class DetectEnemyCollider : MonoBehaviour
             _enemyStats.TakeDamage(_playerAttack.CalculateDamage());
         }
 
-        if (other.CompareTag("Solar"))
+        if (other.CompareTag("Solar") && !foxTutorial)
         {
             GetComponent<Waypoint_Indicator>().enabled = true;
         }
