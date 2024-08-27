@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PuzzleConditionController : MonoBehaviour
 {
@@ -61,9 +63,10 @@ public class PuzzleConditionController : MonoBehaviour
                 enemySpawner.isConditionCompleted = true;
             }
 
-            if (GetComponent<TaskPrefab>())
+            if ( GetComponentInParent<TaskPrefab>())
             {
-                GetComponent<TaskPrefab>().isCompleted = true;
+                GetComponentInParent<TaskPrefab>().isCompleted = true;
+                GetComponentInParent<TaskPrefab>().transform.GetComponentInChildren<NavMeshAgent>().enabled = true;
                 transform.parent.DOScale(Vector3.zero, 1);
                 Destroy(transform.gameObject, 1f);
             }

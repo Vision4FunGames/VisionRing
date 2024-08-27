@@ -67,7 +67,7 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = currentDungeon.transform.GetChild(0).position;
-        playerMovementStart();
+        Invoke("playerMovementStart",1);
         _cameraShake.DungeonStart();
         player.teleportParticle.Stop();
     }

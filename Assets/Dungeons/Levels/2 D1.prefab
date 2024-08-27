@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2602521165083952684}
   - component: {fileID: 6671672682468274749}
-  - component: {fileID: 691369820350569303}
   m_Layer: 0
   m_Name: 2 D1
   m_TagString: Untagged
@@ -1425,128 +1424,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: e41f8205af192dd4e9c24395de354366, type: 2}
   m_BuildHeightMesh: 0
---- !u!114 &691369820350569303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934353193153525979}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8057c976b872b494aba079f605e2e5b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_tag_name: Canvas
-  camera_tag_name: MainCamera
-  multiCam: 0
-  distCalTargetTag: MainCamera
-  enableStandardTracking: 0
-  enableCenteredTracking: 0
-  showBoundaryBox: 1
-  boundaryBoxColor: {r: 1, g: 1, b: 0.4, a: 1}
-  parentSize: {x: 150, y: 150}
-  displayRangeMin: 0
-  displayRangeMax: 500
-  raycastTarget: 0
-  enableSprite: 0
-  spriteDepth: 0
-  offScreenSpriteRotates: 0
-  onScreenSprite: {fileID: 0}
-  onScreenSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  onScreenSpriteSize: 1
-  onScreenSpriteOffset: {x: 0, y: 0}
-  onScreenSpriteRotation: 0
-  onScreenSpriteFadeWithRange: 0
-  onScreenSpriteScaleWithRange: 0
-  reverseOnScreenSpriteScaleWithRange: 0
-  onScreenSpriteHide: 0
-  offScreenSprite: {fileID: 0}
-  offScreenSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  offScreenSpriteSize: 1
-  offScreenSpriteOffset: {x: 0, y: 0}
-  offScreenSpriteRotation: 0
-  offScreenSpriteFadeWithRange: 0
-  offScreenScaleWithRange: 0
-  reverseOffScreenSpriteScaleWithRange: 0
-  offScreenSpriteHide: 0
-  enableGameObject: 0
-  gameObjectDepth: 0
-  offScreenObjectRotates: 0
-  onScreenGameObject: {fileID: 0}
-  onScreenGameObjectColor: {r: 1, g: 1, b: 1, a: 1}
-  onScreenGameObjectSize: 1
-  onScreenGameObjectOffset: {x: 0, y: 0}
-  onScreenGameObjectRotation: 0
-  onScreenGameObjectFadeWithRange: 0
-  onScreenGameObjectScaleWithRange: 0
-  reverseOnScreenGameObjectScaleWithRange: 0
-  onScreenGameObjectHide: 0
-  offScreenGameObject: {fileID: 0}
-  offScreenGameObjectColor: {r: 1, g: 1, b: 1, a: 1}
-  offScreenGameObjectSize: 1
-  offScreenGameObjectOffset: {x: 0, y: 0}
-  offScreenGameObjectRotation: 0
-  offScreenGameObjectFadeWithRange: 0
-  offScreenGameObjectScaleWithRange: 0
-  reverseOffScreenGameObjectScaleWithRange: 0
-  offScreenGameObjectHide: 0
-  enableText: 1
-  textDepth: 0
-  textDescription: Hello!
-  distIncrement: m
-  textFont: {fileID: 0}
-  textSize: 40
-  textColor: {r: 0, g: 0, b: 0, a: 1}
-  textAlign: 1
-  textLineSpacing: 20
-  edgeDetectOffset: {x: 0, y: 0}
-  onScreenSpriteHideDesc: 0
-  onScreenSpriteHideDist: 0
-  onScreenTextOffset: {x: 0, y: 0}
-  offScreenSpriteHideDesc: 0
-  offScreenSpriteHideDist: 0
-  offScreenTextOffset: {x: 0, y: 0}
-  showDiameter: 0
-  diameterColor: {r: 0, g: 0, b: 0, a: 1}
-  diameterSize: 50
-  onScreenCenteredRangeMin: 0
-  onScreenCenteredRangeMax: 50
-  raycastTargetCentered: 0
-  enableCenteredSprite: 0
-  onScreenCenteredSpriteDepth: 0
-  onScreenCenteredSprite: {fileID: 0}
-  onScreenCenteredSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  onScreenCenteredSpriteSize: 1
-  onScreenCenteredSpriteRotation: 0
-  onScreenSpriteCenteredFadeWithRange: 0
-  onScreenSpriteCenteredScaleWithRange: 0
-  onScreenSpriteCenteredScaleReverse: 0
-  hideOnScreenCenteredSprite: 0
-  hideOffScreenCenteredSprite: 0
-  enableCenteredPrefab: 0
-  onScreenCenteredPrefabDepth: 0
-  onScreenCenteredPrefab: {fileID: 0}
-  onScreenCenteredPrefabColor: {r: 1, g: 1, b: 1, a: 1}
-  onScreenCenteredPrefabSize: 1
-  onScreenCenteredPrefabRotation: 0
-  onScreenPrefabCenteredFadeWithRange: 0
-  onScreenPrefabCenteredScaleWithRange: 0
-  onScreenPrefabCenteredScaleReverse: 0
-  hideOnScreenCenteredPrefab: 0
-  hideOffScreenCenteredPrefab: 0
-  enableRadiusGizmo: 0
-  radiusGizmoColor: {r: 0, g: 0, b: 0, a: 1}
-  radiusGizmoSize: 50
-  toggleSetupOptions: 1
-  toggleParentOptions: 0
-  toggleSpriteOptions: 0
-  toggleGameObjectOptions: 0
-  toggleTextOptions: 0
-  toggleDiameterOptions: 0
-  toggleCenteredSpriteOptions: 0
-  toggleCenteredPrefabOptions: 0
-  toggleRadiusGizmoOptions: 0
 --- !u!1 &6243921862944897145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,7 +1448,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6243921862944897145}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000004371139}
-  m_LocalPosition: {x: -8.16, y: 3.8, z: -28.12}
+  m_LocalPosition: {x: -8.16, y: 2.0675, z: -28.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

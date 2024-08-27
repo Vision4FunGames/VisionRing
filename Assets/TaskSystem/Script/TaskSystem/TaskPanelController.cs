@@ -71,7 +71,7 @@ namespace TaskSystem
             // Child
             spawnedBox.transform.SetSiblingIndex(1);
             spawnedBox.isMainTask = task.IsMainTask();
-
+ 
             spawnedBox.infoText.text = msg;
             spawnedBox.Resize();
         }
@@ -81,5 +81,6 @@ namespace TaskSystem
             TaskBox lastMain = spawnedBoxes.Where(t => t.isMainTask).FirstOrDefault();
             lastMain.Dispose();
         }
+        public TaskBox GetLastMainTask() => spawnedBoxes.Where(t => t.isMainTask).FirstOrDefault();
     }
 }
