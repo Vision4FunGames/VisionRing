@@ -13,18 +13,23 @@ public class RandomPointNavmesh : MonoBehaviour
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
-        bool isCorrect = false;
-        while (!isCorrect)
+        int maxAttempts = 30; // Deneme sayısını sınırla
+        int attempts = 0;
+
+        while (attempts < maxAttempts)
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
             UnityEngine.AI.NavMeshHit hit;
+
             if (UnityEngine.AI.NavMesh.SamplePosition(randomPoint, out hit, 4.0f, UnityEngine.AI.NavMesh.AllAreas))
             {
                 result = hit.position;
-                isCorrect = true;
                 return true;
             }
+
+            attempts++;
         }
+
         result = Vector3.zero;
         return false;
     }
@@ -34,7 +39,6 @@ public class RandomPointNavmesh : MonoBehaviour
     public Vector3 RandomPoint(float range)
     {
         Vector3 point;
-        Debug.Log(range+"Range");
         if (RandomPoint(_player.transform.position, range, out point))
         {
             Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
