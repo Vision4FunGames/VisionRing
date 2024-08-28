@@ -28,7 +28,7 @@ public class SaveTheFox : MonoBehaviour
     {
         if (other.CompareTag("Solar"))
         {
-            GetComponent<Waypoint_Indicator>().enabled = true;
+            GetComponent<Waypoint_Indicator>().enableSprite = true;
         }
     }
 }

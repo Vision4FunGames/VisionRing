@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class PuzzleConditionController : MonoBehaviour
 {
     private EnemySpawner enemySpawner;
-    
+
     public int enemyCount;
     int currentCount;
     public int leaveEnemy;
@@ -63,10 +63,18 @@ public class PuzzleConditionController : MonoBehaviour
                 enemySpawner.isConditionCompleted = true;
             }
 
-            if ( GetComponentInParent<TaskPrefab>())
+            if (GetComponentInParent<TaskPrefab>() && GetComponentInParent<SaveTheFox>())
             {
                 GetComponentInParent<TaskPrefab>().transform.GetComponentInChildren<NavMeshAgent>().enabled = true;
-                GetComponentInParent<TaskPrefab>().transform.GetComponentInChildren<NavMeshAgent>().transform.SetParent(null);
+                GetComponentInParent<TaskPrefab>().transform.GetComponentInChildren<NavMeshAgent>().transform
+                    .SetParent(null);
+                GetComponentInParent<TaskPrefab>().isCompleted = true;
+                transform.parent.DOScale(Vector3.zero, 1);
+                Destroy(transform.gameObject, 1f);
+            }
+
+            if (GetComponentInParent<TaskPrefab>() && !GetComponentInParent<SaveTheFox>())
+            {
                 GetComponentInParent<TaskPrefab>().isCompleted = true;
                 transform.parent.DOScale(Vector3.zero, 1);
                 Destroy(transform.gameObject, 1f);

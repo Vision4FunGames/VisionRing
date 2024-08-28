@@ -16,6 +16,7 @@ public class CharacterAnimator : MonoBehaviour
     public bool shied;
     public GameObject sword;
     public ParticleSystem spwn;
+    public GameObject[] closedObj;
     protected virtual void Start()
     {
         navmeshAgent = GetComponent<NavMeshAgent>();
@@ -142,6 +143,14 @@ public class CharacterAnimator : MonoBehaviour
         if (sword)
         {
             sword.gameObject.SetActive(false);
+        }
+
+        if (closedObj.Length > 0)
+        {
+            for (int i = 0; i < closedObj.Length; i++)
+            {
+                closedObj[i].SetActive(false);
+            }
         }
 
         Invoke("PuffParticleSpawn", 1.5f);
