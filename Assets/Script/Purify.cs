@@ -17,10 +17,10 @@ public class Purify : MonoBehaviour
 
     public void StartPurify()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < purifyObject.Length; i++)
         {
-            transform.GetChild(i).GetComponent<Collider>().enabled = true;
-            transform.GetChild(i).GetComponent<Outline>().enabled = true;
+            purifyObject[i].GetComponent<Collider>().enabled = true;
+            purifyObject[i].GetComponent<Outline>().enabled = true;
         }
     }
 

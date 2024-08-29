@@ -953,12 +953,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95092fc6582615241979067a79bbcaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  task: 0
+  task: 1
   animator: {fileID: 3027089017047488693}
   isTabut: 0
   shied: 0
   sword: {fileID: 919132148141242666}
   spwn: {fileID: 4315073854079339298}
+  closedObj:
+  - {fileID: 1795677774}
   ppppp: {fileID: 552978921}
 --- !u!114 &2168672734020771598
 MonoBehaviour:
@@ -972,6 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c22da51e7b54444b2d87f54851076f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foxTutorial: 0
 --- !u!114 &1956348263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1027,7 +1030,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244007399908466913}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8057c976b872b494aba079f605e2e5b4, type: 3}
   m_Name: 
@@ -1047,7 +1050,7 @@ MonoBehaviour:
   enableSprite: 1
   spriteDepth: 0
   offScreenSpriteRotates: 0
-  onScreenSprite: {fileID: 0}
+  onScreenSprite: {fileID: 21300000, guid: 88a8f1c7b55d7ba4988bdace5bda5c74, type: 3}
   onScreenSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   onScreenSpriteSize: 1
   onScreenSpriteOffset: {x: 0, y: 0}
@@ -1056,9 +1059,9 @@ MonoBehaviour:
   onScreenSpriteScaleWithRange: 0
   reverseOnScreenSpriteScaleWithRange: 0
   onScreenSpriteHide: 1
-  offScreenSprite: {fileID: 21300000, guid: bd3f422f405073e48829d0c1ce27680f, type: 3}
-  offScreenSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  offScreenSpriteSize: 1
+  offScreenSprite: {fileID: 21300000, guid: 88a8f1c7b55d7ba4988bdace5bda5c74, type: 3}
+  offScreenSpriteColor: {r: 0.9622642, g: 0.05900679, b: 0.05900679, a: 1}
+  offScreenSpriteSize: 0.25
   offScreenSpriteOffset: {x: 0, y: 0}
   offScreenSpriteRotation: 0
   offScreenSpriteFadeWithRange: 0
