@@ -19,8 +19,18 @@ public class Purify : MonoBehaviour
     {
         for (int i = 0; i < purifyObject.Length; i++)
         {
-            purifyObject[i].GetComponent<Collider>().enabled = true;
-            purifyObject[i].GetComponent<Outline>().enabled = true;
+            
+
+            if (purifyObject[i].GetComponent<GrowTween>())
+            {
+                purifyObject[i].GetComponent<GrowTween>().StartGrowPurify();
+            }
+            else
+            {
+                purifyObject[i].GetComponent<Collider>().enabled = true;
+                purifyObject[i].GetComponent<Outline>().enabled = true;
+            }
+               
         }
     }
 

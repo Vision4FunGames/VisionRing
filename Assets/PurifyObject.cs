@@ -26,7 +26,10 @@ public class PurifyObject : MonoBehaviour
                 GetComponent<Outline>().enabled = false;
                 GetComponent<GrowTween>().Grow();
                 if (hitCount > 2)
+                {
                     _purify.DestroyObj();
+                    Destroy(gameObject);
+                }
                 hitCount++;
             }
             else
