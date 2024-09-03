@@ -38,8 +38,8 @@ public class UiManager : MonoBehaviour
         vaultPanel,
         cinematicCanvas;
 
-    
-    public  Button buildBtn;
+
+    public Button buildBtn;
     public TextMeshProUGUI playerLevel;
     public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
@@ -58,7 +58,7 @@ public class UiManager : MonoBehaviour
     public GameObject mapOpenBtn;
     public TMP_InputField playerNameInput;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
-    public  bool isTaskInventory;
+    public bool isTaskInventory;
     public MMProgressBar playerProgressBar;
     public FixedJoystick attackJoystick;
     public Sprite[] itemlevelSprites45;
@@ -69,6 +69,7 @@ public class UiManager : MonoBehaviour
     public Material skillMaterial;
     public Button StoneBtn;
     public Button sonarBtn;
+    public Button horseBtn;
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
 
     //Chest Scroll
@@ -85,6 +86,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private SkillUpgrade skillUpgrade;
 
     [HideInInspector] private SkillInfoPopUp currentSkillPopUp;
+
     //Economy
     public TextMeshProUGUI contentText;
 
@@ -92,6 +94,7 @@ public class UiManager : MonoBehaviour
     [Header("Chapters")] public VideoPlayer chapter1;
     public VideoPlayer chapter3;
     public VideoPlayer endVideo;
+    private TaskSystem.TaskManager _taskManager;
 
     public delegate void OnEconomyChanged();
 
@@ -119,20 +122,24 @@ public class UiManager : MonoBehaviour
         gamePlay.SetActive(true);
         onEconomyChangedCallBack += EconomyUI;
         onEconomyChangedCallBack.Invoke();
+        _taskManager = FindObjectOfType<TaskSystem.TaskManager>();
         if (PlayerPrefs.HasKey("solarTuto"))
         {
             sonarBtn.gameObject.SetActive(true);
         }
+
         if (PlayerPrefs.HasKey("playerName"))
         {
-           // GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
-           // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
+            // GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
+            // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
         }
         else
         {
             // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
         }
+        HideOutEntry();
     }
+
     public void DisableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)
@@ -141,13 +148,30 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void DungeonEntry()
+    {
+        horseBtn.gameObject.SetActive(true);
+
+        ringBtn.gameObject.SetActive(true);
+
+        if (_taskManager.LastMainTaskIndex > 5)
+            sonarBtn.gameObject.SetActive(true);
+    }
+
+    public void HideOutEntry()
+    {
+        horseBtn.gameObject.SetActive(false);
+        sonarBtn.gameObject.SetActive(false);
+        ringBtn.gameObject.SetActive(false);
+    }
+
     public void VaultOpen()
     {
         FindObjectOfType<VaultUI>().vaultGem.text = FindObjectOfType<VaultUI>().vaultCount.ToString();
         CloseAllUI();
         OpenUI(vaultPanel);
-        
     }
+
     public void EnableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)
@@ -157,6 +181,7 @@ public class UiManager : MonoBehaviour
     }
 
     private Camera _camera;
+
     public void StonePanelOpen()
     {
         CloseAllUI();
@@ -165,7 +190,7 @@ public class UiManager : MonoBehaviour
         _camera.gameObject.SetActive(false);
     }
 
-   
+
     public void CloseStonePanel()
     {
         GamePlayUI();
@@ -178,6 +203,7 @@ public class UiManager : MonoBehaviour
         StoneBtn.interactable = true;
         StoneBtn.GetComponentInChildren<TextMeshProUGUI>().text = "RING";
     }
+
     public void PlayerNameSave()
     {
         GameManager.instance.PlayerName = playerNameInput.text;
@@ -185,31 +211,32 @@ public class UiManager : MonoBehaviour
         playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
     }
 
-    
+
     public void CinematicCanvasOpen()
-    { 
-        
+    {
         RectTransform rectTransform = cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>();
-     
+
         rectTransform.DOAnchorPos(Vector2.zero, 2f);
-       
+
         cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(Vector2.zero, 2f);
     }
-	public void CinematicCanvasClose()
-	{
-		cinematicCanvas.GetComponent<CanvasGroup>().DOFade(0,3f);
+
+    public void CinematicCanvasClose()
+    {
+        cinematicCanvas.GetComponent<CanvasGroup>().DOFade(0, 3f);
         cinematicCanvas.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 200f), 2f);
         cinematicCanvas.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -200f), 2f);
-		
-	}
+    }
 
     private float baseZoom;
+
     public void MapOpen()
     {
         if (_blMiniMap == null)
         {
             _blMiniMap = FindObjectOfType<bl_MiniMap>();
         }
+
         _blMiniMap.GetMiniMapSize();
         var ui = _blMiniMap.MiniMapUI;
         if (ui != null)
@@ -217,7 +244,7 @@ public class UiManager : MonoBehaviour
             ui.root.anchoredPosition = _blMiniMap.FullMapPosition;
             ui.root.sizeDelta = _blMiniMap.FullMapSize;
 
-            ui.root.anchoredPosition =Vector2.zero;
+            ui.root.anchoredPosition = Vector2.zero;
             ui.root.sizeDelta = new Vector2(Screen.height - 100, Screen.height - 100);
             ui.root.eulerAngles = _blMiniMap.FullMapRotation;
             ui.minimapMaskManager?.ChangeMaskType(true);
@@ -243,7 +270,7 @@ public class UiManager : MonoBehaviour
             _blMiniMap.Target = Player.instance.transform.GetChild(0).transform;
             _blMiniMap.Zoom = baseZoom;
         }
-        
+
         _blMiniMap._isPreviewFullscreen = false;
         mapCloseBtn.SetActive(false);
         mapOpenBtn.SetActive(true);
@@ -350,7 +377,7 @@ public class UiManager : MonoBehaviour
         {
             FindObjectOfType<InventoryTask>().OpenInventory();
         }
-        
+
         CloseAllUI();
 
         contentText.text = "INVENTORY";
@@ -449,13 +476,13 @@ public class UiManager : MonoBehaviour
         // Inventory.instance.onItemChangedCallback?.Invoke();
         // skillUpgrade.onSkillShopChangeCallBack?.Invoke();
         // navigationArea.gameObject.SetActive(true);
-    //     if (!GameManager.instance.isMagician)
-    //     {
-    //         TutorialLoader.instance.Load("Magician");
-    //         PlayerPrefs.SetInt("Magician", 1);
-    //         GameManager.instance.isMagician = true;
-    //     }
-    //     }
+        //     if (!GameManager.instance.isMagician)
+        //     {
+        //         TutorialLoader.instance.Load("Magician");
+        //         PlayerPrefs.SetInt("Magician", 1);
+        //         GameManager.instance.isMagician = true;
+        //     }
+        //     }
     }
 
     public void SkillUI()
@@ -532,7 +559,7 @@ public class UiManager : MonoBehaviour
             tweener.Open();
         }
 
-        if (gameObject == goldPanel) 
+        if (gameObject == goldPanel)
         {
             onEconomyChangedCallBack.Invoke();
         }
@@ -567,7 +594,7 @@ public class UiManager : MonoBehaviour
         goldText.text = EconomyManager.instance.GetGold().ToString();
         diamondText.text = EconomyManager.instance.GetDiamond().ToString();
         gemText.text = EconomyManager.instance.GetGem().ToString();
-        ES3.Save("itemCount",EconomyManager.instance.itemCount);
+        ES3.Save("itemCount", EconomyManager.instance.itemCount);
     }
 
     public void InventoryFilter(String type)
@@ -596,7 +623,7 @@ public class UiManager : MonoBehaviour
 
     public void SkillPopUp(Skills skill)
     {
-        if (currentSkillPopUp ==null)
+        if (currentSkillPopUp == null)
         {
             var popup = Instantiate(Resources.Load("SkillInfoPopUp"), magicianPanel.transform);
             currentSkillPopUp = popup.GetComponent<SkillInfoPopUp>();
@@ -605,6 +632,7 @@ public class UiManager : MonoBehaviour
         {
             currentSkillPopUp.gameObject.SetActive(true);
         }
+
         currentSkillPopUp.skillNameText.text = skill.skillName;
         currentSkillPopUp.currentLevelText.text = skill.skillLevel.ToString();
         currentSkillPopUp.nextLevelText.text = (skill.skillLevel + 1).ToString();
@@ -618,9 +646,7 @@ public class UiManager : MonoBehaviour
         currentSkillPopUp.skillIcon.sprite = skill.skillImage;
         currentSkillPopUp.evoCostText.text = skill.necessariesName[skill.skillLevel].evolutionCost.ToString();
         currentSkillPopUp.upgradeCostText.text = skill.necessariesName[skill.skillLevel].upgradeCost.ToString();
-
     }
-
 }
 
 [Serializable]

@@ -18,6 +18,7 @@ public class TeleportScene : MonoBehaviour
         _cameraShake = FindObjectOfType<CameraShake>();
         _player = FindObjectOfType<Player>();
         tp = FindObjectOfType<TeleportManager>();
+      
     }
 
     public void EnableCollider()
@@ -48,6 +49,13 @@ public class TeleportScene : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         _player.transform.position = targetTeleport.transform.position + new Vector3(3, 0, -6);
+        if (Vector3.Distance(_player.transform.position, tp.dungeonSpawnPoint.transform.position) < 300)
+        {
+            UiManager.instance.DungeonEntry();
+        }
+        else
+            UiManager.instance.HideOutEntry();
+        
         _cameraShake.DungeonEnd();
         _player.teleportParticle.Stop();
         Invoke("playerMovementStart", 1);

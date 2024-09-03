@@ -7,7 +7,7 @@ using UnityEngine;
 public class PurifyObject : MonoBehaviour
 {
     private Purify _purify;
-    int hitCount;
+    public int hitCount;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class PurifyObject : MonoBehaviour
                     _purify.DestroyObj();
                     Destroy(gameObject);
                 }
-                hitCount++;
+              
             }
             else
             {

@@ -67,6 +67,12 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = currentDungeon.transform.GetChild(0).position;
+        if (Vector3.Distance(player.transform.position, dungeonSpawnPoint.transform.position) < 300)
+        {
+            UiManager.instance.DungeonEntry();
+        }
+        else
+            UiManager.instance.HideOutEntry();
         Invoke("playerMovementStart",1);
         _cameraShake.DungeonStart();
         player.teleportParticle.Stop();
@@ -76,6 +82,12 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = Vector3.zero;
+        if (Vector3.Distance(player.transform.position, dungeonSpawnPoint.transform.position) < 300)
+        {
+            UiManager.instance.DungeonEntry();
+        }
+        else
+            UiManager.instance.HideOutEntry();
         playerMovementStart();
         _cameraShake.DungeonEnd();
         player.teleportParticle.Stop();

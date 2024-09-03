@@ -19,8 +19,6 @@ public class Purify : MonoBehaviour
     {
         for (int i = 0; i < purifyObject.Length; i++)
         {
-            
-
             if (purifyObject[i].GetComponent<GrowTween>())
             {
                 purifyObject[i].GetComponent<GrowTween>().StartGrowPurify();
