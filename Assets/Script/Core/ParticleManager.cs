@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
+    public ParticleSystem questCompleteConfetti;
+    public ParticleSystem playerQuestParticle;
     public ParticleSystem purifyParticle;
     public ParticleSystem smokeDeath;
     public ParticleSystem swimParticle;

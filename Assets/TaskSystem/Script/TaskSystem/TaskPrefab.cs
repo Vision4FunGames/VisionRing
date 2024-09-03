@@ -24,5 +24,7 @@ public class TaskPrefab : MonoBehaviour
     {
         yield return new WaitUntil(() => isCompleted);
         taskManager.OnMainTaskCompleted();
+        ParticleManager.instance.playerQuestParticle.Play();
+        ParticleManager.instance.questCompleteConfetti.Play();
     }
 }
