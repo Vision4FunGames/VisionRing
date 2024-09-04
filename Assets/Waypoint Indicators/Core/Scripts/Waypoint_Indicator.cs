@@ -14,7 +14,7 @@ public class Waypoint_Indicator : MonoBehaviour
     #region Variables
     //Make this public to allow for external scripts to send Text Description copy here as "description"
     private bool isDynamic = false;
-
+    public bool task;
 
     #region CANVAS - By default, be sure to tag your Canvas as "Canvas" for the script to see it
     //!! Make sure your Canvas > Reference Resolution is the same aspect ratio as your Play Screen or else Waypoint boundary edges may not align exactly

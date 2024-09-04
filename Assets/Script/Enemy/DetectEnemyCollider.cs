@@ -38,6 +38,7 @@ public class DetectEnemyCollider : MonoBehaviour
         if (other.CompareTag("Solar") && !foxTutorial)
         {
             GetComponent<Waypoint_Indicator>().enabled = true;
+            Invoke("ClosedIndicator", 2f);
         }
 
         if (other.CompareTag("SwordCollider"))
@@ -71,6 +72,12 @@ public class DetectEnemyCollider : MonoBehaviour
         {
             rb.isKinematic = true;
         }
+    }
+
+    public void ClosedIndicator()
+    {
+        if (!GetComponent<Waypoint_Indicator>().task)
+            GetComponent<Waypoint_Indicator>().enabled = false;
     }
 
     private void OnTriggerStay(Collider other)

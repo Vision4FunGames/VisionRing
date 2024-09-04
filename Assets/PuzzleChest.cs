@@ -30,10 +30,15 @@ public class PuzzleChest : MonoBehaviour
         if (other.CompareTag("Solar"))
         {
             GetComponent<Waypoint_Indicator>().enabled = true;
+            Invoke("ClosedIndicator",2);
         }
     }
 
-    public void ChestOpen()
+    public void ClosedIndicator()
+    {
+        GetComponent<Waypoint_Indicator>().enabled = false;
+    }
+        public void ChestOpen()
     {
         for (int i = 0; i < dropObjectCount; i++)
         {

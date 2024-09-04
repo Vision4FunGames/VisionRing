@@ -65,12 +65,7 @@ public class PuzzleConditionController : MonoBehaviour
 
             if (GetComponentInParent<TaskPrefab>() && GetComponentInParent<SaveTheFox>())
             {
-                GetComponentInParent<TaskPrefab>().transform.GetComponentInChildren<NavMeshAgent>().enabled = true;
-                GetComponentInParent<TaskPrefab>().transform.GetComponentInChildren<NavMeshAgent>().transform
-                    .SetParent(null);
-                GetComponentInParent<TaskPrefab>().isCompleted = true;
-                transform.parent.DOScale(Vector3.zero, 1);
-                Destroy(transform.gameObject, 1f);
+                GetComponentInParent<SaveTheFox>().FoxFree();
             }
 
             if (GetComponentInParent<TaskPrefab>() && !GetComponentInParent<SaveTheFox>())

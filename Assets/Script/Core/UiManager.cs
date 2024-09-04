@@ -138,6 +138,7 @@ public class UiManager : MonoBehaviour
             // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
         }
         HideOutEntry();
+        
     }
 
     public void DisableButton()
