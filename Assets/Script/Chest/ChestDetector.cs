@@ -34,8 +34,8 @@ public class ChestDetector : MonoBehaviour
         Inventory.instance.SaveAllItems();
         var chest = FindObjectOfType<ChestManager>().gameObject;
         Destroy(chest);
-        GameManager.instance.playerVCam.Follow = Player.instance.transform;
-        GameManager.instance.playerVCam.LookAt = Player.instance.transform;
+        //GameManager.instance.playerVCam.Follow = Player.instance.transform;
+        //GameManager.instance.playerVCam.LookAt = Player.instance.transform;
         UiManager.instance.GamePlayUI();
         
         // GameManager.Instance.cameraPlayer.GetComponent<CinemachineVirtualCamera>().Follow = FindObjectOfType<PlayerManager>().gameObject.transform;

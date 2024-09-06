@@ -606,11 +606,11 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
 
     public void CinematicCamEnable(Transform target, float timer = 0)
     {
-        playerVCam.gameObject.SetActive(false);
-        foxVCam.gameObject.SetActive(false);
-        cinematicVCam.gameObject.SetActive(true);
-        cinematicVCam.Follow = target;
-        cinematicVCam.LookAt = target;
+        //playerVCam.gameObject.SetActive(false);
+        //foxVCam.gameObject.SetActive(false);
+        //cinematicVCam.gameObject.SetActive(true);
+        //cinematicVCam.Follow = target;
+        //cinematicVCam.LookAt = target;
         // if (tutorialWall.name == target.name)
         // {
         //     CinemachineTransposer cmoffset = cinematicVCam.GetCinemachineComponent<CinemachineTransposer>();
@@ -632,7 +632,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         }
         else
         {
-            playerVCam.gameObject.SetActive(true);
+            //playerVCam.gameObject.SetActive(true);
             cinematicVCam.gameObject.SetActive(false);
             foxVCam.gameObject.SetActive(false);
         }
@@ -640,7 +640,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
 
     public void FoxCamEnable()
     {
-        playerVCam.gameObject.SetActive(false);
+        //playerVCam.gameObject.SetActive(false);
         cinematicVCam.gameObject.SetActive(false);
         foxVCam.gameObject.SetActive(true);
     }
@@ -648,7 +648,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     IEnumerator DisableCamera()
     {
         yield return new WaitForSeconds(DisableTimer);
-        playerVCam.gameObject.SetActive(true);
+        //playerVCam.gameObject.SetActive(true);
         cinematicVCam.gameObject.SetActive(false);
     }
 

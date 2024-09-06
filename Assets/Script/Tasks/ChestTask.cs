@@ -1,9 +1,11 @@
 using System;
+using TaskSystem;
 using UnityEngine;
 
 public class ChestTask : MonoBehaviour
 {
     private Player player;
+    private bool partOne;
     private void OnEnable()
     {
         player = FindObjectOfType<Player>();
@@ -14,10 +16,17 @@ public class ChestTask : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < 50) // burası değiscek sandığa yaklasmaya devam etmemiz gerek açılmasın hemen
+        if (Vector3.Distance(player.transform.position, transform.position) < 50 && !partOne) // burası değiscek sandığa yaklasmaya devam etmemiz gerek açılmasın hemen
         {
-           // GetComponent<TaskPrefab>().isCompleted = true;
-           // Destroy(transform.gameObject, 1f);
+            partOne = true;
+            var box = TaskPanelController.instance.GetLastMainTask();
+            box.infoText.text = "OpenTheChest";
+        }
+
+        if (Vector3.Distance(player.transform.position, transform.position) < 10 && partOne)
+        {
+             GetComponent<TaskPrefab>().isCompleted = true;
+             Destroy(transform.gameObject, 3f);
         }
     }
 }

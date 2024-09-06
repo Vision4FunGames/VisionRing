@@ -22,8 +22,8 @@ public class ChestManager : MonoBehaviour
 
     public void GoToCamera()
     {
-        GameManager.instance.playerVCam.Follow = transform.parent;
-        GameManager.instance.playerVCam.LookAt = transform.parent;
+        //GameManager.instance.playerVCam.Follow = transform.parent;
+        //GameManager.instance.playerVCam.LookAt = transform.parent;
         anim.SetTrigger("Open");
         transform.DOScale(new Vector3(4f, 4f, 4f), 1.5f)
             .OnComplete(() =>

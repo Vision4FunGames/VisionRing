@@ -419,7 +419,7 @@ public class Player : MonoBehaviour
 
         StateMachine.ChangeState(PlayerIdleState);
         transform.GetChild(0).transform.rotation = new Quaternion(0, 0, 0, 0);
-        GameManager.instance.playerVCam.m_LookAt = null;
+       // GameManager.instance.playerVCam.m_LookAt = null;
         transform.AddComponent<NavMeshAgent>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 6f;
@@ -438,8 +438,8 @@ public class Player : MonoBehaviour
     {
         isMovement = true;
         StateMachine.ChangeState(PlayerMovementState);
-        GameManager.instance.playerVCam.m_LookAt = transform;
-        GameManager.instance.playerVCam.m_Follow = transform;
+        //GameManager.instance.playerVCam.m_LookAt = transform;
+        //GameManager.instance.playerVCam.m_Follow = transform;
         GetComponent<CharacterController>().enabled = true;
         UiManager.instance.GamePlayUI();
         PlayerManager.instance.pet.GetComponent<FoxManager>().tutorial = false;
@@ -449,7 +449,7 @@ public class Player : MonoBehaviour
 
     public void CloseCam()
     {
-        GameManager.instance.playerVCam.m_Follow = null;
+        //GameManager.instance.playerVCam.m_Follow = null;
         Invoke("EndOfTheCinema", 3f);
     }
 

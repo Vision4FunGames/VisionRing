@@ -19,14 +19,14 @@ public class value : MonoBehaviour
     // Start is called before the first frame update
     public void UpdateValue()
     {
-        GetComponent<TextMeshProUGUI>().text = Slider.value.ToString();
+        //GetComponent<TextMeshProUGUI>().text = Slider.value.ToString();
     }
 
     public void updateX()
     {
-        var cm = GameManager.instance.playerVCam;
-        var cmf = cm.GetComponent<CinemachineTransposer>();
-        cmf.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
-        cmf.m_FollowOffset = new Vector3(Slider.value,0,0);
+        // var cm = GameManager.instance.playerVCam;
+        // var cmf = cm.GetComponent<CinemachineTransposer>();
+        // cmf.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
+        // cmf.m_FollowOffset = new Vector3(Slider.value,0,0);
     }
 }

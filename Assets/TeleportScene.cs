@@ -11,7 +11,7 @@ public class TeleportScene : MonoBehaviour
     private Player _player;
     private int tpCount;
     public GameObject targetTeleport;
-
+    public bool task;
     private void Awake()
     {
         tpCount = 0;
@@ -21,6 +21,10 @@ public class TeleportScene : MonoBehaviour
       
     }
 
+    public void TaskComplete()
+    {
+        FindObjectOfType<TaskPrefab>().isCompleted = true;
+    }
     public void EnableCollider()
     {
         GetComponent<Collider>().enabled = true;
@@ -30,6 +34,10 @@ public class TeleportScene : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (task)
+            {
+                TaskComplete();
+            }
             Debug.Log("sssssssssss");
             GetComponent<Collider>().enabled = false;
             Invoke("EnableCollider", 4f);
