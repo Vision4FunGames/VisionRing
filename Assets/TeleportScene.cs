@@ -36,7 +36,7 @@ public class TeleportScene : MonoBehaviour
         {
             if (task)
             {
-                TaskComplete();
+                Invoke("TaskCompletedWait",4f);
             }
             Debug.Log("sssssssssss");
             GetComponent<Collider>().enabled = false;
@@ -53,6 +53,11 @@ public class TeleportScene : MonoBehaviour
         }
     }
 
+    public void TaskCompletedWait()
+    {
+        FindObjectOfType<TeleportManager>().DungeonIndex();
+        TaskComplete();
+    }
     public void Tp()
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);

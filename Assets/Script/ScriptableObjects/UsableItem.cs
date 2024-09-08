@@ -40,8 +40,11 @@ public class UsableItem : Item
 
     private void DungeonPortal()
     {
-        PlayerPrefs.SetInt("DungeonTutorial",1);
-        FindObjectOfType<InventoryTask>().UseItem();
+        if (PlayerPrefs.GetInt("DungeonTutorial") == 0)
+        {
+            PlayerPrefs.SetInt("DungeonTutorial", 1);
+            FindObjectOfType<InventoryTask>().UseItem();
+        }
         FindObjectOfType<TeleportManager>().TeleportOpenAll();
         Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1f);
         FindObjectOfType<TaskPrefab>().isCompleted = true;

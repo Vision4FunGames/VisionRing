@@ -59,6 +59,7 @@ public class HideOutFox : MonoBehaviour
                 break;
             case 3:
                 hideoutCanvas.gameObject.SetActive(false);
+                FindObjectOfType<TaskReward>().tutorialComplete = true;
                 FindObjectOfType<TaskReward>().rewardPanel.transform.DOScale(new Vector3(1, 1, 1), .5f);
                 break;
         }

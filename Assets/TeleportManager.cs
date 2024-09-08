@@ -15,11 +15,21 @@ public class TeleportManager : MonoBehaviour
     private int currentDungeonValue;
     private GameObject currentDungeon;
     public bool isTutorial;
+    public int currentDungeonIndex;
 
     private void Start()
     {
         player = Player.instance;
         _cameraShake = FindObjectOfType<CameraShake>();
+       
+
+        if (!PlayerPrefs.HasKey("dungeonIndex"))
+        {
+            PlayerPrefs.SetInt("dungeonIndex", 1);
+        }
+
+        currentDungeonIndex = PlayerPrefs.GetInt("dungeonIndex");
+        
         if (PlayerPrefs.HasKey("DungeonTutorial"))
             TeleportOpenAll();
     }
@@ -32,11 +42,18 @@ public class TeleportManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void DungeonIndex()
+    {
+        currentDungeonIndex++;
+        PlayerPrefs.SetInt("dungeonIndex", currentDungeonIndex);
+    }
+
     public void TeleportOpenAll()
     {
         for (int i = 0; i < teleports.Length; i++)
         {
             teleports[i].gameObject.SetActive(true);
+            teleports[i].sceneName = currentDungeonIndex;
         }
     }
 
@@ -59,8 +76,6 @@ public class TeleportManager : MonoBehaviour
             player.isMovement = false;
             Invoke("MoveTeleportPlayer", 2f);
         }
-
-       
     }
 
     public void MoveTeleportPlayer()
@@ -73,7 +88,8 @@ public class TeleportManager : MonoBehaviour
         }
         else
             UiManager.instance.HideOutEntry();
-        Invoke("playerMovementStart",1);
+
+        Invoke("playerMovementStart", 1);
         _cameraShake.DungeonStart();
         player.teleportParticle.Stop();
     }
@@ -88,6 +104,7 @@ public class TeleportManager : MonoBehaviour
         }
         else
             UiManager.instance.HideOutEntry();
+
         playerMovementStart();
         _cameraShake.DungeonEnd();
         player.teleportParticle.Stop();

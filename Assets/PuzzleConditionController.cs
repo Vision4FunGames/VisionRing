@@ -79,6 +79,10 @@ public class PuzzleConditionController : MonoBehaviour
                 GetComponent<MeshRenderer>().enabled = true;
                 GetComponent<Collider>().enabled = true;
             }
+            if (GetComponentInParent<TaskPrefab>() && GetComponentInParent<MerchantTutorial>())
+            {
+                GetComponentInParent<MerchantTutorial>().DiesEnemies();
+            }
         }
     }
 }
