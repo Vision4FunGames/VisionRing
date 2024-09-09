@@ -68,7 +68,7 @@ public class PuzzleConditionController : MonoBehaviour
                 GetComponentInParent<SaveTheFox>().FoxFree();
             }
 
-            if (GetComponentInParent<TaskPrefab>() && !GetComponentInParent<SaveTheFox>())
+            if (GetComponentInParent<TaskPrefab>() && !GetComponentInParent<SaveTheFox>() && !GetComponentInParent<MerchantTutorial>())
             {
                 GetComponentInParent<TaskPrefab>().isCompleted = true;
                 transform.parent.DOScale(Vector3.zero, 1);

@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Exoa.TutorialEngine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace AmazingAssets.DynamicRadialMasks
     [ExecuteAlways]
     public class DRMGameObject : MonoBehaviour
     {
+        public bool task;
         public bool staticDrm;
         private SphereCollider sphereCollider;
         public float waitTime;
@@ -117,11 +119,30 @@ namespace AmazingAssets.DynamicRadialMasks
         public void OpenWorld()
         {
             if (radius > 99)
-                DOTween.To(() => radius, x => radius = x, 0, 0.25f).OnComplete((() => increaseEnes=true));
+                DOTween.To(() => radius, x => radius = x, 0, 4f).OnComplete((() =>
+                {
+                    increaseEnes = true;
+                    
+                }));
             else if (radius < 2)
             {
-                DOTween.To(() => radius, x => radius = x, 100, 0.25f).OnComplete((() => increaseEnes=false));
+                DOTween.To(() => radius, x => radius = x, 100, 4f).OnComplete((() =>
+                {
+                    increaseEnes = false;
+                   
+                }));
             }
+
+            if (task && !increaseEnes)
+            {
+                FindObjectOfType<MerchantTutorial>().BarrierClose();
+            }
+            
+            if (task && increaseEnes)
+            {
+                FindObjectOfType<MerchantTutorial>().BarrierOpen();
+            }
+
         }
     }
 }

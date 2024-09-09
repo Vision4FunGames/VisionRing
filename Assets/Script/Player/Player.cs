@@ -1,4 +1,5 @@
 using System.Collections;
+using AmazingAssets.DynamicRadialMasks;
 using DG.Tweening;
 using Exoa.TutorialEngine;
 using GameAnalyticsSDK;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
     [HideInInspector] public bool ring, horse;
+    public DRMGameObject playerDrm;
     private NavMeshAgent agent;
     public bool tutorial;
     public bool isDamageable = true;
