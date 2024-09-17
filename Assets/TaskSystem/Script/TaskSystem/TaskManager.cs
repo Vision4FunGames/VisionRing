@@ -34,7 +34,7 @@ namespace TaskSystem
             taskPrefab.taskManager = this;
             taskPrefab.isMainTask = true;
             TaskPanelController.instance.SpawnTaskUI(currentTask);
-
+            
         }
 
         internal void OnMainTaskCompleted()

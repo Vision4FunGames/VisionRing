@@ -8,7 +8,7 @@ public class InventoryTask : MonoBehaviour
     
     private void OnEnable()
     {
-           
+        UiManager.instance.focusPanel.SetActive(true);
     }
 
     private void OnDisable()

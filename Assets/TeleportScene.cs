@@ -21,6 +21,11 @@ public class TeleportScene : MonoBehaviour
       
     }
 
+    private void Start()
+    {
+        
+    }
+
     public void TaskComplete()
     {
         FindObjectOfType<TaskPrefab>().isCompleted = true;
@@ -37,6 +42,7 @@ public class TeleportScene : MonoBehaviour
             if (task)
             {
                 Invoke("TaskCompletedWait",4f);
+                Destroy(tp.currentDungeon,4f);
             }
             Debug.Log("sssssssssss");
             GetComponent<Collider>().enabled = false;

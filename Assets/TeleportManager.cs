@@ -13,7 +13,7 @@ public class TeleportManager : MonoBehaviour
     public GameObject dungeonSpawnPoint;
     private Player player;
     private int currentDungeonValue;
-    private GameObject currentDungeon;
+    public GameObject currentDungeon;
     public bool isTutorial;
     public int currentDungeonIndex;
 
@@ -29,6 +29,11 @@ public class TeleportManager : MonoBehaviour
         }
 
         currentDungeonIndex = PlayerPrefs.GetInt("dungeonIndex");
+        
+        if (FindObjectOfType<TaskSystem.TaskManager>().LastMainTaskIndex > 10)
+        {
+            currentDungeonIndex = 2;
+        }
         
         if (PlayerPrefs.HasKey("DungeonTutorial"))
             TeleportOpenAll();
@@ -69,10 +74,12 @@ public class TeleportManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(dungeonLevel);
             UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 1), 1.5f);
-            currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position,
-                Quaternion.identity);
+            if (currentDungeon == null)
+            {
+                currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position,
+                    Quaternion.identity);
+            }
             player.teleportParticle.Play();
             player.isMovement = false;
             Invoke("MoveTeleportPlayer", 2f);
@@ -105,8 +112,8 @@ public class TeleportManager : MonoBehaviour
         }
         else
             UiManager.instance.HideOutEntry();
-
-        playerMovementStart();
+        
+        Invoke("playerMovementStart",1f);
         _cameraShake.DungeonEnd();
         player.teleportParticle.Stop();
     }
