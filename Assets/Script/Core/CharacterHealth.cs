@@ -43,14 +43,14 @@ public abstract class CharacterHealth : MonoBehaviour
             UpdateHealthBar();
             if (health <= maxxHealth *.9f && !GameManager.instance.isHeal)
             {
-                TutorialLoader.instance.Load("Heal");
+                //TutorialLoader.instance.Load("Heal");
                 PlayerPrefs.SetInt("Heal",1);
                 GameManager.instance.isHeal = true;
             }
             if (health <= maxxHealth-10 && !GameManager.instance.isDash)
             {
-                TutorialLoader.instance.Load("Dash");
-                TutorialController.instance.mask.transform.GetChild(0).transform.gameObject.SetActive(true);
+                //TutorialLoader.instance.Load("Dash");
+                //TutorialController.instance.mask.transform.GetChild(0).transform.gameObject.SetActive(true);
                 PlayerPrefs.SetInt("Dash",1);
                 GameManager.instance.isDash = true;
             }

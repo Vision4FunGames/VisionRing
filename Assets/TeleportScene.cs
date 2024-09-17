@@ -9,7 +9,7 @@ public class TeleportScene : MonoBehaviour
     private TeleportManager tp;
     public int sceneName;
     private Player _player;
-    private int tpCount;
+    public int tpCount;
     public GameObject targetTeleport;
     public bool task;
     private void Awake()

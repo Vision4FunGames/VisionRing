@@ -95,6 +95,8 @@ public class MerchantTutorial : MonoBehaviour
         } else if (_speechCount == 2)
         {
             canvas.gameObject.SetActive(false);
+            WaypointIndicator.enabled = false;
+            WaypointIndicator.onScreenSpriteHide = true;
             GetComponentInChildren<MerchantFollow>().enabled = true;
             GetComponent<TaskPrefab>().isCompleted = true;
         }
@@ -147,9 +149,9 @@ public class MerchantTutorial : MonoBehaviour
 
     public void HandScaleAnimation()
     {
-        hand.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1f).OnComplete((() =>
+        hand.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete((() =>
         {
-            hand.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete((() => HandScaleAnimation()));
+            hand.transform.DOScale(new Vector3(.5f, .5f, .5f), 1f).OnComplete((() => HandScaleAnimation()));
         }));
     }
 

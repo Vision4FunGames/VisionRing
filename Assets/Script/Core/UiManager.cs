@@ -137,8 +137,8 @@ public class UiManager : MonoBehaviour
         {
             // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
         }
+
         HideOutEntry();
-        
     }
 
     public void DisableButton()
@@ -374,13 +374,7 @@ public class UiManager : MonoBehaviour
 
     public void ShowInventory()
     {
-        if (isTaskInventory)
-        {
-            FindObjectOfType<InventoryTask>().OpenInventory();
-        }
-
         CloseAllUI();
-
         contentText.text = "INVENTORY";
         OpenUI(currentItems);
         OpenUI(equipmentPanel);
@@ -392,6 +386,10 @@ public class UiManager : MonoBehaviour
         inventoryUi.ShowSelected("All");
         inventoryUi.UpdateUI();
         onEconomyChangedCallBack.Invoke();
+        if (isTaskInventory)
+        {
+            FindObjectOfType<InventoryTask>().OpenInventory();
+        }
     }
 
     public void SettingUI()
@@ -457,7 +455,7 @@ public class UiManager : MonoBehaviour
                 Inventory.instance.onItemChangedCallback?.Invoke();
                 skillUpgrade.onSkillShopChangeCallBack?.Invoke();
                 // navigationArea.gameObject.SetActive(true);
-                TutorialLoader.instance.Load("Magician");
+                //TutorialLoader.instance.Load("Magician");
                 PlayerPrefs.SetInt("Magician", 1);
                 GameManager.instance.isMagician = true;
             }

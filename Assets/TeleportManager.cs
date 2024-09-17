@@ -54,6 +54,7 @@ public class TeleportManager : MonoBehaviour
         {
             teleports[i].gameObject.SetActive(true);
             teleports[i].sceneName = currentDungeonIndex;
+            teleports[i].tpCount = 0;
         }
     }
 

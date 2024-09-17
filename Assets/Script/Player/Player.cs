@@ -337,7 +337,7 @@ public class Player : MonoBehaviour
             {
                 GameManager.instance.CinematicCamEnable(GameManager.instance.colosseum.transform);
                 GameManager.instance.isColosseum = true;
-                TutorialLoader.instance.Load("Colosseum");
+                //TutorialLoader.instance.Load("Colosseum");
                 PlayerPrefs.SetInt("Colosseum", 1);
             }
         }
@@ -346,7 +346,7 @@ public class Player : MonoBehaviour
         {
             if (!GameManager.instance.isCampfire)
             {
-                TutorialLoader.instance.Load("Campfire");
+                //TutorialLoader.instance.Load("Campfire");
                 GameManager.instance.CinematicCamEnable(GameManager.instance.campFire.transform);
                 GameManager.instance.isCampfire = true;
                 PlayerPrefs.SetInt("Campfire", 1);
