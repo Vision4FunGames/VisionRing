@@ -47,6 +47,7 @@ public class MerchantTutorial : MonoBehaviour
         canvas.gameObject.SetActive(true);
         HandScaleAnimation();
         handBool = true;
+        GetComponent<BoxCollider>().enabled = true;
         hand.SetActive(true);
     }
 

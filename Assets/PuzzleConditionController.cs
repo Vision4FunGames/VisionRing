@@ -65,11 +65,14 @@ public class PuzzleConditionController : MonoBehaviour
 
             if (GetComponentInParent<TaskPrefab>() && GetComponentInParent<SaveTheFox>())
             {
+                Debug.Log("A");
                 GetComponentInParent<SaveTheFox>().FoxFree();
             }
 
-            if (GetComponentInParent<TaskPrefab>() && !GetComponentInParent<SaveTheFox>() && !GetComponentInParent<MerchantTutorial>())
+            if (GetComponentInParent<TaskPrefab>() && !GetComponentInParent<SaveTheFox>() &&
+                !GetComponentInParent<MerchantTutorial>() && task)
             {
+                Debug.Log("b");
                 GetComponentInParent<TaskPrefab>().isCompleted = true;
                 transform.parent.DOScale(Vector3.zero, 1);
                 Destroy(transform.gameObject, 1f);
@@ -79,8 +82,10 @@ public class PuzzleConditionController : MonoBehaviour
                 GetComponent<MeshRenderer>().enabled = true;
                 GetComponent<Collider>().enabled = true;
             }
+
             if (GetComponentInParent<TaskPrefab>() && GetComponentInParent<MerchantTutorial>())
             {
+                Debug.Log("c");
                 GetComponentInParent<MerchantTutorial>().DiesEnemies();
             }
         }

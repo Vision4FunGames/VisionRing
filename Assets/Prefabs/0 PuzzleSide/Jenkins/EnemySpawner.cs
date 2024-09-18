@@ -21,7 +21,11 @@ public class EnemySpawner : PuzzleConditionTrigger
     private void Start()
     {
         if (!GetComponent<PuzzleConditionController>())
+        {
             gameObject.AddComponent<PuzzleConditionController>();
+            gameObject.GetComponent<PuzzleConditionController>().task = false;
+        }
+          
         if (PuzzleSpawnType == PuzzleSpawnType.Start)
         {
             SpawnEnemy();

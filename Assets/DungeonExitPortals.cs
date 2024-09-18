@@ -14,6 +14,7 @@ public class DungeonExitPortals : MonoBehaviour
         currentTaskCount++;
         if (currentTaskCount >= taskCount)
         {
+            exitPortal.gameObject.SetActive(false);
             exitPortal.GetComponent<Waypoint_Indicator>().enabled = true;
             exitPortal.GetComponent<Collider>().enabled = true;
             exitPortal.GetComponent<TeleportScene>().task = true;
