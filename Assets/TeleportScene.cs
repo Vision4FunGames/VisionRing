@@ -71,9 +71,13 @@ public class TeleportScene : MonoBehaviour
         if (Vector3.Distance(_player.transform.position, tp.dungeonSpawnPoint.transform.position) < 300)
         {
             UiManager.instance.DungeonEntry();
+            _player.isBase = false;
         }
         else
+        {
+            _player.isBase = true;
             UiManager.instance.HideOutEntry();
+        }
         
         _cameraShake.DungeonEnd();
         _player.teleportParticle.Stop();

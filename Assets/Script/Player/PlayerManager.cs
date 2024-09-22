@@ -202,7 +202,7 @@ public class PlayerManager : MonoBehaviour
 
     public void SlowMotion()
     {
-        if (timeScWaitCurrent > timeScWait)
+        if (timeScWaitCurrent > timeScWait && !player.isBase)
         {
             timeScWaitCurrent = 0;
             _slowMotionBool = true;
