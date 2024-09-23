@@ -1,10 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UseInstinctSkill : MonoBehaviour
 {
+    public GameObject panel;
+    
+    
     private void OnEnable()
     {
         UiManager.instance.sonarBtn.gameObject.SetActive(true);

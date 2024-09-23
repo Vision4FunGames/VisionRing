@@ -1,7 +1,9 @@
+using System;
 using DG.Tweening;
 using TaskSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MerchantTutorial : MonoBehaviour
 {
@@ -210,6 +212,15 @@ public class MerchantTutorial : MonoBehaviour
         WaypointIndicator.onScreenSpriteHide = false;
         GetComponentInChildren<Animator>().SetBool("standup", true);
         GetComponent<Collider>().enabled = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Solar"))
+        {
+            WaypointIndicator.enabled = true;
+            GetComponent<Collider>().enabled = false;
+        }
     }
 
     public void BarrierClose()

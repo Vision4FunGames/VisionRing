@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
@@ -12,24 +13,24 @@ public class TeleportScene : MonoBehaviour
     public int tpCount;
     public GameObject targetTeleport;
     public bool task;
+
     private void Awake()
     {
         tpCount = 0;
         _cameraShake = FindObjectOfType<CameraShake>();
         _player = FindObjectOfType<Player>();
         tp = FindObjectOfType<TeleportManager>();
-      
     }
 
     private void Start()
     {
-        
     }
 
     public void TaskComplete()
     {
         FindObjectOfType<TaskPrefab>().isCompleted = true;
     }
+
     public void EnableCollider()
     {
         GetComponent<Collider>().enabled = true;
@@ -39,19 +40,23 @@ public class TeleportScene : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_XDamping = 0;
+            GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_YDamping = 0;
+            GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_ZDamping = 0;
             if (task)
             {
-                Invoke("TaskCompletedWait",4f);
-                Destroy(tp.currentDungeon,4f);
+                Invoke("TaskCompletedWait", 4f);
+                Destroy(tp.currentDungeon, 4f);
             }
+
             Debug.Log("sssssssssss");
             GetComponent<Collider>().enabled = false;
             Invoke("EnableCollider", 4f);
-            if (tpCount !=0)
+            if (tpCount != 0)
             {
                 TpStart();
             }
-            else 
+            else
             {
                 tpCount++;
                 tp.DungeonScene(sceneName);
@@ -64,6 +69,7 @@ public class TeleportScene : MonoBehaviour
         FindObjectOfType<TeleportManager>().DungeonIndex();
         TaskComplete();
     }
+
     public void Tp()
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
@@ -78,7 +84,7 @@ public class TeleportScene : MonoBehaviour
             _player.isBase = true;
             UiManager.instance.HideOutEntry();
         }
-        
+
         _cameraShake.DungeonEnd();
         _player.teleportParticle.Stop();
         Invoke("playerMovementStart", 1);
@@ -87,6 +93,9 @@ public class TeleportScene : MonoBehaviour
     public void playerMovementStart()
     {
         _player.isMovement = true;
+        GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_XDamping = 1;
+        GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_YDamping = 1;
+        GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_ZDamping = 1;
     }
 
     public void TpStart()

@@ -23,10 +23,11 @@ public class ChestTask : MonoBehaviour
             box.infoText.text = "OpenTheChest";
         }
 
-        if (Vector3.Distance(player.transform.position, transform.position) < 10 && partOne)
+        if (Vector3.Distance(player.transform.position, transform.position) < 30 && partOne)
         {
              GetComponent<TaskPrefab>().isCompleted = true;
              Destroy(transform.gameObject, 3f);
+             FindObjectOfType<DungeonExitPortals>().dungeonTaskCheck();
         }
     }
 }

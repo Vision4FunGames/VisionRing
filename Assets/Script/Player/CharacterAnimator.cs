@@ -17,6 +17,7 @@ public class CharacterAnimator : MonoBehaviour
     public GameObject sword;
     public ParticleSystem spwn;
     public GameObject[] closedObj;
+
     protected virtual void Start()
     {
         navmeshAgent = GetComponent<NavMeshAgent>();
@@ -24,21 +25,21 @@ public class CharacterAnimator : MonoBehaviour
         enemyStats = GetComponent<EnemyStats>();
         combat.OnAttack += OnAttack;
         enemyStats.OnDie += DieAnimation;
-        
+
         if (task)
         {
             navmeshAgent.enabled = false;
             animator.SetBool("spawType", true);
             spwn.Play();
-            Invoke("navmeshEnable",1.5f);
+            Invoke("navmeshEnable", 1.5f);
         }
     }
 
     public void navmeshEnable()
     {
         navmeshAgent.enabled = true;
-
     }
+
     protected virtual void Update()
     {
         if (navmeshAgent.velocity.magnitude / navmeshAgent.speed >= 0)
@@ -121,6 +122,8 @@ public class CharacterAnimator : MonoBehaviour
         enemyStats.die = true;
 
         animator.SetTrigger("death_");
+        animator.SetBool("death_", true);
+        //Invoke("GoBack",);
         GoBack();
         navmeshAgent.speed = 0;
         navmeshAgent.enabled = false;
@@ -135,7 +138,7 @@ public class CharacterAnimator : MonoBehaviour
 
     public void GoBack()
     {
-        animator.speed = .5f;
+        //animator.speed = .5f;
         transform.SetParent(null);
         Vector3 direction = transform.position - PlayerManager.instance.transform.position;
         direction = direction.normalized;
@@ -156,7 +159,7 @@ public class CharacterAnimator : MonoBehaviour
         Invoke("PuffParticleSpawn", 1.5f);
         deathPos = direction * 5 + new Vector3(0, direction.y + 4, 0);
 
-        transform.DOLocalJump(transform.position + deathPos, 2f, 1, Random.Range(3.25f, 3.75f)).SetEase(Ease.OutCubic)
+        transform.DOLocalJump(transform.position + deathPos, 2f, 1, Random.Range(3.25f, 3.75f)).SetDelay(.5f)
             .OnComplete(() => { Destroy(transform.gameObject, 1); });
     }
 

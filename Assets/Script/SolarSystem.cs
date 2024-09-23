@@ -28,6 +28,7 @@ public class SolarSystem : MonoBehaviour
             PlayerPrefs.SetInt("solarTuto", 1);
             solarSystemtutorial = false;
             Invoke("TutorialSolarPopUp", 3);
+            FindObjectOfType<UseInstinctSkill>().panel.SetActive(false);
         }
 
         gameObject.SetActive(true);
