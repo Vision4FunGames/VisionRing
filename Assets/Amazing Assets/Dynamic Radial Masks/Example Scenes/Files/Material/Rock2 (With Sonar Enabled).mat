@@ -1,25 +1,46 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5162261896941612891
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rock2 (With Sonar Enabled)
-  m_Shader: {fileID: 4800000, guid: 9b23da75b3f320142adf376d7ccf9e6f, type: 3}
-  m_ShaderKeywords: _SONAR_EFFECT_ON
+  m_Shader: {fileID: -6465566751694194690, guid: a8d8788fe39e11a45a5025f98f18511e, type: 3}
+  m_ValidKeywords:
+  - _SONAR_EFFECT_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseAlbedo:
+        m_Texture: {fileID: 2800000, guid: 7c754333041983b499a6d6e68ace208e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 7c754333041983b499a6d6e68ace208e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -31,16 +52,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BaseTex:
-        m_Texture: {fileID: 2800000, guid: 7c754333041983b499a6d6e68ace208e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Bump:
         m_Texture: {fileID: 2800000, guid: 1353b878739a31c43924af9ed1570a1e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fef978e2802415f499366382396c69b6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -64,7 +81,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7c754333041983b499a6d6e68ace208e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -92,7 +109,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnowAlbedo:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 58b6422504be0f3458860655315bd776, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SnowAlbedo_1:
+        m_Texture: {fileID: 2800000, guid: 89ff0174a23ab564f927c8c38984857d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SnowMap:
+        m_Texture: {fileID: 2800000, guid: 58b6422504be0f3458860655315bd776, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnowNormal:
@@ -103,18 +128,13 @@ Material:
         m_Texture: {fileID: 2800000, guid: 89ff0174a23ab564f927c8c38984857d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SnowTex:
-        m_Texture: {fileID: 2800000, guid: 58b6422504be0f3458860655315bd776, type: 3}
-        m_Scale: {x: 3, y: 3}
-        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
-    - _AlphaCutout: 0
-    - _BaseGlossiness: 0
-    - _BaseMetallic: 0.5
+    - Vector1_891C51FD: 3
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -126,22 +146,19 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RenderSonarEffect: 1
+    - _SONAR_EFFECT: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SnowCover: 0.5
-    - _SnowGlossiness: 0.2
-    - _SnowMetallic: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _BaseColor: {r: 0.79607844, g: 0.79607844, b: 0.79607844, a: 1}
+    - _BaseColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RockColor: {r: 0.79800004, g: 0.77643245, b: 0.71172976, a: 1}
-    - _SnowColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SonarColor: {r: 1.5416869, g: 0.038223643, b: 2.433572, a: 1}
-    - _SonarEmission: {r: 3.1611977, g: 0, b: 3.9999998, a: 1}
+    - _SonarColor: {r: 7.152941, g: 0.1254902, b: 11.356863, a: 1}
+    - _SonarEmission: {r: 0.69935286, g: 0.08098967, b: 0.8584906, a: 1}
+  m_BuildTextureStacks: []

@@ -8,15 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NightFloor
-  m_Shader: {fileID: 4800000, guid: 70ef48c49f8bb994a88a1550d326460f, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 7c3f78935ff08d34fac6bfa736acaea8, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - TCP2_REFLECTIONS_FRESNEL
-  - TCP2_RIM_LIGHTING_LIGHTMASK
-  - TCP2_SHADOW_LIGHT_COLOR
-  - TCP2_UV_NORMALS_FULL
-  - _EMISSION
-  - _INVERTDISSOLVE_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
@@ -56,6 +50,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 046c0d6be0472fe4d816c4ec52de6d9f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskNoiseMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapMask:
@@ -129,6 +127,7 @@ Material:
     - _IndirectIntensity: 0
     - _IndirectIntensityOutline: 0
     - _InvertDissolve: 1
+    - _InvertDissolveEffect: 0
     - _MatCapMaskChannel: 0
     - _MatCapType: 0
     - _Metallic: 0
@@ -149,6 +148,7 @@ Material:
     - _OutlineTextureType: 0
     - _OutlineWidth: 1
     - _Parallax: 0.02
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _RampBands: 4
     - _RampBandsSmoothing: 0.1
@@ -178,6 +178,8 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _TexLod: 5
+    - _UVScaleBase: 1
+    - _UVScaleNoise: 1
     - _UVSec: 0
     - _UseAlphaTest: 0
     - _UseEmission: 1
@@ -202,6 +204,7 @@ Material:
     - _EdgeEmission: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskEdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}

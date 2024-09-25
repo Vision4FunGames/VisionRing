@@ -9,7 +9,7 @@ namespace AmazingAssets.DynamicRadialMasks.Example
     {
         void Start()
         {
-            Mesh mesh = GetComponent<MeshFilter>().mesh;
+            Mesh mesh = GetComponent<MeshFilter>().sharedMesh;
 
             Mesh fragmentedMesh = DoFragmentMesh(ref mesh);
 
@@ -56,6 +56,7 @@ namespace AmazingAssets.DynamicRadialMasks.Example
             _mesh.GetUVs(0, mUV);
             List<Vector4> mUV2 = new List<Vector4>();
             _mesh.GetUVs(1, mUV2);
+            Color[] mColor = _mesh.colors;
 
 
             List<Vector3> newVertices = new List<Vector3>();
@@ -64,12 +65,14 @@ namespace AmazingAssets.DynamicRadialMasks.Example
             List<Vector4> newUV2 = new List<Vector4>();
             List<Vector3> newNormal = new List<Vector3>();
             List<Vector4> newTangent = new List<Vector4>();
+            List<Color> newColor = new List<Color>();
 
 
             bool hasUV = true;
             bool hasUV2 = true;
             bool hasNormal = true;
             bool hasTangent = true;
+            bool hasColor = true;
 
             if (_mesh.uv == null || _mesh.uv.Length != _mesh.vertexCount)
                 hasUV = false;
@@ -79,6 +82,8 @@ namespace AmazingAssets.DynamicRadialMasks.Example
                 hasNormal = false;
             if (_mesh.tangents == null || _mesh.tangents.Length != _mesh.vertexCount)
                 hasTangent = false;
+            if (_mesh.colors == null || _mesh.colors.Length != _mesh.vertexCount)
+                hasColor = false;
 
 
 
@@ -138,6 +143,13 @@ namespace AmazingAssets.DynamicRadialMasks.Example
                         newTangent.Add(mTangent[index2]);
                         newTangent.Add(mTangent[index3]);
                     }
+                    //Color
+                    if (hasColor)
+                    {
+                        newColor.Add(mColor[index1]);
+                        newColor.Add(mColor[index2]);
+                        newColor.Add(mColor[index3]);
+                    }
                 }
 
             }
@@ -160,9 +172,12 @@ namespace AmazingAssets.DynamicRadialMasks.Example
                 saveMesh.normals = newNormal.ToArray();
             if (hasTangent)
                 saveMesh.tangents = newTangent.ToArray();
+            if (hasColor)
+                saveMesh.colors = newColor.ToArray();
 
 
             return saveMesh;
         }
+
     }
 }

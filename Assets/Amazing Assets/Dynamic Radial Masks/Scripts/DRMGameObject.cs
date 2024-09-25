@@ -20,12 +20,12 @@ namespace AmazingAssets.DynamicRadialMasks
         [HideInInspector] public float radius = 5;
         [HideInInspector] public float intensity = 1;
         [HideInInspector] public float noiseStrength = 0;
-        [HideInInspector] [Min(0f)] public float edgeSize = 1;
+        [HideInInspector][Min(0f)] public float edgeSize = 1;
         [HideInInspector] public int ringCount = 3;
         [HideInInspector] public float frequency = 10;
         [HideInInspector] public float phaseSpeed = 2;
         [HideInInspector] public float currentPhase = 0;
-        [HideInInspector] [Min(0.001f)] public float smooth = 1;
+        [HideInInspector][Min(0.001f)] public float smooth = 1;
         public Slider slider;
         public float baseRadius;
         public float breafDuration;
@@ -122,14 +122,14 @@ namespace AmazingAssets.DynamicRadialMasks
                 DOTween.To(() => radius, x => radius = x, 0, 4f).OnComplete((() =>
                 {
                     increaseEnes = true;
-                    
+
                 }));
             else if (radius < 2)
             {
                 DOTween.To(() => radius, x => radius = x, 100, 4f).OnComplete((() =>
                 {
                     increaseEnes = false;
-                   
+
                 }));
             }
 
@@ -137,7 +137,7 @@ namespace AmazingAssets.DynamicRadialMasks
             {
                 FindObjectOfType<MerchantTutorial>().BarrierClose();
             }
-            
+
             if (task && increaseEnes)
             {
                 FindObjectOfType<MerchantTutorial>().BarrierOpen();
