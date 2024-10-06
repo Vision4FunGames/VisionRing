@@ -132,10 +132,13 @@ public class TeleportManager : MonoBehaviour
 
     public void TeleportSpawn()
     {
-        GameObject baseTeleport = Instantiate(twoSideTeleport, player.transform.position + new Vector3(0, 1, 0),
-            quaternion.identity);
-        baseTeleport.GetComponentInChildren<TwoSideTeleport>().targetTeleport =
-            teleports[currentDungeonValue].gameObject;
-        teleports[currentDungeonValue].targetTeleport = baseTeleport;
+        if (Vector3.Distance(player.transform.position, dungeonSpawnPoint.transform.position) < 300)
+        {
+            GameObject baseTeleport = Instantiate(twoSideTeleport, player.transform.position + new Vector3(0, 1, 0),
+                quaternion.identity);
+            baseTeleport.GetComponentInChildren<TwoSideTeleport>().targetTeleport =
+                teleports[currentDungeonValue].gameObject;
+            teleports[currentDungeonValue].targetTeleport = baseTeleport;
+        }
     }
 }

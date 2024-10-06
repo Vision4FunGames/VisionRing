@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 33486698422679776}
   - component: {fileID: 23388923443250498}
   - component: {fileID: 65980592190731834}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Low Parapet Corner 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4534969005913942
 Transform:
@@ -28,13 +28,13 @@ Transform:
   m_GameObject: {fileID: 1581905229212550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6534892231352028746}
   - {fileID: 8771928356217757668}
+  - {fileID: 6534892231352028746}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33486698422679776
 MeshFilter:
@@ -94,34 +94,33 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581905229212550}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9203686, y: 2.46, z: 0.92063737}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1.12, z: 0.00000052154064}
 --- !u!1001 &6534892231352161482
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
     m_TransformParent: {fileID: 4534969005913942}
     m_Modifications:
     - target: {fileID: 100000, guid: e67c19ea4c3752d49b45969a673aac59, type: 3}
       propertyPath: m_Name
       value: Edge Pillar Corner 01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e67c19ea4c3752d49b45969a673aac59, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e67c19ea4c3752d49b45969a673aac59, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e67c19ea4c3752d49b45969a673aac59, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e67c19ea4c3752d49b45969a673aac59, type: 3}
       propertyPath: m_LocalScale.z
@@ -172,9 +171,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 9dcf01808385e3b4db349ed62dbce099, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e67c19ea4c3752d49b45969a673aac59, type: 3}
 --- !u!4 &6534892231352028746 stripped
 Transform:
@@ -186,16 +182,23 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
     m_TransformParent: {fileID: 4534969005913942}
     m_Modifications:
     - target: {fileID: 100000, guid: 7c8b290a472758042b30b83b506a2bb0, type: 3}
       propertyPath: m_Name
       value: Low Parapet Corner Base 01
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7c8b290a472758042b30b83b506a2bb0, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7c8b290a472758042b30b83b506a2bb0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7c8b290a472758042b30b83b506a2bb0, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7c8b290a472758042b30b83b506a2bb0, type: 3}
       propertyPath: m_LocalScale.x
@@ -254,9 +257,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 9dcf01808385e3b4db349ed62dbce099, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c8b290a472758042b30b83b506a2bb0, type: 3}
 --- !u!4 &8771928356217757668 stripped
 Transform:

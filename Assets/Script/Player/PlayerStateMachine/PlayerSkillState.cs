@@ -226,6 +226,7 @@ public class PlayerSkillState : PlayerState
     public void DashSkill()
     {
         _player.isDamageable = false;
+        _player.dash = true;
         _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
                                              new Vector3(_player.uiManager.attackJoystick.Horizontal, 0f,
                                                  _player.uiManager.attackJoystick.Vertical) *
@@ -241,6 +242,7 @@ public class PlayerSkillState : PlayerState
         ParticleManager.instance.playerDashParticle.Play();
         _player.transform.DOMove(targetPos, .2f).SetEase(Ease.Linear).OnComplete((() =>
         {
+            _player.dash = false;
             _player.StateMachine.ChangeState(_player.PlayerMovementState);
             ParticleManager.instance.playerDashParticle.Stop();
             _player.isDamageable = true;

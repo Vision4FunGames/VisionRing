@@ -77,10 +77,12 @@ namespace Script.Player.PlayerStateMachine
                 {
                     _player.playerSound.audioSource.clip = _player.playerSound.swim;
                 }
+
                 _player.playerSound.audioSource.Play();
             }
 
-            if (_player._myController.velocity.magnitude < 2 && _player.playerSound.audioSource.clip != _player.playerSound.earnItemSound)
+            if (_player._myController.velocity.magnitude < 2 &&
+                _player.playerSound.audioSource.clip != _player.playerSound.earnItemSound)
             {
                 _player.playerSound.audioSource.Stop();
             }
@@ -126,8 +128,7 @@ namespace Script.Player.PlayerStateMachine
                 PlayerMovemetSound();
                 _player._playerAnimator.SetFloat(RunSpeed, _player.animSpeed);
                 _player.transform.GetChild(0).LookAt(_player.transform.GetChild(0).position +
-                                                     new Vector3(_player._fixedJoystick.Horizontal, 0f,
-                                                         _player._fixedJoystick.Vertical) *
+                                                    new Vector3(PlayerDirection().x,0,PlayerDirection().z)*
                                                      (_player.rotSpeed * Time.deltaTime));
                 if (PlayerDirection().magnitude > 0.5)
                 {
@@ -159,8 +160,11 @@ namespace Script.Player.PlayerStateMachine
 
         Vector3 PlayerDirection()
         {
-            return new Vector3(_player._fixedJoystick.Horizontal, _playerVelocity.y,
+            Quaternion rotationOffset = Quaternion.Euler(0, _player.offsettAngle, 0); // Y ekseni etrafında döndürme
+            Vector3 joystickDirection = new Vector3(_player._fixedJoystick.Horizontal, _playerVelocity.y,
                 _player._fixedJoystick.Vertical);
+            Vector3 adjustedDirection = rotationOffset * joystickDirection;
+            return adjustedDirection;
         }
 
         public override void PhysicUpdate()

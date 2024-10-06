@@ -12,6 +12,7 @@ using Image = UnityEngine.UI.Image;
 
 public class Player : MonoBehaviour
 {
+    public float offsettAngle;
     [HideInInspector] public PlayerSound playerSound;
     [HideInInspector] public UiManager uiManager;
     [HideInInspector] public PlayerHealth _playerHealth;
@@ -20,9 +21,11 @@ public class Player : MonoBehaviour
     private NavMeshAgent agent;
     public bool tutorial;
     public bool isDamageable = true;
+    public bool dash;
     public Transform autoMoveTarget;
     public ParticleSystem teleportParticle;
     public bool isBase;
+
     #region Singleton
 
     public static Player instance;
@@ -101,9 +104,8 @@ public class Player : MonoBehaviour
             autoMove = true;
             StateMachine.ChangeState(PlayerAutoMove);
         }
-           
     }
-    
+
     private void Awake()
     {
         baseSpeed = speed;
@@ -201,11 +203,38 @@ public class Player : MonoBehaviour
             //uiManager.attackJoystick.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = attackSprite;
         }
 
+        if (dash)
+        {
+            DashRaycast();
+        }
         // if (Input.GetKeyDown(KeyCode.B))
         // {
         //     PlayerBox = new PlayerBox(this, StateMachine);
         //     StateMachine.ChangeState(PlayerBox);
         // }
+    }
+
+    private float rayDistance = 2;
+    private Vector3 rayPos;
+
+    public void DashRaycast()
+    {
+        RaycastHit hit;
+        rayPos = transform.GetChild(0).position + new Vector3(0, 2, 0);
+        if (Physics.Raycast(rayPos, transform.GetChild(0).forward, out hit, rayDistance))
+        {
+            transform.DOKill();
+            dash = false;
+            StateMachine.ChangeState(PlayerMovementState);
+            ParticleManager.instance.playerDashParticle.Stop();
+            isDamageable = true;
+        }
+        else
+        {
+            Debug.Log("Önü açık.");
+        }
+
+        Debug.DrawRay(rayPos, transform.GetChild(0).forward * rayDistance, Color.red);
     }
 
     private void OnTriggerExit(Collider other)
@@ -270,6 +299,23 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (other.CompareTag("BasePlane"))
+        {
+            isMovement = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.position = Vector3.zero;
+            Invoke("IsMovementAgain",1);
+        }
+        if (other.CompareTag("DungeonPlane"))
+        {
+            isMovement = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.position = FindObjectOfType<TeleportManager>().currentDungeon.transform.GetChild(0).position;
+            Invoke("IsMovementAgain",1);
+        }
+        
         if (other.CompareTag("RockPuzzle"))
         {
             other.gameObject.GetComponentInParent<PuzzleController>().DoneEnemyMission();
@@ -370,8 +416,9 @@ public class Player : MonoBehaviour
     public void IsMovementAgain()
     {
         isMovement = true;
+        GetComponent<Rigidbody>().useGravity = true;
     }
-
+   
     public void BackDoMove(GameObject enemy)
     {
         Vector3 dir = transform.position - enemy.transform.position;
@@ -422,7 +469,7 @@ public class Player : MonoBehaviour
 
         StateMachine.ChangeState(PlayerIdleState);
         transform.GetChild(0).transform.rotation = new Quaternion(0, 0, 0, 0);
-       // GameManager.instance.playerVCam.m_LookAt = null;
+        // GameManager.instance.playerVCam.m_LookAt = null;
         transform.AddComponent<NavMeshAgent>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 6f;

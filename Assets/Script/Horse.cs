@@ -40,6 +40,7 @@ public class Horse : MonoBehaviour
             _player.horse = false;
             _player.speed = _player.baseSpeed;
             _player._playerAnimator.SetBool("horse", false);
+            _animator.SetFloat("HorseSpeed",0);
             _player.StateMachine.ChangeState(_player.PlayerMovementState);
             HorsePositionBack(10);
         }
@@ -121,6 +122,11 @@ public class Horse : MonoBehaviour
         if (!_player.horse && Vector3.Distance(transform.position, vposCamera) < 2 && !callHorse)
         {
             _animator.SetFloat("HorseSpeed", 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            CallHorse();
         }
     }
 }
