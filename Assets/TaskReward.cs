@@ -20,9 +20,9 @@ public class TaskReward : MonoBehaviour
 
     public void GetReward()
     {
-        Item item = FindObjectOfType<EquipmentManager>().dropUsableItems[0];
-        Inventory.instance.usableItemsCount[0] += 1;
-        Inventory.instance.SaveAllItems();
+        //Item item = FindObjectOfType<EquipmentManager>().dropUsableItems[0];
+        //Inventory.instance.usableItemsCount[0] += 1;
+        //Inventory.instance.SaveAllItems();
         rewardPanel.transform.DOScale(Vector3.zero, .5f);
         Destroy(FindObjectOfType<TaskPrefab>().gameObject, 2);
         FindObjectOfType<TaskPrefab>().isCompleted = true;

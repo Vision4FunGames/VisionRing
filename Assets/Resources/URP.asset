@@ -19,6 +19,26 @@ MonoBehaviour:
   cameraLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-1547762514752291338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e2e32e102e44abeb72209e7ce030c3, type: 3}
+  m_Name: KawaseBlur
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    renderPassEvent: 500
+    blurMaterial: {fileID: 2100000, guid: b89fe5ba919488448932eec0a1caf6fb, type: 2}
+    blurPasses: 1
+    downsample: 1
+    copyToFramebuffer: 0
+    targetName: _blurTexture
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +55,8 @@ MonoBehaviour:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
   m_RendererFeatures:
   - {fileID: 9098373997198225393}
-  m_RendererFeatureMap: f1afa6f8f1ea437e
+  - {fileID: -1547762514752291338}
+  m_RendererFeatureMap: f1afa6f8f1ea437ef63d8677313e85ea
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}

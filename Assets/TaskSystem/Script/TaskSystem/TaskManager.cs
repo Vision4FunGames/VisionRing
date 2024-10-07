@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
 using System;
+
 namespace TaskSystem
 {
     public class TaskManager : TaskSingleton<TaskManager>
@@ -19,8 +20,8 @@ namespace TaskSystem
         {
             base.Awake();
             CheckForMainTasks();
-
         }
+
         public void CheckForMainTasks()
         {
             if (ES3.KeyExists(MainTasksSaveKey))
@@ -28,13 +29,19 @@ namespace TaskSystem
                 //LastMainTaskIndex = ES3.Load(MainTasksSaveKey, 0);
             }
 
+            Debug.Log("Task      " + LastMainTaskIndex);
+
+            if (LastMainTaskIndex > 5 && LastMainTaskIndex < 11)
+                LastMainTaskIndex = 5;
+            else if (LastMainTaskIndex > 11 && LastMainTaskIndex < 14)
+                LastMainTaskIndex = 11;
+            
             var currentTask = mainTasks.taskData[LastMainTaskIndex];
             currentTask.MarkAsMainTask();
             var taskPrefab = Instantiate(currentTask.prefab, null);
             taskPrefab.taskManager = this;
             taskPrefab.isMainTask = true;
             TaskPanelController.instance.SpawnTaskUI(currentTask);
-            
         }
 
         internal void OnMainTaskCompleted()
@@ -50,37 +57,37 @@ namespace TaskSystem
 
             TaskPanelController.instance.DestroyLastMainTask();
             TaskPanelController.instance.SpawnTaskUI(currentTask);
-
         }
     }
+
     [System.Serializable]
     public class TaskGroup
     {
         public TaskType taskType;
         public List<Task> taskData = new List<Task>();
     }
+
     [System.Serializable]
     public class Task
     {
         public string taskName;
-        [Multiline]
-        public string questDirections;
-        [Multiline]
-        public string hint;
+        [Multiline] public string questDirections;
+        [Multiline] public string hint;
         public DetailedInfo detailedInfo;
         public TaskPrefab prefab;
         private bool isMainTask;
         public void MarkAsMainTask() => isMainTask = true;
         public bool IsMainTask() => isMainTask;
     }
+
     [System.Serializable]
     public class DetailedInfo
     {
-        [Multiline]
-        public string onClickDescription;
+        [Multiline] public string onClickDescription;
         [Space(10)] public Sprite rewardIcon;
         [Space(10)] public int rewardAmount = 0;
     }
+
     public enum TaskType
     {
         Undefined,

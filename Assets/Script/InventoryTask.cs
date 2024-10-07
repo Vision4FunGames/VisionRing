@@ -9,6 +9,10 @@ public class InventoryTask : MonoBehaviour
     private void OnEnable()
     {
         UiManager.instance.focusPanel.SetActive(true);
+        //Item item = FindObjectOfType<EquipmentManager>().dropUsableItems[0];
+        Inventory.instance.usableItemsCount[0] += 1;
+        //Inventory.instance.SaveAllItems();
+        FindObjectOfType<UiManager>().isTaskInventory = true;
     }
 
     private void OnDisable()
