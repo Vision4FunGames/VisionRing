@@ -2,19 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AxisDissolve 3
   m_Shader: {fileID: 4800000, guid: 9f7e299f202797a4cb234938560347b2, type: 3}
-  m_ValidKeywords:
-  - _2SIDESSECONDEDGE_ON
-  - _AXIS_Y
-  - _EDGESAFFECT_EMISSION
-  - _GUIDEAFFECTSEDGESBLENDING_ON
-  m_InvalidKeywords: []
+  m_ShaderKeywords: _2SIDESSECONDEDGE_ON _AXIS_Y _EDGESAFFECT_EMISSION _GUIDEAFFECTSEDGESBLENDING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -76,16 +71,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - _0AmountOffsetMin: 0
     - _2SidesSecondEdge: 1
     - _AlphaCutoff: 0.5
     - _Axis: 1
-    - _Cutoff: 0.5
     - _DisplacementGuideTilling: 1
     - _DisplacementGuideTillingSpeed: 0.005
-    - _DissolveAmount: 0.134
+    - _DissolveAmount: 0.364
     - _Edge1PatternTilling: 8.61
     - _EdgeWidth: 0.054
     - _EdgesAffect: 1
@@ -119,7 +112,6 @@ Material:
     - _VertexDisplacementEdge2: 0
     - _VertexDisplacementMainEdge: 0
     - _VertexDisplacementSecondEdge: 0
-    - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveColor: {r: 1, g: 0, b: 0, a: 0}
@@ -131,4 +123,3 @@ Material:
     - _SecondEdgeColor1: {r: 0, g: 27.607843, b: 47.937256, a: 1}
     - _SecondEdgeColor2: {r: 0, g: 0, b: 0, a: 0}
     - _SpecularValue: {r: 0, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
