@@ -36,7 +36,7 @@ public class GrowTween : MonoBehaviour
             float val = start - delta;
             foreach (var item in materialInstances)
             {
-                DOVirtual.Float(start, val, time, (z) => { item.SetFloat("_Grow", z); })
+                DOVirtual.Float(start, val, time, (z) => { item.SetFloat("_Clip", z); })
                     .OnComplete((() =>
                     {
                         start = val;
