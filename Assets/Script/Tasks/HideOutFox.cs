@@ -22,7 +22,7 @@ public class HideOutFox : MonoBehaviour
     private string playerTextOne =
         "I need to solve a mystery my parents left me. You'll learn when we're best friends.";
 
-    private string foxTextTwo = "Let's find my other captured friend. She'll help you get stronger.";
+    private string foxTextTwo = "Let's see what you're capable of";
 
 
     private bool speechDone;

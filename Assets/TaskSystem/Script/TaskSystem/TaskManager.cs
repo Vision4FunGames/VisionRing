@@ -26,7 +26,7 @@ namespace TaskSystem
         {
             if (ES3.KeyExists(MainTasksSaveKey))
             {
-                LastMainTaskIndex = ES3.Load(MainTasksSaveKey, 0);
+                //LastMainTaskIndex = ES3.Load(MainTasksSaveKey, 0);
             }
 
             Debug.Log("Task      " + LastMainTaskIndex);
