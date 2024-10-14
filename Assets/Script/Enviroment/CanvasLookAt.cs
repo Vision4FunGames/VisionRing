@@ -18,7 +18,7 @@ public class CanvasLookAt : MonoBehaviour
       transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
       if (isIndicator && !isStarted)
       {
-         Indicator();
+       //  Indicator();
       }
       
    }
