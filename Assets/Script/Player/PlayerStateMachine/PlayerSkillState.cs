@@ -246,6 +246,11 @@ public class PlayerSkillState : PlayerState
             _player.StateMachine.ChangeState(_player.PlayerMovementState);
             ParticleManager.instance.playerDashParticle.Stop();
             _player.isDamageable = true;
+            if (_player.isDashTutorial)
+            {
+                _player.isDashTutorial = false;
+                _player.CompleteTask();
+            }
         }));
     }
 

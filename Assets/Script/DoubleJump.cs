@@ -21,5 +21,6 @@ public class DoubleJump : MonoBehaviour
     public void CompleteTask()
     {
         GetComponentInParent<TaskPrefab>().isCompleted = true;
+        Destroy(transform.parent.gameObject,1);
     }
 }

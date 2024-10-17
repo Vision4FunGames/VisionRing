@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Script.CombatScript;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum CurrentGunType
 {
@@ -34,7 +35,12 @@ public class PlayerAttack : MonoBehaviour
     private bool hold = false;
     private PlayerStats playerStats;
     public DecalCreaters decalCreaters;
-    
+
+    [FormerlySerializedAs("isAttackBool")] [HideInInspector]
+    public bool isSimpleAttackBool;
+
+    public bool isComboAttackBool;
+
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -69,7 +75,7 @@ public class PlayerAttack : MonoBehaviour
             switch (myCurrentGunType)
             {
                 case CurrentGunType.sword:
-                    if (GameManager.instance.tutorialSection ==0 && GameManager.instance.tutorialCounter <= 1)
+                    if (GameManager.instance.tutorialSection == 0 && GameManager.instance.tutorialCounter <= 1)
                     {
                         swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
                         swordAttack.AttackSword(player, playerAnimator);
@@ -79,6 +85,14 @@ public class PlayerAttack : MonoBehaviour
                         swordAttack ??= playerAnimator.gameObject.AddComponent<SwordAttack>();
                         swordAttack.AttackSword(player, playerAnimator);
                     }
+
+                    if (isSimpleAttackBool)
+                    {
+                        isSimpleAttackBool = false;
+                        Invoke("CompleteSimpleAttack", 1);
+                    }
+                    
+
                     break;
                 case CurrentGunType.arrow:
                     arrowAttack ??= playerAnimator.gameObject.AddComponent<ArrowAttack>();
@@ -90,10 +104,16 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void CompleteSimpleAttack()
+    {
+        FindObjectOfType<TaskPrefab>().isCompleted = true;
+    }
+
     public void HoldAttack()
     {
         StartCoroutine(Hold());
     }
+
     public IEnumerator Hold()
     {
         yield return new WaitForSeconds(.25f);
@@ -107,6 +127,7 @@ public class PlayerAttack : MonoBehaviour
         StopCoroutine(Hold());
         hold = false;
     }
+
     public void ChangeGunType(CurrentGunType currentGunType)
     {
         myCurrentGunType = currentGunType;
@@ -131,6 +152,7 @@ public class SwordAttack : MonoBehaviour
     private Player player;
     private BoxCollider swordCollider;
     private DecalCreaters _decalCreaters;
+
     private void Start()
     {
         playerAnimator ??= FindObjectOfType<Player>().GetComponentInChildren<Animator>();
@@ -201,9 +223,9 @@ public class SwordAttack : MonoBehaviour
     {
         PlayerManager.instance.SlowMotion();
     }
+
     public void EnableSwordCollider(int attackCount)
     {
-       
         player.playerSound.swordAudioSource.PlayOneShot(player.playerSound.swordHitSound[attackCount], .7f);
         swordCollider.enabled = false;
         swordCollider.enabled = true;
@@ -238,13 +260,22 @@ public class SwordAttack : MonoBehaviour
 
     public void ComboAttackReset()
     {
-        
         comboCounter = 0;
+        if (player._playerAttack.isComboAttackBool)
+        {
+            player._playerAttack.isComboAttackBool = false;
+            Invoke("CompleteComboAttack", 1);
+        }
         if (playerAnimator.GetComponentInParent<Player>().speed < 5)
         {
             playerAnimator.GetComponentInParent<Player>().speed *= 2;
             playerAnimator.GetComponentInParent<Player>().animValue *= 2;
         }
+    }
+
+    public void CompleteComboAttack()
+    {
+        FindObjectOfType<TaskPrefab>().isCompleted = true;
     }
 }
 

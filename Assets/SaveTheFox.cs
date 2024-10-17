@@ -80,6 +80,7 @@ public class SaveTheFox : MonoBehaviour
     public void CompleteTask()
     {
         canvas.SetActive(false);
+        PlayerPrefs.SetInt("Fox",1);
         GetComponentInParent<TaskPrefab>().isCompleted = true;
         transform.parent.DOScale(Vector3.zero, 1);
         Destroy(transform.gameObject, 1f);

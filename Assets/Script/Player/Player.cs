@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     public bool tutorial;
     public bool isDamageable = true;
     public bool dash;
+    public bool isDashTutorial;
+    public bool isDoubleJumpTutorial;
     public Transform autoMoveTarget;
     public ParticleSystem teleportParticle;
     public bool isBase;
@@ -428,6 +430,10 @@ public class Player : MonoBehaviour
         transform.DOMove(transform.position + (dir * 2), 1f).OnComplete(() => isMovement = true);
     }
 
+    public void CompleteTask()
+    {
+        FindObjectOfType<TaskPrefab>().isCompleted = true;
+    }
     public void DisableSkill(float skilltime)
     {
         Invoke("DisableSkillTime", skilltime);

@@ -113,6 +113,11 @@ namespace Script.Player.PlayerStateMachine
                     _player.playerSound.audioSource.Play();
                     _playerVelocity.y = 4;
                     ChangeAnimationState(playerDoubleJumpAnimationString);
+                    if (_player.isDoubleJumpTutorial)
+                    {
+                        _player.isDoubleJumpTutorial = false;
+                        _player.CompleteTask();
+                    }
                     //_playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.4f * gravityValue);
                 }
             }

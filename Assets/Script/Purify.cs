@@ -27,6 +27,7 @@ public class Purify : MonoBehaviour
             {
                 purifyObject[i].GetComponent<Collider>().enabled = true;
                 purifyObject[i].GetComponent<Outline>().enabled = true;
+                purifyObject[i].GetComponent<Waypoint_Indicator>().enabled = true;
             }
                
         }
