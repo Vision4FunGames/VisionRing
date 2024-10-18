@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1196c0fbef055664ca7a5614335dd7ca, type: 3}
+  m_Name: RewardList
+  m_EditorClassIdentifier: 
+  openClip: {fileID: 8300000, guid: 0a3476ad2d45c3449a07345c4aa315b7, type: 3}
+  idleClip: {fileID: 8300000, guid: af6892c301499f24fb72ebf7e383b02b, type: 3}
+  firstClip: {fileID: 8300000, guid: fc85da3e52966df43ab1a73d9e7bb089, type: 3}
+  doubleSound: {fileID: 8300000, guid: be1c13296130e9a419af521b9a5330bd, type: 3}
+  claimSound: {fileID: 8300000, guid: afde278fd59e2304b86f7ee54006795b, type: 3}
+  rewards:
+  - rewardName: Gold
+    rewardType: 0
+    prefab: {fileID: 919132149155446097, guid: ef9c7f972ecb02f46b00954b121a37f9, type: 3}
+    sprite: {fileID: 21300000, guid: 6a4dcd08ac1bfc24da68090ce3314aea, type: 3}
+  - rewardName: Diamond
+    rewardType: 1
+    prefab: {fileID: 705138628545013317, guid: 73a66ce3863e7904d8f3c9f71209257f, type: 3}
+    sprite: {fileID: 21300000, guid: b38d44cec200ef643a93001986c28785, type: 3}
+  - rewardName: GemBlue
+    rewardType: 2
+    prefab: {fileID: 705138628545013317, guid: 73a66ce3863e7904d8f3c9f71209257f, type: 3}
+    sprite: {fileID: 21300000, guid: 7733b4ec1d3773f4eaba9aa3a469fe5d, type: 3}
+  - rewardName: GemPurple
+    rewardType: 3
+    prefab: {fileID: 705138628545013317, guid: 73a66ce3863e7904d8f3c9f71209257f, type: 3}
+    sprite: {fileID: 21300000, guid: 6a4dcd08ac1bfc24da68090ce3314aea, type: 3}
+  - rewardName: GemGreen
+    rewardType: 4
+    prefab: {fileID: 705138628545013317, guid: 73a66ce3863e7904d8f3c9f71209257f, type: 3}
+    sprite: {fileID: 21300000, guid: a927f836c7c011442a3f9598a9c875c4, type: 3}
+  spinRewardPacks:
+  - packName: Forest
+    packType: 0
+    rewards:
+    - rewardType: 0
+      minAmount: 10
+      maxAmount: 20
+      Chance: 100
+      Index: 0
+      _weight: 100
+    - rewardType: 0
+      minAmount: 1
+      maxAmount: 3
+      Chance: 50
+      Index: 1
+      _weight: 150
+    - rewardType: 0
+      minAmount: 100
+      maxAmount: 200
+      Chance: 10
+      Index: 2
+      _weight: 160
+    - rewardType: 0
+      minAmount: 50
+      maxAmount: 60
+      Chance: 5
+      Index: 3
+      _weight: 165
+    - rewardType: 0
+      minAmount: 10
+      maxAmount: 20
+      Chance: 5
+      Index: 4
+      _weight: 170
+    - rewardType: 0
+      minAmount: 500
+      maxAmount: 1000
+      Chance: 1
+      Index: 5
+      _weight: 171
+    - rewardType: 1
+      minAmount: 100
+      maxAmount: 120
+      Chance: 2
+      Index: 6
+      _weight: 173
+    - rewardType: 4
+      minAmount: 5
+      maxAmount: 10
+      Chance: 25
+      Index: 7
+      _weight: 198
+  - packName: Dungeon
+    packType: 1
+    rewards:
+    - rewardType: 0
+      minAmount: 10
+      maxAmount: 20
+      Chance: 100
+      Index: 0
+      _weight: 0
+    - rewardType: 1
+      minAmount: 1
+      maxAmount: 3
+      Chance: 50
+      Index: 0
+      _weight: 0
+    - rewardType: 0
+      minAmount: 100
+      maxAmount: 200
+      Chance: 10
+      Index: 0
+      _weight: 0
+    - rewardType: 1
+      minAmount: 50
+      maxAmount: 60
+      Chance: 5
+      Index: 0
+      _weight: 0
+    - rewardType: 2
+      minAmount: 10
+      maxAmount: 20
+      Chance: 5
+      Index: 0
+      _weight: 0
+    - rewardType: 0
+      minAmount: 500
+      maxAmount: 1000
+      Chance: 1
+      Index: 0
+      _weight: 0
+    - rewardType: 1
+      minAmount: 100
+      maxAmount: 120
+      Chance: 2
+      Index: 0
+      _weight: 0
+    - rewardType: 4
+      minAmount: 5
+      maxAmount: 10
+      Chance: 25
+      Index: 0
+      _weight: 0
