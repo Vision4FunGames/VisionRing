@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class IapBundleManager : MonoBehaviour
 {
@@ -28,6 +29,12 @@ public class IapBundleManager : MonoBehaviour
         
     }
 
+    public void ShowLuckySpin(RewardPackType rewardsPackType,int duration, UnityAction<Reward> action)
+    {
+        luckySpin.SetActive(true);
+        pickerWheel.SetRewards(rewardsPackType, duration, action);
+
+    }
 
 
     public void Result(Reward action)
