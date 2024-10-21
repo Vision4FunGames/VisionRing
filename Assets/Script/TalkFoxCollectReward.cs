@@ -10,19 +10,17 @@ public class TalkFoxCollectReward : MonoBehaviour
     public TextMeshProUGUI foxTxt;
     public string foxSpeechOne = "You are great! You prove yourself.";
     public string foxSpeechTwo = "I found a key in the dungeon. You deserve it.";
-
+    public GameObject _canvas;
     void Start()
     {
         FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>().enabled = true;
     }
 
-    private void OnMouseDown()
-    {
-        SpeechFox();
-    }
+ 
 
     public void SpeechFox()
     {
+        _canvas.SetActive(true);
         if (clickCount == 0)
         {
             speechDone = false;
@@ -31,8 +29,9 @@ public class TalkFoxCollectReward : MonoBehaviour
         }
         else if (clickCount == 1)
         {
+            foxTxt.text = "";
             speechDone = false;
-            foxTxt.DOText(foxSpeechOne, 2).OnComplete(() => speechDone = true);
+            foxTxt.DOText(foxSpeechTwo, 2).OnComplete(() => speechDone = true);
         }
     }
 
