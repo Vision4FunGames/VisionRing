@@ -105,4 +105,13 @@ public class TeleportScene : MonoBehaviour
         _player.isMovement = false;
         Invoke("Tp", 2f);
     }
+
+    public void OpenDelayPortal(float delay)
+    {
+        transform.DOScale(new Vector3(4.27f,3.12f,3.12f), 1f).SetEase(Ease.OutBack).SetDelay(delay);
+    }
+    public void CloseDelayPortal(float delay)
+    {
+        transform.DOScale(Vector3.zero, 1).SetDelay(delay);
+    }
 }

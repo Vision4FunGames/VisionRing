@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
@@ -53,11 +54,21 @@ public class TeleportManager : MonoBehaviour
         PlayerPrefs.SetInt("dungeonIndex", currentDungeonIndex);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.H))
+            TeleportOpenAll();
+    }
+
+    private float delayTime;
     public void TeleportOpenAll()
     {
         for (int i = 0; i < teleports.Length; i++)
         {
+            teleports[i].transform.localScale = Vector3.zero;
             teleports[i].gameObject.SetActive(true);
+            teleports[i].OpenDelayPortal(delayTime);
+            delayTime = delayTime + 0.3f;
             teleports[i].sceneName = currentDungeonIndex;
             teleports[i].tpCount = 0;
         }
