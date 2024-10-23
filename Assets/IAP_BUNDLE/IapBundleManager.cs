@@ -27,6 +27,11 @@ public class IapBundleManager : MonoBehaviour
         instance = this;
     }
 
+    private void OnEnable()
+    {
+        ShowLuckySpin();
+    }
+
     [Button]
     public void ShowLuckySpin()
     {
