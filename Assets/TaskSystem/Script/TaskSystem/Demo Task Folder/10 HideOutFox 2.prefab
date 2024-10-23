@@ -53,9 +53,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1470bb54b62a9f242815d4d84323a0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  refreshTime: 0
+  rewardPackName: {fileID: 6688494022461241209}
   rewardList: {fileID: 11400000, guid: 8a094c2fcfd67a742a2af4541eabca36, type: 2}
   luckySpin: {fileID: 4138879105437957538}
   pickerWheel: {fileID: 3194335010684855666}
+  gridItems: []
+  tempIndexList: 
+  selectedIndex: 
+  selectedRewards: []
 --- !u!223 &1904344802
 Canvas:
   m_ObjectHideFlags: 0
@@ -1540,6 +1546,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3570228666854022281, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570228666854022281, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570228666854022281, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570228666854022281, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570228666854022281, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570228666854022281, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5668018129263062970, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1635,3 +1665,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 814985816029533719, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
   m_PrefabInstance: {fileID: 3620658624571272117}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6688494022461241209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7993155098113367244, guid: c2914b0495cf476489bfdfe8bc8045a7, type: 3}
+  m_PrefabInstance: {fileID: 3620658624571272117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

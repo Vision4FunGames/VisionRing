@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TalkFoxCollectReward : MonoBehaviour
 {
@@ -11,13 +12,19 @@ public class TalkFoxCollectReward : MonoBehaviour
     public string foxSpeechOne = "You are great! You prove yourself.";
     public string foxSpeechTwo = "I found a key in the dungeon. You deserve it.";
     public GameObject _canvas;
+
+  
     void Start()
     {
-        FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>().enabled = true;
+      //  if (FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>())
+      //      FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>().enabled = true;
+        GetComponentInChildren<IapBundleManager>().ShowLuckySpin(RewardPackType.Map1, 1, Result);
     }
 
- 
-
+    public void Result(Reward action)
+    {
+        Debug.Log("Earn  " + action.rewardType.ToString() + "   " + action.amount);
+    }
     public void SpeechFox()
     {
         _canvas.SetActive(true);
