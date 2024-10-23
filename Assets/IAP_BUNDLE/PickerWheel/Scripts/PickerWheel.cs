@@ -10,7 +10,6 @@ namespace EasyUI.PickerWheelUI
     public class PickerWheel : MonoBehaviour
     {
         public RewardList rewardList;
-        public Color softColor, darkColor;
 
         [Header("References :")]
         [SerializeField] private GameObject linePrefab;
@@ -41,6 +40,7 @@ namespace EasyUI.PickerWheelUI
         // Events
         private UnityAction onSpinStartEvent;
         private UnityAction<Reward> onSpinEndEvent;
+        public List<WheelItem> wheelItems;
 
 
         private bool _isSpinning = false;
@@ -58,32 +58,38 @@ namespace EasyUI.PickerWheelUI
         private float halfPieceAngleWithPaddings;
 
 
-        private double accumulatedWeight;
-        private System.Random rand = new System.Random();
+        [SerializeField] private double accumulatedWeight;
+        [SerializeField] private System.Random rand = new System.Random();
 
-        private List<int> nonZeroChancesIndices = new List<int>();
+        [SerializeField] private List<int> nonZeroChancesIndices = new List<int>();
 
 
         private void Start()
         {
-          
+
             SetupAudio();
         }
 
-        public void SetRewards(RewardPackType rewardPack, int durationTime, UnityAction<Reward> resultAction)
+        public void SetRewards(List<Reward> newRewards, int durationTime, UnityAction<Reward> resultAction)
         {
-            foreach (Transform child in wheelPiecesParent.transform)
-            {
-                Destroy(child.gameObject);
-            }
-            rewards = rewardList.GetRewards(rewardPack);
+            /*  foreach (Transform child in wheelPiecesParent.transform)
+              {
+                  Destroy(child.gameObject);
+              }*/
+            rewards = newRewards;
             pieceAngle = 360 / rewards.Count;
             halfPieceAngle = pieceAngle / 2f;
             halfPieceAngleWithPaddings = halfPieceAngle - (halfPieceAngle / 4f);
             spinDuration = durationTime;
             OnSpinEnd(resultAction);
-           
-            Generate();
+
+            for (int i = 0; i < wheelItems.Count; i++)
+            {
+                wheelItems[i].SetReward(rewards[i]);
+            }
+
+
+            //  Generate();
 
             CalculateWeightsAndIndices();
             if (nonZeroChancesIndices.Count == 0)
@@ -117,7 +123,7 @@ namespace EasyUI.PickerWheelUI
         {
             Reward reward = rewards[index];
             Transform pieceTrns = InstantiatePiece().transform.GetChild(0);
-            pieceTrns.GetChild(0).GetComponent<Image>().color = (index % 2 == 0) ? softColor : darkColor;
+            // pieceTrns.GetChild(0).GetComponent<Image>().color = (index % 2 == 0) ? softColor : darkColor;
             pieceTrns.GetChild(1).GetComponent<Image>().sprite = rewardList.rewards[(int)reward.rewardType].sprite;
             pieceTrns.GetChild(2).GetComponent<Text>().text = rewardList.rewards[(int)reward.rewardType].rewardName;
             pieceTrns.GetChild(3).GetComponent<Text>().text = "10";//piece.Amount.ToString();
@@ -143,6 +149,7 @@ namespace EasyUI.PickerWheelUI
                 if (onSpinStartEvent != null)
                     onSpinStartEvent.Invoke();
 
+                CalculateWeightsAndIndices();
                 int index = GetRandomPieceIndex();
                 Reward reward = rewards[index];
 
@@ -212,7 +219,7 @@ namespace EasyUI.PickerWheelUI
         private int GetRandomPieceIndex()
         {
             double r = rand.NextDouble() * accumulatedWeight;
-
+            Debug.Log("r: " + r);
             for (int i = 0; i < rewards.Count; i++)
                 if (rewards[i]._weight >= r)
                     return i;
@@ -222,6 +229,8 @@ namespace EasyUI.PickerWheelUI
 
         private void CalculateWeightsAndIndices()
         {
+            nonZeroChancesIndices.Clear();
+            accumulatedWeight = 0;
             for (int i = 0; i < rewards.Count; i++)
             {
                 Reward reward = rewards[i];

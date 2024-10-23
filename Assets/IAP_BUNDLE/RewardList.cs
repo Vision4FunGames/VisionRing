@@ -2,9 +2,11 @@ using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public enum RewardItemType { Gold, Diamond, GemBlue, GemPurple, GemGreen }
+public enum Tier { Tier1, Tier2, Tier3, Tier4, Tier5, Tier6, Tier7, Tier8, Tier9 }
 public enum RewardPackType { Forest, Dungeon, Chest, Skull }
 [CreateAssetMenu(fileName = "RewardList", menuName = "ScriptableObjects/RewardList", order = 3)]
 public class RewardList : ScriptableObject
@@ -12,8 +14,10 @@ public class RewardList : ScriptableObject
     public AudioClip openClip, idleClip, firstClip;
 
     public AudioClip doubleSound, claimSound;
+    public List<TierColor> tierColors;
     public List<RewardDetail> rewards;
     public List<RewardPack> spinRewardPacks;
+
 
     private void OnValidate()
     {
@@ -28,7 +32,18 @@ public class RewardList : ScriptableObject
         {
             item.packName = item.packType.ToString();
         }
+        c = 0;
 
+        foreach (var item in tierColors)
+        {
+            item.tier = (Tier)c;
+            c++;
+        }
+
+    }
+    public Color GetTierColor(RewardItemType rewardItemType)
+    {
+        return tierColors[(int)rewards[(int)rewardItemType].tier].color;
     }
 
     public List<Reward> GetRewards(RewardPackType packType)
@@ -49,6 +64,8 @@ public class RewardDetail
     public GameObject prefab;
     [ShowAssetPreview(50, 50)]
     public Sprite sprite;
+    public Tier tier;
+
 }
 
 [Serializable]
@@ -56,7 +73,6 @@ public class RewardPack
 {
     [ReadOnly] public string packName;
     public RewardPackType packType;
-
     public List<Reward> rewards;
 }
 
@@ -64,9 +80,15 @@ public class RewardPack
 public class Reward
 {
     public RewardItemType rewardType;
-    public int minAmount, maxAmount;
+    public int amount;
     [Range(0f, 100f)]
     public float Chance = 100f;
-    [HideInInspector] public int Index;
-    [HideInInspector] public double _weight = 0f;
+    /*[HideInInspector]*/ public int Index;
+   /* [HideInInspector]*/ public double _weight = 0f;
+}
+[Serializable]
+public class TierColor
+{
+    public Tier tier;
+    public Color color;
 }
