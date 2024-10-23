@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public enum RewardItemType { Gold, Diamond, GemBlue, GemPurple, GemGreen , Sword1Map1}
+public enum RewardItemType { Gold, Diamond, GemBlue, GemPurple, GemGreen, Sword1Map1 }
 public enum Tier { Tier1, Tier2, Tier3, Tier4, Tier5, Tier6, Tier7, Tier8, Tier9 }
-public enum RewardPackType { Forest, Dungeon, Chest, Skull , Map1 }
+public enum RewardPackType { Forest, Dungeon, Chest, Skull, Map1 }
 [CreateAssetMenu(fileName = "RewardList", menuName = "ScriptableObjects/RewardList", order = 3)]
 public class RewardList : ScriptableObject
 {
@@ -28,9 +28,12 @@ public class RewardList : ScriptableObject
             reward.rewardName = reward.rewardType.ToString();
             c++;
         }
+        c = 0;
         foreach (var item in spinRewardPacks)
         {
+            item.packType = (RewardPackType)c;
             item.packName = item.packType.ToString();
+            c++;
         }
         c = 0;
 
@@ -83,8 +86,8 @@ public class Reward
     public int amount;
     [Range(0f, 100f)]
     public float Chance = 100f;
-    /*[HideInInspector]*/ public int Index;
-   /* [HideInInspector]*/ public double _weight = 0f;
+    [HideInInspector] public int Index;
+    [HideInInspector] public double _weight = 0f;
 }
 [Serializable]
 public class TierColor
