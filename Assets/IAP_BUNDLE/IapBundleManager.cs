@@ -44,7 +44,6 @@ public class IapBundleManager : MonoBehaviour
         luckySpin.SetActive(true);
         rewardPackName.text = rewardsPackType.ToString() + " Pack";
 
-        Debug.Log(rewardsPackType.ToString()+" "+rewardList.spinRewardPacks[(int)rewardsPackType].rewards.Count);
         for (int i = 0; i < rewardList.spinRewardPacks[(int)rewardsPackType].rewards.Count; i++)
         {
             gridItems[i].SetReward(rewardList.spinRewardPacks[(int)rewardsPackType].rewards[i]);
