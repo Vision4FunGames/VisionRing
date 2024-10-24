@@ -18,7 +18,7 @@ public class TalkFoxCollectReward : MonoBehaviour
     {
       //  if (FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>())
       //      FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>().enabled = true;
-        GetComponentInChildren<IapBundleManager>().ShowLuckySpin(RewardPackType.Map1, 1, Result);
+        GetComponentInChildren<IapBundleManager>().ShowLuckySpin(RewardPackType.Map1, 5, Result);
     }
 
     public void Result(Reward action)

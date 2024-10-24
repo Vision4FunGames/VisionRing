@@ -62,7 +62,9 @@ namespace EasyUI.PickerWheelUI
         [SerializeField] private System.Random rand = new System.Random();
 
         [SerializeField] private List<int> nonZeroChancesIndices = new List<int>();
-
+        public Toggle animToggle;
+        private Reward resultReward;
+        private Vector3 resultAngle;
 
         private void Start()
         {
@@ -140,6 +142,32 @@ namespace EasyUI.PickerWheelUI
             return Instantiate(wheelPiecePrefab, wheelPiecesParent.position, Quaternion.identity, wheelPiecesParent);
         }
 
+        public void AnimToggleAction()
+        {
+            Debug.Log(animToggle.isOn);
+
+            if (!animToggle.isOn)
+            {
+                if (_isSpinning)
+                {
+                    wheelCircle.DOKill();
+                    wheelCircle
+               .DORotate(resultAngle, (!animToggle.isOn) ? 0 : spinDuration, RotateMode.FastBeyond360)
+               .SetEase(Ease.InOutQuart)
+               .OnComplete(() =>
+               {
+
+                   _isSpinning = false;
+                   if (onSpinEndEvent != null)
+                       onSpinEndEvent.Invoke(resultReward);
+
+                   //onSpinStartEvent = null;
+                   // onSpinEndEvent = null;
+               });
+                }
+            }
+        }
+
 
         public void Spin()
         {
@@ -159,6 +187,7 @@ namespace EasyUI.PickerWheelUI
                     reward = rewards[index];
                 }
 
+                resultReward = reward;
                 float angle = -(pieceAngle * index);
 
                 float rightOffset = (angle - halfPieceAngleWithPaddings) % 360;
@@ -173,9 +202,9 @@ namespace EasyUI.PickerWheelUI
                 prevAngle = currentAngle = wheelCircle.eulerAngles.z;
 
                 bool isIndicatorOnTheLine = false;
-
+                resultAngle = targetRotation;
                 wheelCircle
-                .DORotate(targetRotation, spinDuration, RotateMode.FastBeyond360)
+                .DORotate(targetRotation, (!animToggle.isOn) ? 0 : spinDuration, RotateMode.FastBeyond360)
                 .SetEase(Ease.InOutQuart)
                 .OnUpdate(() =>
                 {
@@ -193,6 +222,7 @@ namespace EasyUI.PickerWheelUI
                 })
                 .OnComplete(() =>
                 {
+
                     _isSpinning = false;
                     if (onSpinEndEvent != null)
                         onSpinEndEvent.Invoke(reward);
