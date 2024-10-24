@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     public FoxManager foxManager;
     public GameObject MinimapOriginObj;
     [Header("Tutorial")] public GameObject tutorialEnemies;
+    public GameObject fox;
     public GameObject tutoCage;
     public GameObject tutorialWall;
     public GameObject tutorialCollider1, tutorialCollider2, villageEntryCollider;
@@ -104,6 +105,14 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         {
             GameAnalytics.Initialize();
         }
+        
+        //PlayerPrefs.SetInt("Fox", 1);
+        if (PlayerPrefs.GetInt("Fox") == 1)
+        {
+            fox.SetActive(true);
+        }
+        // else
+        //fox.SetActive(false);
     }
 
     public void CurrentTutorialComplete()

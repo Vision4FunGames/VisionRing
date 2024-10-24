@@ -3,6 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class TalkFoxCollectReward : MonoBehaviour
 {
@@ -12,24 +13,33 @@ public class TalkFoxCollectReward : MonoBehaviour
     public string foxSpeechOne = "You are great! You prove yourself.";
     public string foxSpeechTwo = "I found a key in the dungeon. You deserve it.";
     public GameObject _canvas;
-
-  
+    public GameObject spinReward;
+    public GameObject equipPanel;
+    public Equipment swordMap1;
+    public Button equipSword;
     void Start()
     {
       //  if (FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>())
       //      FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>().enabled = true;
-        GetComponentInChildren<IapBundleManager>().ShowLuckySpin(RewardPackType.Map1, 5, Result);
+      equipSword.onClick.AddListener(EquipSwordMap);
     }
 
+    public void EquipSwordMap()
+    {
+        EquipmentManager.instance.Equip(swordMap1);
+        GetComponent<TaskPrefab>().isCompleted = true;
+        Destroy(gameObject);
+    }
     public void Result(Reward action)
     {
-        Debug.Log("Earn  " + action.rewardType.ToString() + "   " + action.amount);
+       equipPanel.transform.DOScale(Vector3.one, 1);
     }
     public void SpeechFox()
     {
-        _canvas.SetActive(true);
+       
         if (clickCount == 0)
         {
+            _canvas.SetActive(true);
             speechDone = false;
             foxTxt.DOText(foxSpeechOne, 2).OnComplete(() => speechDone = true);
             clickCount++;
@@ -38,7 +48,13 @@ public class TalkFoxCollectReward : MonoBehaviour
         {
             foxTxt.text = "";
             speechDone = false;
-            foxTxt.DOText(foxSpeechTwo, 2).OnComplete(() => speechDone = true);
+            foxTxt.DOText(foxSpeechTwo, 2).OnComplete((() =>
+            {
+                speechDone = true;
+                spinReward.SetActive(true);
+                _canvas.SetActive(false);
+                GetComponentInChildren<IapBundleManager>().ShowLuckySpin(RewardPackType.Map1, 5, Result);
+            }));
         }
     }
 

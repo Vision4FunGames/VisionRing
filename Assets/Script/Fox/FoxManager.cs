@@ -47,13 +47,7 @@ public class FoxManager : MonoBehaviour
 
         timer = wanderingTimer;
         foxHintCounter = 0;
-        //PlayerPrefs.SetInt("Fox", 1);
-        if (PlayerPrefs.GetInt("Fox") == 1)
-        {
-            gameObject.SetActive(true);
-        }
-       // else
-            //gameObject.SetActive(false);
+       
     }
 
     void FixedUpdate()
