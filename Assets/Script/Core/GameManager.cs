@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
             GameAnalytics.Initialize();
         }
         
-        //PlayerPrefs.SetInt("Fox", 1);
+        PlayerPrefs.SetInt("Fox", 1);
         if (PlayerPrefs.GetInt("Fox") == 1)
         {
             fox.SetActive(true);

@@ -432,7 +432,13 @@ public class Player : MonoBehaviour
 
     public void CompleteTask()
     {
-        FindObjectOfType<TaskPrefab>().isCompleted = true;
+        if (FindObjectOfType<DashTutorial>())
+        {
+            FindObjectOfType<DashTutorial>().CompleteTask();
+        }else if (FindObjectOfType<DoubleJumpTutorial>())
+        {
+            FindObjectOfType<DoubleJumpTutorial>().CompleteTask();
+        }
     }
     public void DisableSkill(float skilltime)
     {

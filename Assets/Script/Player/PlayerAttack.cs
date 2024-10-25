@@ -106,7 +106,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void CompleteSimpleAttack()
     {
-        FindObjectOfType<TaskPrefab>().isCompleted = true;
+        FindObjectOfType<SimpleAttack>().CompleteTask();
     }
 
     public void HoldAttack()
@@ -275,7 +275,7 @@ public class SwordAttack : MonoBehaviour
 
     public void CompleteComboAttack()
     {
-        FindObjectOfType<TaskPrefab>().isCompleted = true;
+        FindObjectOfType<ComboAttack>().CompleteTask();
     }
 }
 

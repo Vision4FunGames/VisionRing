@@ -256,7 +256,6 @@ namespace EasyUI.PickerWheelUI
         private int GetRandomPieceIndex()
         {
             double r = rand.NextDouble() * accumulatedWeight;
-            Debug.Log("r: " + r);
             for (int i = 0; i < rewards.Count; i++)
                 if (rewards[i]._weight >= r)
                     return i;

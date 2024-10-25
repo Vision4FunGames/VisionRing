@@ -17,11 +17,12 @@ public class TalkFoxCollectReward : MonoBehaviour
     public GameObject equipPanel;
     public Equipment swordMap1;
     public Button equipSword;
+
     void Start()
     {
-      //  if (FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>())
-      //      FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>().enabled = true;
-      equipSword.onClick.AddListener(EquipSwordMap);
+        //  if (FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>())
+        GameManager.instance.fox.GetComponent<Waypoint_Indicator>().enabled = true;
+        equipSword.onClick.AddListener(EquipSwordMap);
     }
 
     public void EquipSwordMap()
@@ -30,15 +31,17 @@ public class TalkFoxCollectReward : MonoBehaviour
         GetComponent<TaskPrefab>().isCompleted = true;
         Destroy(gameObject);
     }
+
     public void Result(Reward action)
     {
-       equipPanel.transform.DOScale(Vector3.one, 1);
+        equipPanel.transform.DOScale(Vector3.one, 1);
     }
+
     public void SpeechFox()
     {
-       
         if (clickCount == 0)
         {
+            GameManager.instance.fox.GetComponent<Waypoint_Indicator>().enabled = false;
             _canvas.SetActive(true);
             speechDone = false;
             foxTxt.DOText(foxSpeechOne, 2).OnComplete(() => speechDone = true);
