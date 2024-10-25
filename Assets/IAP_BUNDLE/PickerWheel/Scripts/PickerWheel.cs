@@ -177,63 +177,70 @@ namespace EasyUI.PickerWheelUI
                 if (onSpinStartEvent != null)
                     onSpinStartEvent.Invoke();
 
-                CalculateWeightsAndIndices();
-                int index = GetRandomPieceIndex();
-                Reward reward = rewards[index];
+                IapBundleManager.instance.RefresRewards();
 
-                if (reward.Chance == 0 && nonZeroChancesIndices.Count != 0)
-                {
-                    index = nonZeroChancesIndices[Random.Range(0, nonZeroChancesIndices.Count)];
-                    reward = rewards[index];
-                }
-
-                resultReward = reward;
-                float angle = -(pieceAngle * index);
-
-                float rightOffset = (angle - halfPieceAngleWithPaddings) % 360;
-                float leftOffset = (angle + halfPieceAngleWithPaddings) % 360;
-
-                float randomAngle = Random.Range(leftOffset, rightOffset);
-
-                Vector3 targetRotation = Vector3.back * (randomAngle + 2 * 360 * spinDuration);
-
-                //float prevAngle = wheelCircle.eulerAngles.z + halfPieceAngle ;
-                float prevAngle, currentAngle;
-                prevAngle = currentAngle = wheelCircle.eulerAngles.z;
-
-                bool isIndicatorOnTheLine = false;
-                resultAngle = targetRotation;
-                wheelCircle
-                .DORotate(targetRotation, (!animToggle.isOn) ? 0 : spinDuration, RotateMode.FastBeyond360)
-                .SetEase(Ease.InOutQuart)
-                .OnUpdate(() =>
-                {
-                    float diff = Mathf.Abs(prevAngle - currentAngle);
-                    if (diff >= halfPieceAngle)
-                    {
-                        if (isIndicatorOnTheLine)
-                        {
-                            audioSource.PlayOneShot(audioSource.clip);
-                        }
-                        prevAngle = currentAngle;
-                        isIndicatorOnTheLine = !isIndicatorOnTheLine;
-                    }
-                    currentAngle = wheelCircle.eulerAngles.z;
-                })
-                .OnComplete(() =>
-                {
-
-                    _isSpinning = false;
-                    if (onSpinEndEvent != null)
-                        onSpinEndEvent.Invoke(reward);
-
-                    //onSpinStartEvent = null;
-                    // onSpinEndEvent = null;
-                });
-
+                Invoke(nameof(SpinWheel), 0.1f);
             }
         }
 
+        public void SpinWheel()
+        {
+
+            CalculateWeightsAndIndices();
+            int index = GetRandomPieceIndex();
+            Reward reward = rewards[index];
+
+            if (reward.Chance == 0 && nonZeroChancesIndices.Count != 0)
+            {
+                index = nonZeroChancesIndices[Random.Range(0, nonZeroChancesIndices.Count)];
+                reward = rewards[index];
+            }
+
+            resultReward = reward;
+            float angle = -(pieceAngle * index);
+
+            float rightOffset = (angle - halfPieceAngleWithPaddings) % 360;
+            float leftOffset = (angle + halfPieceAngleWithPaddings) % 360;
+
+            float randomAngle = Random.Range(leftOffset, rightOffset);
+
+            Vector3 targetRotation = Vector3.back * (randomAngle + 2 * 360 * spinDuration);
+
+            //float prevAngle = wheelCircle.eulerAngles.z + halfPieceAngle ;
+            float prevAngle, currentAngle;
+            prevAngle = currentAngle = wheelCircle.eulerAngles.z;
+
+            bool isIndicatorOnTheLine = false;
+            resultAngle = targetRotation;
+            wheelCircle
+            .DORotate(targetRotation, (!animToggle.isOn) ? 0 : spinDuration, RotateMode.FastBeyond360)
+            .SetEase(Ease.InOutQuart)
+            .OnUpdate(() =>
+            {
+                float diff = Mathf.Abs(prevAngle - currentAngle);
+                if (diff >= halfPieceAngle)
+                {
+                    if (isIndicatorOnTheLine)
+                    {
+                        audioSource.PlayOneShot(audioSource.clip);
+                    }
+                    prevAngle = currentAngle;
+                    isIndicatorOnTheLine = !isIndicatorOnTheLine;
+                }
+                currentAngle = wheelCircle.eulerAngles.z;
+            })
+            .OnComplete(() =>
+            {
+
+                _isSpinning = false;
+                if (onSpinEndEvent != null)
+                    onSpinEndEvent.Invoke(reward);
+
+                //onSpinStartEvent = null;
+                // onSpinEndEvent = null;
+            });
+
+        }
 
         public void OnSpinStart(UnityAction action)
         {

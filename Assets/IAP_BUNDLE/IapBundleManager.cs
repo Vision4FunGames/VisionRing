@@ -22,6 +22,10 @@ public class IapBundleManager : MonoBehaviour
     [SerializeField, ReadOnly] private List<int> selectedIndex;
     [SerializeField, ReadOnly] private List<Reward> selectedRewards;
 
+    private RewardPackType rewardsPackType;
+    private UnityAction<Reward> spinEndAction;
+    private int duration;
+
     private void Awake()
     {
         instance = this;
@@ -41,6 +45,7 @@ public class IapBundleManager : MonoBehaviour
 
     public void ShowLuckySpin(RewardPackType rewardsPackType, int duration, UnityAction<Reward> action)
     {
+        this.rewardsPackType = rewardsPackType;
         luckySpin.SetActive(true);
         rewardPackName.text = rewardsPackType.ToString() + " Pack";
 
@@ -57,6 +62,14 @@ public class IapBundleManager : MonoBehaviour
             }
         }
 
+        this.spinEndAction = action;
+        this.duration = duration;
+        RefresRewards();
+    }
+
+
+    public void RefresRewards()
+    {
         tempIndexList.Clear();
         selectedRewards.Clear();
         selectedIndex.Clear();
@@ -77,9 +90,14 @@ public class IapBundleManager : MonoBehaviour
             selectedRewards.Add(rewardList.spinRewardPacks[(int)rewardsPackType].rewards[selectedIndex[i]]);
             gridItems[selectedIndex[i]].Selected();
         }
+        for (int i = 0; i < tempIndexList.Count; i++)
+        {
+            gridItems[tempIndexList[i]].Deselect();
+        }
 
-        pickerWheel.SetRewards(selectedRewards, duration, action);
-
+        pickerWheel.SetRewards(selectedRewards, duration, spinEndAction);
+        if (!pickerWheel.IsSpinning) Invoke(nameof(RefresRewards), refreshTime);
+        else CancelInvoke(nameof(RefresRewards));
     }
 
 
