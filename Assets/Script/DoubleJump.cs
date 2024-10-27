@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class DoubleJump : MonoBehaviour
@@ -14,6 +15,8 @@ public class DoubleJump : MonoBehaviour
     public void BreakSphere()
     {
         gimletParticle.Play();
+        GetComponent<Waypoint_Indicator>().enabled = false;
+        transform.DOScale(Vector3.zero, 1f);
         Invoke("CompleteTask",1);
     }
     
