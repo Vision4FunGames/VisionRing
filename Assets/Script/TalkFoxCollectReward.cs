@@ -79,6 +79,7 @@ public class TalkFoxCollectReward : MonoBehaviour
 
     public void BackCameraPos2()
     {
+        FindObjectOfType<DailyWheelBase>().GetComponent<Waypoint_Indicator>().enabled = true;
         GameManager.instance.playerVCam.gameObject.SetActive(true);
         GameManager.instance.coleziumCam.gameObject.SetActive(false);
     }
