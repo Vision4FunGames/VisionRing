@@ -109,6 +109,7 @@ public class FoxManager : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Debug.Log("foxtiklandi");
         if (FindObjectOfType<TalkFoxCollectReward>())
         {
             FindObjectOfType<TalkFoxCollectReward>().SpeechFox();

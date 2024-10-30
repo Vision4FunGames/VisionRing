@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     public CinemachineVirtualCamera playerVCam;
     public CinemachineVirtualCamera cinematicVCam;
     public CinemachineVirtualCamera foxVCam;
+    public CinemachineVirtualCamera coleziumCam;
     public int tutorialCounter = 0;
     public int tutorialSection;
     private string tutorialName;

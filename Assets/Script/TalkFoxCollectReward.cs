@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -17,10 +18,12 @@ public class TalkFoxCollectReward : MonoBehaviour
     public GameObject equipPanel;
     public Equipment swordMap1;
     public Button equipSword;
-
+  
+    
     void Start()
     {
         //  if (FindObjectOfType<FoxManager>().GetComponent<Waypoint_Indicator>())
+     
         GameManager.instance.fox.GetComponent<Waypoint_Indicator>().enabled = true;
         equipSword.onClick.AddListener(EquipSwordMap);
     }
@@ -41,6 +44,7 @@ public class TalkFoxCollectReward : MonoBehaviour
     {
         if (clickCount == 0)
         {
+            foxTxt.text = "";
             GameManager.instance.fox.GetComponent<Waypoint_Indicator>().enabled = false;
             _canvas.SetActive(true);
             speechDone = false;
@@ -53,22 +57,41 @@ public class TalkFoxCollectReward : MonoBehaviour
             speechDone = false;
             foxTxt.DOText(foxSpeechTwo, 2).OnComplete((() =>
             {
-                speechDone = true;
-                spinReward.SetActive(true);
+               
+               GameManager.instance.playerVCam.gameObject.SetActive(false);
+               GameManager.instance.coleziumCam.gameObject.SetActive(true);
+               
+                //spinReward.SetActive(true);
                 _canvas.SetActive(false);
-                GetComponentInChildren<IapBundleManager>().ShowLuckySpin(RewardPackType.Map1, 5, Result);
+                Invoke("BackCameraPos",2f);
+                //GetComponentInChildren<IapBundleManager>().ShowLuckySpin(RewardPackType.Map1, 5, Result);
             }));
         }
     }
 
-    private void Update()
+    public void BackCameraPos()
     {
-        if (speechDone)
+        FindObjectOfType<DailyWheelBase>().transform.DOScale(new Vector3(.5f, .5f, .5f), 1).SetEase(Ease.OutBack).OnComplete((() =>
+        {
+            Invoke("BackCameraPos2",1);
+        }));
+    }
+
+    public void BackCameraPos2()
+    {
+        GameManager.instance.playerVCam.gameObject.SetActive(true);
+        GameManager.instance.coleziumCam.gameObject.SetActive(false);
+    }
+    public void Update()
+    {
+        if (speechDone && _canvas.activeSelf)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 SpeechFox();
             }
         }
+
+       
     }
 }
