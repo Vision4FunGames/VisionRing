@@ -99,10 +99,17 @@ public class UiManager : MonoBehaviour
     public delegate void OnEconomyChanged();
 
     public OnEconomyChanged onEconomyChangedCallBack;
-
+    public TextMeshProUGUI playerBravery;
     [Header("ItemCollect")] public GameObject itemTextPanel;
     private bl_MiniMap _blMiniMap;
 
+    [Space(50)]
+    [Header("Bravery Ui")] public TextMeshProUGUI popUpBraveryText;
+    public TextMeshProUGUI braveryText;
+    public TextMeshProUGUI attackText;
+    public TextMeshProUGUI health;
+    public TextMeshProUGUI defance;
+    public  Slider playerExpSlider;
     private void Awake()
     {
         instance = this;
@@ -141,6 +148,13 @@ public class UiManager : MonoBehaviour
         HideOutEntry();
     }
 
+    public void UpdatePlayerStats()
+    {
+        attackText.text = Player.instance.GetComponent<PlayerStats>().damage.GetValue().ToString();
+        defance.text = Player.instance.GetComponent<PlayerStats>().armor.GetValue().ToString();
+        popUpBraveryText.text = Player.instance.GetComponent<PlayerStats>().TotalBravery().ToString();
+        health.text = Player.instance.GetComponent<PlayerStats>().health.GetValue().ToString();
+    }
     public void DisableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)

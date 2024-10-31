@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerHealth : CharacterHealth
 {
+    public Vector3 offsetHealthBar;
     private DRMGameObject drmGameObject;
     Material _playerMaterial;
     [HideInInspector] public GameObject _damageNumbersPro;
@@ -39,6 +40,7 @@ public class PlayerHealth : CharacterHealth
         _gameManager = FindObjectOfType<GameManager>();
         mmProgressBar.LerpForegroundBarDurationIncreasing = 3f;
     }
+
     private void Start()
     {
         UiManager.instance.healText.text = HealLimit.ToString();
@@ -46,6 +48,15 @@ public class PlayerHealth : CharacterHealth
 
     private void Update()
     {
+        if (Camera.main != null)
+        {
+            Vector3 goldpos = Camera.main.WorldToScreenPoint(transform.position) 
+                              + new Vector3(offsetHealthBar.x * Screen.width / 1920f, 
+                                  offsetHealthBar.y * Screen.height / 1080f, 
+                                  0f);
+            mmProgressBar.transform.position = goldpos;
+        }
+
         if (isHealBuff)
         {
             healTime -= Time.deltaTime;
@@ -66,6 +77,7 @@ public class PlayerHealth : CharacterHealth
                 isCooldown = false;
             }
         }
+
         if (Input.GetKey(KeyCode.K))
         {
             DamageText(10);
@@ -77,7 +89,7 @@ public class PlayerHealth : CharacterHealth
         if (!useShield && GameManager.instance.gameState != GameState.Pause)
         {
             GameManager.instance.PlayFightSound();
-                _player.playerSound.hitSource.PlayOneShot(_player.playerSound.hitMeSound[Random.Range(0,2)]);
+            _player.playerSound.hitSource.PlayOneShot(_player.playerSound.hitMeSound[Random.Range(0, 2)]);
             TakeDamage(damage);
             DamageText(damage);
             PlayerManager.instance.DamageHitParticle();
@@ -93,7 +105,7 @@ public class PlayerHealth : CharacterHealth
         newDamageNumber.transform.localScale = new Vector3(2, 2, 2);
         newDamageNumber.followedTarget = transform;
     }
-   
+
     #region HealBuff
 
     public void EnableHealBuff(GameObject btn)
@@ -126,6 +138,7 @@ public class PlayerHealth : CharacterHealth
                 healCooldown = 8f;
                 healRate = .3f;
             }
+
             isCooldown = true;
             HealBuff(true);
         }
@@ -137,7 +150,7 @@ public class PlayerHealth : CharacterHealth
         isHealBuff = true;
         healTime = 3f;
         healBuffParticle.gameObject.SetActive(true);
-        health +=  ((maxHealth *.6f) * healRate);
+        health += ((maxHealth * .6f) * healRate);
         mmProgressBar.UpdateBar(health, 0, maxHealth);
         if (health > maxHealth)
             health = maxHealth;
@@ -145,7 +158,6 @@ public class PlayerHealth : CharacterHealth
 
     public void HealBtnCoolDown(GameObject btn)
     {
-        
         var btnImage = btn.GetComponent<Image>();
         btnImage.fillAmount = 0f;
         btnImage.DOFillAmount(360f, 8f).SetEase(Ease.Linear);
@@ -155,17 +167,17 @@ public class PlayerHealth : CharacterHealth
         {
             btnFill.transform.GetChild(i).GetComponent<Image>().fillAmount = 0f;
         }
-        FillImage(btnFill,0);
+
+        FillImage(btnFill, 0);
     }
 
-    public void FillImage(Transform t,int child)
+    public void FillImage(Transform t, int child)
     {
-        
         t.GetChild(child).GetComponent<Image>().DOFillAmount(1, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
-            if (child <3)
+            if (child < 3)
             {
-               FillImage(t,child + 1);   
+                FillImage(t, child + 1);
             }
         });
     }

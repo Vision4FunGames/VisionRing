@@ -1,4 +1,6 @@
+using System;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +13,6 @@ public class DailyWheelBase : MonoBehaviour
 
     private void Start()
     {
-        
         equipSword.onClick.AddListener(EquipSwordMap);
     }
 
@@ -23,10 +24,21 @@ public class DailyWheelBase : MonoBehaviour
         FindObjectOfType<TaskPrefab>().isCompleted = true;
         Destroy(FindObjectOfType<TaskPrefab>().gameObject);
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            EquipmentManager.instance.currentEquipment[0].itemLevel += 1;
+            Debug.Log(EquipmentManager.instance.currentEquipment[0].itemLevel);
+        }
+    }
+
     public void Result(Reward action)
     {
         taskPopup.transform.DOScale(Vector3.one, 1);
     }
+
     private void OnMouseDown()
     {
         canvasWheel.SetActive(true);
