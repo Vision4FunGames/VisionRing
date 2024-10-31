@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8057c976b872b494aba079f605e2e5b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  task: 0
   canvas_tag_name: EnemyCanvas
   camera_tag_name: MainCamera
   multiCam: 0
@@ -109,13 +110,13 @@ MonoBehaviour:
   offScreenSpriteRotates: 1
   onScreenSprite: {fileID: 0}
   onScreenSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  onScreenSpriteSize: 1
+  onScreenSpriteSize: 0.38
   onScreenSpriteOffset: {x: 0, y: 0}
   onScreenSpriteRotation: 0
   onScreenSpriteFadeWithRange: 0
   onScreenSpriteScaleWithRange: 0
   reverseOnScreenSpriteScaleWithRange: 0
-  onScreenSpriteHide: 1
+  onScreenSpriteHide: 0
   offScreenSprite: {fileID: 21300000, guid: a88223c9956b71e4ca6f3158015e4efc, type: 3}
   offScreenSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   offScreenSpriteSize: 0.5
@@ -196,8 +197,8 @@ MonoBehaviour:
   toggleSetupOptions: 1
   toggleParentOptions: 0
   toggleSpriteOptions: 1
-  toggleGameObjectOptions: 1
-  toggleTextOptions: 0
+  toggleGameObjectOptions: 0
+  toggleTextOptions: 1
   toggleDiameterOptions: 0
   toggleCenteredSpriteOptions: 0
   toggleCenteredPrefabOptions: 0
