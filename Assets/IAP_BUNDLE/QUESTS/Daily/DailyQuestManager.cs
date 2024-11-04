@@ -1,9 +1,11 @@
+using DG.Tweening;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class DailyQuestManager : MonoBehaviour
 {
@@ -18,7 +20,11 @@ public class DailyQuestManager : MonoBehaviour
     public List<DailyQuestItemUi> dailyQuestUiList;
     public int[] dailyQuestCount;
 
-    public DailyQuestType selectType;
+    public Transform targetStarImg;
+    public Transform starParent;
+    public GameObject starPrefab;
+
+    //public DailyQuestType selectType;
 
     private void Awake()
     {
@@ -73,14 +79,7 @@ public class DailyQuestManager : MonoBehaviour
         dailyStarSlider.value = dailyStarCount;
         dailyStarCountTxt.text = dailyStarCount.ToString();
     }
-
-    [Button]
-    public void AddStar()
-    {
-        AddStar(10);
-    }
-
-    public void AddStar(int amount)
+    public void AddStar(int amount, Vector3 pos)
     {
         dailyStarCount += amount;
         dailyStarSlider.value = dailyStarCount;
@@ -89,6 +88,16 @@ public class DailyQuestManager : MonoBehaviour
         foreach (var item in chestList)
         {
             item.Control();
+        }
+        if (amount >= 10) amount = 10;
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject newImage = Instantiate(starPrefab, pos, Quaternion.identity, starParent);
+            float r = Random.Range(0.2f, 0.5f);
+            newImage.transform.DOMove(new Vector2(pos.x + Random.Range(-100, 100), pos.y + Random.Range(-100, 100)), r).SetUpdate(true).OnComplete(() => newImage.transform.DOMove(targetStarImg.position, 0.9f).SetUpdate(true).OnComplete(() =>
+            {
+                Destroy(newImage);
+            }));
         }
     }
 
@@ -100,12 +109,20 @@ public class DailyQuestManager : MonoBehaviour
         {
             dailyQuestUiList[i].SetQuest(dailyQuestList.questList[i]);
         }
-    }
 
+        // DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.ClearDungeon,1);
+    }
     [Button]
     public void AddQuestEvent()
     {
-        dailyQuestCount[(int)selectType]++;
+        AddQuestEvent((DailyQuestType)Random.Range(0, dailyQuestUiList.Count), 1);
+    }
+
+
+
+    public void AddQuestEvent(DailyQuestType selectType, int amount)
+    {
+        dailyQuestCount[(int)selectType] += amount;
         PlayerPrefs.SetInt("IapBundle_DailyQuestAmount" + (int)selectType, dailyQuestCount[(int)selectType]);
         dailyQuestUiList[(int)selectType].Control();
     }

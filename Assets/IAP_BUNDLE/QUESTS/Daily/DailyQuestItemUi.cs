@@ -15,7 +15,7 @@ public class DailyQuestItemUi : MonoBehaviour
     [ReadOnly] public DailyQuestItem quest;
     public Slider slider;
     public Button button;
-    public GameObject tick;
+    public GameObject tick,starImage;
 
     public void Clear()
     {
@@ -74,7 +74,7 @@ public class DailyQuestItemUi : MonoBehaviour
     {
         tick.SetActive(true);
         button.gameObject.SetActive(false);
-        DailyQuestManager.Instance.AddStar(quest.star);
+        DailyQuestManager.Instance.AddStar(quest.star, starImage.transform.position);
         PlayerPrefs.SetInt("DailyQuestClaim" + quest.questType, 1);
     }
 
