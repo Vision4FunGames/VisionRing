@@ -29,7 +29,8 @@ public class DailyWheelBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            EquipmentManager.instance.currentEquipment[0].itemLevel += 1;
+            EquipmentManager.instance.EarnItem(swordMap1);
+            //EquipmentManager.instance.currentEquipment[0].itemLevel += 1;
             Debug.Log(EquipmentManager.instance.currentEquipment[0].itemLevel);
         }
     }

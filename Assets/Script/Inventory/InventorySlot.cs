@@ -24,11 +24,15 @@ public class InventorySlot : MonoBehaviour
         item = newItem;
         if (_inventoryType is InventoryType.Inventory or InventoryType.Upgrade or InventoryType.Usable)
         {
-            backGImage.sprite = UiManager.instance.itemLevelSprites[newItem.itemLevel];
+            int maxIndex = UiManager.instance.itemlevelSprites45.Length - 1;
+            int clampedIndex = Mathf.Clamp(newItem.itemLevel, 0, maxIndex);
+            backGImage.sprite = UiManager.instance.itemlevelSprites45[clampedIndex];
         }
         else
         {
-            backGImage.sprite = UiManager.instance.itemlevelSprites45[newItem.itemLevel];
+            int maxIndex = UiManager.instance.itemlevelSprites45.Length - 1;
+            int clampedIndex = Mathf.Clamp(newItem.itemLevel, 0, maxIndex);
+            backGImage.sprite = UiManager.instance.itemlevelSprites45[clampedIndex];
         }
         if (count>1)
         {
@@ -57,7 +61,9 @@ public class InventorySlot : MonoBehaviour
         }
         else
         {
-            backGImage.sprite = UiManager.instance.itemlevelSprites45[newItem.itemLevel];
+            int maxIndex = UiManager.instance.itemlevelSprites45.Length - 1;
+            int clampedIndex = Mathf.Clamp(newItem.itemLevel, 0, maxIndex);
+            backGImage.sprite = UiManager.instance.itemlevelSprites45[clampedIndex];
         }
       
 

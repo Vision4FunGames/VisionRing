@@ -415,29 +415,18 @@ public class EquipmentManager : MonoBehaviour
             }
         }
 
-        if (upgradeEquipment[0].name == upgradeEquipment[1].name &&
-            upgradeEquipment[0].name == upgradeEquipment[2].name)
+        Equipment eq = new Equipment();
+        eq.Fill(upgradeEquipment[0]);
+        eq.itemLevel = upgradeEquipment[0].itemLevel + 1;
+        eq.name = upgradeEquipment[0].name;
+        eq.showInInventory = true;
+        inventory.Add(eq);
+        if (inventory.onItemChangedCallback != null)
         {
-            if (upgradeEquipment[0].itemLevel == upgradeEquipment[1].itemLevel &&
-                upgradeEquipment[0].itemLevel == upgradeEquipment[2].itemLevel)
-            {
-                UiManager.instance.upgradeWheel.transform.DORotate(new Vector3(0, 0, 180f), 2f).OnComplete(() =>
-                {
-                    Equipment eq = new Equipment();
-                    eq.Fill(upgradeEquipment[0]);
-                    eq.itemLevel = upgradeEquipment[0].itemLevel + 1;
-                    eq.name = upgradeEquipment[0].name;
-                    eq.showInInventory = true;
-                    inventory.Add(eq);
-                    if (inventory.onItemChangedCallback != null)
-                    {
-                        inventory.onItemChangedCallback.Invoke();
-                    }
-                    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"BlackSmith",eq.name);
-                    ClearUpgradeSlots();
-                });
-            }
+            inventory.onItemChangedCallback.Invoke();
         }
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"BlackSmith",eq.name);
+        ClearUpgradeSlots();
 
         inventory.SaveAllItems();
     }
