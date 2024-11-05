@@ -18,7 +18,8 @@ public class MapMaskManager : MonoBehaviour
         }
         else
         {
-            currentMapLevel = PlayerPrefs.GetInt("MapLevel") - 1;
+            if (currentMapLevel != 0)
+                currentMapLevel = PlayerPrefs.GetInt("MapLevel") - 1;
         }
     }
 

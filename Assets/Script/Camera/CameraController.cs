@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public bool merchantTutorial;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -19,31 +20,38 @@ public class CameraController : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            
-            if (Physics.Raycast(ray,out hit))
+
+            if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.gameObject.name == "Blacksmith")
                 {
                     UiManager.instance.BlackSmithUI();
-                    QuestMachineMessages.SendCompositeMessage(this,"Meet:Blacksmith");
+                    QuestMachineMessages.SendCompositeMessage(this, "Meet:Blacksmith");
                 }
 
                 else if (hit.transform.gameObject.name == "pouch")
                 {
-                  //  hit.transform.gameObject.GetComponent<PouchManager>().OpenPouchPanel();
+                    //  hit.transform.gameObject.GetComponent<PouchManager>().OpenPouchPanel();
                     UiManager.instance.selectedPouch = hit.transform.gameObject;
                 }
                 else if (hit.transform.gameObject.name == "Chest")
                 {
                     hit.transform.gameObject.GetComponent<ChestManager>().GoToCamera();
                     hit.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
-
                 }
 
                 else if (hit.transform.gameObject.name == "Merchant")
                 {
-                    UiManager.instance.CloseAllUI();
-                    UiManager.instance.ShopUI();
+                    if (merchantTutorial)
+                    {
+                        FindObjectOfType<TalkWithAaliyah>().SpeechStart();
+                        merchantTutorial = false;
+                    }
+                    else
+                    {
+                        UiManager.instance.CloseAllUI();
+                        UiManager.instance.ShopUI();
+                    }
                 }
                 else if (hit.transform.gameObject.name == "Magician")
                 {
@@ -55,7 +63,8 @@ public class CameraController : MonoBehaviour
                     var giver = GameManager.instance.baskan.GetComponent<QuestGiver>();
                     if (QuestManager.instance.successedQuests.Count > 0)
                     {
-                        if (QuestManager.instance.successedQuests[QuestManager.instance.successedQuests.Count-1] == "Award")
+                        if (QuestManager.instance.successedQuests[QuestManager.instance.successedQuests.Count - 1] ==
+                            "Award")
                         {
                             for (int i = 0; i < giver.questList.Count; i++)
                             {
@@ -68,7 +77,7 @@ public class CameraController : MonoBehaviour
                             }
                         }
                     }
-                   
+
                     //Debug.Log("1st Quests State : " +giver.questList[0].GetState());
                     giver.StartDialogueWithPlayer();
                 }

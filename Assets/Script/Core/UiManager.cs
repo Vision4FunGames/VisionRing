@@ -357,7 +357,7 @@ public class UiManager : MonoBehaviour
             onEconomyChangedCallBack.Invoke();
             contentText.text = "SHOP";
             GameManager.instance.isMerchant = true;
-            TutorialLoader.instance.Load("Merchant");
+           // TutorialLoader.instance.Load("Merchant");
             PlayerPrefs.SetInt("Merchant", 1);
         }
     }
