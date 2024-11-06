@@ -42,6 +42,13 @@ public class ShopSlot : MonoBehaviour
         {
             inveSlot.UseItem();
             Shop.instance.shopItems.RemoveAt(index);
+            if (FindObjectOfType<BuyAnArmour>())
+            {
+                FindObjectOfType<BuyAnArmour>().Maskcanvas.SetActive(false);
+                FindObjectOfType<BuyAnArmour>().GetComponent<TaskPrefab>().isCompleted = true;
+                Destroy(FindObjectOfType<BuyAnArmour>().gameObject,.1f);
+               
+            }
            // Destroy(gameObject);
             if (Shop.instance.onItemChangedCallback!= null)
             {

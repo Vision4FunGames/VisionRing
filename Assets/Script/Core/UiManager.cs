@@ -95,7 +95,7 @@ public class UiManager : MonoBehaviour
     public VideoPlayer chapter3;
     public VideoPlayer endVideo;
     private TaskSystem.TaskManager _taskManager;
-
+    public bool buyanarmortutorial;
     public delegate void OnEconomyChanged();
 
     public OnEconomyChanged onEconomyChangedCallBack;
@@ -110,6 +110,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI health;
     public TextMeshProUGUI defance;
     public  Slider playerExpSlider;
+    public InventorySlot armorSlot;
     private void Awake()
     {
         instance = this;
@@ -439,9 +440,6 @@ public class UiManager : MonoBehaviour
 
     public void MagicianUI()
     {
-        if (GameManager.instance.isMagician &&
-            GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0)
-        {
             CloseAllUI();
             Invoke("OpenUI", canvasTime);
             OpenUI(inventory);
@@ -453,49 +451,6 @@ public class UiManager : MonoBehaviour
             skillUpgrade.onSkillShopChangeCallBack?.Invoke();
             //navigationArea.gameObject.SetActive(true);
             //skillUpgrade.BringCurrentSkills();
-        }
-        else
-        {
-            if (GameManager.instance.magician.GetComponent<QuestGiver>().GetOfferableQuests().Count == 0 &&
-                GameManager.instance.magician.GetComponent<QuestGiver>().GetActiveQuests().Count == 0)
-            {
-                CloseAllUI();
-                Invoke("OpenUI", canvasTime);
-                OpenUI(inventory);
-                OpenUI(magicianPanel);
-                OpenUI(contentPanel);
-                OpenUI(goldPanel);
-                contentText.text = "MAGICIAN";
-                Inventory.instance.onItemChangedCallback?.Invoke();
-                skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-                // navigationArea.gameObject.SetActive(true);
-                //TutorialLoader.instance.Load("Magician");
-                PlayerPrefs.SetInt("Magician", 1);
-                GameManager.instance.isMagician = true;
-            }
-            else
-            {
-                GameManager.instance.magician.GetComponent<QuestGiver>().StartDialogueWithPlayer();
-            }
-        }
-
-        // CloseAllUI();
-        // Invoke("OpenUI", canvasTime);
-        // OpenUI(inventory);
-        // OpenUI(magicianPanel);
-        // OpenUI(contentPanel);
-        // OpenUI(goldPanel);
-        // contentText.text = "MAGICIAN";
-        // Inventory.instance.onItemChangedCallback?.Invoke();
-        // skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-        // navigationArea.gameObject.SetActive(true);
-        //     if (!GameManager.instance.isMagician)
-        //     {
-        //         TutorialLoader.instance.Load("Magician");
-        //         PlayerPrefs.SetInt("Magician", 1);
-        //         GameManager.instance.isMagician = true;
-        //     }
-        //     }
     }
 
     public void SkillUI()

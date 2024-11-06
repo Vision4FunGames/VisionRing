@@ -8,6 +8,9 @@ public class CameraController : MonoBehaviour
 {
     public bool merchantTutorial;
 
+    public bool blackSmithTurial;
+
+    public bool magicianTutorial;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +28,18 @@ public class CameraController : MonoBehaviour
             {
                 if (hit.transform.gameObject.name == "Blacksmith")
                 {
-                    UiManager.instance.BlackSmithUI();
-                    QuestMachineMessages.SendCompositeMessage(this, "Meet:Blacksmith");
+                    if (blackSmithTurial)
+                    {
+                      
+                        FindObjectOfType<MeetBuckley>()?.SpeechStart();
+                        blackSmithTurial = false;
+                    }
+                    else
+                    {
+                        UiManager.instance.BlackSmithUI();
+                        QuestMachineMessages.SendCompositeMessage(this, "Meet:Blacksmith");
+                    }
+                    
                 }
 
                 else if (hit.transform.gameObject.name == "pouch")
@@ -44,7 +57,9 @@ public class CameraController : MonoBehaviour
                 {
                     if (merchantTutorial)
                     {
-                        FindObjectOfType<TalkWithAaliyah>().SpeechStart();
+                        FindObjectOfType<TalkWithAaliyah>()?.SpeechStart();
+                        FindObjectOfType<TalkWAaliyah>()?.SpeechStart();
+
                         merchantTutorial = false;
                     }
                     else
@@ -55,8 +70,18 @@ public class CameraController : MonoBehaviour
                 }
                 else if (hit.transform.gameObject.name == "Magician")
                 {
-                    QuestMachineMessages.SendCompositeMessage(this, "Found:Magician");
-                    UiManager.instance.MagicianUI();
+                    if (magicianTutorial)
+                    {
+                        FindObjectOfType<MeetMarley>().SpeechStart();
+
+                        magicianTutorial = false;
+                    }
+                    else
+                    {
+                        QuestMachineMessages.SendCompositeMessage(this, "Found:Magician");
+                        UiManager.instance.MagicianUI();
+                    }
+                 
                 }
                 else if (hit.transform.gameObject.name == "Baskan")
                 {

@@ -7,23 +7,27 @@ using UnityEngine.UI;
 
 /* This object manages the inventory UI. */
 
-public class InventoryUI : MonoBehaviour {
-
-    
+public class InventoryUI : MonoBehaviour
+{
     #region Singleton
+
     public static InventoryUI instance;
     private string type = "All";
-    void Awake ()
+
+    void Awake()
     {
         instance = this;
     }
+
     #endregion
-    public GameObject inventoryUI;	// The entire UI
-    public Transform itemsParent,currentItemsParent;	// The parent object of all the items
-    Inventory inventory;	// Our current inventory
+
+    public GameObject inventoryUI; // The entire UI
+    public Transform itemsParent, currentItemsParent; // The parent object of all the items
+    Inventory inventory; // Our current inventory
     private EquipmentManager equipmentManager;
     List<Equipment> listEq = new List<Item>().Cast<Equipment>().ToList();
-    void Start ()
+
+    void Start()
     {
         equipmentManager = EquipmentManager.instance;
         inventory = inventoryUI.GetComponent<Inventory>();
@@ -31,8 +35,9 @@ public class InventoryUI : MonoBehaviour {
         inventory.gameObject.SetActive(false);
         int counter = 0;
     }
+
     // Check to see if we should open/close the inventory
-    void Update ()
+    void Update()
     {
         // if (Input.GetButtonDown("Inventory"))
         // {
@@ -40,25 +45,35 @@ public class InventoryUI : MonoBehaviour {
         //     UpdateUI();
         // }
     }
+
     // Update the inventory UI by:
     //		- Adding items
     //		- Clearing empty slots
     // This is called using a delegate on the Inventory.
-    public void UpdateUI ()
+    public void UpdateUI()
     {
         inventory.Initialize();
         int counter = 0;
         ConvertToEquipmentList();
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         InventorySlot[] currentSlots = currentItemsParent.GetComponentsInChildren<InventorySlot>();
-       // DefaultWearBringTop();
+        // DefaultWearBringTop();
         //CountItem();
         if (type == "")
         {
             type = "All";
         }
+
+        if (UiManager.instance.buyanarmortutorial)
+        {
+            UiManager.instance.buyanarmortutorial = false;
+            type = "Armor";
+            ShopUI.instance.ShowSelected(type);
+            FindObjectOfType<BuyAnArmour>().OpenMask();
+        }
+
         switch (type)
-        { 
+        {
             case "All":
                 UiManager.instance.InventoryFilter("");
                 int ecoCounter = 0;
@@ -67,23 +82,28 @@ public class InventoryUI : MonoBehaviour {
                 {
                     if (i < inventory.items.Count)
                     {
-                        slots[i].AddItem(inventory.items[i],inventory.itemsCount[i]);
+                        slots[i].AddItem(inventory.items[i], inventory.itemsCount[i]);
                     }
-                    else if ((ecoCounter < EconomyManager.instance.itemList.Count)&&(EconomyManager.instance.itemCount[ecoCounter] > 0))
+                    else if ((ecoCounter < EconomyManager.instance.itemList.Count) &&
+                             (EconomyManager.instance.itemCount[ecoCounter] > 0))
                     {
                         if (EconomyManager.instance.itemList[ecoCounter].showInInventory)
                         {
-                            slots[i].AddItem(EconomyManager.instance.itemList[ecoCounter],EconomyManager.instance.itemCount[ecoCounter]);
+                            slots[i].AddItem(EconomyManager.instance.itemList[ecoCounter],
+                                EconomyManager.instance.itemCount[ecoCounter]);
                         }
                         else
                         {
                             slots[i].ClearSlot();
                         }
+
                         ecoCounter++;
                     }
-                    else if (usableCounter < inventory.usableItems.Count && inventory.usableItemsCount[usableCounter] > 0)
+                    else if (usableCounter < inventory.usableItems.Count &&
+                             inventory.usableItemsCount[usableCounter] > 0)
                     {
-                        slots[i].AddItem(inventory.usableItems[usableCounter],inventory.usableItemsCount[usableCounter]);
+                        slots[i].AddItem(inventory.usableItems[usableCounter],
+                            inventory.usableItemsCount[usableCounter]);
                         slots[i]._inventoryType = InventoryType.Usable;
                         usableCounter++;
                     }
@@ -92,6 +112,7 @@ public class InventoryUI : MonoBehaviour {
                         slots[i].ClearSlot();
                     }
                 }
+
                 break;
             case "Armor":
                 ClearAllSlots();
@@ -101,10 +122,11 @@ public class InventoryUI : MonoBehaviour {
                 {
                     if ((i < inventory.items.Count) && (listEq[i].equipSlot == EquipmentSlot.Body))
                     {
-                            slots[counter].AddItem(inventory.items[i],inventory.itemsCount[i]);
-                            counter++;
-                    } 
+                        slots[counter].AddItem(inventory.items[i], inventory.itemsCount[i]);
+                        counter++;
+                    }
                 }
+
                 break;
             case "Sword":
                 ClearAllSlots();
@@ -112,14 +134,15 @@ public class InventoryUI : MonoBehaviour {
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                        if ((i < inventory.items.Count)  && (listEq[i].equipSlot == EquipmentSlot.Weapon))
-                        {
-                            slots[counter].AddItem(inventory.items[i],inventory.itemsCount[i]);
-                            counter++;
-                        }    
+                    if ((i < inventory.items.Count) && (listEq[i].equipSlot == EquipmentSlot.Weapon))
+                    {
+                        slots[counter].AddItem(inventory.items[i], inventory.itemsCount[i]);
+                        counter++;
+                    }
                 }
+
                 break;
-            
+
             case "Bow":
                 // 
                 break;
@@ -132,8 +155,9 @@ public class InventoryUI : MonoBehaviour {
                     {
                         slots[counter].AddItem(inventory.items[i]);
                         counter++;
-                    } 
+                    }
                 }
+
                 break;
             case "Head":
                 ClearAllSlots();
@@ -144,26 +168,28 @@ public class InventoryUI : MonoBehaviour {
                     {
                         slots[counter].AddItem(inventory.items[i]);
                         counter++;
-                    } 
+                    }
                 }
+
                 break;
-            
+
             case "Potion":
                 UiManager.instance.InventoryFilter("");
                 ClearAllSlots();
-               // CountItem();
+                // CountItem();
                 counter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if (i<SkillCoolDown.instance._currentSkills.Count)
+                    if (i < SkillCoolDown.instance._currentSkills.Count)
                     {
                         slots[i].AddSkill(SkillCoolDown.instance._currentSkills[i]);
                         slots[i].countText.text = SkillCoolDown.instance._currentSkills[i].skillLevel.ToString();
                     }
                 }
+
                 break;
         }
-        
+
         for (int i = 0; i < equipmentManager.currentEquipment.Length; i++)
         {
             if (equipmentManager.currentEquipment[i] != null)
@@ -180,13 +206,12 @@ public class InventoryUI : MonoBehaviour {
                 equipmentManager.Equip(equipmentManager.defaultWear[i]);
             }
         }
-        
-        for (int i = 0; i <currentSlots.Length; i++)
+
+        for (int i = 0; i < currentSlots.Length; i++)
         {
-            if (currentSlots[i].isEquipped ==false || currentSlots[i].name == null)
+            if (currentSlots[i].isEquipped == false || currentSlots[i].name == null)
             {
                 currentSlots[i].ClearSlot();
-               
             }
         }
         // for (int i = 0; i < currentSlots.Length; i++)
@@ -201,7 +226,7 @@ public class InventoryUI : MonoBehaviour {
         // }
     }
 
-  
+
     private void ClearAllSlots()
     {
         InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>();
@@ -210,7 +235,7 @@ public class InventoryUI : MonoBehaviour {
             slots[i].ClearSlot();
         }
     }
-    
+
     //Button filter
     public void ShowSelected(string selected)
     {
@@ -220,11 +245,10 @@ public class InventoryUI : MonoBehaviour {
             var image = btnBG[i].GetComponent<Image>().color;
             btnBG[i].GetComponent<Image>().color = new Color(image.r, image.g, image.b, 0f);
         }
-        
+
         type = selected;
         UpdateUI();
         type = "All";
-        
     }
 
     public void ShowSelectedMini(string selected)
@@ -233,36 +257,38 @@ public class InventoryUI : MonoBehaviour {
         if (UiManager.instance.armorFilter.activeSelf)
         {
             btnBG = UiManager.instance.armorFilter.GetComponentsInChildren<Button>();
-        } 
-        if (UiManager.instance.gunFilter.activeSelf)
-        {
-             btnBG = UiManager.instance.gunFilter.GetComponentsInChildren<Button>();
         }
 
-        if (btnBG.Length>0)
+        if (UiManager.instance.gunFilter.activeSelf)
+        {
+            btnBG = UiManager.instance.gunFilter.GetComponentsInChildren<Button>();
+        }
+
+        if (btnBG.Length > 0)
         {
             for (int i = 0; i < btnBG.Length; i++)
             {
                 var image = btnBG[i].GetComponent<Image>().color;
                 btnBG[i].GetComponent<Image>().color = new Color(image.r, image.g, image.b, 0f);
             }
-        
+
             type = selected;
             UpdateUI();
             type = "All";
         }
-       
     }
+
     //selected button background change
     public void SelectedButton(GameObject btn)
     {
         var color = btn.GetComponent<Image>().color;
         btn.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 255f);
     }
+
     public void ConvertToEquipmentList()
     {
         listEq.Clear();
-       
+
         for (int i = 0; i < inventory.items.Count; i++)
         {
             listEq.Add((Equipment)inventory.items[i]);
@@ -282,7 +308,7 @@ public class InventoryUI : MonoBehaviour {
             }
         }
     }
-    
+
     // private void CountItem()
     // {
     //     for (int i = 0; i < EconomyManager.instance.itemList.Count; i++)
@@ -305,6 +331,4 @@ public class InventoryUI : MonoBehaviour {
     //     }
     //     return count;
     // } 
-
-   
 }

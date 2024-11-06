@@ -112,6 +112,11 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
         {
             fox.SetActive(true);
         }
+
+        if (PlayerPrefs.GetInt("Blacksmith") == 1)
+        {
+            blacksmith.transform.DOScale(Vector3.one, 1);
+        }
         // else
         //fox.SetActive(false);
     }

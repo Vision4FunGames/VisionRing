@@ -429,6 +429,17 @@ public class EquipmentManager : MonoBehaviour
         ClearUpgradeSlots();
 
         inventory.SaveAllItems();
+
+        if (FindObjectOfType<MeetBuckley>())
+        {
+            UiManager.instance.GamePlayUI();
+            FindObjectOfType<TaskPrefab>().isCompleted = true;
+            Inventory.instance.InventoryTypeChange(InventoryType.Inventory);
+            InventoryUI.instance.ShowSelected("All");
+            InventoryUI.instance.UpdateUI();
+            FindObjectOfType<InventoryUI>().itemsParent.GetChild(0).GetComponent<InventorySlot>().UseItem();
+            Destroy(FindObjectOfType<TaskPrefab>().gameObject,1);
+        }
     }
 
     private void ClearUpgradeSlots()
