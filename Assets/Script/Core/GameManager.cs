@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     public AudioClip fight, stand;
     public bool isFoxSaved;
     public bool isCampfire;
+    public bool skillTutorial;
     private UnityUIQuestDialogueUI _questDialogueUI;
     private float DisableTimer;
     [Header("QuestTimer")] private QuestManager _questManager;

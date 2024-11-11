@@ -11,7 +11,7 @@ public class MeetBuckley : MonoBehaviour
 
     private string blc =
         "Hello, adventurer, welcome to my place. I'm Blacksmith Buckley, bring me your items that need polish.";
-        
+
     private string blc1 =
         "It is not enough to have strong armour to fight. Powerful spells are also very important for your survival. Go to Marley the Wizard and get a spell.";
 
@@ -53,10 +53,11 @@ public class MeetBuckley : MonoBehaviour
                 _speechDone = true;
                 UiManager.instance.armorSlot.UseItem();
             }));
-        }else if (clickCount == 3)
+        }
+        else if (clickCount == 3)
         {
+            GameManager.instance.blacksmith.GetComponent<Waypoint_Indicator>().enabled = false;
             GetComponent<TaskPrefab>().isCompleted = true;
-            GameManager.instance.merchant.GetComponent<Waypoint_Indicator>().enabled = false;
             Destroy(gameObject, .1f);
         }
 

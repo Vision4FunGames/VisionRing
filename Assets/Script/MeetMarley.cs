@@ -7,7 +7,7 @@ using UnityEngine;
 public class MeetMarley : MonoBehaviour
 {
     public GameObject blcPanel;
-    private int clickCount;
+    public int clickCount;
     public UpgradeItem bone;
     public UpgradeItem skelet;
     public UpgradeItem gem;
@@ -28,6 +28,7 @@ public class MeetMarley : MonoBehaviour
         PlayerPrefs.SetInt("Magician", 1);
         GameManager.instance.magician.GetComponent<Waypoint_Indicator>().enabled = true;
         FindObjectOfType<CameraController>().magicianTutorial = true;
+        GameManager.instance.skillTutorial = true;
     }
 
     public void SpeechStart()
@@ -55,7 +56,9 @@ public class MeetMarley : MonoBehaviour
         }
         else if (clickCount == 2)
         {
+            UiManager.instance.CloseAllUI();
             blcPanel.SetActive(true);
+            mrcText.text = "";
             mrcText.DOText(blc1, 1).OnComplete((() =>
             {
                 _speechDone = true;

@@ -99,6 +99,12 @@ public class SkillBuySlot : MonoBehaviour
 
     public void BuySkill()
     {
+        if (GameManager.instance.skillTutorial)
+        {
+            GameManager.instance.skillTutorial = false;
+            FindObjectOfType<MeetMarley>().SpeechStart();
+        }
+        
         skillUpgrade.BuySkill(this);
     }
 

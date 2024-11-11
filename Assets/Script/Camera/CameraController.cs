@@ -67,6 +67,10 @@ public class CameraController : MonoBehaviour
                         UiManager.instance.CloseAllUI();
                         UiManager.instance.ShopUI();
                     }
+                }else if (hit.transform.gameObject.name == "Farmer")
+                {
+                    UiManager.instance.CloseAllUI();
+                    UiManager.instance.ShopUI();
                 }
                 else if (hit.transform.gameObject.name == "Magician")
                 {
