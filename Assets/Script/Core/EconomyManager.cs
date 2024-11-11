@@ -9,19 +9,19 @@ public class EconomyManager : MonoBehaviour
 {
     public static EconomyManager instance;
     private ShopSlot[] shopSlot;
+
     private void Awake()
     {
         instance = this;
         shopSlot = GetComponents<ShopSlot>();
     }
-    
+
 
     [Header("Items")] public List<Item> itemList = new List<Item>();
     public List<int> itemCount = new List<int>();
 
 
-    [SerializeField]
-    private int diamond { get; set; }
+    [SerializeField] private int diamond { get; set; }
     private int coin { get; set; }
     private int gold { get; set; }
 
@@ -37,9 +37,9 @@ public class EconomyManager : MonoBehaviour
         for (int i = 0; i < itemList.Count; i++)
         {
             index = itemList.FindIndex(r => r.name.Contains("Diamond"));
-            
         }
-        diamond = itemCount[index]; 
+
+        diamond = itemCount[index];
         return diamond;
     }
 
@@ -58,13 +58,14 @@ public class EconomyManager : MonoBehaviour
         gold += count;
         UiManager.instance.onEconomyChangedCallBack.Invoke();
         Shop.instance.onItemChangedCallback.Invoke();
-        PlayerPrefs.SetInt("gold",gold);
+        PlayerPrefs.SetInt("gold", gold);
     }
+
     public void SetCoin(int count)
     {
         coin += count;
         UiManager.instance.onEconomyChangedCallBack.Invoke();
-        PlayerPrefs.SetInt("coin",coin);
+        PlayerPrefs.SetInt("coin", coin);
     }
 
     public void SetDiamond(int count)
@@ -73,6 +74,7 @@ public class EconomyManager : MonoBehaviour
         UiManager.instance.onEconomyChangedCallBack.Invoke();
         PlayerPrefs.SetInt("diamond", diamond);
     }
+
     void Start()
     {
         LoadEconomy();
@@ -82,7 +84,7 @@ public class EconomyManager : MonoBehaviour
         }
     }
 
-    public void EarnItem(int index,int itemCount)
+    public void EarnItem(int index, int itemCount)
     {
         for (int i = 0; i < itemList.Count; i++)
         {
@@ -91,26 +93,31 @@ public class EconomyManager : MonoBehaviour
                 this.itemCount[i] += itemCount;
             }
         }
-        
     }
 
     public void EarnUpgradeItem(UpgradeItem upgradeItem)
     {
         for (int i = 0; i < itemList.Count; i++)
         {
+            if (itemList.Count > itemCount.Count)
+            {
+                itemCount.Add(0);
+            }
             if (itemList[i].name == upgradeItem.name)
             {
                 itemCount[i]++;
+                Debug.Log("-------------------"+upgradeItem.name);
             }
         }
+
         ES3.Save("itemCount", itemCount);
         itemCount = ES3.Load("itemCount", itemCount);
         for (int i = 0; i < itemCount.Count; i++)
         {
             Debug.Log(itemCount[i]);
         }
-     
     }
+
     private void LoadEconomy()
     {
         if (PlayerPrefs.HasKey("gold"))
@@ -129,12 +136,10 @@ public class EconomyManager : MonoBehaviour
         }
 
         itemCount = ES3.Load("itemCount", itemCount);
-
     }
 
-    public void SpendItems(List<UpgradeItem> itemList,List<int> itemCount)
+    public void SpendItems(List<UpgradeItem> itemList, List<int> itemCount)
     {
-       
         for (int i = 0; i < itemList.Count; i++)
         {
             for (int j = 0; j < this.itemList.Count; j++)
@@ -146,23 +151,25 @@ public class EconomyManager : MonoBehaviour
                 }
             }
         }
+
         UiManager.instance.onEconomyChangedCallBack.Invoke();
-        ES3.Save("itemCount",itemCount);
+        ES3.Save("itemCount", itemCount);
     }
 
     public int GetGemAmount(int level) => level * 50;
 
     public void EarnRewards()
     {
-        EarnItem(0,30);
-        EarnItem(1,30);
-        EarnItem(2,30);
-        ES3.Save("itemCount",itemCount);
+        EarnItem(0, 30);
+        EarnItem(1, 30);
+        EarnItem(2, 30);
+        ES3.Save("itemCount", itemCount);
         PlayerManager.instance.earnItemParticle.Play();
         HapticPatterns.PlayPreset(HapticPatterns.PresetType.Warning);
         Player.instance.playerSound.audioSource.clip = Player.instance.playerSound.earnItemSound;
         Player.instance.playerSound.audioSource.Play();
     }
+
     public int GetStoneCount(string itemName)
     {
         for (int i = 0; i < itemList.Count; i++)
@@ -172,10 +179,11 @@ public class EconomyManager : MonoBehaviour
                 return itemCount[i];
             }
         }
+
         return 0;
     }
 
-    public void SetStoneCount(string itemName,int count)
+    public void SetStoneCount(string itemName, int count)
     {
         for (int i = 0; i < itemList.Count; i++)
         {
@@ -186,6 +194,5 @@ public class EconomyManager : MonoBehaviour
                 return;
             }
         }
-      
     }
 }

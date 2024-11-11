@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     public GameObject tutorialBox, tutorialBoxArea;
     public GameObject mainSword;
     public GameObject baskan;
+    public GameObject shirley;
     public GameObject merchant;
     public GameObject blacksmith;
     public GameObject magician;

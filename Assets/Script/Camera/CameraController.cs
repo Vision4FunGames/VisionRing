@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     public bool blackSmithTurial;
 
     public bool magicianTutorial;
+
+    public bool farmerTutorail;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,8 +71,16 @@ public class CameraController : MonoBehaviour
                     }
                 }else if (hit.transform.gameObject.name == "Farmer")
                 {
-                    UiManager.instance.CloseAllUI();
-                    UiManager.instance.ShopUI();
+                    if (farmerTutorail)
+                    {
+                        FindObjectOfType<MeetShirley>()?.SpeechStart();
+                        farmerTutorail = false;
+                    }
+                    else
+                    {
+                        UiManager.instance.CloseAllUI();
+                        UiManager.instance.ShopUI();
+                    }
                 }
                 else if (hit.transform.gameObject.name == "Magician")
                 {

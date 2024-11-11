@@ -26,6 +26,7 @@ public class ShopUI : MonoBehaviour
 
     private Shop shop;
     List<Equipment> listEq = new List<Item>().Cast<Equipment>().ToList();
+    List<Equipment> listUp = new List<UpgradeItem>().Cast<Equipment>().ToList();
     private MapMaskManager map;
 
     void Start()
@@ -154,6 +155,26 @@ public class ShopUI : MonoBehaviour
 
                 break;
             case "Potion":
+                ClearAllSlots();
+                AllSlotsShow();
+                counter = 0;
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if ((i < shop.shopItemsUp.Count))
+
+                    {
+                        shopSlots[i].AddItem(listUp[i]);
+                        shopSlots[i].index = i;
+                        slots[i].AddItem(shop.shopItems[i]);
+                        shopSlots[i].onSpendMoneyChanged.Invoke();
+                        counter++;
+                    }
+                    else
+                    {
+                        shopSlots[i].gameObject.SetActive(false);
+                    }
+                }
+
                 break;
         }
     }
@@ -178,9 +199,15 @@ public class ShopUI : MonoBehaviour
     public void ConvertToEquipmentList()
     {
         listEq.Clear();
+        listUp.Clear();
         for (int i = 0; i < shop.shopItems.Count; i++)
         {
-            listEq.Add((Equipment)shop.shopItems[i]);
+            if (shop.shopItems.Count > i)
+                listEq.Add((Equipment)shop.shopItems[i]);
+            else
+            {
+                listUp.Add((Equipment)shop.shopItems[i]);
+            }
         }
     }
 

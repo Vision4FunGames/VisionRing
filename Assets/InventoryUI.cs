@@ -76,6 +76,7 @@ public class InventoryUI : MonoBehaviour
         {
             case "All":
                 UiManager.instance.InventoryFilter("");
+                int listUqcount =0 ;
                 int ecoCounter = 0;
                 int usableCounter = 0;
                 for (int i = 0; i < slots.Length; i++)
@@ -84,20 +85,23 @@ public class InventoryUI : MonoBehaviour
                     {
                         slots[i].AddItem(inventory.items[i], inventory.itemsCount[i]);
                     }
-                    else if ((ecoCounter < EconomyManager.instance.itemList.Count) &&
-                             (EconomyManager.instance.itemCount[ecoCounter] > 0))
+                    else if ((ecoCounter < EconomyManager.instance.itemList.Count))
                     {
-                        if (EconomyManager.instance.itemList[ecoCounter].showInInventory)
-                        {
-                            slots[i].AddItem(EconomyManager.instance.itemList[ecoCounter],
-                                EconomyManager.instance.itemCount[ecoCounter]);
-                        }
-                        else
-                        {
-                            slots[i].ClearSlot();
-                        }
-
                         ecoCounter++;
+                        for (int j = listUqcount; j < EconomyManager.instance.itemList.Count; j++)
+                        {
+                            if ((EconomyManager.instance.itemCount[j] > 0))
+                            {
+                                if (EconomyManager.instance.itemList[j].showInInventory)
+                                {
+                                    slots[i].AddItem(EconomyManager.instance.itemList[j],
+                                        EconomyManager.instance.itemCount[j]);
+                                    listUqcount = j+1;
+                                    break;
+                                }
+                                slots[i].ClearSlot();
+                            }
+                        }
                     }
                     else if (usableCounter < inventory.usableItems.Count &&
                              inventory.usableItemsCount[usableCounter] > 0)

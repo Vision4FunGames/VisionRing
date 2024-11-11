@@ -19,6 +19,7 @@ public class Shop : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
     public List<Item> shopItems = new List<Item>();
+    public List<UpgradeItem> shopItemsUp = new List<UpgradeItem>();
     public GameObject shopItem;
 
     private ShopUI shopUI;
@@ -28,6 +29,10 @@ public class Shop : MonoBehaviour
         shopUI = ShopUI.instance;
         
         for ( i=0; i < shopItems.Count; i++)
+        {
+            AddItem();
+        }
+        for ( i=0; i < shopItemsUp.Count; i++)
         {
             AddItem();
         }
