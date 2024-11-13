@@ -36,7 +36,7 @@ public class UiManager : MonoBehaviour
         navigationArea,
         settingPanel,
         vaultPanel,
-        cinematicCanvas;
+        cinematicCanvas,dungeonPanel;
 
 
     public Button buildBtn;
@@ -181,6 +181,11 @@ public class UiManager : MonoBehaviour
         ringBtn.gameObject.SetActive(false);
     }
 
+    public void DungeonPanelOpen()
+    {
+        CloseAllUI();
+        OpenUI(dungeonPanel);
+    }
     public void VaultOpen()
     {
         FindObjectOfType<VaultUI>().vaultGem.text = FindObjectOfType<VaultUI>().vaultCount.ToString();

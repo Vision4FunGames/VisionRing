@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
     public bool magicianTutorial;
 
     public bool farmerTutorail;
+
+    public bool baskanTutorial;
     // Start is called before the first frame update
     void Start()
     {
@@ -99,26 +101,15 @@ public class CameraController : MonoBehaviour
                 }
                 else if (hit.transform.gameObject.name == "Baskan")
                 {
-                    var giver = GameManager.instance.baskan.GetComponent<QuestGiver>();
-                    if (QuestManager.instance.successedQuests.Count > 0)
+                    if (baskanTutorial)
                     {
-                        if (QuestManager.instance.successedQuests[QuestManager.instance.successedQuests.Count - 1] ==
-                            "Award")
-                        {
-                            for (int i = 0; i < giver.questList.Count; i++)
-                            {
-                                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                                if (giver.questList[i].id.ToString() == "Monster")
-                                {
-                                    giver.questList[i].SetState(QuestState.WaitingToStart);
-                                    break;
-                                }
-                            }
-                        }
+                        baskanTutorial = false;
+                        FindObjectOfType<MeetRuthledge>()?.SpeechStart();
                     }
-
-                    //Debug.Log("1st Quests State : " +giver.questList[0].GetState());
-                    giver.StartDialogueWithPlayer();
+                    else
+                    {
+                        UiManager.instance.DungeonPanelOpen();
+                    }
                 }
             }
         }

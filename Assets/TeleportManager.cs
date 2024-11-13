@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class TeleportManager : MonoBehaviour
 {
+    public int[] dungeonKeyPrice;
+    public DungeonLayout[] dungeonLayouts;
+    public GameObject[] dungeons;
     public TeleportScene[] teleports;
     public GameObject twoSideTeleport;
     private CameraShake _cameraShake;
     public Scene baseScene;
-    public GameObject[] dungeons;
     public GameObject dungeonSpawnPoint;
     private Player player;
     private int currentDungeonValue;
@@ -22,7 +24,7 @@ public class TeleportManager : MonoBehaviour
     {
         player = Player.instance;
         _cameraShake = FindObjectOfType<CameraShake>();
-       
+
 
         if (!PlayerPrefs.HasKey("dungeonIndex"))
         {
@@ -30,16 +32,33 @@ public class TeleportManager : MonoBehaviour
         }
 
         currentDungeonIndex = PlayerPrefs.GetInt("dungeonIndex");
-        
+
         if (FindObjectOfType<TaskSystem.TaskManager>().LastMainTaskIndex > 10)
         {
             currentDungeonIndex = 2;
         }
-        
+
         if (PlayerPrefs.HasKey("DungeonTutorial"))
             TeleportOpenAll();
+
+        SetUpdatePanel();
     }
 
+    public void SetUpdatePanel()
+    {
+        
+        for (int i = 0; i < dungeonLayouts.Length; i++)
+        {
+            dungeonLayouts[i].price.text = "$" + dungeonKeyPrice[i];
+
+            if (PlayerPrefs.GetInt("dungeonIndex") >= i)
+            {
+                dungeonLayouts[i].complete.SetActive(true);
+                dungeonLayouts[i].buyBtn.gameObject.SetActive(false);
+                dungeonLayouts[i].price.gameObject.SetActive(false);
+            }
+        }
+    }
     public void TeleportScene(int sceneName)
     {
         PlayerPrefs.SetInt("HideOut" + SceneManager.GetActiveScene().name, 0);
@@ -56,11 +75,12 @@ public class TeleportManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H))
             TeleportOpenAll();
     }
 
     private float delayTime;
+
     public void TeleportOpenAll()
     {
         for (int i = 0; i < teleports.Length; i++)
@@ -91,6 +111,7 @@ public class TeleportManager : MonoBehaviour
                 currentDungeon = Instantiate(dungeons[dungeonLevel], dungeonSpawnPoint.transform.position,
                     Quaternion.identity);
             }
+
             player.teleportParticle.Play();
             player.isMovement = false;
             Invoke("MoveTeleportPlayer", 2f);
@@ -123,8 +144,8 @@ public class TeleportManager : MonoBehaviour
         }
         else
             UiManager.instance.HideOutEntry();
-        
-        Invoke("playerMovementStart",1f);
+
+        Invoke("playerMovementStart", 1f);
         _cameraShake.DungeonEnd();
         player.teleportParticle.Stop();
     }
