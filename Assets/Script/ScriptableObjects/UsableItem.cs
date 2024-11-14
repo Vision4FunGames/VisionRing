@@ -5,12 +5,14 @@ public class UsableItem : Item
 {
     public GameObject popUp;
     public Transform popUpTransform;
-
+    public int dungeonIndex;
+    public bool dungeonkey;
+    
     public override void Use(InventoryType type, int count = 0)
     {
         if (type == InventoryType.Usable)
         {
-            if (this.name == "DungeonPortal")
+            if (dungeonkey)
             {
                 DungeonPortal();
             }
@@ -43,8 +45,9 @@ public class UsableItem : Item
         if (PlayerPrefs.GetInt("DungeonTutorial") == 0)
         {
             PlayerPrefs.SetInt("DungeonTutorial", 1);
-            FindObjectOfType<InventoryTask>().UseItem();
+            FindObjectOfType<InventoryTask>()?.UseItem();
         }
+        FindObjectOfType<TeleportManager>().DungeonIndexChange(dungeonIndex);
         FindObjectOfType<TeleportManager>().TeleportOpenAll();
         Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1f);
         FindObjectOfType<TaskPrefab>().isCompleted = true;

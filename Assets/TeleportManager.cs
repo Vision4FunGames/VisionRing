@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
+using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TeleportManager : MonoBehaviour
 {
+    public List<bool> completeDungeon;
     public int[] dungeonKeyPrice;
     public DungeonLayout[] dungeonLayouts;
     public GameObject[] dungeons;
@@ -25,7 +28,8 @@ public class TeleportManager : MonoBehaviour
         player = Player.instance;
         _cameraShake = FindObjectOfType<CameraShake>();
 
-
+        completeDungeon = ES3.Load("CompleteDungeon", completeDungeon);
+        
         if (!PlayerPrefs.HasKey("dungeonIndex"))
         {
             PlayerPrefs.SetInt("dungeonIndex", 1);
@@ -33,7 +37,8 @@ public class TeleportManager : MonoBehaviour
 
         currentDungeonIndex = PlayerPrefs.GetInt("dungeonIndex");
 
-        if (FindObjectOfType<TaskSystem.TaskManager>().LastMainTaskIndex > 10)
+        if (FindObjectOfType<TaskSystem.TaskManager>().LastMainTaskIndex > 10 &&
+            FindObjectOfType<TaskSystem.TaskManager>().LastMainTaskIndex <= 25)
         {
             currentDungeonIndex = 2;
         }
@@ -42,20 +47,54 @@ public class TeleportManager : MonoBehaviour
             TeleportOpenAll();
 
         SetUpdatePanel();
+        
+        Inventory.instance.usableItemsCount[0] += 1;
+        Inventory.instance.usableItemsCount[1] += 1;
     }
 
+    public void DungeonIndexChange(int dungeonIndex)
+    {
+        currentDungeonIndex = dungeonIndex;
+    }
     public void SetUpdatePanel()
     {
-        
-        for (int i = 0; i < dungeonLayouts.Length; i++)
+        for (int i = 1; i < dungeonLayouts.Length; i++)
         {
+            Debug.Log("array"+i);
             dungeonLayouts[i].price.text = "$" + dungeonKeyPrice[i];
 
-            if (PlayerPrefs.GetInt("dungeonIndex") >= i)
+            if (i == currentDungeonIndex)
+            {
+                dungeonLayouts[i].buyBtn.gameObject.SetActive(false);
+                dungeonLayouts[i].price.gameObject.SetActive(false);
+            }
+
+            if (completeDungeon[i])
             {
                 dungeonLayouts[i].complete.SetActive(true);
                 dungeonLayouts[i].buyBtn.gameObject.SetActive(false);
                 dungeonLayouts[i].price.gameObject.SetActive(false);
+            }
+        }
+    }
+
+
+    [Button("SaveDungeon")]
+    public void SaveDungeon()
+    {
+        ES3.Save("CompleteDungeon", completeDungeon);
+    }
+
+    public void BuyKeyDungeon(DungeonLayout dungeonKeys)
+    {
+        for (int i = 1; i < dungeonLayouts.Length; i++)
+        {
+            if (dungeonLayouts[i] == dungeonKeys)
+            {
+                currentDungeonIndex = i;
+                SetUpdatePanel();
+                SaveDungeon();
+                break;
             }
         }
     }
@@ -69,6 +108,8 @@ public class TeleportManager : MonoBehaviour
 
     public void DungeonIndex()
     {
+        completeDungeon[currentDungeonIndex] = true;
+        SaveDungeon();
         currentDungeonIndex++;
         PlayerPrefs.SetInt("dungeonIndex", currentDungeonIndex);
     }
