@@ -25,14 +25,14 @@ public class RewardList : ScriptableObject
         foreach (var reward in rewards)
         {
             reward.rewardType = (RewardItemType)c;
-            reward.rewardName = reward.rewardType.ToString();
+            if (reward.rewardName == "") reward.rewardName = reward.rewardType.ToString();
             c++;
         }
         c = 0;
         foreach (var item in spinRewardPacks)
         {
             item.packType = (RewardPackType)c;
-            item.packName = item.packType.ToString();
+            if (item.packName == "") item.packName = item.packType.ToString();
             c++;
         }
         c = 0;
@@ -57,24 +57,34 @@ public class RewardList : ScriptableObject
         }
         return null;
     }
+    public RewardDetail GetRewardDetail(RewardItemType rewardType)
+    {
+        return rewards[(int)rewardType];
+    }
+
+    public int GetAmount(RewardItemType rewardType)
+    {
+        return rewards[(int)rewardType].amount;
+    }
+
 }
 [Serializable]
 public class RewardDetail
 {
-    [ReadOnly] public string rewardName;
+    public string rewardName;
     public RewardItemType rewardType;
     [ShowAssetPreview(50, 50)]
     public GameObject prefab;
     [ShowAssetPreview(50, 50)]
     public Sprite sprite;
     public Tier tier;
-
+    public int amount;
 }
 
 [Serializable]
 public class RewardPack
 {
-    [ReadOnly] public string packName;
+    public string packName;
     public RewardPackType packType;
     public List<Reward> rewards;
 }
@@ -83,7 +93,6 @@ public class RewardPack
 public class Reward
 {
     public RewardItemType rewardType;
-    public int amount;
     [Range(0f, 100f)]
     public float Chance = 100f;
     [HideInInspector] public int Index;

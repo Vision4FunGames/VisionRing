@@ -103,6 +103,6 @@ public class IapBundleManager : MonoBehaviour
 
     public void Result(Reward action)
     {
-        Debug.Log("Earn  " + action.rewardType.ToString() + "   " + action.amount);
+        Debug.Log("Earn  " + action.rewardType.ToString() + "   " + PlaytimeRewardsManager.instance.rewardList.GetAmount(action.rewardType));
     }
 }

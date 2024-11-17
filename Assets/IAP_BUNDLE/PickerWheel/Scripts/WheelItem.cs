@@ -15,6 +15,6 @@ public class WheelItem : MonoBehaviour
         bg.color = IapBundleManager.instance.rewardList.GetTierColor(reward.rewardType);
         icon.sprite = IapBundleManager.instance.rewardList.rewards[(int)reward.rewardType].sprite;
         label.text = IapBundleManager.instance.rewardList.rewards[(int)reward.rewardType].rewardName;
-        amount.text = reward.amount.ToString();
+        amount.text = PlaytimeRewardsManager.instance.rewardList.GetAmount(reward.rewardType).ToString();
     }
 }
