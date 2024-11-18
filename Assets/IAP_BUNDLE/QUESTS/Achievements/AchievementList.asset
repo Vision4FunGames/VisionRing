@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cad56cd84024734ab15eea5e5aefd4f, type: 3}
+  m_Name: AchievementList
+  m_EditorClassIdentifier: 
+  achievementList:
+  - content: 'Defeat Monsters '
+    achievementType: 0
+    baseAmount: 10
+    offset: 5
+    limit: 200
+    rewardAmount: 10
+  - content: Login Game
+    achievementType: 1
+    baseAmount: 1
+    offset: 0
+    limit: 0
+    rewardAmount: 10
+  - content: 'Watch Ad '
+    achievementType: 2
+    baseAmount: 1
+    offset: 1
+    limit: 5
+    rewardAmount: 10
+  - content: 'Upgrade Equipments '
+    achievementType: 3
+    baseAmount: 1
+    offset: 1
+    limit: 10
+    rewardAmount: 10
+  - content: 'Use Skill '
+    achievementType: 4
+    baseAmount: 1
+    offset: 1
+    limit: 15
+    rewardAmount: 5
+  - content: 'Use Ring '
+    achievementType: 5
+    baseAmount: 1
+    offset: 1
+    limit: 15
+    rewardAmount: 5
+  - content: 'Complete Dungeon '
+    achievementType: 6
+    baseAmount: 1
+    offset: 1
+    limit: 10
+    rewardAmount: 15
+  - content: 'Open Chests '
+    achievementType: 7
+    baseAmount: 1
+    offset: 2
+    limit: 20
+    rewardAmount: 10
+  - content: 'Upgrade Artifacts '
+    achievementType: 8
+    baseAmount: 1
+    offset: 1
+    limit: 10
+    rewardAmount: 10
+  - content: 'Daily Wheel Spin '
+    achievementType: 9
+    baseAmount: 1
+    offset: 1
+    limit: 5
+    rewardAmount: 5
+  - content: 'Level Up '
+    achievementType: 10
+    baseAmount: 1
+    offset: 0
+    limit: 99
+    rewardAmount: 10
+  - content: 'Play Game for X Sec '
+    achievementType: 11
+    baseAmount: 60
+    offset: 60
+    limit: 300
+    rewardAmount: 10
+  - content: Make In-App Purchase
+    achievementType: 12
+    baseAmount: 1
+    offset: 0
+    limit: 1
+    rewardAmount: 50
+  - content: 'Increase Attack with Beans '
+    achievementType: 13
+    baseAmount: 1
+    offset: 5
+    limit: 40
+    rewardAmount: 10
+  - content: 'Increase Defence with Beans '
+    achievementType: 14
+    baseAmount: 1
+    offset: 5
+    limit: 40
+    rewardAmount: 10
+  - content: Increase Health with Beans
+    achievementType: 15
+    baseAmount: 1
+    offset: 5
+    limit: 40
+    rewardAmount: 10

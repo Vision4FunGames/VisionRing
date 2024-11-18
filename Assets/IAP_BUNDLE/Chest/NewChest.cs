@@ -113,7 +113,7 @@ public class NewChest : MonoBehaviour
 
         ChestItem newItem = Instantiate(NewChestManager.instance.rewardManager.rewards[(int)piece.rewardType].prefab, spawnPos.position, Quaternion.identity).GetComponent<ChestItem>();
 
-        newItem.SetAmount(this,piece.rewardType, piece.amount, rewardPoses[targetIndx]);
+        newItem.SetAmount(this,piece.rewardType, PlaytimeRewardsManager.instance.rewardList.GetAmount(piece.rewardType), rewardPoses[targetIndx]);
         rewards.Add(newItem);
         rewardPieces.RemoveAt(index);
     }

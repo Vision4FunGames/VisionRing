@@ -15,7 +15,7 @@ public class GridItem : MonoBehaviour
         this.reward = reward;
         bg.color = IapBundleManager.instance.rewardList.GetTierColor(reward.rewardType);
         icon.sprite = IapBundleManager.instance.rewardList.rewards[(int)reward.rewardType].sprite;
-        amount.text = reward.amount.ToString();
+        amount.text = PlaytimeRewardsManager.instance.rewardList.GetAmount(reward.rewardType).ToString();
         if (!gameObject.activeSelf) gameObject.SetActive(true);
         if (selectGlow.activeSelf) selectGlow.SetActive(false);
     }

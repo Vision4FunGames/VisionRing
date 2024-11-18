@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 public class DailyQuestManager : MonoBehaviour
 {
@@ -28,19 +27,13 @@ public class DailyQuestManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         FirstControl();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
