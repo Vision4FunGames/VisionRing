@@ -47,9 +47,6 @@ public class TeleportManager : MonoBehaviour
             TeleportOpenAll();
 
         SetUpdatePanel();
-        
-        Inventory.instance.usableItemsCount[0] += 1;
-        Inventory.instance.usableItemsCount[1] += 1;
     }
 
     public void DungeonIndexChange(int dungeonIndex)
@@ -60,7 +57,6 @@ public class TeleportManager : MonoBehaviour
     {
         for (int i = 1; i < dungeonLayouts.Length; i++)
         {
-            Debug.Log("array"+i);
             dungeonLayouts[i].price.text = "$" + dungeonKeyPrice[i];
 
             if (i == currentDungeonIndex)
@@ -92,6 +88,7 @@ public class TeleportManager : MonoBehaviour
             if (dungeonLayouts[i] == dungeonKeys)
             {
                 currentDungeonIndex = i;
+                Inventory.instance.usableItemsCount[i-1] += 1;
                 SetUpdatePanel();
                 SaveDungeon();
                 break;
