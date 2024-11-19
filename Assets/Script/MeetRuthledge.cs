@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -23,6 +20,8 @@ public class MeetRuthledge : MonoBehaviour
     {
         GameManager.instance.baskan.GetComponent<Waypoint_Indicator>().enabled = true;
         FindObjectOfType<CameraController>().baskanTutorial = true;
+        PlayerPrefs.SetInt("Baskan", 1);
+        GameManager.instance.baskan.transform.DOScale(Vector3.one, 1);
     }
 
     private void Update()
@@ -39,6 +38,7 @@ public class MeetRuthledge : MonoBehaviour
 
         if (clickCount == 0)
         {
+            GameManager.instance.baskan.GetComponent<Waypoint_Indicator>().enabled = false;
             TextMeshProUGUI.text = " ";
             conPanel.SetActive(true);
             TextMeshProUGUI.DOText(dialogOne, 1f).OnComplete((() => { _speechDone = true; }));
@@ -47,10 +47,7 @@ public class MeetRuthledge : MonoBehaviour
         if (clickCount == 1)
         {
             TextMeshProUGUI.text = " ";
-            TextMeshProUGUI.DOText(dialogTwo, 1f).OnComplete((() =>
-            {
-                _speechDone = true; 
-            }));
+            TextMeshProUGUI.DOText(dialogTwo, 1f).OnComplete((() => { _speechDone = true; }));
         }
 
         if (clickCount == 2)
@@ -58,7 +55,7 @@ public class MeetRuthledge : MonoBehaviour
             conPanel.SetActive(false);
             UiManager.instance.DungeonPanelOpen();
         }
-    
+
         clickCount++;
     }
 }

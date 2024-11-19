@@ -66,8 +66,10 @@ public class MeetMarley : MonoBehaviour
             }));
         }else if (clickCount == 3)
         {
+            blcPanel.SetActive(false);
+            UiManager.instance.GamePlayUI();
+            GameManager.instance.magician.GetComponent<Waypoint_Indicator>().enabled = false;
             GetComponent<TaskPrefab>().isCompleted = true;
-            GameManager.instance.merchant.GetComponent<Waypoint_Indicator>().enabled = false;
             Destroy(gameObject, .1f);
         }
 

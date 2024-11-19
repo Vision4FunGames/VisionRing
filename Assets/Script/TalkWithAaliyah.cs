@@ -21,6 +21,8 @@ public class TalkWithAaliyah : MonoBehaviour
     private void Start()
     {
         GameManager.instance.merchant.GetComponent<Waypoint_Indicator>().enabled = true;
+        GameManager.instance.merchant.transform.DOScale(Vector3.one, 1);
+        PlayerPrefs.SetInt("Merchant",1);
         cameraController = FindObjectOfType<CameraController>();
         cameraController.merchantTutorial = true;
         rewardCollectBtn.onClick.AddListener(RewardCoin);
@@ -30,6 +32,7 @@ public class TalkWithAaliyah : MonoBehaviour
     {
         rewardPanel.SetActive(false);
         EconomyManager.instance.SetGold(1000);
+        GameManager.instance.merchant.GetComponent<Waypoint_Indicator>().enabled = false;
         GetComponent<TaskPrefab>().isCompleted = true;
         Destroy(gameObject,.4f);
     }

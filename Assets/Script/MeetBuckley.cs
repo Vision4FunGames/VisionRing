@@ -22,8 +22,8 @@ public class MeetBuckley : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.blacksmith.transform.DOScale(Vector3.one, 1);
         PlayerPrefs.SetInt("Blacksmith", 1);
+        GameManager.instance.blacksmith.transform.DOScale(Vector3.one, 1);
         GameManager.instance.blacksmith.GetComponent<Waypoint_Indicator>().enabled = true;
         FindObjectOfType<CameraController>().blackSmithTurial = true;
     }
@@ -34,6 +34,7 @@ public class MeetBuckley : MonoBehaviour
         if (clickCount == 0)
         {
             blcPanel.SetActive(true);
+            GameManager.instance.blacksmith.GetComponent<Waypoint_Indicator>().enabled = false;
             mrcText.DOText(blc, 1).OnComplete((() =>
             {
                 _speechDone = true;
@@ -56,7 +57,7 @@ public class MeetBuckley : MonoBehaviour
         }
         else if (clickCount == 3)
         {
-            GameManager.instance.blacksmith.GetComponent<Waypoint_Indicator>().enabled = false;
+            
             GetComponent<TaskPrefab>().isCompleted = true;
             Destroy(gameObject, .1f);
         }

@@ -76,12 +76,12 @@ public class InventoryUI : MonoBehaviour
         {
             case "All":
                 UiManager.instance.InventoryFilter("");
-                int listUqcount =0 ;
+                int listUqcount = 0;
                 int ecoCounter = 0;
                 int usableCounter = 0;
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if (i < inventory.items.Count)
+                    if (i < inventory.itemsCount.Count && i < inventory.items.Count && inventory.itemsCount[i] > 0)
                     {
                         slots[i].AddItem(inventory.items[i], inventory.itemsCount[i]);
                     }
@@ -96,20 +96,27 @@ public class InventoryUI : MonoBehaviour
                                 {
                                     slots[i].AddItem(EconomyManager.instance.itemList[j],
                                         EconomyManager.instance.itemCount[j]);
-                                    listUqcount = j+1;
+                                    listUqcount = j + 1;
                                     break;
                                 }
+
                                 slots[i].ClearSlot();
                             }
                         }
                     }
-                    else if (usableCounter < inventory.usableItems.Count &&
-                             inventory.usableItemsCount[usableCounter] > 0)
+                    else if (usableCounter < inventory.usableItems.Count)
                     {
-                        slots[i].AddItem(inventory.usableItems[usableCounter],
-                            inventory.usableItemsCount[usableCounter]);
-                        slots[i]._inventoryType = InventoryType.Usable;
-                        usableCounter++;
+                        for (int j = 0; j < inventory.usableItemsCount.Count; j++)
+                        {
+                            Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                            if (inventory.usableItemsCount[j] > 0)
+                            {
+                                slots[i].AddItem(inventory.usableItems[usableCounter],
+                                    inventory.usableItemsCount[usableCounter]);
+                                slots[i]._inventoryType = InventoryType.Usable;
+                                usableCounter++;
+                            }
+                        }
                     }
                     else
                     {

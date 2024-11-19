@@ -7,6 +7,7 @@ public class MeetShirley : MonoBehaviour
 {
     private string dialogOne =
         "If you're looking for powerful potions and potent consumables, you're in the right place my friend.";
+
     private string dialogTwo =
         "You look fully prepared for battle now. Meet Ruhletge and buy a dungeon key from him.";
 
@@ -23,6 +24,8 @@ public class MeetShirley : MonoBehaviour
     {
         GameManager.instance.shirley.GetComponent<Waypoint_Indicator>().enabled = true;
         FindObjectOfType<CameraController>().farmerTutorail = true;
+        PlayerPrefs.SetInt("Farmer", 1);
+        GameManager.instance.shirley.transform.DOScale(Vector3.one, 1);
         cltBtn.onClick.AddListener(CollectReward);
     }
 
@@ -70,6 +73,7 @@ public class MeetShirley : MonoBehaviour
         if (clickCount == 3)
         {
             conPanel.SetActive(false);
+            GameManager.instance.shirley.GetComponent<Waypoint_Indicator>().enabled = false;
             GetComponent<TaskPrefab>().isCompleted = true;
             Destroy(gameObject, .2f);
         }

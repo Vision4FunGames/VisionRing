@@ -7,7 +7,9 @@ public enum npcType
 {
     BlackSmith,
     Merchant,
-    Magician
+    Magician,
+    Farmer,
+    Baskan
 }
 
 public class BuildScale : MonoBehaviour

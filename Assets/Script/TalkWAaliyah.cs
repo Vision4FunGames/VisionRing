@@ -18,6 +18,7 @@ public class TalkWAaliyah : MonoBehaviour
     private void Start()
     {
         GameManager.instance.merchant.GetComponent<Waypoint_Indicator>().enabled = true;
+        GameManager.instance.merchant.transform.DOScale(Vector3.one, 1);
         cameraController = FindObjectOfType<CameraController>();
         cameraController.merchantTutorial = true;
     }
@@ -36,8 +37,8 @@ public class TalkWAaliyah : MonoBehaviour
         }else if (clickCount == 1)
         {
             mrcPanel.SetActive(false);
-            GetComponent<TaskPrefab>().isCompleted = true;
             GameManager.instance.merchant.GetComponent<Waypoint_Indicator>().enabled = false;
+            GetComponent<TaskPrefab>().isCompleted = true;
             Destroy(gameObject,.1f);
         }
         clickCount++;
