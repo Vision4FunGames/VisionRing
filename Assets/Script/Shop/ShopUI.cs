@@ -161,11 +161,10 @@ public class ShopUI : MonoBehaviour
                 for (int i = 0; i < slots.Length; i++)
                 {
                     if ((i < shop.shopItemsUp.Count))
-
                     {
-                        shopSlots[i].AddItem(listUp[i]);
+                        shopSlots[i].AddUpgradeItem(listUp[i]);
                         shopSlots[i].index = i;
-                        slots[i].AddItem(shop.shopItems[i]);
+                        slots[i].AddItem(shop.shopItemsUp[i]);
                         shopSlots[i].onSpendMoneyChanged.Invoke();
                         counter++;
                     }
@@ -208,6 +207,11 @@ public class ShopUI : MonoBehaviour
             {
                 listUp.Add((Equipment)shop.shopItems[i]);
             }
+        }
+        for (int i = 0; i < shop.shopItemsUp.Count; i++)
+        {
+            if (shop.shopItemsUp.Count > i)
+                listUp.Add((Equipment)shop.shopItems[i]);
         }
     }
 

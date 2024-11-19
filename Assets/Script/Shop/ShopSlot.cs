@@ -33,6 +33,14 @@ public class ShopSlot : MonoBehaviour
         priceText.text = price.ToString();
         UpdateButton();
     }
+    public void AddUpgradeItem(Equipment newItem)
+    {
+        currentItem = newItem;
+        bgImage.sprite = UiManager.instance.itemDescriptionSprites[newItem.itemLevel];
+            //price = newItem.price;
+        //priceText.text = price.ToString();
+        UpdateButton();
+    }
     public void BuyShopSlot()
     {
         //money condition
