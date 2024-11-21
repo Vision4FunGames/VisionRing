@@ -30,6 +30,7 @@ public class AchievementUiItem : MonoBehaviour
 
     public void Control()
     {
+        slider.maxValue = achievement.GetRequirementAmount();
         slider.DOValue(AchievementManager.Instance.achievementCount[(int)achievement.achievementType], 0.5f);
         requirement.text = AchievementManager.Instance.achievementCount[(int)achievement.achievementType] + "/" + achievement.GetRequirementAmount();
 
@@ -45,7 +46,7 @@ public class AchievementUiItem : MonoBehaviour
         else//ödül kazanýlmadý
         {
 
-
+            bg.sprite = graySprite;
             if (achievement.availableGoEvent)
             {
                 claimButton.gameObject.SetActive(false);
@@ -55,7 +56,9 @@ public class AchievementUiItem : MonoBehaviour
             {
                 claimButton.interactable = false;
                 claimButton.gameObject.SetActive(true);
+                goButton.gameObject.SetActive(false);
             }
+            transform.SetSiblingIndex(transform.parent.childCount - 1);
         }
 
     }
@@ -74,9 +77,16 @@ public class AchievementUiItem : MonoBehaviour
     }
     public void Claim()
     {
-        tick.SetActive(true);
         claimButton.gameObject.SetActive(false);
         Debug.Log("Earn " + achievement.rewardAmount + "  Gem");
-        PlayerPrefs.SetInt("DailyQuestClaim" + achievement.achievementType, 1);
+
+        AchievementManager.Instance.achievementCount[(int)achievement.achievementType] -= achievement.GetRequirementAmount();
+        PlayerPrefs.SetInt("Iap_Bundle_AchievementAmount" + (int)achievement.achievementType, AchievementManager.Instance.achievementCount[(int)achievement.achievementType]);
+        achievement.LevelUp();
+        Control();
+    }
+    public void Go()
+    {
+        if (achievement.availableGoEvent) AchievementRouting.instance.SendMessage(achievement.goEvent);
     }
 }

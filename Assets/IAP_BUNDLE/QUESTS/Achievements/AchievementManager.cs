@@ -10,7 +10,7 @@ public class AchievementManager : MonoBehaviour
 {
     public AchievementList achievementList;
     public List<AchievementUiItem> achievementUiList;
-    public int[] achievementCount;
+    public int[] achievementCount, achievementLevels;
 
 
     public static AchievementManager Instance;
@@ -51,17 +51,17 @@ public class AchievementManager : MonoBehaviour
             achievementUiList[i].SetQuest(achievementList.achievementList[i]);
         }
 
-        // DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.ClearDungeon,1);
+       // AchievementManager.Instance.AddAchievementEvent(AchievementType.LevelUp,1);
     }
     [Button]
     public void AddQuestEvent()
     {
-        AddQuestEvent((DailyQuestType)Random.Range(0, achievementUiList.Count), 1);
+        AddAchievementEvent((AchievementType)Random.Range(0, achievementUiList.Count), 1);
     }
 
 
 
-    public void AddQuestEvent(DailyQuestType selectType, int amount)
+    public void AddAchievementEvent(AchievementType selectType, int amount)
     {
         achievementCount[(int)selectType] += amount;
         PlayerPrefs.SetInt("Iap_Bundle_AchievementAmount" + (int)selectType, achievementCount[(int)selectType]);

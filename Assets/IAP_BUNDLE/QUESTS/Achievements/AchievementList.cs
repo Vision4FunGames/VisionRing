@@ -34,6 +34,17 @@ public class AchievementItem
     public string goEvent;
     public int GetRequirementAmount()
     {
-        return baseAmount + (PlayerPrefs.GetInt("Iap_BundleAchievemet" + achievementType.ToString() + "Level", 0) * offset);
+        int level = PlayerPrefs.GetInt("Iap_BundleAchievemet" + achievementType.ToString() + "Level", 0);
+        if (baseAmount == 1)
+        {
+            if (level == 0 && offset > 0) return baseAmount + (level * offset);
+            else if (offset == 0) return baseAmount;
+            else return level * offset;
+        }
+        else return baseAmount + (level * offset);
+    }
+    public void LevelUp()
+    {
+        PlayerPrefs.SetInt("Iap_BundleAchievemet" + achievementType.ToString() + "Level", PlayerPrefs.GetInt("Iap_BundleAchievemet" + achievementType.ToString() + "Level", 0) + 1);
     }
 }

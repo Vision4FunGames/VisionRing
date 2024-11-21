@@ -559,7 +559,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1137698343977808637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 223781883369130940}
+        m_TargetAssemblyTypeName: AchievementUiItem, Assembly-CSharp
+        m_MethodName: Claim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1137698343977808639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +946,8 @@ MonoBehaviour:
     offset: 0
     limit: 0
     rewardAmount: 0
+    availableGoEvent: 0
+    goEvent: 
   slider: {fileID: 1137698343230930504}
   claimButton: {fileID: 1137698343977808636}
   goButton: {fileID: 1878564250055371702}
@@ -1005,7 +1019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1137698344377823089
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1547,7 +1561,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 60584560223179898}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 223781883369130940}
+        m_TargetAssemblyTypeName: AchievementUiItem, Assembly-CSharp
+        m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4992474265576702515
 MonoBehaviour:
   m_ObjectHideFlags: 0
