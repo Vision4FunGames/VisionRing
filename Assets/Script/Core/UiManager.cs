@@ -80,7 +80,8 @@ public class UiManager : MonoBehaviour
     public List<GameObject> UiPanels = new List<GameObject>();
     public GameObject collectBtn;
     public GameObject upgradeWheel;
-
+    public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI playerNamePopUpText;
     public GameObject inventoryBtnPanel, shopBtnPanel;
 
     [SerializeField] private SkillUpgrade skillUpgrade;
@@ -138,12 +139,14 @@ public class UiManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("playerName"))
         {
-            // GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
-            // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
+             GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
+             playerNameText.text = PlayerPrefs.GetString("playerName");
+             playerNamePopUpText.text = "<i>"+playerNameText.text+"</i>" + "'s Profile";
+             playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
         }
         else
         {
-            // playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
+             playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
         }
 
         HideOutEntry();
@@ -230,6 +233,8 @@ public class UiManager : MonoBehaviour
         GameManager.instance.PlayerName = playerNameInput.text;
         PlayerPrefs.SetString("playerName", playerNameInput.text);
         playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
+        playerNameText.text = PlayerPrefs.GetString("playerName");
+        playerNamePopUpText.text = "<i>"+playerNameText.text+"</i>" + "'s Profile";
     }
 
 
