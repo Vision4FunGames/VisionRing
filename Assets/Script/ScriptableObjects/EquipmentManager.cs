@@ -388,7 +388,7 @@ public class EquipmentManager : MonoBehaviour
                 upgradeEquipment[i] = newItem;
                 newItem.RemoveFromInventory();
                 UpdateStatsText(newItem);
-              
+
 
                 if (onItemAddedCallback != null)
                 {
@@ -405,13 +405,13 @@ public class EquipmentManager : MonoBehaviour
         if ((newItem.damageModifier * playerStats.damage.GetValue() > 0))
         {
             float damage = newItem.damageModifier * playerStats.damage.GetValue();
-            float newItemDamage = (newItem.damageModifier+1) * playerStats.damage.GetValue();
+            float newItemDamage = (newItem.damageModifier + 1) * playerStats.damage.GetValue();
             UiManager.instance.upGradeTxt1.text =
-                damage + " " + (newItemDamage - damage);
+                damage + " " + $"+ <color=green>{(newItemDamage - damage)}</color>";
             newItem.damageModifier += 1;
         }
-          
-                
+
+
         if (newItem.armorModifier * playerStats.armor.GetValue() > 0)
             UiManager.instance.upGradeTxt2.text =
                 (newItem.armorModifier * playerStats.armor.GetValue()).ToString();
@@ -419,8 +419,8 @@ public class EquipmentManager : MonoBehaviour
         if (newItem.armorModifier * playerStats.armor.GetValue() > 0)
             UiManager.instance.upGradeTxt3.text =
                 (newItem.hpModifier * playerStats.health.GetValue()).ToString();
-
     }
+
     private void UpdateUpgradeSlots()
     {
         Debug.Log("A2");
