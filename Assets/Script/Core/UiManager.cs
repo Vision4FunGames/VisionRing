@@ -112,6 +112,8 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI defance;
     public  Slider playerExpSlider;
     public InventorySlot armorSlot;
+
+    public TextMeshProUGUI upGradeTxt1, upGradeTxt2, upGradeTxt3;
     private void Awake()
     {
         instance = this;

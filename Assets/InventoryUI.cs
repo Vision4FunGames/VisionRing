@@ -108,7 +108,6 @@ public class InventoryUI : MonoBehaviour
                     {
                         for (int j = 0; j < inventory.usableItemsCount.Count; j++)
                         {
-                            Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                             if (inventory.usableItemsCount[j] > 0)
                             {
                                 slots[i].AddItem(inventory.usableItems[usableCounter],

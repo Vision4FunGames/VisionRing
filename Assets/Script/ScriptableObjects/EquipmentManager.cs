@@ -51,6 +51,7 @@ public class EquipmentManager : MonoBehaviour
     private PlayerAttack _playerAttack;
 
     public Animator inventoryPlayerAnim;
+
     // Callback for when an item is equipped
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 
@@ -63,18 +64,19 @@ public class EquipmentManager : MonoBehaviour
     public GameObject inventoryHand, inventoryLeftHand;
     public Equipment[] upgradeEquipment;
     public InventorySlot[] upgradeSlots;
-    public Item[] chestItems, upgradeItems,dropUsableItems;
+    public Item[] chestItems, upgradeItems, dropUsableItems;
 
     public Equipment selectedChestItem;
     private PlayerStats playerStats;
+
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
-        if (onEquipmentChanged ==null)
+        if (onEquipmentChanged == null)
         {
             onEquipmentChanged += playerStats.OnEquipmentChanged;
         }
-      
+
         _player = FindObjectOfType<Player>();
         _playerAttack = FindObjectOfType<PlayerAttack>();
         ResetObjects();
@@ -88,8 +90,6 @@ public class EquipmentManager : MonoBehaviour
         LoadEquipment();
         EquipAllDefault();
         onItemAddedCallback += UpdateUpgradeSlots;
-       
-        
     }
 
     public void LoadEquipment()
@@ -108,6 +108,7 @@ public class EquipmentManager : MonoBehaviour
         {
             defaultWear[i].icon = Resources.Load<Sprite>("ItemSprite/" + defaultWear[i].name);
         }
+
         EquipmentInitialize();
     }
 
@@ -146,7 +147,6 @@ public class EquipmentManager : MonoBehaviour
 
     void Update()
     {
-        
     }
 
 
@@ -165,10 +165,10 @@ public class EquipmentManager : MonoBehaviour
         ParticleManager.instance.playerEnvanterParticleSystem.Play();
         // Find out what slot the item fits in
         // and put it there.
-        
+
         int slotIndex = (int)newItem.equipSlot;
 
-        
+
         // If there was already an item in the slot
         // make sure to put it back in the inventory
         if (currentEquipment[slotIndex] != null)
@@ -182,7 +182,7 @@ public class EquipmentManager : MonoBehaviour
         // An item has been equipped so we trigger the callback
         currentEquipment[slotIndex] = newItem;
         //equippedInventory.Add(newItem);
-        
+
         newItem.showInInventory = true;
         if (newItem.mesh)
         {
@@ -204,13 +204,14 @@ public class EquipmentManager : MonoBehaviour
                 new Vector3(rightHand.transform.position.x, rightHand.transform.position.y,
                     rightHand.transform.position.z),
                 Quaternion.identity);
-            if (currentWeapon.GetComponentInChildren<GunType>().myGunType is CurrentGunType.sword or CurrentGunType.spear)
+            if (currentWeapon.GetComponentInChildren<GunType>().myGunType is CurrentGunType.sword
+                or CurrentGunType.spear)
             {
                 currentWeapon.transform.parent = rightHand.transform;
                 currentWeapon.transform.localPosition = new Vector3(0, 0.0028f, 0);
                 currentWeapon.transform.localEulerAngles = new Vector3(-31.375f, -43.925f, -97.642f);
                 _playerAttack.ChangeGunType(currentWeapon.GetComponentInChildren<GunType>().myGunType);
-                
+
                 currentInventoryWeapon = Instantiate(newItem.prefab,
                     new Vector3(inventoryHand.transform.position.x, inventoryHand.transform.position.y,
                         inventoryHand.transform.position.z),
@@ -227,7 +228,7 @@ public class EquipmentManager : MonoBehaviour
                     inventoryPlayerAnim.SetTrigger("Spear");
                 }
             }
-            
+
             else if (currentWeapon.GetComponentInChildren<GunType>().myGunType == CurrentGunType.arrow)
             {
                 currentWeapon.transform.parent = leftHand.transform;
@@ -246,11 +247,11 @@ public class EquipmentManager : MonoBehaviour
                 inventoryPlayerAnim.SetTrigger("Bow");
             }
         }
+
         if (onEquipmentChanged != null)
             onEquipmentChanged.Invoke(newItem, oldItem);
         CheckItemSet();
         //equippedItems [itemIndex] = newMesh.gameObject;
-        
     }
 
     public void Unequip(int slotIndex)
@@ -282,6 +283,7 @@ public class EquipmentManager : MonoBehaviour
             if (inventory.onItemChangedCallback != null)
                 inventory.onItemChangedCallback.Invoke();
         }
+
         CheckItemSet();
         ES3.Save("currentItems", currentEquipment);
         ES3.Save("inventory", inventory.items);
@@ -343,20 +345,23 @@ public class EquipmentManager : MonoBehaviour
     {
         for (int i = 0; i < currentEquipment.Length; i++)
         {
-            if (currentEquipment[i]==null)
+            if (currentEquipment[i] == null)
             {
                 return;
             }
         }
-          InventorySlot[] currentSlots = InventoryUI.instance.currentItemsParent.GetComponentsInChildren<InventorySlot>();
-        if (currentEquipment[0].itemSet == currentEquipment[1].itemSet && currentEquipment[0].itemSet== currentEquipment[3].itemSet && currentEquipment[0].itemSet !=0)
+
+        InventorySlot[] currentSlots = InventoryUI.instance.currentItemsParent.GetComponentsInChildren<InventorySlot>();
+        if (currentEquipment[0].itemSet == currentEquipment[1].itemSet &&
+            currentEquipment[0].itemSet == currentEquipment[3].itemSet && currentEquipment[0].itemSet != 0)
         {
             for (int i = 0; i < currentSlots.Length; i++)
             {
-                if (i==2)
+                if (i == 2)
                 {
                     i++;
                 }
+
                 currentSlots[i].backGImage.material = UiManager.instance.skillMaterial;
             }
         }
@@ -368,18 +373,23 @@ public class EquipmentManager : MonoBehaviour
             }
         }
     }
+
     #endregion
 
     #region Upgrade
 
     public void UpgradeEquip(Equipment newItem)
     {
+        Debug.Log("A1");
         for (int i = 0; i < upgradeEquipment.Length; i++)
         {
             if (upgradeEquipment[i] == null)
             {
                 upgradeEquipment[i] = newItem;
                 newItem.RemoveFromInventory();
+                UpdateStatsText(newItem);
+              
+
                 if (onItemAddedCallback != null)
                 {
                     onItemAddedCallback.Invoke();
@@ -390,8 +400,30 @@ public class EquipmentManager : MonoBehaviour
         }
     }
 
+    public void UpdateStatsText(Equipment newItem)
+    {
+        if ((newItem.damageModifier * playerStats.damage.GetValue() > 0))
+        {
+            float damage = newItem.damageModifier * playerStats.damage.GetValue();
+            float newItemDamage = (newItem.damageModifier+1) * playerStats.damage.GetValue();
+            UiManager.instance.upGradeTxt1.text =
+                damage + " " + (newItemDamage - damage);
+            newItem.damageModifier += 1;
+        }
+          
+                
+        if (newItem.armorModifier * playerStats.armor.GetValue() > 0)
+            UiManager.instance.upGradeTxt2.text =
+                (newItem.armorModifier * playerStats.armor.GetValue()).ToString();
+
+        if (newItem.armorModifier * playerStats.armor.GetValue() > 0)
+            UiManager.instance.upGradeTxt3.text =
+                (newItem.hpModifier * playerStats.health.GetValue()).ToString();
+
+    }
     private void UpdateUpgradeSlots()
     {
+        Debug.Log("A2");
         for (int i = 0; i < upgradeSlots.Length; i++)
         {
             if (upgradeEquipment[i] != null)
@@ -407,6 +439,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void UpgradeItem()
     {
+        Debug.Log("A3");
         for (int i = 0; i < upgradeEquipment.Length; i++)
         {
             if (upgradeEquipment[i] == null)
@@ -425,7 +458,8 @@ public class EquipmentManager : MonoBehaviour
         {
             inventory.onItemChangedCallback.Invoke();
         }
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete,"BlackSmith",eq.name);
+
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "BlackSmith", eq.name);
         ClearUpgradeSlots();
 
         inventory.SaveAllItems();
@@ -438,7 +472,7 @@ public class EquipmentManager : MonoBehaviour
             InventoryUI.instance.ShowSelected("All");
             InventoryUI.instance.UpdateUI();
             FindObjectOfType<InventoryUI>().itemsParent.GetChild(0).GetComponent<InventorySlot>().UseItem();
-            Destroy(FindObjectOfType<TaskPrefab>().gameObject,1);
+            Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1);
         }
     }
 
@@ -495,6 +529,7 @@ public class EquipmentManager : MonoBehaviour
             Inventory.instance.items.Add(equipment);
             Inventory.instance.itemsCount.Add(1);
         }
+
         //Inventory.instance.items.Add(this);
         Inventory.instance.onItemChangedCallback.Invoke();
         PlayerManager.instance.earnItemParticle.Play();
