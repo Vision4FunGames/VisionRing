@@ -95,6 +95,7 @@ public class CharacterStats : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            
             Die();
             die = true;
         }

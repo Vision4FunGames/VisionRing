@@ -70,6 +70,7 @@ public class UiManager : MonoBehaviour
     public Button StoneBtn;
     public Button sonarBtn;
     public Button horseBtn;
+    public Button upggradeBtn;
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
 
     //Chest Scroll
@@ -83,7 +84,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI playerNameText;
     public TextMeshProUGUI playerNamePopUpText;
     public GameObject inventoryBtnPanel, shopBtnPanel;
-
+    public CanvasGroupTweener dailyPanel;
     [SerializeField] private SkillUpgrade skillUpgrade;
 
     [HideInInspector] private SkillInfoPopUp currentSkillPopUp;
@@ -168,7 +169,6 @@ public class UiManager : MonoBehaviour
             ButtonType[i].skillButton.enabled = false;
         }
     }
-
     public void DungeonEntry()
     {
         horseBtn.gameObject.SetActive(true);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using GameAnalyticsSDK;
 using Lofelt.NiceVibrations;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -378,6 +379,8 @@ public class EquipmentManager : MonoBehaviour
 
     #region Upgrade
 
+    private Equipment currentEq;
+
     public void UpgradeEquip(Equipment newItem)
     {
         Debug.Log("A1");
@@ -385,6 +388,7 @@ public class EquipmentManager : MonoBehaviour
         {
             if (upgradeEquipment[i] == null)
             {
+                currentEq = newItem;
                 upgradeEquipment[i] = newItem;
                 newItem.RemoveFromInventory();
                 UpdateStatsText(newItem);
@@ -402,23 +406,42 @@ public class EquipmentManager : MonoBehaviour
 
     public void UpdateStatsText(Equipment newItem)
     {
+        UiManager.instance.upGradeTxt1.text = " ";
+        UiManager.instance.upGradeTxt2.text = " ";
+        UiManager.instance.upGradeTxt3.text = " ";
+
+        UiManager.instance.upggradeBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "dddddddd";
+        //newItem.upgradePrices[newItem.itemLevel].ToString();
+
         if ((newItem.damageModifier * playerStats.damage.GetValue() > 0))
         {
             float damage = newItem.damageModifier * playerStats.damage.GetValue();
             float newItemDamage = (newItem.damageModifier + 1) * playerStats.damage.GetValue();
             UiManager.instance.upGradeTxt1.text =
-                damage + " " + $"+ <color=green>{(newItemDamage - damage)}</color>";
+                "Attack  " + damage + " " + $"+ <color=green>{(newItemDamage - damage)}</color>";
             newItem.damageModifier += 1;
         }
 
-
         if (newItem.armorModifier * playerStats.armor.GetValue() > 0)
+        {
+            float armor = newItem.armorModifier * playerStats.armorValue;
+            float newArmor = (newItem.armorModifier + 1) * playerStats.armorValue;
+
             UiManager.instance.upGradeTxt2.text =
-                (newItem.armorModifier * playerStats.armor.GetValue()).ToString();
+                "Armor " + armor + " " + $"+ <color=green>{(newArmor - armor)}</color>";
+            newItem.armorModifier += 1;
+        }
 
-        if (newItem.armorModifier * playerStats.armor.GetValue() > 0)
-            UiManager.instance.upGradeTxt3.text =
-                (newItem.hpModifier * playerStats.health.GetValue()).ToString();
+        if (newItem.hpModifier * playerStats.health.GetValue() > 0)
+        {
+            float health = newItem.hpModifier * playerStats.health.GetValue();
+            float newHealth = (newItem.hpModifier + 1) * playerStats.health.GetValue();
+            ;
+
+            UiManager.instance.upGradeTxt2.text =
+                "Health " + health + " " + $"+ <color=green>{(newHealth - health)}</color>";
+            newItem.hpModifier += 1;
+        }
     }
 
     private void UpdateUpgradeSlots()
@@ -439,40 +462,51 @@ public class EquipmentManager : MonoBehaviour
 
     public void UpgradeItem()
     {
-        Debug.Log("A3");
-        for (int i = 0; i < upgradeEquipment.Length; i++)
+        UiManager.instance.upGradeTxt1.text = " ";
+        UiManager.instance.upGradeTxt2.text = " ";
+        UiManager.instance.upGradeTxt3.text = " ";
+
+        if (currentEq.upgradePrices.Length < currentEq.itemLevel)
+            currentEq.itemLevel = currentEq.upgradePrices.Length - 1;
+
+        if (currentEq.upgradePrices[currentEq.itemLevel] < EconomyManager.instance.GetGold())
         {
-            if (upgradeEquipment[i] == null)
+            EconomyManager.instance.SetGold(currentEq.upgradePrices[currentEq.itemLevel]);
+            upgradeEquipment[0].itemLevel++;
+            for (int i = 0; i < upgradeEquipment.Length; i++)
             {
-                return;
+                if (upgradeEquipment[i] == null)
+                {
+                    return;
+                }
             }
-        }
 
-        Equipment eq = new Equipment();
-        eq.Fill(upgradeEquipment[0]);
-        eq.itemLevel = upgradeEquipment[0].itemLevel + 1;
-        eq.name = upgradeEquipment[0].name;
-        eq.showInInventory = true;
-        inventory.Add(eq);
-        if (inventory.onItemChangedCallback != null)
-        {
-            inventory.onItemChangedCallback.Invoke();
-        }
+            Equipment eq = new Equipment();
+            eq.Fill(upgradeEquipment[0]);
+            eq.itemLevel = upgradeEquipment[0].itemLevel + 1;
+            eq.name = upgradeEquipment[0].name;
+            eq.showInInventory = true;
+            inventory.Add(eq);
+            if (inventory.onItemChangedCallback != null)
+            {
+                inventory.onItemChangedCallback.Invoke();
+            }
 
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "BlackSmith", eq.name);
-        ClearUpgradeSlots();
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "BlackSmith", eq.name);
+            ClearUpgradeSlots();
 
-        inventory.SaveAllItems();
+            inventory.SaveAllItems();
 
-        if (FindObjectOfType<MeetBuckley>())
-        {
-            UiManager.instance.GamePlayUI();
-            FindObjectOfType<TaskPrefab>().isCompleted = true;
-            Inventory.instance.InventoryTypeChange(InventoryType.Inventory);
-            InventoryUI.instance.ShowSelected("All");
-            InventoryUI.instance.UpdateUI();
-            FindObjectOfType<InventoryUI>().itemsParent.GetChild(0).GetComponent<InventorySlot>().UseItem();
-            Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1);
+            if (FindObjectOfType<MeetBuckley>())
+            {
+                UiManager.instance.GamePlayUI();
+                FindObjectOfType<TaskPrefab>().isCompleted = true;
+                Inventory.instance.InventoryTypeChange(InventoryType.Inventory);
+                InventoryUI.instance.ShowSelected("All");
+                InventoryUI.instance.UpdateUI();
+                FindObjectOfType<InventoryUI>().itemsParent.GetChild(0).GetComponent<InventorySlot>().UseItem();
+                Destroy(FindObjectOfType<TaskPrefab>().gameObject, 1);
+            }
         }
     }
 

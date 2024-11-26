@@ -37,6 +37,7 @@ public class EnemyStats : CharacterStats
 
     public override void Die()
     {
+        DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.KillCreatures,1);
         if (OnDie != null)
         {
             OnDie();

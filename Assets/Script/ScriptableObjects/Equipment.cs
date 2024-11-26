@@ -19,8 +19,8 @@ public class Equipment : Item {
    [ES3NonSerializable] public GameObject prefab;
 
     public int price = 0;
-    
-   
+
+    public int[] upgradePrices;
     //public bool isEquipped = false;
 
     [ContextMenu("Save")]
@@ -123,7 +123,7 @@ public class Equipment : Item {
         prefab = item.prefab;
         critChanceModifier = item.critChanceModifier;
         itemSet = item.itemSet;
-
+        upgradePrices = item.upgradePrices;
     }
 }
 
