@@ -36,7 +36,8 @@ public class UiManager : MonoBehaviour
         navigationArea,
         settingPanel,
         vaultPanel,
-        cinematicCanvas,dungeonPanel;
+        cinematicCanvas,
+        dungeonPanel;
 
 
     public Button buildBtn;
@@ -96,8 +97,10 @@ public class UiManager : MonoBehaviour
     [Header("Chapters")] public VideoPlayer chapter1;
     public VideoPlayer chapter3;
     public VideoPlayer endVideo;
+    public VideoPlayer npcComing;
     private TaskSystem.TaskManager _taskManager;
     public bool buyanarmortutorial;
+
     public delegate void OnEconomyChanged();
 
     public OnEconomyChanged onEconomyChangedCallBack;
@@ -105,16 +108,16 @@ public class UiManager : MonoBehaviour
     [Header("ItemCollect")] public GameObject itemTextPanel;
     private bl_MiniMap _blMiniMap;
 
-    [Space(50)]
-    [Header("Bravery Ui")] public TextMeshProUGUI popUpBraveryText;
+    [Space(50)] [Header("Bravery Ui")] public TextMeshProUGUI popUpBraveryText;
     public TextMeshProUGUI braveryText;
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI health;
     public TextMeshProUGUI defance;
-    public  Slider playerExpSlider;
+    public Slider playerExpSlider;
     public InventorySlot armorSlot;
-
+    public TextMeshProUGUI pLeveloutText, pLevelInText;
     public TextMeshProUGUI upGradeTxt1, upGradeTxt2, upGradeTxt3;
+
     private void Awake()
     {
         instance = this;
@@ -142,14 +145,14 @@ public class UiManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("playerName"))
         {
-             GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
-             playerNameText.text = PlayerPrefs.GetString("playerName");
-             playerNamePopUpText.text = "<i>"+playerNameText.text+"</i>" + "'s Profile";
-             playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
+            GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
+            playerNameText.text = PlayerPrefs.GetString("playerName");
+            playerNamePopUpText.text = "<i>" + playerNameText.text + "</i>" + "'s Profile";
+            playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
         }
         else
         {
-             playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
+            playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
         }
 
         HideOutEntry();
@@ -162,6 +165,7 @@ public class UiManager : MonoBehaviour
         popUpBraveryText.text = Player.instance.GetComponent<PlayerStats>().TotalBravery().ToString();
         health.text = Player.instance.GetComponent<PlayerStats>().health.GetValue().ToString();
     }
+
     public void DisableButton()
     {
         for (int i = 0; i < ButtonType.Length; i++)
@@ -169,6 +173,7 @@ public class UiManager : MonoBehaviour
             ButtonType[i].skillButton.enabled = false;
         }
     }
+
     public void DungeonEntry()
     {
         horseBtn.gameObject.SetActive(true);
@@ -191,6 +196,7 @@ public class UiManager : MonoBehaviour
         CloseAllUI();
         OpenUI(dungeonPanel);
     }
+
     public void VaultOpen()
     {
         FindObjectOfType<VaultUI>().vaultGem.text = FindObjectOfType<VaultUI>().vaultCount.ToString();
@@ -236,7 +242,7 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetString("playerName", playerNameInput.text);
         playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Close();
         playerNameText.text = PlayerPrefs.GetString("playerName");
-        playerNamePopUpText.text = "<i>"+playerNameText.text+"</i>" + "'s Profile";
+        playerNamePopUpText.text = "<i>" + playerNameText.text + "</i>" + "'s Profile";
     }
 
 
@@ -324,6 +330,12 @@ public class UiManager : MonoBehaviour
             GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
             chapter3.gameObject.SetActive(false);
         }
+
+        if (npcComing.frame + 5 >= (long)npcComing.frameCount && npcComing.gameObject.activeSelf)
+        {
+            GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
+            npcComing.gameObject.SetActive(false);
+        }
     }
 
     public void MenuUI()
@@ -370,7 +382,7 @@ public class UiManager : MonoBehaviour
             onEconomyChangedCallBack.Invoke();
             contentText.text = "SHOP";
             GameManager.instance.isMerchant = true;
-           // TutorialLoader.instance.Load("Merchant");
+            // TutorialLoader.instance.Load("Merchant");
             PlayerPrefs.SetInt("Merchant", 1);
         }
     }
@@ -452,17 +464,17 @@ public class UiManager : MonoBehaviour
 
     public void MagicianUI()
     {
-            CloseAllUI();
-            Invoke("OpenUI", canvasTime);
-            OpenUI(inventory);
-            OpenUI(magicianPanel);
-            OpenUI(contentPanel);
-            OpenUI(goldPanel);
-            contentText.text = "MAGICIAN";
-            Inventory.instance.onItemChangedCallback?.Invoke();
-            skillUpgrade.onSkillShopChangeCallBack?.Invoke();
-            //navigationArea.gameObject.SetActive(true);
-            //skillUpgrade.BringCurrentSkills();
+        CloseAllUI();
+        Invoke("OpenUI", canvasTime);
+        OpenUI(inventory);
+        OpenUI(magicianPanel);
+        OpenUI(contentPanel);
+        OpenUI(goldPanel);
+        contentText.text = "MAGICIAN";
+        Inventory.instance.onItemChangedCallback?.Invoke();
+        skillUpgrade.onSkillShopChangeCallBack?.Invoke();
+        //navigationArea.gameObject.SetActive(true);
+        //skillUpgrade.BringCurrentSkills();
     }
 
     public void SkillUI()

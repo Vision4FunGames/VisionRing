@@ -128,6 +128,7 @@ public class RingUpgrade : MonoBehaviour
     {
         if (pinkSocket.stoneCost[pinkLevelVal] < currentValuePink && pinkLevelVal + 1 < pinkSocket.stoneCost.Length)
         {
+            DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.UpgradeRing,1);
             currentValuePink -= pinkSocket.stoneCost[pinkLevelVal];
             EconomyManager.instance.SetStoneCount("DarkStone", currentValuePink);
             CurrentStoneText();
@@ -147,6 +148,7 @@ public class RingUpgrade : MonoBehaviour
     {
         if (redSocket.stoneCost[redLevelVal] < currentValueRed && redLevelVal + 1 < redSocket.stoneCost.Length)
         {
+            DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.UpgradeRing,1);
             currentValueRed -= pinkSocket.stoneCost[redLevelVal];
             EconomyManager.instance.SetStoneCount("LifeStone", currentValueRed);
             CurrentStoneText();
@@ -167,6 +169,8 @@ public class RingUpgrade : MonoBehaviour
     {
         if (blueSocket.stoneCost[blueLevelVal] < currentValueBlue && blueLevelVal + 1 < blueSocket.stoneCost.Length)
         {
+            DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.UpgradeRing,1);
+
             currentValueBlue -= pinkSocket.stoneCost[blueLevelVal];
             EconomyManager.instance.SetStoneCount("LightStone", currentValueBlue);
             CurrentStoneText();

@@ -100,6 +100,8 @@ public class VaultUI : MonoBehaviour
             int vaultLevel = PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName);
             if (vaultLevel < 49)
             {
+                DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.UpgradeArtifacts,1);
+
                 vaultCount -= vaultItems[currentIndex].VaultArtifact
                     .gemCost[PlayerPrefs.GetInt(vaultItems[currentIndex].VaultArtifact.artifactName)];
                 vaultGem.text = vaultCount.ToString();

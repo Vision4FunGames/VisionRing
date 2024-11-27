@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DungeonExitPortals : MonoBehaviour
@@ -14,6 +12,7 @@ public class DungeonExitPortals : MonoBehaviour
         currentTaskCount++;
         if (currentTaskCount >= taskCount)
         {
+            DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.ClearDungeon,1);
             exitPortal.gameObject.SetActive(true);
             exitPortal.GetComponent<Waypoint_Indicator>().enabled = true;
             exitPortal.GetComponent<Collider>().enabled = true;

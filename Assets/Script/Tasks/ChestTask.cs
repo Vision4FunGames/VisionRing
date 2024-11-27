@@ -6,6 +6,8 @@ public class ChestTask : MonoBehaviour
 {
     private Player player;
     private bool partOne;
+    private bool chestOpen;
+
     private void OnEnable()
     {
         player = FindObjectOfType<Player>();
@@ -16,18 +18,21 @@ public class ChestTask : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < 50 && !partOne) // burası değiscek sandığa yaklasmaya devam etmemiz gerek açılmasın hemen
+        if (Vector3.Distance(player.transform.position, transform.position) < 50 &&
+            !partOne) // burası değiscek sandığa yaklasmaya devam etmemiz gerek açılmasın hemen
         {
             partOne = true;
             var box = TaskPanelController.instance.GetLastMainTask();
             box.infoText.text = "OpenTheChest";
         }
 
-        if (Vector3.Distance(player.transform.position, transform.position) < 30 && partOne)
+        if (Vector3.Distance(player.transform.position, transform.position) < 30 && partOne && !chestOpen)
         {
-             GetComponent<TaskPrefab>().isCompleted = true;
-             Destroy(transform.gameObject, 3f);
-             FindObjectOfType<DungeonExitPortals>().dungeonTaskCheck();
+            chestOpen = true;
+            DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.OpenChest,1);
+            GetComponent<TaskPrefab>().isCompleted = true;
+            Destroy(transform.gameObject, 3f);
+            FindObjectOfType<DungeonExitPortals>().dungeonTaskCheck();
         }
     }
 }

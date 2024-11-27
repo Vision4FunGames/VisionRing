@@ -473,6 +473,9 @@ public class EquipmentManager : MonoBehaviour
         {
             EconomyManager.instance.SetGold(currentEq.upgradePrices[currentEq.itemLevel]);
             upgradeEquipment[0].itemLevel++;
+            
+            DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.UpgradeOneItem,1);
+
             for (int i = 0; i < upgradeEquipment.Length; i++)
             {
                 if (upgradeEquipment[i] == null)
