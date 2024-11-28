@@ -1,16 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using System;
+using TMPro;
 
 public class DailyTimer : MonoBehaviour
 {
+    public GameObject dailyPanel;
+    public TextMeshProUGUI timerTxt;
     private DateTime currentTime;
     private DateTime lastCheckedDate;
     private TimeSpan targetTime = new TimeSpan(3, 0, 0); // 03:00 UTC
-
+    private bool isTimeFetched = false;
+    private float lastControlTime;
     void Start()
     {
         StartCoroutine(GetTimeFromInternet());
@@ -30,6 +32,7 @@ public class DailyTimer : MonoBehaviour
         {
             OnNewDay();
         }
+        lastControlTime = Time.time;
     }
 
     IEnumerator GetTimeFromInternet()
@@ -43,20 +46,23 @@ public class DailyTimer : MonoBehaviour
             WorldTimeAPIResponse response = JsonUtility.FromJson<WorldTimeAPIResponse>(json);
             currentTime = DateTime.Parse(response.datetime).ToUniversalTime();
             Debug.Log("Current UTC time: " + currentTime);
+            isTimeFetched = true;
         }
         else
         {
             Debug.LogError("Failed to get time from internet");
+            yield return new WaitForSeconds(1);
+            StartCoroutine(GetTimeFromInternet());
         }
     }
 
     void Update()
     {
-        if (currentTime == null)
-            return;
+        if (!isTimeFetched || !dailyPanel.activeSelf) return;
 
-        currentTime = currentTime.AddSeconds(Time.deltaTime);
+        if (Time.time < lastControlTime + 1) return;
 
+        lastControlTime = Time.time;
         // Gün deðiþimi kontrolü
         if (currentTime.Date > lastCheckedDate)
         {
@@ -71,13 +77,20 @@ public class DailyTimer : MonoBehaviour
             timeToTarget = timeToTarget.Add(new TimeSpan(24, 0, 0)); // Ertesi gün 03:00 UTC
         }
 
-        Debug.Log("Time until 03:00 UTC: " + timeToTarget.ToString(@"hh\:mm\:ss"));
+        //Debug.Log("Time until 03:00 UTC: " + timeToTarget.ToString(@"hh\:mm\:ss"));
+        timerTxt.text = timeToTarget.ToString(@"hh\:mm\:ss");
+        // currentTime'ý sadece deltaTime ile güncellemek yerine gerçek zamanla eþitle
+        currentTime = DateTime.UtcNow;
     }
 
-    void OnNewDay()
+    public void OnNewDay()
     {
+
         Debug.Log("New day detected: " + currentTime.Date);
         // Günlük görevlerinizi burada yenileyebilirsiniz
+
+        PlaytimeRewardsManager.instance.DayReset();
+        DailyQuestManager.Instance.DayReset();
 
         // Gün deðiþimi sonrasý lastCheckedDate güncelle
         lastCheckedDate = currentTime.Date;
@@ -100,5 +113,3 @@ public class WorldTimeAPIResponse
 {
     public string datetime;
 }
-
-

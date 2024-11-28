@@ -39,12 +39,12 @@ public class DailyQuestManager : MonoBehaviour
 
     public void FirstControl()
     {
-        //newDay=...........
-        //eðer yeni gün olmuþsa sýfýrlayacak.
+
         SetQuestList();
         if (newDay)
         {
             dailyStarCount = 0;
+            dailyStarSlider.value = 0;
             PlayerPrefs.SetInt("IapBundle_DailyStar", 0);
             foreach (var item in chestList)
             {
@@ -54,6 +54,7 @@ public class DailyQuestManager : MonoBehaviour
             {
                 item.Clear();
             }
+            
         }
         else
         {
@@ -119,4 +120,13 @@ public class DailyQuestManager : MonoBehaviour
         PlayerPrefs.SetInt("IapBundle_DailyQuestAmount" + (int)selectType, dailyQuestCount[(int)selectType]);
         dailyQuestUiList[(int)selectType].Control();
     }
+
+    public void DayReset()
+    {
+        newDay = true;
+        FirstControl();
+        newDay = false;
+    }
+
+
 }

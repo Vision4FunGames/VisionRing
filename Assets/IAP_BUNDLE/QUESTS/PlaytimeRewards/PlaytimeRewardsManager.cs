@@ -33,6 +33,19 @@ public class PlaytimeRewardsManager : MonoBehaviour
     {
         dailyPlaytime += Time.deltaTime;
     }
+
+    public void DayReset()
+    {
+        dailyPlaytime = 0;
+        PlayerPrefs.SetFloat("DailyPlaytime", dailyPlaytime);
+        for (int i = 0; i < playtimeRewards.Count; i++)
+        {
+            playtimeRewards[i].SetReward(rewards[i], rewardsRequirementMinutes[i], i);
+        }
+    }
+
+
+
     IEnumerator SavePlaytime()
     {
         while (true)

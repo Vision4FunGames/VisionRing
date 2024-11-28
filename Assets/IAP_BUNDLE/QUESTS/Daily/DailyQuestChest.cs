@@ -38,6 +38,8 @@ public class DailyQuestChest : MonoBehaviour
     public void Clear()
     {
         PlayerPrefs.SetInt("IapBundle_DailyChest" + requirementStar, 0);
+        closeImage.SetActive(true);
+        openedImage.SetActive(false);
     }
 
     public void Control()

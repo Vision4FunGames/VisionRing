@@ -15,10 +15,11 @@ public class DailyQuestItemUi : MonoBehaviour
     [ReadOnly] public DailyQuestItem quest;
     public Slider slider;
     public Button button;
-    public GameObject tick,starImage;
+    public GameObject tick, starImage;
 
     public void Clear()
     {
+        Debug.Log("Clear");
         slider.maxValue = quest.requirementAmount;
         slider.value = 0;
         title.text = quest.title;
@@ -26,7 +27,9 @@ public class DailyQuestItemUi : MonoBehaviour
         star.text = quest.star.ToString();
         requirement.text = "0/" + quest.requirementAmount;
         button.interactable = false;
+        button.gameObject.SetActive(false);
         tick.SetActive(false);
+        PlayerPrefs.SetInt("IapBundle_DailyQuestAmount" + (int)quest.questType, 0);
         PlayerPrefs.SetInt("DailyQuestClaim" + quest.questType, 0);
     }
 
@@ -40,6 +43,7 @@ public class DailyQuestItemUi : MonoBehaviour
             bg.sprite = greenSprite;
             button.gameObject.SetActive(false);
             tick.SetActive(true);
+            transform.SetSiblingIndex(transform.parent.childCount - 1);
         }
         else
         {
@@ -48,6 +52,7 @@ public class DailyQuestItemUi : MonoBehaviour
                 button.interactable = true;
                 bg.sprite = greenSprite;
                 transform.SetSiblingIndex(0);
+                button.gameObject.SetActive(true);
 
             }
             else//ödül kazanýlmadý
@@ -68,7 +73,7 @@ public class DailyQuestItemUi : MonoBehaviour
         content.text = quest.content;
         star.text = quest.star.ToString();
         requirement.text = "0/" + quest.requirementAmount;
-
+        bg.sprite = graySprite;
     }
     public void Claim()
     {
@@ -76,6 +81,7 @@ public class DailyQuestItemUi : MonoBehaviour
         button.gameObject.SetActive(false);
         DailyQuestManager.Instance.AddStar(quest.star, starImage.transform.position);
         PlayerPrefs.SetInt("DailyQuestClaim" + quest.questType, 1);
+        transform.SetSiblingIndex(transform.parent.childCount - 1);
     }
 
 }

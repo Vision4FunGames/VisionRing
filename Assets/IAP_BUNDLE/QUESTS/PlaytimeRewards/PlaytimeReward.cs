@@ -45,6 +45,8 @@ public class PlaytimeReward : MonoBehaviour
         rewardIsEmpty = false;
         claimedObj.SetActive(false);
         bg.color = PlaytimeRewardsManager.instance.rewardList.GetTierColor(reward.rewardType);
+        focusImage.DOKill();
+        focusImage.DOFade(0, 0.1f);
     }
 
     public void Control()
