@@ -121,6 +121,12 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        if (!PlayerPrefs.HasKey("StartVideo"))
+        {
+            chapter1.gameObject.SetActive(true);
+            PlayerPrefs.SetInt("StartVideo", 1);
+        }
     }
 
     private void Start()
