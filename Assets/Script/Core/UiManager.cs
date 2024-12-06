@@ -42,6 +42,7 @@ public class UiManager : MonoBehaviour
 
     public Button buildBtn;
     public TextMeshProUGUI playerLevel;
+    public TextMeshProUGUI playerLevelInventory;
     public GameObject focusPanel;
     public CanvasGroup CanvasGroup;
     public float canvasTime;

@@ -131,6 +131,14 @@ public class TeleportManager : MonoBehaviour
             teleports[i].tpCount = 0;
         }
     }
+    
+    public void TeleportCloseAll()
+    {
+        for (int i = 0; i < teleports.Length; i++)
+        {
+            teleports[i].gameObject.SetActive(true);
+        }
+    }
 
     public void DungeonScene(int dungeonLevel)
     {

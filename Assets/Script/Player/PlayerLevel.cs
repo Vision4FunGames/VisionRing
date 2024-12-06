@@ -36,6 +36,7 @@ public class PlayerLevel : MonoBehaviour
 
         PercenCalculate();
         UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"   %"+_percent;
+        UiManager.instance.playerLevelInventory.text =  "Level: " + currentLevel.ToString();
         UiManager.instance.pLeveloutText.text = currentLevel.ToString();
         UiManager.instance.pLevelInText.text = currentLevel.ToString();
         if (currentLevel >= 2)
@@ -83,6 +84,7 @@ public class PlayerLevel : MonoBehaviour
         UiManager.instance.playerLevel.text = "Level: " + currentLevel.ToString() +"i%"+_percent;
         UiManager.instance.pLeveloutText.text = currentLevel.ToString();
         UiManager.instance.pLevelInText.text = currentLevel.ToString();
+        UiManager.instance.playerLevelInventory.text =  "Level: " + currentLevel.ToString();
         if (currentExp > levelsExpPool[currentLevel - 1])
             LevelUp();
         var unlockObjects = FindObjectsOfType<UnlockButton>();

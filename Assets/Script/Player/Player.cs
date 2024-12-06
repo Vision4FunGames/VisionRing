@@ -222,8 +222,9 @@ public class Player : MonoBehaviour
     public void DashRaycast()
     {
         RaycastHit hit;
+        LayerMask mask = ~LayerMask.GetMask("Fox");
         rayPos = transform.GetChild(0).position + new Vector3(0, 2, 0);
-        if (Physics.Raycast(rayPos, transform.GetChild(0).forward, out hit, rayDistance))
+        if (Physics.Raycast(rayPos, transform.GetChild(0).forward, out hit, rayDistance,mask))
         {
             transform.DOKill();
             dash = false;

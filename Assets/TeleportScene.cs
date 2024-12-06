@@ -43,6 +43,9 @@ public class TeleportScene : MonoBehaviour
             GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_XDamping = 0;
             GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_YDamping = 0;
             GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_ZDamping = 0;
+
+            transform.DOScale(Vector3.zero, 1).SetDelay(2);
+            
             if (task)
             {
                 Invoke("TaskCompletedWait", 4f);
