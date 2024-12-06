@@ -410,7 +410,7 @@ public class EquipmentManager : MonoBehaviour
         UiManager.instance.upGradeTxt2.text = " ";
         UiManager.instance.upGradeTxt3.text = " ";
 
-        UiManager.instance.upggradeBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "dddddddd";
+        UiManager.instance.upggradeBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade";
         //newItem.upgradePrices[newItem.itemLevel].ToString();
 
         if ((newItem.damageModifier * playerStats.damage.GetValue() > 0))

@@ -84,16 +84,19 @@ public class InventoryUI : MonoBehaviour
                     if (i < inventory.itemsCount.Count && i < inventory.items.Count && inventory.itemsCount[i] > 0)
                     {
                         slots[i].AddItem(inventory.items[i], inventory.itemsCount[i]);
+                        Debug.Log("A1-A1");
                     }
-                    else if ((ecoCounter < EconomyManager.instance.itemList.Count))
+                    else if ((ecoCounter < EconomyManager.instance.itemList.Count) && (EconomyManager.instance.itemCount[ecoCounter] > 0))
                     {
                         ecoCounter++;
+                        Debug.Log("A2-A1");
                         for (int j = listUqcount; j < EconomyManager.instance.itemList.Count; j++)
                         {
                             if ((EconomyManager.instance.itemCount[j] > 0))
                             {
                                 if (EconomyManager.instance.itemList[j].showInInventory)
                                 {
+                                    Debug.Log("A2-A1");
                                     slots[i].AddItem(EconomyManager.instance.itemList[j],
                                         EconomyManager.instance.itemCount[j]);
                                     listUqcount = j + 1;
@@ -106,14 +109,16 @@ public class InventoryUI : MonoBehaviour
                     }
                     else if (usableCounter < inventory.usableItems.Count)
                     {
-                        for (int j = 0; j < inventory.usableItemsCount.Count; j++)
+                        for (int j = usableCounter; j < inventory.usableItemsCount.Count; j++)
                         {
                             if (inventory.usableItemsCount[j] > 0)
                             {
+                                Debug.Log("A3-A1");
                                 slots[i].AddItem(inventory.usableItems[usableCounter],
                                     inventory.usableItemsCount[usableCounter]);
                                 slots[i]._inventoryType = InventoryType.Usable;
                                 usableCounter++;
+                                break;
                             }
                         }
                     }
