@@ -44,8 +44,8 @@ public class TeleportScene : MonoBehaviour
             GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_YDamping = 0;
             GameManager.instance.playerVCam.GetCinemachineComponent<CinemachineTransposer>().m_ZDamping = 0;
 
-            transform.DOScale(Vector3.zero, 1).SetDelay(2);
-            
+            transform.DOScale(Vector3.zero, 1).SetDelay(2).OnComplete((() => gameObject.SetActive(false)));
+
             if (task)
             {
                 Invoke("TaskCompletedWait", 4f);
@@ -111,8 +111,9 @@ public class TeleportScene : MonoBehaviour
 
     public void OpenDelayPortal(float delay)
     {
-        transform.DOScale(new Vector3(4.27f,3.12f,3.12f), 1f).SetEase(Ease.OutBack).SetDelay(delay);
+        transform.DOScale(new Vector3(4.27f, 3.12f, 3.12f), 1f).SetEase(Ease.OutBack).SetDelay(delay);
     }
+
     public void CloseDelayPortal(float delay)
     {
         transform.DOScale(Vector3.zero, 1).SetDelay(delay);

@@ -64,6 +64,10 @@ public class InventoryUI : MonoBehaviour
             type = "All";
         }
 
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].ClearSlot();
+        }
         if (UiManager.instance.buyanarmortutorial)
         {
             UiManager.instance.buyanarmortutorial = false;

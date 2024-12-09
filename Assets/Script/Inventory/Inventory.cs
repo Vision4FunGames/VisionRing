@@ -147,10 +147,12 @@ public class Inventory : MonoBehaviour
         }
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
+        
         ES3.Save("currentItems",equipmentManager.currentEquipment);
         ES3.Save("inventory",items);
         ES3.Save("UsableItems", usableItems);
         ES3.Save("UsableItemsCount", usableItemsCount);
+        InventoryUI.instance.UpdateUI();
     }
 
     public void InventoryTypeChange(InventoryType type)

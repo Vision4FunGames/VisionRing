@@ -73,6 +73,7 @@ public class UiManager : MonoBehaviour
     public Button sonarBtn;
     public Button horseBtn;
     public Button upggradeBtn;
+    public Button inventoryBtn;
     [Header("Economy ")] public TextMeshProUGUI diamondText, gemText, goldText;
 
     //Chest Scroll

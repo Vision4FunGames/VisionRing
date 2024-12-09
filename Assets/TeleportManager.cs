@@ -94,6 +94,13 @@ public class TeleportManager : MonoBehaviour
                 break;
             }
         }
+
+        TaskPrefab taskPrefab = FindObjectOfType<MeetRuthledge>()?.GetComponent<TaskPrefab>();
+        if (taskPrefab != null)
+        {
+            taskPrefab.isCompleted = true;
+            Destroy(taskPrefab.gameObject,1);
+        }
     }
     public void TeleportScene(int sceneName)
     {
@@ -136,7 +143,7 @@ public class TeleportManager : MonoBehaviour
     {
         for (int i = 0; i < teleports.Length; i++)
         {
-            teleports[i].gameObject.SetActive(true);
+            teleports[i].gameObject.SetActive(false);
         }
     }
 
