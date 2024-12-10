@@ -79,7 +79,8 @@ public class AchievementUiItem : MonoBehaviour
     {
         claimButton.gameObject.SetActive(false);
         Debug.Log("Earn " + achievement.rewardAmount + "  Gem");
-
+        RewardDetail newReward = new RewardDetail();
+        RewardDisplay.Instance.EarnReward(RewardItemType.GemBlue, achievement.rewardAmount);
         AchievementManager.Instance.achievementCount[(int)achievement.achievementType] -= achievement.GetRequirementAmount();
         PlayerPrefs.SetInt("Iap_Bundle_AchievementAmount" + (int)achievement.achievementType, AchievementManager.Instance.achievementCount[(int)achievement.achievementType]);
         achievement.LevelUp();

@@ -67,11 +67,12 @@ public class PlaytimeReward : MonoBehaviour
         }
     }
 
-    public void SelectReward()
+    public void SelectReward(bool display)
     {
         if (isReady)
         {
             PlayerPrefs.SetInt("PlaytimeRewarded" + rewardIndex, 1);
+            if (display) RewardDisplay.Instance.EarnReward(reward.rewardType);
             Debug.Log("Earn: " + reward.rewardType + "    " + PlaytimeRewardsManager.instance.rewardList.GetAmount(reward.rewardType));
             isReady = false;
             rewardIsEmpty = true;
@@ -79,4 +80,10 @@ public class PlaytimeReward : MonoBehaviour
             claimedObj.SetActive(true);
         }
     }
+    public void Clear()
+    {
+        PlayerPrefs.SetInt("PlaytimeRewarded" + rewardIndex, 0);
+    }
+
+
 }

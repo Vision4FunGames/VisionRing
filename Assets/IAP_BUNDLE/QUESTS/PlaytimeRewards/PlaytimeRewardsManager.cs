@@ -13,7 +13,8 @@ public class PlaytimeRewardsManager : MonoBehaviour
     public List<Reward> rewards;
     public List<int> rewardsRequirementMinutes;
     public static PlaytimeRewardsManager instance;
-    /*[ReadOnly]*/ public float dailyPlaytime;
+    /*[ReadOnly]*/
+    public float dailyPlaytime;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class PlaytimeRewardsManager : MonoBehaviour
         PlayerPrefs.SetFloat("DailyPlaytime", dailyPlaytime);
         for (int i = 0; i < playtimeRewards.Count; i++)
         {
+            playtimeRewards[i].Clear();
             playtimeRewards[i].SetReward(rewards[i], rewardsRequirementMinutes[i], i);
         }
     }
@@ -64,10 +66,13 @@ public class PlaytimeRewardsManager : MonoBehaviour
 
     public void ClaimAllBUtton()
     {
+        List<RewardDetail> list = new List<RewardDetail>();
         foreach (var item in playtimeRewards)
         {
-            item.SelectReward();
+            if (item.isReady) list.Add(item.rewardDetail);
+            item.SelectReward(false);
         }
+        if (list.Count > 0) RewardDisplay.Instance.EarnReward(list);
     }
 
 

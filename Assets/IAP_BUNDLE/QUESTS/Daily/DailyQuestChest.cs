@@ -27,6 +27,7 @@ public class DailyQuestChest : MonoBehaviour
             {
                 isOpenable = false;
                 Debug.Log("Sandýk Açýldý");
+                RewardDisplay.Instance.EarnReward(ChestRewardPackType.DefaultChest);
                 spring.AddVelocityPosition(Vector3.one * 10f);
                 spring.AddVelocityScale(Vector3.right * 5f);
                 PlayerPrefs.SetInt("IapBundle_DailyChest" + requirementStar, 1);

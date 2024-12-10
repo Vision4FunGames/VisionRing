@@ -54,7 +54,7 @@ public class DailyQuestManager : MonoBehaviour
             {
                 item.Clear();
             }
-            
+
         }
         else
         {

@@ -8,6 +8,7 @@ using UnityEngine;
 public enum RewardItemType { Gold, Diamond, GemBlue, GemPurple, GemGreen, Sword1Map1 }
 public enum Tier { Tier1, Tier2, Tier3, Tier4, Tier5, Tier6, Tier7, Tier8, Tier9 }
 public enum RewardPackType { Forest, Dungeon, Chest, Skull, Map1 }
+public enum ChestRewardPackType { DefaultChest,DailyChest }
 [CreateAssetMenu(fileName = "RewardList", menuName = "ScriptableObjects/RewardList", order = 3)]
 public class RewardList : ScriptableObject
 {
@@ -17,7 +18,7 @@ public class RewardList : ScriptableObject
     public List<TierColor> tierColors;
     public List<RewardDetail> rewards;
     public List<RewardPack> spinRewardPacks;
-
+    public List<ChestRewardPack> chestRewardPacks;
 
     private void OnValidate()
     {
@@ -61,6 +62,10 @@ public class RewardList : ScriptableObject
     {
         return rewards[(int)rewardType];
     }
+    public ChestRewardPack GetRewardDetail(ChestRewardPackType chestType)
+    {
+        return chestRewardPacks[(int)chestType];
+    }
 
     public int GetAmount(RewardItemType rewardType)
     {
@@ -80,6 +85,16 @@ public class RewardDetail
     public Tier tier;
     public int amount;
 }
+
+
+[Serializable]
+public class ChestRewardPack
+{
+    public string packName;
+    public ChestRewardPackType packType;
+    public List<RewardDetail> rewards;
+}
+
 
 [Serializable]
 public class RewardPack
