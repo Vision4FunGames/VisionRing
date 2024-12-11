@@ -29,7 +29,9 @@ public class SaveTheFox : MonoBehaviour
         if (distance < 25 && !changeTxt)
         {
             var box = TaskPanelController.instance.GetLastMainTask();
-            box.infoText.text = "Save the Fox";
+            string msg = "Save the Fox \n \n Approach the cage and save the fox\n";
+            box.infoText.text = msg;
+            
             changeTxt = true;
         }
 

@@ -124,11 +124,7 @@ public class UiManager : MonoBehaviour
     {
         instance = this;
 
-        if (!PlayerPrefs.HasKey("StartVideo"))
-        {
-            chapter1.gameObject.SetActive(true);
-            PlayerPrefs.SetInt("StartVideo", 1);
-        }
+       
     }
 
     private void Start()
@@ -164,6 +160,16 @@ public class UiManager : MonoBehaviour
         }
 
         HideOutEntry();
+        
+        if (!PlayerPrefs.HasKey("StartVideo"))
+        {
+            chapter1.frame = 0;
+            chapter1.time = 0;
+            npcComing.time = 0;
+            npcComing.frame = 0;
+            chapter1.gameObject.SetActive(true);
+            PlayerPrefs.SetInt("StartVideo", 1);
+        }
     }
 
     public void UpdatePlayerStats()
