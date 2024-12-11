@@ -59,6 +59,7 @@ public class UiManager : MonoBehaviour
     public GameObject mapCloseBtn;
     public GameObject mapOpenBtn;
     public TMP_InputField playerNameInput;
+    public TextMeshProUGUI playerNameInputTxt;
     [HideInInspector] public float dashCoolDownLast, rotateFireLast, earthquickLast, flameTLastQuick;
     public bool isTaskInventory;
     public MMProgressBar playerProgressBar;
@@ -170,8 +171,16 @@ public class UiManager : MonoBehaviour
             chapter1.gameObject.SetActive(true);
             PlayerPrefs.SetInt("StartVideo", 1);
         }
+        playerNameInput.onValueChanged.AddListener(OnInputFieldChanged);
     }
-
+    private void OnInputFieldChanged(string value)
+    {
+        playerNameInputTxt.text = value;
+    }
+    void OnDestroy()
+    {
+        playerNameInput.onValueChanged.RemoveListener(OnInputFieldChanged);
+    }
     public void UpdatePlayerStats()
     {
         attackText.text = Player.instance.GetComponent<PlayerStats>().damage.GetValue().ToString();
