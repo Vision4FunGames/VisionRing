@@ -108,10 +108,10 @@ namespace AmazingAssets.DynamicRadialMasks
 
         public void BreafRadial()
         {
-            DOTween.To(() => radius, x => radius = x, baseRadius + 1, breafDuration)
+            DOTween.To(() => radius, x => radius = x, baseRadius + 0, breafDuration)
                 .OnComplete(() =>
                 {
-                    DOTween.To(() => radius, x => radius = x, baseRadius - 1, breafDuration)
+                    DOTween.To(() => radius, x => radius = x, baseRadius - 0, breafDuration)
                         .OnComplete(() => { BreafRadial(); });
                 });
         }

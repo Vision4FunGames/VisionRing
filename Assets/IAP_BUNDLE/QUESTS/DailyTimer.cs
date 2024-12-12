@@ -17,7 +17,7 @@ public class DailyTimer : MonoBehaviour
     {
         StartCoroutine(GetTimeFromInternet());
 
-        // Son giriþ tarihini yükle
+        // Son giriï¿½ tarihini yï¿½kle
         if (PlayerPrefs.HasKey("LastLoginDate"))
         {
             lastCheckedDate = DateTime.Parse(PlayerPrefs.GetString("LastLoginDate")).ToUniversalTime();
@@ -27,7 +27,7 @@ public class DailyTimer : MonoBehaviour
             lastCheckedDate = DateTime.UtcNow;
         }
 
-        // Oyun baþlarken gün deðiþimi kontrolü yap
+        // Oyun baï¿½larken gï¿½n deï¿½iï¿½imi kontrolï¿½ yap
         if (DateTime.UtcNow.Date > lastCheckedDate.Date)
         {
             OnNewDay();
@@ -63,23 +63,23 @@ public class DailyTimer : MonoBehaviour
         if (Time.time < lastControlTime + 1) return;
 
         lastControlTime = Time.time;
-        // Gün deðiþimi kontrolü
+        // Gï¿½n deï¿½iï¿½imi kontrolï¿½
         if (currentTime.Date > lastCheckedDate)
         {
             lastCheckedDate = currentTime.Date;
             OnNewDay();
         }
 
-        // 03:00 UTC'ye kalan süreyi hesapla ve göster
+        // 03:00 UTC'ye kalan sï¿½reyi hesapla ve gï¿½ster
         TimeSpan timeToTarget = targetTime - currentTime.TimeOfDay;
         if (timeToTarget < TimeSpan.Zero)
         {
-            timeToTarget = timeToTarget.Add(new TimeSpan(24, 0, 0)); // Ertesi gün 03:00 UTC
+            timeToTarget = timeToTarget.Add(new TimeSpan(24, 0, 0)); // Ertesi gï¿½n 03:00 UTC
         }
 
         //Debug.Log("Time until 03:00 UTC: " + timeToTarget.ToString(@"hh\:mm\:ss"));
         timerTxt.text = timeToTarget.ToString(@"hh\:mm\:ss");
-        // currentTime'ý sadece deltaTime ile güncellemek yerine gerçek zamanla eþitle
+        // currentTime'ï¿½ sadece deltaTime ile gï¿½ncellemek yerine gerï¿½ek zamanla eï¿½itle
         currentTime = DateTime.UtcNow;
     }
 
@@ -87,22 +87,22 @@ public class DailyTimer : MonoBehaviour
     {
 
         Debug.Log("New day detected: " + currentTime.Date);
-        // Günlük görevlerinizi burada yenileyebilirsiniz
+        // Gï¿½nlï¿½k gï¿½revlerinizi burada yenileyebilirsiniz
 
         PlaytimeRewardsManager.instance.DayReset();
         DailyQuestManager.Instance.DayReset();
 
-        // Gün deðiþimi sonrasý lastCheckedDate güncelle
+        // Gï¿½n deï¿½iï¿½imi sonrasï¿½ lastCheckedDate gï¿½ncelle
         lastCheckedDate = currentTime.Date;
 
-        // Yeni günü kaydet
+        // Yeni gï¿½nï¿½ kaydet
         PlayerPrefs.SetString("LastLoginDate", lastCheckedDate.ToString());
         PlayerPrefs.Save();
     }
 
     void OnApplicationQuit()
     {
-        // Oyundan çýkarken son giriþ tarihini kaydet
+        // Oyundan ï¿½ï¿½karken son giriï¿½ tarihini kaydet
         PlayerPrefs.SetString("LastLoginDate", currentTime.ToString());
         PlayerPrefs.Save();
     }

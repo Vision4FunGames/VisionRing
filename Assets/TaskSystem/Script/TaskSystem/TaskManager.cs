@@ -33,8 +33,8 @@ namespace TaskSystem
 
             if (LastMainTaskIndex > 5 && LastMainTaskIndex < 11)
                 LastMainTaskIndex = 5;
-            else if (LastMainTaskIndex > 11 && LastMainTaskIndex < 14)
-                LastMainTaskIndex = 11;
+            else if (LastMainTaskIndex > 18 && LastMainTaskIndex < 21)
+                LastMainTaskIndex = 18;
             
             var currentTask = mainTasks.taskData[LastMainTaskIndex];
             currentTask.MarkAsMainTask();
