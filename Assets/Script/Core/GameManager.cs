@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour, IGameAnalyticsATTListener
     public GameObject campFire;
     public GameObject tutoVaril;
     public GameObject StonePanel;
+    public GameObject playernamePanel;
     [Header("NPC isOpen")] public bool isMerchant;
     public bool isMagician;
     public bool isBlacksmith;

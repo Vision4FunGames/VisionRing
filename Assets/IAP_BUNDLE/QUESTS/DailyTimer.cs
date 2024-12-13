@@ -50,7 +50,7 @@ public class DailyTimer : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to get time from internet");
+            //Debug.LogError("Failed to get time from internet");
             yield return new WaitForSeconds(1);
             StartCoroutine(GetTimeFromInternet());
         }

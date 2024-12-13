@@ -147,7 +147,7 @@ public class UiManager : MonoBehaviour
         {
             sonarBtn.gameObject.SetActive(true);
         }
-
+        
         if (PlayerPrefs.HasKey("playerName"))
         {
             GameManager.instance.PlayerName = PlayerPrefs.GetString("playerName");
@@ -157,13 +157,14 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            playerNameConfirm.GetComponentInParent<CanvasGroupTweener>().Open();
+           
         }
 
         HideOutEntry();
         
         if (!PlayerPrefs.HasKey("StartVideo"))
         {
+            Debug.Log("Video sıfırlama");
             chapter1.frame = 0;
             chapter1.time = 0;
             npcComing.time = 0;
@@ -342,9 +343,11 @@ public class UiManager : MonoBehaviour
 
         if (chapter1.frame + 5 >= (long)chapter1.frameCount && chapter1.gameObject.activeSelf)
         {
+            Debug.Log("Video chapter1 kapatma");
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Cinematic", "Cinematic02");
             GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
             chapter1.gameObject.SetActive(false);
+            GameManager.instance.playernamePanel.gameObject.SetActive(true);
         }
 
         if (chapter3.frame + 5 >= (long)chapter3.frameCount && chapter3.gameObject.activeSelf)
@@ -356,6 +359,7 @@ public class UiManager : MonoBehaviour
 
         if (npcComing.frame + 5 >= (long)npcComing.frameCount && npcComing.gameObject.activeSelf)
         {
+            Debug.Log("Video npc kapatma");
             GetComponent<SoundManager>().mainMusicSource.volume = GetComponent<SoundManager>().mainMusicVolume.value;
             npcComing.gameObject.SetActive(false);
         }
