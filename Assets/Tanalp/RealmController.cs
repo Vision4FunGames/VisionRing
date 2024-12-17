@@ -124,7 +124,7 @@ public class RealmController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("The 'DRM' game object is not assigned.");
+           // Debug.LogWarning("The 'DRM' game object is not assigned.");
         }
     }
 }

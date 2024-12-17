@@ -85,6 +85,7 @@ public class TeleportScene : MonoBehaviour
         else
         {
             _player.isBase = true;
+            _player.playerDrm.gameObject.SetActive(false);
             UiManager.instance.HideOutEntry();
         }
 

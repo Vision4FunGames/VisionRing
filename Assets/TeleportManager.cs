@@ -180,7 +180,10 @@ public class TeleportManager : MonoBehaviour
             UiManager.instance.DungeonEntry();
         }
         else
+        {
             UiManager.instance.HideOutEntry();
+        }
+        
 
         Invoke("playerMovementStart", 1);
         _cameraShake.DungeonStart();

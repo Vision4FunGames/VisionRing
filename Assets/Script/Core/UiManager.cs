@@ -450,7 +450,7 @@ public class UiManager : MonoBehaviour
         OpenUI(contentPanel);
         Inventory.instance.InventoryTypeChange(InventoryType.Inventory);
         inventoryUi.ShowSelected("All");
-        inventoryUi.UpdateUI();
+        //inventoryUi.UpdateUI();
         onEconomyChangedCallBack.Invoke();
         if (isTaskInventory)
         {

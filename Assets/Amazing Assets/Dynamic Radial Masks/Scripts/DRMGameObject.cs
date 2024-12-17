@@ -122,7 +122,7 @@ namespace AmazingAssets.DynamicRadialMasks
                 DOTween.To(() => radius, x => radius = x, 0, 4f).OnComplete((() =>
                 {
                     increaseEnes = true;
-
+                    gameObject.SetActive(false);
                 }));
             else if (radius < 2)
             {

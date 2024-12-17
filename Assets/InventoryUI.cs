@@ -63,6 +63,7 @@ public class InventoryUI : MonoBehaviour
         {
             type = "All";
         }
+        Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -115,13 +116,13 @@ public class InventoryUI : MonoBehaviour
                     {
                         for (int j = usableCounter; j < inventory.usableItemsCount.Count; j++)
                         {
+                            usableCounter++;
                             if (inventory.usableItemsCount[j] > 0)
                             {
                                 Debug.Log("A3-A1");
-                                slots[i].AddItem(inventory.usableItems[usableCounter],
-                                    inventory.usableItemsCount[usableCounter]);
+                                slots[i].AddItem(inventory.usableItems[j],
+                                    inventory.usableItemsCount[j]);
                                 slots[i]._inventoryType = InventoryType.Usable;
-                                usableCounter++;
                                 break;
                             }
                         }
