@@ -12,8 +12,8 @@ public class TaskReward : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Inventory.instance.usableItemsCount[0] += 1;
-        Inventory.instance.usableItemsCount[1] += 1;
+        //Inventory.instance.usableItemsCount[0] += 1;
+        //Inventory.instance.usableItemsCount[1] += 1;
         Inventory.instance.SaveAllItems();
         collectBtn.onClick.AddListener(GetReward);
     }
