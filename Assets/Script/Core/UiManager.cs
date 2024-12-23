@@ -130,6 +130,18 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+        if (!PlayerPrefs.HasKey("StartVideo"))
+        {
+            Debug.Log("Video sıfırlama");
+            chapter1.frame = 0;
+            chapter1.time = 0;
+            npcComing.time = 0;
+            npcComing.frame = 0;
+           // chapter1.gameObject.SetActive(qtrue);
+            PlayerPrefs.SetInt("StartVideo", 1);
+        }
+        
+        
         buildBtn.onClick.AddListener(PlayerManager.instance.BuildStartObj);
         StoneBtn.onClick.AddListener(StonePanelOpen);
         playerNameConfirm.onClick.AddListener(PlayerNameSave);
@@ -162,16 +174,7 @@ public class UiManager : MonoBehaviour
 
         HideOutEntry();
         
-        if (!PlayerPrefs.HasKey("StartVideo"))
-        {
-            Debug.Log("Video sıfırlama");
-            chapter1.frame = 0;
-            chapter1.time = 0;
-            npcComing.time = 0;
-            npcComing.frame = 0;
-            chapter1.gameObject.SetActive(true);
-            PlayerPrefs.SetInt("StartVideo", 1);
-        }
+        
         playerNameInput.onValueChanged.AddListener(OnInputFieldChanged);
     }
     private void OnInputFieldChanged(string value)
