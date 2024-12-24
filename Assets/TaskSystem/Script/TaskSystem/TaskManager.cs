@@ -9,6 +9,7 @@ namespace TaskSystem
 {
     public class TaskManager : TaskSingleton<TaskManager>
     {
+        public bool test;
         public TaskGroup mainTasks;
         public TaskGroup manualTasks;
 
@@ -24,7 +25,7 @@ namespace TaskSystem
 
         public void CheckForMainTasks()
         {
-            if (ES3.KeyExists(MainTasksSaveKey))
+            if (ES3.KeyExists(MainTasksSaveKey) && !test)
             {
                 LastMainTaskIndex = ES3.Load(MainTasksSaveKey, 0);
             }
