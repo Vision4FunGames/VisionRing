@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class TaskReward : MonoBehaviour
     public Button collectBtn;
     public bool tutorialComplete;
 
+    public TextMeshProUGUI rewardTxt;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class TaskReward : MonoBehaviour
         rewardPanel.transform.DOScale(Vector3.zero, .5f);
         Destroy(FindObjectOfType<TaskPrefab>().gameObject, 2);
         FindObjectOfType<TaskPrefab>().isCompleted = true;
+        rewardTxt.text = " ";
         if (!tutorialComplete)
             FindObjectOfType<UiManager>().isTaskInventory = true;
     }

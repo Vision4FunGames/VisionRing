@@ -68,6 +68,7 @@ public class HideOutManager : MonoBehaviour
                         if (!PlayerPrefs.HasKey("HideOutReward"))
                         {
                             FindObjectOfType<TaskReward>().rewardPanel.transform.DOScale(new Vector3(1, 1, 1), .5f);
+                            FindObjectOfType<TaskReward>().rewardTxt.text = "Dungeon Key (T1)";
                         }
                     }));
                 });

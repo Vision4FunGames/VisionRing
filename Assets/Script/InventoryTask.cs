@@ -27,6 +27,12 @@ public class InventoryTask : MonoBehaviour
     {
         mask1.SetActive(false);
         mask2.SetActive(true);
+        Invoke("CloseMask",2);
+    }
+
+    public void CloseMask()
+    {
+        mask2.SetActive(false);
     }
 
     public void UseItem()
