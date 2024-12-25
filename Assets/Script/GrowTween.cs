@@ -29,20 +29,22 @@ public class GrowTween : MonoBehaviour
 
     public void Grow()
     {
+        transform.DOKill();
+        GetComponent<PurifyObject>().hitCount++;
+        _grow = true;
+        float val = start - delta;
+        foreach (var item in materialInstances)
+        {
+            DOVirtual.Float(start, val, time, (z) => { item.SetFloat("_Grow", z); })
+                .OnComplete((() =>
+                {
+                    start = val;
+                    _grow = false;
+                }));
+        }
+
         if (!_grow)
         {
-            GetComponent<PurifyObject>().hitCount++;
-            _grow = true;
-            float val = start - delta;
-            foreach (var item in materialInstances)
-            {
-                DOVirtual.Float(start, val, time, (z) => { item.SetFloat("_Clip", z); })
-                    .OnComplete((() =>
-                    {
-                        start = val;
-                        _grow = false;
-                    }));
-            }
         }
     }
 }

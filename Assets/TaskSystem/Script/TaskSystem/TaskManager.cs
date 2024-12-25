@@ -25,9 +25,10 @@ namespace TaskSystem
 
         public void CheckForMainTasks()
         {
-            if (ES3.KeyExists(MainTasksSaveKey) && !test)
+            if (ES3.KeyExists(MainTasksSaveKey))
             {
-                LastMainTaskIndex = ES3.Load(MainTasksSaveKey, 0);
+                if (!test)
+                    LastMainTaskIndex = ES3.Load(MainTasksSaveKey, 0);
             }
 
             Debug.Log("Task      " + LastMainTaskIndex);
@@ -36,7 +37,7 @@ namespace TaskSystem
                 LastMainTaskIndex = 5;
             else if (LastMainTaskIndex > 18 && LastMainTaskIndex < 21)
                 LastMainTaskIndex = 18;
-            
+
             var currentTask = mainTasks.taskData[LastMainTaskIndex];
             currentTask.MarkAsMainTask();
             var taskPrefab = Instantiate(currentTask.prefab, null);
