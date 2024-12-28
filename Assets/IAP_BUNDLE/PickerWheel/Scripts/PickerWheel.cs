@@ -202,7 +202,7 @@ namespace EasyUI.PickerWheelUI
             float rightOffset = (angle - halfPieceAngleWithPaddings) % 360;
             float leftOffset = (angle + halfPieceAngleWithPaddings) % 360;
 
-            float randomAngle = Random.Range(leftOffset, rightOffset);
+            float randomAngle = 0; //Random.Range(leftOffset, rightOffset);
 
             Vector3 targetRotation = Vector3.back * (randomAngle + 2 * 360 * spinDuration);
 
