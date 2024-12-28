@@ -91,6 +91,7 @@ public class DailyTimer : MonoBehaviour
 
         PlaytimeRewardsManager.instance.DayReset();
         DailyQuestManager.Instance.DayReset();
+        DailyCheckinManager.Instance.NextDay();
 
         // G�n de�i�imi sonras� lastCheckedDate g�ncelle
         lastCheckedDate = currentTime.Date;
