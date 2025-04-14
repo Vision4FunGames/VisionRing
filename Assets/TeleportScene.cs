@@ -3,6 +3,7 @@ using Cinemachine;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TeleportScene : MonoBehaviour
 {
@@ -77,6 +78,14 @@ public class TeleportScene : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         _player.transform.position = targetTeleport.transform.position + new Vector3(3, 0, -6);
+        Debug.Log(PlayerPrefs.GetInt("Fox"));
+        if (PlayerPrefs.GetInt("Fox") == 1)
+        {
+            GameManager.instance.fox.SetActive(true);
+            GameManager.instance.fox.GetComponent<NavMeshAgent>().enabled = false;
+            GameManager.instance.fox.transform.position = _player.transform.position;
+        }
+      
         if (Vector3.Distance(_player.transform.position, tp.dungeonSpawnPoint.transform.position) < 300)
         {
             UiManager.instance.DungeonEntry();
