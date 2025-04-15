@@ -137,7 +137,7 @@ public class UiManager : MonoBehaviour
             chapter1.time = 0;
             npcComing.time = 0;
             npcComing.frame = 0;
-           // chapter1.gameObject.SetActive(qtrue);
+            chapter1.gameObject.SetActive(true);
             PlayerPrefs.SetInt("StartVideo", 1);
         }
         

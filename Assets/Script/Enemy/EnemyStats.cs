@@ -33,25 +33,26 @@ public class EnemyStats : CharacterStats
         }
 
         puzzleConditionController = GetComponentInParent<PuzzleConditionController>();
+        
+      
     }
 
     public override void Die()
     {
         DailyQuestManager.Instance.AddQuestEvent(DailyQuestType.KillCreatures,1);
-        if (OnDie != null)
-        {
-            OnDie();
-        }
-        die = true;
-
+      
+        
         if (GetComponent<CapsuleCollider>())
             GetComponent<CapsuleCollider>().enabled = false;
         
         if (GetComponentInParent<EndlessSkelet>())
         {
             GetComponentInParent<EndlessSkelet>().DeadEnemy();
+        }   
+        if (GetComponentInParent<BossRaidSpawnEnemy>())
+        {
+            GetComponentInParent<BossRaidSpawnEnemy>().KillEnemy();
         }
-
        
         Player.instance.GetComponent<PlayerLevel>().ExpCalculate( enemyExp.GetExp(1));
         FindObjectOfType<DrmEnemyChange>().EnemyVariationsList.Remove(GetComponent<EnemyVariations>());
@@ -77,6 +78,11 @@ public class EnemyStats : CharacterStats
             GetComponent<CapsuleCollider>().enabled = false;
             tutoCage.EnemyDied();
         }
+        if (OnDie != null)
+        {
+            OnDie();
+        }
+        die = true;
         base.Die();
     }
 }
