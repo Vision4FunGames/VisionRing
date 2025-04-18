@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -42,10 +40,8 @@ public class BossRaidSpawnEnemy : MonoBehaviour
     public void KillEnemy()
     {
         killCount++;
-        Debug.Log("AAAAAAA----");
         if (killCount == spawned)
         {
-            Debug.Log("AAAAAAA");
             killCount = 0;
             SpawnEnemy();
         }

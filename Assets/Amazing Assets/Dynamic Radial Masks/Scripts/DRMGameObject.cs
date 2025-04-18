@@ -142,7 +142,6 @@ namespace AmazingAssets.DynamicRadialMasks
             {
                 FindObjectOfType<MerchantTutorial>().BarrierOpen();
             }
-
         }
     }
 }
