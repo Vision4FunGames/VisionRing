@@ -22,7 +22,6 @@ public class TeleportManager : MonoBehaviour
     public GameObject currentDungeon;
     public bool isTutorial;
     public int currentDungeonIndex;
-
     private void Start()
     {
         player = Player.instance;
@@ -178,10 +177,12 @@ public class TeleportManager : MonoBehaviour
         if (Vector3.Distance(player.transform.position, dungeonSpawnPoint.transform.position) < 300)
         {
             UiManager.instance.DungeonEntry();
+            player.isBase = false;
         }
         else
         {
             UiManager.instance.HideOutEntry();
+            player.isBase = true;
         }
         
 
@@ -197,9 +198,14 @@ public class TeleportManager : MonoBehaviour
         if (Vector3.Distance(player.transform.position, dungeonSpawnPoint.transform.position) < 300)
         {
             UiManager.instance.DungeonEntry();
+            player.isBase = false;
         }
         else
+        {
             UiManager.instance.HideOutEntry();
+            player.isBase = true;
+        }
+           
 
         Invoke("playerMovementStart", 1f);
         _cameraShake.DungeonEnd();

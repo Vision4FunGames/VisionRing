@@ -29,7 +29,8 @@ namespace AmazingAssets.DynamicRadialMasks
         public Slider slider;
         public float baseRadius;
         public float breafDuration;
-
+        private Player _player;
+        private BossRaidSpawnEnemy _bossRaidSpawnEnemy;
 #if UNITY_EDITOR
         [HideInInspector] public bool displayAllProperties = true;
         [HideInInspector] public DynamicRadialMasks.Enum.MaskShape maskShape;
@@ -45,6 +46,9 @@ namespace AmazingAssets.DynamicRadialMasks
             timer = waitTime;
             if (staticDrm)
                 BreafStart();
+
+            _player = GetComponentInParent<Player>();
+            _bossRaidSpawnEnemy = FindObjectOfType<BossRaidSpawnEnemy>();
         }
 
         void Update()
@@ -123,13 +127,22 @@ namespace AmazingAssets.DynamicRadialMasks
                 {
                     increaseEnes = true;
                     gameObject.SetActive(false);
+                    if (_player)
+                    {
+                        _bossRaidSpawnEnemy.KillAllEnemy();
+                    }
                 }));
             else if (radius < 2)
             {
                 DOTween.To(() => radius, x => radius = x, 100, 4f).OnComplete((() =>
                 {
                     increaseEnes = false;
-
+                    Debug.Log(_player);
+                    if (_player && !_player.isBase)
+                    {
+                        Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+                        _bossRaidSpawnEnemy.SpawnEnemy();
+                    }
                 }));
             }
 

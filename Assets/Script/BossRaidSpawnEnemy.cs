@@ -1,3 +1,4 @@
+using AmazingAssets.DynamicRadialMasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +11,8 @@ public class BossRaidSpawnEnemy : MonoBehaviour
     public int numberOfEnemiesToSpawn = 3;
     int spawned = 0;
     private int killCount=0;
-    void SpawnEnemy()
+    public DRMGameObject DrmGameObject;
+    public void SpawnEnemy()
     {
         spawned = 0;
 
@@ -20,7 +22,7 @@ public class BossRaidSpawnEnemy : MonoBehaviour
             Vector3 randomPosition = playerTransform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
 
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomPosition, out hit, 2f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPosition, out hit, 4f, NavMesh.AllAreas))
             {
                 int rand = Random.Range(0, enemyPrefab.Length);
                 GameObject currentEnemy = Instantiate(enemyPrefab[rand], hit.position, Quaternion.identity);
@@ -37,6 +39,15 @@ public class BossRaidSpawnEnemy : MonoBehaviour
         }
     }
 
+    public void KillAllEnemy()
+    {
+        for (int i = 0; i < spawned; i++)
+        {
+          
+            DestroyImmediate(transform.GetChild(0).gameObject);
+        }
+        killCount = 0;
+    }
     public void KillEnemy()
     {
         killCount++;

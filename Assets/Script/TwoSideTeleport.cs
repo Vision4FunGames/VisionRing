@@ -28,9 +28,14 @@ public class TwoSideTeleport : MonoBehaviour
         if (Vector3.Distance(player.transform.position, _teleportManager.dungeonSpawnPoint.transform.position) < 300)
         {
             UiManager.instance.DungeonEntry();
+            player.isBase = false;
         }
         else
+        {
             UiManager.instance.HideOutEntry();
+            player.isBase =true;
+        }
+         
 
         _cameraShake.DungeonEnd();
         player.teleportParticle.Stop();

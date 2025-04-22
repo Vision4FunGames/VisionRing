@@ -80,7 +80,7 @@ public class EconomyManager : MonoBehaviour
         LoadEconomy();
         for (int i = 0; i < itemCount.Count; i++)
         {
-            Debug.Log(itemCount[i]);
+//            Debug.Log(itemCount[i]);
         }
     }
 
@@ -114,7 +114,7 @@ public class EconomyManager : MonoBehaviour
         itemCount = ES3.Load("itemCount", itemCount);
         for (int i = 0; i < itemCount.Count; i++)
         {
-            Debug.Log(itemCount[i]);
+           // Debug.Log(itemCount[i]);
         }
     }
 
