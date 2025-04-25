@@ -4,6 +4,7 @@ using DG.Tweening;
 using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class TeleportManager : MonoBehaviour
@@ -174,6 +175,14 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = currentDungeon.transform.GetChild(0).position;
+        
+        if (PlayerPrefs.GetInt("Fox") == 1)
+        {
+            GameManager.instance.fox.SetActive(true);
+            GameManager.instance.fox.GetComponent<NavMeshAgent>().enabled = false;
+            GameManager.instance.fox.transform.position = player.transform.position;
+            GameManager.instance.fox.GetComponent<NavMeshAgent>().enabled = true;
+        }
         if (Vector3.Distance(player.transform.position, dungeonSpawnPoint.transform.position) < 300)
         {
             UiManager.instance.DungeonEntry();
@@ -195,6 +204,15 @@ public class TeleportManager : MonoBehaviour
     {
         UiManager.instance.backGroundImage.DOColor(new Color(0, 0, 0, 0), 1.5f);
         player.transform.position = Vector3.zero;
+        
+        if (PlayerPrefs.GetInt("Fox") == 1)
+        {
+            GameManager.instance.fox.SetActive(true);
+            GameManager.instance.fox.GetComponent<NavMeshAgent>().enabled = false;
+            GameManager.instance.fox.transform.position = player.transform.position;
+            GameManager.instance.fox.GetComponent<NavMeshAgent>().enabled = true;
+        }
+        
         if (Vector3.Distance(player.transform.position, dungeonSpawnPoint.transform.position) < 300)
         {
             UiManager.instance.DungeonEntry();

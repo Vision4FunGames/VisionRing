@@ -84,6 +84,7 @@ public class TeleportScene : MonoBehaviour
             GameManager.instance.fox.SetActive(true);
             GameManager.instance.fox.GetComponent<NavMeshAgent>().enabled = false;
             GameManager.instance.fox.transform.position = _player.transform.position;
+            GameManager.instance.fox.GetComponent<NavMeshAgent>().enabled = true;
         }
       
         if (Vector3.Distance(_player.transform.position, tp.dungeonSpawnPoint.transform.position) < 300)
