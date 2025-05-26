@@ -1,8 +1,6 @@
 using NaughtyAttributes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public enum RewardItemType { Gold, Diamond, GemBlue, GemPurple, GemGreen, Sword1Map1 }

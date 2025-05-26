@@ -113,7 +113,7 @@ namespace AllIn1SpringsToolkit
 			if (positionSpring.springEnabled)
 			{
 				Vector3 velocity = (positionSpring.GetCurrentValue() - rigidBodyFollower.position) * VELOCITY_FACTOR;
-				rigidBodyFollower.velocity = velocity;
+				rigidBodyFollower.linearVelocity = velocity;
 			}
 
 			if (rotationSpring.springEnabled)

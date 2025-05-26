@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // AppsFlyer SDK
+    implementation 'com.android.installreferrer:installreferrer:2.1'
+    implementation 'com.appsflyer:af-android-sdk:6.14.0'
+    implementation 'com.appsflyer:unity-wrapper:6.14.3'
+
+    // Facebook SDK (AndroidX sürümüne geçilmediyse sürüm kontrolü yapýlmalý)
+    implementation 'com.facebook.android:facebook-core:[16.0.1,17)'
+    implementation 'com.facebook.android:facebook-login:[16.0.1,17)'
+    implementation 'com.facebook.android:facebook-share:[16.0.1,17)'
+    implementation 'com.facebook.android:facebook-applinks:[16.0.1,17)'
+    implementation 'com.facebook.android:facebook-gamingservices:[16.0.1,17)'
+    implementation 'com.parse.bolts:bolts-android:1.4.0'
+
+    // GameAnalytics
+    implementation 'com.google.android.instantapps:instantapps:1.1.0'
+    implementation 'com.google.android.gms:play-services-appset:16.0.2'
+}
+
+android {
+    compileSdkVersion 36
+    buildToolsVersion '36.0.0'
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 36
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+
+        consumerProguardFiles 'proguard-unity.txt'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude "**/lib/armeabi/**"
+        exclude "**/lib/mips/**"
+        exclude "**/lib/mips64/**"
+        exclude "**/lib/x86/**"
+        exclude "**/lib/x86_64/**"
+    }
+
+    aaptOptions {
+        // Eski taným, yeni tanýmla deðiþtiriyoruz
+        noCompress = unityStreamingAssets.tokenize(', ').join(' ')
+        
+        // Diðer dosya türlerini hariç tutmak için örnek ayar:
+        // ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    maven { url "https://maven.google.com" }
+    mavenLocal()
+    flatDir {
+        dirs "${project(':unityLibrary').projectDir}/libs"
+    }
+}

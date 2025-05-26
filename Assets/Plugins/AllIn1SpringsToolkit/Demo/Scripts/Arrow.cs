@@ -53,7 +53,7 @@ namespace AllIn1SpringsToolkit.Demo.Scripts
             }
             hasBeenShot = true;
             
-            arrowsRigidbody.velocity = Vector3.zero;
+            arrowsRigidbody.linearVelocity = Vector3.zero;
             arrowsRigidbody.angularVelocity = Vector3.zero;
             arrowsRigidbody.isKinematic = false;
             arrowsRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;

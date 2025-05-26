@@ -72,7 +72,7 @@ namespace Bearroll.UltimateDecals {
 
 			get {
 
-				var asset = GraphicsSettings.renderPipelineAsset;
+				var asset = GraphicsSettings.defaultRenderPipeline;
 
 				if (asset == null) return PipelineType.Legacy;
 

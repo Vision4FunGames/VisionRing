@@ -60,7 +60,7 @@ namespace Bearroll.UltimateDecals {
 
 		static Object GetData() {
 
-			var asset = GraphicsSettings.renderPipelineAsset;
+			var asset = GraphicsSettings.defaultRenderPipeline;
 
 			if (asset == null) return null;
 

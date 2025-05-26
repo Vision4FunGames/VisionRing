@@ -106,7 +106,7 @@ namespace AllIn1SpringsToolkit.Demo.Scripts
             balls[currentBallIndex].position = randomPosition;
             int randomColorIndex = Random.Range(0, ballColors.Length);
             ballMeshRenderers[currentBallIndex].material.color = ballColors[randomColorIndex];
-            ballRigidbodies[currentBallIndex].velocity = Vector3.zero;
+            ballRigidbodies[currentBallIndex].linearVelocity = Vector3.zero;
             balls[currentBallIndex].gameObject.SetActive(true);
             currentBallIndex = (currentBallIndex + 1) % (balls.Length - 1);
         }

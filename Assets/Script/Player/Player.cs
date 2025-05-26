@@ -245,7 +245,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Box"))
         {
             StateMachine.ChangeState(PlayerMovementState);
-            currentboxrb.velocity = Vector3.zero;
+            currentboxrb.linearVelocity = Vector3.zero;
         }
 
         if (other.CompareTag("water"))
@@ -306,7 +306,7 @@ public class Player : MonoBehaviour
         {
             isMovement = false;
             GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             transform.position = Vector3.zero;
             Invoke("IsMovementAgain",1);
         }
@@ -314,7 +314,7 @@ public class Player : MonoBehaviour
         {
             isMovement = false;
             GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             transform.position = FindObjectOfType<TeleportManager>().currentDungeon.transform.GetChild(0).position;
             Invoke("IsMovementAgain",1);
         }

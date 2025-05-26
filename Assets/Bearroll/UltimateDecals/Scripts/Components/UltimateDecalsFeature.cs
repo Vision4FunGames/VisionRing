@@ -1,5 +1,6 @@
 ﻿#if UD_URP || UD_LWRP
 
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -15,6 +16,7 @@ namespace Bearroll.UltimateDecals {
 
 		public class UD_PreparePass: ScriptableRenderPass {
 
+			[Obsolete("Obsolete")]
 			public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor) {
 				
 				var camera = UD_Camera.currentCamera;

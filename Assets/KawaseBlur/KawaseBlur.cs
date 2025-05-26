@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -48,6 +49,7 @@ public class KawaseBlur : ScriptableRendererFeature
             this.profilerTag = profilerTag;
         }
 
+        [Obsolete("Obsolete")]
         public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
         {
             var width = cameraTextureDescriptor.width / downsample;
@@ -123,7 +125,7 @@ public class KawaseBlur : ScriptableRendererFeature
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        var src = renderer.cameraColorTarget;
+        var src = renderer.cameraColorTargetHandle;
         scriptablePass.Setup(src);
         renderer.EnqueuePass(scriptablePass);
     }

@@ -58,14 +58,14 @@ namespace AllIn1SpringsToolkit.Demo.Scripts
         private void BallElongateAlongVelocity()
         {
             //We first set the rotation we want to elongate in
-            float velocityMagnitude = ballRigidbody.velocity.magnitude;
+            float velocityMagnitude = ballRigidbody.linearVelocity.magnitude;
             if(velocityMagnitude < 0.01f)
             {
                 ballTransformSpring.transform.localRotation = Quaternion.identity;
             }
             else
             {
-                ballTransformSpring.transform.right = ballRigidbody.velocity.normalized;
+                ballTransformSpring.transform.right = ballRigidbody.linearVelocity.normalized;
             }
 
             //We then calculate the velocity ratio and set the scale target with a spring

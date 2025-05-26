@@ -116,7 +116,7 @@ namespace FAE
 
             EditorGUILayout.HelpBox("Universal Render Pipeline support requires Unity 2019.3f6 or newer", MessageType.Info);
 #else
-            if (UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset == null)
+            if (UnityEngine.Rendering.GraphicsSettings.defaultRenderPipeline == null)
             {
                 EditorGUILayout.HelpBox("No Scriptable Render Pipeline is currently active", MessageType.Warning);
             }
@@ -127,7 +127,7 @@ namespace FAE
                     FAE_Core.InstallShaders(FAE_Core.ShaderInstallation.BuiltIn);
                 }
 
-                using (new EditorGUI.DisabledGroupScope(UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset == null))
+                using (new EditorGUI.DisabledGroupScope(UnityEngine.Rendering.GraphicsSettings.defaultRenderPipeline == null))
                 {
                     if (GUILayout.Button("<b><size=16>Universal RP</size></b>\n<i>Shader Graph shaders</i>", Button))
                     {

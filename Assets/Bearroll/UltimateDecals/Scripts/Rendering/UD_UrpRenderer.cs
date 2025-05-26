@@ -14,7 +14,7 @@ namespace Bearroll.UltimateDecals {
 
 		public UD_UrpRenderer(UD_Camera camera): base(camera) {
 
-			var urp = GraphicsSettings.renderPipelineAsset as UniversalRenderPipelineAsset;
+			var urp = GraphicsSettings.defaultRenderPipeline as UniversalRenderPipelineAsset;
 
 			urp.supportsCameraDepthTexture = true;
 

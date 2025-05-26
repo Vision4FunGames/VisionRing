@@ -97,7 +97,7 @@ namespace MapMinimap.Demo
 
             //Do move
             move = Vector3.Lerp(move, tmove, move_accel * Time.fixedDeltaTime);
-            rigid.velocity = move;
+            rigid.linearVelocity = move;
 
             //Facing
             if (!is_action && IsMoving())
@@ -252,7 +252,7 @@ namespace MapMinimap.Demo
             auto_move = false;
             auto_move_target = transform.position;
             move = Vector3.zero;
-            rigid.velocity = Vector3.zero;
+            rigid.linearVelocity = Vector3.zero;
         }
 
         //------- Mouse Clicks --------

@@ -1,0 +1,30 @@
+﻿allprojects {
+    buildscript {
+        repositories {
+            google()
+            mavenCentral()
+            jcenter() // Eski, mümkünse alternatif kullan
+        }
+
+        dependencies {
+            // Android Gradle Plugin (AGP) sürümü: Unity'ye göre uyarlanmalı
+            // Unity 2022.3 LTS → Gradle 7.2, AGP 7.0.2 destekleniyor
+            classpath 'com.android.tools.build:gradle:7.0.2'
+            **BUILD_SCRIPT_DEPS**
+        }
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
+        **ARTIFACTORYREPOSITORY**
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

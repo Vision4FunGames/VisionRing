@@ -15,7 +15,7 @@ namespace AllIn1SpringsToolkit.Demo.Scripts
     
             if (targetRigidbody != null)
             {
-                Vector3 otherVelocity = targetRigidbody.velocity;
+                Vector3 otherVelocity = targetRigidbody.linearVelocity;
                 float forceFactor = Mathf.InverseLerp(0f, maxVelocityMagnitude, otherVelocity.magnitude);
                 scoreTransformSpring.AddVelocityScale(scaleVector * forceFactor * maxPunchForce);
             }
