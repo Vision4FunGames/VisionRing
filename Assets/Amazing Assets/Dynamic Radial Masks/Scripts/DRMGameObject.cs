@@ -129,6 +129,7 @@ namespace AmazingAssets.DynamicRadialMasks
                     gameObject.SetActive(false);
                     if (_player)
                     {
+                        _bossRaidSpawnEnemy.raidPanel.SetActive(false);
                         _bossRaidSpawnEnemy.KillAllEnemy();
                     }
                 }));
@@ -141,7 +142,7 @@ namespace AmazingAssets.DynamicRadialMasks
                     if (_player && !_player.isBase)
                     {
                         Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-                        _bossRaidSpawnEnemy.SpawnEnemy();
+                        _bossRaidSpawnEnemy.raidPanel.SetActive(true);
                     }
                 }));
             }
